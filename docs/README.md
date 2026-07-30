@@ -1,145 +1,135 @@
-# Documentazione canonica del progetto
+# Documentazione canonica
 
-Questa cartella contiene le decisioni editoriali, metodologiche, tecniche e operative vincolanti per il libro.
+Questa cartella contiene le regole editoriali, metodologiche e operative del libro.
 
-Nessuna regola necessaria alla produzione deve dipendere dalla cronologia della conversazione o da conoscenza implicita. Il repository è la fonte di verità.
+La documentazione è stata consolidata per evitare sovrapposizioni. Le regole sono organizzate per tema in pochi documenti canonici. I materiali originali ricevuti restano in `source/` e lo storico dei file precedenti resta disponibile in Git.
 
-## Repository operativo
+## Stato
 
 - Repository: `ferdinandobons/aibook`
-- Branch predefinito: `main`
-- Formato sorgente: Markdown
-- Produzione: seriale controllata, un capitolo completo alla volta
-- Capitolo pilota: `CH-P06-ATTENTION`
-- Ultima ricerca approfondita globale: 30 luglio 2026
+- Branch canonico: `main`
+- Formato: Markdown
+- Modalità: produzione seriale, un capitolo completo alla volta
+- Opera: unica e continua
+- Capitoli pianificati: 98
+- Appendici pianificate: 12
+- Ultima ricerca approfondita globale: **30 luglio 2026**
 
-## Da dove iniziare
+## Ordine di lettura
 
 Una persona o un sistema AI senza contesto precedente legge:
 
 1. `../GUIDELINE.md`;
 2. `../README.md`;
 3. questo file;
-4. `00_CONTRATTO_EDITORIALE.md`;
-5. `08_REGISTRO_DECISIONI.md`;
-6. `12_ARCHITETTURA_EDITORIALE_EVOLUTIVA.md`;
-7. `14_CATALOGO_STATO_ARTE.md`;
-8. `10_INDICE_EDITORIALE.md`;
-9. `13_PROTOCOLLO_AGGIORNAMENTO_CONTENUTI.md`;
-10. i protocolli specialistici necessari;
-11. `../PROGRESS.md`;
-12. gli artefatti del capitolo coinvolto.
+4. `00_GOVERNANCE_E_ARCHITETTURA.md`;
+5. `01_INDICE_EDITORIALE.md`;
+6. `14_CATALOGO_STATO_ARTE.md`;
+7. `15_REGISTRO_RICERCHE_APPROFONDITE.md`;
+8. il documento specialistico necessario;
+9. `../PROGRESS.md`;
+10. gli artefatti del capitolo coinvolto.
 
-Per scrivere o revisionare una lezione, la lettura specialistica minima è:
+Per scrivere o revisionare una lezione:
 
-1. `EXPLANATION_STYLE_AND_VISUALS.md`;
-2. `19_STRUTTURA_LOGICA_IN_PROSA.md`;
-3. `20_VOCE_EDITORIALE_E_REVISIONE_LINGUISTICA.md`;
-4. `18_PROTOCOLLO_QA_DIDATTICO.md`;
-5. `01_TEMPLATE_CAPITOLO.md`;
-6. `04_PROTOCOLLO_QA_TESTO.md`;
-7. `06_WORKFLOW_CAPITOLO.md`.
-
-Per creare o modificare immagini tecniche:
-
-1. `17_STANDARD_VISIVO_CANONICO.md`;
-2. `16_REGOLA_CONTENIMENTO_TESTO_VISUALI.md`;
-3. `02_TEMPLATE_VISUALE.md`;
-4. `03_PROTOCOLLO_QA_VISUALE.md`;
-5. `EXPLANATION_STYLE_AND_VISUALS.md`.
+1. `02_STILE_E_QA_TESTO.md`;
+2. `04_CODICE_FONTI_E_RIPRODUCIBILITA.md`;
+3. `05_WORKFLOW_E_REPOSITORY.md`;
+4. `03_VISUALI.md`, quando sono previste figure.
 
 ## Mappa dei documenti
 
 | Documento | Funzione |
 |---|---|
-| `00_CONTRATTO_EDITORIALE.md` | Obiettivi, livello tecnico, voce, quality gate e vincoli globali. |
-| `01_TEMPLATE_CAPITOLO.md` | Distingue scaffold, testo del manuale e artefatti di prova. |
-| `02_TEMPLATE_VISUALE.md` | Specifica e audit di ogni immagine. |
-| `03_PROTOCOLLO_QA_VISUALE.md` | Generazione, revisione e approvazione delle visuali. |
-| `04_PROTOCOLLO_QA_TESTO.md` | Verifica fattuale, matematica, didattica, editoriale e linguistica. |
-| `05_STANDARD_SNIPPET_CODICE.md` | Snippet, esecuzione, test e audit del codice. |
-| `06_WORKFLOW_CAPITOLO.md` | Sequenza completa dalla ricerca al congelamento. |
-| `07_POLITICA_FONTI_CITAZIONI.md` | Gerarchia delle fonti, citazioni e date di verifica. |
-| `08_REGISTRO_DECISIONI.md` | Decisioni correnti e sostituite. |
-| `09_STRUTTURA_REPOSITORY.md` | Convenzioni per cartelle, file, ID e artefatti. |
-| `10_INDICE_EDITORIALE.md` | Indice dell'opera nelle quattordici parti stabili. |
-| `11_AUDIT_DOCUMENTAZIONE.md` | Controllo di completezza e coerenza. |
-| `12_ARCHITETTURA_EDITORIALE_EVOLUTIVA.md` | Parti, routing, maturità e identità dei capitoli. |
-| `13_PROTOCOLLO_AGGIORNAMENTO_CONTENUTI.md` | Procedure per tecniche, API, maturità, capitoli ed edizioni. |
-| `14_CATALOGO_STATO_ARTE.md` | Famiglie, tecniche e ottimizzazioni censite. |
-| `15_REGISTRO_RICERCHE_APPROFONDITE.md` | Ricognizioni globali e confini temporali. |
-| `16_REGOLA_CONTENIMENTO_TESTO_VISUALI.md` | Divieto di overflow, clipping e sovrapposizioni. |
-| `17_STANDARD_VISIVO_CANONICO.md` | Sfondo bianco, orientamento, palette, box, frecce e tipografia. |
-| `18_PROTOCOLLO_QA_DIDATTICO.md` | Review strutturale, anti-template, editoriale e linguistica. |
-| `19_STRUTTURA_LOGICA_IN_PROSA.md` | Logica rigorosa incorporata nella prosa. |
-| `20_VOCE_EDITORIALE_E_REVISIONE_LINGUISTICA.md` | Voce da manuale, italiano idiomatico, ritmo e lettura ad alta voce. |
-| `EXPLANATION_STYLE_AND_VISUALS.md` | Metodo integrato di spiegazione, visuali e codice. |
-| `source/README.md` | Indice delle fonti metodologiche archiviate. |
+| `00_GOVERNANCE_E_ARCHITETTURA.md` | Contratto editoriale, opera unica, parti stabili, routing, maturità, ID, decisioni e governance. |
+| `01_INDICE_EDITORIALE.md` | Indice compatto delle quattordici parti, dei 98 capitoli e delle appendici. |
+| `02_STILE_E_QA_TESTO.md` | Metodo didattico, voce italiana, template del capitolo, gate di comparsa e review del testo. |
+| `03_VISUALI.md` | Standard visivo, sfondo bianco, orientamento, palette, contenimento, `SPEC.md` e QA delle figure. |
+| `04_CODICE_FONTI_E_RIPRODUCIBILITA.md` | Gerarchia delle fonti, claim, citazioni, verifica temporale, snippet, test, output e ambienti. |
+| `05_WORKFLOW_E_REPOSITORY.md` | Struttura delle cartelle, ID, ciclo di produzione, aggiornamenti U1-U8, commit e congelamento. |
+| `14_CATALOGO_STATO_ARTE.md` | Registro dettagliato delle famiglie, tecniche, maturità e destinazioni editoriali. |
+| `15_REGISTRO_RICERCHE_APPROFONDITE.md` | Dossier delle ricerche globali, fonti seme, limiti e date di copertura. |
+| `source/README.md` | Indice dei materiali metodologici originali conservati integralmente. |
+
+## Consolidamento applicato
+
+Le informazioni dei precedenti documenti sono state assorbite come segue.
+
+| Area precedente | Documento canonico corrente |
+|---|---|
+| contratto, decisioni, architettura evolutiva e audit documentale | `00_GOVERNANCE_E_ARCHITETTURA.md` |
+| indice dell'opera | `01_INDICE_EDITORIALE.md` |
+| template del capitolo, stile di spiegazione, struttura in prosa, voce, QA testuale e didattico | `02_STILE_E_QA_TESTO.md` |
+| template visuale, standard, contenimento e protocollo QA | `03_VISUALI.md` |
+| fonti, citazioni, snippet, API, test e riproducibilità | `04_CODICE_FONTI_E_RIPRODUCIBILITA.md` |
+| workflow, aggiornamenti, struttura repository, ID, commit e freeze | `05_WORKFLOW_E_REPOSITORY.md` |
+| catalogo e ricerca globale | `14_CATALOGO_STATO_ARTE.md` e `15_REGISTRO_RICERCHE_APPROFONDITE.md` |
+
+I file precedenti vengono rimossi dopo l'aggiornamento di tutti i riferimenti. La migrazione non modifica le regole sostanziali; elimina ripetizioni e punti di conflitto.
 
 ## Accuratezza
 
-La versione approvata non contiene affermazioni fattuali basate su inferenze editoriali. Ogni affermazione tecnica, storica, architetturale, quantitativa o temporale è sostenuta da una fonte primaria, documentazione ufficiale, uno standard, una derivazione o una prova riproducibile.
+La versione approvata non contiene fatti basati su inferenze editoriali. Ogni affermazione tecnica, storica, quantitativa, architetturale o temporale richiede:
 
-Sono ammessi:
+- fonte primaria;
+- documentazione ufficiale;
+- repository ufficiale;
+- standard;
+- derivazione verificata;
+- oppure risultato riprodotto.
 
-- derivazioni esplicite;
-- esempi dichiarati `Illustrativo`;
-- risultati dichiarati `Eseguito`, con ambiente e test;
-- confini precisi.
+`CLAIMS.md` collega ogni affermazione portante alla prova. `FONTI_PRIMARIE.md` registra sezioni, versioni e limiti.
 
-Quando una fonte non stabilisce un punto, la frase non entra nella versione approvata.
+## Prosa
 
-## Prosa del manuale
+Il capitolo deve leggersi come un manuale tecnico in italiano. Lo scaffold di stato, problema, trasformazione, output, invariante e confine resta in `PLAN.md` e `TEXT_AUDIT.md`; il lettore vede titoli semantici, paragrafi naturali e un esempio continuo.
 
-La struttura logica di stato, problema, trasformazione, output, invariante, confine e continuità è obbligatoria. Viene però incorporata in titoli semantici e paragrafi naturali.
+Ogni capitolo supera:
 
-`PLAN.md` e `TEXT_AUDIT.md` rendono esplicito lo scaffold. `CHAPTER.md` deve leggere come un manuale, non come una checklist, una specifica o un registro di audit.
-
-Regole principali:
-
-- metadati e stato editoriale fuori dal flusso del lettore;
-- sezioni abbastanza ampie da sostenere un ragionamento;
-- italiano scritto direttamente e senza calchi evitabili;
-- ritmo variato;
-- cautele non ripetute;
-- esempio continuo mantenuto;
-- dettagli di riproducibilità spostati negli artefatti;
-- review linguistica e lettura ad alta voce obbligatorie.
-
-## Artefatti
-
-Ogni capitolo tecnico integra:
-
-1. testo verificato e revisionato linguisticamente;
-2. immagini tecniche approvate dopo audit iterativo;
-3. codice eseguito e testato.
-
-Testo, formule, immagini e codice condividono nomi, shape, numeri, ordine e confini.
+- review fattuale e matematica;
+- review didattica;
+- gate anti-template;
+- review editoriale e linguistica;
+- lettura ad alta voce;
+- nuova lettura integrale dopo le correzioni.
 
 ## Visuali
 
-Tutte le immagini seguono `17_STANDARD_VISIVO_CANONICO.md`:
+Tutte le immagini tecniche:
 
-- sfondo bianco puro `#FFFFFF`;
-- orientamento scelto in base al contenuto;
-- palette, box, frecce e tipografia coerenti;
-- una domanda principale;
-- nessun render completo della pagina usato come figura tecnica;
-- testo integralmente contenuto.
+- usano sfondo bianco puro `#FFFFFF`;
+- scelgono orientamento in base al contenuto;
+- mantengono il testo dentro i box;
+- non presentano frecce ambigue;
+- condividono palette, box e tipografia;
+- vengono revisionate e rigenerate;
+- diventano `final.png` soltanto dopo approvazione tecnica e autoriale.
 
-## Aggiornamenti
+## Codice
 
-Quando viene presa una nuova decisione:
+Ogni capitolo tecnico include almeno uno snippet eseguibile, salvo eccezione motivata. Python e PyTorch sono predefiniti. Ogni output dichiarato `Eseguito` possiede ambiente, comando, log o test.
 
-1. si aggiorna `08_REGISTRO_DECISIONI.md`;
-2. si aggiornano contratto e protocolli;
-3. si aggiornano template e indice quando necessario;
-4. si controllano i riferimenti incrociati;
-5. si aggiorna `11_AUDIT_DOCUMENTAZIONE.md`;
-6. si registra il commit.
+## Coerenza documentale
 
-In presenza di una divergenza non corretta, il lavoro resta bloccato.
+La documentazione è considerata coerente quando un sistema senza contesto può:
 
-## Dipendenze escluse
+- comprendere scopo e struttura;
+- collocare e aggiornare una tecnica;
+- creare o modificare un capitolo;
+- applicare fonti, claim, codice e visuali;
+- scrivere prosa da manuale;
+- ripetere le review fino alla rimozione dei difetti bloccanti;
+- ricostruire una versione approvata dal commit.
 
-`LEARN_GOVERNANCE.md` non è una dipendenza del libro. Tutte le regole necessarie sono nel repository.
+Quando una decisione cambia, vengono aggiornati il documento tematico, questo indice, `GUIDELINE.md`, i riferimenti e gli audit interessati prima di riprendere la produzione.
+
+## Regola per nuovi file in `docs/`
+
+Un nuovo documento canonico viene creato soltanto quando il contenuto:
+
+1. non appartiene chiaramente a uno dei temi esistenti;
+2. sarebbe difficile da consultare come sezione del documento corrente;
+3. possiede un ciclo di aggiornamento realmente indipendente;
+4. viene approvato nella governance.
+
+Per impostazione predefinita, una nuova regola viene aggiunta al documento tematico esistente anziché creare un altro file.
