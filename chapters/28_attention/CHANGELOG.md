@@ -1,52 +1,71 @@
 # Changelog. Capitolo 28
 
-## 0.3.0-rc3. 30 luglio 2026
+## `0.4.0-rc4`. 30 luglio 2026
 
-### Riscrittura della superficie editoriale
+### Riscrittura editoriale e linguistica
 
-- Riaperta la review didattica dopo il feedback sulla ripetizione delle intestazioni metacognitive.
-- Registrata `DID-ATT-03`, con esito respinto per struttura visibile troppo simile a una checklist.
-- Rimossi dal corpo i blocchi ripetitivi `Stato del lettore`, `Dove siamo`, `Problema locale`, `Cosa è cambiato`, `Cosa è rimasto invariato`, `Cosa non fa`, `Frase di continuità` e `Contratto dello snippet`.
-- Mantenute le stesse funzioni logiche all'interno di paragrafi naturali.
-- Sostituiti i titoli metacognitivi con titoli semantici legati a problemi e meccanismi.
-- Integrati shape, invarianti, confini e passaggi successivi nella prosa.
-- Conservata la sequenza verificata: esempio, pseudocodice, formula, implementazione, API e confini.
-- Mantenuta l'ispezione completa di `ATT-01` e `ATT-02` senza etichette editoriali rigide.
-- Registrata `DID-ATT-04`, seconda lettura completa della versione in prosa con esito superato.
+- riaperta la review dopo il feedback sulla prosa ancora troppo schematica;
+- spostati metadati, stato e informazioni operative in un commento non renderizzato;
+- rimosso il registro di approvazione dal testo destinato al lettore;
+- ridotte le sezioni principali a otto;
+- raccolti score, scaling, softmax e somma pesata in un'unica spiegazione continua;
+- riscritta l'apertura attorno al problema delle combinazioni dipendenti dalla posizione;
+- limitato `consumer` alla sola lettura dell'etichetta presente in `ATT-01`;
+- spiegato che `K` e `V` condividono i valori soltanto per semplificare i conti;
+- sostituite formulazioni da specifica con italiano tecnico più naturale;
+- raccolti i dettagli PyTorch in una nota sulle API;
+- riuniti complessità, limiti e ponte verso la multi-head attention;
+- riscritto il riepilogo a partire dal problema iniziale;
+- condensati fonti e materiali verificabili.
+
+### Review
+
+- registrata `EDIT-ATT-01`, respinta per frammentazione e voce da documentazione;
+- registrata `EDIT-ATT-02`, seconda lettura completa con tre profili di lettore;
+- eseguito il controllo ad alta voce della versione `0.4.0-rc4`;
+- esito editoriale e linguistico positivo per il testo;
+- riaperto il controllo incrociato con `ATT-01` e `ATT-02`.
 
 ### Governance
 
-- Aggiunto `docs/19_STRUTTURA_LOGICA_IN_PROSA.md`.
-- Riscritto `docs/01_TEMPLATE_CAPITOLO.md` distinguendo scaffold interno e superficie destinata al lettore.
-- Aggiornati `EXPLANATION_STYLE_AND_VISUALS.md` e `docs/18_PROTOCOLLO_QA_DIDATTICO.md` con un gate anti-template.
-- Aggiornato `docs/README.md` con il nuovo ordine di lettura.
+- applicato `docs/20_VOCE_EDITORIALE_E_REVISIONE_LINGUISTICA.md`;
+- aggiornati i protocolli testuali e il template del capitolo.
 
-## 0.2.0-rc2. 30 luglio 2026
+## `0.3.0-rc3`. 30 luglio 2026
+
+### Riscrittura anti-template
+
+- rimossi dal corpo i blocchi ripetitivi dello scaffold;
+- sostituiti i titoli metacognitivi con titoli semantici;
+- integrati shape, invarianti e confini nella prosa;
+- mantenuta la sequenza verificata: esempio, pseudocodice, formula, implementazione e confini;
+- registrata `DID-ATT-04`, seconda lettura della versione in prosa.
+
+### Governance
+
+- aggiunto `docs/19_STRUTTURA_LOGICA_IN_PROSA.md`;
+- aggiornati template e protocollo didattico con il gate anti-template.
+
+## `0.2.0-rc2`. 30 luglio 2026
 
 ### Riscrittura didattica
 
-- Riaperta la review didattica dopo il confronto con `EXPLANATION_STYLE_AND_VISUALS.md`.
-- Registrata `DID-ATT-01`, con esito respinto e dieci difetti bloccanti.
-- Descritti i ruoli prima dei termini query, key e value.
-- Spostato il nome scaled dot-product attention dopo l'esempio completo e il pseudocodice.
-- Aggiunti stato accumulato, blocchi atomici e frasi di continuità.
-- Attraversate `ATT-01` e `ATT-02` nella prosa con inquadramento, ispezione e conclusione.
-- Separata la mask matematica dalle convenzioni delle API PyTorch.
-- Separata la nota sul dropout dal confronto formula/API.
-- Ridotta la multi-head attention a ponte verso il capitolo successivo.
-- Ridotte le implementazioni hardware-aware a confine.
-- Rimosso `SNIP-ATT-004` dal capitolo, dai test e dagli output.
-- Rieseguiti i tre test pertinenti.
-- Registrata `DID-ATT-02`, seconda lettura completa con esito tecnico superato.
+- descritti i ruoli prima dei termini query, key e value;
+- spostato il nome scaled dot-product attention dopo esempio e pseudocodice;
+- separate le transizioni portanti;
+- attraversate `ATT-01` e `ATT-02` nella prosa;
+- separata la mask matematica dalle convenzioni PyTorch;
+- ridotta la multi-head attention a ponte;
+- rimosso `SNIP-ATT-004`;
+- rieseguiti i tre test pertinenti.
 
 ### Governance
 
-- Aggiunto `docs/18_PROTOCOLLO_QA_DIDATTICO.md`.
-- Resa obbligatoria almeno una review didattica completa per ogni capitolo.
-- Resa obbligatoria una nuova review integrale dopo ogni correzione di un difetto bloccante.
+- aggiunto `docs/18_PROTOCOLLO_QA_DIDATTICO.md`;
+- resa obbligatoria una nuova review integrale dopo ogni correzione bloccante.
 
-## 0.1.0-rc1. 30 luglio 2026
+## `0.1.0-rc1`. 30 luglio 2026
 
-- Prima candidatura completa per review autoriale.
-- Aggiunti testo, fonti, claim, audit, quattro snippet e due figure candidate.
-- Rigenerate le figure v2 dopo il rilevamento di blob corrotti e problemi di contenimento.
+- prima candidatura completa;
+- aggiunti testo, fonti, claim, audit, quattro snippet e due figure candidate;
+- rigenerate le figure dopo problemi di formato e contenimento.
