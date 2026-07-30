@@ -2,6 +2,28 @@
 
 > I nomi dei protocolli citati nelle versioni storiche restano come traccia. Le regole correnti sono consolidate in `docs/02_STILE_E_QA_TESTO.md`, `docs/03_VISUALI.md` e `docs/04_CODICE_FONTI_E_RIPRODUCIBILITA.md`.
 
+## `0.6.0-rc6`. 30 luglio 2026
+
+### Correzione visuale e controllo incrociato
+
+- generata `ATT-01/candidate-v3.png`;
+- sostituite le label `consumer 1/2` con `Posizione 1/2`;
+- ricostruito il pannello del contesto fisso per eliminare sovrapposizioni e residui delle versioni precedenti;
+- confermati i coefficienti `0,10`, `0,60`, `0,30` per `q₁` e `0,05`, `0,15`, `0,80` per `q₂`;
+- corretto l'alt text, che riportava valori non coerenti per la seconda query;
+- aggiornato il riferimento nel capitolo da `candidate-v2.png` a `candidate-v3.png`;
+- ricontrollata `ATT-02/candidate-v2.png` nel nuovo flusso;
+- ripetuta la lettura completa di testo, formule, figure e codice;
+- aperta la revisione autoriale della candidatura completa.
+
+### Riproducibilità
+
+- aggiunto `scripts/generate_book_visuals.py` per la produzione raster deterministica;
+- aggiunto `scripts/integrate_generated_visuals.py` per l'allineamento dei riferimenti;
+- aggiunto il workflow `generate-book-visuals.yml`;
+- verificata la decodifica dei PNG prodotti;
+- codice numerico e test invariati.
+
 ## `0.5.0-rc5`. 30 luglio 2026
 
 ### Riscrittura per un lettore non esperto
