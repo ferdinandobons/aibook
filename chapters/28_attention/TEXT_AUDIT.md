@@ -1,203 +1,174 @@
-# Audit del testo e della conformità didattica. Capitolo 28
+# Audit del testo. Capitolo 28
 
 ## Stato
 
-- Versione corrente: `0.3.0-rc3`
+- Versione corrente: `0.4.0-rc4`
 - Data: 30 luglio 2026
-- Protocolli: `docs/04_PROTOCOLLO_QA_TESTO.md`, `docs/18_PROTOCOLLO_QA_DIDATTICO.md`, `docs/19_STRUTTURA_LOGICA_IN_PROSA.md`
+- Protocolli: `docs/04_PROTOCOLLO_QA_TESTO.md`, `docs/18_PROTOCOLLO_QA_DIDATTICO.md`, `docs/19_STRUTTURA_LOGICA_IN_PROSA.md`, `docs/20_VOCE_EDITORIALE_E_REVISIONE_LINGUISTICA.md`
 - Esito fattuale e matematico: **superato**
-- Esito didattico: **superato dopo quattro review complete, incluse due review successive alla prima riscrittura**
-- Review autoriale: aperta
+- Esito didattico: **superato**
+- Esito editoriale e linguistico: **superato dopo riscrittura e seconda lettura**
+- Codice: invariato, test registrati superati
+- Visuali: validate tecnicamente nella versione precedente, controllo incrociato riaperto per la nuova prosa
+- Review autoriale: riaperta
 
-# Review `DID-ATT-01`. Struttura e gate
+## Storia delle review didattiche
 
-- Versione esaminata: `0.1.0-rc1`
-- Ambito: intero capitolo, visuali, snippet e confini
+### `DID-ATT-01`. Struttura e gate
+
+- Versione: `0.1.0-rc1`
 - Esito: **respinta**
 
-## Difetti bloccanti trovati
+Difetti principali:
 
-1. `query`, `key` e `value` comparivano prima della descrizione concreta dei tre ruoli.
-2. Il nome `scaled dot-product attention` compariva prima del completamento di softmax e somma pesata.
-3. Mancava pseudocodice prima della formula generale.
-4. I blocchi atomici erano incompleti nelle transizioni di scaling e softmax.
-5. `ATT-01` e `ATT-02` non erano attraversate integralmente dalla prosa.
-6. La sezione sulla mask combinava meccanismo matematico e semantica di API diverse.
-7. La sezione API combinava equivalenza, backend e dropout nello stesso passaggio.
-8. Formula e snippet multi-head anticipavano il capitolo successivo.
-9. Le implementazioni hardware-aware erano spiegate oltre il ruolo di confine.
-10. Lo stato accumulato non era esplicito dopo ogni operazione numerica.
+- termini query, key e value anticipati;
+- nome dell'operatore introdotto prima del meccanismo completo;
+- pseudocodice assente;
+- blocchi atomici incompleti;
+- visuali non attraversate integralmente;
+- mask matematica e semantica API combinate;
+- multi-head e implementazioni hardware-aware anticipate.
 
-## Correzioni applicate
+Le correzioni hanno prodotto la versione `0.2.0-rc2`.
 
-- descrizione dei ruoli prima dei nomi tecnici;
-- nome completo dell'operatore spostato dopo esempio e pseudocodice;
-- pseudocodice inserito prima della formula;
-- transizioni separate per score, scaling, softmax, output e mask;
-- visuali attraversate secondo `inquadra, ispeziona, conclude`;
-- mask matematica separata dalla semantica PyTorch;
-- dropout separato dal confronto formula/API;
-- multi-head ridotta a ponte;
-- implementazioni hardware-aware ridotte a confine;
-- rimosso `SNIP-ATT-004`.
+### `DID-ATT-02`. Sequenza e ricostruibilità
 
-# Review `DID-ATT-02`. Prosa e ricostruibilità della prima riscrittura
+- Versione: `0.2.0-rc2`
+- Esito tecnico: **superato**
 
-- Versione esaminata: `0.2.0-rc2`
-- Ambito: seconda lettura completa senza usare il piano come spiegazione implicita
-- Esito tecnico: **superata rispetto ai gate di sequenza e correttezza**
+La review ha confermato ordine del meccanismo, gate di comparsa, codice dopo il caso base e confini. Non ha però rilevato che lo scaffold didattico era diventato la struttura visibile della lezione.
 
-## Controlli superati
+### `DID-ATT-03`. Gate anti-template
 
-- [x] Oggetto continuo unico.
-- [x] Caso base prima di mask, API, complessità e ponte multi-head.
-- [x] Descrizione dei ruoli prima dei nomi.
-- [x] Esempio prima del pseudocodice e della formula.
-- [x] Codice dopo il meccanismo.
-- [x] Visuali attraversate dalla prosa.
-- [x] Cambiamento, invariante e confine ricostruibili.
-- [x] Controlli finali di ricostruzione, localizzazione, confine, trasferimento e variazione.
-
-## Problema non rilevato in questa review
-
-La riscrittura aveva trasformato lo scaffold didattico in una sequenza visibile di sottotitoli ripetuti:
-
-```text
-Stato del lettore
-Dove siamo
-Problema locale
-Trasformazione
-Cosa è cambiato
-Cosa è rimasto invariato
-Cosa non fa
-Frase di continuità
-Contratto dello snippet
-```
-
-Il contenuto rispettava la logica del metodo, ma la superficie editoriale risultava meccanica e avrebbe reso capitoli diversi troppo simili.
-
-La review è stata quindi riaperta dopo il feedback autoriale.
-
-# Review `DID-ATT-03`. Gate anti-template
-
-- Versione esaminata: `0.2.0-rc2`
-- Ambito: struttura visibile, ritmo, titoli e naturalezza della prosa
+- Versione: `0.2.0-rc2`
 - Esito: **respinta**
 
-## Difetti bloccanti
+Difetti:
 
-1. Lo scaffold interno era esposto quasi integralmente nel capitolo.
-2. Le microsezioni interrompevano un meccanismo che poteva essere letto come prosa continua.
-3. Titoli metacognitivi ricorrenti sostituivano titoli legati al contenuto.
-4. Le frasi di continuità erano corrette ma formalmente troppo uniformi.
-5. I contratti degli snippet erano pubblicati come moduli, anziché integrati nel testo.
-6. La bussola e gli stati del lettore occupavano la superficie editoriale invece di restare nel piano e nell'audit.
+- intestazioni metacognitive ripetute;
+- microsezioni numerose;
+- frasi di continuità uniformi;
+- contratti degli snippet esposti come moduli;
+- superficie editoriale simile a una checklist.
 
-## Correzioni applicate
+Le correzioni hanno prodotto la versione `0.3.0-rc3`.
 
-- creato `docs/19_STRUTTURA_LOGICA_IN_PROSA.md`;
-- aggiornati `EXPLANATION_STYLE_AND_VISUALS.md`, `01_TEMPLATE_CAPITOLO.md` e `18_PROTOCOLLO_QA_DIDATTICO.md`;
-- riscritti i titoli come domande o meccanismi semantici;
-- incorporati stato, problema, trasformazione, output, invariante e confine nei paragrafi;
-- rimossi i blocchi visibili `Stato del lettore`;
-- rimosse le intestazioni ripetute `Cosa è cambiato`, `Cosa è rimasto invariato`, `Cosa non fa` e `Frase di continuità`;
-- sostituiti i contratti visibili degli snippet con introduzioni naturali in prosa;
-- mantenute esplicite shape, condizioni e confini nel punto in cui servono;
-- conservate le funzioni `inquadra, ispeziona, conclude` delle visuali senza pubblicarne le etichette.
+### `DID-ATT-04`. Seconda lettura della versione in prosa
 
-# Review `DID-ATT-04`. Seconda lettura della versione in prosa
+- Versione: `0.3.0-rc3`
+- Esito didattico: **superato rispetto allo scaffold e ai gate**
 
-- Versione esaminata: `0.3.0-rc3`
-- Ambito: lettura completa del capitolo, figure, formule, snippet, esercizi e fonti
-- Esito: **superata**
+Problema non rilevato:
 
-## Struttura logica
+La prosa non mostrava più le intestazioni metacognitive, ma conservava ancora il loro ritmo. Il capitolo era suddiviso in molte sezioni brevi, usava espressioni da documentazione e inseriva dettagli API e di riproducibilità nel flusso principale.
 
-- [x] Lo stesso esempio attraversa l'intero caso base.
-- [x] Stato, problema, operazione, output, invariante e confine sono ricostruibili in ogni giunzione critica.
-- [x] I passaggi numerici introducono una trasformazione dominante per paragrafo.
-- [x] I concetti differiti non vengono usati come prerequisiti.
-- [x] La multi-head attention resta un ponte breve.
+## Review editoriale `EDIT-ATT-01`. Lettura come manuale
 
-## Superficie editoriale
+- Versione: `0.3.0-rc3`
+- Profili simulati: lettore nuovo, lettore tecnico, lettore che riprende il capitolo
+- Esito: **respinta**
 
-- [x] I titoli descrivono problemi, oggetti e meccanismi reali.
-- [x] Lo scaffold non appare come sequenza di intestazioni ripetute.
-- [x] Le transizioni usano formulazioni diverse ma mantengono il nesso causale.
-- [x] Shape, invarianti e confini restano espliciti nella prosa.
-- [x] Le sezioni hanno dimensione proporzionata al contenuto.
-- [x] Il capitolo non appare come una checklist compilata.
+### Difetti bloccanti
 
-## Gate di comparsa
+1. metadati e stato della candidatura esposti all'inizio;
+2. ventidue sezioni o blocchi finali, con forte frammentazione;
+3. score, scaling, softmax e combinazione separati in microsezioni;
+4. uso ripetuto di `consumer`, `posizione sorgente`, `contratto algoritmico`, `meccanismo stabilizzato` e formule simili;
+5. esempio numerico non ancorato abbastanza chiaramente al problema sequenziale;
+6. `K` e `V` numericamente identiche senza una spiegazione sufficiente del carattere illustrativo;
+7. passaggio a PyTorch vicino alla forma di una reference API;
+8. dettagli su versioni, backend e dropout troppo invasivi;
+9. cautele e confini ripetuti nel corpo, negli errori comuni e nel riepilogo;
+10. conclusione vicina a una checklist di operazioni.
 
-- [x] I ruoli sono descritti prima dei termini `query`, `key` e `value`.
-- [x] L'esempio numerico precede pseudocodice e formula generale.
-- [x] Il codice compare dopo il meccanismo indipendente dalla libreria.
-- [x] La causal mask matematica precede le convenzioni API.
-- [x] Le varianti restano dopo il caso base o come confini.
+### Correzioni applicate
 
-## Visuali
+- metadati spostati in un commento HTML;
+- rimosso il registro di approvazione dal testo pubblico;
+- ridotte le sezioni principali a otto;
+- raccolto l'intero caso numerico in una sola sezione narrativa;
+- apertura riscritta partendo dal problema delle combinazioni dipendenti dalla posizione;
+- `consumer` limitato alla sola lettura dell'etichetta già presente in `ATT-01`;
+- spiegata esplicitamente l'identità numerica illustrativa tra `K` e `V`;
+- sostituite formulazioni da specifica con frasi italiane naturali;
+- dettagli API raccolti in una nota;
+- complessità, limiti e ponte multi-head riuniti in una sola sezione;
+- riepilogo riscritto a partire dal problema iniziale;
+- fonti e materiali condensati.
 
-- [x] `ATT-01` è introdotta, letta e conclusa nella prosa.
-- [x] `ATT-02` è introdotta, letta e conclusa nella prosa.
-- [x] Le label coincidono con il testo.
-- [x] Le figure non introducono meccanismi non spiegati.
+Artefatti riaperti:
 
-## Codice
+- `CHAPTER.md`;
+- `TEXT_AUDIT.md`;
+- `CHANGELOG.md`;
+- `REVIEW.md`;
+- controllo incrociato con `ATT-01` e `ATT-02`;
+- documentazione metodologica.
 
-- [x] Ogni snippet è preceduto da input, operazione e controllo atteso espressi in prosa.
-- [x] Il codice ripete il percorso già stabilizzato.
-- [x] Nessuna variante differita viene introdotta dagli snippet.
+## Review editoriale `EDIT-ATT-02`. Seconda lettura e prova ad alta voce
 
-## Prosa
+- Versione: `0.4.0-rc4`
+- Profili simulati: lettore nuovo, lettore tecnico, lettore che riprende il capitolo
+- Esito: **superata per il testo**
 
-- [x] Italiano diretto, calmo e progressivo.
+### Lettore nuovo
+
+- [x] Il problema della combinazione fissa precede la terminologia.
+- [x] Query, key e value sono introdotte come tre ruoli funzionali.
+- [x] La coincidenza numerica tra `K` e `V` è dichiarata come scelta illustrativa.
+- [x] Score, scaling, softmax e somma pesata formano un unico percorso leggibile.
+- [x] Il pseudocodice precede la formula generale.
+- [x] La causal mask viene spiegata sugli score prima della convenzione PyTorch.
+
+### Lettore tecnico
+
+- [x] Formula e shape conservano il contratto verificato.
+- [x] Ipotesi della derivazione sul fattore di scala restano esplicite.
+- [x] Dropout e semantica booleana sono separati dalla definizione matematica.
+- [x] Complessità e limite quadratico restano corretti.
+- [x] Multi-head attention e implementazioni hardware-aware restano differite.
+- [x] Codice e risultati eseguiti non sono stati modificati.
+
+### Lettore che riprende il capitolo
+
+- [x] Otto sezioni semantiche permettono di ritrovare il flusso.
+- [x] La tabella delle shape localizza rapidamente gli oggetti.
+- [x] Il riepilogo ricostruisce il motivo dell'attention, non soltanto i nomi delle operazioni.
+- [x] Fonti e materiali restano accessibili senza dominare la chiusura.
+
+### Controllo linguistico
+
+- [x] Eliminato l'uso ricorrente di `consumer` dalla prosa.
+- [x] Sostituiti i principali calchi e le formulazioni da specifica.
 - [x] Nessun em dash.
-- [x] Nessuna metafora portante o personificazione.
-- [x] Referenti espliciti.
-- [x] Seconda persona limitata a controlli ed esercizi.
-- [x] Ritmo e titoli non sono governati da un template visibile.
+- [x] Ritmo variato tra spiegazione, calcolo e conseguenza.
+- [x] Ridotte le cautele duplicate.
+- [x] La lettura ad alta voce non presenta sequenze consecutive meccaniche.
+- [x] I passaggi matematici restano pronunciabili e collegati da frasi complete.
 
-## Controlli finali
+### Elementi aperti
 
-- [x] Ricostruzione possibile dall'input originale.
-- [x] Localizzazione del primo uso di `V` possibile.
-- [x] Confine della causal mask spiegabile.
-- [x] Trasferimento a `q=[0,1]` possibile.
-- [x] Variazione delle shape possibile.
+- `ATT-01` contiene ancora le label `consumer 1` e `consumer 2`; il testo le localizza una sola volta. Una futura revisione visuale potrà sostituirle con `posizione 1` e `posizione 2`, senza bloccare la comprensione corrente.
+- `ATT-01` e `ATT-02` devono essere ricontrollate nel nuovo flusso e approvate nuovamente dall'autore prima del congelamento della versione `0.4.0-rc4`.
 
-# Audit fattuale
+## Audit fattuale, matematico e algoritmico
 
-- [x] Ogni affermazione portante è registrata in `CLAIMS.md`.
-- [x] Le citazioni sono state controllate nelle fonti primarie o ufficiali.
-- [x] Transformer originale, API PyTorch e ambiente eseguito sono distinti.
-- [x] Non sono presenti benchmark propri.
-- [x] Non sono presenti inferenze fattuali editoriali.
-
-# Audit matematico
-
-- [x] Shape di `Q`, `K`, `V`, score, coefficienti e output ricontrollate.
-- [x] Esempio numerico ricalcolato in `float64`.
-- [x] Somma dei coefficienti verificata.
-- [x] Output della singola query verificato.
-- [x] Equivalenza tra formula diretta e API verificata.
-- [x] Ipotesi della derivazione sulla varianza esplicitate.
-
-# Audit algoritmico
-
+- [x] Claim portanti invariati e verificati.
+- [x] Formula della scaled dot-product attention invariata.
+- [x] Shape di `Q`, `K`, `V`, score, coefficienti e output corrette.
+- [x] Valori dell'esempio coerenti con i test registrati.
 - [x] Ordine: score, scaling, mask opzionale, softmax, prodotto con `V`.
-- [x] La mask non è descritta come operazione sulle value.
-- [x] Il dropout è separato dal caso base.
-- [x] La multi-head attention non viene implementata nel capitolo base.
+- [x] Mask applicata agli score.
+- [x] Complessità del caso materializzato invariata.
+- [x] Ambiente eseguito distinto dalla versione documentata.
 
-# Audit temporale
+## Audit del codice
 
-- [x] PyTorch stable risolve a `2.13` alla data della ricerca.
-- [x] Ambiente locale `2.10.0+cpu` dichiarato separatamente.
-- [x] Nessuna dichiarazione di esecuzione sotto `2.13`.
+- [x] Tre snippet invariati.
+- [x] Tre test registrati superati nella precedente esecuzione.
+- [x] Nessuna nuova dichiarazione di esecuzione.
+- [x] La nuova prosa descrive lo stesso input, lo stesso ordine e gli stessi output.
 
-# Esito finale
+## Esito
 
-La candidatura `0.3.0-rc3` non presenta difetti didattici bloccanti noti rispetto a `EXPLANATION_STYLE_AND_VISUALS.md`, `18_PROTOCOLLO_QA_DIDATTICO.md` e `19_STRUTTURA_LOGICA_IN_PROSA.md`.
-
-La review autoriale resta necessaria. Qualsiasi modifica strutturale successiva riapre la review didattica e il gate anti-template.
+Il testo `0.4.0-rc4` supera i gate fattuali, didattici, anti-template, editoriali e linguistici. La revisione autoriale viene riaperta perché la superficie editoriale è cambiata e le due visuali devono essere ricontrollate nel nuovo contesto prima del congelamento.
