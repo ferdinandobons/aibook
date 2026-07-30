@@ -1,3 +1,5 @@
 # Alt text ATT-01
 
-Confronto in due pannelli. A sinistra le tre value `v₁`, `v₂` e `v₃` confluiscono in un unico vettore fisso `c`; lo stesso vettore viene usato come `c per q₁` e `c per q₂`, quindi query diverse ricevono lo stesso riassunto. A destra una tabella separa le intestazioni di riga `q₁` e `q₂` dai coefficienti. `q₁` usa i pesi `0,10`, `0,60`, `0,30` e produce `c₁`; `q₂` usa `0,55`, `0,15`, `0,30` e produce `c₂`. Le value restano identiche, mentre cambiano i coefficienti con cui vengono combinate.
+Confronto in due pannelli. A sinistra i tre vettori `v₁`, `v₂` e `v₃` confluiscono in un unico vettore di contesto fisso `c`; lo stesso vettore viene riutilizzato dalla `Posizione 1` e dalla `Posizione 2`. A destra, le query `q₁` e `q₂` usano coefficienti differenti sugli stessi vettori. `q₁` usa `0,10`, `0,60`, `0,30` e produce `c₁`; `q₂` usa `0,05`, `0,15`, `0,80` e produce `c₂`. I valori sorgente restano identici, mentre cambiano i pesi con cui vengono combinati.
+
+Stato: verificato su `candidate-v3.png`.
