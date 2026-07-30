@@ -294,6 +294,16 @@ Alla data di questo aggiornamento non risultano decisioni aperte che impediscano
 - Il Capitolo 28 conserva il ruolo di pilota.
 - La numerazione può cambiare prima del congelamento, gli ID semantici no.
 
+## DEC-045. Contenimento del testo nelle visuali
+
+- Stato: `vincolante`
+- Ogni testo deve rimanere integralmente dentro il proprio box, cella, badge, callout, pannello o nodo.
+- Testo che oltrepassa o tocca il bordo, viene tagliato, invade un contenitore adiacente o si sovrappone ad altri elementi costituisce un difetto bloccante.
+- Pedici, apici, glifi e simboli matematici devono essere interamente visibili.
+- La correzione procede aumentando il contenitore, ridisponendo i nodi, spezzando intenzionalmente le righe, accorciando la label o dividendo la figura. La riduzione del font è l'ultima opzione.
+- Il controllo viene eseguito sull'immagine raster effettiva e alla dimensione editoriale prevista.
+- Riferimenti: `02_TEMPLATE_VISUALE.md`, `03_PROTOCOLLO_QA_VISUALE.md`, `16_REGOLA_CONTENIMENTO_TESTO_VISUALI.md`.
+
 # Decisioni sostituite
 
 ## DEC-S01. Uso prioritario di SVG
