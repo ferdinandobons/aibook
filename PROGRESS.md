@@ -4,77 +4,103 @@
 
 - Repository operativo: `ferdinandobons/aibook`
 - Branch canonico: `main`
-- Branch di review: `review/chapter-28-pilot`
-- Pull request: `#1`
+- Pull request del pilota: `#1`, unita con squash
+- Commit del pilota su `main`: `a10235cf384ebda23060a05a3e25ef7b490595a1`
+- Branch di produzione completa: `feature/full-book-production`
 - Modalità: produzione seriale controllata
-- Capitolo pilota: `CH-P06-ATTENTION`, numero di lavoro 28
-- Versione candidata: `0.3.0-rc3`
-- Stato: **revisione autoriale aperta**
+- Opera pianificata: 98 capitoli e 12 appendici
+- Capitoli approvati e uniti: 1 (`CH-P06-ATTENTION`)
+- Unità corrente: `CH-P01-AI-FIELD`, Capitolo 1
+- Stato dell'unità corrente: **research**
 - Ultima ricerca approfondita globale: 30 luglio 2026
-- Ultima verifica delle fonti del capitolo: 30 luglio 2026
-- Standard visivo canonico adottato: 30 luglio 2026
-- Struttura logica in prosa adottata: 30 luglio 2026
+- Standard didattico, visuale e di verifica: attivi
 
-## Pacchetto disponibile
+## Capitolo pilota
 
-Il branch di review contiene:
+Il Capitolo 28, `CH-P06-ATTENTION`, è stato approvato dal committente e unito in `main`.
 
-- capitolo Markdown completo, riscritto come prosa tecnica naturale;
+Il pilota ha congelato i principi generali relativi a:
+
 - fonti primarie e documentazione ufficiale;
-- registro delle affermazioni;
-- audit fattuale, matematico, algoritmico e temporale;
-- quattro review didattiche registrate;
-- tre snippet Python/PyTorch;
-- tre test pertinenti superati;
-- ambiente e output registrati;
-- due immagini tecniche candidate con specifiche, alt text e audit;
-- checklist per la revisione dell'autore.
+- registro dei claim;
+- review fattuale, matematica, algoritmica e temporale;
+- review didattica iterativa;
+- struttura logica incorporata nella prosa;
+- gate anti-template;
+- snippet eseguiti e testati;
+- visuali tecniche con sfondo bianco e audit iterativo;
+- assenza di render delle pagine.
 
-Non contiene render delle pagine, mockup editoriali o screenshot di impaginazioni.
+Il pilota è un riferimento di qualità, non un modello tipografico rigido da replicare in ogni capitolo.
 
-## Review didattica
+## Produzione completa
 
-La prima candidatura è stata corretta in due cicli distinti:
+Il piano operativo è in [`BOOK_PRODUCTION.md`](BOOK_PRODUCTION.md).
 
-1. revisione della sequenza didattica, dei gate e dei confini;
-2. revisione della superficie editoriale e rimozione delle intestazioni metacognitive ripetute.
+La realizzazione segue l'indice canonico in `docs/10_INDICE_EDITORIALE.md` e procede un capitolo alla volta. Non vengono accumulati capitoli non revisionati.
 
-La versione `0.3.0-rc3` mantiene internamente stato, problema, trasformazione, output, invariante e confine, ma li integra in paragrafi e titoli semantici.
+La sequenza di ogni unità è:
 
-Documenti pertinenti:
+```text
+ricerca
+-> claim
+-> piano interno
+-> prima stesura
+-> formule e derivazioni
+-> codice e test
+-> visuali e audit
+-> audit fattuale e matematico
+-> review didattica
+-> gate anti-template
+-> seconda lettura completa
+-> revisione autoriale
+-> congelamento
+```
 
-- `docs/EXPLANATION_STYLE_AND_VISUALS.md`;
-- `docs/18_PROTOCOLLO_QA_DIDATTICO.md`;
-- `docs/19_STRUTTURA_LOGICA_IN_PROSA.md`;
-- `docs/01_TEMPLATE_CAPITOLO.md`.
+## Unità corrente. Capitolo 1
 
-## Stato delle visuali
+### `CH-P01-AI-FIELD`. Che cos'è l'intelligenza artificiale
 
-- `ATT-01/candidate-v2.png`: `validata tecnicamente`; approvazione autoriale aperta.
-- `ATT-02/candidate-v2.png`: `validata tecnicamente`; approvazione autoriale aperta.
-- Le versioni `candidate-v1.png` sono state rimosse perché corrotte e non revisionabili.
-- Nessuna immagine è denominata `final.png` prima dell'approvazione.
+Perimetro:
 
-## Standard visivo adottato
+- AI, machine learning, deep learning e AI generativa;
+- sistemi simbolici, statistici e neurali;
+- modelli discriminativi e generativi;
+- foundation model, modelli generalisti e specialistici;
+- training, inference, parametri e dati.
 
-Tutte le immagini future seguono `docs/17_STANDARD_VISIVO_CANONICO.md`:
+Artefatti da produrre:
 
-- sfondo bianco puro `#FFFFFF`;
-- orientamento orizzontale o verticale scelto in base al contenuto;
-- palette semantica stabile;
-- box, frecce e gerarchia tipografica comuni;
-- una domanda didattica principale per figura;
-- nessuna renderizzazione completa della pagina usata come figura tecnica;
-- prima generazione sempre trattata come bozza.
+- `CHAPTER.md`;
+- `PLAN.md`;
+- `FONTI_PRIMARIE.md`;
+- `CLAIMS.md`;
+- `TEXT_AUDIT.md`;
+- codice PyTorch minimo con test e output;
+- visuali tecniche con `SPEC.md`, `AUDIT.md` e alt text.
 
-Il contenimento del testo è un gate obbligatorio. Overflow, clipping, sovrapposizioni e padding insufficiente bloccano l'approvazione.
+## Regole attive per tutte le visuali
+
+- sfondo globale bianco puro `#FFFFFF`;
+- orientamento orizzontale o verticale in base al contenuto;
+- palette, box, frecce e gerarchia tipografica comuni;
+- una domanda principale per figura;
+- nessun overflow, clipping o collegamento ambiguo;
+- prima generazione sempre trattata come bozza;
+- `final.png` soltanto dopo approvazione tecnica e autoriale.
+
+## Confine degli artefatti
+
+Il repository contiene testo Markdown, formule, tabelle, immagini tecniche, codice, test, output, fonti e audit.
+
+Non vengono prodotti mockup editoriali, screenshot dell'impaginazione o render raster delle pagine complete.
 
 ## Prossimo gate
 
-1. review del capitolo `0.3.0-rc3` e degli artefatti nella pull request;
-2. commenti e correzioni;
-3. riapertura degli audit interessati quando necessario;
-4. approvazione della prosa, del formato pilota e delle due visuali;
-5. rinomina delle figure approvate in `final.png`;
-6. congelamento del capitolo e merge;
-7. avvio seriale dei capitoli successivi.
+1. completare il dossier delle fonti del Capitolo 1;
+2. costruire il registro dei claim;
+3. definire il piano didattico interno;
+4. scrivere e revisionare il capitolo;
+5. creare ed eseguire il codice;
+6. generare e revisionare le visuali;
+7. aprire la candidatura del Capitolo 1 alla revisione autoriale.
