@@ -19,7 +19,7 @@ La struttura deve permettere di ricostruire ogni capitolo, ogni affermazione, og
 
 ## Cartella `docs/`
 
-Contiene soltanto documentazione canonica del progetto:
+La radice di `docs/` contiene la documentazione canonica. La sottocartella `source/` conserva copie archivistiche dei materiali originali ricevuti.
 
 ```text
 docs/
@@ -36,13 +36,22 @@ docs/
   09_STRUTTURA_REPOSITORY.md
   10_INDICE_EDITORIALE.md
   EXPLANATION_STYLE_AND_VISUALS.md
+  source/
+    README.md
+    EXPLANATION_STYLE_AND_VISUALS_ORIGINAL_PART_01.md
+    EXPLANATION_STYLE_AND_VISUALS_ORIGINAL_PART_02.md
+    EXPLANATION_STYLE_AND_VISUALS_ORIGINAL_PART_03.md
+    EXPLANATION_STYLE_AND_VISUALS_ORIGINAL_PART_04.md
+    EXPLANATION_STYLE_AND_VISUALS_ORIGINAL_PART_05.md
 ```
 
 Nessuna regola vincolante deve esistere soltanto in una conversazione o in un file esterno.
 
+I file in `docs/source/` non sono automaticamente vincolanti. Il loro adattamento canonico è indicato da `docs/source/README.md`.
+
 ## Cartella del capitolo
 
-Nome consigliato:
+Nome:
 
 ```text
 chapters/<NN_slug>/
@@ -54,7 +63,7 @@ Esempio:
 chapters/28_attention/
 ```
 
-Struttura:
+Struttura prevista:
 
 ```text
 chapters/28_attention/
@@ -79,7 +88,7 @@ chapters/28_attention/
 
 ## Asset visuali
 
-Gli asset finali possono essere mantenuti in una cartella globale per agevolare riuso e impaginazione:
+Gli asset finali vengono mantenuti in:
 
 ```text
 assets/chapters/<NN_slug>/<FIG-ID>/
@@ -103,11 +112,12 @@ assets/chapters/28_attention/ATT-01/
 
 - `final.png` esiste soltanto dopo l'approvazione.
 - `SPEC.md` descrive domanda, nodi, frecce, shape, valori e ordine di lettura.
-- `AUDIT.md` registra tutte le iterazioni esaminate e il verdetto.
+- `AUDIT.md` registra le iterazioni esaminate, i difetti e il verdetto.
 - `ALT_TEXT.md` contiene alt text ed equivalente testuale esteso.
 - Le bozze respinte non vengono nominate `final`.
-- Le bozze possono restare fuori dal repository quando non sono utili alla tracciabilità.
+- Le bozze possono restare fuori dal repository quando non servono alla tracciabilità.
 - Nessuna immagine approvata contiene watermark, firma o branding di terzi.
+- L'artefatto editoriale principale è PNG ad alta risoluzione.
 
 ## ID delle visuali
 
@@ -125,7 +135,7 @@ ATT-02
 ATT-03
 ```
 
-L'ID resta stabile anche quando una figura viene rigenerata. Le iterazioni vengono registrate come `v1`, `v2`, `v3` nel relativo audit.
+L'ID resta stabile durante le rigenerazioni. Le versioni vengono registrate come `v1`, `v2`, `v3` nell'audit.
 
 ## ID delle affermazioni
 
@@ -141,7 +151,7 @@ Esempio:
 CLM-ATT-001
 ```
 
-Ogni ID compare in `CLAIMS.md` e può essere richiamato nell'audit.
+Ogni ID compare in `CLAIMS.md` e può essere richiamato negli audit.
 
 ## ID degli snippet
 
@@ -167,7 +177,7 @@ outputs/SNIP-ATT-001.txt
 
 ## ID delle fonti
 
-Formato consigliato:
+Formato:
 
 ```text
 SRC-<sigla-capitolo>-<numero a tre cifre>
@@ -194,7 +204,7 @@ Contiene:
 - snippet essenziali;
 - esercizi;
 - fonti;
-- registro finale di approvazione.
+- registri finali di approvazione.
 
 Segue `docs/01_TEMPLATE_CAPITOLO.md`.
 
@@ -214,17 +224,15 @@ Contiene:
 
 ## File `FONTI_PRIMARIE.md`
 
-Contiene soltanto fonti effettivamente consultate o pianificate con stato esplicito.
-
 Ogni voce indica:
 
 - ID;
 - dati bibliografici;
-- versione;
+- versione, revisione o commit;
 - data di consultazione;
 - sezioni rilevanti;
 - affermazioni sostenibili;
-- limiti.
+- limiti e divergenze.
 
 ## File `CLAIMS.md`
 
@@ -240,6 +248,8 @@ respinta
 rimossa
 ```
 
+Una voce `aperta` non entra come affermazione assertiva nella versione approvata.
+
 ## File `TEXT_AUDIT.md`
 
 Registra:
@@ -247,11 +257,12 @@ Registra:
 - versione esaminata;
 - data;
 - fonti riaperte;
-- claim corretti o rimossi;
+- claim corretti, ristretti o rimossi;
 - errori matematici;
 - problemi di terminologia;
 - divergenze;
 - controllo temporale;
+- controllo dell'assenza di inferenze fattuali;
 - audit didattico;
 - esito.
 
@@ -280,26 +291,27 @@ Contiene output letterali generati dall'esecuzione. Un output mostrato nel libro
 
 ### `environments/`
 
-Contiene versioni e dipendenze, per esempio:
+Contiene almeno:
 
 ```text
-Python 3.x.y
-PyTorch x.y.z
-OS o container
+sistema operativo o container
+Python
+PyTorch o altra libreria
 CPU o GPU
 CUDA, quando applicabile
 dtype
+seed
 ```
 
 ## Cartella `scripts/`
 
-Contiene strumenti trasversali, per esempio:
+Può contenere strumenti trasversali per:
 
 - validazione dei link interni;
 - controllo degli ID;
 - esecuzione degli snippet;
 - verifica delle citazioni locali;
-- controllo delle immagini mancanti;
+- controllo degli asset mancanti;
 - generazione di report.
 
 Gli script non sostituiscono la review tecnica.
@@ -314,9 +326,9 @@ Contiene test trasversali del progetto, separati dai test specifici dei capitoli
 - documenti canonici: prefisso numerico per l'ordine di lettura;
 - ID stabili e mai riutilizzati per un oggetto diverso;
 - nessuno spazio nei nomi degli asset e degli script;
-- estensione `.md` per documentazione e capitoli;
-- estensione `.png` per immagini finali;
-- estensione `.py` per snippet eseguibili Python.
+- `.md` per documentazione e capitoli;
+- `.png` per immagini finali;
+- `.py` per snippet eseguibili Python.
 
 ## Commit
 
@@ -349,7 +361,7 @@ Il commit SHA viene riportato in `CHAPTER.md` e in `PROGRESS.md`.
 
 ## Progressi
 
-`PROGRESS.md` riporta lo stato sintetico. Non sostituisce i registri di audit.
+`PROGRESS.md` riporta lo stato sintetico e non sostituisce i registri di audit.
 
 Stati consigliati:
 
@@ -364,6 +376,6 @@ approvato
 sospeso
 ```
 
-## Regola sulle modifiche ai documenti canonici
+## Modifiche ai documenti canonici
 
-Quando una decisione modifica più protocolli, gli aggiornamenti devono essere completati prima di riprendere la produzione dei capitoli. Un commit può aggiornare più documenti quando serve a mantenerli coerenti.
+Quando una decisione modifica più protocolli, gli aggiornamenti devono essere completati prima di riprendere la produzione dei capitoli. Il registro delle decisioni deve essere aggiornato nello stesso ciclo di modifica.
