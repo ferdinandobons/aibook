@@ -3,7 +3,7 @@
 ## Metadati
 
 - `chapter_id`: `CH-P06-ATTENTION`
-- Parte: `P06` — Sequenze, linguaggio e contesto
+- Parte: `P06`, Sequenze, linguaggio e contesto
 - Maturità: `CORE`
 - Stato: **revisione autoriale del capitolo pilota**
 - Versione candidata: `0.1.0-rc1`
@@ -16,7 +16,7 @@
 - Oggetto continuo: una query e tre coppie key-value di dimensione 2
 - Concetti differiti: positional encoding, FlashAttention a livello di kernel, MQA, GQA, MLA e KV cache
 
-> **Stato della candidatura.** Il testo e il codice sono presentati per revisione. La figura `ATT-01` è una bozza con un difetto documentato; `ATT-02` è validata tecnicamente. Nessuna figura è ancora approvata dall'autore. Nessuna pagina del libro è stata rasterizzata.
+> **Stato della candidatura.** Il testo e il codice sono presentati per revisione. Le figure `ATT-01/candidate-v2.png` e `ATT-02/candidate-v2.png` sono validate tecnicamente e attendono l'approvazione autoriale. Nessuna pagina del libro è stata rasterizzata.
 
 ## Bussola
 
@@ -90,7 +90,7 @@ Manca una regola che produca tre coefficienti dipendenti da `q`. Una media unifo
 
 La figura candidata `ATT-01` confronta queste due situazioni:
 
-![Pesi fissi e pesi dipendenti dalla query](../../assets/chapters/28_attention/ATT-01/candidate-v1.png)
+![Pesi fissi e pesi dipendenti dalla query](../../assets/chapters/28_attention/ATT-01/candidate-v2.png)
 
 La figura non dimostra la formula. Stabilisce soltanto il requisito: query diverse devono poter produrre coefficienti diversi sulla stessa sorgente.
 
@@ -200,7 +200,7 @@ $$
 
 La figura candidata `ATT-02` percorre lo stesso oggetto, dalla query all'output:
 
-![Una query, tre key e tre value](../../assets/chapters/28_attention/ATT-02/candidate-v1.png)
+![Una query, tre key e tre value](../../assets/chapters/28_attention/ATT-02/candidate-v2.png)
 
 ### Cosa è cambiato
 
@@ -233,9 +233,9 @@ Per più query raccogliamo le query in una matrice:
 La forma matriciale è:
 
 $$
-\operatorname{Attention}(Q,K,V)
+\mathrm{Attention}(Q,K,V)
 =
-\operatorname{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V.
+\mathrm{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V.
 $$
 
 La softmax è applicata per riga. Ogni riga dell'output corrisponde a una query.
@@ -274,7 +274,7 @@ Le query provengono da una sequenza, mentre key e value provengono da un'altra s
 Introduciamo una mask additiva `M \in \mathbb{R}^{L\times S}`:
 
 $$
-A = \operatorname{softmax}\left(\frac{QK^T}{\sqrt{d_k}} + M\right).
+A = \mathrm{softmax}\left(\frac{QK^T}{\sqrt{d_k}} + M\right).
 $$
 
 Nel caso causale quadrato:
@@ -377,16 +377,16 @@ Test: le posizioni future hanno peso esattamente zero nell'esempio in `float64`.
 Una singola head usa un solo insieme di proiezioni. La multi-head attention calcola più attention in parallelo:
 
 $$
-\operatorname{head}_i =
-\operatorname{Attention}(QW_i^Q, KW_i^K, VW_i^V),
+h_i =
+\mathrm{Attention}\left(QW_i^Q, KW_i^K, VW_i^V\right),
 $$
 
 poi concatena gli output e applica una proiezione finale:
 
 $$
-\operatorname{MultiHead}(Q,K,V)
+\mathrm{MHA}(Q,K,V)
 =
-\operatorname{Concat}(\operatorname{head}_1,\ldots,\operatorname{head}_h)W^O.
+\left[h_1 \mathbin{\|} \cdots \mathbin{\|} h_H\right]W^O.
 $$
 
 Le head non vengono sommate direttamente prima di `W^O`. La concatenazione conserva separati i canali prodotti dalle diverse proiezioni fino alla proiezione finale [Vaswani et al., 2017, §3.2.2].
@@ -511,14 +511,16 @@ Le schede complete, le sezioni consultate e i limiti sono in [`FONTI_PRIMARIE.md
 - output: [`code/outputs/`](code/outputs/);
 - audit codice: [`code/CODE_AUDIT.md`](code/CODE_AUDIT.md);
 - audit testo: [`TEXT_AUDIT.md`](TEXT_AUDIT.md);
-- claim: [`CLAIMS.md`](CLAIMS.md).
+- claim: [`CLAIMS.md`](CLAIMS.md);
+- visuale `ATT-01`: [`candidate-v2.png`](../../assets/chapters/28_attention/ATT-01/candidate-v2.png);
+- visuale `ATT-02`: [`candidate-v2.png`](../../assets/chapters/28_attention/ATT-02/candidate-v2.png).
 
 ## 22. Registro finale di approvazione
 
 - Review fattuale: completata per la candidatura `0.1.0-rc1`
 - Review matematica: completata per la candidatura `0.1.0-rc1`
 - Review codice: test locali superati
-- Review visuale: `ATT-01` da modificare; `ATT-02` validata tecnicamente; approvazione autoriale aperta
+- Review visuale: `ATT-01` e `ATT-02` validate tecnicamente; approvazione autoriale aperta
 - Review didattica: completata internamente, aperta alla revisione dell'autore
 - Review autoriale: **aperta**
 - Commit congelato: non assegnato
