@@ -1,38 +1,70 @@
-# Piano del Capitolo 28
+# Piano interno. Capitolo 28
+
+## Identità
 
 - `chapter_id`: `CH-P06-ATTENTION`
-- Versione candidata: `0.2.0-rc2`
-- Domanda centrale: come un vettore corrente costruisce una combinazione dei vettori sorgente che dipende dai confronti con la sorgente?
-- Oggetto continuo: un vettore corrente e tre coppie sorgente con `d_k=d_v=2`.
+- Versione candidata: `0.4.0-rc4`
+- Stato: review editoriale superata, controllo visuale riaperto
+- Domanda centrale: come una posizione costruisce una combinazione dei vettori disponibili in funzione dei confronti con le key?
+- Oggetto continuo: una query e tre coppie key-value con `d_k=d_v=2`.
 - Stato finale: esempio numerico, pseudocodice, formula, shape, causal mask, implementazione diretta e confronto API.
-- Concetti differiti: posizione, multi-head attention, varianti KV, cache e implementazioni hardware-aware.
+- Concetti differiti: informazione posizionale, multi-head attention, varianti KV, cache e implementazioni hardware-aware.
 
-## Progressione didattica
+## Progressione didattica interna
 
-1. vettori sorgente già noti;
-2. insufficienza di una combinazione fissa;
-3. coefficienti dipendenti dalla posizione corrente;
-4. descrizione dei tre ruoli prima dei nomi query, key e value;
-5. score numerici;
-6. scaling numerico;
-7. softmax numerica;
-8. combinazione numerica delle value;
-9. ispezione guidata di `ATT-02`;
-10. pseudocodice;
-11. nome tecnico e formula generale;
-12. provenienza di `Q`, `K` e `V`;
-13. causal mask matematica;
-14. codice diretto;
-15. API e semantica delle mask;
-16. complessità e confini;
-17. ponte verso multi-head attention.
+1. limite di un contesto fisso;
+2. combinazioni diverse per posizioni diverse;
+3. ruoli di query, key e value;
+4. prodotti scalari e score;
+5. scaling;
+6. softmax;
+7. combinazione delle value;
+8. pseudocodice;
+9. formula matriciale e shape;
+10. self-attention, cross-attention e causalità;
+11. causal mask;
+12. implementazione PyTorch;
+13. complessità e confini;
+14. ponte verso la multi-head attention.
+
+La versione destinata al lettore raccoglie i passaggi da 4 a 7 in un'unica sezione narrativa. Lo scaffold resta verificabile senza determinare il numero dei titoli.
+
+## Superficie editoriale adottata
+
+La versione `0.4.0-rc4` usa otto sezioni principali:
+
+1. perché una combinazione fissa non basta;
+2. query, key e value;
+3. il calcolo completo su una query;
+4. forma matriciale;
+5. causal mask;
+6. PyTorch;
+7. costo, limiti e multi-head;
+8. riepilogo.
+
+Regole applicate:
+
+- metadati in commento non renderizzato;
+- nessun registro di approvazione nel manuale;
+- score, scaling, softmax e somma pesata in un unico movimento;
+- identità numerica di `K` e `V` dichiarata come scelta illustrativa;
+- dettagli API raccolti in una nota;
+- fonti e artefatti condensati;
+- review linguistica e lettura ad alta voce.
 
 ## Visuali incluse
 
-- `ATT-01`: differenza tra contesto fisso e coefficienti dipendenti dalla posizione corrente.
+- `ATT-01`: differenza tra contesto fisso e coefficienti dipendenti dalla posizione.
 - `ATT-02`: esempio numerico completo per una query.
 
-Ogni visuale viene inquadrata, attraversata e conclusa nella prosa.
+Ogni visuale viene introdotta, attraversata e conclusa nella prosa.
+
+Controlli riaperti:
+
+- coerenza delle label con il nuovo lessico;
+- eventuale sostituzione di `consumer 1/2` con `posizione 1/2` in `ATT-01`;
+- leggibilità nel nuovo flusso;
+- approvazione autoriale.
 
 ## Codice incluso
 
@@ -40,19 +72,26 @@ Ogni visuale viene inquadrata, attraversata e conclusa nella prosa.
 - `SNIP-ATT-002`: formula matriciale e confronto API.
 - `SNIP-ATT-003`: causal mask e coefficienti futuri nulli.
 
-## Materiale rimosso dopo la review didattica
+Il codice è invariato rispetto alla versione testata. La prosa è stata riallineata allo stesso ordine e agli stessi output.
 
-- formula e snippet completi della multi-head attention, trasferiti al capitolo successivo;
-- spiegazione interna di FlashAttention, ridotta a confine hardware-aware;
-- semantica API delle mask nella stessa transizione della mask matematica;
-- uso anticipato del nome `scaled dot-product attention` prima del calcolo completo.
+## Materiale differito
+
+- formula completa della multi-head attention;
+- concatenazione e proiezione finale;
+- shape per head;
+- meccanismo interno di FlashAttention;
+- varianti KV e cache.
 
 ## Gate di completamento
 
 - termini introdotti dopo i referenti;
-- esempio, shape e pseudocodice prima della formula generale;
-- blocchi atomici per score, scaling, softmax, output e mask;
+- esempio e pseudocodice prima della formula;
 - codice dopo il meccanismo;
-- varianti soltanto come confini;
-- due review didattiche complete registrate in `TEXT_AUDIT.md`;
-- nessun difetto bloccante residuo prima della revisione autoriale.
+- varianti come confini o rinvii;
+- prosa non frammentata;
+- metadati separati dal manuale;
+- italiano idiomatico;
+- lettura ad alta voce superata;
+- review `EDIT-ATT-01` e `EDIT-ATT-02` registrate;
+- controllo incrociato visuale ripetuto;
+- revisione autoriale prima del congelamento.
