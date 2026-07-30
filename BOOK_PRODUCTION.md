@@ -4,18 +4,20 @@
 
 - Branch di produzione: `feature/full-book-production`
 - Branch canonico: `main`
+- Pull request di produzione: `#2`
 - Commit di partenza: `a10235cf384ebda23060a05a3e25ef7b490595a1`
 - Opera pianificata: 98 capitoli e 12 appendici
 - Modalità: produzione seriale controllata
 - Capitolo pilota approvato e unito: `CH-P06-ATTENTION`
 - Unità corrente: `CH-P01-AI-FIELD`
+- Stato dell'unità corrente: `technical-review`, visuali bloccate
 - Data di apertura della produzione completa: 30 luglio 2026
 
 ## Scopo
 
-Questo branch raccoglie la stesura completa dell'opera **Intelligenza artificiale generativa**. La produzione segue senza eccezioni i documenti canonici della cartella `docs/`.
+Questo branch raccoglie la stesura completa dell'opera **Intelligenza artificiale generativa**. La produzione segue i documenti canonici della cartella `docs/`.
 
-Il progetto non genera tutti i capitoli in una singola passata non revisionata. Ogni capitolo attraversa ricerca, claim, piano interno, prosa, formule, codice, visuali, audit e revisione prima che inizi il successivo. Questa regola è necessaria per mantenere verificabilità, coerenza e qualità editoriale sull'intera opera.
+Il progetto non genera tutti i capitoli in una singola passata non revisionata. Ogni capitolo attraversa ricerca, claim, piano interno, prosa, formule, codice, visuali, audit e revisione prima che inizi il successivo. Questa regola mantiene verificabilità, coerenza e qualità editoriale sull'intera opera.
 
 ## Artefatti destinati al libro
 
@@ -44,9 +46,9 @@ Non vengono prodotte renderizzazioni raster delle pagine, mockup editoriali o sc
 
 ## Quadro dell'opera
 
-| Parte | Intervallo di lavoro | Capitoli | Stato iniziale |
+| Parte | Intervallo di lavoro | Capitoli | Stato corrente |
 |---|---:|---:|---|
-| `P01` Campo, metodo e storia dell'AI | 1-4 | 4 | capitolo 1 in `research` |
+| `P01` Campo, metodo e storia dell'AI | 1-4 | 4 | capitolo 1 in `technical-review`; altri `planned` |
 | `P02` Matematica, informazione e calcolo | 5-9 | 5 | `planned` |
 | `P03` Apprendimento, ottimizzazione e decisione | 10-14 | 5 | `planned` |
 | `P04` Reti neurali e rappresentazioni | 15-19 | 5 | `planned` |
@@ -65,7 +67,7 @@ L'identità e l'ordine semantico dei capitoli sono definiti in `docs/10_INDICE_E
 
 ## Sequenza di produzione
 
-L'ordine predefinito segue l'indice, salvo dipendenze tecniche documentate:
+L'ordine predefinito segue l'indice, salvo dipendenze documentate:
 
 ```text
 CH-P01-AI-FIELD
@@ -75,18 +77,18 @@ CH-P01-AI-FIELD
 -> P02 ... P14
 ```
 
-Il capitolo pilota `CH-P06-ATTENTION` rimane il riferimento già approvato per tono, rigore, codice, visuali e audit, senza imporre una sagoma visibile identica agli altri capitoli.
+Il capitolo pilota `CH-P06-ATTENTION` rimane il riferimento approvato per rigore, codice, visuali e audit, senza imporre una sagoma visibile identica agli altri capitoli.
 
 ## Gate prima di passare al capitolo successivo
 
 Un capitolo può lasciare l'unità corrente soltanto quando:
 
 - le affermazioni portanti sono verificate;
-- le formule e i numeri sono corretti;
+- formule e numeri sono corretti;
 - il codice previsto è eseguito e testato;
 - le visuali incluse sono validate tecnicamente;
 - la prosa supera almeno una review didattica completa;
-- ogni difetto bloccante trovato è corretto e seguito da una nuova review integrale;
+- ogni difetto bloccante viene corretto e seguito da una nuova review integrale;
 - il gate anti-template è superato;
 - testo, formule, immagini e codice sono coerenti;
 - la candidatura è disponibile per la revisione autoriale oppure il capitolo è formalmente sospeso.
@@ -95,23 +97,34 @@ Un capitolo può lasciare l'unità corrente soltanto quando:
 
 ### `CH-P01-AI-FIELD`. Che cos'è l'intelligenza artificiale
 
-Stato: `research`.
+Stato: `technical-review`, con gate visuale bloccato.
 
-Perimetro:
+### Artefatti completati
 
-- AI, machine learning, deep learning e AI generativa;
-- sistemi simbolici, statistici e neurali;
-- modelli discriminativi e generativi;
-- foundation model, modelli generalisti e specialistici;
-- training, inference, parametri e dati.
+- [x] `PLAN.md`;
+- [x] `FONTI_PRIMARIE.md`;
+- [x] `CLAIMS.md`;
+- [x] `CHAPTER.md`, versione `0.1.1-draft2`;
+- [x] due letture tecniche e didattiche del testo;
+- [x] `SNIP-AI-001` eseguito;
+- [x] tre test superati;
+- [x] ambiente e output registrati;
+- [x] `CODE_AUDIT.md`;
+- [x] specifiche e alt text previsti per `AI-01` e `AI-02`.
 
-Output previsti:
+### Gate aperti
 
-- capitolo completo in prosa;
-- dossier delle fonti e registro dei claim;
-- almeno una visuale tassonomica e una visuale training/inference;
-- uno snippet PyTorch minimo che separa aggiornamento dei parametri e inferenza;
-- test, output e audit.
+- [ ] candidata conforme per `AI-01`;
+- [ ] candidata conforme per `AI-02`;
+- [ ] audit visuale delle candidate;
+- [ ] controllo incrociato finale;
+- [ ] review autoriale.
+
+### Incidente visuale
+
+Lo strumento immagini ha prodotto schermate GitHub, dashboard di progetto e indici del libro invece dei diagrammi richiesti. Tutte le candidate sono state respinte e nessun PNG è stato pubblicato. I dettagli sono registrati negli audit delle visuali.
+
+Il lavoro non passa al Capitolo 2 finché il Capitolo 1 non viene approvato oppure formalmente sospeso con una decisione esplicita.
 
 ## Aggiornamento del piano
 
@@ -119,7 +132,6 @@ Dopo ogni capitolo si aggiornano:
 
 - questo file;
 - `PROGRESS.md`;
-- lo stato del capitolo;
-- le date di verifica;
-- il commit o la pull request di revisione;
+- stato e date del capitolo;
+- commit o pull request di revisione;
 - eventuali cambiamenti del catalogo e dell'indice.
