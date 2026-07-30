@@ -27,6 +27,7 @@ Nessuna regola necessaria alla produzione dei capitoli deve dipendere dalla cron
 | `08_REGISTRO_DECISIONI.md` | Elenco consolidato delle decisioni prese e del loro stato vincolante. |
 | `09_STRUTTURA_REPOSITORY.md` | Convenzioni per cartelle, file, ID, asset, audit e artefatti riproducibili. |
 | `10_INDICE_EDITORIALE.md` | Indice completo dei due volumi, capitoli e appendici. |
+| `11_AUDIT_DOCUMENTAZIONE.md` | Controllo finale di completezza, coerenza e assenza di decisioni bloccanti. |
 | `EXPLANATION_STYLE_AND_VISUALS.md` | Metodo completo di spiegazione in italiano e grammatica visuale del libro. |
 | `source/README.md` | Indice delle fonti metodologiche originali archiviate. |
 
@@ -84,4 +85,5 @@ La stesura del capitolo pilota può iniziare soltanto dopo che:
 - tutti i documenti elencati sopra sono presenti;
 - non rimangono contraddizioni note;
 - il registro delle decisioni è aggiornato;
+- l'audit della documentazione è positivo;
 - il committente dà esplicitamente il via.
