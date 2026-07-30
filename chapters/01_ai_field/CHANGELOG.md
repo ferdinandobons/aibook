@@ -1,5 +1,7 @@
 # Changelog. Capitolo 1
 
+> I nomi dei protocolli citati nelle versioni storiche restano come traccia. Le regole correnti sono consolidate in `docs/02_STILE_E_QA_TESTO.md`, `docs/03_VISUALI.md` e `docs/04_CODICE_FONTI_E_RIPRODUCIBILITA.md`.
+
 ## `0.2.0-rc1`. 30 luglio 2026
 
 ### Riscrittura editoriale
@@ -28,7 +30,7 @@
 
 ### Governance
 
-- applicato `docs/20_VOCE_EDITORIALE_E_REVISIONE_LINGUISTICA.md`;
+- applicato lo standard ora consolidato in `docs/02_STILE_E_QA_TESTO.md`;
 - riaperti `CHAPTER.md`, `TEXT_AUDIT.md`, `REVIEW.md` e i gate visuali.
 
 ## `0.1.1-draft2`. 30 luglio 2026
