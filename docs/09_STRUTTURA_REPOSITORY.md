@@ -2,13 +2,15 @@
 
 ## Scopo
 
-La struttura deve permettere di ricostruire ogni capitolo, ogni affermazione, ogni immagine e ogni risultato eseguito a partire dal repository.
+La struttura deve permettere di ricostruire ogni capitolo, affermazione, immagine e risultato eseguito, mantenendo separati il manuale destinato al lettore e i materiali operativi.
 
 ## Albero principale
 
 ```text
 /
   README.md
+  GUIDELINE.md
+  BOOK_PRODUCTION.md
   PROGRESS.md
   docs/
   chapters/
@@ -18,8 +20,6 @@ La struttura deve permettere di ricostruire ogni capitolo, ogni affermazione, og
 ```
 
 ## Cartella `docs/`
-
-La radice di `docs/` contiene la documentazione canonica. La sottocartella `source/` conserva copie archivistiche dei materiali originali ricevuti.
 
 ```text
 docs/
@@ -36,19 +36,22 @@ docs/
   09_STRUTTURA_REPOSITORY.md
   10_INDICE_EDITORIALE.md
   11_AUDIT_DOCUMENTAZIONE.md
+  12_ARCHITETTURA_EDITORIALE_EVOLUTIVA.md
+  13_PROTOCOLLO_AGGIORNAMENTO_CONTENUTI.md
+  14_CATALOGO_STATO_ARTE.md
+  15_REGISTRO_RICERCHE_APPROFONDITE.md
+  16_REGOLA_CONTENIMENTO_TESTO_VISUALI.md
+  17_STANDARD_VISIVO_CANONICO.md
+  18_PROTOCOLLO_QA_DIDATTICO.md
+  19_STRUTTURA_LOGICA_IN_PROSA.md
+  20_VOCE_EDITORIALE_E_REVISIONE_LINGUISTICA.md
   EXPLANATION_STYLE_AND_VISUALS.md
   source/
-    README.md
-    EXPLANATION_STYLE_AND_VISUALS_ORIGINAL_PART_01.md
-    EXPLANATION_STYLE_AND_VISUALS_ORIGINAL_PART_02.md
-    EXPLANATION_STYLE_AND_VISUALS_ORIGINAL_PART_03.md
-    EXPLANATION_STYLE_AND_VISUALS_ORIGINAL_PART_04.md
-    EXPLANATION_STYLE_AND_VISUALS_ORIGINAL_PART_05.md
 ```
 
-Nessuna regola vincolante deve esistere soltanto in una conversazione o in un file esterno.
+Nessuna regola vincolante può esistere soltanto in una conversazione o in un file esterno.
 
-I file in `docs/source/` non sono automaticamente vincolanti. Il loro adattamento canonico è indicato da `docs/source/README.md`.
+I file in `docs/source/` sono copie archivistiche. Diventano vincolanti soltanto attraverso l'adattamento nei documenti canonici.
 
 ## Cartella del capitolo
 
@@ -58,156 +61,69 @@ Nome:
 chapters/<NN_slug>/
 ```
 
-Esempio:
+Struttura:
 
 ```text
-chapters/28_attention/
-```
-
-Struttura prevista:
-
-```text
-chapters/28_attention/
+chapters/<NN_slug>/
   CHAPTER.md
   PLAN.md
   FONTI_PRIMARIE.md
   CLAIMS.md
   TEXT_AUDIT.md
   CHANGELOG.md
+  REVIEW.md
   code/
     README.md
     CODE_AUDIT.md
-    SNIP-ATT-001.py
-    SNIP-ATT-001_test.py
     outputs/
-      SNIP-ATT-001.txt
     environments/
-      python-pytorch.txt
   assets/
     README.md
 ```
 
-## Asset visuali
-
-Gli asset finali vengono mantenuti in:
-
-```text
-assets/chapters/<NN_slug>/<FIG-ID>/
-  final.png
-  AUDIT.md
-  ALT_TEXT.md
-  SPEC.md
-```
-
-Esempio:
-
-```text
-assets/chapters/28_attention/ATT-01/
-  final.png
-  AUDIT.md
-  ALT_TEXT.md
-  SPEC.md
-```
-
-### Regole
-
-- `final.png` esiste soltanto dopo l'approvazione.
-- `SPEC.md` descrive domanda, nodi, frecce, shape, valori e ordine di lettura.
-- `AUDIT.md` registra le iterazioni esaminate, i difetti e il verdetto.
-- `ALT_TEXT.md` contiene alt text ed equivalente testuale esteso.
-- Le bozze respinte non vengono nominate `final`.
-- Le bozze possono restare fuori dal repository quando non servono alla tracciabilità.
-- Nessuna immagine approvata contiene watermark, firma o branding di terzi.
-- L'artefatto editoriale principale è PNG ad alta risoluzione.
-
-## ID delle visuali
-
-Formato:
-
-```text
-<sigla-capitolo>-<numero a due cifre>
-```
-
-Esempi:
-
-```text
-ATT-01
-ATT-02
-ATT-03
-```
-
-L'ID resta stabile durante le rigenerazioni. Le versioni vengono registrate come `v1`, `v2`, `v3` nell'audit.
-
-## ID delle affermazioni
-
-Formato:
-
-```text
-CLM-<sigla-capitolo>-<numero a tre cifre>
-```
-
-Esempio:
-
-```text
-CLM-ATT-001
-```
-
-Ogni ID compare in `CLAIMS.md` e può essere richiamato negli audit.
-
-## ID degli snippet
-
-Formato:
-
-```text
-SNIP-<sigla-capitolo>-<numero a tre cifre>
-```
-
-Esempio:
-
-```text
-SNIP-ATT-001
-```
-
-File associati:
-
-```text
-SNIP-ATT-001.py
-SNIP-ATT-001_test.py
-outputs/SNIP-ATT-001.txt
-```
-
-## ID delle fonti
-
-Formato:
-
-```text
-SRC-<sigla-capitolo>-<numero a tre cifre>
-```
-
-Esempio:
-
-```text
-SRC-ATT-001
-```
-
-`CLAIMS.md` collega ogni claim a uno o più ID fonte.
+Le visuali vengono conservate nella cartella globale `assets/chapters/`, non duplicate nella cartella del capitolo.
 
 ## File `CHAPTER.md`
 
-Contiene:
+`CHAPTER.md` contiene soltanto il materiale destinato alla lettura:
 
-- metadati;
-- bussola;
-- evidenze e provenienza;
-- prosa;
-- formule;
+- titolo;
+- apertura;
+- spiegazione in prosa;
+- formule e tabelle necessarie;
 - riferimenti alle visuali;
 - snippet essenziali;
-- esercizi;
-- fonti;
-- registri finali di approvazione.
+- riepilogo;
+- controlli ed esercizi;
+- riferimenti principali e rinvii ai materiali verificabili.
 
-Segue `docs/01_TEMPLATE_CAPITOLO.md`.
+I metadati possono essere conservati in un commento HTML o in front matter non renderizzato:
+
+```text
+<!--
+chapter_id:
+part_id:
+order_key:
+title:
+version:
+status:
+last_source_check:
+environment:
+deferred:
+-->
+```
+
+Non fanno parte del flusso del manuale:
+
+- stato della candidatura;
+- esito degli audit;
+- immagini respinte;
+- branch, commit e pull request;
+- registro finale di approvazione;
+- elenco completo dei file di lavorazione;
+- dettagli di riproducibilità non necessari alla comprensione.
+
+Questi dati restano in `PLAN.md`, `TEXT_AUDIT.md`, `CHANGELOG.md`, `REVIEW.md` e `code/`.
 
 ## File `PLAN.md`
 
@@ -215,13 +131,17 @@ Contiene:
 
 - domanda centrale;
 - oggetto continuo;
-- stati del lettore;
+- stato iniziale e gap;
+- output finale;
 - sequenza delle transizioni;
+- input, output, shape, invarianti e confini;
 - concetti differiti;
 - storyboard delle visuali;
 - piano degli snippet;
-- rischi tecnici e didattici;
+- rischi tecnici, didattici ed editoriali;
 - criteri di completamento.
+
+Lo scaffold di progettazione non determina i titoli visibili di `CHAPTER.md`.
 
 ## File `FONTI_PRIMARIE.md`
 
@@ -237,9 +157,9 @@ Ogni voce indica:
 
 ## File `CLAIMS.md`
 
-Contiene il registro frase-prova. Non viene sostituito da una bibliografia generica.
+Contiene il registro frase-prova.
 
-Stati ammessi:
+Stati:
 
 ```text
 aperta
@@ -258,14 +178,40 @@ Registra:
 - versione esaminata;
 - data;
 - fonti riaperte;
-- claim corretti, ristretti o rimossi;
+- claim corretti o rimossi;
 - errori matematici;
 - problemi di terminologia;
 - divergenze;
-- controllo temporale;
-- controllo dell'assenza di inferenze fattuali;
-- audit didattico;
+- audit temporale;
+- review didattica;
+- gate anti-template;
+- review editoriale e linguistica;
+- profili di lettore simulati;
+- lettura ad alta voce;
+- artefatti riaperti;
 - esito.
+
+## File `CHANGELOG.md`
+
+Registra le modifiche tra versioni:
+
+- correzioni fattuali;
+- riscritture didattiche;
+- riscritture editoriali;
+- modifiche a formule, visuali e codice;
+- review riaperte;
+- decisioni di governance applicate.
+
+## File `REVIEW.md`
+
+È la guida alla revisione autoriale. Indica:
+
+- versione da leggere;
+- percorso consigliato;
+- modifiche principali;
+- aspetti da valutare;
+- stato di codice e visuali;
+- decisioni richieste all'autore.
 
 ## Cartella `code/`
 
@@ -275,7 +221,7 @@ Descrive ambiente, installazione, comandi e mappa degli snippet.
 
 ### `CODE_AUDIT.md`
 
-Registra per ogni snippet:
+Registra:
 
 - API verificata;
 - ambiente;
@@ -288,7 +234,7 @@ Registra per ogni snippet:
 
 ### `outputs/`
 
-Contiene output letterali generati dall'esecuzione. Un output mostrato nel libro come `Eseguito` deve essere riconducibile a un file o a un test.
+Contiene output letterali. Un output mostrato come `Eseguito` deve essere riconducibile a un file o a un test.
 
 ### `environments/`
 
@@ -297,81 +243,144 @@ Contiene almeno:
 ```text
 sistema operativo o container
 Python
-PyTorch o altra libreria
+libreria
 CPU o GPU
 CUDA, quando applicabile
 dtype
 seed
 ```
 
+I dettagli completi restano in questa cartella e non interrompono il testo del manuale.
+
+## Asset visuali
+
+Percorso:
+
+```text
+assets/chapters/<NN_slug>/<FIG-ID>/
+  candidate-vN.png
+  SPEC.md
+  AUDIT.md
+  ALT_TEXT.md
+```
+
+Dopo l'approvazione:
+
+```text
+assets/chapters/<NN_slug>/<FIG-ID>/
+  final.png
+  SPEC.md
+  AUDIT.md
+  ALT_TEXT.md
+```
+
+Regole:
+
+- `final.png` soltanto dopo approvazione;
+- `SPEC.md` descrive domanda, nodi, frecce, shape, valori e ordine;
+- `AUDIT.md` registra iterazioni, difetti e verdetto;
+- `ALT_TEXT.md` contiene alt text ed equivalente testuale;
+- bozze respinte non vengono nominate `final`;
+- nessun watermark, firma o branding;
+- formato principale PNG ad alta risoluzione.
+
+## ID
+
+### Visuali
+
+```text
+<SIGLA>-<numero a due cifre>
+```
+
+Esempio: `ATT-01`.
+
+### Claim
+
+```text
+CLM-<SIGLA>-<numero a tre cifre>
+```
+
+### Snippet
+
+```text
+SNIP-<SIGLA>-<numero a tre cifre>
+```
+
+### Fonti
+
+```text
+SRC-<SIGLA>-<numero a tre cifre>
+```
+
+Gli ID sono stabili e non vengono riutilizzati per oggetti diversi.
+
 ## Cartella `scripts/`
 
-Può contenere strumenti trasversali per:
+Può contenere strumenti per:
 
-- validazione dei link interni;
+- validazione dei link;
 - controllo degli ID;
 - esecuzione degli snippet;
 - verifica delle citazioni locali;
-- controllo degli asset mancanti;
+- controllo degli asset;
 - generazione di report.
 
-Gli script non sostituiscono la review tecnica.
+Gli script non sostituiscono la review umana o tecnica.
 
 ## Cartella `tests/`
 
-Contiene test trasversali del progetto, separati dai test specifici dei capitoli.
+Contiene test trasversali, separati dai test specifici dei capitoli.
 
 ## Convenzioni per i nomi
 
-- cartelle e file tecnici: ASCII, minuscolo quando possibile, underscore per gli slug;
-- documenti canonici: prefisso numerico per l'ordine di lettura;
-- ID stabili e mai riutilizzati per un oggetto diverso;
-- nessuno spazio nei nomi degli asset e degli script;
+- cartelle e file tecnici: ASCII e underscore negli slug;
+- documenti canonici: prefisso numerico per l'ordine;
+- nessuno spazio nei nomi di asset e script;
 - `.md` per documentazione e capitoli;
-- `.png` per immagini finali;
-- `.py` per snippet eseguibili Python.
+- `.png` per immagini;
+- `.py` per Python.
 
 ## Commit
 
-I commit devono descrivere l'unità di cambiamento. Esempi:
+I commit descrivono l'unità di cambiamento. Non dichiarano approvazione quando i gate non sono completi.
+
+Esempi:
 
 ```text
 Add primary source dossier for attention scoring
-Add and test minimal scaled-dot-product attention snippet
-Record rejection of ATT-03 v2 after connection audit
+Rewrite Chapter 1 with canonical manual voice
+Record language review after read-aloud pass
 Approve ATT-01 after visual QA
-Complete factual review of Chapter 28 section 3
 Freeze Chapter 28 editorial version
 ```
 
-Non si usa un messaggio che dichiara approvazione quando l'audit non è completo.
-
 ## Congelamento
 
-Il commit di congelamento di un capitolo deve permettere di identificare:
+Il commit di congelamento identifica:
 
 - testo esatto;
-- fonti esatte;
+- fonti e claim;
 - immagini finali;
 - codice e test;
-- output;
+- output e ambiente;
 - audit;
 - data editoriale.
 
-Il commit SHA viene riportato in `CHAPTER.md` e in `PROGRESS.md`.
+Il commit SHA viene riportato negli artefatti operativi e in `PROGRESS.md`, non necessariamente nel flusso di `CHAPTER.md`.
 
 ## Progressi
 
-`PROGRESS.md` riporta lo stato sintetico e non sostituisce i registri di audit.
+`PROGRESS.md` riporta lo stato sintetico e non sostituisce gli audit.
 
 Stati consigliati:
 
 ```text
 non iniziato
 ricerca
-pianificazione
 stesura
 review tecnica
+review didattica
+review editoriale
 review autoriale
 approvato
 sospeso
@@ -379,4 +388,4 @@ sospeso
 
 ## Modifiche ai documenti canonici
 
-Quando una decisione modifica più protocolli, gli aggiornamenti devono essere completati prima di riprendere la produzione dei capitoli. Il registro delle decisioni deve essere aggiornato nello stesso ciclo di modifica.
+Quando una decisione modifica più protocolli, gli aggiornamenti vengono completati prima di riprendere la produzione. Il registro delle decisioni viene aggiornato nello stesso ciclo.
