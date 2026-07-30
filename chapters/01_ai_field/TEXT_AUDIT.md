@@ -1,150 +1,166 @@
-# Audit del testo e della conformità didattica. Capitolo 1
+# Audit del testo. Capitolo 1
 
 ## Stato
 
-- Versione corrente: `0.1.1-draft2`
+- Versione corrente: `0.2.0-rc1`
 - Data: 30 luglio 2026
-- Protocolli: `docs/04_PROTOCOLLO_QA_TESTO.md`, `docs/18_PROTOCOLLO_QA_DIDATTICO.md`, `docs/19_STRUTTURA_LOGICA_IN_PROSA.md`
-- Esito fattuale e matematico del testo: **superato per la bozza**
-- Esito didattico del testo: **superato dopo due letture**
+- Protocolli: `docs/04_PROTOCOLLO_QA_TESTO.md`, `docs/18_PROTOCOLLO_QA_DIDATTICO.md`, `docs/19_STRUTTURA_LOGICA_IN_PROSA.md`, `docs/20_VOCE_EDITORIALE_E_REVISIONE_LINGUISTICA.md`
+- Esito fattuale e tecnico: **superato per testo e codice**
+- Esito didattico: **superato**
+- Esito editoriale e linguistico: **superato dopo riscrittura e seconda lettura**
 - Esito visuale: **bloccato**
 - Review autoriale: non aperta
 
-# Review `DID-AI-01`. Struttura, terminologia e forza delle affermazioni
+## Storia delle review
 
-- Versione esaminata: `0.1.0-draft1`
-- Ambito: intero capitolo, fonti, claim e snippet
-- Esito: **respinta, correzioni richieste**
+### `DID-AI-01`. Accuratezza e gate di comparsa
 
-## Difetti bloccanti trovati
+- Versione: `0.1.0-draft1`
+- Esito: **respinta**
 
-1. L'apertura affermava che tutti gli esempi presentati potevano essere descritti come AI system, includendo una semplice ricerca di parole senza dichiarare il confine definitorio.
-2. La descrizione generale dell'AI era formulata in modo troppo ampio e non distingueva abbastanza l'ancora OECD dalla tassonomia editoriale del libro.
-3. La distinzione generativo/discriminativo usava soltanto `p(y|x)`, `p(x,y)` e `p(x)` e non dichiarava il caso dei modelli generativi condizionati `p(x|c)`.
-4. La distinzione tra modello e sistema era corretta come scelta editoriale, ma doveva essere marcata più chiaramente come convenzione locale.
-5. `Generalista` e `specialistico` richiedevano un richiamo più esplicito alla natura relativa delle etichette.
-6. L'esempio code-driven doveva ribadire che la diminuzione della loss su quattro esempi non dimostra generalizzazione.
-7. La visuale `AI-01` non poteva usare un diagramma di Venn gerarchico, perché meccanismo, obiettivo e ampiezza sono assi differenti.
-8. Le candidate generate dallo strumento immagini rappresentavano repository, pull request o riepiloghi del progetto e non potevano essere incluse.
+Difetti principali:
 
-## Correzioni applicate
+1. confine troppo ampio tra automazione ordinaria e sistema di AI;
+2. definizione OECD non separata abbastanza dalla tassonomia editoriale;
+3. distinzione discriminativo/generativo incompleta;
+4. convenzione `modello/sistema` non marcata con sufficiente chiarezza;
+5. relatività di `generalista` e `specialistico` poco esplicita;
+6. rischio di interpretare la diminuzione della loss come generalizzazione;
+7. candidate visuali non pertinenti.
 
-- sostituita l'affermazione universale sugli esempi iniziali con un confine esplicito tra automazione ordinaria e AI;
-- usata la definizione OECD come ancora operativa, senza presentarla come unica tassonomia possibile;
-- chiarita la convenzione locale `modello` rispetto a `sistema`;
-- riscritta la distinzione discriminativo/generativo includendo classificatori generativi e modelli condizionati;
-- rafforzata la separazione tra meccanismo, obiettivo e ampiezza;
-- dichiarata la relatività di `generalista` e `specialistico`;
-- dichiarato che il risultato PyTorch non è un test di generalizzazione;
-- respinte tutte le immagini non conformi e rimosse dal percorso editoriale;
-- portata la versione a `0.1.1-draft2`.
+Correzioni applicate nella versione `0.1.1-draft2`:
 
-## Artefatti riaperti
+- ristretto il confine definitorio;
+- attribuite le definizioni alle rispettive fonti;
+- estesa la distinzione probabilistica;
+- chiarita la convenzione modello/sistema;
+- dichiarata la relatività dell'ampiezza;
+- separato il risultato eseguito da una valutazione di generalizzazione;
+- respinte le visuali estranee.
+
+### `DID-AI-02`. Seconda lettura tecnica e didattica
+
+- Versione: `0.1.1-draft2`
+- Esito tecnico: **superato**
+
+Controlli superati:
+
+- oggetto continuo presente;
+- termini introdotti dopo i referenti;
+- codice dopo la spiegazione di parametri, training e inference;
+- fonti e limiti coerenti;
+- formule e risultati allineati al codice;
+- gate anti-template nominalmente superato.
+
+Problema non rilevato in questa fase:
+
+Il capitolo restava troppo simile a un dossier tecnico. La presenza visibile di metadati, molte sezioni brevi, continue precisazioni difensive e dettagli API nel flusso principale rendevano la lettura corretta ma poco naturale.
+
+## Review editoriale `EDIT-AI-01`. Lettura come manuale
+
+- Versione: `0.1.1-draft2`
+- Profili simulati: lettore nuovo, lettore tecnico, lettore che riprende il capitolo
+- Esito: **respinta**
+
+### Difetti bloccanti
+
+1. metadati, stato della candidatura e registro di approvazione esposti al lettore;
+2. sedici sezioni principali, molte troppo brevi;
+3. ritmo dominato da definizioni, cautela e cambio di titolo;
+4. esempio `Il pacco non è arrivato` abbandonato durante lunghi passaggi astratti;
+5. formulazioni poco idiomatiche, tra cui `ancora operativa`, `dimensione da annotare` e `ampiezza del riuso`;
+6. eccesso di negazioni e confini ripetuti;
+7. codice e dettagli PyTorch troppo vicini alla forma di una reference;
+8. tassonomia dei tre aspetti presentata tardi, pur essendo l'idea organizzativa del capitolo;
+9. ciclo di vita introdotto come ulteriore blocco autonomo dopo molte definizioni;
+10. chiusura vicina a una checklist.
+
+### Correzioni applicate
+
+- metadati spostati in un commento HTML;
+- rimossi dal flusso stato della candidatura, audit e registro di approvazione;
+- ridotte le sezioni principali da sedici a otto;
+- apertura riscritta attorno alla richiesta di assistenza;
+- tre domande organizzative anticipate e riprese nel capitolo;
+- esempio continuo reintegrato nelle sezioni astratte;
+- training e inference raccolti in una sola sezione narrativa;
+- dettagli `eval()` e `inference_mode()` spostati in una nota;
+- cautele duplicate ridotte;
+- lessico ibrido sostituito con forme italiane naturali;
+- ciclo di vita ridotto a un ponte finale;
+- fonti e materiali condensati in una sezione di rinvio.
+
+Artefatti riaperti:
 
 - `CHAPTER.md`;
-- `CLAIMS.md`;
-- specifiche `AI-01` e `AI-02`;
-- audit visuale.
+- `TEXT_AUDIT.md`;
+- `CHANGELOG.md`;
+- `REVIEW.md`;
+- documentazione metodologica del progetto.
 
-# Review `DID-AI-02`. Seconda lettura completa del testo
+## Review editoriale `EDIT-AI-02`. Seconda lettura e prova ad alta voce
 
-- Versione esaminata: `0.1.1-draft2`
-- Ambito: prosa, formule, snippet, esercizi, fonti e confini
-- Esito del testo: **superata**
+- Versione: `0.2.0-rc1`
+- Profili simulati: lettore nuovo, lettore tecnico, lettore che riprende il capitolo
+- Esito: **superata per il testo**
 
-## Oggetto continuo e progressione
+### Lettore nuovo
 
-- [x] La richiesta `Il pacco non è arrivato` attraversa i principali confronti.
-- [x] Il testo parte dal programma, introduce la definizione di AI system e separa modello e sistema.
-- [x] Regole e apprendimento precedono AI, ML e deep learning.
-- [x] Parametri e training precedono inference e snippet.
-- [x] Discriminativo e generativo precedono generative AI e foundation model.
-- [x] I tre assi vengono ricomposti soltanto dopo la loro introduzione.
+- [x] L'apertura presenta un caso concreto prima delle definizioni.
+- [x] La differenza tra regola, modello appreso e sistema ibrido è costruita sullo stesso esempio.
+- [x] AI, machine learning, deep learning, generative AI e foundation model non compaiono come lista di sinonimi.
+- [x] Il passaggio al codice avviene dopo parametri, training e inference.
+- [x] Le formule probabilistiche sono introdotte dopo la domanda a cui rispondono.
 
-## Gate di comparsa
+### Lettore tecnico
 
-- [x] `Machine learning` compare dopo un esempio di comportamento appreso.
-- [x] `Deep learning` compare dopo representation learning.
-- [x] Parametri, loss e optimizer vengono descritti prima del codice.
-- [x] Generative AI compare dopo la distinzione generativo/discriminativo.
-- [x] Foundation model compare dopo generative AI e non viene usato come suo sinonimo.
-- [x] Le tecniche di adattamento sono nominate come consumer futuri, senza spiegarle a metà.
-
-## Struttura logica in prosa
-
-- [x] I titoli descrivono oggetti e problemi reali.
-- [x] Il capitolo non espone lo scaffold `input/trasformazione/invariante` come serie ripetitiva di sezioni.
-- [x] Cambiamento, invarianti e confini restano ricostruibili nei paragrafi.
-- [x] Le transizioni nominano l'oggetto prodotto e il passaggio successivo.
-- [x] Il capitolo non appare come checklist compilata.
-
-## Accuratezza e fonti
-
-- [x] La definizione OECD è attribuita e non trasformata in definizione universale del campo.
-- [x] Il lifecycle NIST viene riferito a prodotti, servizi e sistemi.
-- [x] AI, machine learning, representation learning e deep learning sono distinti.
-- [x] La soglia della profondità non viene presentata come numero universale.
-- [x] La distinzione generativo/discriminativo è limitata al contratto dichiarato.
-- [x] Il risultato Ng/Jordan non viene generalizzato a tutti i modelli.
-- [x] NIST GAI sostiene la produzione di contenuto sintetico e il confine con i foundation model.
-- [x] La definizione CRFM viene attribuita al report che introduce il termine.
-- [x] Le convenzioni editoriali sono indicate come tali.
-
-## Matematica e codice
-
-- [x] Formula lineare con shape implicite compatibili.
-- [x] `p(y|x)`, `p(x,y)` e `p(x|c)` usate con significato coerente.
-- [x] Loss e output coincidono con il file eseguito.
-- [x] `eval()` e `inference_mode()` mantengono ruoli distinti.
-- [x] La mancata modifica dei parametri in inference è testata.
+- [x] La definizione OECD è attribuita e limitata al proprio contesto.
+- [x] La convenzione modello/sistema è dichiarata.
+- [x] Discriminativo, generativo e condizionato sono distinti.
 - [x] La diminuzione della loss non viene presentata come generalizzazione.
+- [x] `eval()` e `inference_mode()` conservano significati distinti.
+- [x] Fonti, codice e risultati eseguiti restano rintracciabili.
 
-## Prosa
+### Lettore che riprende il capitolo
 
-- [x] Italiano diretto e progressivo.
+- [x] Otto titoli semantici permettono di ritrovare le idee portanti.
+- [x] La tabella dei tre aspetti ricompone la tassonomia.
+- [x] Il riepilogo torna al problema iniziale.
+- [x] I materiali di progetto non interrompono la lettura.
+
+### Controllo linguistico
+
+- [x] Italiano scritto direttamente, non tradotto.
 - [x] Nessun em dash.
-- [x] Nessuna metafora portante o personificazione.
-- [x] Termini inglesi usati in modo coerente.
-- [x] Seconda persona limitata a controlli ed esercizi.
-- [x] Referenti espliciti nei passaggi con modello, sistema e checkpoint.
+- [x] Eliminati i calchi individuati nella review precedente.
+- [x] Alternanza tra periodi brevi e articolati.
+- [x] Ridotta la ripetizione di `non implica`, `non coincide` e formule equivalenti.
+- [x] Soggetti e referenti restano chiari nei passaggi con modello, sistema e checkpoint.
+- [x] La lettura ad alta voce non presenta sequenze consecutive dal ritmo burocratico o meccanico.
 
-## Controlli finali
+### Elementi ancora aperti
 
-- [x] Il lettore può ricostruire la relazione AI, ML e deep learning.
-- [x] Può localizzare l'aggiornamento dei parametri.
-- [x] Può delimitare generative AI e foundation model.
-- [x] Può trasferire i tre assi a un filtro antispam.
-- [x] Può prevedere l'effetto dell'aggiunta di un tool al sistema.
+- `AI-01` e `AI-02` devono essere generate e sottoposte ad audit.
+- Dopo l'inserimento delle figure occorre ripetere il controllo incrociato e una lettura integrale.
 
-# Audit fattuale
+## Audit fattuale e matematico
 
-- [x] Tutti i claim portanti sono registrati in `CLAIMS.md`.
-- [x] Le fonti sono primarie, ufficiali o autorevoli e riportano limiti d'uso.
-- [x] Le informazioni soggette a cambiamento sono datate.
-- [x] Non sono presenti benchmark propri.
-- [x] Non sono presenti inferenze fattuali editoriali presentate come fatti.
+- [x] Claim portanti registrati in `CLAIMS.md`.
+- [x] Fonti primarie, istituzionali o ufficiali con limiti d'uso.
+- [x] Definizioni attribuite.
+- [x] Formula lineare coerente.
+- [x] `p(y|x)`, `p(x,y)` e `p(x|c)` usate nel significato dichiarato.
+- [x] Risultati del codice allineati agli output registrati.
+- [x] Nessuna inferenza fattuale editoriale presentata come fatto.
 
-# Audit algoritmico e temporale
+## Audit del codice
 
-- [x] Training: zeroing dei gradienti, forward, loss, backward, step.
-- [x] Inference: `eval()`, `inference_mode()`, forward, nessun optimizer step.
-- [x] PyTorch eseguito `2.10.0+cpu` distinto dalla documentazione stable `2.13`.
-- [x] AI RMF 1.0 citato come versione pubblicata, senza anticipare la revisione in corso.
-- [x] Pagina NIST AI 600-1 registrata con pubblicazione 2024 e aggiornamento della pagina 2026.
+- [x] Training modifica almeno un parametro.
+- [x] Inference non modifica i parametri.
+- [x] Output di shape `[1,2]`.
+- [x] Tre test superati nel run registrato.
+- [x] Codice invariato dalla precedente review tecnica.
 
-# Audit visuale
+## Esito
 
-Esito: **respinto e aperto**.
-
-Le candidate prodotte durante questa sessione sono state escluse perché rappresentavano:
-
-- pagine GitHub;
-- riepiloghi di merge e branch;
-- dashboard sul completamento del libro;
-- indici dell'opera non richiesti.
-
-Nessuna candidata rispondeva alla domanda di `AI-01` o `AI-02`. Nessun file è stato caricato come immagine del capitolo.
-
-# Esito finale
-
-Il testo `0.1.1-draft2` e il codice non presentano difetti tecnici o didattici bloccanti noti. Il capitolo resta nello stato `revisione tecnica, visuali bloccate` e non può passare alla revisione autoriale. La prossima operazione valida è produrre le due visuali conformi, sottoporle ad audit e ripetere il controllo incrociato completo.
+Il testo `0.2.0-rc1` supera i gate fattuali, didattici, anti-template, editoriali e linguistici. Il capitolo resta bloccato dalle visuali mancanti; non passa alla revisione autoriale finché `AI-01` e `AI-02` non vengono validate e integrate.
