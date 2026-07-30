@@ -2,162 +2,176 @@
 
 ## Stato
 
-- Data dell'audit: 30 luglio 2026
+- Data dell'audit: **30 luglio 2026**
 - Repository: `ferdinandobons/aibook`
 - Branch: `main`
-- Stato documentale esaminato immediatamente prima di questo audit finale: commit `c6fb784a21f5c145577c087e25ef18706446de86`
-- Esito: **approvato per l'avvio del capitolo pilota dopo il via esplicito del committente**
+- Esito: **approvato per l'uso della nuova architettura evolutiva**
 
 ## Scopo
 
-Verificare che tutte le decisioni, metodologie e indicazioni concordate siano registrate in `docs/`, che non dipendano dalla cronologia della conversazione e che non rimangano contraddizioni note capaci di bloccare il Capitolo 28.
+Verificare che le decisioni concordate siano presenti nel repository e che una persona o un sistema AI senza contesto precedente possa:
 
-## Documenti controllati
+- comprendere lo scopo del libro;
+- leggere la documentazione nell'ordine corretto;
+- aggiungere una nuova tecnica;
+- aggiornare un capitolo;
+- cambiare la maturità di una voce;
+- creare, dividere o unire capitoli;
+- eseguire una ricerca approfondita;
+- mantenere coerenti testo, immagini, codice, fonti e audit.
 
-- [x] `README.md`
-- [x] `00_CONTRATTO_EDITORIALE.md`
-- [x] `01_TEMPLATE_CAPITOLO.md`
-- [x] `02_TEMPLATE_VISUALE.md`
-- [x] `03_PROTOCOLLO_QA_VISUALE.md`
-- [x] `04_PROTOCOLLO_QA_TESTO.md`
-- [x] `05_STANDARD_SNIPPET_CODICE.md`
-- [x] `06_WORKFLOW_CAPITOLO.md`
-- [x] `07_POLITICA_FONTI_CITAZIONI.md`
-- [x] `08_REGISTRO_DECISIONI.md`
-- [x] `09_STRUTTURA_REPOSITORY.md`
-- [x] `10_INDICE_EDITORIALE.md`
-- [x] struttura e criteri di `11_AUDIT_DOCUMENTAZIONE.md`
-- [x] `EXPLANATION_STYLE_AND_VISUALS.md`
-- [x] `source/README.md`
-- [x] cinque segmenti archivistici del file metodologico originale
+## Entry point e root
 
-## Verifica delle decisioni editoriali
+- [x] `../GUIDELINE.md` presente come entry point operativo.
+- [x] `../README.md` rinvia a `GUIDELINE.md`.
+- [x] `../README.md` descrive scopo, parti, maturità e ricerca globale.
+- [x] `../PROGRESS.md` resta il registro sintetico dello stato.
 
-- [x] Repository `ferdinandobons/aibook` registrato.
-- [x] Branch predefinito `main` registrato.
-- [x] Formato sorgente Markdown registrato.
-- [x] Lingua italiana registrata.
-- [x] Struttura in due volumi registrata.
-- [x] Indice completo dei 72 capitoli e delle appendici registrato.
-- [x] Produzione seriale, un capitolo alla volta, registrata.
-- [x] Capitolo pilota 28 registrato.
-- [x] Livello intermedio tecnico con approfondimenti avanzati quando necessari registrato.
-- [x] Approccio didactic-first ancorato a fonti primarie registrato.
-- [x] Revisione autoriale prima del congelamento registrata.
+## Documenti canonici controllati
 
-## Verifica dell'accuratezza
+- [x] `README.md`.
+- [x] `00_CONTRATTO_EDITORIALE.md`.
+- [x] `01_TEMPLATE_CAPITOLO.md`.
+- [x] `02_TEMPLATE_VISUALE.md`.
+- [x] `03_PROTOCOLLO_QA_VISUALE.md`.
+- [x] `04_PROTOCOLLO_QA_TESTO.md`.
+- [x] `05_STANDARD_SNIPPET_CODICE.md`.
+- [x] `06_WORKFLOW_CAPITOLO.md`.
+- [x] `07_POLITICA_FONTI_CITAZIONI.md`.
+- [x] `08_REGISTRO_DECISIONI.md`.
+- [x] `09_STRUTTURA_REPOSITORY.md`.
+- [x] `10_INDICE_EDITORIALE.md`.
+- [x] `11_AUDIT_DOCUMENTAZIONE.md`.
+- [x] `12_ARCHITETTURA_EDITORIALE_EVOLUTIVA.md`.
+- [x] `13_PROTOCOLLO_AGGIORNAMENTO_CONTENUTI.md`.
+- [x] `14_CATALOGO_STATO_ARTE.md`.
+- [x] `15_REGISTRO_RICERCHE_APPROFONDITE.md`.
+- [x] `EXPLANATION_STYLE_AND_VISUALS.md`.
+- [x] archivio `source/`.
 
-- [x] Gerarchia delle fonti definita.
-- [x] Ricerca web aggiornata richiesta per contenuti recenti.
-- [x] Data di verifica e data di congelamento richieste.
-- [x] Registro `CLAIMS.md` obbligatorio.
-- [x] Controllo frase per frase richiesto.
-- [x] Audit matematico richiesto.
-- [x] Audit architetturale e algoritmico richiesto.
-- [x] Audit temporale richiesto.
-- [x] Seconda lettura completa richiesta.
-- [x] Paper, documentazione, repository, checkpoint e prodotto distinti.
-- [x] Inferenze fattuali editoriali escluse dalla versione approvata.
-- [x] Derivazioni matematiche ammesse soltanto se esplicite e ricontrollate.
-- [x] Esempi illustrativi ammessi soltanto se dichiarati e internamente coerenti.
-- [x] Risultati `Eseguito` ammessi soltanto con ambiente, comando, output e test.
+## Architettura dell'opera
 
-## Verifica delle visuali
+- [x] La divisione canonica in due volumi è stata sostituita.
+- [x] Il repository contiene una sola opera continua.
+- [x] Volume unico, tomi, sito e corso sono definiti come export.
+- [x] Le parti `P01`-`P14` hanno ID, nomi e ordine stabili.
+- [x] Le parti non dipendono da modelli, prodotti o periodi temporali.
+- [x] La modifica delle parti richiede ricerca, migrazione e approvazione esplicita.
+- [x] L'indice dell'edizione di lavoro usa 98 capitoli pianificati.
+- [x] Il Capitolo 28 mantiene il ruolo di pilota.
 
-- [x] Strumento immagini definito come strumento di produzione.
-- [x] SVG esclusi come artefatto editoriale principale.
-- [x] PNG ad alta risoluzione definito come formato finale.
-- [x] Prima generazione sempre trattata come bozza.
-- [x] Audit iterativo obbligatorio.
-- [x] Revisione di origine e destinazione di ogni freccia richiesta.
-- [x] Controllo di incroci, giunzioni apparenti e callout richiesto.
-- [x] Controllo di formule, numeri e shape richiesto.
-- [x] Controllo della semantica delle mask richiesto.
-- [x] Rigenerazione completa richiesta quando la struttura è ambigua.
-- [x] Alt text ed equivalente testuale richiesti.
-- [x] Watermark, firme e branding di terzi esclusi.
-- [x] Nessun numero fisso di immagini imposto.
-- [x] Almeno una visuale portante richiesta per i capitoli tecnici.
+## Routing e identità
 
-## Verifica del codice
+- [x] La collocazione dipende dal problema risolto e dall'oggetto modificato.
+- [x] Ogni tecnica ha una collocazione primaria.
+- [x] I collegamenti secondari usano tag e cross-reference.
+- [x] `chapter_id` è distinto dal numero visualizzato.
+- [x] `order_key`, prerequisiti, successori e alias sono definiti.
+- [x] Split e merge richiedono mappa di migrazione.
 
-- [x] Python e PyTorch definiti come predefiniti.
-- [x] NumPy ammesso per esempi e controlli indipendenti.
-- [x] Pseudocodice distinto dal codice eseguibile.
-- [x] Almeno uno snippet richiesto per ogni capitolo tecnico.
-- [x] Snippet brevi e autosufficienti definiti come forma predefinita.
-- [x] Script lunghi ammessi soltanto quando necessari.
-- [x] Firma API verificata sulla documentazione ufficiale.
-- [x] Esecuzione in processo pulito richiesta.
-- [x] Test degli invarianti richiesti.
-- [x] Confronto indipendente richiesto quando possibile.
-- [x] Riesecuzione completa richiesta dopo ogni correzione.
-- [x] Versione, device, dtype, seed, input, output e comando richiesti.
-- [x] Coerenza con testo, formule e visuali richiesta.
+## Maturità
 
-## Verifica del metodo didattico
+- [x] `CORE`, `ESTABLISHED` e `FRONTIER` sono definiti.
+- [x] La maturità è separata dalla collocazione.
+- [x] La promozione richiede nuove prove.
+- [x] Una promozione non sposta automaticamente la voce.
+- [x] Le voci frontier restano nella parte funzionale pertinente.
+- [x] `P14` non è un contenitore generico per tutte le novità.
 
-- [x] Oggetto continuo richiesto.
-- [x] Catena dei sette punti registrata.
-- [x] Stati del lettore registrati.
-- [x] Blocco atomico di spiegazione registrato.
-- [x] Gate del termine registrato.
-- [x] Gate dell'astrazione registrato.
-- [x] Gate delle frecce registrato.
-- [x] Gate di simboli e formule registrato.
-- [x] Gate del codice registrato.
-- [x] Gate delle varianti registrato.
-- [x] Niente metafore o personificazioni registrato.
-- [x] Italiano calmo, preciso e progressivo registrato.
-- [x] Una trasformazione principale per paragrafo registrata.
-- [x] Check di ricostruzione, localizzazione, confine, trasferimento e variazione registrati.
+## Catalogo e ricerca
 
-## Verifica delle dipendenze
+- [x] `14_CATALOGO_STATO_ARTE.md` registra le principali famiglie censite.
+- [x] Ogni voce ha ID, parte, maturità, destinazione e data.
+- [x] Il catalogo non dichiara completezza assoluta.
+- [x] `15_REGISTRO_RICERCHE_APPROFONDITE.md` registra la ricerca del 30 luglio 2026.
+- [x] Copertura, criteri, fonti seme, esiti e limiti sono dichiarati.
+- [x] È prevista una revisione frontier almeno ogni 90 giorni durante la produzione attiva.
+- [x] È prevista una nuova ricerca globale prima di ogni edizione.
 
-- [x] `LEARN_GOVERNANCE.md` dichiarato non necessario.
-- [x] Nessuna frase guida esterna obbligatoria.
-- [x] Il file metodologico originale è conservato in `docs/source/`.
-- [x] Il documento canonico adattato al libro è presente.
-- [x] Il file originale ricevuto è registrato con 496 righe, 21858 byte e SHA-256 `c2ceb5be83b7d8fede41d82a98b9c1cf8a12a7cad3c8a702d6546d214196726b`.
+## Aggiornamenti futuri
 
-## Controllo delle decisioni sostituite
+- [x] Il protocollo U1-U8 è definito.
+- [x] Esiste una procedura per nuove tecniche.
+- [x] Esiste una procedura per nuova evidenza.
+- [x] Esiste una procedura per API e implementazioni.
+- [x] Esiste una procedura per promozione e demozione.
+- [x] Esiste una procedura per nuovi capitoli.
+- [x] Esiste una procedura per split e merge.
+- [x] Esiste una procedura per correzioni tecniche.
+- [x] Esiste una procedura per nuove edizioni.
 
-- [x] Uso prioritario di SVG marcato come sostituito.
-- [x] Dipendenza da `LEARN_GOVERNANCE.md` marcata come sostituita.
-- [x] Ammissibilità di inferenze editoriali fattuali marcata come sostituita.
+## Accuratezza
+
+- [x] Fonti primarie e ufficiali hanno priorità.
+- [x] Le inferenze fattuali editoriali sono escluse.
+- [x] `CLAIMS.md` è obbligatorio.
+- [x] La review frase per frase è obbligatoria.
+- [x] L'audit matematico è obbligatorio.
+- [x] L'audit architetturale e temporale è obbligatorio.
+- [x] Paper, implementazione, checkpoint e prodotto restano distinti.
+- [x] Risultati quantitativi richiedono setup e provenienza.
+
+## Visuali
+
+- [x] Le immagini vengono create con lo strumento immagini.
+- [x] Gli SVG non sono l'artefatto editoriale principale.
+- [x] La prima generazione è sempre una bozza.
+- [x] Formula, numeri, shape e collegamenti vengono verificati.
+- [x] Una linea ambigua blocca l'approvazione.
+- [x] Ogni correzione richiede un nuovo audit completo.
+- [x] Alt text ed equivalente testuale sono obbligatori.
+
+## Codice
+
+- [x] Ogni capitolo tecnico include codice eseguibile, salvo eccezione motivata.
+- [x] Python e PyTorch sono predefiniti.
+- [x] NumPy è ammesso per controlli indipendenti.
+- [x] Pseudocodice e codice eseguibile restano distinti.
+- [x] Le API vengono verificate sulla documentazione ufficiale.
+- [x] Il codice viene eseguito in un processo pulito.
+- [x] Gli invarianti vengono testati.
+- [x] Gli output `Eseguito` hanno log o test associati.
+
+## Metodo didattico
+
+- [x] Oggetto continuo.
+- [x] Catena dei sette punti.
+- [x] Stati del lettore.
+- [x] Blocco atomico di spiegazione.
+- [x] Gate del termine, dell'astrazione, delle frecce, della matematica, del codice e delle varianti.
+- [x] Niente metafore o personificazioni.
+- [x] Italiano calmo, preciso e progressivo.
+- [x] Una trasformazione principale per paragrafo.
+- [x] Ricostruzione, localizzazione, confine, trasferimento e variazione.
+
+## Decisioni sostituite controllate
+
+- [x] SVG come strumento principale sostituito.
+- [x] Dipendenza da `LEARN_GOVERNANCE.md` sostituita.
+- [x] Inferenze fattuali etichettate sostituite dall'esclusione.
+- [x] Due volumi come struttura canonica sostituiti dall'opera unica.
 
 ## Controllo incrociato
 
-- [x] Il contratto editoriale rinvia ai protocolli specialistici.
-- [x] Il template del capitolo include i gate testuali, matematici, visuali e di codice.
-- [x] Il workflow usa gli stessi stati dichiarati nei protocolli.
-- [x] La struttura del repository include tutti gli artefatti obbligatori.
-- [x] La struttura del repository elenca anche il presente audit.
-- [x] Il registro delle decisioni riporta le decisioni correnti e quelle sostituite.
-- [x] L'indice della documentazione elenca i documenti canonici e l'archivio.
-- [x] Non risultano decisioni aperte che impediscano l'avvio.
+- [x] Il contratto rinvia all'architettura evolutiva.
+- [x] Il registro delle decisioni contiene le nuove decisioni.
+- [x] L'indice usa le quattordici parti stabili.
+- [x] La struttura del repository include `GUIDELINE.md` e i documenti `12`-`15`.
+- [x] Il protocollo di aggiornamento rinvia al catalogo e al registro delle ricerche.
+- [x] Il README root e il README docs indicano lo stesso ordine di lettura.
+- [x] Non risultano conflitti noti tra opera unica, parti, maturità e numerazione.
 
-## Problemi corretti durante l'audit
+## Elementi operativi non bloccanti
 
-1. È stata rimossa l'ammissibilità residua delle inferenze editoriali fattuali.
-2. È stato reso obbligatorio almeno uno snippet eseguibile nei capitoli tecnici.
-3. È stata registrata esplicitamente la produzione delle immagini con lo strumento immagini e non tramite SVG come artefatto principale.
-4. È stato aggiunto l'indice editoriale completo.
-5. È stata aggiunta una copia archivistica integrale del file metodologico originale.
-6. È stata corretta la descrizione di `docs/` per distinguere documenti canonici e archivio delle fonti.
-7. È stato registrato che il capitolo pilota non deve iniziare prima del via esplicito.
-8. È stato aggiunto il presente audit all'indice canonico e alla struttura documentale.
+- Le versioni esatte di Python e PyTorch vengono fissate all'apertura del capitolo relativo.
+- Ogni voce del catalogo viene riaperta con fonti puntuali quando entra in un capitolo.
+- La numerazione visualizzata resta modificabile fino al congelamento dell'edizione.
+- La sequenza illustrativa del capitolo attention viene scelta nel piano del capitolo.
 
-## Elementi non bloccanti
-
-- Le versioni esatte di Python e PyTorch verranno fissate all'apertura operativa del Capitolo 28, dopo verifica della documentazione corrente.
-- La sequenza italiana continua del Capitolo 28 verrà scelta durante la pianificazione ed etichettata come `Illustrativo`.
-- Il dossier iniziale delle fonti del Capitolo 28 dovrà essere riaperto, aggiornato e verificato prima della stesura portante.
-
-Questi elementi appartengono al workflow del capitolo e non costituiscono decisioni editoriali mancanti.
+Questi elementi appartengono al workflow e non rappresentano decisioni globali mancanti.
 
 ## Verdetto
 
-La documentazione è completa rispetto alle decisioni prese fino alla data dell'audit. Non risultano contraddizioni note o decisioni globali mancanti che impediscano l'avvio del Capitolo 28.
+La documentazione è sufficiente per trasferire il contesto operativo a un sistema AI privo della conversazione originaria.
 
-Il prossimo passaggio autorizzato è attendere il via esplicito del committente. Dopo il via, il capitolo entra nello stato `ricerca` e segue `06_WORKFLOW_CAPITOLO.md`.
+L'architettura è stabile rispetto all'inserimento di nuove tecniche. Catalogo, maturità, ID semantici, routing e procedure di aggiornamento permettono l'evoluzione del libro senza modificare automaticamente i nomi o l'ordine delle parti.
