@@ -2,13 +2,14 @@
 
 ## Stato
 
-- Versione corrente: `0.4.0-rc4`
+- Versione corrente: `0.5.0-rc5`
 - Data: 30 luglio 2026
 - Protocollo corrente: `docs/02_STILE_E_QA_TESTO.md`
 - Fonti, codice e riproducibilità: `docs/04_CODICE_FONTI_E_RIPRODUCIBILITA.md`
 - Esito fattuale e matematico: **superato**
 - Esito didattico: **superato**
-- Esito editoriale e linguistico: **superato dopo riscrittura e seconda lettura**
+- Esito di chiarezza per lettore non esperto: **superato dopo riscrittura e seconda lettura**
+- Esito editoriale e linguistico: **superato**
 - Codice: invariato, test registrati superati
 - Visuali: validate tecnicamente nella versione precedente, controllo incrociato riaperto
 - Review autoriale: riaperta
@@ -95,7 +96,7 @@ Correzioni:
 - riepilogo riscritto;
 - fonti e materiali condensati.
 
-## `EDIT-ATT-02`. Seconda lettura e prova ad alta voce
+## `EDIT-ATT-02`. Seconda lettura e prova di fluidità
 
 - Versione: `0.4.0-rc4`
 - Profili: lettore nuovo, lettore tecnico, lettore che riprende il capitolo
@@ -114,7 +115,7 @@ Correzioni:
 
 - [x] formula e shape invariati;
 - [x] ipotesi della derivazione sul fattore di scala esplicite;
-- [x] dropout e semantica booleana separati dalla definizione matematica;
+- [x] dropout e semantica booleana separate dalla definizione matematica;
 - [x] complessità e limite quadratico corretti;
 - [x] multi-head e implementazioni hardware-aware differite;
 - [x] codice e risultati eseguiti invariati.
@@ -126,27 +127,112 @@ Correzioni:
 - [x] riepilogo centrato sul motivo dell'attention;
 - [x] fonti e materiali accessibili senza dominare la chiusura.
 
+Problema residuo emerso nella review successiva:
+
+La versione risultava chiara per un lettore già abituato a vettori, token, shape e softmax. Per un lettore meno esperto, però, il passaggio dalle prime righe ai vettori restava brusco, il prodotto scalare non veniva spiegato e la derivazione sulla varianza interrompeva il meccanismo principale. La sezione PyTorch conservava inoltre tre blocchi di codice e dettagli API non necessari alla prima comprensione.
+
+## `EDIT-ATT-03`. Review per lettore non esperto
+
+- Versione: `0.4.0-rc4`
+- Profilo dominante: lettore che conosce l'idea generale di modello ma non padroneggia ancora algebra lineare e API PyTorch
+- Criterio: il meccanismo deve poter essere raccontato prima in parole e poi ricostruito con i numeri
+- Esito: **respinta**
+
+Difetti bloccanti:
+
+1. apertura ancora astratta e priva di un esempio linguistico concreto;
+2. `token` e `vettore` dati per noti;
+3. shape `[3,2]`, `d_k` e `d_v` introdotte senza traduzione immediata;
+4. prodotto scalare mostrato ma non spiegato come operazione;
+5. score presentati prima di chiarire che cosa rappresentano nel confronto;
+6. fattore di scala spiegato attraverso la varianza nel percorso principale;
+7. softmax introdotta dalla formula prima del significato intuitivo;
+8. caveat sul dropout inserito mentre il lettore stava ancora costruendo la combinazione base;
+9. self-attention, cross-attention e causalità compresse in un solo paragrafo;
+10. tre blocchi PyTorch nel corpo principale;
+11. costo quadratico espresso prima in notazione asintotica e soltanto dopo in forma concreta.
+
+Correzioni nella versione `0.5.0-rc5`:
+
+- apertura ancorata alla frase `Il pacco non è arrivato`;
+- token spiegato come parola o parte di parola;
+- vettore spiegato come lista di numeri;
+- calcolati anche i risultati delle due combinazioni iniziali;
+- query, key e value dichiarate come ruoli matematici;
+- shape tradotta in numero di righe e valori per riga;
+- prodotto scalare descritto come moltiplicazione e somma;
+- significato degli score spiegato prima del scaling;
+- motivazione intuitiva del fattore di scala separata dalla derivazione, spostata in un approfondimento;
+- softmax descritta come trasformazione in coefficienti non negativi che sommano a uno;
+- caveat sul dropout rimosso dal calcolo principale;
+- formula presentata come forma compatta di passaggi già eseguiti;
+- self-attention, cross-attention e causalità separate in frasi distinte;
+- mantenuto un solo snippet completo nel corpo;
+- confronti API e causal mask rinviati ai file di codice;
+- costo quadratico spiegato prima come matrice di `n^2` celle.
+
+## `EDIT-ATT-04`. Seconda lettura della versione accessibile
+
+- Versione: `0.5.0-rc5`
+- Profili: lettore non esperto, lettore tecnico, lettore che riprende il capitolo
+- Esito: **superata per il testo**
+
+### Lettore non esperto
+
+- [x] comprende il problema attraverso una frase prima dei vettori;
+- [x] riceve una definizione immediata di token, vettore e shape;
+- [x] distingue query, key e value come ruoli;
+- [x] comprende il prodotto scalare senza conoscere la notazione matriciale;
+- [x] comprende score, scaling, softmax e somma pesata in ordine;
+- [x] può saltare l'approfondimento sulla varianza senza perdere il filo;
+- [x] incontra la formula soltanto dopo l'esempio completo;
+- [x] comprende la causal mask attraverso il divieto di leggere il futuro;
+- [x] vede nel codice le stesse tre operazioni già spiegate;
+- [x] comprende il costo quadratico come numero di coppie da confrontare.
+
+### Lettore tecnico
+
+- [x] formula della scaled dot-product attention invariata;
+- [x] shape di `Q`, `K`, `V`, score, coefficienti e output corrette;
+- [x] fattore `1/sqrt(d_k)` attribuito e derivazione conservata con ipotesi;
+- [x] softmax applicata lungo le key;
+- [x] mask applicata agli score prima della softmax;
+- [x] complessità asintotica conservata;
+- [x] multi-head e implementazioni hardware-aware differite;
+- [x] codice e risultati eseguiti invariati.
+
+### Lettore che riprende il capitolo
+
+- [x] otto sezioni semantiche;
+- [x] formula compatta preceduta dalla spiegazione estesa;
+- [x] tabella delle shape con significato esplicito;
+- [x] riepilogo in tre paragrafi brevi;
+- [x] collegamenti ai tre snippet senza duplicarli nel corpo.
+
 ### Controllo linguistico
 
-- [x] uso ricorrente di `consumer` eliminato dalla prosa;
-- [x] calchi e formulazioni da specifica sostituiti;
+- [x] italiano scritto direttamente;
+- [x] periodi matematici collegati da verbi operativi;
 - [x] nessun em dash;
-- [x] ritmo variato;
-- [x] cautele duplicate ridotte;
-- [x] lettura ad alta voce superata;
-- [x] passaggi matematici collegati da frasi complete.
+- [x] ridotti calchi da documentazione;
+- [x] nessun accumulo di caveat nel percorso principale;
+- [x] termini tecnici definiti e poi riutilizzati;
+- [x] ritmo alternato tra spiegazione, formula ed esempio;
+- [x] codice introdotto e concluso in prosa.
 
 ## Audit tecnico
 
 - [x] claim portanti invariati e verificati;
 - [x] formula della scaled dot-product attention invariata;
 - [x] shape di `Q`, `K`, `V`, score, coefficienti e output corrette;
-- [x] valori dell'esempio coerenti con i test;
+- [x] valori dell'esempio principale coerenti con i test;
+- [x] valori aggiunti `c_1=[0,40,0,90]` e `c_2=[0,85,0,95]` ricalcolati;
 - [x] ordine score, scaling, mask opzionale, softmax, prodotto con `V`;
 - [x] mask applicata agli score;
 - [x] complessità del caso materializzato invariata;
 - [x] ambiente eseguito distinto dalla versione documentata;
-- [x] tre snippet e tre test invariati.
+- [x] tre snippet e tre test invariati;
+- [x] nessuna nuova esecuzione dichiarata per la sola riscrittura editoriale.
 
 ## Elementi aperti
 
@@ -156,4 +242,4 @@ Correzioni:
 
 ## Esito
 
-Il testo `0.4.0-rc4` supera i gate fattuali, didattici, anti-template, editoriali e linguistici. La revisione autoriale è riaperta perché la superficie editoriale è cambiata e le visuali devono essere ricontrollate nel nuovo contesto.
+Il testo `0.5.0-rc5` supera i gate fattuali, didattici, anti-template, editoriali, linguistici e di chiarezza per un lettore non esperto. La revisione autoriale resta riaperta perché la superficie editoriale è cambiata e le visuali devono essere ricontrollate nel nuovo contesto.
