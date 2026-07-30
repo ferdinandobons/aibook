@@ -4,19 +4,19 @@
 
 - Stato: `vincolante`
 - Metodo: `EXPLANATION_STYLE_AND_VISUALS.md`
-- Regola di superficie: `19_STRUTTURA_LOGICA_IN_PROSA.md`
-- Review didattica: `18_PROTOCOLLO_QA_DIDATTICO.md`
+- Struttura in prosa: `19_STRUTTURA_LOGICA_IN_PROSA.md`
+- Voce editoriale: `20_VOCE_EDITORIALE_E_REVISIONE_LINGUISTICA.md`
+- Review: `18_PROTOCOLLO_QA_DIDATTICO.md`
 
-## 1. Principio del template
+## 1. Principio
 
-Il template distingue due artefatti:
+Il template distingue:
 
-1. lo scaffold interno usato per pianificare e revisionare;
-2. il capitolo destinato al lettore.
+1. scaffold interno per pianificazione e review;
+2. testo destinato al lettore;
+3. artefatti di prova e riproduzione.
 
-Lo scaffold interno è regolare e analitico. Il capitolo pubblicato è una spiegazione in prosa con titoli semantici adatti al contenuto.
-
-Non si copiano nel testo, come struttura ripetitiva, le etichette `Dove siamo`, `Problema`, `Trasformazione`, `Cosa è cambiato`, `Cosa è rimasto invariato`, `Cosa non fa` o `Frase di continuità`.
+Lo scaffold è regolare e analitico. Il capitolo pubblicato è una spiegazione in prosa, con titoli e ritmo adatti al contenuto.
 
 ## 2. File obbligatori
 
@@ -33,31 +33,41 @@ chapters/<slug>/
   assets/
 ```
 
-## 3. Metadati del capitolo
+## 3. Metadati
 
-`CHAPTER.md` o il front matter associato registra:
+I metadati vengono conservati in un commento HTML all'inizio di `CHAPTER.md`, in front matter non renderizzato oppure in un file separato.
+
+Formato consigliato:
 
 ```text
+<!--
 chapter_id:
 part_id:
 order_key:
-titolo:
+title:
 slug:
-maturità:
-stato editoriale:
-data di apertura:
-data ultima ricerca web:
-data ultima verifica fonti:
-data di congelamento:
-versione Python:
-versione delle librerie:
-device e dtype:
-prerequisiti:
-concetti differiti:
-capitolo o consumer successivo:
+maturity:
+status:
+version:
+opened:
+last_web_research:
+last_source_check:
+freeze_date:
+environment:
+prerequisites:
+deferred:
+next_chapter:
+-->
 ```
 
-I dettagli operativi non devono interrompere la lettura della lezione nella versione editoriale finale.
+La versione editoriale non mostra:
+
+- stato della candidatura;
+- branch e commit;
+- esito degli audit;
+- immagini respinte;
+- note sulla pull request;
+- dettagli operativi non necessari alla comprensione.
 
 ## 4. Scaffold interno in `PLAN.md`
 
@@ -69,15 +79,15 @@ Oggetto continuo:
 Stato iniziale:
 Gap:
 Output finale:
-Invarianti principali:
+Invarianti:
 Confini:
 Concetti differiti:
-Consumer successivo:
-Visuali previste:
-Snippet previsti:
+Passaggio successivo:
+Visuali:
+Snippet:
 ```
 
-Per ogni transizione portante si compila internamente:
+Per ogni transizione portante:
 
 ```text
 Ultima affermazione stabile:
@@ -89,87 +99,108 @@ Output e shape:
 Cosa cambia:
 Cosa resta invariato:
 Cosa non fa:
-Cosa userà l'output:
+Consumer successivo:
 Esempio o prova:
 Errore comune:
-Giunzione con il passaggio successivo:
+Giunzione:
 ```
 
-Questa scheda non determina i titoli visibili del capitolo.
+Lo scaffold non determina i titoli visibili.
 
 ## 5. Struttura destinata al lettore
 
-Il capitolo usa soltanto le sezioni necessarie al proprio profilo. Un possibile percorso è:
+Il capitolo usa soltanto le sezioni necessarie al proprio profilo.
+
+Un possibile percorso è:
 
 ```text
 Titolo
-Orientamento iniziale in prosa
-Problema concreto
-Meccanismo costruito per passaggi
+Apertura concreta
+Problema
+Meccanismo o argomento costruito per passaggi
 Esempio continuo
-Pseudocodice, quando utile
 Formalizzazione
-Implementazione
-Varianti o confini pertinenti
-Ricostruzione
+Codice o esperimento
+Varianti e confini pertinenti
+Riepilogo
 Controlli ed esercizi
-Fonti e artefatti
+Riferimenti e materiali verificabili
 ```
 
-I titoli sono semantici. Devono nominare il contenuto reale, per esempio:
+Non esiste una sequenza obbligatoria identica per tutti i capitoli.
 
-```text
-Perché una combinazione fissa non basta
-Dal confronto ai coefficienti
-Escludere le posizioni future
-Dalla formula all'implementazione
-```
+Come riferimento editoriale, un capitolo tecnico ordinario usa spesso da cinque a dieci sezioni principali. Il numero può cambiare, ma ogni titolo deve corrispondere a una domanda o a un movimento concettuale reale.
 
-Non esiste una sequenza obbligatoria di trenta intestazioni uguale per ogni capitolo.
+## 6. Apertura
 
-## 6. Orientamento iniziale
-
-L'apertura deve rendere chiari, in uno o più paragrafi naturali:
+L'apertura rende chiari, in prosa:
 
 - il punto da cui si parte;
-- la capacità mancante;
-- ciò che il lettore saprà ricostruire alla fine;
+- il problema concreto;
+- perché il problema conta;
+- ciò che il lettore saprà fare;
 - il confine del capitolo.
 
-Una bussola schematica può essere conservata in `PLAN.md`. Nel testo pubblico viene usata soltanto quando migliora davvero la comprensione.
+Una bussola schematica può restare in `PLAN.md`. Nel corpo compare soltanto se migliora la lettura.
 
-## 7. Transizioni nella prosa
+## 7. Titoli e gerarchia
 
-Ogni passaggio deve contenere le funzioni del blocco atomico, ma le integra in frasi e paragrafi.
+Il titolo del capitolo usa `#`.
 
-Esempio:
+Le sezioni principali usano `##`.
+
+Le sottosezioni usano `###` soltanto quando la gerarchia è reale. Non si usa `#` per ogni sezione interna.
+
+Titoli adatti:
 
 ```text
-I tre prodotti scalari forniscono uno score per ogni key. Il vettore risultante ha shape [S], mentre V non è ancora coinvolta. Gli score non sono coefficienti normalizzati: possono essere negativi e non sommano a 1. Prima della softmax, il passaggio successivo ne controlla la scala.
+Una stessa richiesta, sistemi diversi
+Quando il comportamento viene appreso
+Il calcolo completo su una query
+Escludere le posizioni future
+Dalla formula a PyTorch
 ```
 
-Il reviewer deve poter ricostruire stato, output, invariante, confine e continuità. Il lettore non deve vedere un modulo compilato.
+Titoli da non usare come telaio ricorrente:
 
-## 8. Ordine di introduzione
+```text
+Dove siamo
+Problema locale
+Trasformazione
+Cosa è cambiato
+Cosa non fa
+Frase di continuità
+Contratto dello snippet
+```
 
-Quando pertinente, l'ordine è:
+## 8. Paragrafi
+
+Ogni paragrafo ha una relazione dominante, ma può collegare stato, problema, passaggio, conseguenza e limite.
+
+Il reviewer deve poter ricostruire lo scaffold; il lettore deve incontrare un ragionamento.
+
+Le sezioni non vengono spezzate per ogni operazione elementare. Più passaggi brevi possono vivere nella stessa sezione quando appartengono allo stesso movimento.
+
+## 9. Ordine di introduzione
+
+Quando pertinente:
 
 ```text
 domanda concreta
--> oggetto o esempio osservabile
+-> esempio osservabile
 -> valori e shape
 -> algoritmo o pseudocodice
 -> formula generale
--> derivazione necessaria
--> implementazione verificata
--> varianti e ottimizzazioni
+-> derivazione
+-> implementazione
+-> varianti
 ```
 
-Il pseudocodice può essere omesso quando non esiste un algoritmo sequenziale utile da esplicitare. L'omissione deve essere motivata nel piano.
+Il pseudocodice può essere omesso quando non chiarisce un processo sequenziale. La decisione viene registrata in `PLAN.md`.
 
-## 9. Visuali
+## 10. Visuali
 
-Ogni visuale inclusa possiede:
+Ogni visuale possiede:
 
 ```text
 FIG-ID
@@ -181,21 +212,19 @@ candidate-vN.png o final.png
 
 Nel capitolo la prosa:
 
-1. introduce la domanda della figura;
-2. attraversa gli elementi nell'ordine di lettura;
-3. esplicita il risultato e il passaggio successivo.
+1. introduce la domanda;
+2. attraversa gli elementi;
+3. esplicita il risultato.
 
-Le etichette `Domanda della figura` e `Conclusione della figura` non sono obbligatorie nella superficie pubblicata.
+Le etichette editoriali non sono obbligatorie.
 
-## 10. Codice
+Una visuale mancante o respinta viene registrata negli audit. Il capitolo destinato al lettore non descrive i fallimenti del processo di generazione.
 
-Prima di ogni snippet, la prosa identifica naturalmente:
+## 11. Codice
 
-- l'input già noto;
-- le righe che implementano l'operazione centrale;
-- l'output o l'invariante da controllare.
+Prima di uno snippet, la prosa chiarisce input, operazione centrale e controllo atteso.
 
-Il contratto completo dello snippet resta in `code/README.md` e `code/CODE_AUDIT.md`. Nel corpo non è obbligatorio pubblicare una sezione intitolata `Contratto dello snippet`.
+Il corpo mostra soltanto il frammento utile alla spiegazione. Il contratto completo resta in `code/README.md` e `code/CODE_AUDIT.md`.
 
 Ogni snippet registra:
 
@@ -213,77 +242,85 @@ test
 stato audit
 ```
 
-## 11. Matematica, shape e invarianti
+I dettagli di ambiente e tolleranza non interrompono il discorso, salvo che siano essenziali per interpretare il risultato.
 
-Le formule entrano dopo i referenti concreti. Shape, condizioni e invarianti vengono dichiarati nel punto in cui servono, in prosa, tabella o box tecnico.
+## 12. Matematica, shape e invarianti
 
-La forma editoriale può variare. Non può variare la precisione.
+Le formule entrano dopo i referenti concreti.
 
-## 12. Varianti e confini
+Shape, condizioni e invarianti vengono dichiarati nel punto in cui servono, in prosa, tabella o box tecnico. La forma editoriale può variare; la precisione no.
+
+## 13. Varianti e confini
 
 Una variante entra dopo il caso base e dichiara:
 
 - collo di bottiglia;
 - modifica;
 - comportamento invariato;
-- costo nuovo;
+- nuovo costo;
 - trade-off;
 - fonte e versione.
 
-Un concetto rinviato viene mantenuto come ponte breve o riferimento incrociato. Non viene spiegato a metà per riempire una sezione standard.
+Un concetto rinviato viene mantenuto come ponte breve o riferimento incrociato.
 
-## 13. Ricostruzione e controlli
+## 14. Riepilogo
 
-La conclusione permette al lettore di:
+La conclusione riprende il problema iniziale e ricompone il percorso. Non si limita a elencare i nomi delle operazioni.
 
-- ricostruire il flusso;
-- localizzare il meccanismo;
-- indicarne il confine;
-- trasferirlo a un nuovo input;
+Il lettore deve poter:
+
+- ricostruire;
+- localizzare;
+- delimitare;
+- trasferire;
 - prevedere una variazione.
 
-I titoli di questi controlli possono essere mantenuti perché descrivono azioni distinte richieste al lettore.
+## 15. Controlli ed esercizi
 
-## 14. Fonti e artefatti
+I controlli di comprensione possono mantenere titoli come:
 
-Il capitolo chiude con le sezioni pertinenti tra:
+- Ricostruzione;
+- Localizzazione;
+- Confine;
+- Trasferimento;
+- Variazione.
+
+Gli esercizi richiedono soltanto conoscenze costruite nel capitolo o dichiarate come prerequisiti.
+
+## 16. Riferimenti e materiali
+
+Il capitolo chiude con una sezione breve che rinvia a:
 
 - fonti primarie;
 - documentazione ufficiale;
-- repository e standard;
-- artefatti di riproduzione;
+- codice e test;
+- output e ambiente;
 - letture complementari separate.
 
-## 15. Audit
+Registri di approvazione, audit completi e storia delle versioni non fanno parte del testo destinato al lettore.
 
-`TEXT_AUDIT.md` registra almeno:
+## 17. Audit
+
+`TEXT_AUDIT.md` registra:
 
 - audit fattuale;
 - audit matematico;
 - audit algoritmico;
 - audit temporale;
 - audit incrociato;
-- una o più review didattiche complete;
-- controllo anti-template secondo `19_STRUTTURA_LOGICA_IN_PROSA.md`;
-- esito autoriale.
+- review strutturale;
+- gate anti-template;
+- review editoriale e linguistica;
+- lettura ad alta voce;
+- revisione autoriale.
 
-Un capitolo non passa a revisione autoriale soltanto perché contiene tutte le etichette del vecchio template. Deve mostrare una prosa naturale e permettere al reviewer di ricostruire la logica sottostante.
+## 18. Gate finale
 
-## 16. Registro finale
+Un capitolo non passa a revisione autoriale soltanto perché contiene tutti gli artefatti. Deve:
 
-```text
-Review fattuale:
-Review matematica:
-Review architetturale e algoritmica:
-Review temporale:
-Review codice:
-Review visuale:
-Review incrociata:
-Review didattica:
-Review anti-template:
-Review autoriale:
-Data di congelamento:
-Commit congelato:
-Problemi non bloccanti:
-Sezioni rinviate:
-```
+- essere corretto;
+- risultare continuo;
+- usare un italiano naturale;
+- mantenere l'esempio;
+- separare manuale e materiali operativi;
+- superare una nuova lettura completa dopo le correzioni.
