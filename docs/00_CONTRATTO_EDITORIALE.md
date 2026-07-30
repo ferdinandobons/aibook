@@ -7,52 +7,96 @@
 
 ## Stato del progetto
 
-- Repository operativo: `ferdinandobons/aibook`
+- Repository: `ferdinandobons/aibook`
 - Branch predefinito: `main`
-- Stato: attivo, in attesa del via alla stesura del capitolo pilota
-- Modalità di produzione: seriale controllata, un capitolo completo alla volta
-- Capitolo pilota: **Capitolo 28. Il meccanismo di attention**
 - Lingua: italiano
 - Formato sorgente: Markdown
+- Modalità: produzione seriale controllata
+- Opera canonica: unica e continua
+- Export: volume unico, più tomi, sito o corso
+- Capitolo pilota: `CH-P06-ATTENTION`, visualizzato come Capitolo 28 nell'edizione di lavoro
 - Visuali: immagini raster generate con lo strumento immagini
 - Codice principale: Python e PyTorch
-- Data di riferimento del presente contratto: 30 luglio 2026
-- Data da registrare per ogni ricerca: giorno effettivo della verifica
+- Ultima ricerca approfondita globale: **30 luglio 2026**
+- Entry point operativo: `../GUIDELINE.md`
 
 ## 1. Obiettivo editoriale
 
-Il libro deve costruire modelli mentali eseguibili. Alla fine di ogni meccanismo il lettore deve poter:
+Il libro costruisce modelli mentali eseguibili. Alla fine di ogni meccanismo il lettore deve poter:
 
-1. ricostruire l'input iniziale;
-2. descrivere la trasformazione nell'ordine reale di esecuzione;
-3. indicare l'output e la sua shape;
+1. ricostruire l'input;
+2. descrivere la trasformazione nell'ordine reale;
+3. indicare output e shape;
 4. dire cosa è cambiato;
 5. dire cosa è rimasto invariato;
-6. localizzare il componente nel sistema più grande;
-7. dire cosa il meccanismo non fa;
-8. prevedere l'effetto di una variazione controllata;
-9. collegare la spiegazione a un'immagine e a un'implementazione verificata.
+6. localizzare il componente;
+7. dire cosa non fa;
+8. prevedere una variazione controllata;
+9. collegare la spiegazione a una visuale e a codice verificato.
 
-Il testo non è una rassegna di termini. Ogni capitolo porta un oggetto concreto dall'apertura alla ricostruzione finale.
+Il libro non è una rassegna di nomi. Ogni capitolo porta un oggetto concreto dall'apertura alla ricostruzione finale.
 
-## 2. Struttura dell'opera
+## 2. Architettura dell'opera
 
-L'opera è organizzata in due volumi. L'indice canonico è in `10_INDICE_EDITORIALE.md`.
+L'opera canonica è unica. La suddivisione in tomi è una scelta di pubblicazione e non modifica la sorgente.
 
-I capitoli sono organizzati per:
+Le parti stabili sono:
 
-- idee;
-- problemi;
-- meccanismi;
-- famiglie architetturali;
-- processi di training e inference;
-- sistemi di produzione e valutazione.
+| ID | Nome |
+|---|---|
+| `P01` | Campo, metodo e storia dell'AI |
+| `P02` | Matematica, informazione e calcolo |
+| `P03` | Apprendimento, ottimizzazione e decisione |
+| `P04` | Reti neurali e rappresentazioni |
+| `P05` | Modellazione generativa |
+| `P06` | Sequenze, linguaggio e contesto |
+| `P07` | Dati, pretraining e scaling |
+| `P08` | Progettazione delle architetture |
+| `P09` | Adattamento, allineamento e ragionamento |
+| `P10` | Multimodalità e modelli del mondo |
+| `P11` | Conoscenza esterna, memoria e azione |
+| `P12` | Efficienza, inference e sistemi |
+| `P13` | Valutazione, interpretabilità, sicurezza e governance |
+| `P14` | Laboratori, integrazione e osservatorio |
 
-I singoli modelli vengono usati come studi di caso verificati. Un modello recente non determina da solo la struttura del libro.
+ID, nome e ordine delle parti sono stabili. Le regole complete sono in `12_ARCHITETTURA_EDITORIALE_EVOLUTIVA.md`.
 
-## 3. Lettore target e profondità
+Una nuova tecnica viene collocata in base al problema risolto e all'oggetto modificato. Il nome di un modello, la data o la popolarità non determinano da soli la struttura.
 
-Il livello principale è intermedio tecnico, con approfondimenti avanzati ogni volta che servono per spiegare correttamente:
+## 3. Identità dei capitoli
+
+Ogni capitolo ha:
+
+```text
+chapter_id
+part_id
+order_key
+titolo
+slug
+maturità
+stato editoriale
+prerequisiti
+successori
+alias
+```
+
+`chapter_id` è stabile. Il numero visualizzato è specifico dell'edizione e può cambiare prima del congelamento.
+
+L'indice dell'edizione di lavoro è in `10_INDICE_EDITORIALE.md`.
+
+## 4. Maturità dei contenuti
+
+- `CORE`: concetto durevole e necessario per numerosi sviluppi successivi.
+- `ESTABLISHED`: concetto verificato e rilevante, ma ancora in evoluzione oppure non universale.
+- `FRONTIER`: concetto recente, sperimentale o con evidenza ancora limitata.
+
+La maturità non determina la collocazione. Una promozione non sposta automaticamente la tecnica.
+
+Il catalogo corrente è in `14_CATALOGO_STATO_ARTE.md`. Le procedure di aggiornamento sono in `13_PROTOCOLLO_AGGIORNAMENTO_CONTENUTI.md`.
+
+## 5. Lettore target e profondità
+
+Il livello principale è intermedio tecnico. Gli approfondimenti avanzati entrano ogni volta che servono per spiegare correttamente:
 
 - matematica e derivazioni;
 - shape e contratti tensoriali;
@@ -60,18 +104,18 @@ Il livello principale è intermedio tecnico, con approfondimenti avanzati ogni v
 - complessità computazionale;
 - memoria e data movement;
 - implementazione PyTorch;
-- training distribuito;
+- distributed training;
 - inference e serving;
-- hardware e kernel;
-- trade-off tra accuratezza, latenza, memoria, costo ed energia.
+- hardware, compiler e kernel;
+- trade-off tra qualità, latenza, memoria, costo ed energia.
 
-Gli approfondimenti avanzati non sono limitati a poche sezioni opzionali. Entrano quando il caso base, da solo, sarebbe incompleto o fuorviante. Rimangono collegati allo stesso esempio continuo.
+Gli approfondimenti avanzati non sono decorativi e non sono confinati a rare appendici. Entrano dopo la stabilizzazione del caso base.
 
-## 4. Metodo di spiegazione
+## 6. Metodo di spiegazione
 
-Il metodo vincolante è definito in `EXPLANATION_STYLE_AND_VISUALS.md`.
+Il metodo vincolante è `EXPLANATION_STYLE_AND_VISUALS.md`.
 
-Ogni transizione importante usa questo contratto:
+Ogni transizione importante usa:
 
 ```text
 Dove siamo:
@@ -88,7 +132,7 @@ Errore comune:
 Frase di continuità:
 ```
 
-Ordine di ammissione del formalismo:
+Ordine di ammissione:
 
 ```text
 domanda in linguaggio naturale
@@ -96,91 +140,50 @@ domanda in linguaggio naturale
 -> tabella o shape
 -> pseudocodice
 -> formula
--> derivazione, quando necessaria
+-> derivazione
 -> implementazione verificata
 -> varianti e ottimizzazioni
 ```
 
-Vincoli di prosa:
+Vincoli:
 
 - italiano diretto, calmo e progressivo;
-- termini tecnici standard mantenuti in inglese quando appropriato;
+- termini tecnici standard in inglese quando appropriato;
 - nessuna metafora o personificazione;
 - nessun em dash;
 - una trasformazione principale per paragrafo;
-- referenti espliciti per tensor, operazioni e stati;
-- distinzione visibile tra fonte, derivazione, esempio e risultato eseguito;
-- nessuna formula, variante o ottimizzazione prima che il referente concreto sia stabile;
-- nessuna semplificazione che modifichi il meccanismo;
-- nessun contenuto fattuale inserito per inferenza editoriale.
+- referenti espliciti;
+- nessuna semplificazione che cambi il meccanismo;
+- nessun fatto introdotto per inferenza editoriale.
 
-## 5. Politica dell'accuratezza
+## 7. Accuratezza
 
-### 5.1 Principio
+### 7.1 Principio
 
 Ogni informazione portante deve essere verificata.
 
-Una frase non entra nella versione approvata soltanto perché è plausibile, coerente con conoscenze generali o frequentemente ripetuta. Deve essere sostenuta da:
+Sono ammesse come prove:
 
 - fonte primaria;
 - documentazione ufficiale;
 - repository ufficiale;
 - standard o documento istituzionale;
 - derivazione matematica esplicita e ricontrollata;
-- risultato riprodotto con codice e ambiente registrati.
+- risultato riprodotto con ambiente, comando, output e test.
 
-### 5.2 Esclusione delle inferenze fattuali
+Una frase plausibile non entra nella versione approvata senza prova.
 
-La versione approvata non contiene affermazioni fattuali basate su inferenze editoriali.
+### 7.2 Classi di contenuto
 
-Quando una fonte non consente di stabilire un punto:
+- **Fatto da fonte primaria**.
+- **Derivazione**.
+- **Risultato eseguito**.
+- **Illustrativo**.
+- **Confine**.
 
-- la frase viene ristretta a ciò che è verificabile;
-- il punto viene omesso;
-- oppure viene registrato come problema aperto fuori dal testo approvato.
+Le inferenze fattuali editoriali non sono ammesse nella versione approvata.
 
-Le interpretazioni degli autori possono essere riportate soltanto come posizione attribuita alla fonte.
-
-Le derivazioni matematiche sono ammesse quando partono da definizioni verificate e rendono espliciti i passaggi necessari.
-
-### 5.3 Classi ammesse
-
-- **Fatto da fonte primaria**: sostenuto direttamente dalla fonte.
-- **Derivazione**: ottenuta da definizioni verificate con passaggi riproducibili.
-- **Risultato eseguito**: prodotto da codice realmente eseguito.
-- **Illustrativo**: esempio costruito, dichiarato e internamente coerente.
-- **Confine**: comportamento che il meccanismo non implementa.
-
-## 6. Politica delle fonti
-
-### 6.1 Gerarchia
-
-Le affermazioni tecniche sono supportate, in ordine di preferenza, da:
-
-1. paper originale negli atti ufficiali di una conferenza o rivista;
-2. versione ufficiale degli autori su arXiv, quando è la fonte primaria disponibile;
-3. technical report ufficiale dell'organizzazione responsabile;
-4. documentazione ufficiale del framework o della libreria;
-5. repository ufficiale degli autori o dell'organizzazione;
-6. standard, regolamenti e documenti istituzionali.
-
-Fonti secondarie possono aiutare a individuare materiale primario. Non sostengono da sole una spiegazione portante, un dato quantitativo, una formula, una firma API o una descrizione architetturale.
-
-### 6.2 Verifica temporale
-
-Per contenuti suscettibili di cambiamento vengono registrati:
-
-- data della ricerca;
-- versione della documentazione;
-- versione del modello o checkpoint;
-- revisione del paper;
-- commit o release, quando disponibile;
-- hardware e comando, per risultati riprodotti;
-- differenze tra paper, implementazione e versione corrente.
-
-Ogni capitolo recente viene ricontrollato sul web prima dell'approvazione editoriale. Il capitolo registra una data di congelamento e non dichiara aggiornamento oltre quella data.
-
-### 6.3 Registro delle affermazioni
+### 7.3 Artefatti per capitolo
 
 Ogni capitolo contiene:
 
@@ -188,275 +191,174 @@ Ogni capitolo contiene:
 - `CLAIMS.md`;
 - `TEXT_AUDIT.md`.
 
-Le affermazioni portanti devono essere riconducibili a una voce del dossier. Una voce aperta non può comparire come frase assertiva nella versione approvata.
+Una voce aperta in `CLAIMS.md` non entra come frase assertiva.
 
-La politica completa è in `07_POLITICA_FONTI_CITAZIONI.md`.
+## 8. Fonti e ricerca
 
-## 7. Sistema di citazione
+Gerarchia:
 
-Nel testo si usa una citazione breve collocata vicino all'affermazione:
+1. paper originale in atti ufficiali o rivista;
+2. versione ufficiale degli autori;
+3. technical report ufficiale;
+4. documentazione ufficiale;
+5. repository ufficiale;
+6. standard e documenti istituzionali.
 
-```text
-[Vaswani et al., 2017, §3.2.1]
-[PyTorch Docs, scaled_dot_product_attention, versione X.Y, consultato il GG-MM-AAAA]
-```
+Le fonti secondarie possono aiutare a trovare le fonti primarie, ma non sostengono da sole una spiegazione portante, una formula, un dato o una firma API.
 
-Alla fine del capitolo si separano:
+Per contenuti recenti vengono registrati:
+
+- data della ricerca;
+- versione della documentazione;
+- versione del modello o checkpoint;
+- revisione del paper;
+- commit o release;
+- hardware e comando per risultati riprodotti;
+- differenze tra paper e implementazione.
+
+La ricerca globale è registrata in `15_REGISTRO_RICERCHE_APPROFONDITE.md`. Ogni capitolo esegue inoltre una verifica locale.
+
+## 9. Citazioni
+
+Nel testo si usa una citazione breve vicina all'affermazione. Alla fine del capitolo si separano:
 
 1. fonti primarie;
 2. documentazione ufficiale;
-3. repository e artefatti di riproduzione;
+3. repository e artefatti;
 4. standard e documenti istituzionali;
-5. letture complementari chiaramente separate.
+5. letture complementari.
 
 Una citazione generica non sostituisce il controllo della sezione esatta.
 
-## 8. Contratto visuale
-
-Le visuali tecniche vengono create con lo strumento immagini. Gli SVG non sono l'artefatto editoriale principale.
-
-Ogni immagine resta una bozza finché non supera una revisione tecnica, didattica e visiva esplicita.
-
-### 8.1 Ciclo obbligatorio
-
-1. definizione della domanda unica e dello storyboard;
-2. generazione della prima bozza;
-3. ispezione critica di contenuto, collegamenti, testo, shape e composizione;
-4. registrazione dei difetti;
-5. rigenerazione o modifica con correzioni esplicite;
-6. nuova ispezione completa;
-7. ripetizione del ciclo finché non restano difetti bloccanti;
-8. approvazione e inserimento nel capitolo.
-
-Una visuale non viene approvata quando:
-
-- una linea suggerisce una dipendenza diversa da quella reale;
-- una freccia parte o termina sul nodo errato;
-- un incrocio sembra una giunzione;
-- una callout sembra un flusso dati;
-- una mask appare applicata al tensor sbagliato;
-- una label è ambigua;
-- una shape è incompatibile;
-- un valore numerico non coincide con il calcolo;
-- il testo è alterato o illeggibile;
-- la densità impedisce un ordine di lettura stabile.
-
-### 8.2 Stile
-
-Le immagini devono essere originali e didattiche, con:
-
-- blocchi puliti;
-- frecce chiare;
-- gerarchia leggibile;
-- palette semantica;
-- assenza di watermark, firme e branding di terzi;
-- significato non affidato al solo colore;
-- alt text ed equivalente testuale.
-
-Le immagini di riferimento orientano il linguaggio visuale, non vengono copiate.
-
-### 8.3 Quantità
-
-Non esiste un numero rigido di immagini per capitolo. Si crea una visuale per ogni meccanismo o relazione che richiede una rappresentazione spaziale.
-
-Ogni capitolo tecnico deve includere almeno una visuale portante approvata.
-
-Il protocollo completo è in `03_PROTOCOLLO_QA_VISUALE.md`.
-
-## 9. Codice
-
-Il codice è una parte strutturale del libro insieme a testo e immagini.
-
-### 9.1 Presenza
-
-Ogni capitolo tecnico include almeno uno snippet eseguibile collegato direttamente al contenuto. Un'eccezione per un capitolo intrinsecamente non computazionale deve essere motivata nei metadati.
-
-### 9.2 Linguaggi
-
-- Python e PyTorch sono predefiniti.
-- NumPy può essere usato per esempi numerici e verifiche indipendenti.
-- Pseudocodice e codice eseguibile devono essere etichettati in modo distinto.
-
-### 9.3 Dimensione
-
-La forma predefinita è uno snippet breve e autosufficiente, normalmente tra circa 8 e 40 righe significative. Script più lunghi vengono mantenuti nel repository quando sono realmente necessari.
-
-### 9.4 Contratto
-
-Ogni blocco eseguibile specifica:
-
-- ID;
-- domanda;
-- input e shape;
-- operazione centrale;
-- output osservabile;
-- invariante;
-- versione Python;
-- versione della libreria;
-- device e dtype;
-- seed, quando rilevante;
-- fonte API ufficiale;
-- file completo;
-- test;
-- stato dell'audit.
-
-### 9.5 Review
-
-Ogni snippet viene:
-
-1. verificato sulla documentazione ufficiale;
-2. ispezionato staticamente;
-3. eseguito in un processo pulito;
-4. testato sugli invarianti;
-5. confrontato con una formula diretta, NumPy o un'API ufficiale quando possibile;
-6. rieseguito dopo ogni correzione;
-7. confrontato con testo, formule e immagini.
-
-Un output viene chiamato `Eseguito` soltanto quando deriva dall'ambiente e dal comando registrati.
-
-Lo standard completo è in `05_STANDARD_SNIPPET_CODICE.md`.
-
-## 10. Review del testo
+## 10. Testo e review
 
 Ogni capitolo attraversa:
 
-1. ricerca e dossier delle fonti;
-2. mappa delle affermazioni;
+1. ricerca delle fonti;
+2. mappa dei claim;
 3. prima stesura;
 4. audit fattuale frase per frase;
 5. audit matematico;
 6. audit architetturale e algoritmico;
 7. audit temporale;
-8. audit di coerenza tra testo, immagini e codice;
+8. controllo incrociato con codice e visuali;
 9. audit didattico;
-10. seconda lettura completa.
-
-Un capitolo non può essere approvato in presenza di:
-
-- affermazione senza prova;
-- citazione non pertinente;
-- dato senza setup;
-- formula, shape o derivazione errata;
-- esempio incoerente;
-- API non verificata;
-- informazione recente non ricontrollata;
-- inferenza fattuale editoriale;
-- contraddizione tra artefatti;
-- semplificazione falsa.
+10. seconda lettura integrale;
+11. revisione autoriale.
 
 Il protocollo completo è in `04_PROTOCOLLO_QA_TESTO.md`.
 
-## 11. Quality gate per capitolo
+## 11. Visuali
 
-### Accuratezza
+Le visuali tecniche vengono create con lo strumento immagini. Gli SVG non sono l'artefatto editoriale principale.
 
-- ogni affermazione portante ha una fonte o una prova;
-- le citazioni sono state aperte e controllate nel contesto originale;
-- paper, documentazione, repository, checkpoint e prodotto non sono confusi;
-- i dati quantitativi riportano setup e data;
-- i dettagli recenti sono ricontrollati sul web;
-- non rimangono inferenze fattuali editoriali.
+Ogni visuale:
 
-### Matematica
+1. risponde a una sola domanda;
+2. ha uno storyboard;
+3. viene generata come bozza;
+4. viene riletta senza affidarsi al prompt;
+5. viene controllata per formule, numeri, shape, frecce, incroci e ordine;
+6. viene rigenerata o modificata quando necessario;
+7. viene ricontrollata integralmente;
+8. entra nel capitolo soltanto come `final.png` approvato.
 
-- simboli, shape, segni e fattori di scala sono corretti;
-- esempi numerici e arrotondamenti sono ricalcolati;
-- condizioni di validità sono dichiarate;
-- complessità e memoria sono verificate.
+Una singola linea ambigua blocca l'approvazione.
 
-### Didattica
+Ogni asset finale ha alt text, equivalente testuale e audit. Il protocollo è in `03_PROTOCOLLO_QA_VISUALE.md`.
 
-- lo stesso oggetto attraversa il capitolo;
-- ogni sezione parte dall'output della precedente;
-- un solo concetto nuovo per transizione;
-- cambiamento, invariante e confine dichiarati;
-- formule e codice entrano dopo il meccanismo concreto;
-- varianti e ottimizzazioni entrano dopo il caso base.
+## 12. Codice
 
-### Visuali
+Il codice è parte strutturale del libro.
 
-- tutte le figure hanno superato l'audit iterativo;
-- label e shape coincidono con la prosa;
-- frecce e linee non sono ambigue;
-- ordine di lettura chiaro;
-- alt text presente;
-- nessun elemento decorativo o ridondante.
+- Python e PyTorch sono predefiniti.
+- NumPy può essere usato per esempi e controlli indipendenti.
+- Ogni capitolo tecnico include almeno uno snippet eseguibile, salvo eccezione motivata.
+- Gli snippet sono normalmente brevi e autosufficienti.
+- Script lunghi restano nel repository quando necessari.
 
-### Codice e riproducibilità
+Ogni snippet dichiara:
 
-- codice eseguito in ambiente pulito;
-- output salvato;
-- versioni registrate;
-- test passati;
-- API verificate;
-- differenze hardware dichiarate;
-- snippet allineati al capitolo.
+- ID e domanda;
+- input e shape;
+- operazione centrale;
+- output e invariante;
+- versione Python e libreria;
+- device, dtype e seed;
+- fonte dell'API;
+- file, test e stato dell'audit.
 
-### Coerenza incrociata
+Ogni snippet viene verificato sulla documentazione ufficiale, eseguito in un processo pulito, testato e rieseguito dopo le correzioni.
 
-- testo, formule, visuali e codice condividono nomi, shape, numeri, ordine e confini;
-- nessuna contraddizione aperta.
+Un output è `Eseguito` soltanto quando esistono ambiente, comando, log o test registrati.
 
-## 12. Workflow seriale
+## 13. Controllo incrociato
+
+Testo, formule, immagini e codice devono coincidere per:
+
+- label;
+- shape;
+- numeri;
+- ordine delle operazioni;
+- invarianti;
+- confini;
+- versione tecnica.
+
+Una contraddizione blocca il capitolo.
+
+## 14. Aggiornamenti futuri
+
+Ogni aggiornamento segue una delle procedure U1-U8 di `13_PROTOCOLLO_AGGIORNAMENTO_CONTENUTI.md`:
+
+- nuova tecnica;
+- nuova evidenza;
+- aggiornamento API;
+- cambio di maturità;
+- nuovo capitolo;
+- split o merge;
+- correzione tecnica;
+- nuova edizione.
+
+Una nuova decisione globale viene registrata in `08_REGISTRO_DECISIONI.md` e propagata a tutti i documenti coinvolti.
+
+## 15. Workflow e congelamento
 
 Per ogni capitolo:
 
-1. apertura della struttura;
-2. definizione del perimetro;
-3. dossier delle fonti;
-4. mappa delle affermazioni;
-5. piano didattico;
-6. storyboard delle visuali;
-7. prima stesura;
-8. implementazioni e test;
-9. generazione e audit iterativo delle immagini;
-10. audit fattuale;
-11. audit matematico;
-12. audit architetturale e algoritmico;
-13. audit temporale;
-14. audit incrociato;
-15. audit didattico;
-16. seconda lettura completa;
-17. revisione autoriale;
-18. congelamento della versione e del commit.
+```text
+fonti
+-> claim
+-> piano didattico
+-> stesura
+-> formule
+-> codice e test
+-> visuali e audit
+-> review tecnica
+-> review didattica
+-> review autoriale
+-> congelamento
+```
 
-Il workflow completo è in `06_WORKFLOW_CAPITOLO.md`.
+La versione approvata riceve:
 
-## 13. Revisione autoriale
+- data di congelamento;
+- commit SHA;
+- fonti esatte;
+- codice, output e ambiente;
+- visuali finali;
+- audit completati.
 
-Dopo i gate tecnici, il capitolo viene sottoposto alla revisione del committente.
+Non si dichiara aggiornamento oltre la data verificata.
 
-Una modifica autoriale che tocca contenuto tecnico, formule, immagini o codice riapre i relativi audit. Nessun capitolo è considerato approvato prima della revisione umana prevista.
+## 16. Documenti vincolanti
 
-## 14. Documentazione canonica
+- `../GUIDELINE.md`;
+- `08_REGISTRO_DECISIONI.md`;
+- `12_ARCHITETTURA_EDITORIALE_EVOLUTIVA.md`;
+- `13_PROTOCOLLO_AGGIORNAMENTO_CONTENUTI.md`;
+- `14_CATALOGO_STATO_ARTE.md`;
+- `10_INDICE_EDITORIALE.md`;
+- protocolli specialistici da `01` a `07`;
+- `EXPLANATION_STYLE_AND_VISUALS.md`.
 
-Tutte le decisioni e le metodologie devono essere presenti in `docs/`.
-
-- `docs/README.md` è l'indice della documentazione.
-- `08_REGISTRO_DECISIONI.md` registra le decisioni esplicite.
-- `LEARN_GOVERNANCE.md` non è una dipendenza.
-- Nessuna regola vincolante può dipendere soltanto dalla conversazione.
-
-Quando una nuova decisione viene presa, i documenti interessati devono essere aggiornati prima di proseguire con la produzione.
-
-## 15. Capitolo pilota
-
-Il capitolo pilota è **Capitolo 28. Il meccanismo di attention**.
-
-Il capitolo usa una breve sequenza italiana dichiarata come illustrativa. Non dipende da una frase canonica esterna.
-
-Il pilota deve validare:
-
-- tono;
-- profondità;
-- metodo cumulativo;
-- citazioni;
-- registro dei claim;
-- formule e shape;
-- snippet PyTorch;
-- audit del codice;
-- numero e ruolo delle immagini;
-- qualità della review visuale;
-- coerenza tra tutti gli artefatti.
-
-La stesura inizia soltanto dopo il via esplicito del committente.
+In caso di divergenza il lavoro interessato resta bloccato finché i documenti non vengono riallineati.
