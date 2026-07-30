@@ -2,6 +2,31 @@
 
 > I nomi dei protocolli citati nelle versioni storiche restano come traccia. Le regole correnti sono consolidate in `docs/02_STILE_E_QA_TESTO.md`, `docs/03_VISUALI.md` e `docs/04_CODICE_FONTI_E_RIPRODUCIBILITA.md`.
 
+## `0.3.0-rc2`. 30 luglio 2026
+
+### Riscrittura per un lettore non esperto
+
+- aperto il capitolo con tre domande semplici: meccanismo, obiettivo e ampiezza;
+- aggiunta una spiegazione in linguaggio comune dopo la definizione OECD;
+- eliminato l'uso di `checkpoint` prima della sua definizione;
+- spiegato il machine learning come ciclo di esempi, errore e aggiornamento dei parametri;
+- definiti `feature`, `logit`, `loss`, `optimizer`, `checkpoint` e `shape` nel punto d'uso;
+- reso esplicito che il training apprende e l'inference usa i parametri disponibili;
+- mantenuta la formula lineare come secondo livello di precisione;
+- introdotta la distinzione discriminativo/generativo con esempi prima delle formule probabilistiche;
+- ridotto l'elenco prematuro dei metodi di adattamento dei foundation model;
+- sostituita la sezione riepilogativa a elenco con prosa continua;
+- ridotte le sezioni principali da otto a sette.
+
+### Review
+
+- registrata `EDIT-AI-03`, respinta perché la versione precedente richiedeva ancora troppa familiarità con il gergo;
+- registrata `EDIT-AI-04`, seconda lettura completa con un lettore non esperto come profilo dominante;
+- verificata la possibilità di seguire il filo concettuale anche saltando formule e codice;
+- esito editoriale, linguistico e di chiarezza positivo per il testo;
+- codice e risultati eseguiti invariati;
+- visuali `AI-01` e `AI-02` ancora aperte.
+
 ## `0.2.0-rc1`. 30 luglio 2026
 
 ### Riscrittura editoriale
@@ -24,7 +49,7 @@
 
 - registrata `EDIT-AI-01`, respinta per frammentazione, metadati visibili e prosa da specifica;
 - registrata `EDIT-AI-02`, seconda lettura completa con tre profili di lettore;
-- eseguita lettura ad alta voce della versione `0.2.0-rc1`;
+- eseguita lettura completa della versione `0.2.0-rc1`;
 - esito editoriale e linguistico positivo per il testo;
 - visuali `AI-01` e `AI-02` ancora aperte.
 
