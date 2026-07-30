@@ -6,6 +6,7 @@ on:
       - feature/full-book-production
     paths:
       - 'scripts/generate_book_visuals.py'
+      - 'scripts/generate_history_visuals.py'
       - 'scripts/integrate_generated_visuals.py'
       - '.github/workflows/generate-book-visuals.yml'
 
@@ -29,8 +30,11 @@ jobs:
       - name: Install image dependency
         run: python -m pip install --disable-pip-version-check pillow==11.3.0
 
-      - name: Generate and validate PNG files
+      - name: Generate shared and pilot visuals
         run: python scripts/generate_book_visuals.py
+
+      - name: Generate Chapter 2 visuals
+        run: python scripts/generate_history_visuals.py
 
       - name: Integrate generated visual references
         run: python scripts/integrate_generated_visuals.py
@@ -44,6 +48,8 @@ jobs:
           git add \
             assets/chapters/01_ai_field/AI-01/candidate-v1.png \
             assets/chapters/01_ai_field/AI-02/candidate-v1.png \
+            assets/chapters/02_history/HIST-01/candidate-v1.png \
+            assets/chapters/02_history/HIST-02/candidate-v1.png \
             assets/chapters/28_attention/ATT-01/candidate-v3.png \
             chapters/28_attention/CHAPTER.md
           if git diff --cached --quiet; then
