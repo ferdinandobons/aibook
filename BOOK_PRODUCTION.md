@@ -4,53 +4,61 @@
 
 - Branch di produzione: `feature/full-book-production`
 - Branch canonico: `main`
-- Pull request di produzione: `#2`
+- Pull request: `#2`
 - Commit di partenza: `a10235cf384ebda23060a05a3e25ef7b490595a1`
 - Opera pianificata: 98 capitoli e 12 appendici
 - Modalità: produzione seriale controllata
 - Capitolo pilota in `main`: `CH-P06-ATTENTION`, versione `0.3.0-rc3`
 - Revisione editoriale del pilota nel branch: `0.4.0-rc4`
 - Unità corrente: `CH-P01-AI-FIELD`, versione `0.2.0-rc1`
-- Stato dell'unità corrente: review editoriale superata, visuali bloccate
-- Data di apertura della produzione completa: 30 luglio 2026
+- Stato corrente: review editoriale superata, visuali aperte
+- Data di apertura: 30 luglio 2026
+
+## Documenti operativi
+
+- governance: `docs/00_GOVERNANCE_E_ARCHITETTURA.md`;
+- indice: `docs/01_INDICE_EDITORIALE.md`;
+- stile e QA del testo: `docs/02_STILE_E_QA_TESTO.md`;
+- visuali: `docs/03_VISUALI.md`;
+- fonti, codice e riproducibilità: `docs/04_CODICE_FONTI_E_RIPRODUCIBILITA.md`;
+- workflow e repository: `docs/05_WORKFLOW_E_REPOSITORY.md`;
+- catalogo: `docs/14_CATALOGO_STATO_ARTE.md`;
+- ricerca globale: `docs/15_REGISTRO_RICERCHE_APPROFONDITE.md`.
 
 ## Scopo
 
-Questo branch raccoglie la stesura completa dell'opera **Intelligenza artificiale generativa**. La produzione segue i documenti canonici della cartella `docs/`.
+Questo branch raccoglie la stesura dell'opera **Intelligenza artificiale generativa**. Non accumula capitoli non revisionati. Ogni unità attraversa ricerca, claim, piano, prosa, codice, visuali e review prima che inizi la successiva.
 
-Il progetto non accumula capitoli non revisionati. Ogni unità attraversa ricerca, claim, piano, prosa, codice, visuali e review prima che inizi la successiva.
+Gli artefatti del libro sono:
 
-## Artefatti destinati al libro
+- testo Markdown in prosa da manuale;
+- formule e tabelle;
+- immagini tecniche con sfondo bianco;
+- snippet eseguiti e testati;
+- fonti e claim;
+- audit tecnici, didattici, editoriali e visuali.
 
-Ogni capitolo integra, quando pertinenti:
-
-1. testo Markdown in prosa tecnica naturale;
-2. formule e tabelle;
-3. immagini tecniche con sfondo bianco e audit iterativo;
-4. snippet Python o PyTorch eseguiti e testati;
-5. fonti primarie e documentazione ufficiale;
-6. registro delle affermazioni;
-7. audit fattuale, matematico, algoritmico, temporale, didattico, editoriale, visuale e del codice.
-
-Non vengono prodotte renderizzazioni raster delle pagine, mockup editoriali o screenshot dell'impaginazione.
+Non vengono prodotti render raster delle pagine, mockup editoriali o screenshot dell'impaginazione.
 
 Metadati, audit, branch, commit e dettagli operativi restano fuori dal testo destinato al lettore.
 
-## Stati ammessi
+## Stati
 
-- `planned`: presente nell'indice, non aperto;
-- `research`: fonti e claim in costruzione;
-- `draft`: prima stesura;
-- `technical-review`: audit tecnico;
-- `didactic-review`: sequenza e gate;
-- `editorial-review`: voce, ritmo e italiano;
-- `author-review`: candidatura pronta per l'autore;
-- `approved`: congelato con data e commit;
-- `suspended`: lavoro fermato con problemi documentati.
+```text
+planned
+research
+draft
+technical-review
+didactic-review
+editorial-review
+author-review
+approved
+suspended
+```
 
 ## Quadro dell'opera
 
-| Parte | Intervallo | Capitoli | Stato corrente |
+| Parte | Intervallo | Capitoli | Stato |
 |---|---:|---:|---|
 | `P01` Campo, metodo e storia dell'AI | 1-4 | 4 | capitolo 1, visuali aperte; altri `planned` |
 | `P02` Matematica, informazione e calcolo | 5-9 | 5 | `planned` |
@@ -67,38 +75,18 @@ Metadati, audit, branch, commit e dettagli operativi restano fuori dal testo des
 | `P13` Valutazione, interpretabilità, sicurezza e governance | 83-93 | 11 | `planned` |
 | `P14` Laboratori, integrazione e osservatorio | 94-98 | 5 | `planned` |
 
-L'identità e l'ordine semantico sono definiti in `docs/10_INDICE_EDITORIALE.md`.
-
-## Voce editoriale
-
-Ogni capitolo deve leggersi come un manuale, non come una specifica o un audit.
-
-Regole:
-
-- scaffold interno in `PLAN.md` e `TEXT_AUDIT.md`;
-- prosa continua in `CHAPTER.md`;
-- titoli semantici;
-- sezioni abbastanza ampie;
-- italiano idiomatico;
-- ritmo variato;
-- esempio continuo;
-- metadati nascosti;
-- dettagli di riproducibilità negli artefatti;
-- lettura ad alta voce.
-
-Riferimento: `docs/20_VOCE_EDITORIALE_E_REVISIONE_LINGUISTICA.md`.
-
 ## Sequenza di produzione
 
 ```text
 ricerca
 -> claim
 -> piano interno
--> prima stesura
+-> stesura
 -> formule e derivazioni
 -> codice e test
 -> visuali e audit
--> audit fattuale e matematico
+-> audit fattuale, matematico e algoritmico
+-> controllo incrociato e temporale
 -> review didattica
 -> gate anti-template
 -> review editoriale e linguistica
@@ -110,7 +98,7 @@ ricerca
 
 ## Gate prima del capitolo successivo
 
-Un capitolo può lasciare l'unità corrente quando:
+Un capitolo lascia l'unità corrente quando:
 
 - le affermazioni portanti sono verificate;
 - formule e numeri sono corretti;
@@ -126,8 +114,6 @@ Un capitolo può lasciare l'unità corrente quando:
 ## Unità corrente
 
 ### `CH-P01-AI-FIELD`. Che cos'è l'intelligenza artificiale
-
-Stato: review editoriale superata, gate visuale bloccato.
 
 Versione: `0.2.0-rc1`.
 
@@ -165,7 +151,7 @@ Dopo ogni capitolo si aggiornano:
 
 - questo file;
 - `PROGRESS.md`;
-- stato e versione del capitolo;
+- stato e versione;
 - date di verifica;
 - commit o pull request;
 - eventuali cambiamenti del catalogo e dell'indice.
