@@ -30,7 +30,16 @@ Un sistema AI o una persona senza contesto precedente legge nell'ordine:
 11. `../PROGRESS.md`;
 12. i file del capitolo coinvolto.
 
-Per un'attività che crea o modifica immagini tecniche, la lettura specialistica minima è:
+Per scrivere o revisionare una lezione, la lettura specialistica minima è:
+
+1. `EXPLANATION_STYLE_AND_VISUALS.md`;
+2. `19_STRUTTURA_LOGICA_IN_PROSA.md`;
+3. `18_PROTOCOLLO_QA_DIDATTICO.md`;
+4. `01_TEMPLATE_CAPITOLO.md`;
+5. `04_PROTOCOLLO_QA_TESTO.md`;
+6. `06_WORKFLOW_CAPITOLO.md`.
+
+Per creare o modificare immagini tecniche:
 
 1. `17_STANDARD_VISIVO_CANONICO.md`;
 2. `16_REGOLA_CONTENIMENTO_TESTO_VISUALI.md`;
@@ -43,24 +52,26 @@ Per un'attività che crea o modifica immagini tecniche, la lettura specialistica
 | Documento | Funzione |
 |---|---|
 | `00_CONTRATTO_EDITORIALE.md` | Obiettivi, livello tecnico, politica generale, quality gate e vincoli globali. |
-| `01_TEMPLATE_CAPITOLO.md` | Struttura obbligatoria di ogni capitolo e registri di approvazione. |
+| `01_TEMPLATE_CAPITOLO.md` | Distingue scaffold interno e capitolo in prosa; definisce gli artefatti e i gate. |
 | `02_TEMPLATE_VISUALE.md` | Scheda di progettazione e audit per ogni immagine. Include stile, orientamento e contenimento. |
 | `03_PROTOCOLLO_QA_VISUALE.md` | Processo iterativo di generazione, revisione, rigenerazione e approvazione delle immagini. |
-| `04_PROTOCOLLO_QA_TESTO.md` | Processo di verifica fattuale, matematica, architetturale, temporale e didattica del testo. |
-| `05_STANDARD_SNIPPET_CODICE.md` | Regole per snippet, script completi, esecuzione, test e audit del codice. |
-| `06_WORKFLOW_CAPITOLO.md` | Sequenza operativa completa, dalla ricerca al congelamento del commit. |
-| `07_POLITICA_FONTI_CITAZIONI.md` | Gerarchia delle fonti, verifica web, citazioni, divergenze e data di congelamento. |
+| `04_PROTOCOLLO_QA_TESTO.md` | Verifica fattuale, matematica, architetturale, temporale e testuale. |
+| `05_STANDARD_SNIPPET_CODICE.md` | Regole per snippet, script, esecuzione, test e audit del codice. |
+| `06_WORKFLOW_CAPITOLO.md` | Sequenza operativa completa, dalla ricerca al congelamento. |
+| `07_POLITICA_FONTI_CITAZIONI.md` | Gerarchia delle fonti, verifica web, citazioni e data di congelamento. |
 | `08_REGISTRO_DECISIONI.md` | Elenco consolidato delle decisioni correnti e sostituite. |
-| `09_STRUTTURA_REPOSITORY.md` | Convenzioni per cartelle, file, ID, asset, audit e artefatti riproducibili. |
-| `10_INDICE_EDITORIALE.md` | Indice dell'opera unica organizzata nelle quattordici parti stabili. |
-| `11_AUDIT_DOCUMENTAZIONE.md` | Controllo di completezza, coerenza e assenza di decisioni bloccanti. |
-| `12_ARCHITETTURA_EDITORIALE_EVOLUTIVA.md` | Parti stabili, routing, maturità e identità semantica dei capitoli. |
-| `13_PROTOCOLLO_AGGIORNAMENTO_CONTENUTI.md` | Procedure per nuove tecniche, nuove evidenze, API, maturità, capitoli ed edizioni. |
+| `09_STRUTTURA_REPOSITORY.md` | Convenzioni per cartelle, file, ID, asset e artefatti riproducibili. |
+| `10_INDICE_EDITORIALE.md` | Indice dell'opera unica nelle quattordici parti stabili. |
+| `11_AUDIT_DOCUMENTAZIONE.md` | Controllo di completezza e coerenza della documentazione. |
+| `12_ARCHITETTURA_EDITORIALE_EVOLUTIVA.md` | Parti stabili, routing, maturità e identità dei capitoli. |
+| `13_PROTOCOLLO_AGGIORNAMENTO_CONTENUTI.md` | Procedure per nuove tecniche, API, maturità, capitoli ed edizioni. |
 | `14_CATALOGO_STATO_ARTE.md` | Principali famiglie, tecniche e ottimizzazioni censite. |
-| `15_REGISTRO_RICERCHE_APPROFONDITE.md` | Registro delle ricognizioni globali e dei relativi confini temporali. |
-| `16_REGOLA_CONTENIMENTO_TESTO_VISUALI.md` | Regola canonica che impedisce testo debordante, tagliato, sovrapposto o privo di padding. |
-| `17_STANDARD_VISIVO_CANONICO.md` | Grammatica visiva comune: sfondo bianco, orientamento adattivo, palette, box, frecce, tipografia e densità. |
-| `EXPLANATION_STYLE_AND_VISUALS.md` | Metodo completo di spiegazione in italiano e grammatica didattica del libro. |
+| `15_REGISTRO_RICERCHE_APPROFONDITE.md` | Registro delle ricognizioni globali e dei confini temporali. |
+| `16_REGOLA_CONTENIMENTO_TESTO_VISUALI.md` | Impedisce testo debordante, tagliato, sovrapposto o privo di padding. |
+| `17_STANDARD_VISIVO_CANONICO.md` | Sfondo bianco, orientamento adattivo, palette, box, frecce e tipografia. |
+| `18_PROTOCOLLO_QA_DIDATTICO.md` | Review iterativa della progressione didattica, inclusa la verifica anti-template. |
+| `19_STRUTTURA_LOGICA_IN_PROSA.md` | Mantiene obbligatoria la logica del metodo senza esporla come serie rigida di intestazioni. |
+| `EXPLANATION_STYLE_AND_VISUALS.md` | Metodo completo di spiegazione in italiano e grammatica didattica. |
 | `source/README.md` | Indice delle fonti metodologiche originali archiviate. |
 
 ## Regola fondamentale sull'accuratezza
@@ -76,6 +87,12 @@ Sono ammessi:
 
 Quando una fonte non consente di verificare un'affermazione, la frase non entra nella versione approvata.
 
+## Regola fondamentale sulla prosa
+
+La struttura logica di stato, problema, trasformazione, output, invariante, confine e continuità è obbligatoria. Per impostazione predefinita viene incorporata in paragrafi e titoli semantici, non pubblicata come una sequenza ripetitiva di intestazioni metacognitive.
+
+`PLAN.md` e `TEXT_AUDIT.md` rendono esplicito lo scaffold. `CHAPTER.md` deve apparire come una spiegazione tecnica naturale. Il reviewer deve poter ricostruire lo scaffold leggendo la prosa, ma il lettore non deve vedere un modulo compilato.
+
 ## Regola fondamentale sugli artefatti
 
 Ogni capitolo tecnico integra:
@@ -88,43 +105,37 @@ Testo, formule, immagini e codice condividono nomi, shape, numeri, ordine delle 
 
 ## Regole fondamentali sulle visuali
 
-Tutte le immagini tecniche usano la grammatica definita in `17_STANDARD_VISIVO_CANONICO.md`.
+Tutte le immagini tecniche usano `17_STANDARD_VISIVO_CANONICO.md`.
 
-In particolare:
+- sfondo globale bianco puro `#FFFFFF`;
+- orientamento orizzontale o verticale in base al contenuto;
+- palette, box, frecce e gerarchia tipografica coerenti;
+- una domanda principale per figura;
+- nessun render completo della pagina usato come figura tecnica.
 
-- lo sfondo globale è sempre bianco puro `#FFFFFF`;
-- l'orientamento può essere orizzontale o verticale in base al contenuto;
-- palette, box, frecce e gerarchia tipografica conservano ruoli comuni;
-- una figura risponde a una sola domanda principale;
-- una figura tecnica non è una renderizzazione completa della pagina del libro.
-
-Ogni testo deve rimanere integralmente dentro il proprio box, cella, badge, callout o pannello. Testo debordante, tagliato, sovrapposto, troppo vicino al bordo o privo di margine interno costituisce un difetto bloccante.
-
-La regola dettagliata sul contenimento è in `16_REGOLA_CONTENIMENTO_TESTO_VISUALI.md`. Il template e il protocollo QA applicano entrambi gli standard.
+Ogni testo deve rimanere integralmente dentro il proprio contenitore. Overflow, clipping, sovrapposizioni e padding insufficiente sono difetti bloccanti.
 
 ## Ordine di autorità e aggiornamenti
 
-I documenti devono essere mantenuti coerenti tra loro. Non è ammesso risolvere silenziosamente un conflitto scegliendo un documento e ignorandone un altro.
+I documenti devono restare coerenti. Non è ammesso risolvere silenziosamente un conflitto scegliendo un documento e ignorandone un altro.
 
 Quando viene presa una nuova decisione:
 
 1. si registra in `08_REGISTRO_DECISIONI.md`;
-2. si aggiornano il contratto e i protocolli interessati;
+2. si aggiornano contratto e protocolli interessati;
 3. si aggiornano template, catalogo e indice quando necessario;
 4. si controllano i riferimenti incrociati;
 5. si aggiorna `11_AUDIT_DOCUMENTAZIONE.md`;
 6. si registra il commit.
 
-In presenza di una divergenza non ancora corretta, il lavoro interessato resta bloccato.
+In presenza di una divergenza non corretta, il lavoro interessato resta bloccato.
 
 ## Archivio metodologico
 
-Il contenuto originale di `EXPLANATION_STYLE_AND_VISUALS.md` fornito dal committente è conservato integralmente in `source/`, diviso in segmenti consecutivi per mantenerne la tracciabilità.
+Il contenuto originale del file metodologico fornito dal committente è conservato in `source/`. Il documento canonico applicato al libro è `EXPLANATION_STYLE_AND_VISUALS.md`, integrato dai protocolli successivi.
 
-Il documento canonico applicato al libro è `EXPLANATION_STYLE_AND_VISUALS.md`. I riferimenti originari specifici di altri progetti restano nell'archivio, mentre le regole operative rispettano le decisioni correnti.
-
-Per sfondo, palette, orientamento e componenti delle immagini raster tecniche prevale `17_STANDARD_VISIVO_CANONICO.md`.
+Per la struttura visibile dei capitoli prevale `19_STRUTTURA_LOGICA_IN_PROSA.md`. Per le immagini raster tecniche prevale `17_STANDARD_VISIVO_CANONICO.md`.
 
 ## Dipendenze escluse
 
-`LEARN_GOVERNANCE.md` non è una dipendenza del libro. Tutte le regole necessarie sono riportate nel repository. Nessuna frase guida esterna è obbligatoria.
+`LEARN_GOVERNANCE.md` non è una dipendenza del libro. Tutte le regole necessarie sono riportate nel repository.
