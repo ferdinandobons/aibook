@@ -7,11 +7,11 @@ Questo documento registra le decisioni esplicite che governano il progetto. Ogni
 Stati:
 
 - `vincolante`: applicata a tutto il progetto;
-- `pilota`: applicata al capitolo pilota e da confermare dopo la revisione autoriale;
+- `pilota`: applicata a un capitolo e da confermare;
 - `sostituita`: conservata per tracciare una modifica;
 - `aperta`: richiede una decisione.
 
-Non risultano decisioni aperte che impediscano la review del Capitolo 28.
+Non risultano decisioni aperte che impediscano la produzione seriale.
 
 # Decisioni editoriali
 
@@ -45,7 +45,7 @@ Non risultano decisioni aperte che impediscano la review del Capitolo 28.
 ## DEC-006. Capitolo pilota
 
 - Stato: `pilota`
-- Il primo capitolo è `CH-P06-ATTENTION`, visualizzato come Capitolo 28 nell'edizione di lavoro.
+- Il primo capitolo prodotto è `CH-P06-ATTENTION`, visualizzato come Capitolo 28 nell'edizione di lavoro.
 
 ## DEC-007. Livello tecnico
 
@@ -85,8 +85,8 @@ Non risultano decisioni aperte che impediscano la review del Capitolo 28.
 ## DEC-013. Ricerca web aggiornata
 
 - Stato: `vincolante`
-- Contenuti recenti vengono ricontrollati al momento della lavorazione.
-- Ogni capitolo registra date di verifica e congelamento.
+- I contenuti recenti vengono ricontrollati al momento della lavorazione.
+- Ogni capitolo registra le date di verifica e congelamento.
 
 ## DEC-014. Gerarchia delle fonti
 
@@ -101,7 +101,7 @@ Non risultano decisioni aperte che impediscano la review del Capitolo 28.
 ## DEC-016. Review del testo
 
 - Stato: `vincolante`
-- Ogni capitolo attraversa audit fattuale, matematico, architetturale, algoritmico, temporale, incrociato e didattico.
+- Ogni capitolo attraversa audit fattuale, matematico, architetturale, algoritmico, temporale, incrociato, didattico ed editoriale.
 - Dopo le correzioni viene eseguita una nuova lettura completa.
 
 ## DEC-017. Registro delle affermazioni
@@ -184,7 +184,7 @@ Non risultano decisioni aperte che impediscano la review del Capitolo 28.
 ## DEC-031. Revisione autoriale
 
 - Stato: `vincolante`
-- Dopo i gate tecnici, ogni capitolo viene sottoposto alla revisione del committente.
+- Dopo i gate tecnici ed editoriali, ogni capitolo viene sottoposto alla revisione del committente.
 
 ## DEC-032. Congelamento del capitolo
 
@@ -275,10 +275,22 @@ Non risultano decisioni aperte che impediscano la review del Capitolo 28.
 
 - Stato: `vincolante`
 - Stato, problema, input, trasformazione, output, invariante, confine e continuità restano obbligatori come funzioni logiche.
-- Per impostazione predefinita non vengono pubblicati come sequenza ripetitiva di intestazioni metacognitive.
+- Non vengono pubblicati come sequenza ripetitiva di intestazioni metacognitive.
 - Lo scaffold esplicito appartiene a `PLAN.md` e `TEXT_AUDIT.md`; `CHAPTER.md` usa titoli semantici e prosa naturale.
 - La review include un gate anti-template.
 - Riferimento: `19_STRUTTURA_LOGICA_IN_PROSA.md`.
+
+## DEC-048. Voce da manuale e review linguistica
+
+- Stato: `vincolante`
+- `CHAPTER.md` deve leggersi come un manuale tecnico, non come una specifica, una reference API o un registro di audit.
+- Metadati, stato editoriale, commit, esiti delle review e dettagli operativi restano fuori dal flusso destinato al lettore.
+- Le sezioni sono abbastanza ampie da sostenere un ragionamento e non vengono create per ogni micro-operazione.
+- L'italiano deve risultare idiomatico, fluido e scritto direttamente nella lingua del libro.
+- Calchi non necessari, ritmo meccanico, frammentazione, cautele ripetute e prosa burocratica sono difetti bloccanti.
+- Ogni capitolo riceve una review editoriale e linguistica, una lettura ad alta voce e una verifica con almeno tre profili di lettore.
+- Dopo le correzioni viene eseguita una nuova lettura integrale.
+- Riferimento: `20_VOCE_EDITORIALE_E_REVISIONE_LINGUISTICA.md`.
 
 # Decisioni sostituite
 
@@ -305,9 +317,15 @@ Non risultano decisioni aperte che impediscano la review del Capitolo 28.
 ## DEC-S05. Blocco atomico pubblicato come struttura standard
 
 - Stato: `sostituita`
-- Interpretazione precedente: le etichette del blocco atomico potevano diventare il telaio visibile ricorrente dei capitoli.
 - Sostituita da `DEC-047`.
 - Il blocco resta obbligatorio per progettazione e review, ma viene incorporato nella prosa.
+
+## DEC-S06. Correttezza didattica considerata sufficiente per la prosa finale
+
+- Stato: `sostituita`
+- Interpretazione precedente: un testo corretto, progressivo e privo di intestazioni metacognitive poteva essere considerato editorialmente pronto.
+- Sostituita da `DEC-048`.
+- La versione finale deve superare anche fluidità, italiano idiomatico, ritmo, lettura ad alta voce e separazione tra manuale e materiali operativi.
 
 # Regola di propagazione
 
