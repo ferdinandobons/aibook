@@ -2,6 +2,36 @@
 
 > I nomi dei protocolli citati nelle versioni storiche restano come traccia. Le regole correnti sono consolidate in `docs/02_STILE_E_QA_TESTO.md`, `docs/03_VISUALI.md` e `docs/04_CODICE_FONTI_E_RIPRODUCIBILITA.md`.
 
+## `0.5.0-rc5`. 30 luglio 2026
+
+### Riscrittura per un lettore non esperto
+
+- aperta la lezione con la frase `Il pacco non è arrivato` prima della rappresentazione vettoriale;
+- spiegato `token` come parola o parte di parola;
+- spiegato un vettore come lista di numeri;
+- calcolati i risultati delle due combinazioni iniziali per rendere visibile la differenza;
+- presentati query, key e value come ruoli matematici;
+- tradotte le shape in numero di righe e valori per riga;
+- spiegato il prodotto scalare come moltiplicazione e somma;
+- chiarito il significato degli score prima del fattore di scala;
+- separata la motivazione intuitiva del scaling dalla derivazione sulla varianza;
+- spiegata la softmax in parole prima della formula;
+- rimosso dal calcolo principale il caveat sul dropout;
+- presentata la formula matriciale come forma compatta dei passaggi già eseguiti;
+- separate self-attention, cross-attention e causalità in frasi distinte;
+- mantenuto un solo snippet completo nel corpo della lezione;
+- rinviati confronto API e causal mask ai file di codice;
+- spiegato il costo quadratico prima come matrice di `n^2` celle.
+
+### Review
+
+- registrata `EDIT-ATT-03`, respinta perché `0.4.0-rc4` richiedeva ancora familiarità con vettori, shape, softmax e PyTorch;
+- registrata `EDIT-ATT-04`, seconda lettura completa con un lettore non esperto come profilo dominante;
+- verificata la possibilità di spiegare il meccanismo prima in parole e poi con numeri e formule;
+- esito editoriale, linguistico e di chiarezza positivo per il testo;
+- codice e risultati eseguiti invariati;
+- riaperto il controllo incrociato con `ATT-01` e `ATT-02`.
+
 ## `0.4.0-rc4`. 30 luglio 2026
 
 ### Riscrittura editoriale e linguistica
@@ -24,7 +54,7 @@
 
 - registrata `EDIT-ATT-01`, respinta per frammentazione e voce da documentazione;
 - registrata `EDIT-ATT-02`, seconda lettura completa con tre profili di lettore;
-- eseguito il controllo ad alta voce della versione `0.4.0-rc4`;
+- eseguito il controllo completo della versione `0.4.0-rc4`;
 - esito editoriale e linguistico positivo per il testo;
 - riaperto il controllo incrociato con `ATT-01` e `ATT-02`.
 
