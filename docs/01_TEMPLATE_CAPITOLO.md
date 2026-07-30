@@ -2,12 +2,18 @@
 
 ## Metadati
 
-- Stato: bozza AI / revisione tecnica / revisione autoriale / approvato
+- Stato: ricerca / bozza / revisione fattuale / revisione matematica / revisione codice / revisione visuale / revisione didattica / revisione autoriale / approvato
 - Profilo: componente / processo / architettura / training / tecnica / paper / confronto / implementazione
 - Data ultima verifica fonti:
+- Data di congelamento editoriale:
+- Versione Python:
 - Versione PyTorch:
+- Device e dtype di riferimento:
 - Oggetto continuo:
 - Concetti differiti:
+- Registro affermazioni: `CLAIMS.md`
+- Audit testuale: `TEXT_AUDIT.md`
+- Audit codice: `code/CODE_AUDIT.md`
 
 ## Bussola
 
@@ -22,6 +28,12 @@
 Al termine del capitolo il lettore può...
 
 ## Prerequisiti stabili
+
+## Evidenze e provenienza
+
+| ID | Affermazione o risultato | Tipo | Fonte o prova | Stato |
+|---|---|---|---|---|
+| CLM-NN-001 |  | fonte primaria / derivazione / eseguito / illustrativo / confine |  | aperta |
 
 ## 1. Ancora
 
@@ -83,29 +95,61 @@ Prova che il nuovo concetto è stabile:
 
 ## 8. Pseudocodice
 
+Il pseudocodice deve essere etichettato esplicitamente e non deve essere presentato come codice eseguibile.
+
 ## 9. Formalizzazione matematica
 
 ## 10. Derivazione
 
 ## 11. Implementazione da zero
 
+### Contratto dello snippet
+
+- ID:
+- Domanda:
+- Input noto:
+- Shape iniziali:
+- Operazione centrale:
+- Output osservabile:
+- Invariante:
+- File completo:
+- Stato audit:
+
 ## 12. Implementazione con API ufficiale
 
-## 13. Test e invarianti
+- API e firma verificate:
+- Versione della documentazione:
+- Differenze rispetto all'implementazione da zero:
+- File completo:
 
-## 14. Complessità e memoria
+## 13. Registro degli snippet
 
-## 15. Stabilità numerica
+| ID | Concetto | File | Ambiente | Test | Stato |
+|---|---|---|---|---|---|
+| SNIP-NN-001 |  |  |  |  | bozza |
 
-## 16. Varianti e ottimizzazioni
+## 14. Test e invarianti
 
-## 17. Failure mode
+- Shape attese:
+- Proprietà numeriche:
+- Tolleranze:
+- Caso negativo:
+- Output salvato:
+- Comando di esecuzione:
 
-## 18. Reintegrazione nell'architettura
+## 15. Complessità e memoria
 
-## 19. Ricostruzione completa
+## 16. Stabilità numerica
 
-## 20. Controlli di comprensione
+## 17. Varianti e ottimizzazioni
+
+## 18. Failure mode
+
+## 19. Reintegrazione nell'architettura
+
+## 20. Ricostruzione completa
+
+## 21. Controlli di comprensione
 
 ### Ricostruzione
 
@@ -117,10 +161,40 @@ Prova che il nuovo concetto è stabile:
 
 ### Variazione
 
-## 21. Esercizi
+## 22. Esercizi
 
-## 22. Fonti primarie
+## 23. Audit testuale
 
-## 23. Documentazione ufficiale
+- Affermazioni portanti verificate:
+- Citazioni controllate nel contesto originale:
+- Formule e numeri ricontrollati:
+- Paper, documentazione e implementazione distinti:
+- Informazioni recenti ricontrollate:
+- Divergenze tra fonti registrate:
+- Inferenze non necessarie rimosse:
+- Esito:
 
-## 24. Artefatti di riproduzione
+## 24. Audit del codice
+
+- Esecuzione pulita completata:
+- Versioni registrate:
+- Test superati:
+- Output coerente con la prosa:
+- API verificata sulla documentazione ufficiale:
+- Stato:
+
+## 25. Fonti primarie
+
+## 26. Documentazione ufficiale
+
+## 27. Repository e artefatti di riproduzione
+
+## 28. Registro finale di approvazione
+
+- Review fattuale:
+- Review matematica:
+- Review codice:
+- Review visuale:
+- Review didattica:
+- Review autoriale:
+- Commit congelato:
