@@ -18,7 +18,7 @@ Il libro è organizzato per problemi, meccanismi e contratti tecnici. I singoli 
 
 ## Forma dell'opera
 
-Il repository contiene **una sola opera canonica e continua**. La stessa sorgente può essere esportata come volume unico, più tomi, sito, knowledge base o corso modulare. L'export non modifica l'identità dei contenuti.
+Il repository contiene **una sola opera canonica e continua**. La stessa sorgente può essere esportata come volume unico, più tomi, sito, knowledge base o corso modulare.
 
 ## Parti stabili
 
@@ -40,8 +40,6 @@ Il repository contiene **una sola opera canonica e continua**. La stessa sorgent
 | `P14` | Laboratori, integrazione e osservatorio |
 
 ID, nomi e ordine delle parti sono stabili. Le nuove tecniche vengono inserite nella parte che possiede l'oggetto modificato.
-
-La specifica è in [`docs/12_ARCHITETTURA_EDITORIALE_EVOLUTIVA.md`](docs/12_ARCHITETTURA_EDITORIALE_EVOLUTIVA.md).
 
 ## Maturità dei contenuti
 
@@ -69,37 +67,45 @@ Ogni capitolo registra anche la propria data di verifica e congelamento.
 - registro delle affermazioni in `CLAIMS.md`;
 - formule e derivazioni ricontrollate;
 - snippet Python e PyTorch eseguiti e testati;
-- immagini create con lo strumento immagini e sottoposte a review iterativa;
+- immagini create con lo strumento immagini e revisionate iterativamente;
 - controllo incrociato tra testo, formule, immagini e codice;
+- review didattica, editoriale e linguistica;
+- lettura ad alta voce;
 - revisione autoriale prima del congelamento.
 
-## Stile delle lezioni
+## Voce del manuale
 
-La metodologia interna registra stato, problema, input, trasformazione, output, invariante, confine e passaggio successivo. Questi elementi non vengono però ripetuti come una sequenza fissa di intestazioni nel testo destinato al lettore.
+Il rigore del progetto resta negli artefatti interni, ma il lettore incontra una spiegazione continua.
 
-`PLAN.md` e `TEXT_AUDIT.md` conservano lo scaffold esplicito. `CHAPTER.md` usa titoli semantici e prosa tecnica naturale, adattata al profilo del contenuto.
+`PLAN.md` e `TEXT_AUDIT.md` conservano lo scaffold di stato, problema, trasformazione, output, invariante e confine. `CHAPTER.md` usa titoli semantici, sezioni abbastanza ampie e paragrafi naturali.
+
+Regole essenziali:
+
+- metadati, audit, branch e commit fuori dal flusso della lezione;
+- italiano scritto direttamente, senza calchi evitabili;
+- ritmo variato;
+- esempio continuo mantenuto;
+- dettagli API e di riproducibilità spostati nei materiali associati quando interrompono il discorso;
+- nessuna lezione che suoni come una checklist, una specifica o una reference.
 
 Riferimenti:
 
 - [`docs/EXPLANATION_STYLE_AND_VISUALS.md`](docs/EXPLANATION_STYLE_AND_VISUALS.md);
 - [`docs/18_PROTOCOLLO_QA_DIDATTICO.md`](docs/18_PROTOCOLLO_QA_DIDATTICO.md);
-- [`docs/19_STRUTTURA_LOGICA_IN_PROSA.md`](docs/19_STRUTTURA_LOGICA_IN_PROSA.md).
+- [`docs/19_STRUTTURA_LOGICA_IN_PROSA.md`](docs/19_STRUTTURA_LOGICA_IN_PROSA.md);
+- [`docs/20_VOCE_EDITORIALE_E_REVISIONE_LINGUISTICA.md`](docs/20_VOCE_EDITORIALE_E_REVISIONE_LINGUISTICA.md).
 
-Ogni capitolo riceve almeno una review didattica completa. Quando emerge un difetto bloccante, il capitolo viene corretto e revisionato integralmente di nuovo. Il gate anti-template respinge lezioni che sembrano checklist compilate.
-
-## Stile delle immagini tecniche
+## Stile delle immagini
 
 Tutte le figure seguono [`docs/17_STANDARD_VISIVO_CANONICO.md`](docs/17_STANDARD_VISIVO_CANONICO.md):
 
 - sfondo bianco puro `#FFFFFF`;
-- orientamento orizzontale o verticale in base al contenuto;
+- orientamento in base al contenuto;
 - palette, box, frecce e gerarchia tipografica comuni;
 - una domanda principale per figura;
 - nessun testo fuori dal proprio contenitore;
-- nessun mockup della pagina completa usato come figura tecnica;
-- prima generazione sempre trattata come bozza.
-
-La regola contro overflow e clipping è in [`docs/16_REGOLA_CONTENIMENTO_TESTO_VISUALI.md`](docs/16_REGOLA_CONTENIMENTO_TESTO_VISUALI.md).
+- nessun mockup della pagina completa;
+- prima generazione sempre bozza.
 
 ## Come leggere `docs/`
 
@@ -113,8 +119,9 @@ Ordine consigliato:
 6. `13_PROTOCOLLO_AGGIORNAMENTO_CONTENUTI.md`;
 7. `EXPLANATION_STYLE_AND_VISUALS.md`;
 8. `19_STRUTTURA_LOGICA_IN_PROSA.md`;
-9. `18_PROTOCOLLO_QA_DIDATTICO.md`;
-10. protocolli specialistici per testo, codice e visuali.
+9. `20_VOCE_EDITORIALE_E_REVISIONE_LINGUISTICA.md`;
+10. `18_PROTOCOLLO_QA_DIDATTICO.md`;
+11. protocolli specialistici per testo, codice e visuali.
 
 L'indice completo è in [`docs/README.md`](docs/README.md).
 
@@ -124,6 +131,7 @@ L'indice completo è in [`docs/README.md`](docs/README.md).
 /
   README.md
   GUIDELINE.md
+  BOOK_PRODUCTION.md
   PROGRESS.md
   docs/
   chapters/
@@ -136,4 +144,4 @@ Ogni capitolo conserva testo, fonti, claim, audit, codice, output, ambiente e vi
 
 ## Stato corrente
 
-Il capitolo pilota è **Il meccanismo di attention**, identificato come capitolo 28 nell'edizione di lavoro. Lo stato aggiornato è in [`PROGRESS.md`](PROGRESS.md).
+Il Capitolo 28 e il Capitolo 1 sono stati riscritti secondo la nuova voce editoriale. Lo stato aggiornato è in [`PROGRESS.md`](PROGRESS.md).
