@@ -1,61 +1,63 @@
-# Protocollo di conformità didattica dei capitoli
+# Protocollo di conformità didattica ed editoriale
 
 ## Stato
 
 - Stato: `vincolante`
-- Data di adozione: 30 luglio 2026
 - Ambito: ogni capitolo, lezione, appendice tecnica e revisione sostanziale
-- Fonte metodologica: `EXPLANATION_STYLE_AND_VISUALS.md`
-- Regola di superficie: `19_STRUTTURA_LOGICA_IN_PROSA.md`
-- Artefatto di registrazione: `chapters/<capitolo>/TEXT_AUDIT.md`
+- Metodo: `EXPLANATION_STYLE_AND_VISUALS.md`
+- Superficie in prosa: `19_STRUTTURA_LOGICA_IN_PROSA.md`
+- Voce editoriale: `20_VOCE_EDITORIALE_E_REVISIONE_LINGUISTICA.md`
+- Registro: `chapters/<capitolo>/TEXT_AUDIT.md`
 
 ## 1. Scopo
 
-Ogni capitolo deve risultare corretto sia nel contenuto sia nel modo in cui costruisce il modello mentale del lettore.
+Un capitolo deve essere corretto nei fatti, nella sequenza didattica e nella forma editoriale.
 
-La logica di stato, problema, trasformazione, output, invariante e confine è obbligatoria. Le relative etichette non sono obbligatorie nella lezione pubblicata. Il reviewer controlla le funzioni della spiegazione, non la presenza nominale di una sequenza fissa di sottotitoli.
+La logica di stato, problema, trasformazione, output, invariante e confine è obbligatoria. Le relative etichette non sono obbligatorie nel testo pubblicato. Il reviewer controlla ciò che il lettore può capire, non il numero di campi nominalmente presenti.
 
 Un capitolo viene respinto quando:
 
-- introduce termini prima del referente concreto;
+- introduce termini prima dei referenti;
 - salta passaggi necessari;
-- accumula più concetti nuovi nella stessa transizione;
-- usa formule o codice prima che il meccanismo sia stabile;
-- rende impliciti shape, invarianti o confini necessari;
-- tratta una visuale come elemento autonomo;
-- anticipa varianti che interrompono il caso base;
-- espone lo scaffold di progettazione come struttura ripetitiva della lezione;
-- non permette ricostruzione, trasferimento e variazione.
+- accumula concetti diversi nella stessa transizione;
+- anticipa formule, codice o varianti;
+- rende impliciti shape o confini necessari;
+- espone lo scaffold come struttura ripetitiva;
+- frammenta il testo in microsezioni;
+- suona come una specifica o una reference;
+- non permette ricostruzione e trasferimento.
 
-## 2. Regola minima di review
+## 2. Review iterative
 
-Ogni capitolo riceve almeno una review didattica completa. La modalità predefinita prevede due passaggi indipendenti.
+Ogni capitolo riceve almeno tre letture distinte:
 
-Quando una review trova un difetto bloccante:
+1. **Review strutturale e didattica**, dedicata a oggetto continuo, gate e sequenza.
+2. **Review anti-template e ricostruibilità**, dedicata alla superficie editoriale e alla coerenza globale.
+3. **Review editoriale e linguistica**, dedicata a fluidità, italiano idiomatico e leggibilità da manuale.
 
-1. il capitolo torna allo stato `revisione didattica`;
-2. il difetto viene registrato in `TEXT_AUDIT.md`;
+Quando emerge un difetto bloccante:
+
+1. il capitolo torna allo stato `revisione didattica` o `revisione editoriale`;
+2. il difetto viene registrato;
 3. vengono corretti tutti gli artefatti coinvolti;
-4. l'intera review viene ripetuta;
-5. il ciclo continua finché non restano difetti bloccanti.
+4. si ripete l'intera review interessata;
+5. si esegue comunque una nuova lettura completa.
 
-Una modifica successiva a ordine, terminologia, esempio, formula, visuale, codice, confine o struttura visibile riapre il gate.
+Una modifica successiva a ordine, terminologia, esempio, formula, visuale, codice, confine, titoli o voce riapre i gate pertinenti.
 
 ## 3. Indipendenza del reviewer
 
-La review viene svolta come se il reviewer non conoscesse il piano o l'intenzione dell'autore.
+La review viene svolta come se il reviewer non conoscesse il piano dell'autore.
 
 Il capitolo deve funzionare usando soltanto:
 
 - prerequisiti dichiarati;
 - contenuto già stabilizzato;
-- informazioni presenti nel testo, nelle figure e nel codice richiamato.
+- testo, figure e codice richiamato.
 
-Il piano interno non può compensare una giunzione mancante nella prosa.
+`PLAN.md` non può compensare una giunzione mancante nella prosa.
 
-## 4. Doppio livello obbligatorio
-
-### 4.1 Scaffold interno
+## 4. Scaffold interno
 
 In `PLAN.md` e `TEXT_AUDIT.md` devono essere ricostruibili:
 
@@ -75,215 +77,137 @@ Errore comune
 Giunzione
 ```
 
-### 4.2 Superficie destinata al lettore
+`CHAPTER.md` integra queste funzioni senza ripetere le etichette.
 
-`CHAPTER.md` usa titoli semantici, paragrafi causali e transizioni naturali. Non deve ripetere sistematicamente le etichette dello scaffold.
+## 5. Review 1. Struttura e gate
 
-Il reviewer deve poter compilare lo scaffold partendo dalla prosa. Il lettore non deve percepire di leggere uno scaffold compilato.
-
-## 5. Passaggi obbligatori della review
-
-### A. Oggetto continuo
+### Oggetto continuo
 
 Registrare:
 
 ```text
 Oggetto iniziale:
-Stato accumulato dopo ogni sezione:
+Stato dopo ogni sezione:
 Output finale:
-Consumer successivo:
+Passaggio successivo:
 ```
 
-Lo stesso oggetto deve attraversare il capitolo. Un cambio di esempio o notazione richiede una motivazione.
+Lo stesso oggetto deve attraversare il capitolo. Un cambio di esempio o notazione richiede una ragione didattica.
 
-### B. Stato del lettore
+### Catena causale
 
-Per ogni sezione portante controllare internamente:
-
-```text
-Ultima affermazione stabile:
-Oggetto corrente:
-Un concetto nuovo:
-Concetti differiti:
-Prova che il nuovo concetto è stabile:
-```
-
-Questa scheda appartiene alla review. Non deve necessariamente comparire nel capitolo.
-
-### C. Catena dei sette punti
-
-Verificare la connessione causale di:
+Verificare:
 
 1. stato iniziale;
 2. problema;
 3. motivo della nuova operazione;
 4. trasformazione concreta;
-5. stato risultante;
+5. risultato;
 6. invariante;
-7. elemento ancora mancante.
+7. elemento differito.
 
-La presenza di sette intestazioni omonime non dimostra la conformità.
-
-### D. Funzioni del blocco atomico
-
-Per ogni trasformazione il reviewer deve poter rispondere:
-
-```text
-Dove siamo?
-Quale problema locale resta?
-Quali input e shape sono disponibili?
-Quale operazione viene applicata?
-Quale output e shape risultano?
-Che cosa cambia?
-Che cosa resta invariato?
-Che cosa non fa l'operazione?
-Chi usa l'output?
-Quale esempio o prova stabilizza il passaggio?
-Quale errore è probabile?
-Come continua il flusso?
-```
-
-Le risposte possono essere distribuite in uno o più paragrafi naturali. Non si richiedono sottotitoli letterali.
-
-### E. Gate di comparsa
+### Gate di comparsa
 
 Controllare:
 
-- termine tecnico dopo il referente concreto;
-- astrazione accompagnata da oggetto, valori, produttore e consumer;
+- termine tecnico dopo il referente;
+- astrazione accompagnata da oggetto e operazione;
 - frecce dopo la spiegazione dei nodi;
-- esempio e shape prima della formula generale;
+- esempio e shape prima della formula;
 - pseudocodice prima della formula quando chiarisce un algoritmo;
-- codice dopo il meccanismo indipendente dalla libreria;
-- varianti e ottimizzazioni dopo il caso base.
+- codice dopo il meccanismo;
+- varianti dopo il caso base.
 
-### F. Una trasformazione per passaggio
+### Trasformazione dominante
 
-Ogni paragrafo deve avere una trasformazione dominante. Si divide il testo quando combina:
+Ogni paragrafo deve avere una trasformazione o una relazione principale. Più passaggi brevi possono stare nella stessa sezione se formano un unico movimento concettuale.
 
-- meccanismo matematico e semantica API;
+La sezione viene divisa quando combina:
+
+- meccanismo matematico e dettagli API;
 - caso base e ottimizzazione hardware;
 - formula e benchmark;
 - variante e failure mode indipendente;
-- più operazioni che richiedono stati diversi del lettore.
+- più oggetti che richiedono prerequisiti diversi.
 
-Questo controllo non impone una microsezione per ogni operazione. Più passaggi brevi possono vivere in una sezione semantica unica, purché la sequenza sia chiara.
+### Visuali e codice
 
-### G. Visuali attraversate dalla prosa
+Ogni figura viene introdotta, attraversata e conclusa nella prosa.
 
-Ogni figura viene:
+Prima di uno snippet devono risultare chiari:
 
-1. inquadrata con la domanda a cui risponde;
-2. ispezionata nell'ordine di lettura;
-3. conclusa con risultato e passo successivo.
+- input;
+- operazione centrale;
+- output o invariante.
 
-Le tre funzioni possono essere integrate in prosa. Le etichette `Domanda della figura` e `Conclusione della figura` non sono necessarie.
+### Confini
 
-### H. Codice integrato
+Un concetto differito può essere nominato per localizzare ciò che segue, ma non viene spiegato a metà.
 
-Prima di ogni snippet il testo deve rendere chiari:
+## 6. Review 2. Superficie editoriale e ricostruibilità
 
-- input già noto;
-- righe o operazione centrale;
-- output o invariante da osservare.
-
-Queste informazioni possono essere in un paragrafo. Non è necessario pubblicare un box chiamato `Contratto dello snippet`.
-
-### I. Confini e materiale differito
-
-Un concetto differito può localizzare un confine, ma non viene spiegato a metà.
-
-Una sezione spostabile senza rompere l'oggetto continuo deve essere valutata come:
-
-- ponte breve;
-- riferimento incrociato;
-- capitolo successivo;
-- approfondimento separato.
-
-### J. Prosa italiana
-
-Controllare:
-
-- italiano diretto, calmo e progressivo;
-- soggetti e referenti espliciti;
-- niente metafore o personificazioni sostitutive;
-- niente em dash;
-- una trasformazione principale per paragrafo;
-- seconda persona limitata a controlli ed esercizi;
-- termini inglesi coerenti;
-- frasi non sovraccariche;
-- ritmo variato e adatto al contenuto.
-
-### K. Gate anti-template
-
-Il reviewer controlla che:
-
-- i titoli descrivano oggetti e meccanismi reali;
-- le intestazioni metacognitive non siano ripetute come telaio standard;
-- la prosa non sembri una checklist trasformata in pagina;
-- elenchi e box non sostituiscano una spiegazione fluida;
-- capitoli di profilo diverso non vengano forzati nella stessa sagoma;
-- la rimozione delle etichette non nasconda shape, invarianti o confini.
-
-Sono segnali di problema intestazioni ricorrenti come:
-
-```text
-Stato del lettore
-Dove siamo
-Problema locale
-Trasformazione
-Cosa è cambiato
-Cosa è rimasto invariato
-Cosa non fa
-Frase di continuità
-Contratto dello snippet
-```
-
-Una singola etichetta può essere usata quando serve. La ripetizione sistematica viene respinta.
-
-### L. Controlli finali
-
-Il capitolo deve permettere:
-
-- ricostruzione;
-- localizzazione;
-- confine;
-- trasferimento;
-- variazione.
-
-## 6. Review in due passaggi
-
-### Review 1. Struttura e gate
+Il reviewer rilegge il capitolo senza consultare il piano.
 
 Controlla:
 
-- oggetto continuo;
-- catena dei sette punti;
-- stato del lettore;
-- funzioni del blocco atomico;
-- gate di termini, formule, codice e varianti;
-- confini;
-- visuali;
-- struttura visibile e gate anti-template.
+- titoli semantici;
+- sezioni abbastanza ampie;
+- assenza di intestazioni metacognitive ripetute;
+- continuità tra paragrafi;
+- shape e invarianti ancora visibili;
+- esempio continuo presente durante le astrazioni;
+- riepilogo che ricompone il problema;
+- esercizi coerenti con ciò che è stato costruito;
+- coerenza tra prosa, formule, visuali e codice.
 
-### Review 2. Prosa e ricostruibilità
+Sono difetti bloccanti:
 
-Dopo le correzioni, rilegge integralmente il capitolo e controlla:
+- capitolo che appare come una checklist;
+- molte microsezioni di uno o due paragrafi;
+- un titolo per ogni operazione elementare;
+- metadati operativi nel flusso di lettura;
+- spiegazione dominata da box e liste;
+- codice o note API che cambiano il capitolo in una reference.
 
-- ordine reale delle operazioni;
-- referenti;
-- densità;
-- ritmo;
-- continuità;
-- stato accumulato;
-- naturalezza dei titoli;
-- esercizi;
-- coerenza tra testo, formule, figure e codice;
-- ricostruibilità senza consultare il piano.
+## 7. Review 3. Voce e lingua italiana
 
-La seconda review non può limitarsi ai difetti già trovati.
+Si applica `20_VOCE_EDITORIALE_E_REVISIONE_LINGUISTICA.md`.
 
-## 7. Registro in `TEXT_AUDIT.md`
+Il reviewer controlla:
+
+- italiano naturale;
+- sintassi non tradotta dall'inglese;
+- uso necessario e coerente dei termini tecnici;
+- assenza di calchi e ibridi evitabili;
+- ritmo variato;
+- frasi non troppo uniformi;
+- periodi non sovraccarichi;
+- soggetti e referenti chiari;
+- cautele non ripetute;
+- citazioni che non spezzano il ragionamento;
+- separazione tra testo pubblico e materiali di progetto.
+
+Il capitolo viene letto ad alta voce. Vengono segnati i punti in cui:
+
+- il periodo è difficile da pronunciare;
+- il referente si perde;
+- il registro cambia bruscamente;
+- la frase suona burocratica;
+- il lettore deve tornare indietro per capire l'operazione.
+
+La review simula almeno un lettore nuovo, un lettore tecnico e un lettore che riprende il capitolo dopo tempo.
+
+## 8. Controlli finali
+
+Il capitolo deve permettere:
+
+- **ricostruzione**, ripetere il flusso;
+- **localizzazione**, indicare dove avviene un'operazione;
+- **confine**, dire cosa non viene concluso;
+- **trasferimento**, applicare il meccanismo a un nuovo caso;
+- **variazione**, prevedere l'effetto di una modifica.
+
+## 9. Registro in `TEXT_AUDIT.md`
 
 Ogni review registra:
 
@@ -291,6 +215,7 @@ Ogni review registra:
 Review ID:
 Versione esaminata:
 Data:
+Profilo del lettore:
 Ambito:
 Difetti bloccanti:
 Difetti non bloccanti:
@@ -308,43 +233,45 @@ Stati ammessi:
 - `corretta, nuova review richiesta`;
 - `superata`.
 
-## 8. Difetti bloccanti
+## 10. Difetti bloccanti
 
-La review viene respinta quando è presente almeno uno dei seguenti difetti:
+Il capitolo viene respinto in presenza di:
 
 - oggetto continuo interrotto;
 - dipendenza da un concetto non stabilizzato;
-- termine tecnico usato come spiegazione prima del referente;
-- formula generale prima dei passaggi necessari;
+- termine o formula anticipati;
 - codice prima del meccanismo;
 - variante prima del caso base;
-- più concetti inseparati nella stessa transizione;
 - invariante necessario implicito;
-- giunzione critica vaga;
-- visuale non attraversata dalla prosa;
-- sezione spostabile che diluisce il percorso;
-- metafora usata al posto dell'operazione;
-- esercizio non costruito nel capitolo;
+- visuale non integrata;
 - contraddizione tra artefatti;
 - semplificazione falsa;
-- struttura pubblicata dominata da intestazioni metacognitive ripetute;
-- lezione che appare come una checklist invece che come prosa tecnica.
+- scaffold pubblicato come telaio;
+- frammentazione eccessiva;
+- metadati di progetto esposti;
+- italiano non fluido in più passaggi;
+- calchi non necessari;
+- ritmo meccanico;
+- ripetizione eccessiva di negazioni e cautele;
+- riepilogo ridotto a checklist;
+- lettura ad alta voce non superata.
 
-## 9. Gate di approvazione
+## 11. Gate di approvazione
 
-Un capitolo passa a `revisione autoriale` soltanto quando:
+Un capitolo passa alla revisione autoriale soltanto quando:
 
-- almeno una review completa è registrata;
-- ogni difetto bloccante è corretto;
-- dopo le correzioni è stata eseguita una nuova review integrale;
-- `TEXT_AUDIT.md` indica `superata`;
+- i claim portanti sono verificati;
+- la review strutturale è superata;
 - il gate anti-template è superato;
-- i concetti differiti non sono prerequisiti impliciti;
-- testo, figure e codice seguono lo stesso percorso.
+- la review editoriale e linguistica è superata;
+- ogni difetto bloccante è stato corretto;
+- dopo le correzioni è stata eseguita una nuova lettura integrale;
+- testo, figure e codice seguono lo stesso percorso;
+- i materiali operativi non interrompono la lezione.
 
-Ogni modifica strutturale successiva riapre il gate.
+Ogni modifica strutturale o linguistica successiva riapre il gate.
 
-## 10. Applicazione retroattiva
+## 12. Applicazione retroattiva
 
 Il protocollo si applica:
 
@@ -353,4 +280,4 @@ Il protocollo si applica:
 - ai capitoli esistenti prima di una nuova edizione;
 - alle sezioni aggiunte per nuove tecniche.
 
-La conformità non deriva dal rispetto nominale del template. Deriva dalla qualità della spiegazione e dal registro delle review.
+La conformità non deriva dal rispetto nominale del template. Deriva dalla qualità del testo che il lettore incontra.
