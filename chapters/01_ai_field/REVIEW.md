@@ -12,12 +12,13 @@
 ## Percorso consigliato
 
 1. `CHAPTER.md`, per voce, fluidità, progressione e perimetro;
-2. `TEXT_AUDIT.md`, per confrontare le versioni e le review `EDIT-AI-01` e `EDIT-AI-02`;
+2. `TEXT_AUDIT.md`, per le review `EDIT-AI-01` e `EDIT-AI-02`;
 3. `CLAIMS.md`, per la mappa frase-prova;
 4. `FONTI_PRIMARIE.md`, per fonti e limiti;
 5. `code/`, per snippet, output e test;
 6. `assets/chapters/01_ai_field/`, per specifiche e stato delle visuali;
-7. `docs/20_VOCE_EDITORIALE_E_REVISIONE_LINGUISTICA.md`, per il nuovo standard del manuale.
+7. `docs/02_STILE_E_QA_TESTO.md`, per voce e review del manuale;
+8. `docs/03_VISUALI.md`, per lo standard delle figure.
 
 ## Modifiche principali
 
@@ -26,15 +27,15 @@
 - la richiesta `Il pacco non è arrivato` rimane il filo del discorso;
 - le definizioni vengono applicate subito al caso concreto;
 - la tassonomia è organizzata attorno a meccanismo, obiettivo e ampiezza;
-- training e inference vengono spiegati prima del codice e all'interno della stessa sezione;
+- training e inference vengono spiegati prima del codice e nella stessa sezione;
 - i dettagli PyTorch più specifici sono raccolti in una nota;
 - il riepilogo ricompone il problema iniziale;
-- fonti e materiali di progetto sono concentrati in una sezione finale breve.
+- fonti e materiali sono concentrati in una sezione finale breve.
 
 ## Aspetti da valutare nel testo
 
 - L'apertura orienta senza sembrare una definizione enciclopedica?
-- L'italiano risulta naturale anche nei passaggi più tecnici?
+- L'italiano risulta naturale nei passaggi tecnici?
 - Le sezioni sono abbastanza ampie da sostenere un ragionamento?
 - L'esempio continuo aiuta a distinguere regole, apprendimento e sistema?
 - La quantità di termini nel primo capitolo resta gestibile?
@@ -47,12 +48,12 @@
 - `AI-02`: da generare;
 - PNG pubblicati: nessuno.
 
-Le visuali restano bloccanti per la candidatura completa. La versione testuale può però essere revisionata ora come standard di voce editoriale.
+Le visuali restano bloccanti per la candidatura completa. La versione testuale può essere revisionata come standard di voce editoriale.
 
 ## Controlli visuali futuri
 
-- `AI-01` deve mostrare i tre aspetti senza una falsa gerarchia;
-- `AI-02` deve separare chiaramente training e inference;
+- `AI-01` deve mostrare i tre aspetti senza falsa gerarchia;
+- `AI-02` deve separare training e inference;
 - entrambe devono usare sfondo bianco e lo standard canonico;
 - testo, figure e snippet devono descrivere lo stesso contratto;
 - dopo l'inserimento si ripetono review incrociata, linguistica e lettura completa.
