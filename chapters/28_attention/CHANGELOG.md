@@ -1,5 +1,7 @@
 # Changelog. Capitolo 28
 
+> I nomi dei protocolli citati nelle versioni storiche restano come traccia. Le regole correnti sono consolidate in `docs/02_STILE_E_QA_TESTO.md`, `docs/03_VISUALI.md` e `docs/04_CODICE_FONTI_E_RIPRODUCIBILITA.md`.
+
 ## `0.4.0-rc4`. 30 luglio 2026
 
 ### Riscrittura editoriale e linguistica
@@ -28,8 +30,8 @@
 
 ### Governance
 
-- applicato `docs/20_VOCE_EDITORIALE_E_REVISIONE_LINGUISTICA.md`;
-- aggiornati i protocolli testuali e il template del capitolo.
+- applicato lo standard ora consolidato in `docs/02_STILE_E_QA_TESTO.md`;
+- aggiornati i protocolli testuali e il template del capitolo, poi riuniti nel documento tematico.
 
 ## `0.3.0-rc3`. 30 luglio 2026
 
@@ -43,7 +45,7 @@
 
 ### Governance
 
-- aggiunto `docs/19_STRUTTURA_LOGICA_IN_PROSA.md`;
+- aggiunto il precedente documento `docs/19_STRUTTURA_LOGICA_IN_PROSA.md`;
 - aggiornati template e protocollo didattico con il gate anti-template.
 
 ## `0.2.0-rc2`. 30 luglio 2026
@@ -61,7 +63,7 @@
 
 ### Governance
 
-- aggiunto `docs/18_PROTOCOLLO_QA_DIDATTICO.md`;
+- aggiunto il precedente documento `docs/18_PROTOCOLLO_QA_DIDATTICO.md`;
 - resa obbligatoria una nuova review integrale dopo ogni correzione bloccante.
 
 ## `0.1.0-rc1`. 30 luglio 2026
