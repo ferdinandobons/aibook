@@ -1,23 +1,23 @@
 # Fonti metodologiche archiviate
 
-Questa cartella conserva i documenti originali ricevuti come base metodologica.
+Questa cartella conserva integralmente i documenti originali ricevuti come base metodologica.
 
-I file qui presenti non sostituiscono i documenti canonici nella radice di `docs/`. Servono a:
+I file qui presenti non sostituiscono la documentazione canonica nella radice di `docs/`. Servono a:
 
-- preservare integralmente le indicazioni originarie;
-- permettere un confronto con l'adattamento editoriale del libro;
-- evitare la perdita di dettagli specifici del sito o di altri progetti;
+- preservare le indicazioni originarie;
+- permettere il confronto con l'adattamento editoriale;
+- evitare la perdita di dettagli provenienti da altri progetti;
 - rendere tracciabili le modifiche metodologiche.
 
 ## Documento archiviato
 
-Per mantenere leggibile e verificabile la copia nel repository, il file originale è conservato in cinque segmenti consecutivi:
+Il file originale è conservato in cinque segmenti consecutivi:
 
-1. `EXPLANATION_STYLE_AND_VISUALS_ORIGINAL_PART_01.md`, righe originali 1-100;
-2. `EXPLANATION_STYLE_AND_VISUALS_ORIGINAL_PART_02.md`, righe originali 101-200;
-3. `EXPLANATION_STYLE_AND_VISUALS_ORIGINAL_PART_03.md`, righe originali 201-300;
-4. `EXPLANATION_STYLE_AND_VISUALS_ORIGINAL_PART_04.md`, righe originali 301-400;
-5. `EXPLANATION_STYLE_AND_VISUALS_ORIGINAL_PART_05.md`, righe originali 401-496.
+1. `EXPLANATION_STYLE_AND_VISUALS_ORIGINAL_PART_01.md`, righe 1-100;
+2. `EXPLANATION_STYLE_AND_VISUALS_ORIGINAL_PART_02.md`, righe 101-200;
+3. `EXPLANATION_STYLE_AND_VISUALS_ORIGINAL_PART_03.md`, righe 201-300;
+4. `EXPLANATION_STYLE_AND_VISUALS_ORIGINAL_PART_04.md`, righe 301-400;
+5. `EXPLANATION_STYLE_AND_VISUALS_ORIGINAL_PART_05.md`, righe 401-496.
 
 I segmenti vanno letti nell'ordine numerico. La divisione non modifica il contenuto.
 
@@ -27,10 +27,15 @@ Dati del file ricevuto:
 - byte: `21858`;
 - SHA-256: `c2ceb5be83b7d8fede41d82a98b9c1cf8a12a7cad3c8a702d6546d214196726b`.
 
-## Documento canonico derivato
+## Adattamento canonico corrente
 
-- `../EXPLANATION_STYLE_AND_VISUALS.md`
+I principi del documento originale sono stati distribuiti nei documenti tematici:
 
-Quando il documento originale contiene dipendenze non applicabili al libro, per esempio riferimenti a `LEARN_GOVERNANCE.md`, a componenti web o a token CSS esterni, il documento canonico conserva il principio metodologico ma applica le decisioni registrate in `../08_REGISTRO_DECISIONI.md`.
+- `../02_STILE_E_QA_TESTO.md`, per didattica, prosa e review;
+- `../03_VISUALI.md`, per immagini e audit visuale;
+- `../04_CODICE_FONTI_E_RIPRODUCIBILITA.md`, per codice, fonti e prove;
+- `../00_GOVERNANCE_E_ARCHITETTURA.md`, per decisioni e dipendenze.
 
-Una divergenza sostanziale tra originale e adattamento deve essere registrata e motivata.
+Quando il materiale originale contiene dipendenze non applicabili, come `LEARN_GOVERNANCE.md`, componenti web o token CSS esterni, il progetto conserva il principio utile ma applica le decisioni canoniche correnti.
+
+Una divergenza sostanziale tra originale e adattamento viene registrata nella governance e nello storico Git.
