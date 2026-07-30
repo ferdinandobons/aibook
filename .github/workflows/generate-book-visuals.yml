@@ -51,6 +51,7 @@ jobs:
             assets/chapters/02_history/HIST-01/candidate-v1.png \
             assets/chapters/02_history/HIST-02/candidate-v1.png \
             assets/chapters/28_attention/ATT-01/candidate-v3.png \
+            chapters/02_history/CHAPTER.md \
             chapters/28_attention/CHAPTER.md
           if git diff --cached --quiet; then
             echo 'Generated PNG files and references are already current.'
