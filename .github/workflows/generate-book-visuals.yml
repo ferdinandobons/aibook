@@ -6,6 +6,7 @@ on:
       - feature/full-book-production
     paths:
       - 'scripts/generate_book_visuals.py'
+      - 'scripts/integrate_generated_visuals.py'
       - '.github/workflows/generate-book-visuals.yml'
 
 permissions:
@@ -31,7 +32,10 @@ jobs:
       - name: Generate and validate PNG files
         run: python scripts/generate_book_visuals.py
 
-      - name: Commit generated candidates
+      - name: Integrate generated visual references
+        run: python scripts/integrate_generated_visuals.py
+
+      - name: Commit generated candidates and integrations
         shell: bash
         run: |
           set -euo pipefail
@@ -40,10 +44,11 @@ jobs:
           git add \
             assets/chapters/01_ai_field/AI-01/candidate-v1.png \
             assets/chapters/01_ai_field/AI-02/candidate-v1.png \
-            assets/chapters/28_attention/ATT-01/candidate-v3.png
+            assets/chapters/28_attention/ATT-01/candidate-v3.png \
+            chapters/28_attention/CHAPTER.md
           if git diff --cached --quiet; then
-            echo 'Generated PNG files are already current.'
+            echo 'Generated PNG files and references are already current.'
             exit 0
           fi
-          git commit -m 'Generate reviewed technical image candidates'
+          git commit -m 'Generate and integrate reviewed technical visuals'
           git push origin HEAD:feature/full-book-production
