@@ -32,6 +32,9 @@ jobs:
       - name: Render technical visuals
         run: python scripts/render_attention_visuals.py
 
+      - name: Repair review Markdown
+        run: python scripts/repair_chapter28_markdown.py
+
       - name: Verify generated PNGs
         run: |
           python - <<'PY'
@@ -50,19 +53,24 @@ jobs:
               print(path, size, path.stat().st_size)
           PY
 
+      - name: Verify Markdown compatibility
+        run: |
+          ! grep -R '\\operatorname' chapters/28_attention/CHAPTER.md
+          ! grep -R 'candidate-v1.png' chapters/28_attention/CHAPTER.md
+
       - name: Replace broken first candidates
         run: |
           rm -f assets/chapters/28_attention/ATT-01/candidate-v1.png
           rm -f assets/chapters/28_attention/ATT-02/candidate-v1.png
 
-      - name: Commit regenerated images
+      - name: Commit regenerated review artifacts
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add assets/chapters/28_attention/ATT-01 assets/chapters/28_attention/ATT-02
+          git add assets/chapters/28_attention/ATT-01 assets/chapters/28_attention/ATT-02 chapters/28_attention/CHAPTER.md
           if git diff --cached --quiet; then
-            echo 'No image changes to commit.'
+            echo 'No generated changes to commit.'
           else
-            git commit -m 'Regenerate attention visuals with contained text'
+            git commit -m 'Repair Chapter 28 review visuals and math rendering'
             git push origin HEAD:review/chapter-28-pilot
           fi
