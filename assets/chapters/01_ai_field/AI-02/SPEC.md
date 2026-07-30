@@ -6,7 +6,8 @@
 - Sezione: Parametri, training e inference
 - Famiglia: process / comparison
 - Orientamento: orizzontale
-- Stato: `storyboard, generazione bloccata`
+- Stato: `candidate-v1, validata tecnicamente`
+- File: `candidate-v1.png`
 - Standard: `docs/03_VISUALI.md`
 - Sfondo: bianco puro `#FFFFFF`
 
@@ -30,7 +31,7 @@ Dati di training
 
 Requisiti:
 
-- il percorso di aggiornamento torna al box dei parametri;
+- il percorso di aggiornamento torna al box del modello;
 - `optimizer step` è l'unico nodo che modifica `θ` in `θ'`;
 - badge: `i parametri cambiano`;
 - il target entra nella loss, non direttamente nel modello.
@@ -50,7 +51,7 @@ Requisiti:
 - nessuna loss;
 - nessun gradiente;
 - nessun optimizer;
-- badge: `i parametri restano invariati`;
+- badge: `parametri invariati`;
 - nota: `caso base del capitolo`.
 
 ## Titolo e footer
@@ -61,7 +62,7 @@ Requisiti:
 
 ## Layout
 
-- due pannelli paralleli con larghezza simile;
+- due pannelli paralleli;
 - training a sinistra, inference a destra;
 - frecce da sinistra a destra;
 - feedback di aggiornamento separato dal flusso dei dati;
@@ -74,7 +75,7 @@ Requisiti:
 - viola: modello e parametri;
 - ambra: loss e gradienti;
 - verde: output e checkpoint pronto;
-- rosso tenue soltanto per un percorso vietato, se necessario.
+- rosso tenue per gli elementi assenti nell'inference.
 
 ## Contenimento
 
@@ -98,4 +99,5 @@ Requisiti:
 
 - training: documentazione PyTorch e `SNIP-AI-001`;
 - inference: `SNIP-AI-001` e documentazione `Module` / `inference_mode`;
-- nessun valore quantitativo necessario.
+- nessun valore quantitativo necessario;
+- generazione raster riproducibile: `scripts/generate_book_visuals.py`.
