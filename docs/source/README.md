@@ -11,7 +11,15 @@ I file qui presenti non sostituiscono i documenti canonici nella radice di `docs
 
 ## Documento archiviato
 
-- `EXPLANATION_STYLE_AND_VISUALS_ORIGINAL.md`: copia del file fornito dal committente.
+Per mantenere leggibile e verificabile la copia nel repository, il file originale è conservato in cinque segmenti consecutivi:
+
+1. `EXPLANATION_STYLE_AND_VISUALS_ORIGINAL_PART_01.md`, righe originali 1-100;
+2. `EXPLANATION_STYLE_AND_VISUALS_ORIGINAL_PART_02.md`, righe originali 101-200;
+3. `EXPLANATION_STYLE_AND_VISUALS_ORIGINAL_PART_03.md`, righe originali 201-300;
+4. `EXPLANATION_STYLE_AND_VISUALS_ORIGINAL_PART_04.md`, righe originali 301-400;
+5. `EXPLANATION_STYLE_AND_VISUALS_ORIGINAL_PART_05.md`, righe originali 401-496.
+
+I segmenti vanno letti nell'ordine numerico. La divisione non modifica il contenuto.
 
 ## Documento canonico derivato
 
