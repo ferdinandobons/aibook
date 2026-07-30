@@ -4,8 +4,8 @@ part_id: P01
 order_key: 010
 title: Che cos'è l'intelligenza artificiale
 maturity: CORE
-status: revisione di chiarezza per lettore non esperto completata, visuali aperte
-version: 0.3.0-rc2
+status: candidatura completa in revisione autoriale
+version: 0.4.0-rc3
 opened: 2026-07-30
 last_web_research: 2026-07-30
 last_source_check: 2026-07-30
@@ -87,7 +87,11 @@ Quando salviamo i parametri e le altre informazioni necessarie a riusare il mode
 
 Durante l'**inference**, un nuovo input attraversa il modello usando i parametri già disponibili. Nel caso base non viene eseguito `optimizer.step()`, quindi i parametri non cambiano. Il training serve ad apprendere; l'inference serve a usare ciò che è stato appreso.
 
-Il seguente esempio PyTorch rende visibile la differenza. Usa quattro osservazioni illustrative, due valori per osservazione e due classi:
+La figura mette le due fasi una accanto all'altra. Nel pannello del training, i target entrano nella loss e l'optimizer è l'unico nodo che aggiorna i parametri. Nel pannello dell'inference, un nuovo input attraversa il checkpoint fissato senza loss, gradienti o optimizer step.
+
+![Training e inference usano il modello in fasi diverse](../../assets/chapters/01_ai_field/AI-02/candidate-v1.png)
+
+Il seguente esempio PyTorch rende visibile la stessa differenza. Usa quattro osservazioni illustrative, due valori per osservazione e due classi:
 
 ```python
 import torch
@@ -174,14 +178,15 @@ Le etichette introdotte finora rispondono a domande diverse. Possiamo riunirle i
 | Obiettivo | Che cosa deve produrre o decidere? | classificare, predire, decidere, generare |
 | Ampiezza | Per quanti compiti e contesti è pensato? | specialistico, base adattabile, generalista |
 
+La figura usa la stessa richiesta come caso guida e la descrive lungo i tre aspetti. I pannelli sono paralleli: non formano una scala e nessuno determina automaticamente gli altri.
+
+![Tre domande per descrivere un sistema di AI](../../assets/chapters/01_ai_field/AI-01/candidate-v1.png)
+
 La richiesta «Il pacco non è arrivato» può quindi essere gestita da un'automazione basata su regole, da un classificatore neurale, da un modello generativo specializzato oppure da un sistema ibrido costruito attorno a un foundation model, un database e alcuni strumenti.
 
 Nessun aspetto determina automaticamente gli altri. Una rete profonda non è necessariamente generativa. Un modello generativo non è necessariamente un foundation model. Un foundation model non rende generalista ogni applicazione che lo utilizza.
 
 Le autorizzazioni mostrano perché la distinzione tra modello e sistema è importante. Lo stesso modello può limitarsi a suggerire una categoria oppure può essere inserito in un sistema autorizzato a modificare un ordine. La formula del modello può restare identica, mentre cambiano le conseguenze operative.
-
-<!-- Inserire AI-01 dopo la validazione visuale. -->
-<!-- Inserire AI-02 dopo la validazione visuale. -->
 
 ## Riepilogo
 
