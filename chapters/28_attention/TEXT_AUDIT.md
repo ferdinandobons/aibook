@@ -226,7 +226,7 @@ Correzioni nella versione `0.5.0-rc5`:
 - [x] formula della scaled dot-product attention invariata;
 - [x] shape di `Q`, `K`, `V`, score, coefficienti e output corrette;
 - [x] valori dell'esempio principale coerenti con i test;
-- [x] valori aggiunti `c_1=[0,40,0,90]` e `c_2=[0,85,0,95]` ricalcolati;
+- [x] valori aggiunti: `c_1` ha componenti `0,40` e `0,90`; `c_2` ha componenti `0,85` e `0,95`;
 - [x] ordine score, scaling, mask opzionale, softmax, prodotto con `V`;
 - [x] mask applicata agli score;
 - [x] complessità del caso materializzato invariata;
