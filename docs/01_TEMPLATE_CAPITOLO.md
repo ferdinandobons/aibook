@@ -2,8 +2,10 @@
 
 ## Metadati
 
-- Stato: ricerca / bozza / revisione fattuale / revisione matematica / revisione codice / revisione visuale / revisione didattica / revisione autoriale / approvato
+- Stato: ricerca / pianificazione / bozza / revisione fattuale / revisione matematica / revisione codice / revisione visuale / revisione incrociata / revisione didattica / revisione autoriale / approvato
 - Profilo: componente / processo / architettura / training / tecnica / paper / confronto / implementazione
+- Data apertura:
+- Data ultima ricerca web:
 - Data ultima verifica fonti:
 - Data di congelamento editoriale:
 - Versione Python:
@@ -12,8 +14,10 @@
 - Oggetto continuo:
 - Concetti differiti:
 - Registro affermazioni: `CLAIMS.md`
+- Dossier fonti: `FONTI_PRIMARIE.md`
 - Audit testuale: `TEXT_AUDIT.md`
 - Audit codice: `code/CODE_AUDIT.md`
+- Piano: `PLAN.md`
 
 ## Bussola
 
@@ -34,6 +38,8 @@ Al termine del capitolo il lettore può...
 | ID | Affermazione o risultato | Tipo | Fonte o prova | Stato |
 |---|---|---|---|---|
 | CLM-NN-001 |  | fonte primaria / derivazione / eseguito / illustrativo / confine |  | aperta |
+
+> Un'affermazione aperta non può comparire come frase assertiva nella versione approvata. Le inferenze fattuali editoriali non sono un tipo ammesso.
 
 ## 1. Ancora
 
@@ -71,6 +77,9 @@ Prova che il nuovo concetto è stabile:
 
 ### Esempio minimo
 
+- Provenienza: Illustrativo / Eseguito / Fonte primaria
+- Controllo numerico:
+
 ### Errore comune
 
 ### Frase di continuità
@@ -86,10 +95,13 @@ Prova che il nuovo concetto è stabile:
 - Stato prima:
 - Stato dopo:
 - Invariante:
+- Confine:
 - Provenienza:
 - Alt text:
+- Equivalente testuale:
 - Stato audit:
 - Registro revisioni:
+- File finale:
 
 ## 7. Shape e strutture dati
 
@@ -100,6 +112,11 @@ Il pseudocodice deve essere etichettato esplicitamente e non deve essere present
 ## 9. Formalizzazione matematica
 
 ## 10. Derivazione
+
+- Definizioni di partenza:
+- Passaggi:
+- Condizioni di validità:
+- Controllo indipendente:
 
 ## 11. Implementazione da zero
 
@@ -112,15 +129,24 @@ Il pseudocodice deve essere etichettato esplicitamente e non deve essere present
 - Operazione centrale:
 - Output osservabile:
 - Invariante:
+- Versione Python:
+- Versione libreria:
+- Device:
+- Dtype:
+- Seed:
 - File completo:
+- Test:
 - Stato audit:
 
 ## 12. Implementazione con API ufficiale
 
 - API e firma verificate:
+- Fonte ufficiale:
 - Versione della documentazione:
+- Data di consultazione:
 - Differenze rispetto all'implementazione da zero:
 - File completo:
+- Test di equivalenza o confronto:
 
 ## 13. Registro degli snippet
 
@@ -136,12 +162,28 @@ Il pseudocodice deve essere etichettato esplicitamente e non deve essere present
 - Caso negativo:
 - Output salvato:
 - Comando di esecuzione:
+- Data di esecuzione:
 
 ## 15. Complessità e memoria
+
+- Costo temporale:
+- Costo spaziale:
+- Parametri rilevanti:
+- Data movement:
+- Condizioni e limiti:
 
 ## 16. Stabilità numerica
 
 ## 17. Varianti e ottimizzazioni
+
+Ogni variante entra dopo il caso base e deve dichiarare:
+
+- collo di bottiglia;
+- modifica;
+- comportamento che resta invariato;
+- nuovo costo;
+- trade-off;
+- fonte e versione.
 
 ## 18. Failure mode
 
@@ -165,36 +207,69 @@ Il pseudocodice deve essere etichettato esplicitamente e non deve essere present
 
 ## 23. Audit testuale
 
-- Affermazioni portanti verificate:
-- Citazioni controllate nel contesto originale:
-- Formule e numeri ricontrollati:
-- Paper, documentazione e implementazione distinti:
-- Informazioni recenti ricontrollate:
-- Divergenze tra fonti registrate:
-- Inferenze non necessarie rimosse:
+- [ ] Tutte le affermazioni portanti sono verificate.
+- [ ] Ogni citazione è stata controllata nel contesto originale.
+- [ ] Formule, shape e numeri sono stati ricontrollati.
+- [ ] Paper, documentazione, repository, checkpoint e prodotto sono distinti.
+- [ ] Le informazioni recenti sono state ricontrollate sul web.
+- [ ] Le divergenze tra fonti sono registrate.
+- [ ] Non sono presenti inferenze fattuali editoriali.
+- [ ] Le interpretazioni degli autori sono attribuite alla fonte.
+- [ ] La semplificazione non cambia il meccanismo.
 - Esito:
 
 ## 24. Audit del codice
 
-- Esecuzione pulita completata:
-- Versioni registrate:
-- Test superati:
-- Output coerente con la prosa:
-- API verificata sulla documentazione ufficiale:
+- [ ] Esecuzione pulita completata.
+- [ ] Versioni registrate.
+- [ ] Test superati.
+- [ ] Output coerente con la prosa.
+- [ ] API verificata sulla documentazione ufficiale.
+- [ ] Shape e dtype controllati.
+- [ ] Output `Eseguito` associati a log o test.
 - Stato:
 
-## 25. Fonti primarie
+## 25. Audit delle visuali
 
-## 26. Documentazione ufficiale
+- [ ] Tutte le immagini incluse sono approvate.
+- [ ] Origine e destinazione delle frecce sono corrette.
+- [ ] Shape, numeri e label coincidono con la prosa.
+- [ ] Non esistono incroci o callout ambigui.
+- [ ] Alt text ed equivalente testuale sono presenti.
+- [ ] Nessun watermark, firma o branding di terzi.
+- Stato:
 
-## 27. Repository e artefatti di riproduzione
+## 26. Audit incrociato
 
-## 28. Registro finale di approvazione
+- [ ] Testo, formule, immagini e codice usano gli stessi nomi.
+- [ ] L'ordine delle operazioni coincide.
+- [ ] Invarianti e confini coincidono.
+- [ ] Numeri e output coincidono.
+- [ ] Non rimangono contraddizioni aperte.
+- Stato:
+
+## 27. Fonti primarie
+
+## 28. Documentazione ufficiale
+
+## 29. Repository, standard e artefatti di riproduzione
+
+## 30. Letture complementari
+
+Questa sezione è separata dalle fonti usate come prova portante.
+
+## 31. Registro finale di approvazione
 
 - Review fattuale:
 - Review matematica:
+- Review architetturale e algoritmica:
+- Review temporale:
 - Review codice:
 - Review visuale:
+- Review incrociata:
 - Review didattica:
 - Review autoriale:
+- Data di congelamento:
 - Commit congelato:
+- Problemi noti non bloccanti:
+- Sezioni rinviate:
