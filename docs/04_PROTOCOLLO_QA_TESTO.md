@@ -1,198 +1,203 @@
 # Protocollo di qualità per il testo
 
-## Scopo
+## Stato
 
-Ogni capitolo deve essere verificabile a livello di affermazioni, formule, numeri, terminologia, descrizioni architetturali e riferimenti temporali. Una frase plausibile ma non sostenuta da evidenza non entra nella versione approvata.
+- Stato: `vincolante`
+- Ambito: ogni capitolo, appendice e modifica sostanziale
+- Review didattica: `18_PROTOCOLLO_QA_DIDATTICO.md`
+- Struttura visibile: `19_STRUTTURA_LOGICA_IN_PROSA.md`
 
-Il processo non tratta la prima stesura come testo finale. Ogni capitolo attraversa revisioni separate, con registrazione dei difetti e nuova verifica dopo ogni correzione.
+## 1. Scopo
 
-## Artefatti obbligatori per capitolo
+Ogni capitolo deve essere verificabile a livello di affermazioni, formule, numeri, terminologia, descrizioni architetturali e riferimenti temporali.
+
+Una frase plausibile ma non sostenuta da evidenza non entra nella versione approvata. Una lezione tecnicamente corretta ma didatticamente meccanica, discontinua o simile a una checklist non supera la review.
+
+## 2. Artefatti obbligatori
 
 ```text
 chapters/<capitolo>/
   CHAPTER.md
+  PLAN.md
   FONTI_PRIMARIE.md
   CLAIMS.md
   TEXT_AUDIT.md
+  CHANGELOG.md
   code/
   assets/
 ```
 
-- `CHAPTER.md`: testo del capitolo.
-- `FONTI_PRIMARIE.md`: paper, documentazione ufficiale, repository e standard consultati.
-- `CLAIMS.md`: registro delle affermazioni portanti.
-- `TEXT_AUDIT.md`: esito delle revisioni testuali e tecniche.
+- `PLAN.md`: scaffold interno e oggetto continuo.
+- `CHAPTER.md`: prosa destinata al lettore.
+- `FONTI_PRIMARIE.md`: fonti e limiti.
+- `CLAIMS.md`: registro frase-prova.
+- `TEXT_AUDIT.md`: revisioni e difetti.
 
-## Classi di contenuto
+## 3. Classi di contenuto
 
-Ogni elemento tecnico appartiene a una delle seguenti classi:
+Ogni elemento tecnico appartiene a una classe:
 
-1. **Fatto da fonte primaria**. È sostenuto da un paper originale, technical report ufficiale, documentazione ufficiale, repository ufficiale o standard.
-2. **Derivazione**. È ottenuto da definizioni o formule già verificate. I passaggi devono essere espliciti e riproducibili.
-3. **Risultato riprodotto**. È prodotto da codice eseguito con ambiente, versione, seed, input e comando registrati.
-4. **Illustrativo**. È un esempio costruito per spiegare il meccanismo. Deve essere dichiarato e internamente coerente.
-5. **Confine**. Dichiara ciò che il meccanismo non implementa o ciò che resta fuori dal capitolo.
+1. **Fatto da fonte primaria**.
+2. **Derivazione** da definizioni verificate.
+3. **Risultato riprodotto** con ambiente e test registrati.
+4. **Illustrativo**, dichiarato e coerente.
+5. **Confine**, che dichiara ciò che il meccanismo non implementa.
 
-Le inferenze editoriali fattuali non sono una classe ammessa nella versione approvata. Non vengono inserite neppure come affermazioni secondarie etichettate. Quando una fonte non consente di stabilire un punto, il testo viene ristretto a ciò che è verificabile oppure il punto viene omesso.
+Le inferenze editoriali fattuali non sono ammesse. Le interpretazioni degli autori vengono attribuite alla fonte.
 
-Le interpretazioni formulate dagli autori di una fonte possono essere riportate soltanto come posizione attribuita a quegli autori e senza trasformarle in fatto indipendente.
+## 4. Registro delle affermazioni
 
-## Registro delle affermazioni
-
-Ogni affermazione portante riceve un ID stabile.
-
-Esempio:
+Ogni affermazione portante riceve un ID stabile:
 
 ```text
-CLM-ATT-001
+ID:
 Affermazione esatta:
-Tipo: fatto da fonte primaria / derivazione / risultato riprodotto / illustrativo / confine
+Tipo:
 Fonte o prova:
-Sezione o pagina della fonte:
+Sezione o pagina:
 Versione o data:
 Controllo indipendente:
-Esito: aperta / verificata / corretta / respinta / rimossa
+Esito:
 Note:
 ```
 
-Il registro deve permettere di risalire dalla frase del capitolo alla prova che la sostiene.
+Una voce aperta non può comparire come frase assertiva nella versione approvata.
 
-## Ciclo obbligatorio di review
+## 5. Ciclo obbligatorio di review
 
-### 1. Ricerca e dossier delle fonti
+### 5.1 Ricerca e fonti
 
-Prima della stesura vengono raccolte le fonti primarie. Per ogni fonte si registrano titolo, autori o organizzazione, data, versione, URL o identificatore, sezioni rilevanti e limiti d'uso.
+Prima della prosa vengono raccolte fonti primarie e ufficiali. Per ogni fonte si registrano versione, sezioni usate, affermazioni sostenibili e limiti.
 
-### 2. Mappa delle affermazioni
+### 5.2 Mappa dei claim
 
-Prima di scrivere la prosa vengono elencate le affermazioni necessarie al capitolo. Una voce senza prova disponibile resta aperta e non può essere trasformata in una frase assertiva.
+Le affermazioni necessarie vengono elencate in `CLAIMS.md`. La prosa non anticipa claim privi di prova.
 
-### 3. Prima stesura
+### 5.3 Prima stesura
 
-La prima stesura segue il metodo di spiegazione del progetto. Le citazioni vengono inserite contestualmente, non aggiunte soltanto alla fine.
+La prima stesura segue l'oggetto continuo e inserisce le citazioni vicino alle affermazioni. È una bozza, non un testo finale.
 
-### 4. Audit fattuale frase per frase
+Lo scaffold di stato, problema, trasformazione, output, invariante e confine viene conservato in `PLAN.md`. `CHAPTER.md` usa titoli semantici e prosa naturale.
+
+### 5.4 Audit fattuale frase per frase
 
 Per ogni periodo tecnico si controlla:
 
 - quale parte è un fatto;
 - quale fonte la sostiene;
-- se la fonte dice davvero ciò che il testo afferma;
-- se il testo aggiunge condizioni non presenti nella fonte;
-- se il testo omette limiti necessari;
+- se la fonte dice realmente ciò che il testo afferma;
+- se sono state aggiunte condizioni;
+- se mancano limiti necessari;
 - se la formulazione è più forte della prova;
-- se paper, implementazione e documentazione corrente vengono distinti;
-- se la terminologia è coerente con la fonte primaria;
-- se è stata introdotta un'inferenza editoriale non ammessa.
+- se paper, implementazione e documentazione sono distinti;
+- se la terminologia è coerente;
+- se è presente una inferenza editoriale non ammessa.
 
-### 5. Audit matematico
+### 5.5 Audit matematico
 
 Si ricontrollano:
 
 - definizioni;
 - simboli;
-- domini e dimensioni;
-- shape;
+- domini e shape;
 - derivazioni;
-- segni;
-- fattori di scala;
+- segni e fattori di scala;
 - normalizzazioni;
 - arrotondamenti;
 - esempi numerici;
 - condizioni di validità.
 
-Quando possibile, i calcoli numerici vengono verificati anche con codice indipendente.
+Quando possibile, i calcoli vengono verificati con codice indipendente.
 
-### 6. Audit architetturale e algoritmico
+### 5.6 Audit architetturale e algoritmico
 
-Si controlla l'ordine reale delle operazioni, la posizione di normalizzazioni, residual connection, mask, routing, caching, loss e update. Una descrizione di un paper non viene automaticamente estesa a tutte le implementazioni successive.
+Si controllano l'ordine reale delle operazioni e la posizione di normalizzazioni, residual connection, mask, routing, caching, loss, gradiente, update, sampling e comunicazione.
 
-Si distingue sempre tra:
+Si distingue tra:
 
-- metodo descritto nel paper;
-- setup sperimentale del paper;
-- implementazione nel repository;
+- metodo del paper;
+- setup sperimentale;
+- implementazione del repository;
 - contratto della documentazione;
-- comportamento di un prodotto o checkpoint specifico.
+- comportamento di un checkpoint o prodotto.
 
-### 7. Audit di coerenza tra testo, immagini e codice
+### 5.7 Audit incrociato
 
-Le stesse label devono mantenere lo stesso significato. Shape, numeri, ordine delle operazioni e nomi dei tensor devono coincidere tra prosa, formule, visuali e snippet.
+Label, shape, numeri, ordine delle operazioni e nomi dei tensor devono coincidere tra prosa, formule, visuali e snippet.
 
-### 8. Audit temporale
+### 5.8 Audit temporale
 
-Per elementi soggetti a cambiamento si ricontrollano sul web:
+Per elementi soggetti a cambiamento si ricontrollano documentazione, API, release, report, errata e data effettiva della verifica.
 
-- versione corrente della documentazione;
-- API e firme correnti;
-- technical report più recente;
-- stato del modello o del repository;
-- eventuali errata o revisioni del paper;
-- data effettiva della verifica.
+### 5.9 Audit didattico
 
-Il capitolo registra una data di congelamento editoriale e non pretende aggiornamento oltre quella data.
+Si applica integralmente `18_PROTOCOLLO_QA_DIDATTICO.md`.
 
-### 9. Audit didattico
+La review controlla:
 
-Dopo l'accuratezza tecnica si verifica che il testo:
+- oggetto continuo;
+- gate di termini, formule, codice e varianti;
+- una trasformazione dominante per passaggio;
+- visuali attraversate dalla prosa;
+- invarianti e confini;
+- ricostruibilità;
+- gate anti-template secondo `19_STRUTTURA_LOGICA_IN_PROSA.md`.
 
-- introduca un solo concetto nuovo per transizione;
-- parta dall'output della sezione precedente;
-- dichiari cosa cambia e cosa resta invariato;
-- non anticipi termini, formule o varianti;
-- non usi una semplificazione che renda falsa la descrizione;
-- permetta ricostruzione, localizzazione, confine, trasferimento e variazione.
+La review non richiede che `CHAPTER.md` contenga titoli letterali come `Cosa è cambiato` o `Frase di continuità`. Richiede che le relative funzioni siano ricostruibili nella prosa.
 
-### 10. Seconda lettura completa
+### 5.10 Seconda lettura completa
 
-Dopo le correzioni, il capitolo viene riletto integralmente. Non si controllano soltanto i difetti già trovati, perché una modifica locale può introdurre incoerenze altrove.
+Dopo ogni correzione strutturale il capitolo viene riletto integralmente, includendo citazioni, formule, figure, codice, output, esercizi e fonti.
 
-La seconda lettura include testo, citazioni, formule, immagini, codice, output, esercizi e bibliografia.
+## 6. Stati del capitolo
 
-## Stati del capitolo
+```text
+ricerca
+bozza
+revisione fattuale
+revisione matematica
+revisione codice
+revisione visuale
+revisione incrociata
+revisione didattica
+revisione autoriale
+approvato
+```
 
-- `ricerca`: fonti e mappa delle affermazioni in costruzione;
-- `bozza`: testo non ancora sottoposto a review completa;
-- `revisione fattuale`: controllo delle affermazioni in corso;
-- `revisione matematica`: formule e numeri in corso di verifica;
-- `revisione codice`: snippet e output in corso di verifica;
-- `revisione visuale`: immagini in corso di verifica;
-- `revisione incrociata`: coerenza tra tutti gli artefatti in verifica;
-- `revisione didattica`: accuratezza tecnica superata, struttura in revisione;
-- `revisione autoriale`: pronto per il controllo umano;
-- `approvato`: tutti i gate superati.
+## 7. Difetti bloccanti
 
-## Difetti bloccanti
+Un capitolo non può essere approvato se presenta:
 
-Un capitolo non può essere approvato se presenta almeno uno dei seguenti problemi:
-
-- affermazione tecnica senza fonte o prova;
-- citazione che non sostiene la frase;
-- dato quantitativo senza setup o provenienza;
+- affermazione senza fonte o prova;
+- citazione non pertinente;
+- dato senza setup;
 - formula, shape o derivazione errata;
-- esempio illustrativo internamente incoerente;
-- API descritta senza verifica sulla versione dichiarata;
+- esempio incoerente;
+- API non verificata;
 - confusione tra paper, repository, checkpoint e prodotto;
 - informazione recente non ricontrollata;
-- inferenza fattuale editoriale, anche se formulata come plausibile;
-- contraddizione tra testo, immagine e codice;
-- semplificazione didattica che cambia il meccanismo;
-- attribuzione agli autori non sostenuta dal testo della fonte;
-- generalizzazione da un singolo setup non dichiarata dalla fonte.
+- inferenza fattuale editoriale;
+- contraddizione tra artefatti;
+- semplificazione che modifica il meccanismo;
+- termine o formula anticipati;
+- variante prima del caso base;
+- visuale non attraversata dalla prosa;
+- lezione strutturata come sequenza ripetitiva di intestazioni metacognitive;
+- rimozione delle etichette che rende impliciti shape, invarianti o confini.
 
-## Esito della review
+## 8. Esito della review
 
 `TEXT_AUDIT.md` registra:
 
-- data e versione esaminata;
+- versione e data;
 - fonti ricontrollate;
-- affermazioni respinte, ristrette, corrette o rimosse;
-- errori matematici trovati;
-- divergenze tra fonti;
-- decisioni editoriali;
-- controllo delle informazioni recenti;
-- controllo dell'assenza di inferenze fattuali;
-- stato finale;
-- elementi ancora aperti.
+- claim corretti o rimossi;
+- errori matematici;
+- divergenze;
+- audit temporale;
+- review didattiche ripetute;
+- controllo anti-template;
+- elementi aperti;
+- esito finale.
 
-La versione approvata deve poter essere ricostruita dal commit del repository e dai relativi artefatti di verifica.
+La versione approvata deve poter essere ricostruita dal commit e dagli artefatti associati.
