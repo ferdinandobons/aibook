@@ -30,6 +30,29 @@ Quale domanda precisa deve risolvere la figura?
 - Valori illustrativi:
 - Valori misurati:
 
+## Contratto di contenimento del testo
+
+Per ogni box, cella, badge, callout e area delimitata si registrano:
+
+- testo esatto previsto;
+- numero massimo di righe;
+- allineamento;
+- margine interno minimo;
+- dimensione minima leggibile;
+- comportamento richiesto quando il testo non entra.
+
+Regola obbligatoria: ogni carattere deve rimanere integralmente dentro il contenitore a cui appartiene. Il testo non può oltrepassare, toccare o essere tagliato dal bordo. Non può sovrapporsi ad altri testi, frecce, simboli o box.
+
+Quando il testo non entra, si applica questo ordine di correzione:
+
+1. aumentare il contenitore;
+2. ridisporre i componenti;
+3. spezzare il testo su righe leggibili;
+4. ridurre la quantità di testo senza perdere il significato;
+5. dividere la visuale in più figure.
+
+La riduzione del font è l'ultima opzione e non può portare il testo sotto la dimensione minima prevista per l'uso editoriale.
+
 ## Provenienza
 
 - Fonte del meccanismo:
@@ -52,7 +75,7 @@ Quale domanda precisa deve risolvere la figura?
 - Sfondo e palette: coerenti con `EXPLANATION_STYLE_AND_VISUALS.md`
 - Font: sans-serif leggibile; simboli tecnici chiaramente distinti
 - Watermark, firme e branding di terzi: assenti
-- Il colore non è l’unico portatore di significato
+- Il colore non è l'unico portatore di significato
 
 ## Audit preliminare
 
@@ -66,6 +89,9 @@ Quale domanda precisa deve risolvere la figura?
 - [ ] Alt text presente
 - [ ] Equivalente semantico presente
 - [ ] Dimensione editoriale verificata
+- [ ] Tutto il testo resta dentro il proprio contenitore
+- [ ] Ogni contenitore conserva margine interno visibile su tutti i lati
+- [ ] Nessun testo tocca bordi, frecce, simboli o testi adiacenti
 
 ## Registro iterazioni
 
@@ -99,6 +125,10 @@ Quale domanda precisa deve risolvere la figura?
 - [ ] Ordine di lettura evidente
 - [ ] Nessuna area sovraccarica
 - [ ] Testo leggibile alla dimensione editoriale prevista
+- [ ] Tutto il testo è contenuto integralmente nei box previsti
+- [ ] Nessun glifo è tagliato o coperto dal bordo
+- [ ] Il padding interno resta uniforme e sufficiente
+- [ ] Il controllo è stato ripetuto sull'immagine raster reale, non soltanto sul prompt
 - [ ] Spaziatura sufficiente tra nodi e linee
 - [ ] Gerarchia visiva coerente
 - [ ] La figura non anticipa concetti non ancora stabilizzati
@@ -108,5 +138,5 @@ Quale domanda precisa deve risolvere la figura?
 
 - Difetti bloccanti rimasti:
 - Difetti non bloccanti accettati:
-- Motivazione dell’approvazione:
-- Data dell’approvazione:
+- Motivazione dell'approvazione:
+- Data dell'approvazione:
