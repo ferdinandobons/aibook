@@ -12,6 +12,7 @@
 - Stato: **revisione autoriale aperta**
 - Ultima ricerca approfondita globale: 30 luglio 2026
 - Ultima verifica delle fonti del capitolo: 30 luglio 2026
+- Standard visivo canonico adottato: 30 luglio 2026
 
 ## Pacchetto disponibile
 
@@ -37,9 +38,23 @@ Non contiene render delle pagine, mockup editoriali o screenshot di impaginazion
 - Le versioni `candidate-v1.png` sono state rimosse perché corrotte e non revisionabili.
 - Nessuna immagine è denominata `final.png` prima dell'approvazione.
 
-## Regola aggiunta
+## Standard visivo adottato
 
-Il contenimento del testo è ora un gate obbligatorio. Una visuale viene respinta quando un testo:
+Tutte le immagini future seguono `docs/17_STANDARD_VISIVO_CANONICO.md`.
+
+Regole principali:
+
+- sfondo globale sempre bianco puro `#FFFFFF`;
+- orientamento orizzontale o verticale scelto in base al contenuto;
+- palette semantica stabile;
+- box, frecce e gerarchia tipografica appartenenti alla stessa famiglia;
+- una domanda didattica principale per figura;
+- nessuna renderizzazione completa di pagina usata come figura tecnica;
+- prima generazione sempre trattata come bozza.
+
+## Gate di contenimento
+
+Il contenimento del testo è un gate obbligatorio. Una visuale viene respinta quando un testo:
 
 - oltrepassa o tocca il bordo del proprio contenitore;
 - viene tagliato;
@@ -51,7 +66,8 @@ Riferimenti:
 
 - `docs/02_TEMPLATE_VISUALE.md`;
 - `docs/03_PROTOCOLLO_QA_VISUALE.md`;
-- `docs/16_REGOLA_CONTENIMENTO_TESTO_VISUALI.md`.
+- `docs/16_REGOLA_CONTENIMENTO_TESTO_VISUALI.md`;
+- `docs/17_STANDARD_VISIVO_CANONICO.md`.
 
 ## Prossimo gate
 
