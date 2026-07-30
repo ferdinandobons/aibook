@@ -3,16 +3,16 @@
 ## Stato
 
 - `chapter_id`: `CH-P01-AI-FIELD`
-- Versione: `0.2.0-rc1`
-- Testo: review tecnica, didattica, editoriale e linguistica superate
-- Codice: audit tecnico superato, tre test registrati
+- Versione: `0.3.0-rc2`
+- Testo: review tecnica, didattica, editoriale, linguistica e di chiarezza per lettore non esperto superate
+- Codice: audit tecnico superato, tre test registrati, nessuna modifica nella riscrittura
 - Visuali: aperte
 - Review autoriale: non ancora aperta per il capitolo completo
 
 ## Percorso consigliato
 
-1. `CHAPTER.md`, per voce, fluidità, progressione e perimetro;
-2. `TEXT_AUDIT.md`, per le review `EDIT-AI-01` e `EDIT-AI-02`;
+1. `CHAPTER.md`, per chiarezza, voce, fluidità e progressione;
+2. `TEXT_AUDIT.md`, per le review da `EDIT-AI-01` a `EDIT-AI-04`;
 3. `CLAIMS.md`, per la mappa frase-prova;
 4. `FONTI_PRIMARIE.md`, per fonti e limiti;
 5. `code/`, per snippet, output e test;
@@ -20,27 +20,42 @@
 7. `docs/02_STILE_E_QA_TESTO.md`, per voce e review del manuale;
 8. `docs/03_VISUALI.md`, per lo standard delle figure.
 
-## Modifiche principali
+## Modifiche principali della versione `0.3.0-rc2`
 
-- metadati e stato editoriale non interrompono più la lezione;
-- il capitolo usa otto sezioni principali anziché una successione di microsezioni;
-- la richiesta `Il pacco non è arrivato` rimane il filo del discorso;
-- le definizioni vengono applicate subito al caso concreto;
-- la tassonomia è organizzata attorno a meccanismo, obiettivo e ampiezza;
-- training e inference vengono spiegati prima del codice e nella stessa sezione;
-- i dettagli PyTorch più specifici sono raccolti in una nota;
-- il riepilogo ricompone il problema iniziale;
-- fonti e materiali sono concentrati in una sezione finale breve.
+- le tre domande guida compaiono nell'apertura;
+- la definizione OECD viene tradotta subito in linguaggio comune;
+- modello e sistema vengono distinti attraverso il caso della spedizione;
+- machine learning viene spiegato prima come ciclo di esempi, errore e aggiornamento;
+- parametri, iperparametri, checkpoint, training e inference vengono introdotti in ordine;
+- `feature`, `logit`, `loss`, `optimizer` e `shape` ricevono una spiegazione nel punto d'uso;
+- la formula lineare e le formule probabilistiche aggiungono precisione senza reggere da sole la spiegazione;
+- discriminativo e generativo vengono distinti con esempi prima della notazione;
+- foundation model viene presentato come base adattabile, senza anticipare una lista di tecniche;
+- il riepilogo è in prosa e riprende le tre domande iniziali.
 
 ## Aspetti da valutare nel testo
 
-- L'apertura orienta senza sembrare una definizione enciclopedica?
-- L'italiano risulta naturale nei passaggi tecnici?
-- Le sezioni sono abbastanza ampie da sostenere un ragionamento?
-- L'esempio continuo aiuta a distinguere regole, apprendimento e sistema?
-- La quantità di termini nel primo capitolo resta gestibile?
-- Il codice chiarisce training e inference senza trasformare la lezione in una guida API?
-- Il riepilogo permette di descrivere un sistema con le tre domande proposte?
+- Un lettore senza formazione in AI comprende il problema già nelle prime righe?
+- Le tre domande restano visibili lungo tutto il capitolo?
+- Ogni termine tecnico è spiegato prima di essere riutilizzato come abbreviazione?
+- Il lettore può distinguere regola, machine learning e deep learning senza formule?
+- Training e inference risultano diversi prima di arrivare al codice?
+- Il codice conferma la spiegazione senza diventare una guida API?
+- La distinzione discriminativo/generativo rimane chiara anche saltando la notazione probabilistica?
+- Foundation model, modello generativo e sistema applicativo restano distinti?
+- L'italiano sembra scritto direttamente, con un ritmo naturale?
+
+## Prova di comprensione semplificata
+
+Dopo la lettura, il revisore dovrebbe poter spiegare il capitolo senza usare inizialmente i termini tecnici:
+
+1. alcuni sistemi seguono regole, altri modificano numeri interni usando esempi;
+2. il training modifica quei numeri, l'inference li usa;
+3. un sistema può scegliere una categoria oppure produrre un nuovo contenuto;
+4. un modello di base adattabile non coincide con ogni applicazione costruita attorno a esso;
+5. modello e sistema non sono la stessa cosa.
+
+Se una di queste frasi non è ricostruibile, la review di chiarezza va riaperta.
 
 ## Stato delle visuali
 
@@ -48,12 +63,12 @@
 - `AI-02`: da generare;
 - PNG pubblicati: nessuno.
 
-Le visuali restano bloccanti per la candidatura completa. La versione testuale può essere revisionata come standard di voce editoriale.
+Le visuali restano bloccanti per la candidatura completa. La versione testuale può essere revisionata come standard di voce per lettori non specialisti.
 
 ## Controlli visuali futuri
 
-- `AI-01` deve mostrare i tre aspetti senza falsa gerarchia;
-- `AI-02` deve separare training e inference;
+- `AI-01` deve mostrare i tre aspetti senza falsa gerarchia e con le stesse parole semplici del testo;
+- `AI-02` deve separare training e inference senza introdurre gergo non spiegato;
 - entrambe devono usare sfondo bianco e lo standard canonico;
 - testo, figure e snippet devono descrivere lo stesso contratto;
 - dopo l'inserimento si ripetono review incrociata, linguistica e lettura completa.
