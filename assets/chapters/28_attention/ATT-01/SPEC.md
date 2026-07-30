@@ -1,9 +1,13 @@
 # ATT-01. Specifica
 
-- Domanda unica: perché due query devono poter produrre combinazioni diverse della stessa sorgente?
-- Stato prima: un unico vettore viene riutilizzato dai consumer.
-- Trasformazione nuova: coefficienti dipendenti dalla query.
-- Stato dopo: due combinazioni diverse della stessa sequenza.
-- Invariante: i quattro elementi sorgente non cambiano.
-- Confine: la figura non descrive il calcolo di score e softmax.
-- Stato: `da modificare`, presentata per review autoriale del concetto e non approvata come figura finale.
+- ID: `ATT-01`
+- File candidato: `candidate-v2.png`
+- Domanda unica: perché query diverse devono poter produrre combinazioni diverse delle stesse value?
+- Stato prima: un unico vettore di contesto `c` viene riutilizzato senza dipendere dalla query.
+- Trasformazione nuova: i coefficienti assegnati a `v₁`, `v₂` e `v₃` dipendono dalla query corrente.
+- Stato dopo: `q₁` e `q₂` producono due combinazioni distinte, `c₁` e `c₂`.
+- Invariante: le tre value disponibili non cambiano tra i due casi.
+- Confine: la figura non descrive ancora il calcolo di score, scaling e softmax.
+- Contenimento: ogni label deve restare integralmente nel proprio box con padding visibile.
+- Produzione: composizione iterata con image generation; testo e collegamenti rasterizzati con `scripts/render_attention_visuals.py`.
+- Stato: `validata tecnicamente`, in attesa di revisione autoriale.
