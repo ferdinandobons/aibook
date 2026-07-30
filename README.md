@@ -83,6 +83,22 @@ La data indica il confine dell'ultima ricognizione globale. Ogni capitolo regist
 - controllo incrociato tra testo, formule, immagini e codice;
 - revisione autoriale prima del congelamento del capitolo.
 
+## Stile delle immagini tecniche
+
+Tutte le figure tecniche seguono [`docs/17_STANDARD_VISIVO_CANONICO.md`](docs/17_STANDARD_VISIVO_CANONICO.md).
+
+Regole essenziali:
+
+- sfondo globale sempre bianco puro `#FFFFFF`;
+- orientamento orizzontale o verticale scelto in base al contenuto;
+- palette, box, frecce e gerarchia tipografica comuni;
+- una domanda didattica principale per figura;
+- nessun testo fuori dal proprio contenitore;
+- nessuna figura tecnica sostituita da un mockup della pagina completa;
+- ogni prima generazione è una bozza e viene revisionata integralmente.
+
+La regola specifica contro overflow, clipping e padding insufficiente è in [`docs/16_REGOLA_CONTENIMENTO_TESTO_VISUALI.md`](docs/16_REGOLA_CONTENIMENTO_TESTO_VISUALI.md).
+
 ## Come leggere `docs/`
 
 Ordine consigliato:
@@ -93,7 +109,8 @@ Ordine consigliato:
 4. `14_CATALOGO_STATO_ARTE.md`, tecniche censite e collocazione;
 5. `10_INDICE_EDITORIALE.md`, struttura dei capitoli;
 6. `13_PROTOCOLLO_AGGIORNAMENTO_CONTENUTI.md`, operazioni future;
-7. i protocolli specialistici per testo, fonti, codice, visuali e workflow.
+7. `17_STANDARD_VISIVO_CANONICO.md`, grammatica delle figure tecniche;
+8. i protocolli specialistici per testo, fonti, codice, visuali e workflow.
 
 L'indice completo dei documenti è in [`docs/README.md`](docs/README.md).
 
