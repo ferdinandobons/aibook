@@ -6,7 +6,8 @@
 - Sezione: Tre domande per descrivere un sistema
 - Famiglia: taxonomy / comparison
 - Orientamento: orizzontale
-- Stato: `storyboard, generazione bloccata`
+- Stato: `candidate-v1, validata tecnicamente`
+- File: `candidate-v1.png`
 - Standard: `docs/03_VISUALI.md`
 - Sfondo: bianco puro `#FFFFFF`
 
@@ -32,20 +33,21 @@ Lo stesso input viene descritto lungo tre aspetti indipendenti.
 
 - `Regole esplicite`;
 - `Modello appreso dai dati`;
-- `Rete neurale profonda`;
-- nota: `Le categorie possono combinarsi in sistemi ibridi`.
+- `Sistema ibrido`;
+- nota: `Le categorie possono combinarsi nello stesso sistema`.
 
 ### Aspetto 2. Obiettivo
 
-- `Predire o decidere`;
+- `Classificare o predire`;
+- `Decidere`;
 - `Generare contenuto`;
 - nota: `L'obiettivo non determina il meccanismo`.
 
 ### Aspetto 3. Ampiezza
 
-- `Sistema specialistico`;
-- `Modello di base adattabile`;
-- `Sistema generalista`;
+- `Specialistico`;
+- `Base adattabile`;
+- `Generalista`;
 - nota: `L'ampiezza dipende dal perimetro valutato`.
 
 ### Footer
@@ -58,8 +60,8 @@ I tre aspetti possono combinarsi: nessuno determina automaticamente gli altri.
 
 - titolo: `AI-01 · Tre domande per descrivere un sistema di AI`;
 - sottotitolo: `Meccanismo, obiettivo e ampiezza rispondono a domande diverse`;
-- box centrale nella fascia superiore o centrale;
-- tre pannelli paralleli di larghezza sufficiente;
+- box centrale nella fascia superiore;
+- tre pannelli paralleli della stessa importanza visiva;
 - nessun diagramma di Venn;
 - nessuna gerarchia disegnata tra i tre aspetti;
 - collegamenti dal box centrale ai pannelli, non tra i pannelli;
@@ -94,4 +96,5 @@ I tre aspetti possono combinarsi: nessuno determina automaticamente gli altri.
 
 - tassonomia: convenzioni e claim del Capitolo 1;
 - definizioni: `FONTI_PRIMARIE.md` e `CLAIMS.md`;
-- valori: nessun dato misurato.
+- valori: nessun dato misurato;
+- generazione raster riproducibile: `scripts/generate_book_visuals.py`.
