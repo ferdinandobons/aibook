@@ -7,52 +7,38 @@
 - Pull request del pilota: `#1`, unita con squash
 - Commit del pilota su `main`: `a10235cf384ebda23060a05a3e25ef7b490595a1`
 - Branch di produzione completa: `feature/full-book-production`
+- Pull request di produzione: `#2`, draft
 - Modalità: produzione seriale controllata
 - Opera pianificata: 98 capitoli e 12 appendici
 - Capitoli approvati e uniti: 1 (`CH-P06-ATTENTION`)
 - Unità corrente: `CH-P01-AI-FIELD`, Capitolo 1
-- Stato dell'unità corrente: **research**
+- Stato dell'unità corrente: **technical-review, visuali bloccate**
+- Versione corrente: `0.1.1-draft2`
 - Ultima ricerca approfondita globale: 30 luglio 2026
-- Standard didattico, visuale e di verifica: attivi
+- Ultima verifica locale delle fonti: 30 luglio 2026
 
 ## Capitolo pilota
 
 Il Capitolo 28, `CH-P06-ATTENTION`, è stato approvato dal committente e unito in `main`.
 
-Il pilota ha congelato i principi generali relativi a:
-
-- fonti primarie e documentazione ufficiale;
-- registro dei claim;
-- review fattuale, matematica, algoritmica e temporale;
-- review didattica iterativa;
-- struttura logica incorporata nella prosa;
-- gate anti-template;
-- snippet eseguiti e testati;
-- visuali tecniche con sfondo bianco e audit iterativo;
-- assenza di render delle pagine.
-
-Il pilota è un riferimento di qualità, non un modello tipografico rigido da replicare in ogni capitolo.
+Il pilota ha congelato i principi generali relativi a fonti, claim, review iterative, prosa naturale, gate anti-template, codice testato, visuali con audit e assenza di render delle pagine. Rimane un riferimento di qualità, non un modello tipografico rigido.
 
 ## Produzione completa
 
-Il piano operativo è in [`BOOK_PRODUCTION.md`](BOOK_PRODUCTION.md).
-
-La realizzazione segue l'indice canonico in `docs/10_INDICE_EDITORIALE.md` e procede un capitolo alla volta. Non vengono accumulati capitoli non revisionati.
-
-La sequenza di ogni unità è:
+Il piano operativo è in [`BOOK_PRODUCTION.md`](BOOK_PRODUCTION.md). La realizzazione segue `docs/10_INDICE_EDITORIALE.md` e procede un capitolo alla volta.
 
 ```text
 ricerca
 -> claim
 -> piano interno
--> prima stesura
--> formule e derivazioni
+-> prosa
+-> formule
 -> codice e test
 -> visuali e audit
 -> audit fattuale e matematico
 -> review didattica
 -> gate anti-template
--> seconda lettura completa
+-> seconda lettura
 -> revisione autoriale
 -> congelamento
 ```
@@ -61,46 +47,59 @@ ricerca
 
 ### `CH-P01-AI-FIELD`. Che cos'è l'intelligenza artificiale
 
-Perimetro:
+### Completato
 
-- AI, machine learning, deep learning e AI generativa;
-- sistemi simbolici, statistici e neurali;
-- modelli discriminativi e generativi;
-- foundation model, modelli generalisti e specialistici;
-- training, inference, parametri e dati.
+- [x] perimetro e piano didattico;
+- [x] dossier delle fonti autorevoli;
+- [x] registro di 18 claim;
+- [x] prima stesura completa;
+- [x] revisione fattuale e terminologica della prima stesura;
+- [x] seconda stesura `0.1.1-draft2`;
+- [x] seconda lettura completa del testo;
+- [x] snippet PyTorch training/inference;
+- [x] ambiente e output registrati;
+- [x] tre test superati;
+- [x] audit del codice;
+- [x] specifiche, audit e alt text previsti per `AI-01` e `AI-02`.
 
-Artefatti da produrre:
+### Stato delle visuali
 
-- `CHAPTER.md`;
-- `PLAN.md`;
-- `FONTI_PRIMARIE.md`;
-- `CLAIMS.md`;
-- `TEXT_AUDIT.md`;
-- codice PyTorch minimo con test e output;
-- visuali tecniche con `SPEC.md`, `AUDIT.md` e alt text.
+- `AI-01`: `da rigenerare`;
+- `AI-02`: `da generare`;
+- PNG pubblicati: 0.
 
-## Regole attive per tutte le visuali
+Le candidate prodotte dallo strumento immagini non rappresentavano la tassonomia o il confronto richiesti. Mostravano schermate GitHub, merge, branch, dashboard di progetto o indici del libro. Sono state respinte e non sono state inserite nel repository.
+
+Il problema è documentato in:
+
+- `assets/chapters/01_ai_field/AI-01/AUDIT.md`;
+- `assets/chapters/01_ai_field/AI-02/AUDIT.md`;
+- `chapters/01_ai_field/TEXT_AUDIT.md`.
+
+### Gate aperti
+
+1. produrre una candidata conforme per `AI-01`;
+2. produrre una candidata conforme per `AI-02`;
+3. eseguire audit tecnico e compositivo di entrambe;
+4. integrare le figure nella prosa;
+5. ripetere il controllo incrociato completo;
+6. aprire la review autoriale del Capitolo 1.
+
+## Regole attive per le visuali
 
 - sfondo globale bianco puro `#FFFFFF`;
-- orientamento orizzontale o verticale in base al contenuto;
-- palette, box, frecce e gerarchia tipografica comuni;
+- orientamento scelto in base al contenuto;
+- palette, box, frecce e tipografia comuni;
 - una domanda principale per figura;
 - nessun overflow, clipping o collegamento ambiguo;
 - prima generazione sempre trattata come bozza;
+- nessun elemento relativo al repository quando non appartiene al contenuto didattico;
 - `final.png` soltanto dopo approvazione tecnica e autoriale.
 
 ## Confine degli artefatti
 
-Il repository contiene testo Markdown, formule, tabelle, immagini tecniche, codice, test, output, fonti e audit.
+Il repository contiene testo Markdown, formule, tabelle, immagini tecniche, codice, test, output, fonti e audit. Non vengono prodotti mockup editoriali, screenshot dell'impaginazione o render raster delle pagine complete.
 
-Non vengono prodotti mockup editoriali, screenshot dell'impaginazione o render raster delle pagine complete.
+## Blocco seriale
 
-## Prossimo gate
-
-1. completare il dossier delle fonti del Capitolo 1;
-2. costruire il registro dei claim;
-3. definire il piano didattico interno;
-4. scrivere e revisionare il capitolo;
-5. creare ed eseguire il codice;
-6. generare e revisionare le visuali;
-7. aprire la candidatura del Capitolo 1 alla revisione autoriale.
+Il Capitolo 2 non viene aperto finché il Capitolo 1 non supera il gate visuale o non viene formalmente sospeso con una decisione esplicita. Questa scelta evita di accumulare capitoli incompleti.
