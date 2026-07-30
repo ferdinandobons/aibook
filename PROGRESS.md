@@ -8,28 +8,45 @@
 - Pull request: `#1`
 - Modalità: produzione seriale controllata
 - Capitolo pilota: `CH-P06-ATTENTION`, numero di lavoro 28
-- Versione candidata: `0.1.0-rc1`
+- Versione candidata: `0.3.0-rc3`
 - Stato: **revisione autoriale aperta**
 - Ultima ricerca approfondita globale: 30 luglio 2026
 - Ultima verifica delle fonti del capitolo: 30 luglio 2026
 - Standard visivo canonico adottato: 30 luglio 2026
+- Struttura logica in prosa adottata: 30 luglio 2026
 
 ## Pacchetto disponibile
 
 Il branch di review contiene:
 
-- capitolo Markdown completo;
+- capitolo Markdown completo, riscritto come prosa tecnica naturale;
 - fonti primarie e documentazione ufficiale;
 - registro delle affermazioni;
-- audit fattuale, matematico, algoritmico e didattico;
-- quattro snippet Python/PyTorch;
-- quattro test superati;
+- audit fattuale, matematico, algoritmico e temporale;
+- quattro review didattiche registrate;
+- tre snippet Python/PyTorch;
+- tre test pertinenti superati;
 - ambiente e output registrati;
 - due immagini tecniche candidate con specifiche, alt text e audit;
-- renderer raster riproducibile per le visuali;
 - checklist per la revisione dell'autore.
 
 Non contiene render delle pagine, mockup editoriali o screenshot di impaginazioni.
+
+## Review didattica
+
+La prima candidatura è stata corretta in due cicli distinti:
+
+1. revisione della sequenza didattica, dei gate e dei confini;
+2. revisione della superficie editoriale e rimozione delle intestazioni metacognitive ripetute.
+
+La versione `0.3.0-rc3` mantiene internamente stato, problema, trasformazione, output, invariante e confine, ma li integra in paragrafi e titoli semantici.
+
+Documenti pertinenti:
+
+- `docs/EXPLANATION_STYLE_AND_VISUALS.md`;
+- `docs/18_PROTOCOLLO_QA_DIDATTICO.md`;
+- `docs/19_STRUTTURA_LOGICA_IN_PROSA.md`;
+- `docs/01_TEMPLATE_CAPITOLO.md`.
 
 ## Stato delle visuali
 
@@ -40,41 +57,24 @@ Non contiene render delle pagine, mockup editoriali o screenshot di impaginazion
 
 ## Standard visivo adottato
 
-Tutte le immagini future seguono `docs/17_STANDARD_VISIVO_CANONICO.md`.
+Tutte le immagini future seguono `docs/17_STANDARD_VISIVO_CANONICO.md`:
 
-Regole principali:
-
-- sfondo globale sempre bianco puro `#FFFFFF`;
+- sfondo bianco puro `#FFFFFF`;
 - orientamento orizzontale o verticale scelto in base al contenuto;
 - palette semantica stabile;
-- box, frecce e gerarchia tipografica appartenenti alla stessa famiglia;
+- box, frecce e gerarchia tipografica comuni;
 - una domanda didattica principale per figura;
-- nessuna renderizzazione completa di pagina usata come figura tecnica;
+- nessuna renderizzazione completa della pagina usata come figura tecnica;
 - prima generazione sempre trattata come bozza.
 
-## Gate di contenimento
-
-Il contenimento del testo è un gate obbligatorio. Una visuale viene respinta quando un testo:
-
-- oltrepassa o tocca il bordo del proprio contenitore;
-- viene tagliato;
-- invade un box o una cella adiacente;
-- si sovrappone a frecce, linee o altro testo;
-- non conserva un padding interno leggibile.
-
-Riferimenti:
-
-- `docs/02_TEMPLATE_VISUALE.md`;
-- `docs/03_PROTOCOLLO_QA_VISUALE.md`;
-- `docs/16_REGOLA_CONTENIMENTO_TESTO_VISUALI.md`;
-- `docs/17_STANDARD_VISIVO_CANONICO.md`.
+Il contenimento del testo è un gate obbligatorio. Overflow, clipping, sovrapposizioni e padding insufficiente bloccano l'approvazione.
 
 ## Prossimo gate
 
-1. review del capitolo e degli artefatti nella pull request dedicata;
+1. review del capitolo `0.3.0-rc3` e degli artefatti nella pull request;
 2. commenti e correzioni;
-3. riapertura degli audit interessati;
-4. approvazione del formato pilota e delle due visuali;
+3. riapertura degli audit interessati quando necessario;
+4. approvazione della prosa, del formato pilota e delle due visuali;
 5. rinomina delle figure approvate in `final.png`;
 6. congelamento del capitolo e merge;
 7. avvio seriale dei capitoli successivi.
