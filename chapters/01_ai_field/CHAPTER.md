@@ -1,176 +1,83 @@
+<!--
+chapter_id: CH-P01-AI-FIELD
+part_id: P01
+order_key: 010
+title: Che cos'è l'intelligenza artificiale
+maturity: CORE
+status: revisione editoriale completata, visuali aperte
+version: 0.2.0-rc1
+opened: 2026-07-30
+last_web_research: 2026-07-30
+last_source_check: 2026-07-30
+environment: Python 3.13.5, PyTorch 2.10.0+cpu
+deferred: generalizzazione, gradienti, architetture neurali, pretraining, scaling, sicurezza, governance
+-->
+
 # Capitolo 1. Che cos'è l'intelligenza artificiale
 
-## Metadati
+La frase «Il pacco non è arrivato» può essere elaborata in molti modi. Un programma può cercare alcune parole e aprire automaticamente un ticket. Un classificatore può assegnare la richiesta alla categoria `problema_di_consegna`. Un modello generativo può comporre una risposta. Un sistema più ampio può inoltre consultare il database degli ordini, verificare lo stato della spedizione e decidere quali azioni sono consentite.
 
-- `chapter_id`: `CH-P01-AI-FIELD`
-- Parte: `P01`, Campo, metodo e storia dell'AI
-- Maturità: `CORE`
-- Stato: **revisione tecnica, visuali bloccate**
-- Versione candidata: `0.1.1-draft2`
-- Data di apertura: 30 luglio 2026
-- Data dell'ultima ricerca web: 30 luglio 2026
-- Data dell'ultima verifica delle fonti: 30 luglio 2026
-- Data di congelamento editoriale: non assegnata
-- Documentazione PyTorch verificata: stable `2.13`
-- Ambiente eseguito: Python `3.13.5`, PyTorch `2.10.0+cpu`
-- Oggetto continuo: una richiesta di assistenza, `Il pacco non è arrivato`, elaborata da sistemi costruiti in modi diversi
-- Concetti differiti: generalizzazione, funzioni obiettivo, gradienti, architetture neurali, famiglie generative, pretraining, scaling, sicurezza e governance
+Dall'esterno, tutti questi casi ricevono lo stesso testo e producono un risultato utile. All'interno, però, possono funzionare in modi molto diversi. Chiamarli semplicemente «AI» non basta a descriverli e, nel caso di una semplice automazione, può persino essere discutibile. Per orientarci useremo come riferimento operativo la definizione aggiornata dell'OCSE, senza trattarla come l'unico modo possibile di delimitare il campo. Costruiremo poi un lessico più preciso, capace di distinguere il meccanismo con cui nasce il comportamento, il tipo di risultato modellato e l'ampiezza dei compiti per cui il sistema viene riutilizzato.
 
-> **Stato della candidatura.** Testo, fonti, claim, codice e test sono disponibili. Le visuali `AI-01` e `AI-02` restano bloccate: le candidate prodotte finora dallo strumento immagini rappresentavano schermate o riepiloghi del progetto anziché i diagrammi tecnici specificati e sono state respinte. Il capitolo non può passare alla revisione autoriale prima del relativo audit visuale.
+## Una stessa richiesta, sistemi diversi
 
-## In questo capitolo
+Un programma riceve un input, esegue alcune operazioni e produce un output. Questa descrizione comprende una calcolatrice, un compilatore, un database e una rete neurale, quindi è troppo ampia per definire da sola l'intelligenza artificiale.
 
-La frase `Il pacco non è arrivato` può entrare in programmi molto diversi. Un'automazione può cercare parole predefinite e aprire una procedura. Un classificatore può assegnare la richiesta alla categoria `problema di consegna`. Un modello generativo può comporre una risposta. Un sistema più ampio può combinare un modello, una ricerca nel database degli ordini e regole che stabiliscono quali azioni siano autorizzate.
+L'OCSE descrive un **sistema di AI** come un sistema basato su macchine che, a partire dagli input ricevuti e in relazione a obiettivi espliciti o impliciti, inferisce come produrre predizioni, contenuti, raccomandazioni o decisioni. Questi output possono influire su ambienti fisici o virtuali [OECD, 2024]. In questo contesto, il verbo *inferire* non implica necessariamente una rete neurale. Indica che il sistema determina un output a partire dagli input, dal proprio stato e dal meccanismo che lo governa.
 
-Non ogni programma che elabora questa frase deve essere chiamato automaticamente `AI`. Il confine dipende dalla definizione adottata e dal tipo di inferenza eseguita. Useremo la definizione OECD aggiornata come ancora operativa, poi distingueremo le proprietà tecniche senza affidare tutto a un'unica etichetta.
+Torniamo alla richiesta iniziale. Un'applicazione di assistenza potrebbe produrre la categoria `problema_di_consegna`, la frase «Controllo subito lo stato della spedizione» oppure la proposta di aprire un ticket e chiedere il numero dell'ordine. Il tipo di output non rivela, da solo, come sia stato ottenuto. La stessa categoria può derivare da una regola scritta a mano, da una regressione logistica o da una rete neurale.
 
-`AI`, `machine learning`, `deep learning`, `modello generativo`, `generative AI` e `foundation model` non indicano la stessa cosa. Alcuni termini descrivono **come** viene costruita la relazione tra input e output. Altri descrivono **quale obiettivo** viene modellato. Altri ancora riguardano **quanto è ampio** il riuso previsto del modello.
+Per descrivere con chiarezza questi casi, nel libro distingueremo **modello** e **sistema**. Un modello è un componente matematico parametrizzato che trasforma input in output. Il sistema comprende il modello, quando presente, e i componenti che ne organizzano l'uso: validazione degli input, regole, retrieval, strumenti esterni, autorizzazioni, interfacce e post-processing. Si tratta di una convenzione editoriale, non di una definizione universale, ma è coerente con l'impostazione del NIST, che tratta rischi e prestazioni lungo l'intero ciclo di vita di prodotti, servizi e sistemi AI [NIST AI RMF 1.0, 2023].
 
-Alla fine del capitolo sapremo separare il modello dai componenti circostanti e descrivere un sistema lungo tre assi: meccanismo, obiettivo e ampiezza. Un piccolo esempio PyTorch renderà inoltre osservabile la differenza tra training e inference.
+La distinzione ha conseguenze pratiche. Due applicazioni possono usare lo stesso checkpoint e comportarsi diversamente perché consultano dati differenti, applicano regole differenti o possiedono autorizzazioni differenti. Al contrario, due modelli diversi possono essere inseriti nello stesso sistema senza cambiare l'interfaccia visibile all'utente.
 
-# 1. Dal programma al sistema di AI
+## Quando il comportamento è scritto e quando viene appreso
 
-Un programma riceve input, esegue operazioni e produce output. Questa descrizione include una calcolatrice, un database, un compilatore e un modello neurale, quindi non basta a delimitare l'intelligenza artificiale.
-
-La definizione OECD aggiornata descrive un **AI system** come un sistema machine-based che, per obiettivi espliciti o impliciti, inferisce dagli input come produrre output quali predizioni, contenuti, raccomandazioni o decisioni. Gli output possono influire su ambienti fisici o virtuali [OECD, 2024].
-
-In questa definizione, `inferire` non significa necessariamente usare una rete neurale. Il sistema determina, a partire dagli input e dal proprio meccanismo, quale output produrre. L'obiettivo può essere scritto direttamente in una funzione, incorporato in regole oppure riflesso nei dati usati durante l'addestramento. L'OECD tratta questi casi come possibilità che possono sovrapporsi [OECD, 2024].
-
-Torniamo alla richiesta:
-
-```text
-Il pacco non è arrivato
-```
-
-Un sistema di assistenza potrebbe produrre una categoria:
-
-```text
-categoria = problema_di_consegna
-```
-
-oppure una risposta:
-
-```text
-risposta = "Controllo subito lo stato della spedizione."
-```
-
-oppure una proposta di azione:
-
-```text
-azione = apri_ticket_e_richiedi_numero_ordine
-```
-
-La natura dell'output non identifica il meccanismo. La stessa categoria può essere ottenuta con una regola scritta a mano, con una regressione logistica o con una rete neurale. Per descrivere il comportamento osservabile occorre inoltre separare il **modello** dal **sistema**.
-
-Nel lessico di questo libro, un modello è un componente matematico parametrizzato che trasforma input in output. Un sistema comprende il modello e i componenti che ne organizzano l'uso: acquisizione e validazione degli input, regole, retrieval, tool, interfacce, autorizzazioni e post-processing.
-
-Questa è una convenzione editoriale, non una definizione universale. È però coerente con il fatto che NIST organizza il risk management lungo l'intero ciclo di vita di prodotti, servizi e sistemi AI, non soltanto attorno al file dei parametri [NIST AI RMF 1.0, 2023]. Un modello può rimanere invariato mentre il comportamento del sistema cambia perché vengono modificati il database consultato, le autorizzazioni o il modo in cui l'output viene presentato.
-
-# 2. Regole esplicite e comportamento appreso
-
-Consideriamo una prima implementazione:
+Consideriamo una prima soluzione alla richiesta di consegna:
 
 ```text
 se il testo contiene "pacco" e "non è arrivato":
     categoria = problema_di_consegna
 ```
 
-La relazione tra input e output è stata specificata direttamente. Il comportamento dipende dalle regole e dalle rappresentazioni scelte dal progettista. Un sistema di questo tipo può essere descritto come **rule-based**. Quando usa rappresentazioni esplicite di fatti, simboli e relazioni, appartiene alla tradizione dell'AI simbolica.
+Qui la relazione tra input e output è stata specificata direttamente. Il progettista ha scelto le parole da cercare e l'azione da eseguire. Un sistema di questo tipo può essere descritto come **rule-based**. Quando usa rappresentazioni esplicite di fatti, simboli e relazioni, si colloca nella tradizione dell'AI simbolica.
 
-Ora immaginiamo di raccogliere richieste già etichettate:
-
-```text
-"Il corriere non è passato"       -> problema_di_consegna
-"Voglio cambiare indirizzo"       -> modifica_ordine
-"Il pacco non è arrivato"         -> problema_di_consegna
-"La carta è stata rifiutata"      -> problema_di_pagamento
-```
-
-Un algoritmo può cercare valori dei parametri che riducano gli errori su questi esempi. Non viene scritta una regola separata per ogni formulazione. Vengono definiti una famiglia di funzioni, un obiettivo e una procedura che modifica i parametri usando i dati. Questo è il nucleo del **machine learning**.
-
-Il contrasto non è assoluto. Un'applicazione reale può usare una regola per validare il numero d'ordine, un classificatore appreso per assegnare la categoria, una rete neurale per rappresentare il testo e un controllo finale che impedisce azioni non autorizzate.
-
-Nel capitolo useremo `simbolico`, `statistico` e `neurale` come tassonomia di lavoro non esaustiva. Non sono tre insiemi sempre disgiunti. `Statistico` indica qui modelli descritti tramite quantità probabilistiche o criteri di stima. `Neurale` indica modelli composti da trasformazioni parametrizzate organizzate in reti. Un modello neurale viene normalmente addestrato con metodi statistici, mentre un sistema simbolico può contenere componenti appresi.
-
-La prima dimensione da annotare è quindi il **meccanismo predominante**:
+La stessa regola fallisce facilmente davanti a formulazioni non previste, come «Il corriere non è mai passato» o «La spedizione risulta ferma da una settimana». Per evitare di scrivere una condizione separata per ogni frase, possiamo raccogliere richieste già etichettate:
 
 ```text
-regole esplicite
-modello appreso dai dati
-rete neurale profonda
-sistema ibrido
+"Il corriere non è passato"  -> problema_di_consegna
+"Voglio cambiare indirizzo"  -> modifica_ordine
+"Il pacco non è arrivato"    -> problema_di_consegna
+"La carta è stata rifiutata" -> problema_di_pagamento
 ```
 
-Queste etichette non dicono ancora se il sistema classifica o genera, né quanto sia ampio il suo campo d'uso.
+Un algoritmo può allora cercare i valori dei parametri che riducono gli errori su questi esempi. Non descriviamo più tutte le regole operative. Definiamo una famiglia di funzioni, un obiettivo e una procedura che modifica i parametri usando i dati. Questo è il nucleo del **machine learning**.
 
-# 3. AI, machine learning e deep learning
+La separazione non è assoluta. Un'applicazione reale può usare una regola per validare il numero d'ordine, un classificatore appreso per riconoscere la categoria, una rete neurale per rappresentare il testo e un controllo finale che impedisce azioni non autorizzate. Per questo `simbolico`, `statistico` e `neurale` sono descrizioni utili, ma non formano tre insiemi sempre disgiunti.
 
-Non esiste una singola tassonomia che esaurisca tutto il campo. Per questo percorso useremo `AI` come categoria più ampia, entro la quale collochiamo metodi di ricerca, pianificazione, rappresentazione della conoscenza, decisione e apprendimento.
+L'**intelligenza artificiale** è il campo più ampio. Comprende, tra gli altri, metodi di ricerca, pianificazione, rappresentazione della conoscenza, decisione e apprendimento. Il machine learning è uno degli approcci disponibili: usa dati, interazioni o segnali di valutazione per scegliere i parametri di un modello. Goodfellow, Bengio e Courville collocano esplicitamente il machine learning all'interno dell'AI e ricordano che esistono anche approcci AI non basati sull'apprendimento automatico, per esempio sistemi costruiti attorno a knowledge base [Goodfellow et al., 2016, cap. 1].
 
-Il **machine learning** è uno degli approcci all'AI. Invece di descrivere interamente il comportamento tramite regole operative, si usa esperienza sotto forma di dati, interazioni o segnali di valutazione per scegliere i parametri di un modello. Goodfellow, Bengio e Courville collocano esplicitamente il machine learning all'interno dell'AI e ricordano che esistono approcci AI non basati sull'apprendimento automatico, per esempio sistemi costruiti attorno a knowledge base [Goodfellow et al., 2016, cap. 1].
+Nel **representation learning** viene appresa anche la rappresentazione utile per il compito. Un classificatore tradizionale può ricevere feature progettate a mano, come la presenza di parole specifiche. Un modello di representation learning produce invece vettori intermedi che aiutano a separare le categorie. Il **deep learning** usa più trasformazioni apprese in composizione: ogni livello riceve una rappresentazione e ne produce un'altra. Non esiste una soglia universalmente accettata di layer oltre la quale un modello diventa `deep`; il termine identifica una famiglia di metodi, non un limite normativo [Goodfellow et al., 2016, cap. 1].
 
-Il **representation learning** è una parte del machine learning in cui anche la rappresentazione usata per il compito viene appresa. Un classificatore può ricevere feature progettate manualmente, come la presenza di parole specifiche. Un modello di representation learning può invece produrre vettori intermedi utili a separare le categorie.
+Possiamo quindi leggere la relazione tra i termini come una progressione concettuale: il deep learning appartiene al representation learning, che appartiene al machine learning, che a sua volta è uno degli approcci all'AI. La relazione non descrive l'architettura completa di ogni applicazione. Un sistema può combinare una rete profonda con regole simboliche o inserire un modello appreso dentro una procedura di ricerca.
 
-Il **deep learning** usa composizioni di più trasformazioni apprese. Ogni livello riceve una rappresentazione e ne produce un'altra. La profondità permette di costruire funzioni complesse come composizioni di funzioni più semplici. Non esiste una soglia universalmente accettata oltre la quale un modello diventa `deep`; il termine descrive una famiglia di metodi, non un numero normativo di layer [Goodfellow et al., 2016, cap. 1].
+## Parametri, training e inference
 
-La relazione concettuale può essere riassunta così:
-
-```text
-AI
-└── machine learning
-    └── representation learning
-        └── deep learning
-```
-
-Questo schema rappresenta una relazione tra concetti, non l'architettura completa di ogni sistema. Un'applicazione può contenere una rete profonda e regole simboliche, oppure usare un modello appreso all'interno di una procedura di ricerca.
-
-La gerarchia non implica che `deep learning` significhi `generativo`. Un modello generativo non deve necessariamente essere una rete profonda. Un sistema AI può non contenere machine learning. Una rete neurale, infine, non coincide con il prodotto o servizio che la incorpora.
-
-# 4. Dati, parametri e iperparametri
-
-Un modello parametrizzato contiene valori che determinano la trasformazione eseguita. In un modello lineare con due feature e due classi, i parametri principali sono una matrice di pesi e un vettore di bias:
+Un modello parametrizzato contiene valori che determinano la trasformazione eseguita. Nel caso di un semplice classificatore lineare con due feature e due classi, possiamo scrivere:
 
 $$
 \mathbf{z}=W\mathbf{x}+\mathbf{b}.
 $$
 
-L'input `x` contiene due feature numeriche. L'output `z` contiene due logit, uno per classe. La softmax può trasformare i logit in valori normalizzati, ma la scelta di `W` e `b` determina la separazione appresa.
+Il vettore `x` contiene le feature di input. La matrice `W` e il vettore `b` sono i parametri. Il risultato `z` contiene due logit, uno per classe. La softmax può trasformarli in valori normalizzati, ma la separazione appresa dipende dai parametri scelti.
 
-I **dati di training** forniscono esempi usati per modificare i parametri. Una **funzione obiettivo** misura, secondo una regola dichiarata, quanto l'output corrente differisce dal risultato desiderato. Un **optimizer** applica aggiornamenti ai parametri usando gradienti o altre quantità calcolate dalla procedura di apprendimento.
+Durante il **training**, gli esempi e una funzione obiettivo forniscono il segnale necessario a modificare quei parametri. Un optimizer applica gli aggiornamenti usando i gradienti o altre quantità calcolate dalla procedura di apprendimento. Il learning rate e il numero di iterazioni sono invece **iperparametri**: configurano l'esperimento, ma non vengono modificati direttamente dal passo dell'optimizer.
 
-Gli **iperparametri** configurano la procedura o la struttura del modello. Nel piccolo esempio del capitolo, il learning rate `0.1` e il numero di iterazioni `100` sono scelti prima dell'esecuzione e non vengono modificati da `optimizer.step()`.
+La distinzione dipende dalla procedura considerata. Un valore scelto come iperparametro in un esperimento potrebbe essere prodotto da un'altra procedura di ricerca. La domanda utile è sempre la stessa: quale operazione può modificarlo?
 
-La distinzione è relativa alla procedura considerata. Un valore può essere iperparametro in un esperimento e diventare output di un'altra procedura di ricerca. La domanda operativa è sempre la stessa: quale istruzione può modificarlo?
+Quando i parametri e le informazioni necessarie a riutilizzarli vengono salvati, otteniamo un **checkpoint**. In un progetto reale il checkpoint può comprendere anche lo stato dell'optimizer, la configurazione, i contatori e altri metadati. Non coincide quindi necessariamente con una sola matrice di pesi.
 
-Quando i parametri e le informazioni necessarie a riutilizzarli vengono salvati, si ottiene un **checkpoint**. In un progetto reale il checkpoint può comprendere anche stato dell'optimizer, contatori, configurazione e metadati. Il termine non indica quindi soltanto una matrice di pesi.
-
-# 5. Training e inference sono due fasi diverse
-
-Durante il **training**, il sistema usa esempi e un segnale obiettivo per modificare i parametri. Nel caso supervisionato più semplice, una iterazione contiene:
-
-```text
-input e target
--> output del modello
--> loss
--> gradienti
--> aggiornamento dei parametri
-```
-
-La documentazione PyTorch presenta questo ciclo tramite `optimizer.zero_grad()`, forward pass, calcolo della loss, `loss.backward()` e `optimizer.step()` [PyTorch Tutorials 2.13, Optimizing Model Parameters]. `optimizer.step()` applica l'aggiornamento ai parametri registrati nell'optimizer [PyTorch 2.13, torch.optim].
-
-Durante l'**inference**, un input nuovo viene trasformato usando i parametri disponibili. Nel caso base non viene eseguito un passo dell'optimizer:
-
-```text
-nuovo input
--> modello con parametri fissati
--> output
-```
-
-Esistono metodi che modificano stato o parametri al test time, ma devono essere nominati esplicitamente perché cambiano questo contratto. Nel percorso base, `inference` indica l'uso del modello addestrato senza update dei parametri.
-
-In PyTorch occorre distinguere `model.eval()` e `torch.inference_mode()`. `eval()` imposta la modalità di evaluation dei moduli che cambiano comportamento tra training ed evaluation, come Dropout e BatchNorm. `inference_mode()` disabilita il tracciamento autograd e altre strutture necessarie al calcolo dei gradienti. Chiamare soltanto `eval()` non disabilita autograd, e usare soltanto `inference_mode()` non sostituisce la modalità di evaluation dei moduli interessati [PyTorch 2.13, `Module` e `inference_mode`].
-
-Il seguente snippet usa quattro esempi illustrativi con due feature e due classi. Il layer lineare viene addestrato con cross-entropy e SGD. La versione completa conserva copie dei parametri prima e dopo le due fasi.
+Durante l'**inference**, un nuovo input viene elaborato usando i parametri disponibili. Nel caso base non viene eseguito un passo dell'optimizer e il checkpoint rimane invariato. Questa differenza è visibile nel seguente esempio PyTorch, costruito con quattro osservazioni illustrative e due classi:
 
 ```python
 import torch
@@ -201,260 +108,102 @@ with torch.inference_mode():
     predicted_class = logits.argmax(dim=-1)
 ```
 
-Il file eseguito è [`code/snip_ai_001_training_inference.py`](code/snip_ai_001_training_inference.py).
+Nel run registrato, la loss passa da `0.641941` a `0.045580`. Almeno un parametro cambia durante il training; nessun parametro cambia durante l'inference. Il nuovo input produce logit di shape `[1,2]` e la classe prevista è `0`.
 
-Nell'ambiente registrato, la loss passa da `0.641941` a `0.045580`. Almeno un parametro cambia durante il training. Nessun parametro cambia durante l'inference. Il nuovo input produce logit con shape `[1,2]` e la classe prevista è `0`.
+Il risultato serve soltanto a distinguere le due fasi. Quattro esempi non costituiscono una valutazione della generalizzazione, che richiede dati separati e un protocollo appropriato.
 
-Questi valori non dimostrano generalizzazione. Il dataset è costruito soltanto per rendere visibile la differenza tra le due fasi. La generalizzazione richiede dati separati e un protocollo di valutazione, che verranno introdotti nei capitoli successivi.
+> **Nota su PyTorch.** `model.eval()` imposta la modalità di evaluation dei moduli che cambiano comportamento tra training ed evaluation, come Dropout e BatchNorm. `torch.inference_mode()` disabilita invece il tracciamento autograd e altre strutture usate per i gradienti. Le due operazioni hanno ruoli diversi e non sono intercambiabili [PyTorch 2.13, `Module` e `inference_mode`].
 
-# 6. Predire una proprietà o modellare i dati
+## Predire una proprietà o modellare i dati
 
-Dopo aver distinto il meccanismo di apprendimento, possiamo descrivere un secondo asse: **l'obiettivo modellato**.
+Finora abbiamo distinto il modo in cui il comportamento viene ottenuto. Una seconda domanda riguarda ciò che il modello descrive.
 
-In un problema di classificazione, un approccio discriminativo può stimare direttamente la distribuzione condizionata
+In un problema di classificazione, un approccio **discriminativo** può stimare direttamente la distribuzione condizionata
 
 $$
 p(y\mid x),
 $$
 
-o imparare una frontiera decisionale equivalente per il compito. `x` rappresenta la richiesta e `y` la categoria.
-
-Un classificatore generativo specifica invece un modello per la distribuzione congiunta, spesso tramite
+dove `x` è la richiesta e `y` la categoria, oppure può apprendere una frontiera decisionale equivalente per il compito. Un classificatore **generativo** specifica invece un modello della distribuzione congiunta, spesso attraverso
 
 $$
 p(x,y)=p(x\mid y)p(y),
 $$
 
-e usa tale modello anche per calcolare la classe. Più in generale, i modelli generativi contemporanei possono modellare una distribuzione dei dati non condizionata oppure una distribuzione condizionata, per esempio `p(x|c)`, dalla quale produrre campioni compatibili con una condizione `c`.
+e usa quel modello anche per calcolare la classe. Ng e Jordan confrontano logistic regression e naive Bayes come esempi dei due approcci; il loro risultato riguarda quella coppia e le ipotesi analizzate, non stabilisce la superiorità universale di un paradigma [Ng e Jordan, 2001].
 
-Ng e Jordan confrontano logistic regression e naive Bayes come esempi discriminativo e generativo. Il loro risultato riguarda quella coppia di modelli e le ipotesi analizzate; non dimostra che un paradigma sia sempre superiore [Ng e Jordan, 2001].
+La parola *generativo* copre anche modelli che descrivono una distribuzione dei dati e producono nuovi campioni. La distribuzione può essere non condizionata oppure dipendere da una condizione, come in `p(x|c)`. Nel framework GAN, per esempio, il generatore viene addestrato a produrre campioni compatibili con la distribuzione dei dati, mentre il discriminatore cerca di distinguere dati reali e campioni generati [Goodfellow et al., 2014]. I due ruoli convivono nello stesso processo di training.
 
-La distinzione riguarda l'obiettivo probabilistico o il ruolo nel sistema, non una forma grafica obbligatoria. Nel framework GAN, un generatore `G` viene addestrato per catturare la distribuzione dei dati e produrre campioni, mentre un discriminatore `D` cerca di distinguere dati reali e campioni prodotti [Goodfellow et al., 2014]. I due ruoli convivono nello stesso processo di training.
+Questa distinzione riguarda l'obiettivo probabilistico o il ruolo nel sistema, non una forma architetturale obbligatoria. Un modello discriminativo può essere una rete profonda; un modello generativo può essere neurale oppure appartenere a un'altra famiglia probabilistica.
 
-Un modello discriminativo può essere una rete profonda. Un modello generativo può essere neurale oppure appartenere a un'altra famiglia probabilistica. L'asse `discriminativo/generativo` non sostituisce quindi l'asse `regole/apprendimento/rete profonda`.
+Il termine **generative AI** viene usato per modelli e sistemi orientati alla produzione di contenuto sintetico a partire da input, istruzioni o contesto. Il profilo NIST include testo, immagini, audio, video e altri contenuti digitali [NIST AI 600-1, 2024]. Nel nostro esempio, il classificatore restituisce una categoria predefinita; un sistema generativo può invece comporre una risposta come «Mi dispiace per il ritardo. Inserisci il numero dell'ordine e controllerò lo stato della spedizione».
 
-# 7. Che cosa indica generative AI
+Produrre una frase non implica intenzione o comprensione umana. Significa eseguire una procedura che genera un output in funzione del modello, dell'input e degli altri componenti del sistema. Un'applicazione può aggiungere al modello un prompt di sistema, un recupero di dati sugli ordini, strumenti esterni, autorizzazioni e controlli sull'output. Il comportamento osservato appartiene all'insieme di questi componenti, non al solo checkpoint.
 
-Il termine **generative AI** viene usato per sistemi orientati alla produzione di contenuto sintetico condizionato da input, istruzioni o contesto. Il profilo NIST descrive modelli che emulano struttura e caratteristiche dei dati di input per produrre contenuto sintetico derivato. Il documento include testo, immagini, video, audio e altri contenuti digitali [NIST AI 600-1, 2024].
+## Foundation model, adattamento e varietà dei compiti
 
-Nel nostro esempio, un classificatore produce una categoria tra opzioni definite:
+Il report dello Stanford Center for Research on Foundation Models introduce il termine **foundation model** per indicare un modello addestrato su dati ampi, in genere con self-supervision su larga scala, e adattabile a numerosi compiti successivi [Bommasani et al., 2021]. La proprietà centrale non è soltanto la capacità di generare contenuti, ma il ruolo di base riutilizzabile.
 
-```text
-problema_di_consegna
-```
+Un foundation model può essere adattato tramite fine-tuning, instruction tuning, adapter, prompting, retrieval o configurazioni del sistema. Questi metodi verranno studiati nei capitoli successivi. Per ora è sufficiente distinguere tre livelli: il modello di base, l'eventuale adattamento e il sistema applicativo. Il modello può restare invariato mentre cambiano i dati di dominio, gli strumenti disponibili, le autorizzazioni e le regole operative.
 
-Un sistema generativo può produrre una sequenza testuale:
+`Foundation model` e `modello generativo` non sono sinonimi. Il profilo NIST chiarisce che non tutta la generative AI deriva da foundation model [NIST AI 600-1, 2024]. Un modello piccolo e addestrato per un dominio ristretto può produrre contenuto senza essere usato come base per molti compiti. Allo stesso modo, il fatto che un modello sia ampiamente adattabile non dice che ogni applicazione costruita su di esso sia generalista.
 
-```text
-Mi dispiace per il ritardo. Inserisci il numero dell'ordine e controllerò lo stato della spedizione.
-```
+I termini **generalista** e **specialistico** sono relativi al perimetro considerato. Un classificatore delle richieste di consegna è specialistico rispetto a un sistema capace di classificare, tradurre, generare testo, analizzare immagini e usare strumenti. Lo stesso sistema, tuttavia, può essere generalista all'interno di un reparto aziendale e specialistico rispetto alla varietà delle attività umane. Nel libro useremo questi termini in base alla gamma di compiti e contesti per cui un modello o un sistema è stato progettato e valutato, non come giudizi automatici di qualità o affidabilità.
 
-`Produrre` non implica intenzione, esperienza soggettiva o comprensione umana. Indica l'esecuzione di una procedura che genera un output sulla base del modello, dell'input e degli altri componenti del sistema.
+## Tre domande per descrivere un sistema
 
-Un modello linguistico può produrre una distribuzione sui token successivi. Il sistema applicativo può aggiungere un template, retrieval sul database degli ordini, tool, autorizzazioni e controlli sull'output. Il comportamento osservato dall'utente appartiene al sistema completo e non può essere attribuito automaticamente al solo checkpoint.
+Le etichette introdotte finora rispondono a domande diverse. Per non confonderle, descriveremo ogni sistema lungo tre dimensioni.
 
-Il profilo NIST chiarisce anche che **non tutta la generative AI deriva da foundation model** [NIST AI 600-1, 2024]. Un modello generativo piccolo e addestrato per un dominio ristretto può produrre contenuto senza avere il ruolo di foundation model.
-
-# 8. Foundation model e adattamento
-
-Il report dello Stanford Center for Research on Foundation Models introduce il termine **foundation model** per un modello addestrato su dati ampi, generalmente con self-supervision su larga scala, adattabile a numerosi compiti downstream [Bommasani et al., 2021].
-
-La proprietà centrale non è soltanto la generazione. È il ruolo di base riutilizzabile. Il modello può essere adattato tramite fine-tuning, instruction tuning, adapter, prompting, retrieval o configurazioni di sistema. Questi meccanismi verranno trattati più avanti.
-
-Per ora separiamo tre oggetti:
-
-```text
-modello di base
--> adattamento o configurazione
--> sistema applicativo
-```
-
-Il modello di base può restare lo stesso mentre cambiano il dataset di adattamento, il prompt di sistema, gli strumenti disponibili e le regole operative. Non è quindi corretto dedurre tutte le proprietà del sistema dalla sola famiglia del foundation model.
-
-`Foundation model` e `generative model` non sono sinonimi. Molti foundation model contemporanei hanno capacità generative, ma la definizione riguarda ampiezza del pretraining e adattabilità. Un modello generativo specialistico può non fungere da fondazione per un insieme ampio di compiti.
-
-# 9. Generalista e specialistico sono termini relativi
-
-Un sistema **specialistico** è progettato e valutato per un insieme ristretto di compiti o condizioni. Un classificatore delle richieste di consegna è specialistico rispetto a un sistema capace di classificare richieste, generare risposte, tradurre testi, analizzare immagini e chiamare strumenti.
-
-Un sistema viene spesso chiamato **generalista** quando copre molti compiti o modalità. Il termine non possiede però una soglia numerica universale. Un modello può essere generalista rispetto a un'applicazione aziendale e specialistico rispetto all'insieme delle capacità umane.
-
-Nel libro, `generalista` e `specialistico` descrivono l'ampiezza relativa del riuso e delle valutazioni. Non implicano qualità, affidabilità o autonomia. Un sistema generalista può fallire su un dominio specifico; un sistema specialistico può essere migliore nel proprio perimetro.
-
-La stessa cautela vale per `foundation model`. Il pretraining ampio rende possibile l'adattamento, ma non garantisce che ogni sistema costruito sul modello sia competente in ogni compito.
-
-# 10. Tre assi invece di una lista di sinonimi
-
-Possiamo ora descrivere un sistema lungo tre dimensioni indipendenti.
-
-| Asse | Domanda | Esempi di valori |
+| Aspetto | Domanda | Esempi |
 |---|---|---|
 | Meccanismo | Come viene costruita la relazione tra input e output? | regole, modello appreso, rete profonda, sistema ibrido |
-| Obiettivo | Quale relazione, distribuzione o decisione viene modellata? | discriminativo, generativo, decisionale |
-| Ampiezza | Quanto è ampio il riuso previsto e verificato? | specialistico, modello di base adattabile, generalista |
+| Obiettivo | Quale relazione, distribuzione o decisione viene descritta? | discriminativo, generativo, decisionale |
+| Ampiezza | Per quali compiti e contesti è previsto e verificato il riuso? | specialistico, base adattabile, generalista |
 
-Per la richiesta `Il pacco non è arrivato` possiamo costruire:
+La richiesta «Il pacco non è arrivato» può quindi essere gestita da un'automazione specialistica basata su regole, da un classificatore neurale specialistico, da un modello generativo addestrato nel dominio dell'assistenza oppure da un sistema ibrido costruito attorno a un foundation model, un database e un insieme di strumenti.
 
-1. un'automazione specialistica rule-based che apre un ticket;
-2. un classificatore specialistico basato su deep learning;
-3. un modello generativo specialistico che compone risposte in un dominio;
-4. un foundation model generativo adattato all'assistenza clienti;
-5. un sistema ibrido che combina foundation model, retrieval, tool e regole.
+Nessuna dimensione determina automaticamente le altre. Una rete profonda non è necessariamente generativa. Un modello generativo non è necessariamente un foundation model. Un foundation model non rende generalista ogni applicazione che lo utilizza.
 
-Nel primo caso, la parola `AI` dipende dalla definizione e dal grado di inferenza attribuito alla semplice automazione. L'esempio serve a mostrare il meccanismo, non a risolvere universalmente il confine tra software ordinario e AI.
+Questa descrizione non esaurisce il ciclo di vita di un sistema. Dati, valutazione, deployment, monitoraggio e ritiro influenzano ciò che il sistema può fare e i rischi che introduce. Per esempio, lo stesso modello di assistenza assume conseguenze operative diverse se può soltanto suggerire una categoria oppure modificare direttamente un ordine. Le autorizzazioni appartengono al sistema, non alla formula del modello.
 
-Nessun asse determina automaticamente gli altri. `Rete profonda` non implica `generativo`. `Generativo` non implica `foundation model`. `Foundation model` non implica che il sistema applicativo sia privo di specializzazione.
+<!-- Inserire AI-01 dopo la validazione visuale. -->
+<!-- Inserire AI-02 dopo la validazione visuale. -->
 
-> **Visuale prevista `AI-01`.** La figura dovrà mostrare i tre assi attorno alla stessa richiesta. Le candidate prodotte finora non rappresentavano questa tassonomia e sono state respinte.
+## Le distinzioni che contano
 
-# 11. Una mappa minima del ciclo di vita
+A questo punto possiamo chiarire alcuni equivoci frequenti senza trasformare i termini in sinonimi.
 
-Le etichette appena costruite descrivono il modello e il sistema, ma non sostituiscono il ciclo di vita. Un progetto reale attraversa almeno:
+- **AI e machine learning.** Il machine learning è un approccio all'AI, non l'intero campo. Ricerca, pianificazione e rappresentazione simbolica della conoscenza possono rientrare nell'AI senza apprendere parametri dai dati.
+- **Machine learning e deep learning.** Il deep learning è una parte del machine learning. Regressione lineare, alberi decisionali e molti modelli probabilistici non vengono normalmente descritti come deep learning.
+- **Generativo e foundation model.** Un modello generativo può essere piccolo e specialistico. Un foundation model è definito soprattutto dal ruolo di base adattabile, non dalla sola capacità di generare.
+- **Modello e prodotto.** Retrieval, strumenti, dati aggiornati, autorizzazioni e interfacce appartengono al sistema costruito attorno al modello.
+- **Training e inference.** Nel caso base, il training modifica i parametri; l'inference li usa. Tecniche di adattamento al test time cambiano questo contratto e verranno dichiarate esplicitamente quando compariranno.
 
-```text
-definizione del compito
--> raccolta e preparazione dei dati
--> scelta del modello e dell'obiettivo
--> training o configurazione
--> valutazione
--> deployment
--> uso e monitoraggio
--> aggiornamento o ritiro
-```
+## Riepilogo
 
-NIST usa il concetto di AI lifecycle per ricordare che rischi, responsabilità e prestazioni dipendono dalle fasi e dagli attori coinvolti [NIST AI RMF 1.0, 2023]. Una misura ottenuta durante lo sviluppo non descrive automaticamente il comportamento dopo il deployment. Un checkpoint non documenta da solo i dati, il contesto d'uso o le procedure di controllo.
+Siamo partiti da una sola richiesta e abbiamo visto che lo stesso output può essere ottenuto con meccanismi differenti. Una regola esplicita, un modello appreso e una rete profonda non sono tre nomi per la stessa cosa; descrivono modi diversi di costruire il comportamento. Allo stesso modo, `discriminativo`, `generativo` e `foundation model` rispondono a domande diverse.
 
-Nel caso della richiesta di consegna, il modello può essere identico in due applicazioni, ma i sistemi differiscono se uno può soltanto suggerire una categoria mentre l'altro può modificare un ordine reale. Le autorizzazioni e le conseguenze operative appartengono al sistema.
+Per descrivere un sistema in modo utile conviene quindi chiedere: come viene prodotto il comportamento, che cosa viene modellato e quanto è ampio il perimetro di riuso? A queste domande va aggiunta la distinzione tra modello e sistema, perché dati esterni, strumenti, regole e autorizzazioni possono cambiare profondamente il comportamento osservato senza modificare il checkpoint.
 
-> **Visuale prevista `AI-02`.** La figura dovrà separare training e inference: dati, loss, gradienti, optimizer e checkpoint aggiornato a sinistra; nuovo input, checkpoint fissato e output a destra. Anche questa visuale resta aperta.
+### Verifica della comprensione
 
-# 12. Errori di classificazione frequenti
+1. Spiega la relazione tra AI, machine learning, representation learning e deep learning senza usare i termini come sinonimi.
+2. Individua nello snippet l'istruzione che modifica i parametri e il blocco che esegue soltanto l'inference.
+3. Spiega perché un modello generativo non è necessariamente un foundation model.
+4. Descrivi un filtro antispam lungo le tre dimensioni: meccanismo, obiettivo e ampiezza.
+5. Supponi di aggiungere al sistema di assistenza uno strumento che legge lo stato reale della spedizione. Quale parte del modello può restare invariata e quale parte del sistema è cambiata?
 
-## `AI` e `machine learning` usati come sinonimi
+### Esercizi
 
-Il machine learning è un approccio all'AI, non la definizione completa del campo. Un sistema basato su ricerca, pianificazione o rappresentazione esplicita della conoscenza può rientrare nell'AI senza apprendere parametri dai dati.
+1. Descrivi un sistema di raccomandazione separando input, modello, output e componenti circostanti.
+2. Scrivi una regola esplicita per riconoscere un problema di consegna e trova due formulazioni che la regola non intercetta.
+3. Rimuovi il ciclo di training da `SNIP-AI-001` e verifica che i parametri rimangano invariati.
+4. Aggiungi una seconda inference con un input diverso e controlla la shape dell'output.
+5. Trova un esempio di modello generativo specialistico che non richieda la nozione di foundation model.
+6. Elenca tre componenti di un sistema di generative AI che non appartengono al checkpoint.
 
-## `Machine learning` e `deep learning` usati come sinonimi
+## Fonti e materiali verificabili
 
-Il deep learning è una parte del machine learning. Regressione lineare, alberi decisionali e molti modelli probabilistici sono machine learning ma non vengono normalmente descritti come deep learning.
+Le fonti portanti sono la definizione aggiornata di sistema di AI dell'OCSE, il NIST AI RMF 1.0, il profilo NIST sulla generative AI, *Deep Learning* di Goodfellow, Bengio e Courville, il confronto di Ng e Jordan tra classificatori discriminativi e generativi, il paper originale sui GAN e il report sui foundation model.
 
-## `Deep` interpretato come soglia assoluta
-
-La profondità riguarda la composizione di trasformazioni. Non esiste un numero universalmente valido di layer che separi ogni modello shallow da ogni modello deep.
-
-## `Generativo` interpretato come sinonimo di foundation model
-
-Un modello generativo può essere piccolo e specialistico. Il profilo NIST dichiara esplicitamente che non tutta la generative AI deriva da foundation model.
-
-## `Foundation model` interpretato come prodotto completo
-
-Un foundation model è una base adattabile. Retrieval, tool, dati di dominio, autorizzazioni e interfaccia appartengono al sistema costruito attorno al modello.
-
-## `Inference` interpretata come aggiornamento automatico
-
-Nel caso base, l'inference usa i parametri disponibili senza un passo dell'optimizer. Tecniche di test-time adaptation esistono, ma cambiano il contratto e devono essere dichiarate.
-
-## `eval()` interpretato come disabilitazione dei gradienti
-
-In PyTorch, `eval()` modifica la modalità dei moduli interessati. `inference_mode()` o `no_grad()` gestiscono il tracciamento autograd. Le operazioni non sono equivalenti.
-
-# 13. Ricostruzione completa
-
-Partiamo dalla richiesta:
-
-```text
-Il pacco non è arrivato
-```
-
-Per descrivere il sistema che la elabora procediamo in questo ordine.
-
-1. Identifichiamo input e output osservabili.
-2. Separiamo il modello dal sistema completo.
-3. Chiediamo se il comportamento deriva da regole, apprendimento dai dati, reti neurali o una combinazione.
-4. Se esiste training, distinguiamo dati, parametri, iperparametri, obiettivo e optimizer.
-5. Separiamo la fase che modifica i parametri dalla fase che li usa per produrre output.
-6. Classifichiamo l'obiettivo come discriminativo, generativo o decisionale, dichiarando la formulazione.
-7. Verifichiamo se il modello è specialistico oppure funge da base adattabile per compiti diversi.
-8. Ricostruiamo il sistema applicativo, includendo retrieval, tool, regole, interfacce e autorizzazioni.
-
-La tassonomia non assegna un'etichetta unica. Produce una descrizione composta. Un sistema può essere contemporaneamente:
-
-```text
-ibrido nel meccanismo
-+ generativo nell'output
-+ costruito su un foundation model
-+ specializzato nell'assistenza clienti
-```
-
-Questa descrizione è più informativa della sola parola `AI`.
-
-# 14. Controlli di comprensione
-
-## Ricostruzione
-
-Spiegare la relazione tra AI, machine learning, representation learning e deep learning senza usare i termini come sinonimi.
-
-## Localizzazione
-
-Indicare quale istruzione modifica i parametri nello snippet PyTorch e quale blocco esegue soltanto l'inference.
-
-## Confine
-
-Spiegare perché un modello generativo non è necessariamente un foundation model e perché un foundation model non coincide con il sistema applicativo.
-
-## Trasferimento
-
-Classificare un filtro antispam che usa una rete neurale addestrata su email etichettate. Descriverlo lungo gli assi meccanismo, obiettivo e ampiezza.
-
-## Variazione
-
-Supporre di aggiungere al sistema di assistenza un tool che legge lo stato reale della spedizione. Dire quale parte del modello può restare invariata e quale parte del sistema è cambiata.
-
-# 15. Esercizi
-
-1. Descrivere un sistema di raccomandazione separando input, modello, output e componenti di sistema.
-2. Scrivere una regola esplicita per classificare una richiesta di consegna, poi indicare due formulazioni che non riconoscerebbe.
-3. Modificare `SNIP-AI-001` rimuovendo il ciclo di training. Verificare che i parametri rimangano invariati e confrontare la loss.
-4. Aggiungere una seconda inference con un input differente e verificare la shape dell'output.
-5. Trovare un esempio di modello generativo specialistico che non richieda la nozione di foundation model.
-6. Spiegare perché un sistema costruito su un modello generalista può essere specialistico nel deployment.
-7. Elencare tre componenti di un sistema di generative AI che non fanno parte del checkpoint.
-8. Confrontare `model.eval()` e `torch.inference_mode()` usando la documentazione PyTorch citata.
-
-# 16. Fonti e artefatti
-
-Le schede complete, le sezioni consultate e i limiti sono in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md).
-
-Fonti portanti:
-
-- OECD, *Explanatory memorandum on the updated OECD definition of an AI system*, 2024.
-- NIST, *Artificial Intelligence Risk Management Framework 1.0*, 2023.
-- Goodfellow, Bengio e Courville, *Deep Learning*, 2016.
-- Ng e Jordan, *On Discriminative vs. Generative Classifiers*, 2001.
-- Goodfellow et al., *Generative Adversarial Nets*, 2014.
-- NIST, *Generative Artificial Intelligence Profile*, 2024.
-- Bommasani et al., *On the Opportunities and Risks of Foundation Models*, 2021.
-- PyTorch stable 2.13, documentazione su optimization, `torch.optim`, `Module` e `inference_mode`.
-
-Artefatti di riproduzione:
-
-- registro delle affermazioni: [`CLAIMS.md`](CLAIMS.md);
-- piano interno: [`PLAN.md`](PLAN.md);
-- codice: [`code/snip_ai_001_training_inference.py`](code/snip_ai_001_training_inference.py);
-- test: [`code/test_ai_snippets.py`](code/test_ai_snippets.py);
-- output: [`code/outputs/`](code/outputs/);
-- ambiente: [`code/environments/python-pytorch.txt`](code/environments/python-pytorch.txt).
-
-## Registro di approvazione
-
-- Review fattuale: completata sulla bozza `0.1.1-draft2`, visuali escluse
-- Review matematica: completata per formula lineare e distribuzioni introduttive
-- Review architetturale e terminologica: completata, modello e sistema distinti
-- Review temporale: fonti ricontrollate il 30 luglio 2026
-- Review codice: superata tecnicamente
-- Review visuale: **bloccata**, candidate errate respinte
-- Review incrociata: superata per testo e codice; visuali aperte
-- Review didattica: seconda lettura completata sul testo
-- Review autoriale: non aperta
-- Data di congelamento: non assegnata
-- Commit congelato: non assegnato
+Le schede complete e i limiti d'uso sono in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md). Il codice eseguito, i test, gli output e l'ambiente sono raccolti nella cartella [`code/`](code/).
