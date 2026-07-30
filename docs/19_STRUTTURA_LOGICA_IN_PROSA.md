@@ -3,13 +3,13 @@
 ## Stato
 
 - Stato: `vincolante`
-- Data di adozione: 30 luglio 2026
-- Ambito: tutti i capitoli, le lezioni e le appendici destinate al lettore
+- Ambito: capitoli, lezioni e appendici destinati al lettore
+- Voce editoriale: `20_VOCE_EDITORIALE_E_REVISIONE_LINGUISTICA.md`
 - Documenti collegati: `EXPLANATION_STYLE_AND_VISUALS.md`, `01_TEMPLATE_CAPITOLO.md`, `18_PROTOCOLLO_QA_DIDATTICO.md`
 
 ## 1. Principio
 
-La struttura logica del metodo è obbligatoria. Le sue etichette non devono però diventare la struttura visibile e ripetitiva di ogni lezione.
+La struttura logica del metodo è obbligatoria. Le sue etichette non devono diventare la struttura visibile e ripetitiva delle lezioni.
 
 Campi come:
 
@@ -19,23 +19,23 @@ Problema
 Input e shape
 Trasformazione
 Output e shape
-Cosa è cambiato
-Cosa è rimasto invariato
+Cosa cambia
+Cosa resta invariato
 Cosa non fa
-Cosa usa l'output dopo
+Consumer successivo
 Errore comune
-Frase di continuità
+Giunzione
 ```
 
-sono uno strumento di progettazione e di review. Per impostazione predefinita non diventano titoli o sottotitoli pubblicati nel capitolo.
+sono strumenti di progettazione e review. Per impostazione predefinita non diventano titoli o sottotitoli di `CHAPTER.md`.
 
-Il lettore deve percepire una spiegazione naturale, non il modulo usato dall'autore per controllarla.
+Il lettore deve percepire una spiegazione continua, non il modulo usato dall'autore per controllarla.
 
 ## 2. Due livelli distinti
 
 ### Livello interno
 
-`PLAN.md`, `TEXT_AUDIT.md` e le schede di progettazione rendono espliciti:
+`PLAN.md` e `TEXT_AUDIT.md` rendono espliciti:
 
 - stato del lettore;
 - problema locale;
@@ -44,148 +44,191 @@ Il lettore deve percepire una spiegazione naturale, non il modulo usato dall'aut
 - cambiamento;
 - invariante;
 - confine;
-- consumer successivo;
+- passaggio successivo;
 - concetti differiti.
 
-Questi campi devono poter essere controllati uno per uno.
+Questi campi devono essere verificabili uno per uno.
 
 ### Livello destinato al lettore
 
 `CHAPTER.md` usa:
 
-- titoli semantici legati al contenuto;
+- titoli legati al contenuto;
+- sezioni costruite attorno a problemi e meccanismi;
 - paragrafi causali;
 - formule e tabelle nel punto in cui servono;
 - transizioni naturali;
-- box soltanto quando aggiungono valore reale.
+- box soltanto quando aggiungono valore;
+- una conclusione che ricompone il problema iniziale.
 
-Il testo integra le funzioni del blocco atomico senza annunciarle con etichette standard ripetute.
+La prosa integra le funzioni dello scaffold senza annunciarle.
 
-## 3. Titoli ammessi
+## 3. Titoli
 
-I titoli devono dire quale oggetto o meccanismo viene esaminato.
+I titoli devono dire quale oggetto, problema o meccanismo viene esaminato.
 
-Esempi corretti:
+Esempi:
 
 ```text
 Perché una combinazione fissa non basta
-Dal confronto ai coefficienti
-Combinare i vettori sorgente
+Quando il comportamento viene appreso
+Dagli score ai coefficienti
 Escludere le posizioni future
-Dalla formula all'implementazione PyTorch
+Dalla formula a PyTorch
 ```
 
-Esempi da evitare come struttura ricorrente del testo pubblicato:
+Da evitare come struttura ricorrente:
 
 ```text
-Dove siamo
+Stato del lettore
 Problema locale
 Trasformazione
 Cosa è cambiato
 Cosa è rimasto invariato
 Cosa non fa
 Frase di continuità
-Stato del lettore
 Contratto dello snippet
 ```
 
-Una di queste etichette può comparire eccezionalmente in un box o in una tabella quando è davvero la forma più chiara. Non può diventare il telaio standard di tutte le sezioni.
+Una di queste etichette può apparire eccezionalmente in un box o in una tabella. Non può costituire il telaio standard del libro.
 
-## 4. Come incorporare il blocco atomico nella prosa
+## 4. Sezioni abbastanza ampie
 
-Una transizione completa può essere scritta in uno o più paragrafi naturali.
+Non si crea una nuova sezione per ogni micro-operazione.
+
+Una sezione principale è giustificata quando cambia:
+
+- la domanda;
+- l'oggetto;
+- il livello di astrazione;
+- la fase del processo;
+- il tipo di evidenza;
+- il consumer del risultato.
+
+Più passaggi brevi possono vivere nella stessa sezione se appartengono allo stesso movimento concettuale. Una sequenza numerica, per esempio, può descrivere confronto, scaling, normalizzazione e combinazione in un'unica sezione, purché ogni passaggio resti localizzabile.
+
+Sono segnali di frammentazione:
+
+- molte sezioni di uno o due paragrafi;
+- un titolo per ogni riga di una formula;
+- successioni `definizione -> cautela -> nuovo titolo`;
+- un indice che sembra una checklist.
+
+## 5. Paragrafi causali
+
+Una transizione completa può occupare uno o più paragrafi naturali.
 
 Esempio:
 
 ```text
-Abbiamo ora tre score, uno per ogni key. I valori hanno la shape corretta, ma non sono ancora coefficienti confrontabili: possono essere negativi e non sommano a 1. Applichiamo quindi la softmax lungo le tre posizioni sorgente. Otteniamo tre coefficienti non negativi, associati alle stesse righe di K e V, la cui somma è 1. Le value non sono ancora state combinate; il passaggio successivo userà questi coefficienti per costruire l'output.
+I tre prodotti scalari forniscono uno score per ogni key, ma non ancora coefficienti utilizzabili: i valori possono essere negativi e non sommano a uno. Li dividiamo quindi per la radice della dimensione delle key e applichiamo la softmax. Otteniamo tre coefficienti associati alle stesse coppie key-value; soltanto a questo punto possiamo usarli per costruire l'output.
 ```
 
-In questo paragrafo sono presenti, senza etichette visibili:
+Il reviewer può ricostruire:
 
 - stato corrente;
 - problema;
 - trasformazione;
 - output;
 - invariante;
-- ciò che resta da fare;
-- continuità con il passaggio successivo.
+- confine;
+- passaggio successivo.
 
-## 5. Variabilità editoriale
+Il lettore vede invece un ragionamento continuo.
 
-I capitoli non devono sembrare prodotti da un unico stampo.
+## 6. Ritmo
 
-La struttura visibile può cambiare in funzione del profilo:
+Le frasi non hanno tutte la stessa lunghezza o la stessa forma. La prosa alterna:
 
-- un componente può seguire il flusso dei dati;
-- un processo può seguire gli stati;
-- un'architettura può seguire moduli e interfacce;
-- un metodo di training può seguire segnale, loss, gradiente e update;
-- un confronto può seguire una differenza controllata;
-- un paper può seguire domanda, proposta, setup, risultati e limiti.
+- frasi brevi per fissare un risultato;
+- frasi medie per spiegare un passaggio;
+- periodi più articolati per collegare condizioni e conseguenze.
 
-La logica interna resta verificabile, ma il ritmo, i titoli e la disposizione della prosa si adattano al soggetto.
+Non si usa automaticamente `Ora che`, `A questo punto` o `Quindi` in ogni transizione. La giunzione resta concreta, ma varia nella forma.
 
-## 6. Shape, invarianti e confini
+Esempi:
 
-Shape, invarianti e confini non devono essere nascosti al punto da diventare ambigui. Devono essere espliciti nel significato, non necessariamente nel titolo.
+```text
+I tre score sono disponibili. Prima della softmax dobbiamo controllarne la scala.
+```
 
-Forme consigliate:
+```text
+I coefficienti restano associati alle stesse value; possiamo quindi usarli per costruire il vettore di output.
+```
+
+```text
+Il caso numerico è completo e può ora essere espresso in forma matriciale.
+```
+
+## 7. Shape, invarianti e confini
+
+Shape, invarianti e confini devono essere espliciti nel significato, non necessariamente nel titolo.
+
+Forme adatte:
 
 ```text
 Il vettore mantiene shape [S]: cambia la magnitudine degli score, non il numero di posizioni.
 ```
 
 ```text
-La mask interviene sugli score prima della softmax. Le righe di V restano invariate.
+La mask interviene sugli score prima della softmax; le righe di V restano invariate.
 ```
 
 ```text
-Questa operazione combina le value disponibili; non introduce informazione esterna.
+L'operazione combina le value disponibili e non introduce informazione esterna.
 ```
 
-## 7. Transizioni naturali
+Le cautele indispensabili restano vicino al meccanismo. Le precisazioni secondarie vengono raccolte in un box o rinviate.
 
-La frase di continuità resta obbligatoria come funzione logica, ma non richiede l'intestazione `Frase di continuità` né la formula identica `Ora che...` in ogni sezione.
+## 8. Esempio continuo
 
-Sono ammesse formulazioni diverse, purché nominino l'oggetto ottenuto e il passo successivo:
+L'esempio non viene abbandonato durante le definizioni astratte. Ogni passaggio importante torna al caso noto.
 
-```text
-I tre score sono ora disponibili. Prima di normalizzarli dobbiamo controllarne la scala.
-```
+Quando due oggetti hanno valori numerici identici soltanto per semplificare i conti, la prosa lo dichiara. Il lettore non deve confondere identità numerica e identità concettuale.
 
-```text
-I coefficienti risultanti sono associati alle stesse tre value. Possiamo quindi usarli per costruire il vettore di output.
-```
+## 9. Codice e visuali
 
-```text
-Il caso numerico è completo; la stessa sequenza di operazioni può ora essere espressa in forma matriciale.
-```
+Prima di uno snippet, input, operazione centrale e controllo atteso vengono spiegati in prosa. Il contratto completo resta negli artefatti del codice.
 
-## 8. Codice e visuali
+Una figura viene introdotta, letta e conclusa nel testo vicino. Non servono etichette come `Domanda della figura` o `Conclusione della figura`, purché le funzioni siano chiaramente presenti.
 
-Prima di uno snippet, input, operazione centrale e controllo atteso possono essere spiegati in prosa. Non è obbligatorio pubblicare un box denominato `Contratto dello snippet`.
+I dettagli di ambiente, versione, log e tolleranze non interrompono il ragionamento principale. Vengono rinviati ai materiali di riproduzione.
 
-Una figura viene inquadrata, ispezionata e conclusa nel testo vicino. Anche in questo caso non sono obbligatorie le etichette `Domanda della figura` o `Conclusione della figura`, purché le tre funzioni siano chiaramente presenti.
+## 10. Metadati invisibili al lettore
 
-## 9. Gate anti-template
+Stato editoriale, versione candidata, date, audit, branch e commit non appartengono al flusso del manuale.
 
-La review didattica respinge un capitolo quando:
+Possono essere conservati:
+
+- in un commento HTML all'inizio del file;
+- in front matter non renderizzato;
+- in `PLAN.md`, `TEXT_AUDIT.md`, `CHANGELOG.md` e `REVIEW.md`.
+
+`CHAPTER.md` non apre con una scheda di lavorazione e non chiude con un registro di approvazione.
+
+## 11. Gate anti-template
+
+La review respinge un capitolo quando:
 
 - ripete sistematicamente le stesse intestazioni metacognitive;
-- espone il foglio di progettazione al posto di una spiegazione fluida;
+- espone lo scaffold al posto di una spiegazione;
 - spezza un meccanismo semplice in troppe microsezioni;
-- usa elenchi e box dove una sequenza di paragrafi sarebbe più leggibile;
-- rende ogni capitolo formalmente identico anche quando il profilo è diverso;
-- nasconde invece informazioni necessarie come shape, invarianti o confini.
+- usa elenchi e box dove la prosa sarebbe più chiara;
+- rende capitoli diversi formalmente identici;
+- nasconde shape, invarianti o confini dopo aver rimosso le etichette;
+- contiene metadati di progetto nel percorso di lettura;
+- suona come una specifica, una reference API o un audit.
 
-La correzione non consiste nel rimuovere la logica. Consiste nel trasferire la logica dalla superficie editoriale alla costruzione della prosa.
+La correzione non elimina la logica. Trasferisce la logica dalla superficie editoriale alla costruzione della prosa.
 
-## 10. Regola di approvazione
+## 12. Regola di approvazione
 
-Un capitolo può essere approvato soltanto quando entrambe le condizioni sono vere:
+Un capitolo può essere approvato soltanto quando:
 
-1. il reviewer può ricostruire tutti i campi del blocco atomico leggendo il testo;
-2. il lettore non è costretto a vedere gli stessi campi come una sequenza rigida di titoli ripetuti.
+1. il reviewer può ricostruire lo scaffold leggendo il testo;
+2. il lettore non vede lo scaffold come una sequenza rigida;
+3. le sezioni hanno ampiezza proporzionata al contenuto;
+4. la prosa supera la review linguistica e la lettura ad alta voce;
+5. i materiali operativi restano separati dal manuale.
 
 La conformità viene registrata in `TEXT_AUDIT.md`.
