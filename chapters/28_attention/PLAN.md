@@ -3,8 +3,8 @@
 ## Identità
 
 - `chapter_id`: `CH-P06-ATTENTION`
-- Versione candidata: `0.5.0-rc5`
-- Stato: review di accessibilità per lettore non esperto superata, controllo visuale riaperto
+- Versione candidata: `0.6.0-rc6`
+- Stato: candidatura completa in revisione autoriale
 - Domanda centrale: come una posizione costruisce una combinazione dei vettori disponibili in funzione dei confronti con le key?
 - Oggetto continuo: una frase intuitiva, poi una query e tre coppie key-value con `d_k=d_v=2`
 - Stato finale: intuizione linguistica, esempio numerico, pseudocodice, formula, shape, causal mask e implementazione diretta
@@ -20,29 +20,26 @@ Il problema e il meccanismo di base devono restare comprensibili anche a chi sal
 
 ## Progressione didattica interna
 
-1. esempio linguistico sulla frase `Il pacco non è arrivato`;
-2. token spiegato come parola o parte di parola;
-3. vettore spiegato come lista di numeri;
-4. limite di una combinazione fissa;
-5. combinazioni diverse per posizioni diverse;
-6. ruoli di query, key e value;
-7. prodotto scalare e score;
-8. scaling con motivazione intuitiva;
-9. softmax come trasformazione in coefficienti che sommano a uno;
-10. combinazione delle value;
-11. pseudocodice;
-12. formula matriciale e shape;
-13. self-attention, cross-attention e causalità;
-14. causal mask;
-15. implementazione PyTorch minima;
-16. complessità e confini;
-17. ponte verso la multi-head attention.
+1. frase concreta e contributi diversi nelle diverse posizioni;
+2. limite di un contesto fisso;
+3. ruoli di query, key e value;
+4. prodotto scalare e score;
+5. scaling;
+6. softmax;
+7. combinazione delle value;
+8. pseudocodice;
+9. formula matriciale e shape;
+10. self-attention, cross-attention e causalità;
+11. causal mask;
+12. implementazione PyTorch;
+13. costo e limiti;
+14. ponte verso la multi-head attention.
 
-La versione destinata al lettore raccoglie i passaggi da 7 a 10 in un'unica sezione narrativa. La derivazione sulla varianza è un approfondimento e non interrompe il percorso principale.
+La versione destinata al lettore raccoglie score, scaling, softmax e somma pesata in un'unica sezione narrativa. Lo scaffold resta verificabile senza determinare il numero dei titoli.
 
 ## Superficie editoriale adottata
 
-La versione `0.5.0-rc5` usa otto sezioni principali:
+La candidatura usa otto sezioni principali:
 
 1. perché una combinazione fissa non basta;
 2. query, key e value;
@@ -55,41 +52,41 @@ La versione `0.5.0-rc5` usa otto sezioni principali:
 
 Regole applicate:
 
-- apertura con una frase naturale prima dei vettori;
-- definizione immediata di token, vettore e shape;
-- query, key e value presentate come ruoli, non come tre oggetti misteriosi;
-- prodotto scalare spiegato come moltiplicazione e somma;
-- softmax spiegata in parole prima della formula;
-- derivazione sul fattore di scala separata come approfondimento;
-- rimosso dal flusso principale il caveat sul dropout dopo la softmax;
-- formule matriciali introdotte come compressione di passaggi già eseguiti;
-- self-attention, cross-attention e causalità spiegate con tre frasi distinte;
-- un solo snippet mostrato integralmente nel capitolo;
-- confronti API e mask mantenuti negli artefatti del codice e richiamati in prosa;
-- costo quadratico spiegato prima come numero di celle `n^2`;
-- review linguistica e lettura lineare senza dipendere dalle formule.
+- problema concreto prima dei vettori;
+- token, vettore, shape e prodotto scalare spiegati nel punto d'uso;
+- query, key e value presentate come ruoli;
+- formula compatta dopo esempio e pseudocodice;
+- derivazione sulla varianza in un approfondimento;
+- dettagli API confinati in nota;
+- un solo snippet completo nel corpo;
+- costo quadratico spiegato prima con le `n²` celle;
+- metadati e audit fuori dal testo del manuale;
+- italiano idiomatico e seconda lettura completa.
 
 ## Visuali incluse
 
-- `ATT-01`: differenza tra contesto fisso e coefficienti dipendenti dalla posizione.
-- `ATT-02`: esempio numerico completo per una query.
+### `ATT-01`. Perché servono pesi dipendenti dalla query
+
+- File: `assets/chapters/28_attention/ATT-01/candidate-v3.png`.
+- Funzione: confrontare contesto fisso e combinazioni dipendenti dalla posizione.
+- Correzione: `consumer 1/2` sostituito con `Posizione 1/2`.
+- Stato: validata tecnicamente, approvazione autoriale aperta.
+
+### `ATT-02`. Esempio numerico completo
+
+- File: `assets/chapters/28_attention/ATT-02/candidate-v2.png`.
+- Funzione: seguire input, score, scaling, softmax, somma pesata e output.
+- Stato: validata tecnicamente, approvazione autoriale aperta.
 
 Ogni visuale viene introdotta, attraversata e conclusa nella prosa.
 
-Controlli riaperti:
-
-- coerenza delle label con il lessico accessibile;
-- eventuale sostituzione di `consumer 1/2` con `posizione 1/2` in `ATT-01`;
-- leggibilità del nuovo testo numerico di `ATT-02` rispetto alla prosa;
-- approvazione autoriale.
-
 ## Codice incluso
 
-- `SNIP-ATT-001`: singola query e valori numerici, mostrato nel capitolo.
-- `SNIP-ATT-002`: formula matriciale e confronto API, richiamato dal capitolo.
-- `SNIP-ATT-003`: causal mask e coefficienti futuri nulli, richiamato dal capitolo.
+- `SNIP-ATT-001`: singola query e valori numerici.
+- `SNIP-ATT-002`: formula matriciale e confronto API.
+- `SNIP-ATT-003`: causal mask e coefficienti futuri nulli.
 
-Il codice è invariato rispetto alla versione testata. La superficie del capitolo mostra soltanto il blocco necessario a riconoscere score, softmax e prodotto con `V`.
+Il codice è invariato rispetto alla versione testata. La prosa descrive gli stessi input, lo stesso ordine e gli stessi output.
 
 ## Materiale differito
 
@@ -97,22 +94,20 @@ Il codice è invariato rispetto alla versione testata. La superficie del capitol
 - concatenazione e proiezione finale;
 - shape per head;
 - meccanismo interno di FlashAttention;
-- varianti KV e cache;
-- dettagli completi sulle differenze tra convenzioni booleane delle API.
+- varianti KV e cache.
 
 ## Gate di completamento
 
-- problema intuitivo prima della rappresentazione vettoriale;
-- termini introdotti dopo i referenti;
-- ogni simbolo accompagnato da un significato in parole;
-- esempio e pseudocodice prima della formula;
-- matematica avanzata separata dal percorso minimo;
-- codice dopo il meccanismo;
-- varianti come confini o rinvii;
-- prosa non frammentata;
-- metadati separati dal manuale;
-- italiano idiomatico;
-- possibilità di spiegare l'attention senza formula prima di formalizzarla;
-- review `EDIT-ATT-01` fino a `EDIT-ATT-04` registrate;
-- controllo incrociato visuale ripetuto;
-- revisione autoriale prima del congelamento.
+- [x] termini introdotti dopo i referenti;
+- [x] esempio e pseudocodice prima della formula;
+- [x] codice dopo il meccanismo;
+- [x] varianti come confini o rinvii;
+- [x] prosa non frammentata;
+- [x] metadati separati dal manuale;
+- [x] italiano idiomatico;
+- [x] chiarezza per lettore non esperto;
+- [x] controllo incrociato visuale ripetuto;
+- [x] alt text verificati;
+- [ ] approvazione autoriale;
+- [ ] rinomina delle figure in `final.png`;
+- [ ] congelamento prima dell'aggiornamento di `main`.
