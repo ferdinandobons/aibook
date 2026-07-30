@@ -1,275 +1,289 @@
-# Capitolo NN. Titolo
+# Template canonico di un capitolo
 
-## Metadati
+## Stato
 
-- Stato: ricerca / pianificazione / bozza / revisione fattuale / revisione matematica / revisione codice / revisione visuale / revisione incrociata / revisione didattica / revisione autoriale / approvato
-- Profilo: componente / processo / architettura / training / tecnica / paper / confronto / implementazione
-- Data apertura:
-- Data ultima ricerca web:
-- Data ultima verifica fonti:
-- Data di congelamento editoriale:
-- Versione Python:
-- Versione PyTorch:
-- Device e dtype di riferimento:
-- Oggetto continuo:
-- Concetti differiti:
-- Registro affermazioni: `CLAIMS.md`
-- Dossier fonti: `FONTI_PRIMARIE.md`
-- Audit testuale: `TEXT_AUDIT.md`
-- Audit codice: `code/CODE_AUDIT.md`
-- Piano: `PLAN.md`
+- Stato: `vincolante`
+- Metodo: `EXPLANATION_STYLE_AND_VISUALS.md`
+- Regola di superficie: `19_STRUTTURA_LOGICA_IN_PROSA.md`
+- Review didattica: `18_PROTOCOLLO_QA_DIDATTICO.md`
 
-## Bussola
+## 1. Principio del template
 
-- **Stato prima:**
-- **Problema:**
-- **Stato dopo:**
-- **Invariante:**
-- **Confine:**
+Il template distingue due artefatti:
 
-## Obiettivo operativo
+1. lo scaffold interno usato per pianificare e revisionare;
+2. il capitolo destinato al lettore.
 
-Al termine del capitolo il lettore può...
+Lo scaffold interno è regolare e analitico. Il capitolo pubblicato è una spiegazione in prosa con titoli semantici adatti al contenuto.
 
-## Prerequisiti stabili
+Non si copiano nel testo, come struttura ripetitiva, le etichette `Dove siamo`, `Problema`, `Trasformazione`, `Cosa è cambiato`, `Cosa è rimasto invariato`, `Cosa non fa` o `Frase di continuità`.
 
-## Evidenze e provenienza
+## 2. File obbligatori
 
-| ID | Affermazione o risultato | Tipo | Fonte o prova | Stato |
-|---|---|---|---|---|
-| CLM-NN-001 |  | fonte primaria / derivazione / eseguito / illustrativo / confine |  | aperta |
+```text
+chapters/<slug>/
+  PLAN.md
+  CHAPTER.md
+  FONTI_PRIMARIE.md
+  CLAIMS.md
+  TEXT_AUDIT.md
+  CHANGELOG.md
+  REVIEW.md
+  code/
+  assets/
+```
 
-> Un'affermazione aperta non può comparire come frase assertiva nella versione approvata. Le inferenze fattuali editoriali non sono un tipo ammesso.
+## 3. Metadati del capitolo
 
-## 1. Ancora
+`CHAPTER.md` o il front matter associato registra:
 
-### Stato del lettore
+```text
+chapter_id:
+part_id:
+order_key:
+titolo:
+slug:
+maturità:
+stato editoriale:
+data di apertura:
+data ultima ricerca web:
+data ultima verifica fonti:
+data di congelamento:
+versione Python:
+versione delle librerie:
+device e dtype:
+prerequisiti:
+concetti differiti:
+capitolo o consumer successivo:
+```
+
+I dettagli operativi non devono interrompere la lettura della lezione nella versione editoriale finale.
+
+## 4. Scaffold interno in `PLAN.md`
+
+Prima della stesura si registra:
+
+```text
+Domanda centrale:
+Oggetto continuo:
+Stato iniziale:
+Gap:
+Output finale:
+Invarianti principali:
+Confini:
+Concetti differiti:
+Consumer successivo:
+Visuali previste:
+Snippet previsti:
+```
+
+Per ogni transizione portante si compila internamente:
 
 ```text
 Ultima affermazione stabile:
 Oggetto corrente:
 Un concetto nuovo:
-Concetti differiti:
-Prova che il nuovo concetto è stabile:
+Input e shape:
+Operazione:
+Output e shape:
+Cosa cambia:
+Cosa resta invariato:
+Cosa non fa:
+Cosa userà l'output:
+Esempio o prova:
+Errore comune:
+Giunzione con il passaggio successivo:
 ```
 
-## 2. Gap concreto
+Questa scheda non determina i titoli visibili del capitolo.
 
-## 3. Prima transizione minima
+## 5. Struttura destinata al lettore
 
-### Dove siamo
+Il capitolo usa soltanto le sezioni necessarie al proprio profilo. Un possibile percorso è:
 
-### Problema
+```text
+Titolo
+Orientamento iniziale in prosa
+Problema concreto
+Meccanismo costruito per passaggi
+Esempio continuo
+Pseudocodice, quando utile
+Formalizzazione
+Implementazione
+Varianti o confini pertinenti
+Ricostruzione
+Controlli ed esercizi
+Fonti e artefatti
+```
 
-### Input e shape
+I titoli sono semantici. Devono nominare il contenuto reale, per esempio:
 
-### Trasformazione
+```text
+Perché una combinazione fissa non basta
+Dal confronto ai coefficienti
+Escludere le posizioni future
+Dalla formula all'implementazione
+```
 
-### Output e shape
+Non esiste una sequenza obbligatoria di trenta intestazioni uguale per ogni capitolo.
 
-### Cosa è cambiato
+## 6. Orientamento iniziale
 
-### Cosa è rimasto invariato
+L'apertura deve rendere chiari, in uno o più paragrafi naturali:
 
-### Cosa non fa
+- il punto da cui si parte;
+- la capacità mancante;
+- ciò che il lettore saprà ricostruire alla fine;
+- il confine del capitolo.
 
-### Cosa usa l'output dopo
+Una bussola schematica può essere conservata in `PLAN.md`. Nel testo pubblico viene usata soltanto quando migliora davvero la comprensione.
 
-### Esempio minimo
+## 7. Transizioni nella prosa
 
-- Provenienza: Illustrativo / Eseguito / Fonte primaria
-- Controllo numerico:
+Ogni passaggio deve contenere le funzioni del blocco atomico, ma le integra in frasi e paragrafi.
 
-### Errore comune
+Esempio:
 
-### Frase di continuità
+```text
+I tre prodotti scalari forniscono uno score per ogni key. Il vettore risultante ha shape [S], mentre V non è ancora coinvolta. Gli score non sono coefficienti normalizzati: possono essere negativi e non sommano a 1. Prima della softmax, il passaggio successivo ne controlla la scala.
+```
 
-## 4. Nome tecnico e contratto
+Il reviewer deve poter ricostruire stato, output, invariante, confine e continuità. Il lettore non deve vedere un modulo compilato.
 
-## 5. Ripetizione e scala
+## 8. Ordine di introduzione
 
-## 6. Visuale portante
+Quando pertinente, l'ordine è:
 
-- ID:
-- Domanda:
-- Stato prima:
-- Stato dopo:
-- Invariante:
-- Confine:
-- Provenienza:
-- Alt text:
-- Equivalente testuale:
-- Stato audit:
-- Registro revisioni:
-- File finale:
+```text
+domanda concreta
+-> oggetto o esempio osservabile
+-> valori e shape
+-> algoritmo o pseudocodice
+-> formula generale
+-> derivazione necessaria
+-> implementazione verificata
+-> varianti e ottimizzazioni
+```
 
-## 7. Shape e strutture dati
+Il pseudocodice può essere omesso quando non esiste un algoritmo sequenziale utile da esplicitare. L'omissione deve essere motivata nel piano.
 
-## 8. Pseudocodice
+## 9. Visuali
 
-Il pseudocodice deve essere etichettato esplicitamente e non deve essere presentato come codice eseguibile.
+Ogni visuale inclusa possiede:
 
-## 9. Formalizzazione matematica
+```text
+FIG-ID
+SPEC.md
+AUDIT.md
+ALT_TEXT.md
+candidate-vN.png o final.png
+```
 
-## 10. Derivazione
+Nel capitolo la prosa:
 
-- Definizioni di partenza:
-- Passaggi:
-- Condizioni di validità:
-- Controllo indipendente:
+1. introduce la domanda della figura;
+2. attraversa gli elementi nell'ordine di lettura;
+3. esplicita il risultato e il passaggio successivo.
 
-## 11. Implementazione da zero
+Le etichette `Domanda della figura` e `Conclusione della figura` non sono obbligatorie nella superficie pubblicata.
 
-### Contratto dello snippet
+## 10. Codice
 
-- ID:
-- Domanda:
-- Input noto:
-- Shape iniziali:
-- Operazione centrale:
-- Output osservabile:
-- Invariante:
-- Versione Python:
-- Versione libreria:
-- Device:
-- Dtype:
-- Seed:
-- File completo:
-- Test:
-- Stato audit:
+Prima di ogni snippet, la prosa identifica naturalmente:
 
-## 12. Implementazione con API ufficiale
+- l'input già noto;
+- le righe che implementano l'operazione centrale;
+- l'output o l'invariante da controllare.
 
-- API e firma verificate:
-- Fonte ufficiale:
-- Versione della documentazione:
-- Data di consultazione:
-- Differenze rispetto all'implementazione da zero:
-- File completo:
-- Test di equivalenza o confronto:
+Il contratto completo dello snippet resta in `code/README.md` e `code/CODE_AUDIT.md`. Nel corpo non è obbligatorio pubblicare una sezione intitolata `Contratto dello snippet`.
 
-## 13. Registro degli snippet
+Ogni snippet registra:
 
-| ID | Concetto | File | Ambiente | Test | Stato |
-|---|---|---|---|---|---|
-| SNIP-NN-001 |  |  |  |  | bozza |
+```text
+ID
+file
+ambiente
+versioni
+device
+dtype
+seed
+comando
+output
+test
+stato audit
+```
 
-## 14. Test e invarianti
+## 11. Matematica, shape e invarianti
 
-- Shape attese:
-- Proprietà numeriche:
-- Tolleranze:
-- Caso negativo:
-- Output salvato:
-- Comando di esecuzione:
-- Data di esecuzione:
+Le formule entrano dopo i referenti concreti. Shape, condizioni e invarianti vengono dichiarati nel punto in cui servono, in prosa, tabella o box tecnico.
 
-## 15. Complessità e memoria
+La forma editoriale può variare. Non può variare la precisione.
 
-- Costo temporale:
-- Costo spaziale:
-- Parametri rilevanti:
-- Data movement:
-- Condizioni e limiti:
+## 12. Varianti e confini
 
-## 16. Stabilità numerica
-
-## 17. Varianti e ottimizzazioni
-
-Ogni variante entra dopo il caso base e deve dichiarare:
+Una variante entra dopo il caso base e dichiara:
 
 - collo di bottiglia;
 - modifica;
-- comportamento che resta invariato;
-- nuovo costo;
+- comportamento invariato;
+- costo nuovo;
 - trade-off;
 - fonte e versione.
 
-## 18. Failure mode
+Un concetto rinviato viene mantenuto come ponte breve o riferimento incrociato. Non viene spiegato a metà per riempire una sezione standard.
 
-## 19. Reintegrazione nell'architettura
+## 13. Ricostruzione e controlli
 
-## 20. Ricostruzione completa
+La conclusione permette al lettore di:
 
-## 21. Controlli di comprensione
+- ricostruire il flusso;
+- localizzare il meccanismo;
+- indicarne il confine;
+- trasferirlo a un nuovo input;
+- prevedere una variazione.
 
-### Ricostruzione
+I titoli di questi controlli possono essere mantenuti perché descrivono azioni distinte richieste al lettore.
 
-### Localizzazione
+## 14. Fonti e artefatti
 
-### Confine
+Il capitolo chiude con le sezioni pertinenti tra:
 
-### Trasferimento
+- fonti primarie;
+- documentazione ufficiale;
+- repository e standard;
+- artefatti di riproduzione;
+- letture complementari separate.
 
-### Variazione
+## 15. Audit
 
-## 22. Esercizi
+`TEXT_AUDIT.md` registra almeno:
 
-## 23. Audit testuale
+- audit fattuale;
+- audit matematico;
+- audit algoritmico;
+- audit temporale;
+- audit incrociato;
+- una o più review didattiche complete;
+- controllo anti-template secondo `19_STRUTTURA_LOGICA_IN_PROSA.md`;
+- esito autoriale.
 
-- [ ] Tutte le affermazioni portanti sono verificate.
-- [ ] Ogni citazione è stata controllata nel contesto originale.
-- [ ] Formule, shape e numeri sono stati ricontrollati.
-- [ ] Paper, documentazione, repository, checkpoint e prodotto sono distinti.
-- [ ] Le informazioni recenti sono state ricontrollate sul web.
-- [ ] Le divergenze tra fonti sono registrate.
-- [ ] Non sono presenti inferenze fattuali editoriali.
-- [ ] Le interpretazioni degli autori sono attribuite alla fonte.
-- [ ] La semplificazione non cambia il meccanismo.
-- Esito:
+Un capitolo non passa a revisione autoriale soltanto perché contiene tutte le etichette del vecchio template. Deve mostrare una prosa naturale e permettere al reviewer di ricostruire la logica sottostante.
 
-## 24. Audit del codice
+## 16. Registro finale
 
-- [ ] Esecuzione pulita completata.
-- [ ] Versioni registrate.
-- [ ] Test superati.
-- [ ] Output coerente con la prosa.
-- [ ] API verificata sulla documentazione ufficiale.
-- [ ] Shape e dtype controllati.
-- [ ] Output `Eseguito` associati a log o test.
-- Stato:
-
-## 25. Audit delle visuali
-
-- [ ] Tutte le immagini incluse sono approvate.
-- [ ] Origine e destinazione delle frecce sono corrette.
-- [ ] Shape, numeri e label coincidono con la prosa.
-- [ ] Non esistono incroci o callout ambigui.
-- [ ] Alt text ed equivalente testuale sono presenti.
-- [ ] Nessun watermark, firma o branding di terzi.
-- Stato:
-
-## 26. Audit incrociato
-
-- [ ] Testo, formule, immagini e codice usano gli stessi nomi.
-- [ ] L'ordine delle operazioni coincide.
-- [ ] Invarianti e confini coincidono.
-- [ ] Numeri e output coincidono.
-- [ ] Non rimangono contraddizioni aperte.
-- Stato:
-
-## 27. Fonti primarie
-
-## 28. Documentazione ufficiale
-
-## 29. Repository, standard e artefatti di riproduzione
-
-## 30. Letture complementari
-
-Questa sezione è separata dalle fonti usate come prova portante.
-
-## 31. Registro finale di approvazione
-
-- Review fattuale:
-- Review matematica:
-- Review architetturale e algoritmica:
-- Review temporale:
-- Review codice:
-- Review visuale:
-- Review incrociata:
-- Review didattica:
-- Review autoriale:
-- Data di congelamento:
-- Commit congelato:
-- Problemi noti non bloccanti:
-- Sezioni rinviate:
+```text
+Review fattuale:
+Review matematica:
+Review architetturale e algoritmica:
+Review temporale:
+Review codice:
+Review visuale:
+Review incrociata:
+Review didattica:
+Review anti-template:
+Review autoriale:
+Data di congelamento:
+Commit congelato:
+Problemi non bloccanti:
+Sezioni rinviate:
+```
