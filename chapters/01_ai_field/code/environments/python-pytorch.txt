@@ -1,0 +1,6 @@
+Python: 3.13.5
+PyTorch: 2.10.0+cpu
+Device: cpu
+Default dtype in snippet: torch.float32
+Seed: 7
+Platform: Linux-6.12.13-x86_64-with-glibc2.41
