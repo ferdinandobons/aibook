@@ -4,14 +4,11 @@
 
 - Branch di produzione: `feature/full-book-production`
 - Branch canonico: `main`
-- Pull request: `#2`
+- Pull request: `#2`, draft
 - Commit di partenza: `a10235cf384ebda23060a05a3e25ef7b490595a1`
 - Opera pianificata: 98 capitoli e 12 appendici
 - Modalità: produzione seriale controllata
-- Capitolo pilota in `main`: `CH-P06-ATTENTION`, versione `0.3.0-rc3`
-- Revisione del pilota nel branch: `0.5.0-rc5`
-- Unità corrente: `CH-P01-AI-FIELD`, versione `0.3.0-rc2`
-- Stato corrente: review di chiarezza per lettore non esperto superata, visuali aperte
+- Unità corrente: `CH-P01-LIFECYCLE`, Capitolo 3, stato `research`
 - Data di apertura: 30 luglio 2026
 
 ## Documenti operativi
@@ -27,11 +24,11 @@
 
 ## Scopo
 
-Questo branch raccoglie la stesura dell'opera **Intelligenza artificiale generativa**. Non accumula capitoli non revisionati. Ogni unità attraversa ricerca, claim, piano, prosa, codice, visuali e review prima che inizi la successiva.
+Questo branch raccoglie la stesura seriale dell'opera **Intelligenza artificiale generativa**. Ogni unità integra testo, fonti, claim, formule, codice, visuali e review prima di lasciare lo stato corrente.
 
 Gli artefatti del libro sono:
 
-- testo Markdown in prosa da manuale;
+- Markdown in prosa da manuale;
 - formule e tabelle;
 - immagini tecniche con sfondo bianco;
 - snippet eseguiti e testati;
@@ -39,41 +36,6 @@ Gli artefatti del libro sono:
 - audit tecnici, didattici, editoriali e visuali.
 
 Non vengono prodotti render raster delle pagine, mockup editoriali o screenshot dell'impaginazione.
-
-Metadati, audit, branch, commit e dettagli operativi restano fuori dal testo destinato al lettore.
-
-## Stati
-
-```text
-planned
-research
-draft
-technical-review
-didactic-review
-editorial-review
-author-review
-approved
-suspended
-```
-
-## Quadro dell'opera
-
-| Parte | Intervallo | Capitoli | Stato |
-|---|---:|---:|---|
-| `P01` Campo, metodo e storia dell'AI | 1-4 | 4 | capitolo 1, visuali aperte; altri `planned` |
-| `P02` Matematica, informazione e calcolo | 5-9 | 5 | `planned` |
-| `P03` Apprendimento, ottimizzazione e decisione | 10-14 | 5 | `planned` |
-| `P04` Reti neurali e rappresentazioni | 15-19 | 5 | `planned` |
-| `P05` Modellazione generativa | 20-25 | 6 | `planned` |
-| `P06` Sequenze, linguaggio e contesto | 26-31 | 6 | capitolo 28 approvato in `main`, nuova review di accessibilità nel branch |
-| `P07` Dati, pretraining e scaling | 32-36 | 5 | `planned` |
-| `P08` Progettazione delle architetture | 37-45 | 9 | `planned` |
-| `P09` Adattamento, allineamento e ragionamento | 46-54 | 9 | `planned` |
-| `P10` Multimodalità e modelli del mondo | 55-62 | 8 | `planned` |
-| `P11` Conoscenza esterna, memoria e azione | 63-72 | 10 | `planned` |
-| `P12` Efficienza, inference e sistemi | 73-82 | 10 | `planned` |
-| `P13` Valutazione, interpretabilità, sicurezza e governance | 83-93 | 11 | `planned` |
-| `P14` Laboratori, integrazione e osservatorio | 94-98 | 5 | `planned` |
 
 ## Sequenza di produzione
 
@@ -90,75 +52,109 @@ ricerca
 -> review didattica
 -> gate anti-template
 -> review editoriale e linguistica
--> review di chiarezza per lettore non esperto
+-> review per lettore non esperto
 -> seconda lettura completa
 -> revisione autoriale
 -> congelamento
 ```
 
-## Gate prima del capitolo successivo
+## Gate prima dell'unità successiva
 
-Un capitolo lascia l'unità corrente quando:
+Una candidatura può lasciare l'unità corrente quando:
 
-- le affermazioni portanti sono verificate;
-- formule e numeri sono corretti;
+- i claim portanti sono verificati;
+- formule, date e numeri sono corretti;
 - il codice previsto è eseguito e testato;
-- le visuali incluse sono validate;
-- la review didattica è superata;
-- il gate anti-template è superato;
-- la review linguistica è superata;
-- un lettore non esperto può ricostruire il meccanismo prima di usare formule e gergo;
-- ogni termine necessario viene spiegato prima di essere riutilizzato;
-- ogni difetto bloccante è seguito da una nuova review integrale;
-- testo, formule, immagini e codice sono coerenti;
-- la candidatura è disponibile per la revisione autoriale oppure il capitolo è formalmente sospeso.
+- le visuali sono validate tecnicamente;
+- le review didattica, editoriale, linguistica e di accessibilità sono superate;
+- testo, immagini e codice sono coerenti;
+- la candidatura completa è disponibile per la revisione autoriale.
+
+La rinomina in `final.png` e il congelamento richiedono approvazione autoriale. La produzione può proseguire sul capitolo successivo mantenendo aperta la review delle candidature complete nel feature branch.
+
+## Quadro dell'opera
+
+| Parte | Intervallo | Capitoli | Stato |
+|---|---:|---:|---|
+| `P01` Campo, metodo e storia dell'AI | 1-4 | 4 | Capitoli 1 e 2 in revisione autoriale; Capitolo 3 in ricerca; Capitolo 4 pianificato |
+| `P02` Matematica, informazione e calcolo | 5-9 | 5 | `planned` |
+| `P03` Apprendimento, ottimizzazione e decisione | 10-14 | 5 | `planned` |
+| `P04` Reti neurali e rappresentazioni | 15-19 | 5 | `planned` |
+| `P05` Modellazione generativa | 20-25 | 6 | `planned` |
+| `P06` Sequenze, linguaggio e contesto | 26-31 | 6 | Capitolo 28 in revisione autoriale; altri `planned` |
+| `P07` Dati, pretraining e scaling | 32-36 | 5 | `planned` |
+| `P08` Progettazione delle architetture | 37-45 | 9 | `planned` |
+| `P09` Adattamento, allineamento e ragionamento | 46-54 | 9 | `planned` |
+| `P10` Multimodalità e modelli del mondo | 55-62 | 8 | `planned` |
+| `P11` Conoscenza esterna, memoria e azione | 63-72 | 10 | `planned` |
+| `P12` Efficienza, inference e sistemi | 73-82 | 10 | `planned` |
+| `P13` Valutazione, interpretabilità, sicurezza e governance | 83-93 | 11 | `planned` |
+| `P14` Laboratori, integrazione e osservatorio | 94-98 | 5 | `planned` |
+
+## Candidature complete
+
+### Capitolo 1. `CH-P01-AI-FIELD`
+
+- versione `0.4.0-rc3`;
+- due visuali validate;
+- snippet PyTorch e tre test;
+- revisione autoriale aperta.
+
+### Capitolo 2. `CH-P01-HISTORY`
+
+- versione `0.2.0-rc1`;
+- quattordici fonti primarie e diciotto claim;
+- snippet simbolico e tre test;
+- due visuali validate;
+- revisione autoriale aperta.
+
+### Capitolo 28. `CH-P06-ATTENTION`
+
+- versione `0.6.0-rc6`;
+- tre snippet e tre test;
+- `ATT-01` corretta e `ATT-02` ricontrollata;
+- revisione autoriale aperta.
 
 ## Unità corrente
 
-### `CH-P01-AI-FIELD`. Che cos'è l'intelligenza artificiale
-
-Versione: `0.3.0-rc2`.
+### Capitolo 3. `CH-P01-LIFECYCLE`
 
 Completato:
 
-- fonti e 18 claim;
-- testo riscritto come manuale;
-- codice e tre test;
-- review fattuale e didattica;
-- gate anti-template;
-- review editoriale e linguistica;
-- review specifica per lettore non esperto;
-- seconda lettura completa.
+- piano interno;
+- oggetto continuo;
+- progressione;
+- visuali e snippet pianificati;
+- gate specifici.
 
-Aperto:
+Da produrre:
 
-- `AI-01`;
-- `AI-02`;
-- controllo incrociato dopo le visuali;
-- revisione autoriale.
+- fonti e claim;
+- prima stesura;
+- codice e test;
+- `LIFE-01` e `LIFE-02`;
+- audit e seconda lettura.
 
-## Revisione del Capitolo 28
+## Tooling visuale
 
-La versione `0.5.0-rc5` nel branch:
+I generatori raster e il workflow sono:
 
-- parte da una frase prima dei vettori;
-- definisce token, vettore, shape e prodotto scalare nel punto d'uso;
-- presenta query, key e value come ruoli;
-- riunisce il calcolo numerico in un percorso intuitivo e poi formale;
-- separa la derivazione avanzata dal percorso minimo;
-- mostra un solo snippet completo nel corpo;
-- spiega la causal mask prima della formula;
-- spiega il costo quadratico attraverso le `n^2` coppie;
-- supera la review linguistica e di chiarezza interna;
-- riapre il controllo incrociato di `ATT-01` e `ATT-02`.
+```text
+scripts/generate_book_visuals.py
+scripts/generate_history_visuals.py
+scripts/integrate_generated_visuals.py
+.github/workflows/generate-book-visuals.yml
+```
+
+I generatori usano sfondo bianco, controllano il wrapping previsto e verificano che i PNG siano decodificabili. Ogni candidata conserva `SPEC.md`, `AUDIT.md` e `ALT_TEXT.md`.
 
 ## Aggiornamento del piano
 
-Dopo ogni capitolo si aggiornano:
+Dopo ogni unità si aggiornano:
 
 - questo file;
 - `PROGRESS.md`;
-- stato e versione;
+- stato e versione del capitolo;
 - date di verifica;
-- commit o pull request;
-- eventuali cambiamenti del catalogo e dell'indice.
+- pull request;
+- eventuali modifiche a catalogo e indice.
