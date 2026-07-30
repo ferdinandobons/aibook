@@ -4,25 +4,26 @@ Repository canonico del libro **Intelligenza artificiale generativa**.
 
 ## Da dove iniziare
 
-Una persona o un sistema AI che non conosce il progetto deve leggere:
+Una persona o un sistema AI senza contesto precedente legge:
 
 1. [`GUIDELINE.md`](GUIDELINE.md), entry point operativo;
-2. [`docs/README.md`](docs/README.md), indice della documentazione canonica;
-3. [`PROGRESS.md`](PROGRESS.md), stato corrente del lavoro.
+2. [`docs/README.md`](docs/README.md), mappa della documentazione;
+3. [`PROGRESS.md`](PROGRESS.md), stato corrente;
+4. [`BOOK_PRODUCTION.md`](BOOK_PRODUCTION.md), piano della produzione completa.
 
 ## Obiettivo
 
 Costruire un manuale tecnico completo in italiano, dai fondamenti matematici e computazionali ai modelli generativi, alle architetture, al post-training, alla multimodalità, agli agenti, ai sistemi di produzione, alla valutazione e alla sicurezza.
 
-Il libro è organizzato per problemi, meccanismi e contratti tecnici. I singoli modelli vengono usati come studi di caso verificati; il nome di un prodotto non determina da solo la struttura dell'opera.
+Il libro è organizzato per problemi, meccanismi e contratti tecnici. I modelli specifici vengono usati come studi di caso, non come struttura dell'opera.
 
 ## Forma dell'opera
 
-Il repository contiene **una sola opera canonica e continua**. La stessa sorgente può essere esportata come volume unico, più tomi, sito, knowledge base o corso modulare.
+Il repository contiene una sola opera canonica e continua. La stessa sorgente può essere esportata come volume unico, più tomi, sito, knowledge base o corso. L'export non cambia l'identità dei contenuti.
 
 ## Parti stabili
 
-| ID | Parte canonica |
+| ID | Parte |
 |---|---|
 | `P01` | Campo, metodo e storia dell'AI |
 | `P02` | Matematica, informazione e calcolo |
@@ -39,100 +40,92 @@ Il repository contiene **una sola opera canonica e continua**. La stessa sorgent
 | `P13` | Valutazione, interpretabilità, sicurezza e governance |
 | `P14` | Laboratori, integrazione e osservatorio |
 
-ID, nomi e ordine delle parti sono stabili. Le nuove tecniche vengono inserite nella parte che possiede l'oggetto modificato.
+ID, nomi e ordine delle parti sono stabili. Le nuove tecniche vengono collocate in base al problema risolto e all'oggetto modificato.
 
-## Maturità dei contenuti
+## Indice e stato dell'arte
 
-Ogni tecnica può essere classificata come:
+- Indice dell'opera: [`docs/01_INDICE_EDITORIALE.md`](docs/01_INDICE_EDITORIALE.md)
+- Catalogo delle tecniche: [`docs/14_CATALOGO_STATO_ARTE.md`](docs/14_CATALOGO_STATO_ARTE.md)
+- Registro delle ricerche globali: [`docs/15_REGISTRO_RICERCHE_APPROFONDITE.md`](docs/15_REGISTRO_RICERCHE_APPROFONDITE.md)
+- Ultima ricerca approfondita globale: **30 luglio 2026**
 
-- `CORE`, durevole e necessaria per numerosi sviluppi;
-- `ESTABLISHED`, verificata e rilevante, ma ancora in evoluzione o non universale;
-- `FRONTIER`, recente, sperimentale o con evidenza limitata.
+Ogni tecnica può essere classificata come `CORE`, `ESTABLISHED` o `FRONTIER`. La maturità può cambiare senza spostare la tecnica tra le parti.
 
-La maturità può cambiare senza spostare la tecnica tra le parti. Il catalogo è in [`docs/14_CATALOGO_STATO_ARTE.md`](docs/14_CATALOGO_STATO_ARTE.md).
+## Documentazione consolidata
 
-## Ultima ricerca approfondita
+La documentazione canonica è stata condensata per tema:
 
-- Data dell'ultima ricerca globale: **30 luglio 2026**
-- Registro: [`docs/15_REGISTRO_RICERCHE_APPROFONDITE.md`](docs/15_REGISTRO_RICERCHE_APPROFONDITE.md)
-- Protocollo futuro: [`docs/13_PROTOCOLLO_AGGIORNAMENTO_CONTENUTI.md`](docs/13_PROTOCOLLO_AGGIORNAMENTO_CONTENUTI.md)
+| Documento | Contenuto |
+|---|---|
+| [`docs/00_GOVERNANCE_E_ARCHITETTURA.md`](docs/00_GOVERNANCE_E_ARCHITETTURA.md) | contratto editoriale, parti, routing, maturità, ID e decisioni |
+| [`docs/01_INDICE_EDITORIALE.md`](docs/01_INDICE_EDITORIALE.md) | 98 capitoli, 12 appendici e regole dell'indice |
+| [`docs/02_STILE_E_QA_TESTO.md`](docs/02_STILE_E_QA_TESTO.md) | metodo didattico, voce italiana, template e review del testo |
+| [`docs/03_VISUALI.md`](docs/03_VISUALI.md) | stile visivo, sfondo bianco, orientamento, contenimento e QA |
+| [`docs/04_CODICE_FONTI_E_RIPRODUCIBILITA.md`](docs/04_CODICE_FONTI_E_RIPRODUCIBILITA.md) | fonti, claim, citazioni, snippet, test, API e ambienti |
+| [`docs/05_WORKFLOW_E_REPOSITORY.md`](docs/05_WORKFLOW_E_REPOSITORY.md) | struttura dei file, produzione seriale e aggiornamenti U1-U8 |
 
-Ogni capitolo registra anche la propria data di verifica e congelamento.
+I registri dettagliati del catalogo e della ricerca restano separati perché hanno struttura e ciclo di aggiornamento propri.
 
 ## Metodo di produzione
 
-- produzione seriale controllata, un capitolo completo alla volta;
-- fonti primarie, technical report, documentazione e repository ufficiali;
-- nessun fatto basato su inferenza editoriale nella versione approvata;
-- registro delle affermazioni in `CLAIMS.md`;
-- formule e derivazioni ricontrollate;
-- snippet Python e PyTorch eseguiti e testati;
-- immagini create con lo strumento immagini e revisionate iterativamente;
-- controllo incrociato tra testo, formule, immagini e codice;
-- review didattica, editoriale e linguistica;
-- lettura ad alta voce;
-- revisione autoriale prima del congelamento.
+```text
+ricerca
+-> claim
+-> piano interno
+-> stesura
+-> formule
+-> codice e test
+-> visuali e audit
+-> audit tecnico
+-> review didattica
+-> gate anti-template
+-> review editoriale e linguistica
+-> lettura ad alta voce
+-> seconda lettura completa
+-> revisione autoriale
+-> congelamento
+```
 
-## Voce del manuale
+La produzione è seriale. Non si apre il capitolo successivo finché quello corrente non è approvato o formalmente sospeso.
 
-Il rigore del progetto resta negli artefatti interni, ma il lettore incontra una spiegazione continua.
+## Stile delle lezioni
 
-`PLAN.md` e `TEXT_AUDIT.md` conservano lo scaffold di stato, problema, trasformazione, output, invariante e confine. `CHAPTER.md` usa titoli semantici, sezioni abbastanza ampie e paragrafi naturali.
+La struttura logica resta esplicita nei file di piano e audit. Il testo destinato al lettore deve però sembrare un manuale tecnico scritto direttamente in italiano:
 
-Regole essenziali:
+- titoli semantici;
+- sezioni non frammentate;
+- esempio continuo;
+- prosa fluida e discorsiva;
+- formule e codice dopo il meccanismo;
+- metadati e registri fuori dal flusso;
+- lettura ad alta voce e review con tre profili di lettore.
 
-- metadati, audit, branch e commit fuori dal flusso della lezione;
-- italiano scritto direttamente, senza calchi evitabili;
-- ritmo variato;
-- esempio continuo mantenuto;
-- dettagli API e di riproducibilità spostati nei materiali associati quando interrompono il discorso;
-- nessuna lezione che suoni come una checklist, una specifica o una reference.
+## Visuali
 
-Riferimenti:
+Tutte le immagini tecniche:
 
-- [`docs/EXPLANATION_STYLE_AND_VISUALS.md`](docs/EXPLANATION_STYLE_AND_VISUALS.md);
-- [`docs/18_PROTOCOLLO_QA_DIDATTICO.md`](docs/18_PROTOCOLLO_QA_DIDATTICO.md);
-- [`docs/19_STRUTTURA_LOGICA_IN_PROSA.md`](docs/19_STRUTTURA_LOGICA_IN_PROSA.md);
-- [`docs/20_VOCE_EDITORIALE_E_REVISIONE_LINGUISTICA.md`](docs/20_VOCE_EDITORIALE_E_REVISIONE_LINGUISTICA.md).
+- usano sfondo bianco puro `#FFFFFF`;
+- possono essere orizzontali o verticali;
+- condividono palette, box, frecce e tipografia;
+- mantengono testo e simboli nei contenitori;
+- vengono revisionate e rigenerate;
+- non sono render delle pagine;
+- diventano `final.png` soltanto dopo approvazione tecnica e autoriale.
 
-## Stile delle immagini
+## Codice e fonti
 
-Tutte le figure seguono [`docs/17_STANDARD_VISIVO_CANONICO.md`](docs/17_STANDARD_VISIVO_CANONICO.md):
+Ogni capitolo tecnico include codice eseguibile, salvo eccezione motivata. Python e PyTorch sono predefiniti. Le API vengono verificate sulla documentazione ufficiale; gli output dichiarati `Eseguito` possiedono ambiente, comando e test.
 
-- sfondo bianco puro `#FFFFFF`;
-- orientamento in base al contenuto;
-- palette, box, frecce e gerarchia tipografica comuni;
-- una domanda principale per figura;
-- nessun testo fuori dal proprio contenitore;
-- nessun mockup della pagina completa;
-- prima generazione sempre bozza.
+Ogni affermazione portante è collegata a una fonte primaria, a documentazione ufficiale, a uno standard, a una derivazione verificata o a una prova riproducibile.
 
-## Come leggere `docs/`
-
-Ordine consigliato:
-
-1. `00_CONTRATTO_EDITORIALE.md`;
-2. `08_REGISTRO_DECISIONI.md`;
-3. `12_ARCHITETTURA_EDITORIALE_EVOLUTIVA.md`;
-4. `14_CATALOGO_STATO_ARTE.md`;
-5. `10_INDICE_EDITORIALE.md`;
-6. `13_PROTOCOLLO_AGGIORNAMENTO_CONTENUTI.md`;
-7. `EXPLANATION_STYLE_AND_VISUALS.md`;
-8. `19_STRUTTURA_LOGICA_IN_PROSA.md`;
-9. `20_VOCE_EDITORIALE_E_REVISIONE_LINGUISTICA.md`;
-10. `18_PROTOCOLLO_QA_DIDATTICO.md`;
-11. protocolli specialistici per testo, codice e visuali.
-
-L'indice completo è in [`docs/README.md`](docs/README.md).
-
-## Struttura del repository
+## Struttura principale
 
 ```text
 /
   README.md
   GUIDELINE.md
-  BOOK_PRODUCTION.md
   PROGRESS.md
+  BOOK_PRODUCTION.md
   docs/
   chapters/
   assets/
@@ -140,8 +133,6 @@ L'indice completo è in [`docs/README.md`](docs/README.md).
   tests/
 ```
 
-Ogni capitolo conserva testo, fonti, claim, audit, codice, output, ambiente e visuali.
-
 ## Stato corrente
 
-Il Capitolo 28 e il Capitolo 1 sono stati riscritti secondo la nuova voce editoriale. Lo stato aggiornato è in [`PROGRESS.md`](PROGRESS.md).
+Il Capitolo 28 sull'attention è il pilota approvato. Il Capitolo 1 è in revisione editoriale con visuali ancora aperte. Lo stato aggiornato è in [`PROGRESS.md`](PROGRESS.md).
