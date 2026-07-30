@@ -12,12 +12,13 @@
 ## Percorso consigliato
 
 1. `CHAPTER.md`, per voce, fluidità, progressione e profondità matematica;
-2. `TEXT_AUDIT.md`, per seguire le review `EDIT-ATT-01` e `EDIT-ATT-02`;
+2. `TEXT_AUDIT.md`, per le review `EDIT-ATT-01` e `EDIT-ATT-02`;
 3. `assets/.../ATT-01/candidate-v2.png`, per il confronto iniziale;
 4. `assets/.../ATT-02/candidate-v2.png`, per il calcolo numerico;
 5. `code/`, per i tre snippet e i test;
 6. `CLAIMS.md` e `FONTI_PRIMARIE.md`, per la tracciabilità;
-7. `docs/20_VOCE_EDITORIALE_E_REVISIONE_LINGUISTICA.md`, per lo standard adottato.
+7. `docs/02_STILE_E_QA_TESTO.md`, per voce e review del manuale;
+8. `docs/03_VISUALI.md`, per lo standard delle figure.
 
 ## Modifiche principali della versione `0.4.0-rc4`
 
@@ -34,12 +35,12 @@
 
 ## Aspetti da valutare nel testo
 
-- La lezione si legge ora come un capitolo di manuale?
+- La lezione si legge come un capitolo di manuale?
 - Il passaggio dal problema intuitivo ai vettori è naturale?
 - Il calcolo completo resta localizzabile senza essere frammentato?
 - La distinzione tra key e value è chiara anche se i numeri coincidono?
-- Le formule interrompono o sostengono il ritmo?
-- La sezione PyTorch è sufficientemente utile senza diventare una reference?
+- Le formule sostengono il ritmo?
+- La sezione PyTorch è utile senza diventare una reference?
 - Il riepilogo rende evidente che cosa l'attention permette di fare?
 
 ## Stato delle visuali
@@ -47,7 +48,7 @@
 - `ATT-01`: candidata tecnicamente validata nella versione precedente;
 - `ATT-02`: candidata tecnicamente validata nella versione precedente.
 
-La nuova prosa usa ancora entrambe le figure, ma il controllo incrociato deve essere ripetuto. `ATT-01` conserva le label `consumer 1` e `consumer 2`; il testo le localizza una sola volta. Una futura revisione può sostituirle con `posizione 1` e `posizione 2` per uniformare il lessico.
+La nuova prosa usa entrambe le figure, ma il controllo incrociato deve essere ripetuto. `ATT-01` conserva le label `consumer 1` e `consumer 2`; il testo le localizza una sola volta. Una futura revisione può sostituirle con `posizione 1` e `posizione 2`.
 
 ## Decisioni richieste all'autore
 
