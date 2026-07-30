@@ -5,8 +5,8 @@
 - `chapter_id`: `CH-P01-AI-FIELD`
 - Parte: `P01`, Campo, metodo e storia dell'AI
 - Profilo: componente e tassonomia introduttiva
-- Stato: review di chiarezza per lettore non esperto superata, visuali aperte
-- Versione del testo: `0.3.0-rc2`
+- Stato: candidatura completa in revisione autoriale
+- Versione del testo: `0.4.0-rc3`
 - Domanda centrale: quali proprietà distinguono AI, machine learning, deep learning, AI generativa, modelli generativi e foundation model senza trattarli come sinonimi?
 - Oggetto continuo: la richiesta `Il pacco non è arrivato`, trasformata in output da sistemi costruiti in modi diversi
 - Output finale: il lettore sa descrivere un sistema attraverso meccanismo, obiettivo e ampiezza, distingue modello e sistema e sa separare training da inference
@@ -74,8 +74,9 @@ Ogni termine tecnico viene preceduto da una spiegazione in linguaggio comune e r
 - Nuovo concetto: i parametri sono numeri interni aggiornati durante il training e usati durante l'inference.
 - Output: separazione tra parametri, iperparametri, checkpoint, training e inference.
 - Codice: modello lineare PyTorch su valori illustrativi.
+- Visuale: `AI-02`, collocata prima dello snippet.
 - Invariante: l'inference non esegue `optimizer.step()` e non modifica i parametri.
-- Gate di chiarezza: `feature`, `logit`, `loss`, `optimizer`, `checkpoint` e `shape` ricevono una spiegazione immediata.
+- Gate di chiarezza: `logit`, `loss`, `optimizer`, `checkpoint` e `shape` ricevono una spiegazione immediata.
 
 ### Transizione 6. Predire o generare
 
@@ -100,11 +101,11 @@ Il lettore ricostruisce tre aspetti:
 2. obiettivo, classificare, predire, decidere o generare;
 3. ampiezza, compito ristretto oppure base adattabile a più contesti.
 
-Localizza inoltre modello e sistema, training e inference, e trasferisce la descrizione a un nuovo caso.
+`AI-01` rende visibili i tre aspetti come pannelli paralleli e non gerarchici. Il lettore localizza inoltre modello e sistema, training e inference, e trasferisce la descrizione a un nuovo caso.
 
 ## Superficie editoriale adottata
 
-La versione `0.3.0-rc2` usa sette sezioni principali e apre con le tre domande che guidano l'intero capitolo.
+La versione `0.4.0-rc3` usa sette sezioni principali e apre con le tre domande che guidano l'intero capitolo.
 
 Regole applicate:
 
@@ -116,10 +117,12 @@ Regole applicate:
 - termini del codice tradotti subito in azioni osservabili;
 - distinzione discriminativo/generativo spiegata prima delle formule probabilistiche;
 - liste di metodi di adattamento ridotte a una descrizione generale;
+- visuali integrate nella prosa e non usate come pagine autonome;
 - riepilogo in prosa, senza una seconda tassonomia ridondante;
-- lettura ad alta voce e verifica con un lettore privo di esperienza specifica.
+- lettura ad alta voce e verifica con un lettore privo di esperienza specifica;
+- nuova lettura integrale dopo l'inserimento delle figure.
 
-## Visuali previste
+## Visuali incluse
 
 ### `AI-01`. Tre aspetti per descrivere un sistema di AI
 
@@ -127,7 +130,8 @@ Regole applicate:
 - Famiglia: taxonomy/comparison.
 - Orientamento: orizzontale.
 - Contenuto: meccanismo, obiettivo, ampiezza.
-- Stato: da rigenerare.
+- File: `assets/chapters/01_ai_field/AI-01/candidate-v1.png`.
+- Stato: validata tecnicamente, approvazione autoriale aperta.
 
 ### `AI-02`. Training e inference usano il modello in fasi diverse
 
@@ -135,7 +139,8 @@ Regole applicate:
 - Famiglia: process/comparison.
 - Orientamento: orizzontale.
 - Contenuto: dati, loss, gradienti, optimizer, checkpoint, nuovo input e output.
-- Stato: da generare.
+- File: `assets/chapters/01_ai_field/AI-02/candidate-v1.png`.
+- Stato: validata tecnicamente, approvazione autoriale aperta.
 
 ## Codice
 
@@ -163,4 +168,5 @@ Regole applicate:
 - non esporre metadati o audit nella lezione;
 - non frammentare il capitolo in microsezioni;
 - superare review linguistica, lettura ad alta voce e parafrasi in linguaggio comune;
-- ripetere il controllo incrociato dopo l'inserimento delle visuali.
+- ripetere il controllo incrociato dopo l'inserimento delle visuali;
+- non rinominare le immagini in `final.png` prima dell'approvazione autoriale.
