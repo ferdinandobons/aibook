@@ -2,6 +2,29 @@
 
 > I nomi dei protocolli citati nelle versioni storiche restano come traccia. Le regole correnti sono consolidate in `docs/02_STILE_E_QA_TESTO.md`, `docs/03_VISUALI.md` e `docs/04_CODICE_FONTI_E_RIPRODUCIBILITA.md`.
 
+## `0.4.0-rc3`. 30 luglio 2026
+
+### Visuali e controllo incrociato
+
+- generate `AI-01/candidate-v1.png` e `AI-02/candidate-v1.png`;
+- applicato sfondo bianco puro, orientamento orizzontale e palette canonica;
+- mantenuto tutto il testo nei contenitori;
+- rappresentati meccanismo, obiettivo e ampiezza come aspetti indipendenti;
+- rappresentato il target come input della loss e non del modello;
+- localizzato `optimizer step` come unico nodo che modifica i parametri;
+- esclusi loss, gradienti e optimizer dal pannello inference;
+- aggiunti alt text verificati e audit visuali completi;
+- integrata `AI-02` prima dello snippet e `AI-01` dopo la tabella dei tre aspetti;
+- eseguita una nuova lettura completa del capitolo dopo l'inserimento delle figure;
+- aperta la revisione autoriale della candidatura completa.
+
+### Riproducibilità delle immagini
+
+- aggiunto `scripts/generate_book_visuals.py`;
+- aggiunto il workflow `generate-book-visuals.yml`;
+- verificata la decodifica dei tre PNG prodotti;
+- nessuna immagine viene denominata `final.png` prima dell'approvazione autoriale.
+
 ## `0.3.0-rc2`. 30 luglio 2026
 
 ### Riscrittura per un lettore non esperto
