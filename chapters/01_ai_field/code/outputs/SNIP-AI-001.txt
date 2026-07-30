@@ -1,0 +1,6 @@
+initial_loss: 0.641941
+final_loss: 0.045580
+training_parameters_changed: True
+inference_parameters_changed: False
+inference_logits: tensor([[ 1.6787, -1.6888]])
+predicted_class: 0
