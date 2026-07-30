@@ -26,7 +26,15 @@ Nessuna regola necessaria alla produzione dei capitoli deve dipendere dalla cron
 | `07_POLITICA_FONTI_CITAZIONI.md` | Gerarchia delle fonti, verifica web, citazioni, divergenze e data di congelamento. |
 | `08_REGISTRO_DECISIONI.md` | Elenco consolidato delle decisioni prese e del loro stato vincolante. |
 | `09_STRUTTURA_REPOSITORY.md` | Convenzioni per cartelle, file, ID, asset, audit e artefatti riproducibili. |
+| `10_INDICE_EDITORIALE.md` | Indice completo dei due volumi, capitoli e appendici. |
 | `EXPLANATION_STYLE_AND_VISUALS.md` | Metodo completo di spiegazione in italiano e grammatica visuale del libro. |
+| `source/README.md` | Indice delle fonti metodologiche originali archiviate. |
+
+## Copia integrale del file metodologico ricevuto
+
+Il contenuto originale di `EXPLANATION_STYLE_AND_VISUALS.md` fornito dal committente è conservato integralmente in `source/`, diviso in cinque segmenti consecutivi per mantenerne leggibile la tracciabilità nel repository.
+
+Il documento canonico applicato al libro è `EXPLANATION_STYLE_AND_VISUALS.md`. I riferimenti originari specifici di altri progetti restano nell'archivio, mentre le regole operative del libro rispettano le decisioni correnti.
 
 ## Ordine di autorità
 
