@@ -4,8 +4,8 @@
 
 - Data dell'audit: **30 luglio 2026**
 - Repository: `ferdinandobons/aibook`
-- Branch: `main`
-- Esito: **approvato per l'uso della nuova architettura evolutiva**
+- Branch verificato: `review/chapter-28-pilot`
+- Esito: **approvato per l'uso dell'architettura evolutiva e dello standard visivo canonico**
 
 ## Scopo
 
@@ -18,6 +18,7 @@ Verificare che le decisioni concordate siano presenti nel repository e che una p
 - cambiare la maturità di una voce;
 - creare, dividere o unire capitoli;
 - eseguire una ricerca approfondita;
+- creare immagini con una grammatica visiva comune;
 - mantenere coerenti testo, immagini, codice, fonti e audit.
 
 ## Entry point e root
@@ -46,6 +47,8 @@ Verificare che le decisioni concordate siano presenti nel repository e che una p
 - [x] `13_PROTOCOLLO_AGGIORNAMENTO_CONTENUTI.md`.
 - [x] `14_CATALOGO_STATO_ARTE.md`.
 - [x] `15_REGISTRO_RICERCHE_APPROFONDITE.md`.
+- [x] `16_REGOLA_CONTENIMENTO_TESTO_VISUALI.md`.
+- [x] `17_STANDARD_VISIVO_CANONICO.md`.
 - [x] `EXPLANATION_STYLE_AND_VISUALS.md`.
 - [x] archivio `source/`.
 
@@ -113,6 +116,8 @@ Verificare che le decisioni concordate siano presenti nel repository e che una p
 
 ## Visuali
 
+### Produzione e review
+
 - [x] Le immagini vengono create con lo strumento immagini.
 - [x] Gli SVG non sono l'artefatto editoriale principale.
 - [x] La prima generazione è sempre una bozza.
@@ -120,6 +125,26 @@ Verificare che le decisioni concordate siano presenti nel repository e che una p
 - [x] Una linea ambigua blocca l'approvazione.
 - [x] Ogni correzione richiede un nuovo audit completo.
 - [x] Alt text ed equivalente testuale sono obbligatori.
+
+### Stile canonico
+
+- [x] `17_STANDARD_VISIVO_CANONICO.md` definisce la grammatica comune.
+- [x] Lo sfondo globale è sempre bianco puro `#FFFFFF`.
+- [x] Gradienti, texture e carta simulata sono esclusi.
+- [x] L'orientamento può essere orizzontale o verticale in funzione del contenuto.
+- [x] L'orientamento deve ridurre incroci, densità e rischio di overflow.
+- [x] Famiglie visuali, palette, box, frecce e gerarchia tipografica sono definite.
+- [x] Una figura tecnica non è una renderizzazione completa della pagina del libro.
+- [x] Il colore non è l'unico portatore di significato.
+- [x] Watermark, firme e branding di terzi sono esclusi.
+
+### Contenimento
+
+- [x] `16_REGOLA_CONTENIMENTO_TESTO_VISUALI.md` è vincolante.
+- [x] Testo fuori box, tagliato o sovrapposto è un difetto bloccante.
+- [x] Padding interno e zona di sicurezza sono obbligatori.
+- [x] Il controllo viene svolto sul raster reale e alla dimensione editoriale.
+- [x] L'orientamento alternativo viene valutato quando il contenuto non entra correttamente.
 
 ## Codice
 
@@ -154,12 +179,14 @@ Verificare che le decisioni concordate siano presenti nel repository e che una p
 ## Controllo incrociato
 
 - [x] Il contratto rinvia all'architettura evolutiva.
-- [x] Il registro delle decisioni contiene le nuove decisioni.
+- [x] Il registro delle decisioni contiene le decisioni architetturali.
 - [x] L'indice usa le quattordici parti stabili.
-- [x] La struttura del repository include `GUIDELINE.md` e i documenti `12`-`15`.
+- [x] La struttura del repository include `GUIDELINE.md` e i documenti evolutivi.
 - [x] Il protocollo di aggiornamento rinvia al catalogo e al registro delle ricerche.
 - [x] Il README root e il README docs indicano lo stesso ordine di lettura.
-- [x] Non risultano conflitti noti tra opera unica, parti, maturità e numerazione.
+- [x] Il template visuale applica lo standard canonico.
+- [x] Il protocollo QA visuale verifica sfondo, orientamento, palette e contenimento.
+- [x] Non risultano conflitti noti tra opera unica, parti, maturità, numerazione e stile visuale.
 
 ## Elementi operativi non bloccanti
 
@@ -167,6 +194,7 @@ Verificare che le decisioni concordate siano presenti nel repository e che una p
 - Ogni voce del catalogo viene riaperta con fonti puntuali quando entra in un capitolo.
 - La numerazione visualizzata resta modificabile fino al congelamento dell'edizione.
 - La sequenza illustrativa del capitolo attention viene scelta nel piano del capitolo.
+- Le proporzioni esatte di ogni canvas vengono decise nello storyboard della figura.
 
 Questi elementi appartengono al workflow e non rappresentano decisioni globali mancanti.
 
@@ -175,3 +203,5 @@ Questi elementi appartengono al workflow e non rappresentano decisioni globali m
 La documentazione è sufficiente per trasferire il contesto operativo a un sistema AI privo della conversazione originaria.
 
 L'architettura è stabile rispetto all'inserimento di nuove tecniche. Catalogo, maturità, ID semantici, routing e procedure di aggiornamento permettono l'evoluzione del libro senza modificare automaticamente i nomi o l'ordine delle parti.
+
+Lo standard visivo è ora esplicito e adattabile. Le figure possono cambiare orientamento e composizione in base al contenuto, ma conservano sfondo bianco, palette semantica, tipografia, box, frecce, contenimento e processo di review comuni.
