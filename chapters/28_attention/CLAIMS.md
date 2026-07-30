@@ -2,7 +2,7 @@
 
 | ID | Affermazione portante | Tipo | Fonte o prova | Esito |
 |---|---|---|---|---|
-| `CLM-ATT-001` | Coefficienti fissi producono la stessa combinazione per consumer diversi; `ATT-01` usa questo confronto come esempio illustrativo. | illustrativo/confine | `ATT-01/SPEC.md` | verificata |
+| `CLM-ATT-001` | Coefficienti fissi producono la stessa combinazione per posizioni diverse; `ATT-01` usa questo confronto come esempio illustrativo. | illustrativo/confine | `ATT-01/SPEC.md` | verificata |
 | `CLM-ATT-002` | La scaled dot-product attention calcola `softmax(QK^T/sqrt(d_k))V`. | fonte primaria | `SRC-ATT-001`, §3.2.1 | verificata |
 | `CLM-ATT-003` | Il fattore `1/sqrt(d_k)` è introdotto per contrastare prodotti scalari di grande magnitudine e regioni softmax con gradienti molto piccoli. | fonte primaria | `SRC-ATT-001`, §3.2.1 | verificata |
 | `CLM-ATT-004` | La softmax produce coefficienti non negativi che sommano a 1 quando la riga contiene almeno un logit finito e non si considera dropout successivo. | derivazione | definizione softmax; test `SNIP-ATT-001/002` | verificata |
