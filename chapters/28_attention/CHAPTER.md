@@ -4,8 +4,8 @@ part_id: P06
 order_key: 280
 title: Il meccanismo di attention
 maturity: CORE
-status: revisione di accessibilità per lettore non esperto completata, controllo visuale riaperto
-version: 0.5.0-rc5
+status: controllo visuale completato, revisione autoriale aperta
+version: 0.6.0-rc6
 opened: 2026-07-30
 last_web_research: 2026-07-30
 last_source_check: 2026-07-30
@@ -43,9 +43,9 @@ $$
 
 I tre vettori disponibili sono gli stessi. Cambiano soltanto i coefficienti con cui vengono combinati, e per questo cambiano anche i risultati. Il problema dell'attention è calcolare coefficienti diversi per posizioni diverse.
 
-La figura seguente confronta le due possibilità. Nel pannello sinistro, `v1`, `v2` e `v3` confluiscono in un solo vettore `c`, riutilizzato da entrambe le posizioni, chiamate `consumer 1` e `consumer 2` nella figura. Nel pannello destro, gli stessi vettori restano disponibili, ma ogni posizione usa coefficienti propri.
+La figura seguente confronta le due possibilità. Nel pannello sinistro, `v1`, `v2` e `v3` confluiscono in un solo vettore `c`, riutilizzato da entrambe le posizioni, indicate nella figura come `Posizione 1` e `Posizione 2`. Nel pannello destro, gli stessi vettori restano disponibili, ma ogni posizione usa coefficienti propri.
 
-![Confronto tra contesto fisso e coefficienti dipendenti dalla posizione corrente](../../assets/chapters/28_attention/ATT-01/candidate-v2.png)
+![Confronto tra contesto fisso e coefficienti dipendenti dalla posizione corrente](../../assets/chapters/28_attention/ATT-01/candidate-v3.png)
 
 La figura mostra il risultato che vogliamo ottenere, ma non spiega ancora come ricavare i coefficienti. Per farlo dobbiamo separare tre ruoli.
 
