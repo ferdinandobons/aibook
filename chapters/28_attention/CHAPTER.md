@@ -4,8 +4,8 @@ part_id: P06
 order_key: 280
 title: Il meccanismo di attention
 maturity: CORE
-status: revisione editoriale riaperta
-version: 0.4.0-rc4
+status: revisione di accessibilità per lettore non esperto completata, controllo visuale riaperto
+version: 0.5.0-rc5
 opened: 2026-07-30
 last_web_research: 2026-07-30
 last_source_check: 2026-07-30
@@ -15,49 +15,45 @@ deferred: informazione posizionale, multi-head attention, varianti KV, KV cache,
 
 # Capitolo 28. Il meccanismo di attention
 
-Una sequenza contiene più elementi, ma non tutti sono ugualmente utili in ogni punto del calcolo. Quando aggiorniamo la rappresentazione di un token, potremmo aver bisogno di combinare soprattutto alcune posizioni e quasi ignorarne altre. Un unico riassunto della sequenza, costruito una volta e riutilizzato ovunque, non offre questa flessibilità.
+Per intuire il problema, torniamo alla frase «Il pacco non è arrivato». Quando il modello aggiorna la rappresentazione della parte finale della frase, la parola `non` può essere molto importante, mentre altre parole possono contribuire meno. In un'altra posizione della stessa frase, i contributi utili possono cambiare. Per semplicità parleremo di parole, anche se un modello lavora normalmente con unità chiamate **token**, che possono coincidere con una parola o con una sua parte.
 
-L'attention risolve il problema costruendo una combinazione diversa per ogni posizione. Il calcolo parte da un vettore che rappresenta l'elemento corrente, lo confronta con un insieme di vettori disponibili e trasforma i risultati in coefficienti. Quei coefficienti stabiliscono quanto ciascun vettore contribuisce all'output.
+Un unico riassunto della sequenza, costruito una volta e riutilizzato in ogni posizione, non può adattarsi a queste differenze. L'**attention** risolve il problema calcolando una combinazione specifica per ogni posizione. Il meccanismo confronta l'elemento corrente con gli elementi disponibili, trasforma i confronti in coefficienti e usa quei coefficienti per costruire un nuovo vettore.
 
-Seguiremo l'intero meccanismo su un esempio numerico molto piccolo. I valori non rappresentano il significato reale di parole specifiche; servono a rendere visibili i passaggi e a permettere il controllo dei conti. Dopo l'esempio passeremo alla forma matriciale, alla causal mask e a un'implementazione PyTorch verificata.
+Seguiremo tutto il calcolo con vettori di soli due numeri. I valori sono illustrativi e non rappresentano il significato reale di parole specifiche. Servono a rendere visibile ogni passaggio prima di arrivare alla formula generale e all'implementazione PyTorch.
 
 ## Perché una combinazione fissa non basta
 
-Consideriamo tre vettori disponibili:
+In un modello, una posizione della sequenza viene rappresentata da un **vettore**, cioè da una lista di numeri. Consideriamo tre vettori disponibili:
 
 $$
 v_1=[1,0],\qquad v_2=[0,1],\qquad v_3=[1,1].
 $$
 
-Supponiamo che due posizioni della sequenza debbano costruire la propria rappresentazione usando questi stessi vettori. Se entrambe ricevono un unico riassunto `c`, la combinazione è identica per tutte e due. Una posizione potrebbe invece richiedere
+Supponiamo che due posizioni debbano usare questi stessi vettori. Se entrambe ricevono un unico riassunto `c`, ottengono la stessa combinazione. Una posizione potrebbe invece aver bisogno di
 
 $$
-c_1=0{,}10v_1+0{,}60v_2+0{,}30v_3,
+c_1=0{,}10v_1+0{,}60v_2+0{,}30v_3=[0{,}40,0{,}90],
 $$
 
-mentre l'altra potrebbe richiedere
+mentre l'altra potrebbe aver bisogno di
 
 $$
-c_2=0{,}05v_1+0{,}15v_2+0{,}80v_3.
+c_2=0{,}05v_1+0{,}15v_2+0{,}80v_3=[0{,}85,0{,}95].
 $$
 
-I vettori disponibili non sono cambiati. È cambiato il modo in cui vengono combinati. Il problema consiste quindi nel calcolare, per ogni posizione corrente, una serie di coefficienti specifici.
+I tre vettori disponibili sono gli stessi. Cambiano soltanto i coefficienti con cui vengono combinati, e per questo cambiano anche i risultati. Il problema dell'attention è calcolare coefficienti diversi per posizioni diverse.
 
-La figura seguente confronta le due possibilità. Nel pannello sinistro, `v1`, `v2` e `v3` confluiscono in un unico vettore `c`, riutilizzato da entrambe le posizioni di destinazione, indicate nella figura come `consumer 1` e `consumer 2`. Nel pannello destro, gli stessi vettori restano disponibili, ma ogni posizione produce coefficienti propri e ottiene una combinazione diversa.
+La figura seguente confronta le due possibilità. Nel pannello sinistro, `v1`, `v2` e `v3` confluiscono in un solo vettore `c`, riutilizzato da entrambe le posizioni, chiamate `consumer 1` e `consumer 2` nella figura. Nel pannello destro, gli stessi vettori restano disponibili, ma ogni posizione usa coefficienti propri.
 
 ![Confronto tra contesto fisso e coefficienti dipendenti dalla posizione corrente](../../assets/chapters/28_attention/ATT-01/candidate-v2.png)
 
-La figura non mostra ancora come vengano calcolati i coefficienti. Stabilisce il requisito: la combinazione deve dipendere dall'elemento che sta interrogando la sequenza.
+La figura mostra il risultato che vogliamo ottenere, ma non spiega ancora come ricavare i coefficienti. Per farlo dobbiamo separare tre ruoli.
 
-## Query, key e value
+## I tre ruoli: query, key e value
 
-Per costruire quei coefficienti servono tre ruoli distinti. Il primo appartiene al vettore della posizione corrente. Il secondo appartiene ai vettori usati per misurare la compatibilità con quella posizione. Il terzo appartiene ai vettori che verranno effettivamente combinati.
+La **query** è il vettore della posizione che stiamo aggiornando. Le **key** sono i vettori usati per misurare quanto ogni posizione disponibile è compatibile con la query. Le **value** sono i vettori che verranno effettivamente combinati per costruire l'output.
 
-Questi ruoli prendono i nomi di **query**, **key** e **value**:
-
-- la query rappresenta l'elemento corrente;
-- ogni key viene confrontata con la query;
-- ogni value contiene il vettore che può contribuire all'output.
+Query, key e value non indicano tre tipi diversi di parole. Sono tre ruoli matematici. La stessa posizione della sequenza può produrre una key e una value differenti attraverso proiezioni apprese.
 
 Nel nostro esempio useremo
 
@@ -81,31 +77,37 @@ V=
 \end{bmatrix}.
 $$
 
-La query ha shape `[d_k]=[2]`. Le matrici `K` e `V` hanno shape `[S,d_k]=[3,2]` e `[S,d_v]=[3,2]`, con `S=3` posizioni disponibili.
+`K` e `V` hanno tre righe perché abbiamo tre posizioni disponibili. Ogni riga contiene due numeri. Per questo la loro shape è `[3,2]`: tre righe, due valori per riga. La query contiene due numeri e ha shape `[2]`.
 
-In questo esempio `K` e `V` contengono gli stessi numeri soltanto per mantenere brevi i calcoli. I due oggetti hanno funzioni diverse: `K` determina i coefficienti, mentre `V` fornisce i vettori da combinare. In un modello reale le key e le value vengono normalmente ottenute attraverso proiezioni differenti e non devono coincidere numericamente.
+In questo esempio `K` e `V` contengono gli stessi valori soltanto per rendere brevi i conti. I ruoli restano diversi. `K` serve a calcolare i coefficienti; `V` contiene i vettori che quei coefficienti combineranno.
 
-Resta invece essenziale la corrispondenza tra le righe. La riga `j` di `K` e la riga `j` di `V` appartengono alla stessa posizione. Se permutassimo una sola delle due matrici, useremmo il coefficiente calcolato per una key sulla value sbagliata.
+La corrispondenza tra le righe è essenziale. La prima key appartiene alla prima value, la seconda key alla seconda value e così via. Se cambiassimo l'ordine di una sola matrice, applicheremmo un coefficiente alla value sbagliata.
 
 ## Il calcolo completo su una query
 
-Il primo passo confronta la query con ogni key mediante un prodotto scalare:
+Il primo passo confronta la query con ogni key. Usiamo il **prodotto scalare**: moltiplichiamo i numeri nella stessa posizione e sommiamo i risultati.
 
 $$
-[1,0]\cdot[1,0]=1,\qquad
-[1,0]\cdot[0,1]=0,\qquad
+[1,0]\cdot[1,0]=1,
+$$
+
+$$
+[1,0]\cdot[0,1]=0,
+$$
+
+$$
 [1,0]\cdot[1,1]=1.
 $$
 
-Otteniamo così un vettore di tre score:
+Otteniamo tre **score**, uno per ogni key:
 
 $$
 qK^T=[1,0,1].
 $$
 
-La shape è `[S]=[3]`, perché esiste uno score per ogni key. Le value non sono ancora entrate nel calcolo. Questi score, inoltre, non sono coefficienti: possono essere negativi e non devono sommare a uno.
+Uno score più alto indica, nel confronto definito da questi vettori, una compatibilità maggiore con la query. Gli score non sono ancora coefficienti. Possono essere negativi e non devono sommare a uno. Le value, inoltre, non sono ancora entrate nel calcolo.
 
-Nel Transformer originale gli score vengono divisi per la radice della dimensione delle key. Poiché `d_k=2`, il nostro esempio diventa
+Nel Transformer originale gli score vengono divisi per la radice della dimensione delle key. Qui ogni key contiene due numeri, quindi `d_k=2`:
 
 $$
 \frac{[1,0,1]}{\sqrt{2}}
@@ -113,25 +115,25 @@ $$
 [0{,}7071,0,0{,}7071].
 $$
 
-La divisione non cambia la shape né l'ordine relativo degli score. Ne modifica soltanto la scala prima della softmax. Vaswani et al. introducono il fattore `1/\sqrt{d_k}` perché prodotti scalari di grande magnitudine possono portare la softmax in regioni con gradienti molto piccoli [Vaswani et al., 2017, §3.2.1].
+Questa divisione non cambia il numero degli score e non cambia quale score è maggiore. Ne riduce la scala prima della softmax. Il fattore `1/\sqrt{d_k}` serve a evitare che, quando i vettori diventano più grandi, i prodotti scalari crescano troppo e rendano la softmax poco favorevole al calcolo dei gradienti [Vaswani et al., 2017, §3.2.1].
 
-Il ruolo del fattore si vede anche in un caso idealizzato. Se le componenti di query e key sono indipendenti, con media zero e varianza uno, il prodotto scalare è una somma di `d_k` termini e la sua varianza cresce come `d_k`. La divisione per `\sqrt{d_k}` riporta la varianza a ordine unitario. Questa derivazione spiega il fattore sotto le ipotesi dichiarate; non afferma che le rappresentazioni apprese in un modello reale siano indipendenti o standardizzate.
+> **Approfondimento matematico.** In un caso idealizzato, se le componenti di query e key sono indipendenti, con media zero e varianza uno, il prodotto scalare somma `d_k` termini e la sua varianza cresce come `d_k`. Dividere per `\sqrt{d_k}` riporta la varianza a ordine unitario. Questa derivazione dipende dalle ipotesi dichiarate e non descrive necessariamente le rappresentazioni apprese da un modello reale.
 
-A questo punto applichiamo la softmax lungo le tre key:
+Ora applichiamo la **softmax**. La softmax trasforma gli score in coefficienti non negativi che sommano a uno. In questo modo possiamo leggerli come quote della combinazione finale:
 
 $$
 \alpha_j=\frac{e^{s_j}}{\sum_{m=1}^{S}e^{s_m}}.
 $$
 
-Con gli score scalati dell'esempio otteniamo, arrotondando a tre decimali,
+Con gli score del nostro esempio otteniamo, arrotondando a tre decimali,
 
 $$
 \alpha=[0{,}401,0{,}198,0{,}401].
 $$
 
-I coefficienti sono non negativi e sommano a uno, purché almeno uno score della riga sia finito e non venga applicato dropout dopo la softmax. Ogni coefficiente continua a essere associato alla stessa coppia key-value.
+Il primo e il terzo vettore ricevono lo stesso coefficiente perché avevano lo stesso score. Il secondo riceve un coefficiente più piccolo. Ogni numero continua a riferirsi alla stessa coppia key-value.
 
-Soltanto ora usiamo `V`. Moltiplichiamo ogni value per il coefficiente corrispondente e sommiamo:
+Soltanto adesso usiamo `V`. Moltiplichiamo ogni value per il coefficiente corrispondente e sommiamo:
 
 $$
 0{,}401[1,0]+0{,}198[0,1]+0{,}401[1,1]
@@ -139,25 +141,25 @@ $$
 [0{,}802,0{,}599].
 $$
 
-Il vettore di output ha shape `[d_v]=[2]`. Le righe di `V` non vengono modificate; il calcolo produce una nuova combinazione. La query non viene sommata direttamente alle value: serve a calcolare, attraverso le key, i coefficienti con cui le value vengono combinate.
+L'output contiene due numeri, quindi ha shape `[2]`, la stessa dimensione delle value. Le righe di `V` non vengono modificate. Il calcolo crea un nuovo vettore combinandole. La query non viene sommata direttamente alle value: serve a scegliere, attraverso il confronto con le key, quanto ciascuna value deve contribuire.
 
-La figura seguente ripercorre lo stesso calcolo. Da sinistra a destra mostra gli input, i prodotti scalari, la divisione per `\sqrt{d_k}`, la softmax, la somma pesata e l'output finale.
+La figura seguente ripercorre lo stesso calcolo da sinistra a destra: input, prodotti scalari, divisione per `\sqrt{d_k}`, softmax, somma pesata e output.
 
 ![Esempio numerico completo per una query](../../assets/chapters/28_attention/ATT-02/candidate-v2.png)
 
-Possiamo riassumere l'algoritmo senza usare ancora la formula compatta:
+Possiamo riassumere l'algoritmo in forma compatta:
 
 ```text
 ricevi una query, S key e S value
 calcola uno score tra la query e ogni key
 dividi gli score per sqrt(d_k)
-normalizza gli score con la softmax
+trasforma gli score in coefficienti con la softmax
 moltiplica ogni value per il coefficiente corrispondente
 somma i vettori pesati
 restituisci un vettore di dimensione d_v
 ```
 
-Il numero dei coefficienti coincide sempre con il numero di coppie key-value; la dimensione dell'output coincide con quella delle value.
+Il numero dei coefficienti coincide con il numero di coppie key-value. La dimensione dell'output coincide con la dimensione delle value.
 
 ## Dall'esempio alla forma matriciale
 
@@ -169,13 +171,9 @@ $$
 \mathrm{softmax}\left(\frac{qK^T}{\sqrt{d_k}}\right)V.
 $$
 
-Quando le query sono più di una, le raccogliamo nelle righe di una matrice `Q`:
+La formula compatta contiene gli stessi passaggi eseguiti a mano. `qK^T` produce gli score, la divisione ne controlla la scala, la softmax produce i coefficienti e il prodotto finale con `V` combina le value.
 
-- `Q\in\mathbb{R}^{L\times d_k}`;
-- `K\in\mathbb{R}^{S\times d_k}`;
-- `V\in\mathbb{R}^{S\times d_v}`.
-
-La formula diventa
+Quando le query sono più di una, le raccogliamo nelle righe di una matrice `Q`. Usiamo `L` per il numero delle query e `S` per il numero delle coppie key-value:
 
 $$
 \mathrm{Attention}(Q,K,V)
@@ -183,26 +181,26 @@ $$
 \mathrm{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V.
 $$
 
-La softmax viene applicata riga per riga. Ogni riga di `QK^T` appartiene a una query; ogni colonna appartiene a una key [Vaswani et al., 2017, §3.2.1].
+La softmax viene applicata riga per riga. Ogni riga appartiene a una query e contiene uno score per ciascuna key [Vaswani et al., 2017, §3.2.1].
 
 | Oggetto | Shape | Significato |
 |---|---:|---|
-| `Q` | `[L,d_k]` | una riga per query |
-| `K` | `[S,d_k]` | una riga per key |
-| `V` | `[S,d_v]` | una riga per value |
-| `QK^T` | `[L,S]` | uno score per coppia query-key |
-| `A` | `[L,S]` | coefficienti normalizzati |
-| `O=AV` | `[L,d_v]` | una riga di output per query |
+| `Q` | `[L,d_k]` | `L` query, ciascuna con `d_k` valori |
+| `K` | `[S,d_k]` | `S` key, ciascuna con `d_k` valori |
+| `V` | `[S,d_v]` | `S` value, ciascuna con `d_v` valori |
+| `QK^T` | `[L,S]` | uno score per ogni coppia query-key |
+| `A` | `[L,S]` | coefficienti normalizzati per ogni query |
+| `O=AV` | `[L,d_v]` | un vettore di output per ogni query |
 
-Con più query, lo stesso calcolo viene eseguito su più righe. Ogni query produce una distribuzione diversa sulle key e quindi una combinazione diversa delle value. Il numero di righe di `K` deve continuare a coincidere con quello di `V`; la dimensione finale di ogni output rimane `d_v`.
+Ogni query può produrre coefficienti diversi e quindi una combinazione diversa delle stesse value. Il numero di righe di `K` deve coincidere con quello di `V`, perché a ogni key deve corrispondere una value.
 
-La formula non richiede che `Q`, `K` e `V` derivino dalla stessa sequenza. Nella **self-attention** provengono dalla stessa sequenza attraverso proiezioni apprese. Nella **cross-attention**, le query provengono da una sequenza e le coppie key-value da un'altra. Nella **causal self-attention**, i tre gruppi provengono dalla stessa sequenza, ma ogni query può usare soltanto la propria posizione e quelle precedenti.
+Nella **self-attention**, query, key e value derivano dalla stessa sequenza. Nella **cross-attention**, le query derivano da una sequenza e le coppie key-value da un'altra. Nella **causal self-attention**, tutti e tre derivano dalla stessa sequenza, ma ogni posizione può usare soltanto sé stessa e le posizioni precedenti.
 
 ## Escludere le posizioni future
 
-Nei modelli autoregressivi, il token in posizione `i` non deve usare informazioni provenienti da posizioni successive. Il vincolo viene applicato agli score prima della softmax.
+Un modello autoregressivo genera una sequenza da sinistra a destra. Quando calcola la rappresentazione della posizione `i`, non deve leggere elementi che, in quel momento, appartengono ancora al futuro.
 
-Introduciamo una mask additiva `M\in\mathbb{R}^{L\times S}`:
+Il vincolo viene applicato agli score prima della softmax. Introduciamo una **mask** additiva `M`:
 
 $$
 A=\mathrm{softmax}\left(\frac{QK^T}{\sqrt{d_k}}+M\right).
@@ -218,13 +216,13 @@ M_{ij}=
 \end{cases}
 $$
 
-Le celle future ricevono quindi un logit pari a `-inf`. Dopo la softmax, i coefficienti corrispondenti sono zero. La mask cambia quali score partecipano alla normalizzazione, ma non modifica `L`, `S`, `d_k`, `d_v` o le righe di `V`.
+Le posizioni ammesse ricevono `0`, quindi il loro score resta invariato. Le posizioni future ricevono `-\infty`; dopo la softmax, il loro coefficiente diventa zero. In questo modo non contribuiscono all'output.
 
-Applicare la mask direttamente alle value avrebbe un significato diverso: cambierebbe i dati trasportati anziché impedire ad alcune posizioni di ricevere peso. Per implementare il vincolo causale, la mask deve intervenire sugli score prima della softmax.
+La mask non viene applicata direttamente alle value. Farlo cambierebbe i dati trasportati. Il vincolo causale deve invece impedire che alcune coppie query-key ricevano peso, e per questo interviene sugli score prima della softmax.
 
 ## Dalla formula a PyTorch
 
-Il seguente snippet ripete l'esempio numerico con le stesse query, key e value. Le righe centrali corrispondono al calcolo già svolto a mano; le asserzioni verificano la somma dei coefficienti e le shape.
+Il seguente snippet ripete l'esempio numerico. Le tre righe centrali corrispondono ai tre passaggi principali: score scalati, softmax e combinazione delle value.
 
 ```python
 from __future__ import annotations
@@ -245,69 +243,43 @@ assert output.shape == (2,)
 torch.testing.assert_close(weights.sum(), torch.tensor(1.0, dtype=weights.dtype))
 ```
 
+`q @ k.transpose(0, 1)` calcola i tre prodotti scalari. `torch.softmax` produce i coefficienti. `weights @ v` costruisce il vettore finale. Le asserzioni controllano che le shape e la somma dei coefficienti siano quelle attese.
+
 Il file completo è [`code/snip_att_001_single_query.py`](code/snip_att_001_single_query.py); l'output registrato è in [`code/outputs/SNIP-ATT-001.txt`](code/outputs/SNIP-ATT-001.txt).
 
-Per batch e head esplicite, PyTorch usa shape come `[B,H,L,d_k]`, `[B,H,S,d_k]` e `[B,H,S,d_v]`. Il confronto seguente verifica che l'implementazione diretta coincida con `torch.nn.functional.scaled_dot_product_attention` nell'ambiente eseguito quando `dropout_p=0.0`:
+Il repository contiene anche due controlli aggiuntivi. [`code/snip_att_002_matrix_api.py`](code/snip_att_002_matrix_api.py) confronta l'implementazione diretta con `torch.nn.functional.scaled_dot_product_attention`. [`code/snip_att_003_causal_mask.py`](code/snip_att_003_causal_mask.py) verifica che i coefficienti delle posizioni future diventino nulli.
 
-```python
-import math
-import torch
-import torch.nn.functional as F
-
-scores = q @ k.transpose(-2, -1) / math.sqrt(q.size(-1))
-weights = torch.softmax(scores, dim=-1)
-output = weights @ v
-
-api_output = F.scaled_dot_product_attention(q, k, v, dropout_p=0.0)
-torch.testing.assert_close(output, api_output, rtol=1e-12, atol=1e-12)
-```
-
-Il file completo è [`code/snip_att_002_matrix_api.py`](code/snip_att_002_matrix_api.py). Il codice è stato eseguito con PyTorch `2.10.0+cpu`; la firma e la semantica correnti dell'API sono state ricontrollate nella documentazione stable `2.13`.
-
-Una causal mask booleana può essere costruita con una matrice triangolare inferiore:
-
-```python
-allowed = torch.ones(3, 3, dtype=torch.bool).tril()
-output = F.scaled_dot_product_attention(
-    q,
-    k,
-    v,
-    attn_mask=allowed,
-    dropout_p=0.0,
-)
-```
-
-Nel file [`code/snip_att_003_causal_mask.py`](code/snip_att_003_causal_mask.py), l'output dell'API viene confrontato con un'implementazione diretta che inserisce `-inf` negli score non ammessi.
-
-> **Nota sulle API.** In `F.scaled_dot_product_attention`, `True` indica una posizione ammessa. In `MultiheadAttention.key_padding_mask`, `True` indica invece una posizione da ignorare. Inoltre `scaled_dot_product_attention` applica dropout quando `dropout_p>0`, indipendentemente dallo stato di training del modulo chiamante. Queste convenzioni appartengono alle API e non cambiano la definizione matematica del meccanismo [PyTorch 2.13 Docs].
+> **Nota sulle API.** Le API PyTorch non usano sempre la stessa convenzione per le mask booleane. Il significato esatto di `True` deve quindi essere controllato nella documentazione della funzione usata. Nel confronto del capitolo `dropout_p=0.0`, così il dropout non modifica i coefficienti [PyTorch 2.13 Docs].
 
 ## Costo, limiti e passaggio alla multi-head attention
 
-Per `Q[L,d_k]`, `K[S,d_k]` e `V[S,d_v]`, il prodotto `QK^T` richiede ordine `O(LSd_k)` operazioni; il prodotto `AV` richiede ordine `O(LSd_v)`. Una realizzazione che conserva score o coefficienti materializza anche un intermedio di shape `[L,S]`. Nella self-attention con `L=S=n`, questo intermedio contiene `n^2` elementi.
+Con `L` query e `S` key, la matrice degli score contiene `L\times S` celle. Nella self-attention, se la sequenza contiene `n` posizioni, la matrice contiene `n^2` celle. Questo è il motivo essenziale per cui sequenze più lunghe possono richiedere molta memoria e molto calcolo.
 
-Implementazioni hardware-aware possono calcolare lo stesso operatore con strategie diverse di accesso alla memoria e ricomputazione. Il loro funzionamento verrà trattato nella parte dedicata all'efficienza; non è necessario per comprendere l'operatore di base.
+In termini asintotici, il prodotto `QK^T` richiede ordine `O(LSd_k)` operazioni e il prodotto con `V` richiede ordine `O(LSd_v)`. Le implementazioni hardware-aware possono eseguire lo stesso operatore con strategie diverse di memoria e ricomputazione, ma non cambiano il meccanismo matematico spiegato qui.
 
-L'attention, da sola, non introduce informazione posizionale, non aggiunge dati esterni e non stabilisce se un contenuto sia corretto. Se `Q`, `K` e `V` vengono permutati in modo coerente e non contengono segnali di posizione, anche l'output segue la stessa permutazione. L'ordine deve quindi essere rappresentato nei dati o nel calcolo attraverso un meccanismo aggiuntivo.
+L'attention, da sola, non aggiunge informazioni esterne e non stabilisce se un contenuto sia corretto. Inoltre non conosce automaticamente l'ordine delle posizioni. L'ordine deve essere rappresentato nei dati o nel calcolo attraverso informazione posizionale, che verrà studiata più avanti.
 
-Il caso studiato finora usa un solo insieme di proiezioni. La **multi-head attention** ripete lo stesso meccanismo su più proiezioni, mantiene separati i risultati e li ricompone. Concatenazione, proiezione finale e shape per head costituiscono il passo successivo e verranno introdotti insieme al blocco Transformer.
+Il caso visto finora usa un solo insieme di proiezioni. La **multi-head attention** ripete lo stesso meccanismo con più proiezioni, mantiene separati i risultati e poi li ricompone. Concatenazione, proiezione finale e shape delle singole head appartengono al passo successivo.
 
 ## Riepilogo
 
-Siamo partiti da un limite semplice: un unico vettore di contesto non può offrire combinazioni diverse a posizioni diverse. L'attention sostituisce quel riassunto fisso con un calcolo dipendente dalla query. La query viene confrontata con le key, gli score vengono ridimensionati e normalizzati, poi i coefficienti risultanti combinano le value.
+L'attention nasce da un problema semplice: posizioni diverse della stessa sequenza possono aver bisogno di combinazioni diverse delle informazioni disponibili. Un riassunto fisso non basta.
 
-La forma matriciale esegue lo stesso procedimento per più query in parallelo. Una mask può escludere alcune coppie query-key prima della softmax, senza modificare le value. Il risultato è una matrice con una riga per query e dimensione finale `d_v`.
+Per ogni posizione, la query viene confrontata con le key. I prodotti scalari producono score, gli score vengono ridimensionati e la softmax li trasforma in coefficienti. Quei coefficienti combinano le value e producono un nuovo vettore.
+
+Con più query, lo stesso calcolo viene eseguito riga per riga. Una causal mask può impedire l'uso delle posizioni future azzerandone i coefficienti prima della combinazione finale.
 
 ### Verifica della comprensione
 
-1. Ricostruisci l'ordine di prodotto scalare, scaling, mask opzionale, softmax e combinazione delle value.
-2. Indica il primo passaggio in cui `V` viene effettivamente usata.
-3. Spiega perché la causal mask agisce sugli score e non direttamente sulle value.
-4. Sostituisci `q=[1,0]` con `q=[0,1]` e prevedi gli score prima della softmax.
+1. Spiega con parole semplici perché un unico vettore di contesto non basta per tutte le posizioni.
+2. Descrivi il ruolo di query, key e value senza usare la formula.
+3. Ricostruisci l'ordine di prodotto scalare, scaling, softmax e combinazione delle value.
+4. Spiega perché la causal mask agisce sugli score e non direttamente sulle value.
 5. Determina la shape dell'output con `L=5`, `S=7`, `d_k=64` e `d_v=32`.
 
 ### Esercizi
 
-1. Calcola a mano i coefficienti e l'output per `q=[0,1]` usando le stesse `K` e `V`.
+1. Calcola a mano score, coefficienti e output per `q=[0,1]` usando le stesse `K` e `V`.
 2. Modifica `SNIP-ATT-002` usando `d_v=3` e verifica la nuova shape dell'output.
 3. Sostituisci la mask booleana con una mask additiva contenente `0` e `-inf`.
 4. Costruisci un caso in cui tutte le key producano lo stesso score e spiega il risultato della softmax.
