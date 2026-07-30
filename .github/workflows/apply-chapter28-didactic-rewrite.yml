@@ -1,0 +1,77 @@
+name: Apply Chapter 28 didactic rewrite
+
+on:
+  push:
+    branches:
+      - review/chapter-28-pilot
+    paths:
+      - .github/workflows/apply-chapter28-didactic-rewrite.yml
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out review branch
+        uses: actions/checkout@v4
+        with:
+          ref: review/chapter-28-pilot
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Apply reviewed payload
+        run: |
+          cat .github/payload/chunk-* > /tmp/aibook-payload.b64
+          base64 --decode /tmp/aibook-payload.b64 > /tmp/aibook-payload.tar.gz
+          tar -xzf /tmp/aibook-payload.tar.gz -C .
+
+          rm -f chapters/28_attention/code/snip_att_004_multihead_shapes.py
+          rm -f chapters/28_attention/code/outputs/SNIP-ATT-004.txt
+          rm -rf .github/payload
+          rm -f .github/workflows/apply-chapter28-didactic-rewrite.yml
+
+      - name: Verify rewritten chapter and documentation
+        run: |
+          grep -F '0.2.0-rc2' chapters/28_attention/CHAPTER.md
+          grep -F 'DID-ATT-01' chapters/28_attention/TEXT_AUDIT.md
+          grep -F 'DID-ATT-02' chapters/28_attention/TEXT_AUDIT.md
+          grep -F '18_PROTOCOLLO_QA_DIDATTICO.md' docs/README.md GUIDELINE.md
+          grep -F 'DEC-046' docs/08_REGISTRO_DECISIONI.md
+
+          ! grep -R 'SNIP-ATT-004' \
+            chapters/28_attention/CHAPTER.md \
+            chapters/28_attention/CLAIMS.md \
+            chapters/28_attention/code/README.md \
+            chapters/28_attention/code/test_attention_snippets.py
+          ! grep -R '\\operatorname' chapters/28_attention/CHAPTER.md
+          ! grep -R 'candidate-v1.png' chapters/28_attention/CHAPTER.md
+          ! grep -R '—' \
+            chapters/28_attention/CHAPTER.md \
+            docs/18_PROTOCOLLO_QA_DIDATTICO.md
+
+          test ! -e chapters/28_attention/code/snip_att_004_multihead_shapes.py
+          test ! -e chapters/28_attention/code/outputs/SNIP-ATT-004.txt
+
+          python -m py_compile \
+            chapters/28_attention/code/snip_att_001_single_query.py \
+            chapters/28_attention/code/snip_att_002_matrix_api.py \
+            chapters/28_attention/code/snip_att_003_causal_mask.py \
+            chapters/28_attention/code/test_attention_snippets.py
+
+      - name: Commit didactic rewrite
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          if git diff --cached --quiet; then
+            echo 'No changes to commit.'
+          else
+            git commit -m 'Rewrite Chapter 28 after iterative didactic QA'
+            git push origin HEAD:review/chapter-28-pilot
+          fi
