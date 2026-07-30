@@ -4,8 +4,8 @@ part_id: P01
 order_key: 020
 title: Dai simboli ai foundation model
 maturity: CORE
-status: prima stesura completa, visuali e codice in revisione
-version: 0.1.0-draft1
+status: candidatura completa in revisione autoriale
+version: 0.2.0-rc1
 opened: 2026-07-30
 last_web_research: 2026-07-30
 last_source_check: 2026-07-30
@@ -49,7 +49,7 @@ Le azioni collegano gli stati: chiedere il numero dell'ordine, interrogare il si
 
 Newell e Simon descrissero simboli e ricerca come elementi centrali del loro programma di ricerca e formularono la *physical symbol system hypothesis* [Newell e Simon, 1976]. Nel libro tratteremo questa formulazione come una tesi storica degli autori, non come una legge dimostrata per ogni forma di intelligenza.
 
-Il seguente snippet mostra una ricerca in ampiezza su un piccolo workflow. Non riproduce un programma storico specifico; rende osservabile il contratto di base: stati espliciti, azioni esplicite e ricerca di un percorso.
+Il seguente snippet mostra una ricerca in ampiezza su un piccolo workflow. L'algoritmo mantiene una coda ed esplora prima i percorsi con meno transizioni. Non riproduce un programma storico specifico; rende osservabile il contratto di base: stati espliciti, azioni esplicite e ricerca di un percorso.
 
 ```python
 from collections import deque
@@ -117,7 +117,7 @@ Un'altra famiglia di approcci modifica il punto in cui viene inserita la conosce
 
 Il perceptron di Rosenblatt, pubblicato nel 1958, è uno dei primi modelli di apprendimento di questo percorso [Rosenblatt, 1958]. Non è una rete profonda nel senso moderno e non deve essere caricato retroattivamente di proprietà sviluppate in seguito. Il suo valore storico, per il nostro racconto, è più semplice: una parte del comportamento può essere ottenuta modificando pesi numerici in funzione degli esempi.
 
-Negli anni successivi, molti metodi statistici hanno reso centrale la relazione tra dati, caratteristiche e criterio di apprendimento. Le support vector network del 1995, per esempio, costruiscono una superficie decisionale in uno spazio di feature e rappresentano una delle famiglie importanti dell'apprendimento statistico [Cortes e Vapnik, 1995]. In questi sistemi le **feature** erano spesso progettate da persone esperte del problema.
+Negli anni successivi, molti metodi statistici hanno reso centrale la relazione tra dati, caratteristiche e criterio di apprendimento. Il lavoro del 1995 sulle support-vector network costruisce una superficie decisionale in uno spazio di feature e rappresenta uno degli esempi importanti dell'apprendimento statistico [Cortes e Vapnik, 1995]. In questi sistemi le **feature** erano spesso progettate da persone esperte del problema.
 
 Per classificare la richiesta di consegna, un progettista poteva scegliere feature come:
 
@@ -136,7 +136,7 @@ Le reti convoluzionali studiate da LeCun, Bottou, Bengio e Haffner mostrano come
 
 ## Quando dati, calcolo e architettura diventano una sola ricetta
 
-Una rete profonda non è utile soltanto perché contiene molti livelli. Deve essere possibile addestrarla, alimentarla con dati appropriati e valutarla con un protocollo adeguato. Nel 2012, Krizhevsky, Sutskever e Hinton addestrarono una rete convoluzionale profonda sul dataset ImageNet usando una implementazione GPU e riportarono un risultato nettamente migliore rispetto agli altri sistemi della competizione descritta nel paper [Krizhevsky et al., 2012].
+Una rete profonda non è utile soltanto perché contiene molti livelli. Deve essere possibile addestrarla, alimentarla con dati appropriati e valutarla con un protocollo adeguato. Nel 2012, Krizhevsky, Sutskever e Hinton addestrarono una rete convoluzionale profonda su ImageNet, un grande benchmark di immagini etichettate, usando unità di calcolo parallelo GPU. Nel paper riportarono un risultato nettamente migliore rispetto agli altri sistemi della competizione [Krizhevsky et al., 2012].
 
 È comune usare quell'episodio come simbolo della crescita del deep learning, ma una spiegazione accurata non lo riduce a una sola causa. Il risultato dipendeva dall'incontro tra architettura, dati su larga scala, accelerazione hardware, regolarizzazione e una procedura di training che funzionava abbastanza bene. Nessuno di questi elementi, preso da solo, descrive l'intera transizione.
 
@@ -148,9 +148,9 @@ Per molto tempo un modello veniva costruito e valutato soprattutto per un compit
 
 Il Transformer del 2017 costruisce il blocco principale di sequence transduction con attention, senza usare recurrence o convoluzioni nel blocco descritto dagli autori [Vaswani et al., 2017]. Questa scelta rende più parallelizzabile il calcolo durante il training rispetto alle architetture ricorrenti considerate nel paper. Il Transformer non crea da solo il paradigma del foundation model, ma diventa un componente importante di molte ricette successive.
 
-BERT usa il pretraining bidirezionale di un Transformer e il fine-tuning per diversi compiti linguistici [Devlin et al., 2019]. L'idea operativa cambia il punto di partenza: invece di inizializzare da zero un modello per ogni classificatore, si parte da parametri che hanno già elaborato una grande quantità di testo.
+BERT usa il pretraining bidirezionale di un Transformer e un ulteriore addestramento, chiamato fine-tuning, per diversi compiti linguistici [Devlin et al., 2019]. L'idea operativa cambia il punto di partenza: invece di inizializzare da zero un modello per ogni classificatore, si parte da parametri che hanno già elaborato una grande quantità di testo.
 
-Nel 2020, Kaplan e colleghi studiarono relazioni empiriche tra loss, dimensione del modello, quantità di dati e compute per la famiglia di language model analizzata [Kaplan et al., 2020]. Le relazioni osservate sono leggi empiriche del regime studiato, non una garanzia che aumentare una qualunque risorsa migliori sempre ogni capacità.
+Nel 2020, Kaplan e colleghi studiarono relazioni empiriche tra loss, dimensione del modello, quantità di dati e risorse di calcolo per la famiglia di language model analizzata [Kaplan et al., 2020]. Le relazioni osservate sono leggi empiriche del regime studiato, non una garanzia che aumentare una qualunque risorsa migliori sempre ogni capacità.
 
 Nello stesso anno, GPT-3 venne valutato su molti compiti descritti attraverso istruzioni o pochi esempi nel contesto, senza aggiornare i parametri per ciascun task [Brown et al., 2020]. Il paper documenta risultati forti in alcuni casi e limiti in altri. Il punto storico che ci interessa è il cambiamento dell'interfaccia: una parte del comportamento può essere specificata nel testo di input, non soltanto attraverso un nuovo ciclo di training.
 
