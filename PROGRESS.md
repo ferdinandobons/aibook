@@ -3,58 +3,43 @@
 ## Stato corrente
 
 - Repository operativo: `ferdinandobons/aibook`
+- Branch canonico: `main`
+- Branch di review: `review/chapter-28-pilot`
 - Modalità: produzione seriale controllata
-- Capitolo pilota: 28, Il meccanismo di attention
-- Testo del capitolo: non iniziato, in attesa del via esplicito
-- Documentazione canonica: completata e consolidata in `docs/`
-- Fonti primarie del capitolo pilota: ricognizione iniziale disponibile, da riaprire e verificare nel workflow del capitolo
-- Visuali: protocollo di audit iterativo definito
-- Testo: protocollo di review fattuale, matematica, architetturale, temporale e didattica definito
-- Codice: standard per snippet, esecuzione pulita e test definito
+- Capitolo pilota: `CH-P06-ATTENTION`, numero di lavoro 28
+- Versione candidata: `0.1.0-rc1`
+- Stato: **revisione autoriale aperta**
+- Ultima ricerca approfondita globale: 30 luglio 2026
+- Ultima verifica delle fonti del capitolo: 30 luglio 2026
 
-## Regole attive
+## Pacchetto disponibile
 
-- Fonti primarie, documentazione ufficiale, repository ufficiali e standard
-- Nessuna inferenza fattuale editoriale nella versione approvata
-- Registro delle affermazioni portanti in `CLAIMS.md`
-- Spiegazione conforme a `docs/EXPLANATION_STYLE_AND_VISUALS.md`
-- Immagini prodotte con lo strumento immagini
-- Nessuna prima generazione considerata finale
-- Controllo completo di formule, shape, numeri, frecce, incroci, leggibilità e composizione
-- Snippet Python e PyTorch collegati direttamente alle sezioni del capitolo
-- Codice eseguito in ambiente pulito e accompagnato da test prima dell'approvazione
-- Coerenza obbligatoria tra testo, formule, immagini e codice
-- Nel repository vengono pubblicate soltanto visuali approvate come `final.png`
-- Ogni capitolo viene associato a una data di congelamento e a un commit SHA
+Il branch di review contiene:
 
-## Documentazione
+- capitolo Markdown completo;
+- fonti primarie e documentazione ufficiale;
+- registro delle affermazioni;
+- audit fattuale, matematico, algoritmico e didattico;
+- quattro snippet Python/PyTorch;
+- quattro test superati;
+- ambiente e output registrati;
+- due immagini tecniche candidate con specifiche, alt text e audit;
+- checklist per la revisione dell'autore.
 
-Indice: `docs/README.md`
+Non contiene render delle pagine o screenshot di impaginazioni.
 
-La cartella contiene:
+## Stato delle visuali
 
-- contratto editoriale;
-- template del capitolo;
-- template e protocollo delle visuali;
-- protocollo QA del testo;
-- standard del codice;
-- workflow del capitolo;
-- politica delle fonti e citazioni;
-- registro delle decisioni;
-- struttura del repository;
-- indice editoriale completo;
-- metodo di spiegazione e visuali;
-- copia archivistica del file metodologico ricevuto.
+- `ATT-01`: `da modificare`; difetto noto documentato nell'audit.
+- `ATT-02`: `validata tecnicamente`; approvazione autoriale aperta.
 
-## Prossima unità di lavoro
+Nessuna immagine è denominata `final.png` prima dell'approvazione.
 
-Dopo il via esplicito:
+## Prossimo gate
 
-1. aprire formalmente il Capitolo 28 nello stato `ricerca`;
-2. ricontrollare sul web le fonti primarie e le versioni correnti;
-3. costruire `CLAIMS.md`;
-4. definire l'oggetto illustrativo continuo;
-5. scrivere la prima transizione didattica;
-6. progettare e revisionare `ATT-01`;
-7. creare ed eseguire il primo snippet;
-8. proseguire secondo `docs/06_WORKFLOW_CAPITOLO.md`.
+1. review del capitolo e degli artefatti nel branch dedicato;
+2. commenti e correzioni;
+3. riapertura degli audit interessati;
+4. approvazione del formato pilota;
+5. congelamento del capitolo e merge;
+6. avvio seriale dei capitoli successivi.

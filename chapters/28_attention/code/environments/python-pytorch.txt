@@ -1,0 +1,8 @@
+data_esecuzione: 2026-07-30
+sistema: Linux-6.12.13-x86_64-with-glibc2.41
+python: 3.13.5 (main, May  5 2026, 21:05:52) [GCC 14.2.0]
+pytorch: 2.10.0+cpu
+device: cpu
+dtype_esempi_principali: torch.float64
+dtype_multihead: torch.float32
+seed_multihead: 7

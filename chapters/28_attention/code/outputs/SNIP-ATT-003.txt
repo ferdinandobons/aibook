@@ -1,0 +1,12 @@
+allowed mask (True = ammesso):
+ tensor([[ True, False, False],
+        [ True,  True, False],
+        [ True,  True,  True]])
+weights:
+ tensor([[[[1.0000, 0.0000, 0.0000],
+          [0.3302, 0.6698, 0.0000],
+          [0.2483, 0.2483, 0.5035]]]], dtype=torch.float64)
+output:
+ tensor([[[[1.0000, 0.0000],
+          [0.3302, 0.6698],
+          [0.7517, 0.7517]]]], dtype=torch.float64)
