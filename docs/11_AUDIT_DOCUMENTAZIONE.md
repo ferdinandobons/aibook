@@ -5,7 +5,7 @@
 - Data dell'audit: 30 luglio 2026
 - Repository: `ferdinandobons/aibook`
 - Branch: `main`
-- Stato del repository esaminato fino al commit: `3f35536e99dbcfbf8744beb6631fe3e48c01e33f`
+- Stato documentale esaminato immediatamente prima di questo audit finale: commit `c6fb784a21f5c145577c087e25ef18706446de86`
 - Esito: **approvato per l'avvio del capitolo pilota dopo il via esplicito del committente**
 
 ## Scopo
@@ -26,6 +26,7 @@ Verificare che tutte le decisioni, metodologie e indicazioni concordate siano re
 - [x] `08_REGISTRO_DECISIONI.md`
 - [x] `09_STRUTTURA_REPOSITORY.md`
 - [x] `10_INDICE_EDITORIALE.md`
+- [x] struttura e criteri di `11_AUDIT_DOCUMENTAZIONE.md`
 - [x] `EXPLANATION_STYLE_AND_VISUALS.md`
 - [x] `source/README.md`
 - [x] cinque segmenti archivistici del file metodologico originale
@@ -131,6 +132,7 @@ Verificare che tutte le decisioni, metodologie e indicazioni concordate siano re
 - [x] Il template del capitolo include i gate testuali, matematici, visuali e di codice.
 - [x] Il workflow usa gli stessi stati dichiarati nei protocolli.
 - [x] La struttura del repository include tutti gli artefatti obbligatori.
+- [x] La struttura del repository elenca anche il presente audit.
 - [x] Il registro delle decisioni riporta le decisioni correnti e quelle sostituite.
 - [x] L'indice della documentazione elenca i documenti canonici e l'archivio.
 - [x] Non risultano decisioni aperte che impediscano l'avvio.
@@ -144,6 +146,7 @@ Verificare che tutte le decisioni, metodologie e indicazioni concordate siano re
 5. È stata aggiunta una copia archivistica integrale del file metodologico originale.
 6. È stata corretta la descrizione di `docs/` per distinguere documenti canonici e archivio delle fonti.
 7. È stato registrato che il capitolo pilota non deve iniziare prima del via esplicito.
+8. È stato aggiunto il presente audit all'indice canonico e alla struttura documentale.
 
 ## Elementi non bloccanti
 
