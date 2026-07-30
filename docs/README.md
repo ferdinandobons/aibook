@@ -30,13 +30,21 @@ Un sistema AI o una persona senza contesto precedente legge nell'ordine:
 11. `../PROGRESS.md`;
 12. i file del capitolo coinvolto.
 
+Per un'attività che crea o modifica immagini tecniche, la lettura specialistica minima è:
+
+1. `17_STANDARD_VISIVO_CANONICO.md`;
+2. `16_REGOLA_CONTENIMENTO_TESTO_VISUALI.md`;
+3. `02_TEMPLATE_VISUALE.md`;
+4. `03_PROTOCOLLO_QA_VISUALE.md`;
+5. `EXPLANATION_STYLE_AND_VISUALS.md`.
+
 ## Mappa dei documenti
 
 | Documento | Funzione |
 |---|---|
 | `00_CONTRATTO_EDITORIALE.md` | Obiettivi, livello tecnico, politica generale, quality gate e vincoli globali. |
 | `01_TEMPLATE_CAPITOLO.md` | Struttura obbligatoria di ogni capitolo e registri di approvazione. |
-| `02_TEMPLATE_VISUALE.md` | Scheda di progettazione e audit per ogni immagine. Include i controlli di contenimento del testo. |
+| `02_TEMPLATE_VISUALE.md` | Scheda di progettazione e audit per ogni immagine. Include stile, orientamento e contenimento. |
 | `03_PROTOCOLLO_QA_VISUALE.md` | Processo iterativo di generazione, revisione, rigenerazione e approvazione delle immagini. |
 | `04_PROTOCOLLO_QA_TESTO.md` | Processo di verifica fattuale, matematica, architetturale, temporale e didattica del testo. |
 | `05_STANDARD_SNIPPET_CODICE.md` | Regole per snippet, script completi, esecuzione, test e audit del codice. |
@@ -50,8 +58,9 @@ Un sistema AI o una persona senza contesto precedente legge nell'ordine:
 | `13_PROTOCOLLO_AGGIORNAMENTO_CONTENUTI.md` | Procedure per nuove tecniche, nuove evidenze, API, maturità, capitoli ed edizioni. |
 | `14_CATALOGO_STATO_ARTE.md` | Principali famiglie, tecniche e ottimizzazioni censite. |
 | `15_REGISTRO_RICERCHE_APPROFONDITE.md` | Registro delle ricognizioni globali e dei relativi confini temporali. |
-| `16_REGOLA_CONTENIMENTO_TESTO_VISUALI.md` | Regola canonica che impedisce testo debordante, tagliato, sovrapposto o privo di padding nelle visuali. |
-| `EXPLANATION_STYLE_AND_VISUALS.md` | Metodo completo di spiegazione in italiano e grammatica visuale del libro. |
+| `16_REGOLA_CONTENIMENTO_TESTO_VISUALI.md` | Regola canonica che impedisce testo debordante, tagliato, sovrapposto o privo di padding. |
+| `17_STANDARD_VISIVO_CANONICO.md` | Grammatica visiva comune: sfondo bianco, orientamento adattivo, palette, box, frecce, tipografia e densità. |
+| `EXPLANATION_STYLE_AND_VISUALS.md` | Metodo completo di spiegazione in italiano e grammatica didattica del libro. |
 | `source/README.md` | Indice delle fonti metodologiche originali archiviate. |
 
 ## Regola fondamentale sull'accuratezza
@@ -77,11 +86,21 @@ Ogni capitolo tecnico integra:
 
 Testo, formule, immagini e codice condividono nomi, shape, numeri, ordine delle operazioni e confini.
 
-## Regola fondamentale sulle visuali
+## Regole fondamentali sulle visuali
+
+Tutte le immagini tecniche usano la grammatica definita in `17_STANDARD_VISIVO_CANONICO.md`.
+
+In particolare:
+
+- lo sfondo globale è sempre bianco puro `#FFFFFF`;
+- l'orientamento può essere orizzontale o verticale in base al contenuto;
+- palette, box, frecce e gerarchia tipografica conservano ruoli comuni;
+- una figura risponde a una sola domanda principale;
+- una figura tecnica non è una renderizzazione completa della pagina del libro.
 
 Ogni testo deve rimanere integralmente dentro il proprio box, cella, badge, callout o pannello. Testo debordante, tagliato, sovrapposto, troppo vicino al bordo o privo di margine interno costituisce un difetto bloccante.
 
-La regola dettagliata è in `16_REGOLA_CONTENIMENTO_TESTO_VISUALI.md` ed è applicata dal template e dal protocollo QA visuale.
+La regola dettagliata sul contenimento è in `16_REGOLA_CONTENIMENTO_TESTO_VISUALI.md`. Il template e il protocollo QA applicano entrambi gli standard.
 
 ## Ordine di autorità e aggiornamenti
 
@@ -103,6 +122,8 @@ In presenza di una divergenza non ancora corretta, il lavoro interessato resta b
 Il contenuto originale di `EXPLANATION_STYLE_AND_VISUALS.md` fornito dal committente è conservato integralmente in `source/`, diviso in segmenti consecutivi per mantenerne la tracciabilità.
 
 Il documento canonico applicato al libro è `EXPLANATION_STYLE_AND_VISUALS.md`. I riferimenti originari specifici di altri progetti restano nell'archivio, mentre le regole operative rispettano le decisioni correnti.
+
+Per sfondo, palette, orientamento e componenti delle immagini raster tecniche prevale `17_STANDARD_VISIVO_CANONICO.md`.
 
 ## Dipendenze escluse
 
