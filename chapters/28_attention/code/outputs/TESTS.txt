@@ -1,9 +1,8 @@
 test_causal_mask (test_attention_snippets.AttentionSnippetTests.test_causal_mask) ... ok
 test_matrix_invariants (test_attention_snippets.AttentionSnippetTests.test_matrix_invariants) ... ok
-test_multihead_shapes (test_attention_snippets.AttentionSnippetTests.test_multihead_shapes) ... ok
 test_single_query_values (test_attention_snippets.AttentionSnippetTests.test_single_query_values) ... ok
 
 ----------------------------------------------------------------------
-Ran 4 tests in 0.007s
+Ran 3 tests in 0.005s
 
 OK

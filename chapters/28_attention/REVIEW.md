@@ -1,34 +1,49 @@
 # Guida alla revisione del capitolo pilota
 
-## Cosa revisionare
+## Versione da revisionare
 
-1. `CHAPTER.md`: tono, progressione, profondità e confini.
-2. `assets/.../ATT-01/candidate-v2.png`: utilità e chiarezza del confronto tra contesto fisso e pesi dipendenti dalla query.
-3. `assets/.../ATT-02/candidate-v2.png`: correttezza, contenimento del testo e leggibilità del calcolo numerico.
-4. `code/`: dimensione e utilità degli snippet.
-5. `FONTI_PRIMARIE.md` e `CLAIMS.md`: livello di tracciabilità.
-6. `TEXT_AUDIT.md` e `code/CODE_AUDIT.md`: sufficienza dei quality gate.
-7. `docs/16_REGOLA_CONTENIMENTO_TESTO_VISUALI.md`: adeguatezza della nuova regola visuale.
+- Capitolo: `CH-P06-ATTENTION`
+- Versione: `0.2.0-rc2`
+- Review didattiche interne: `DID-ATT-01` respinta e corretta; `DID-ATT-02` superata
+- Review autoriale: aperta
+
+## Percorso consigliato
+
+1. `CHAPTER.md`, per tono, progressione e confini;
+2. `TEXT_AUDIT.md`, per vedere gli errori della prima versione e le due review complete;
+3. `assets/.../ATT-01/candidate-v2.png`, per il confronto tra combinazione fissa e coefficienti dipendenti dalla posizione;
+4. `assets/.../ATT-02/candidate-v2.png`, per il calcolo numerico;
+5. `code/`, per i tre snippet eseguibili e i test;
+6. `CLAIMS.md` e `FONTI_PRIMARIE.md`, per la tracciabilità;
+7. `docs/18_PROTOCOLLO_QA_DIDATTICO.md`, per il gate da applicare ai capitoli successivi.
+
+## Modifiche didattiche principali
+
+- ruoli descritti prima dei nomi query, key e value;
+- termine scaled dot-product attention introdotto dopo l'esempio completo;
+- pseudocodice prima della formula generale;
+- stato accumulato esplicito;
+- visuali attraversate dalla prosa;
+- mask matematica separata dalla semantica API;
+- multi-head spostata al capitolo successivo, salvo il ponte finale;
+- implementazioni hardware-aware ridotte a confine.
 
 ## Stato tecnico delle visuali
 
 - `ATT-01`: validata tecnicamente, approvazione autoriale aperta;
 - `ATT-02`: validata tecnicamente, approvazione autoriale aperta.
 
-I rispettivi `AUDIT.md` registrano le versioni respinte, le correzioni applicate e il controllo finale sull'immagine raster.
-
 ## Decisioni richieste all'autore
 
 - [ ] Approvo il tono generale.
+- [ ] Approvo la progressione didattica.
 - [ ] Approvo la profondità matematica.
-- [ ] Approvo la struttura del capitolo.
-- [ ] Approvo il formato degli snippet.
+- [ ] Approvo il formato dei tre snippet.
 - [ ] Approvo `ATT-01`.
 - [ ] Approvo `ATT-02`.
-- [ ] Approvo la regola che rende bloccante ogni overflow o sovrapposizione del testo.
-- [ ] Preferisco spostare la multi-head attention nel capitolo successivo.
-- [ ] Autorizzo l'uso di questo standard per i capitoli successivi.
+- [ ] Approvo il protocollo didattico iterativo per tutti i capitoli.
+- [ ] Autorizzo l'uso di questo standard per la produzione seriale.
 
 ## Nota
 
-Nessuna pagina impaginata è stata generata o inclusa. Il pacchetto contiene soltanto testo Markdown, immagini tecniche, codice, output e audit.
+Il pacchetto contiene soltanto Markdown, immagini tecniche, codice, output e audit. Non contiene pagine renderizzate o mockup editoriali.

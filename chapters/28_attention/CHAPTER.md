@@ -6,300 +6,566 @@
 - Parte: `P06`, Sequenze, linguaggio e contesto
 - Maturità: `CORE`
 - Stato: **revisione autoriale del capitolo pilota**
-- Versione candidata: `0.1.0-rc1`
+- Versione candidata: `0.2.0-rc2`
 - Data di apertura: 30 luglio 2026
 - Data dell'ultima ricerca web: 30 luglio 2026
 - Data dell'ultima verifica delle fonti: 30 luglio 2026
 - Data di congelamento editoriale: non assegnata
 - Documentazione PyTorch verificata: stable `2.13`
-- Ambiente di esecuzione disponibile: Python `3.13.5`, PyTorch `2.10.0+cpu`
-- Oggetto continuo: una query e tre coppie key-value di dimensione 2
-- Concetti differiti: positional encoding, FlashAttention a livello di kernel, MQA, GQA, MLA e KV cache
+- Ambiente eseguito: Python `3.13.5`, PyTorch `2.10.0+cpu`
+- Oggetto continuo: un vettore corrente e tre coppie di vettori sorgente, tutti di dimensione 2
+- Concetti differiti: informazione posizionale, multi-head attention, varianti KV, KV cache e implementazioni hardware-aware
 
-> **Stato della candidatura.** Il testo e il codice sono presentati per revisione. Le figure `ATT-01/candidate-v2.png` e `ATT-02/candidate-v2.png` sono validate tecnicamente e attendono l'approvazione autoriale. Nessuna pagina del libro è stata rasterizzata.
+> **Stato della candidatura.** Il capitolo è stato riscritto dopo una review didattica completa e sottoposto a una seconda review integrale. Le figure `ATT-01/candidate-v2.png` e `ATT-02/candidate-v2.png` sono validate tecnicamente e attendono l'approvazione autoriale. Nessuna pagina del libro è stata rasterizzata.
 
 ## Bussola
 
-- **Stato prima:** disponiamo di una sequenza di vettori, ma non di un'operazione che scelga contributi diversi in funzione della posizione corrente.
-- **Problema:** costruire per ogni query una combinazione dei value che dipenda dalla compatibilità con le key.
-- **Stato dopo:** sappiamo calcolare scaled dot-product attention per una query e per matrici complete, applicare una causal mask, usare l'API PyTorch e localizzare il passaggio alla multi-head attention.
-- **Invariante:** il numero di righe dell'output coincide con il numero di query; la dimensione di ogni riga dell'output coincide con `d_v`.
-- **Confine:** il meccanismo non introduce da solo informazione posizionale, memoria esterna o nuove righe di value.
+- **Stato prima:** disponiamo di una sequenza di vettori, ma non di una regola che scelga contributi diversi in funzione della posizione corrente.
+- **Problema:** produrre, per ogni posizione corrente, una combinazione dei vettori sorgente con coefficienti che dipendano da quella posizione.
+- **Stato dopo:** sappiamo calcolare score, scaling, normalizzazione e somma pesata per una posizione e generalizzare il calcolo a più posizioni.
+- **Invariante:** il numero di output coincide con il numero di vettori correnti; la dimensione di ogni output coincide con la dimensione dei vettori combinati.
+- **Confine:** il meccanismo base non aggiunge informazione posizionale, memoria esterna o dati non presenti nei vettori sorgente.
 
 ## Obiettivo operativo
 
 Al termine del capitolo il lettore può:
 
-1. spiegare il ruolo distinto di query, key e value;
-2. calcolare gli score, lo scaling, la softmax e la somma pesata;
-3. verificare le shape di ogni operazione;
-4. distinguere self-attention, cross-attention e causal self-attention;
-5. implementare il caso base con operazioni tensoriali PyTorch;
-6. confrontare l'implementazione diretta con `torch.nn.functional.scaled_dot_product_attention`;
-7. riconoscere i limiti del caso base e il motivo della multi-head attention.
+1. spiegare perché coefficienti fissi non bastano quando posizioni diverse richiedono combinazioni diverse;
+2. distinguere i tre ruoli successivamente denominati query, key e value;
+3. calcolare score, scaling, softmax e somma pesata in un esempio numerico;
+4. ricostruire la formula matriciale e verificare le shape;
+5. applicare una causal mask agli score;
+6. implementare il caso base con operazioni PyTorch;
+7. confrontare l'implementazione diretta con `torch.nn.functional.scaled_dot_product_attention`;
+8. localizzare il passaggio successivo verso la multi-head attention senza anticiparne il meccanismo completo.
 
 ## Prerequisiti stabili
 
 Il capitolo assume noti:
 
-- vettori, matrici e prodotto matriciale;
+- vettori, matrici, prodotto scalare e prodotto matriciale;
 - shape e trasposizione;
 - proiezione lineare;
 - softmax applicata a un vettore;
 - embedding come sequenza di vettori.
 
-## 1. Dove siamo
+# 1. Ancora: abbiamo vettori, ma non una selezione dipendente dalla posizione
 
-Consideriamo tre posizioni già trasformate in vettori. Non chiediamo ancora come siano stati prodotti. Per il meccanismo corrente sono input disponibili.
+## Stato del lettore
 
-Per una singola posizione corrente usiamo una query:
+```text
+Ultima affermazione stabile: una sequenza può essere rappresentata come una sequenza di vettori.
+Oggetto corrente: tre vettori sorgente v1, v2 e v3.
+Un concetto nuovo: una posizione corrente può richiedere coefficienti propri.
+Concetti differiti: il calcolo dei coefficienti e i nomi tecnici dei tre ruoli.
+Prova che il nuovo concetto è stabile: il lettore può confrontare coefficienti fissi e coefficienti diversi per due consumer.
+```
 
-$$
-q = [1, 0] \in \mathbb{R}^{2}.
-$$
-
-Le tre posizioni consultabili forniscono una key e una value ciascuna:
-
-$$
-K =
-\begin{bmatrix}
-1 & 0 \\
-0 & 1 \\
-1 & 1
-\end{bmatrix}
-\in \mathbb{R}^{3\times2},
-\qquad
-V =
-\begin{bmatrix}
-1 & 0 \\
-0 & 1 \\
-1 & 1
-\end{bmatrix}
-\in \mathbb{R}^{3\times2}.
-$$
-
-I numeri sono **illustrativi**. Sono stati scelti per rendere il calcolo controllabile a mano.
-
-### Stato prima
-
-La query è un vettore. Le key indicano i vettori con cui confrontarla. Le value contengono i vettori da combinare.
-
-### Problema
-
-Manca una regola che produca tre coefficienti dipendenti da `q`. Una media uniforme assegnerebbe sempre `1/3` a ogni value, indipendentemente dalla query.
-
-La figura candidata `ATT-01` confronta queste due situazioni:
-
-![Pesi fissi e pesi dipendenti dalla query](../../assets/chapters/28_attention/ATT-01/candidate-v2.png)
-
-La figura non dimostra la formula. Stabilisce soltanto il requisito: query diverse devono poter produrre coefficienti diversi sulla stessa sorgente.
-
-## 2. Una query confrontata con tutte le key
-
-### Input e shape
-
-- `q`: `[d_k] = [2]`
-- `K`: `[S, d_k] = [3, 2]`
-- `V`: `[S, d_v] = [3, 2]`
-
-`S` è il numero di posizioni consultabili. In questo esempio `S = 3`.
-
-### Trasformazione
-
-Calcoliamo un prodotto scalare tra `q` e ogni riga di `K`:
+Consideriamo tre vettori sorgente:
 
 $$
-qK^T = [1, 0, 1].
+v_1=[1,0],\qquad v_2=[0,1],\qquad v_3=[1,1].
 $$
 
-Il risultato contiene uno score per ogni key. La sua shape è `[S]`.
+I valori sono **illustrativi**. Servono a rendere ogni passaggio verificabile a mano.
 
-### Cosa è cambiato
+## Problema
 
-Le tre key sono state ridotte a tre numeri di compatibilità rispetto alla query corrente.
+Un unico vettore di contesto, costruito una volta e riutilizzato da tutti i consumer, assegna implicitamente la stessa combinazione della sorgente a richieste diverse. Se due posizioni correnti richiedono informazioni diverse, la combinazione deve poter cambiare.
 
-### Cosa è rimasto invariato
-
-`V` non è stato ancora letto dal calcolo. Gli score dipendono da `q` e `K`, non dal contenuto di `V`.
-
-### Cosa non fa
-
-Il prodotto scalare non produce ancora coefficienti normalizzati. Gli score possono essere negativi e non devono sommare a 1.
-
-## 3. Perché dividiamo per la radice di `d_k`
-
-La scaled dot-product attention usa:
+Per esempio, il primo consumer può usare:
 
 $$
-s = \frac{qK^T}{\sqrt{d_k}}.
+c_1=0{,}10v_1+0{,}60v_2+0{,}30v_3,
 $$
 
-Con `d_k = 2` otteniamo:
+mentre il secondo può usare:
 
 $$
-s = [0{,}7071, 0, 0{,}7071].
+c_2=0{,}05v_1+0{,}15v_2+0{,}80v_3.
 $$
 
-Vaswani et al. introducono questa divisione perché, al crescere di `d_k`, prodotti scalari di grande magnitudine possono spingere la softmax verso regioni con gradienti molto piccoli [Vaswani et al., 2017, §3.2.1].
+I vettori sorgente restano gli stessi. Cambiano soltanto i coefficienti usati per combinarli.
 
-### Derivazione sotto ipotesi esplicite
+## Visuale `ATT-01`
 
-Supponiamo, soltanto per questa derivazione, che le componenti di `q` e `k` siano indipendenti, abbiano media 0 e varianza 1. Il prodotto scalare è:
+**Domanda della figura:** perché la combinazione deve dipendere dalla posizione corrente?
 
-$$
-q\cdot k = \sum_{r=1}^{d_k} q_r k_r.
-$$
+![Confronto tra contesto fisso e coefficienti dipendenti dalla posizione corrente](../../assets/chapters/28_attention/ATT-01/candidate-v2.png)
 
-Sotto queste ipotesi la varianza della somma cresce come `d_k`. Dividere per `\sqrt{d_k}` riporta la varianza a ordine unitario. Questa derivazione non afferma che le componenti apprese di un modello reale siano indipendenti o standardizzate. Spiega il ruolo del fattore di scala nel caso idealizzato richiamato dal paper.
+Nel pannello sinistro, `v1`, `v2` e `v3` confluiscono in un unico vettore `c`. Lo stesso `c` viene consegnato a entrambi i consumer.
 
-### Invariante
+Nel pannello destro, la sequenza sorgente non cambia. Il primo vettore corrente produce la prima riga di coefficienti, il secondo produce la seconda riga. Le due righe generano `c1` e `c2`, che sono combinazioni diverse degli stessi tre vettori.
 
-Lo scaling non cambia la shape. Modifica soltanto la magnitudine degli score prima della softmax.
+**Conclusione della figura:** serve una regola che riceva il vettore corrente e produca un coefficiente per ogni vettore sorgente. Ora dobbiamo costruire quella regola.
 
-## 4. Dagli score ai pesi
+## Cosa è cambiato
 
-Applichiamo la softmax lungo le tre key:
+Abbiamo introdotto la possibilità di usare coefficienti diversi per posizioni correnti diverse.
 
-$$
-\alpha_j = \frac{e^{s_j}}{\sum_{m=1}^{S}e^{s_m}}.
-$$
+## Cosa è rimasto invariato
 
-Otteniamo, con arrotondamento a tre decimali:
+I vettori `v1`, `v2` e `v3` non sono stati modificati.
 
-$$
-\alpha = [0{,}401,\ 0{,}198,\ 0{,}401].
-$$
+## Cosa non fa ancora questo passaggio
 
-Ogni coefficiente è non negativo e la somma è 1, a condizione che la riga contenga almeno uno score finito. Queste proprietà derivano dalla definizione della softmax.
+Non calcola i coefficienti. Stabilisce soltanto il requisito che dovranno soddisfare.
 
-### Output e shape
+## Frase di continuità
 
-- input della softmax: `[S]`
-- output della softmax: `[S]`
+Ora che sappiamo quale comportamento manca, possiamo separare il vettore corrente, i vettori usati per il confronto e i vettori da combinare.
 
-### Errore comune
+# 2. Tre ruoli distinti nello stesso calcolo
 
-Gli score e i pesi non sono lo stesso oggetto. Gli score sono i logit prima della normalizzazione. I pesi sono i coefficienti dopo la softmax.
+## Dove siamo
 
-## 5. La somma pesata delle value
+Disponiamo di un vettore corrente e di tre coppie di vettori sorgente. Vogliamo produrre tre coefficienti dipendenti dal vettore corrente.
 
-Ora usiamo i pesi per combinare le righe di `V`:
+## Descrizione prima dei nomi
 
-$$
-o = \sum_{j=1}^{S}\alpha_j v_j = \alpha V.
-$$
+Il calcolo usa tre ruoli:
+
+1. un vettore che rappresenta la posizione corrente;
+2. un vettore di confronto per ogni posizione sorgente;
+3. un vettore da trasportare per ogni posizione sorgente.
+
+Chiamiamo questi ruoli:
+
+- **query**, il vettore corrente;
+- **key**, ciascun vettore usato nel confronto;
+- **value**, ciascun vettore che verrà combinato.
 
 Nel nostro esempio:
 
 $$
-\begin{aligned}
-o &= 0{,}401[1,0] + 0{,}198[0,1] + 0{,}401[1,1] \\
-  &= [0{,}802,\ 0{,}599].
-\end{aligned}
+q=[1,0],
 $$
 
-La figura candidata `ATT-02` percorre lo stesso oggetto, dalla query all'output:
+$$
+K=
+\begin{bmatrix}
+1&0\\
+0&1\\
+1&1
+\end{bmatrix},
+\qquad
+V=
+\begin{bmatrix}
+1&0\\
+0&1\\
+1&1
+\end{bmatrix}.
+$$
 
-![Una query, tre key e tre value](../../assets/chapters/28_attention/ATT-02/candidate-v2.png)
+## Input e shape
 
-### Cosa è cambiato
+- `q`: `[d_k]=[2]`
+- `K`: `[S,d_k]=[3,2]`
+- `V`: `[S,d_v]=[3,2]`
 
-Abbiamo prodotto un nuovo vettore che combina informazioni provenienti dalle tre value.
+`S=3` è il numero di coppie key-value. In questo esempio `d_k=d_v=2`, ma il calcolo generale non richiede che le due dimensioni coincidano.
 
-### Cosa è rimasto invariato
+## Invariante
 
-Il numero e il contenuto delle righe originali di `V` non vengono modificati. Viene creata una combinazione aggiuntiva.
+La riga `j` di `K` e la riga `j` di `V` appartengono alla stessa posizione sorgente. Cambiare l'ordine di una matrice senza applicare la stessa permutazione all'altra romperebbe la corrispondenza.
 
-### Invariante
+## Confine
 
-La dimensione dell'output è `d_v`. Non è obbligatorio che `d_v` coincida con `d_k`.
+I tre nomi descrivono ruoli nel calcolo. Non stabiliscono ancora come ottenere i coefficienti.
 
-### Cosa non fa
+## Frase di continuità
 
-L'operazione non aggiunge informazione che non sia già contenuta nelle value. Cambia i coefficienti con cui le value vengono combinate.
+Ora che i ruoli sono distinti, la query può essere confrontata con ogni key per produrre un numero per posizione sorgente.
 
-## 6. Il nome tecnico e il contratto completo
+# 3. Prima transizione: una query produce uno score per ogni key
 
-La trasformazione appena eseguita è una **scaled dot-product attention** per una query.
+## Stato del lettore
 
-Per più query raccogliamo le query in una matrice:
+```text
+Ultima affermazione stabile: query, key e value hanno ruoli distinti.
+Oggetto corrente: q, K e V con shape note.
+Un concetto nuovo: prodotto scalare tra q e ogni riga di K.
+Concetti differiti: scaling, softmax e uso di V.
+Prova che il nuovo concetto è stabile: il lettore calcola i tre score e ne indica la shape.
+```
 
-- `Q \in \mathbb{R}^{L\times d_k}`;
-- `K \in \mathbb{R}^{S\times d_k}`;
-- `V \in \mathbb{R}^{S\times d_v}`.
+## Problema locale
 
-`L` è il numero di query. `S` è il numero di coppie key-value.
+Servono tre numeri, uno per ogni key, che dipendano dalla query corrente.
+
+## Trasformazione
+
+Calcoliamo tre prodotti scalari:
+
+$$
+[1,0]\cdot[1,0]=1,
+$$
+
+$$
+[1,0]\cdot[0,1]=0,
+$$
+
+$$
+[1,0]\cdot[1,1]=1.
+$$
+
+Lo stato accumulato è:
+
+```text
+q, K, V
+score grezzi = [1, 0, 1]
+```
+
+## Output e shape
+
+Il vettore degli score ha shape `[S]=[3]`.
+
+## Cosa è cambiato
+
+Ogni key è stata ridotta a un numero relativo alla query corrente.
+
+## Cosa è rimasto invariato
+
+`V` non è stato ancora usato. Il numero di posizioni sorgente resta `S=3`.
+
+## Cosa non fa
+
+Gli score non sono coefficienti normalizzati. Possono essere negativi e non devono sommare a 1.
+
+## Errore comune
+
+Gli score non sono i pesi finali. Sono valori intermedi prima della normalizzazione.
+
+## Frase di continuità
+
+Ora che abbiamo uno score per ogni key, dobbiamo controllarne la scala prima di normalizzarlo.
+
+# 4. Seconda transizione: ridimensionare gli score
+
+## Dove siamo
+
+Lo stato corrente contiene `q`, `K`, `V` e gli score grezzi `[1,0,1]`.
+
+## Problema locale
+
+Al crescere di `d_k`, la magnitudine dei prodotti scalari può crescere. Il Transformer originale divide gli score per `sqrt(d_k)` prima della softmax [Vaswani et al., 2017, §3.2.1].
+
+## Trasformazione nell'esempio
+
+Con `d_k=2`:
+
+$$
+\sqrt{d_k}=\sqrt{2}\approx1{,}4142.
+$$
+
+Dividiamo ogni score:
+
+$$
+[1,0,1]/1{,}4142=[0{,}7071,0,0{,}7071].
+$$
+
+Lo stato accumulato è:
+
+```text
+q, K, V
+score grezzi = [1, 0, 1]
+score scalati = [0,7071, 0, 0,7071]
+```
+
+## Output e shape
+
+Gli score scalati mantengono shape `[S]=[3]`.
+
+## Cosa è cambiato
+
+È cambiata la magnitudine dei tre score.
+
+## Cosa è rimasto invariato
+
+L'ordine relativo degli score e la loro shape non cambiano. `V` non è ancora stato usato.
+
+## Derivazione sotto ipotesi esplicite
+
+Supponiamo, soltanto per questa derivazione, che le componenti di due vettori di confronto siano indipendenti, con media 0 e varianza 1. Il prodotto scalare è una somma di `d_k` prodotti. Sotto queste ipotesi, la varianza della somma cresce come `d_k`; la divisione per `sqrt(d_k)` la riporta a ordine unitario.
+
+Questa derivazione descrive un caso idealizzato. Non afferma che le componenti apprese in un modello reale siano indipendenti o standardizzate.
+
+## Confine
+
+Lo scaling non normalizza gli score e non produce ancora coefficienti che sommano a 1.
+
+## Frase di continuità
+
+Ora che gli score sono stati ridimensionati, la softmax può trasformarli in coefficienti confrontabili sulla stessa riga.
+
+# 5. Terza transizione: dagli score scalati ai coefficienti
+
+## Input
+
+Gli score scalati sono:
+
+$$
+[0{,}7071,0,0{,}7071].
+$$
+
+## Trasformazione
+
+Applichiamo la softmax lungo le tre posizioni sorgente. Otteniamo, con arrotondamento a tre decimali:
+
+$$
+[0{,}401,0{,}198,0{,}401].
+$$
+
+Lo stato accumulato è:
+
+```text
+q, K, V
+score grezzi
+score scalati
+coefficienti = [0,401, 0,198, 0,401]
+```
+
+## Output e shape
+
+Il vettore dei coefficienti mantiene shape `[S]=[3]`.
+
+## Cosa è cambiato
+
+Gli score sono diventati coefficienti non negativi. La loro somma è 1, se almeno uno score della riga è finito e non viene applicato dropout dopo la softmax.
+
+## Cosa è rimasto invariato
+
+Ogni coefficiente continua a corrispondere alla stessa riga di `K` e `V`.
+
+## Cosa non fa
+
+La softmax non combina le value. Produce soltanto i coefficienti che verranno usati nel passaggio successivo.
+
+## Errore comune
+
+Applicare la softmax sulla dimensione sbagliata cambia il contratto. Per una query, la normalizzazione deve avvenire lungo le key consultabili.
+
+## Frase di continuità
+
+Ora che abbiamo un coefficiente per ogni posizione sorgente, possiamo usare per la prima volta le value.
+
+# 6. Quarta transizione: combinare le value
+
+## Dove siamo
+
+Disponiamo di tre coefficienti e di tre value corrispondenti.
+
+## Trasformazione
+
+Moltiplichiamo ogni value per il proprio coefficiente e sommiamo:
+
+$$
+0{,}401[1,0]+0{,}198[0,1]+0{,}401[1,1].
+$$
+
+Il risultato è:
+
+$$
+o=[0{,}802,0{,}599].
+$$
+
+Lo stato accumulato completo è:
+
+```text
+q, K, V
+score grezzi
+score scalati
+coefficienti normalizzati
+output o = [0,802, 0,599]
+```
+
+## Output e shape
+
+L'output ha shape `[d_v]=[2]`.
+
+## Cosa è cambiato
+
+È stato creato un nuovo vettore che combina le tre value.
+
+## Cosa è rimasto invariato
+
+Le righe originali di `V` non vengono modificate. Il nuovo vettore è una combinazione aggiuntiva.
+
+## Cosa non fa
+
+L'operazione non aggiunge informazione esterna. L'output appartiene allo spazio generato dalle value disponibili.
+
+## Visuale `ATT-02`
+
+**Domanda della figura:** come viene prodotto l'output numerico per una query?
+
+![Esempio numerico completo per una query](../../assets/chapters/28_attention/ATT-02/candidate-v2.png)
+
+La figura si legge da sinistra a destra. Il primo pannello contiene `q`, `K` e `V`. Il secondo calcola i tre prodotti scalari. Il terzo divide gli score per `sqrt(d_k)`. Il quarto applica la softmax e verifica che i coefficienti sommino a 1. Il quinto combina le value. Il sesto mostra l'output e la sua shape.
+
+**Conclusione della figura:** la query non viene sommata alle value. La query determina i coefficienti tramite il confronto con le key; i coefficienti combinano le value.
+
+## Frase di continuità
+
+Ora che l'intera trasformazione è osservabile su numeri concreti, possiamo esprimerne l'algoritmo senza dipendere dalla notazione matematica compatta.
+
+# 7. Pseudocodice del caso base
+
+Il seguente blocco è pseudocodice, non Python eseguibile.
+
+```text
+input:
+    un vettore corrente
+    S vettori di confronto
+    S vettori da combinare
+
+per ogni posizione sorgente j:
+    calcola il prodotto scalare tra il vettore corrente e il vettore di confronto j
+
+dividi tutti gli score per la radice della dimensione dei vettori di confronto
+normalizza gli score con softmax lungo le S posizioni
+moltiplica ogni vettore da combinare per il coefficiente corrispondente
+somma i vettori pesati
+
+output:
+    un vettore con la stessa dimensione dei vettori combinati
+```
+
+## Invariante algoritmico
+
+Il numero dei coefficienti coincide con il numero di coppie sorgente. La dimensione dell'output coincide con `d_v`.
+
+## Frase di continuità
+
+Ora che l'algoritmo è stabile, possiamo assegnare un nome alla trasformazione e scriverla in forma matriciale.
+
+# 8. Nome tecnico e contratto matematico
+
+La trasformazione completa appena eseguita si chiama **scaled dot-product attention**.
+
+Per una query:
+
+$$
+\mathrm{Attention}(q,K,V)=
+\mathrm{softmax}\left(\frac{qK^T}{\sqrt{d_k}}\right)V.
+$$
+
+Per più query, raccogliamo i vettori correnti nelle righe di `Q`:
+
+- `Q\in\mathbb{R}^{L\times d_k}`;
+- `K\in\mathbb{R}^{S\times d_k}`;
+- `V\in\mathbb{R}^{S\times d_v}`.
 
 La forma matriciale è:
 
 $$
-\mathrm{Attention}(Q,K,V)
-=
+\mathrm{Attention}(Q,K,V)=
 \mathrm{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V.
 $$
 
-La softmax è applicata per riga. Ogni riga dell'output corrisponde a una query.
+La softmax viene applicata per riga. Ogni riga dell'output appartiene a una query [Vaswani et al., 2017, §3.2.1].
 
-### Contratto delle shape
+## Contratto delle shape
 
 | Oggetto | Shape | Ruolo |
 |---|---:|---|
-| `Q` | `[L, d_k]` | una riga per query |
-| `K` | `[S, d_k]` | una riga per key |
-| `V` | `[S, d_v]` | una riga per value |
-| `QK^T` | `[L, S]` | uno score per coppia query-key |
-| `A` | `[L, S]` | pesi normalizzati per query |
-| `O = AV` | `[L, d_v]` | una riga di output per query |
+| `Q` | `[L,d_k]` | una riga per query |
+| `K` | `[S,d_k]` | una riga per key |
+| `V` | `[S,d_v]` | una riga per value |
+| `QK^T` | `[L,S]` | uno score per coppia query-key |
+| `A` | `[L,S]` | coefficienti normalizzati per query |
+| `O=AV` | `[L,d_v]` | una riga di output per query |
 
-La definizione e la multi-head generalization sono presentate nel Transformer originale [Vaswani et al., 2017, §§3.2.1–3.2.2].
+## Cosa cambia passando da una query a più query
 
-## 7. Da dove provengono query, key e value
+Il calcolo viene ripetuto per `L` righe in parallelo. Ogni riga di `A` contiene i coefficienti di una query.
 
-La formula non impone che `Q`, `K` e `V` provengano dallo stesso tensor.
+## Cosa resta invariato
 
-### Self-attention
+Il numero di righe di `K` deve coincidere con il numero di righe di `V`. La dimensione finale di ogni output resta `d_v`.
 
-`Q`, `K` e `V` sono proiezioni della stessa sequenza di input. Nel Transformer originale, ogni head usa proiezioni apprese separate [Vaswani et al., 2017, §3.2.2].
+## Confine
 
-### Cross-attention
+La formula non stabilisce da quali sequenze provengano `Q`, `K` e `V`. Questa distinzione viene introdotta ora, dopo la stabilizzazione dell'operatore.
 
-Le query provengono da una sequenza, mentre key e value provengono da un'altra sorgente. Questa configurazione è usata, per esempio, tra decoder ed encoder nei modelli encoder-decoder.
+# 9. Provenienza di `Q`, `K` e `V`
 
-### Causal self-attention
+## Self-attention
 
-`Q`, `K` e `V` provengono dalla stessa sequenza, ma una query in posizione `i` non può usare key in posizioni future. Il vincolo viene applicato agli score prima della softmax.
+`Q`, `K` e `V` derivano dalla stessa sequenza di input tramite proiezioni apprese. Le proiezioni possono produrre valori diversi anche quando la sequenza sorgente è la stessa.
 
-## 8. La mask modifica gli score, non le value
+## Cross-attention
 
-Introduciamo una mask additiva `M \in \mathbb{R}^{L\times S}`:
+Le query derivano da una sequenza, mentre key e value derivano da un'altra sorgente. Il contratto delle shape resta lo stesso, con `L` e `S` potenzialmente diversi.
+
+## Causal self-attention
+
+`Q`, `K` e `V` derivano dalla stessa sequenza, ma la query in posizione `i` non può usare key in posizioni future. Questo vincolo richiede una modifica agli score prima della softmax.
+
+## Frase di continuità
+
+Ora che il caso causale è localizzato, possiamo aggiungere un solo nuovo oggetto: una mask applicata alla matrice degli score.
+
+# 10. Causal mask: modificare gli score ammessi
+
+## Stato del lettore
+
+```text
+Ultima affermazione stabile: la formula produce una matrice di score [L,S].
+Oggetto corrente: score scalati prima della softmax.
+Un concetto nuovo: una mask additiva con la stessa shape degli score.
+Concetti differiti: semantica delle mask nelle API.
+Prova che il nuovo concetto è stabile: il lettore identifica celle ammesse e bloccate e spiega perché il peso futuro diventa zero.
+```
+
+## Problema locale
+
+In generazione causale, una posizione non deve usare elementi futuri.
+
+## Trasformazione
+
+Introduciamo `M\in\mathbb{R}^{L\times S}` e calcoliamo:
 
 $$
-A = \mathrm{softmax}\left(\frac{QK^T}{\sqrt{d_k}} + M\right).
+A=\mathrm{softmax}\left(\frac{QK^T}{\sqrt{d_k}}+M\right).
 $$
 
-Nel caso causale quadrato:
+Nel caso quadrato:
 
 $$
-M_{ij} =
+M_{ij}=
 \begin{cases}
-0 & \text{se } j \le i,\\
--\infty & \text{se } j > i.
+0 & \text{se } j\le i,\\
+-\infty & \text{se } j>i.
 \end{cases}
 $$
 
-Dopo la softmax, le posizioni con logit `-\infty` ricevono peso 0.
+Una cella bloccata riceve un logit `-inf`. Dopo la softmax, il coefficiente corrispondente è 0.
 
-### Invariante
+## Cosa è cambiato
 
-La mask non cambia `L`, `S` o `d_v`. Cambia quali score possono contribuire.
+Alcuni score non possono più contribuire alla normalizzazione.
 
-### Semantica delle mask nelle API PyTorch
+## Cosa è rimasto invariato
 
-La documentazione stabile PyTorch `2.13` specifica che, in `torch.nn.functional.scaled_dot_product_attention`, una mask booleana usa `True` per indicare una posizione che **partecipa** all'attention. Nella `key_padding_mask` di `torch.nn.MultiheadAttention`, `True` indica invece una posizione da ignorare. Le due semantiche booleane non devono essere confuse [PyTorch 2.13 Docs, `scaled_dot_product_attention`; `MultiheadAttention`].
+`L`, `S`, `d_k` e `d_v` non cambiano. La mask non modifica direttamente le righe di `V`.
 
-## 9. Implementazione minima: una query
+## Errore comune
 
-Lo snippet seguente implementa esattamente l'esempio numerico. La riga centrale è il prodotto tra query e key trasposte, seguito dalla divisione per `sqrt(d_k)`.
+Applicare la mask a `V` cambia i dati trasportati e non implementa il vincolo causale sugli score.
+
+## Frase di continuità
+
+Ora che la mask è stabile come operazione matematica, possiamo verificare la stessa sequenza di operazioni in PyTorch.
+
+# 11. Implementazione minima per una query
+
+## Contratto dello snippet
+
+- **Input noto:** `q`, `K` e `V` dell'esempio numerico.
+- **Operazione centrale:** prodotto tra `q` e `K^T`, divisione per `sqrt(d_k)`, softmax e prodotto con `V`.
+- **Output da osservare:** coefficienti che sommano a 1 e output `[0.8022,0.5989]`.
+- **Invariante:** shape degli score `[3]`, shape dell'output `[2]`.
 
 ```python
 from __future__ import annotations
@@ -324,13 +590,18 @@ File eseguito: [`code/snip_att_001_single_query.py`](code/snip_att_001_single_qu
 
 Output registrato: [`code/outputs/SNIP-ATT-001.txt`](code/outputs/SNIP-ATT-001.txt).
 
-## 10. Implementazione matriciale e confronto con l'API ufficiale
+## Reintegrazione
 
-Per batch e head esplicite usiamo le shape documentate dall'API:
+Le quattro righe centrali corrispondono ai quattro passaggi già eseguiti a mano. Il codice non introduce un secondo algoritmo.
 
-- `Q`: `[B, H, L, d_k]`;
-- `K`: `[B, H, S, d_k]`;
-- `V`: `[B, H, S, d_v]`.
+# 12. Implementazione matriciale e confronto con l'API ufficiale
+
+## Contratto dello snippet
+
+- **Input noto:** batch e head esplicite con `Q`, `K` e `V` di shape `[B,H,L,d]`.
+- **Operazione centrale:** stessa formula matriciale del caso base.
+- **Output da osservare:** equivalenza numerica con `F.scaled_dot_product_attention` quando `dropout_p=0.0`.
+- **Invariante:** output `[B,H,L,d_v]`.
 
 ```python
 import math
@@ -345,15 +616,26 @@ api_output = F.scaled_dot_product_attention(q, k, v, dropout_p=0.0)
 torch.testing.assert_close(output, api_output, rtol=1e-12, atol=1e-12)
 ```
 
-Il confronto è stato eseguito nell'ambiente registrato con PyTorch `2.10.0+cpu`. La firma e la semantica correnti dell'API sono state ricontrollate nella documentazione stabile `2.13`. Non viene dichiarata un'esecuzione locale sotto `2.13`.
+Il confronto è stato eseguito con PyTorch `2.10.0+cpu`. La firma e la semantica correnti dell'API sono state ricontrollate nella documentazione stable `2.13`. Non viene dichiarata un'esecuzione locale sotto `2.13`.
 
-La documentazione corrente indica che l'operatore può selezionare implementazioni ottimizzate in funzione degli input e del backend. La scelta del kernel può produrre piccole differenze numeriche dovute all'ordine delle operazioni in virgola mobile [PyTorch 2.13 Docs, `scaled_dot_product_attention`].
+File eseguito: [`code/snip_att_002_matrix_api.py`](code/snip_att_002_matrix_api.py).
 
-### Nota sul dropout
+## Nota separata sul dropout
 
-`scaled_dot_product_attention` applica dropout quando `dropout_p > 0`, indipendentemente dallo stato di training di un modulo chiamante. La documentazione raccomanda di passare esplicitamente `0.0` quando il dropout non deve essere applicato. Nel capitolo base usiamo `dropout_p=0.0`.
+`F.scaled_dot_product_attention` applica dropout quando `dropout_p>0`, indipendentemente dallo stato di training di un modulo chiamante. Nel caso base passiamo esplicitamente `dropout_p=0.0` [PyTorch 2.13 Docs, `scaled_dot_product_attention`].
 
-## 11. Causal mask in PyTorch
+## Confine
+
+L'API può selezionare backend differenti. Il capitolo non misura kernel o prestazioni hardware.
+
+# 13. Causal mask nell'API PyTorch
+
+## Contratto dello snippet
+
+- **Input noto:** la matrice di score quadrata del caso causale.
+- **Operazione centrale:** una mask booleana triangolare inferiore.
+- **Output da osservare:** coefficienti futuri uguali a zero.
+- **Invariante:** shape dell'output invariata.
 
 ```python
 allowed = torch.ones(3, 3, dtype=torch.bool).tril()
@@ -366,161 +648,147 @@ output = F.scaled_dot_product_attention(
 )
 ```
 
-Nel file eseguito, il risultato viene confrontato con una implementazione diretta che applica `-inf` agli score non ammessi.
+Nel file eseguito, l'output viene confrontato con un'implementazione diretta che inserisce `-inf` negli score non ammessi.
 
 File: [`code/snip_att_003_causal_mask.py`](code/snip_att_003_causal_mask.py).
 
-Test: le posizioni future hanno peso esattamente zero nell'esempio in `float64`.
+## Semantica booleana, dopo il caso matematico
 
-## 12. Multi-head attention
+In `F.scaled_dot_product_attention`, `True` indica una posizione che partecipa all'attention. In `MultiheadAttention.key_padding_mask`, `True` indica invece una posizione da ignorare. Le due convenzioni appartengono ad API diverse e non devono essere scambiate [PyTorch 2.13 Docs].
 
-Una singola head usa un solo insieme di proiezioni. La multi-head attention calcola più attention in parallelo:
-
-$$
-h_i =
-\mathrm{Attention}\left(QW_i^Q, KW_i^K, VW_i^V\right),
-$$
-
-poi concatena gli output e applica una proiezione finale:
-
-$$
-\mathrm{MHA}(Q,K,V)
-=
-\left[h_1 \mathbin{\|} \cdots \mathbin{\|} h_H\right]W^O.
-$$
-
-Le head non vengono sommate direttamente prima di `W^O`. La concatenazione conserva separati i canali prodotti dalle diverse proiezioni fino alla proiezione finale [Vaswani et al., 2017, §3.2.2].
-
-Lo snippet [`code/snip_att_004_multihead_shapes.py`](code/snip_att_004_multihead_shapes.py) esegue `torch.nn.MultiheadAttention` con due head e verifica:
-
-- output `[B, L, E] = [1, 3, 4]`;
-- pesi non mediati `[B, H, L, S] = [1, 2, 3, 3]`.
-
-Il capitolo successivo riprenderà il blocco multi-head insieme alle proiezioni, alla concatenazione e a `W^O`.
-
-## 13. Complessità e memoria
+# 14. Complessità del caso materializzato
 
 Per `Q[L,d_k]`, `K[S,d_k]` e `V[S,d_v]`:
 
 1. `QK^T` richiede ordine `O(LSd_k)` operazioni;
 2. `AV` richiede ordine `O(LSd_v)` operazioni;
-3. una implementazione che materializza score e pesi conserva tensori intermedi di shape `[L,S]`.
+3. una realizzazione che conserva score o coefficienti materializza un intermedio `[L,S]`.
 
-Nel caso di self-attention con `L=S=n`, la dimensione degli intermedi è quadratica in `n`.
+Con self-attention e `L=S=n`, questo intermedio ha `n^2` elementi.
 
-Questa descrizione riguarda l'implementazione standard materializzata. FlashAttention riorganizza lo stesso operatore esatto tramite tiling e ricomputazione, riducendo gli accessi alla memoria HBM e senza richiedere la materializzazione completa della matrice `n×n` in HBM [Dao et al., 2022, §§1–3]. Il meccanismo hardware-aware viene differito alla Parte `P12`.
+## Confine hardware-aware
 
-## 14. Proprietà e confini
+Altre implementazioni possono calcolare lo stesso operatore con strategie differenti di accesso alla memoria e ricomputazione. Il loro meccanismo viene trattato nella Parte `P12`, non in questo capitolo base.
 
-### Proprietà stabilizzate
+# 15. Proprietà stabilizzate e confini
+
+## Proprietà stabilizzate
 
 - ogni riga di `QK^T` appartiene a una query;
 - ogni colonna appartiene a una key;
 - la softmax viene applicata lungo le key;
-- senza dropout, ogni riga dei pesi è non negativa e somma a 1, se almeno una posizione è ammessa;
+- senza dropout, ogni riga valida dei coefficienti è non negativa e somma a 1;
 - ogni riga di output è una combinazione delle righe di `V`;
-- il numero di righe dell'output è `L`;
-- la dimensione di ogni riga è `d_v`.
+- il numero delle righe di output è `L`;
+- la dimensione finale di ogni riga è `d_v`.
 
-### Cosa non fa il meccanismo base
+## Cosa non fa il meccanismo base
 
-- non genera da solo informazione posizionale;
+- non inserisce da solo informazione posizionale;
 - non modifica l'ordine delle righe;
 - non introduce dati esterni;
-- non decide da solo la correttezza di un contenuto;
-- non riduce automaticamente il costo quadratico della matrice degli score;
+- non decide la correttezza del contenuto;
+- non elimina automaticamente il costo quadratico degli score nel caso `L=S=n`;
 - non definisce l'intero blocco Transformer.
 
-### Posizione e permutazioni
+## Posizione e permutazioni
 
-Se `Q`, `K` e `V` vengono permutati in modo coerente e non contengono segnali posizionali, l'operatore segue la stessa permutazione. Questa proprietà deriva dalle moltiplicazioni matriciali e dalla softmax per riga. Per distinguere l'ordine, il sistema deve inserire informazione posizionale nei dati o nel calcolo.
+Se `Q`, `K` e `V` vengono permutati in modo coerente e non contengono segnali posizionali, l'output segue la stessa permutazione. Per distinguere l'ordine, il sistema deve inserire informazione posizionale nei dati o nel calcolo.
 
-## 15. Errori comuni
+# 16. Errori comuni
 
-1. **Applicare la softmax sulla dimensione sbagliata.** Per ogni query, la normalizzazione deve avvenire sulle key.
-2. **Usare `KQ^T` al posto di `QK^T`.** Le shape e il significato delle righe cambiano.
-3. **Applicare la mask a `V`.** La mask modifica gli score o un bias sommato agli score prima della softmax.
-4. **Confondere mask booleane tra API diverse.** In PyTorch la semantica di `True` non è uniforme tra `F.scaled_dot_product_attention` e `MultiheadAttention.key_padding_mask`.
-5. **Dimenticare il fattore `sqrt(d_k)`.** Si implementa allora dot-product attention non scalata.
-6. **Chiamare “pesi” gli score.** I pesi sono il risultato della normalizzazione.
-7. **Assumere che i pesi dopo dropout sommino a 1.** Il dropout modifica i coefficienti dopo la softmax.
+1. **Applicare la softmax sulla dimensione sbagliata.** Per ogni query, la normalizzazione avviene lungo le key.
+2. **Usare `KQ^T` al posto di `QK^T`.** Le righe non rappresenterebbero più le query nel contratto adottato.
+3. **Applicare la mask a `V`.** La mask modifica gli score o un bias sommato agli score.
+4. **Confondere mask booleane tra API diverse.** Il significato di `True` dipende dal contratto dell'API.
+5. **Omettere `sqrt(d_k)`.** Si ottiene dot-product attention non scalata.
+6. **Chiamare pesi gli score.** I coefficienti normalizzati compaiono soltanto dopo la softmax.
+7. **Assumere che i coefficienti dopo dropout sommino a 1.** Il dropout viene applicato dopo la softmax nell'API descritta.
 
-## 16. Ricostruzione completa
+# 17. Ponte verso la multi-head attention
 
-Partiamo da una query `q`, tre key e tre value.
+Il caso base usa un singolo insieme di proiezioni per costruire `Q`, `K` e `V`. Il capitolo successivo introdurrà più insiemi di proiezioni, eseguirà il meccanismo in parallelo e ricomporrà gli output.
 
-1. `qK^T` produce uno score per key.
-2. La divisione per `sqrt(d_k)` ridimensiona i logit.
-3. La mask, se presente, rende non ammesse alcune posizioni.
-4. La softmax produce coefficienti per la query corrente.
-5. I coefficienti combinano le righe di `V`.
-6. Ripetendo il calcolo per `L` query otteniamo `O[L,d_v]`.
-7. Con più head ripetiamo il meccanismo su proiezioni separate, concateniamo e applichiamo `W^O`.
+Questa è una nuova struttura, non un dettaglio necessario per calcolare il caso base. Formula completa, concatenazione, proiezione finale e shape per head restano quindi differite.
 
-Ora che abbiamo ottenuto rappresentazioni dipendenti dal contesto, il componente successivo può combinare più head e reintegrare l'output nel blocco Transformer.
+## Frase di continuità
 
-## 17. Controlli di comprensione
+Ora che una singola trasformazione produce rappresentazioni dipendenti dal contesto, il componente successivo può ripeterla su proiezioni separate e combinare i risultati nel blocco Transformer.
 
-### Ricostruzione
+# 18. Ricostruzione completa
 
-Partendo da `q`, `K` e `V`, ricostruire l'ordine esatto di score, scaling, mask, softmax e prodotto con `V`.
+Partiamo da un vettore corrente e da `S` coppie sorgente.
 
-### Localizzazione
+1. assegniamo i ruoli query, key e value;
+2. confrontiamo la query con ogni key;
+3. dividiamo gli score per `sqrt(d_k)`;
+4. aggiungiamo una mask, se il vincolo la richiede;
+5. applichiamo la softmax lungo le key;
+6. usiamo i coefficienti per combinare le value;
+7. ripetiamo il calcolo per `L` query e otteniamo `O[L,d_v]`.
+
+Lo stesso ordine compare nell'esempio numerico, nel pseudocodice, nella formula, negli snippet e nelle visuali.
+
+# 19. Controlli di comprensione
+
+## Ricostruzione
+
+Ricostruire l'ordine esatto di confronto, scaling, mask, softmax e combinazione delle value.
+
+## Localizzazione
 
 Indicare quale operazione usa `V` per la prima volta.
 
-### Confine
+## Confine
 
-Spiegare perché la mask non deve essere applicata direttamente alle righe di `V`.
+Spiegare perché una causal mask viene applicata agli score e non direttamente alle righe di `V`.
 
-### Trasferimento
+## Trasferimento
 
-Ripetere l'esempio sostituendo `q=[0,1]` e prevedere quali key ricevono score maggiore prima di calcolare la softmax.
+Sostituire `q=[1,0]` con `q=[0,1]`. Prevedere gli score prima di calcolare la softmax.
 
-### Variazione
+## Variazione
 
-Prevedere la shape dell'output quando `L=5`, `S=7`, `d_k=64` e `d_v=32`.
+Prevedere la shape dell'output con `L=5`, `S=7`, `d_k=64` e `d_v=32`.
 
-## 18. Esercizi
+# 20. Esercizi
 
-1. Calcolare a mano la seconda riga dei pesi per `q=[0,1]`.
+1. Calcolare a mano i coefficienti e l'output per `q=[0,1]` usando le stesse `K` e `V`.
 2. Modificare `SNIP-ATT-002` usando `d_v=3` e verificare la nuova shape dell'output.
 3. Sostituire la causal mask booleana con una mask additiva contenente `0` e `-inf`.
 4. Creare un caso in cui tutte le key producano lo stesso score e spiegare il risultato della softmax.
-5. Verificare con un test che una permutazione coerente delle righe permuti coerentemente l'output nel caso senza posizione.
+5. Verificare con un test che una permutazione coerente di query, key e value permuti coerentemente l'output in assenza di posizione.
 
-## 19. Fonti primarie
+# 21. Fonti primarie
 
 Le schede complete, le sezioni consultate e i limiti sono in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md).
 
 - Vaswani et al., *Attention Is All You Need*, NeurIPS 2017.
-- Bahdanau, Cho e Bengio, *Neural Machine Translation by Jointly Learning to Align and Translate*, ICLR 2015 / arXiv.
-- Luong, Pham e Manning, *Effective Approaches to Attention-based Neural Machine Translation*, EMNLP 2015.
-- Dao et al., *FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness*, 2022.
+- Bahdanau, Cho e Bengio, *Neural Machine Translation by Jointly Learning to Align and Translate*, ICLR 2015.
 
-## 20. Documentazione ufficiale
+# 22. Documentazione ufficiale
 
 - PyTorch stable `2.13`, `torch.nn.functional.scaled_dot_product_attention`.
 - PyTorch stable `2.13`, `torch.nn.MultiheadAttention`.
-- PyTorch stable `2.13`, `torch.nn.attention`.
 
-## 21. Artefatti di riproduzione
+# 23. Artefatti di riproduzione
 
 - ambiente: [`code/environments/python-pytorch.txt`](code/environments/python-pytorch.txt);
 - test: [`code/test_attention_snippets.py`](code/test_attention_snippets.py);
 - output: [`code/outputs/`](code/outputs/);
 - audit codice: [`code/CODE_AUDIT.md`](code/CODE_AUDIT.md);
-- audit testo: [`TEXT_AUDIT.md`](TEXT_AUDIT.md);
+- audit testo e didattica: [`TEXT_AUDIT.md`](TEXT_AUDIT.md);
 - claim: [`CLAIMS.md`](CLAIMS.md);
 - visuale `ATT-01`: [`candidate-v2.png`](../../assets/chapters/28_attention/ATT-01/candidate-v2.png);
 - visuale `ATT-02`: [`candidate-v2.png`](../../assets/chapters/28_attention/ATT-02/candidate-v2.png).
 
-## 22. Registro finale di approvazione
+# 24. Registro finale di approvazione
 
-- Review fattuale: completata per la candidatura `0.1.0-rc1`
-- Review matematica: completata per la candidatura `0.1.0-rc1`
-- Review codice: test locali superati
+- Review fattuale: completata per `0.2.0-rc2`
+- Review matematica: completata per `0.2.0-rc2`
+- Review codice: tre test locali superati
 - Review visuale: `ATT-01` e `ATT-02` validate tecnicamente; approvazione autoriale aperta
-- Review didattica: completata internamente, aperta alla revisione dell'autore
+- Review didattica 1: completata, capitolo respinto e corretto
+- Review didattica 2: completata, nessun difetto bloccante residuo
 - Review autoriale: **aperta**
 - Commit congelato: non assegnato

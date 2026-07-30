@@ -1,25 +1,58 @@
-# Piano del capitolo 28
+# Piano del Capitolo 28
 
 - `chapter_id`: `CH-P06-ATTENTION`
-- Domanda centrale: come una query costruisce una combinazione delle value dipendente dalla compatibilità con le key?
-- Oggetto continuo: `q`, `K`, `V` con `d_k=d_v=2`.
-- Stato finale: formula, shape, mask, codice da zero, API e passaggio a multi-head.
-- Concetti differiti: posizione, kernel IO-aware, cache e varianti KV.
+- Versione candidata: `0.2.0-rc2`
+- Domanda centrale: come un vettore corrente costruisce una combinazione dei vettori sorgente che dipende dai confronti con la sorgente?
+- Oggetto continuo: un vettore corrente e tre coppie sorgente con `d_k=d_v=2`.
+- Stato finale: esempio numerico, pseudocodice, formula, shape, causal mask, implementazione diretta e confronto API.
+- Concetti differiti: posizione, multi-head attention, varianti KV, cache e implementazioni hardware-aware.
 
-## Visuali incluse nella candidatura
+## Progressione didattica
 
-- `ATT-01`: requisito dei pesi dipendenti dalla query.
-- `ATT-02`: esempio numerico per una query.
+1. vettori sorgente già noti;
+2. insufficienza di una combinazione fissa;
+3. coefficienti dipendenti dalla posizione corrente;
+4. descrizione dei tre ruoli prima dei nomi query, key e value;
+5. score numerici;
+6. scaling numerico;
+7. softmax numerica;
+8. combinazione numerica delle value;
+9. ispezione guidata di `ATT-02`;
+10. pseudocodice;
+11. nome tecnico e formula generale;
+12. provenienza di `Q`, `K` e `V`;
+13. causal mask matematica;
+14. codice diretto;
+15. API e semantica delle mask;
+16. complessità e confini;
+17. ponte verso multi-head attention.
 
-## Visuali non incluse
+## Visuali incluse
 
-- flusso matriciale completo: non necessario nella candidatura perché formula, tabella shape e codice coprono la relazione senza aggiungere ambiguità;
-- causal mask: coperta da matrice e snippet, candidata a visuale dopo feedback dell'autore;
-- multi-head: candidata al capitolo successivo o a una seconda revisione del pilota.
+- `ATT-01`: differenza tra contesto fisso e coefficienti dipendenti dalla posizione corrente.
+- `ATT-02`: esempio numerico completo per una query.
 
-## Codice
+Ogni visuale viene inquadrata, attraversata e conclusa nella prosa.
 
-- `SNIP-ATT-001`: singola query.
-- `SNIP-ATT-002`: formula matriciale e API.
-- `SNIP-ATT-003`: causal mask.
-- `SNIP-ATT-004`: shape multi-head.
+## Codice incluso
+
+- `SNIP-ATT-001`: singola query e valori numerici.
+- `SNIP-ATT-002`: formula matriciale e confronto API.
+- `SNIP-ATT-003`: causal mask e coefficienti futuri nulli.
+
+## Materiale rimosso dopo la review didattica
+
+- formula e snippet completi della multi-head attention, trasferiti al capitolo successivo;
+- spiegazione interna di FlashAttention, ridotta a confine hardware-aware;
+- semantica API delle mask nella stessa transizione della mask matematica;
+- uso anticipato del nome `scaled dot-product attention` prima del calcolo completo.
+
+## Gate di completamento
+
+- termini introdotti dopo i referenti;
+- esempio, shape e pseudocodice prima della formula generale;
+- blocchi atomici per score, scaling, softmax, output e mask;
+- codice dopo il meccanismo;
+- varianti soltanto come confini;
+- due review didattiche complete registrate in `TEXT_AUDIT.md`;
+- nessun difetto bloccante residuo prima della revisione autoriale.

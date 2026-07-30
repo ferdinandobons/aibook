@@ -1,6 +1,7 @@
 # Audit del codice. Capitolo 28
 
 - Data: 30 luglio 2026
+- Versione del capitolo: `0.2.0-rc2`
 - Python eseguito: `3.13.5`
 - PyTorch eseguito: `2.10.0+cpu`
 - Documentazione API ricontrollata: stable `2.13`
@@ -15,9 +16,9 @@
 - [x] Somme delle righe testate.
 - [x] Equivalenza formula/API testata in `float64`.
 - [x] Causal mask confrontata con implementazione additiva diretta.
-- [x] Multi-head shape controllate con `average_attn_weights=False`.
 - [x] Output salvati.
-- [x] Quattro test superati.
+- [x] Tre test superati dopo la riscrittura didattica.
+- [x] Nessuno snippet introduce multi-head attention prima del capitolo dedicato.
 
 ## Limiti
 
