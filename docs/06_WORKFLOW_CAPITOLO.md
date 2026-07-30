@@ -2,7 +2,7 @@
 
 ## Scopo
 
-Questo documento definisce l'ordine obbligatorio di produzione. Il processo è seriale e controllato. La prima stesura, la prima immagine e il primo snippet sono sempre bozze.
+Il processo è seriale e controllato. La prima stesura, la prima immagine e il primo snippet sono sempre bozze.
 
 L'unità di lavoro è un capitolo completo con testo, formule, fonti, immagini, codice, test, esercizi e audit.
 
@@ -25,6 +25,8 @@ chapters/<slug>/
 
 Registrare `chapter_id`, parte, profilo, domanda centrale, prerequisiti, oggetto continuo, concetti differiti, data e stato `ricerca`.
 
+I metadati destinati al repository vengono conservati in commenti non renderizzati o negli artefatti interni.
+
 ## Fase 1. Perimetro
 
 Stabilire:
@@ -34,7 +36,7 @@ Stabilire:
 - matematica necessaria;
 - codice richiesto;
 - visuali necessarie;
-- consumer successivo.
+- capitolo o passaggio successivo.
 
 Non si decide un numero fisso di figure. Ogni capitolo tecnico include almeno una visuale portante e uno snippet, salvo eccezione motivata.
 
@@ -75,7 +77,7 @@ Errore comune:
 Giunzione:
 ```
 
-Questo scaffold è obbligatorio per progettazione e review. Non viene copiato come struttura standard di `CHAPTER.md`.
+Lo scaffold è obbligatorio per progettazione e review. Non viene copiato come struttura standard di `CHAPTER.md`.
 
 ## Fase 5. Storyboard delle visuali
 
@@ -83,21 +85,22 @@ Per ogni figura creare `SPEC.md` con domanda, famiglia, orientamento, nodi, frec
 
 Applicare `17_STANDARD_VISIVO_CANONICO.md`, `16_REGOLA_CONTENIMENTO_TESTO_VISUALI.md` e `03_PROTOCOLLO_QA_VISUALE.md`.
 
-## Fase 6. Prima stesura in prosa
+## Fase 6. Prima stesura
 
 `CHAPTER.md`:
 
 - segue l'oggetto continuo;
-- usa titoli semantici legati al contenuto;
-- integra stato, problema, trasformazione, output, invariante e confine nei paragrafi;
-- non espone sistematicamente le etichette dello scaffold;
+- usa titoli semantici;
+- organizza le sezioni attorno a problemi e meccanismi;
+- integra stato, trasformazione, output, invariante e confine nei paragrafi;
+- non espone lo scaffold;
+- separa il testo pubblico dai metadati;
 - inserisce le citazioni vicino alle affermazioni;
-- distingue fonti, derivazioni, esempi e risultati eseguiti;
+- distingue fonti, derivazioni, esempi e risultati;
 - non anticipa termini, formule, codice o varianti;
-- non usa metafore sostitutive;
-- non colma lacune con contenuto plausibile non verificato.
+- usa un italiano tecnico naturale.
 
-Applicare `19_STRUTTURA_LOGICA_IN_PROSA.md`.
+Applicare `19_STRUTTURA_LOGICA_IN_PROSA.md` e `20_VOCE_EDITORIALE_E_REVISIONE_LINGUISTICA.md`.
 
 ## Fase 7. Codice
 
@@ -117,7 +120,7 @@ Ricontrollare simboli, domini, shape, segni, scaling, normalizzazioni, arrotonda
 
 ## Fase 10. Audit architetturale e algoritmico
 
-Verificare l'ordine reale di normalizzazioni, residual, mask, routing, cache, loss, gradienti, update, sampling e comunicazione.
+Verificare l'ordine reale di normalizzazioni, residual connection, mask, routing, cache, loss, gradienti, update, sampling e comunicazione.
 
 ## Fase 11. Audit incrociato
 
@@ -127,42 +130,81 @@ Confrontare testo, formule, figure e codice per nomi, shape, numeri, ordine, mas
 
 Prima dell'approvazione ricontrollare documentazione, API, release, commit, report, benchmark e normative pertinenti. Registrare la data di congelamento.
 
-## Fase 13. Review didattica 1
+## Fase 13. Review didattica
 
 Applicare `18_PROTOCOLLO_QA_DIDATTICO.md`:
 
 - oggetto continuo;
-- catena dei sette punti;
+- catena causale;
 - gate di termini, formule, codice e varianti;
-- una trasformazione dominante per passaggio;
-- visuali attraversate dalla prosa;
-- confini e concetti differiti;
-- gate anti-template.
+- trasformazione dominante;
+- visuali integrate;
+- confini e concetti differiti.
 
-Se emerge un difetto bloccante, registrarlo, correggere gli artefatti coinvolti e riaprire la review.
+Se emerge un difetto bloccante, registrarlo, correggere gli artefatti coinvolti e ripetere la review.
 
-## Fase 14. Review didattica 2
+## Fase 14. Gate anti-template
 
-Dopo le correzioni, rileggere integralmente il capitolo senza usare il piano come spiegazione implicita.
+Rileggere il capitolo senza consultare il piano e verificare:
 
-Controllare naturalezza della prosa, titoli, ritmo, referenti, stato accumulato, esercizi e coerenza tra tutti gli artefatti.
+- titoli legati al contenuto;
+- sezioni abbastanza ampie;
+- assenza di intestazioni metacognitive ripetute;
+- continuità tra paragrafi;
+- shape e confini ancora espliciti;
+- separazione tra manuale e materiali operativi.
 
-La seconda review non può limitarsi a confermare i difetti precedenti.
+## Fase 15. Review editoriale e linguistica
 
-## Fase 15. Revisione autoriale
+Applicare `20_VOCE_EDITORIALE_E_REVISIONE_LINGUISTICA.md`.
+
+Controllare:
+
+- fluidità;
+- italiano idiomatico;
+- calchi e ibridi;
+- ritmo delle frasi;
+- densità dei paragrafi;
+- cautele ripetute;
+- uso di elenchi, tabelle e box;
+- continuità dell'esempio;
+- leggibilità delle citazioni;
+- lettura ad alta voce.
+
+La review simula un lettore nuovo, un lettore tecnico e un lettore che riprende il capitolo dopo tempo.
+
+## Fase 16. Seconda lettura completa
+
+Dopo le correzioni, rileggere integralmente il capitolo, senza usare il piano come spiegazione implicita.
+
+La lettura comprende:
+
+- prosa;
+- formule;
+- visuali;
+- codice;
+- esercizi;
+- fonti;
+- audit.
+
+Non può limitarsi a confermare i difetti già trovati.
+
+## Fase 17. Revisione autoriale
 
 Il capitolo passa a revisione autoriale soltanto quando:
 
-- claim portanti verificati;
-- audit fattuale, matematico, codice e visuali positivi;
-- almeno una review didattica completa registrata;
+- i claim sono verificati;
+- audit fattuale, matematico, codice e visuali sono positivi;
+- review didattica superata;
+- gate anti-template superato;
+- review linguistica superata;
+- lettura ad alta voce superata;
 - ogni difetto bloccante corretto;
-- nuova review integrale superata;
-- gate anti-template superato.
+- nuova lettura integrale completata.
 
 Modifiche autoriali strutturali riaprono gli audit pertinenti.
 
-## Fase 16. Congelamento
+## Fase 18. Congelamento
 
 Un capitolo approvato riceve:
 
