@@ -3,69 +3,67 @@
 ## Identità
 
 - Capitolo: `CH-P01-AI-FIELD`
-- Sezione: Tre assi invece di una lista di sinonimi
+- Sezione: Tre domande per descrivere un sistema
 - Famiglia: taxonomy / comparison
 - Orientamento: orizzontale
 - Stato: `storyboard, generazione bloccata`
-- Standard: `docs/17_STANDARD_VISIVO_CANONICO.md`
+- Standard: `docs/03_VISUALI.md`
 - Sfondo: bianco puro `#FFFFFF`
 
 ## Domanda unica
 
-Perché `AI`, `machine learning`, `deep learning`, `generative AI` e `foundation model` non possono essere disposti come una singola lista di sinonimi o come un unico diagramma di inclusione?
+Perché `AI`, `machine learning`, `deep learning`, `generative AI` e `foundation model` non possono essere trattati come sinonimi o disposti lungo una sola gerarchia?
 
 ## Oggetto continuo
 
-Richiesta centrale:
-
 ```text
-Il pacco non è arrivato
+Richiesta: Il pacco non è arrivato
 ```
 
-Lo stesso input viene descritto lungo tre assi indipendenti.
+Lo stesso input viene descritto lungo tre aspetti indipendenti.
 
 ## Contenuto obbligatorio
 
 ### Centro
 
-- box: `Richiesta: Il pacco non è arrivato`.
+- `Richiesta: Il pacco non è arrivato`.
 
-### Asse 1. Meccanismo
+### Aspetto 1. Meccanismo
 
 - `Regole esplicite`;
 - `Modello appreso dai dati`;
 - `Rete neurale profonda`;
 - nota: `Le categorie possono combinarsi in sistemi ibridi`.
 
-### Asse 2. Obiettivo
+### Aspetto 2. Obiettivo
 
 - `Predire o decidere`;
 - `Generare contenuto`;
 - nota: `L'obiettivo non determina il meccanismo`.
 
-### Asse 3. Ampiezza
+### Aspetto 3. Ampiezza
 
 - `Sistema specialistico`;
 - `Modello di base adattabile`;
 - `Sistema generalista`;
-- nota: `Ampiezza relativa al perimetro valutato`.
+- nota: `L'ampiezza dipende dal perimetro valutato`.
 
 ### Footer
 
 ```text
-I tre assi possono combinarsi: nessuno determina automaticamente gli altri.
+I tre aspetti possono combinarsi: nessuno determina automaticamente gli altri.
 ```
 
 ## Layout
 
-- titolo: `AI-01 · Tre assi per descrivere un sistema di AI`;
-- sottotitolo: `Meccanismo, obiettivo e ampiezza non sono sinonimi`;
+- titolo: `AI-01 · Tre domande per descrivere un sistema di AI`;
+- sottotitolo: `Meccanismo, obiettivo e ampiezza rispondono a domande diverse`;
 - box centrale nella fascia superiore o centrale;
 - tre pannelli paralleli di larghezza sufficiente;
 - nessun diagramma di Venn;
-- nessuna relazione gerarchica disegnata tra i tre assi;
+- nessuna gerarchia disegnata tra i tre aspetti;
 - collegamenti dal box centrale ai pannelli, non tra i pannelli;
-- ordine di lettura: centro, meccanismo, obiettivo, ampiezza, footer.
+- ordine: centro, meccanismo, obiettivo, ampiezza, footer.
 
 ## Palette
 
@@ -78,10 +76,10 @@ I tre assi possono combinarsi: nessuno determina automaticamente gli altri.
 ## Contenimento
 
 - massimo tre righe per box;
-- padding interno visibile;
+- padding visibile;
 - nessuna label a contatto con il bordo;
 - font leggibile alla dimensione editoriale;
-- se il testo non entra, aumentare il box o dividere la figura; non ridurre il font sotto la soglia leggibile.
+- se il testo non entra, aumentare il box o dividere la figura.
 
 ## Elementi vietati
 
@@ -95,5 +93,5 @@ I tre assi possono combinarsi: nessuno determina automaticamente gli altri.
 ## Provenienza
 
 - tassonomia: convenzioni e claim del Capitolo 1;
-- definizioni portanti: `FONTI_PRIMARIE.md` e `CLAIMS.md`;
+- definizioni: `FONTI_PRIMARIE.md` e `CLAIMS.md`;
 - valori: nessun dato misurato.
