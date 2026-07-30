@@ -32,13 +32,13 @@ $$
 Supponiamo che due posizioni debbano usare questi stessi vettori. Se entrambe ricevono un unico riassunto `c`, ottengono la stessa combinazione. Una posizione potrebbe invece aver bisogno di
 
 $$
-c_1=0{,}10v_1+0{,}60v_2+0{,}30v_3=[0{,}40,0{,}90],
+c_1=0{,}10v_1+0{,}60v_2+0{,}30v_3=[0{,}40,\;0{,}90],
 $$
 
 mentre l'altra potrebbe aver bisogno di
 
 $$
-c_2=0{,}05v_1+0{,}15v_2+0{,}80v_3=[0{,}85,0{,}95].
+c_2=0{,}05v_1+0{,}15v_2+0{,}80v_3=[0{,}85,\;0{,}95].
 $$
 
 I tre vettori disponibili sono gli stessi. Cambiano soltanto i coefficienti con cui vengono combinati, e per questo cambiano anche i risultati. Il problema dell'attention è calcolare coefficienti diversi per posizioni diverse.
@@ -249,11 +249,11 @@ Il file completo è [`code/snip_att_001_single_query.py`](code/snip_att_001_sing
 
 Il repository contiene anche due controlli aggiuntivi. [`code/snip_att_002_matrix_api.py`](code/snip_att_002_matrix_api.py) confronta l'implementazione diretta con `torch.nn.functional.scaled_dot_product_attention`. [`code/snip_att_003_causal_mask.py`](code/snip_att_003_causal_mask.py) verifica che i coefficienti delle posizioni future diventino nulli.
 
-> **Nota sulle API.** Le API PyTorch non usano sempre la stessa convenzione per le mask booleane. Il significato esatto di `True` deve quindi essere controllato nella documentazione della funzione usata. Nel confronto del capitolo `dropout_p=0.0`, così il dropout non modifica i coefficienti [PyTorch 2.13 Docs].
+> **Nota sulle API.** Le API PyTorch non usano sempre la stessa convenzione per le mask booleane. Il significato esatto di `True` deve quindi essere controllato nella documentazione della funzione usata. Nel confronto del capitolo, `dropout_p` è impostato a `0.0`, quindi il dropout non modifica i coefficienti [PyTorch 2.13 Docs].
 
 ## Costo, limiti e passaggio alla multi-head attention
 
-Con `L` query e `S` key, la matrice degli score contiene `L\times S` celle. Nella self-attention, se la sequenza contiene `n` posizioni, la matrice contiene `n^2` celle. Questo è il motivo essenziale per cui sequenze più lunghe possono richiedere molta memoria e molto calcolo.
+Con `L` query e `S` key, la matrice degli score contiene `L × S` celle. Nella self-attention, se la sequenza contiene `n` posizioni, la matrice contiene `n^2` celle. Questo è il motivo essenziale per cui sequenze più lunghe possono richiedere molta memoria e molto calcolo.
 
 In termini asintotici, il prodotto `QK^T` richiede ordine `O(LSd_k)` operazioni e il prodotto con `V` richiede ordine `O(LSd_v)`. Le implementazioni hardware-aware possono eseguire lo stesso operatore con strategie diverse di memoria e ricomputazione, ma non cambiano il meccanismo matematico spiegato qui.
 
