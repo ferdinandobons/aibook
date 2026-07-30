@@ -2,16 +2,17 @@
 
 ## Stato
 
-- Versione corrente: `0.3.0-rc2`
+- Versione corrente: `0.4.0-rc3`
 - Data: 30 luglio 2026
 - Protocollo corrente: `docs/02_STILE_E_QA_TESTO.md`
 - Fonti, claim e riproducibilità: `docs/04_CODICE_FONTI_E_RIPRODUCIBILITA.md`
 - Esito fattuale e tecnico: **superato per testo e codice**
 - Esito didattico: **superato**
-- Esito di chiarezza per lettore non esperto: **superato dopo riscrittura e seconda lettura**
-- Esito editoriale e linguistico: **superato**
-- Esito visuale: **aperto**
-- Review autoriale completa: non aperta
+- Esito editoriale e linguistico: **superato dopo riscrittura e seconda lettura**
+- Esito di chiarezza per lettore non esperto: **superato**
+- Esito visuale tecnico: **superato**
+- Controllo incrociato testo-visuali-codice: **superato**
+- Review autoriale completa: aperta
 
 ## `DID-AI-01`. Accuratezza e gate di comparsa
 
@@ -90,7 +91,7 @@ Correzioni:
 - ciclo di vita ridotto a ponte;
 - fonti e materiali condensati.
 
-## `EDIT-AI-02`. Seconda lettura e prova di fluidità
+## `EDIT-AI-02`. Seconda lettura e prova ad alta voce
 
 - Versione: `0.2.0-rc1`
 - Profili: lettore nuovo, lettore tecnico, lettore che riprende il capitolo
@@ -120,88 +121,68 @@ Correzioni:
 - [x] riepilogo collegato al problema iniziale;
 - [x] materiali operativi fuori dal flusso.
 
-Problema residuo emerso nella review successiva:
-
-La versione era corretta e più naturale, ma richiedeva ancora troppa familiarità con il lessico tecnico. `Checkpoint` compariva prima della definizione, il machine learning veniva spiegato attraverso formule astratte e la distinzione discriminativo/generativo chiedeva al lettore di comprendere la notazione probabilistica troppo presto.
-
-## `EDIT-AI-03`. Review per lettore non esperto
-
-- Versione: `0.2.0-rc1`
-- Profilo dominante: lettore intelligente ma privo di formazione specifica in AI
-- Criterio: ogni passaggio deve poter essere parafrasato senza usare il termine appena introdotto
-- Esito: **respinta**
-
-Difetti bloccanti:
-
-1. le tre domande organizzative non guidavano ancora l'apertura;
-2. la definizione OECD era seguita da una spiegazione ancora troppo formale;
-3. `checkpoint` compariva prima della propria definizione;
-4. il machine learning era descritto con `famiglia di funzioni`, `obiettivo` e `procedura` prima di un ciclo concreto;
-5. `feature`, `logit`, `loss`, `optimizer` e `shape` richiedevano conoscenze pregresse;
-6. training e inference erano corretti ma non abbastanza distinguibili in linguaggio comune;
-7. la distinzione discriminativo/generativo iniziava dalla notazione probabilistica;
-8. la sezione sui foundation model accumulava troppi metodi di adattamento;
-9. la sezione `Le distinzioni che contano` ripeteva una tassonomia già esposta.
-
-Correzioni nella versione `0.3.0-rc2`:
-
-- apertura costruita attorno a tre domande semplici;
-- definizione OECD seguita da una traduzione in linguaggio comune;
-- distinzione modello/sistema applicata immediatamente al caso della spedizione;
-- machine learning descritto come esempi, errore e aggiornamento di numeri interni;
-- termini del training definiti prima dell'uso;
-- formula lineare mantenuta come secondo livello di precisione;
-- `shape [1,2]` spiegata in parole;
-- discriminativo e generativo introdotti con le azioni `scegliere una categoria` e `produrre un nuovo contenuto`;
-- formule probabilistiche spostate dopo la distinzione intuitiva;
-- adattamento dei foundation model descritto senza un elenco di tecniche premature;
-- riepilogo trasformato in tre paragrafi continui.
-
-## `EDIT-AI-04`. Seconda lettura della versione accessibile
-
-- Versione: `0.3.0-rc2`
-- Profili: lettore non esperto, lettore tecnico, lettore che riprende il capitolo
-- Esito: **superata per il testo**
-
-### Lettore non esperto
-
-- [x] comprende il problema prima della definizione di AI;
-- [x] dispone delle tre domande guida dall'apertura;
-- [x] distingue regola e apprendimento senza conoscere la matematica;
-- [x] comprende `parametro` come numero interno regolabile;
-- [x] distingue training e inference prima del codice;
-- [x] può saltare le formule mantenendo il filo concettuale;
-- [x] comprende discriminativo e generativo attraverso esempi concreti;
-- [x] distingue modello generativo, generative AI e foundation model;
-- [x] può descrivere un sistema con meccanismo, obiettivo e ampiezza.
-
-### Lettore tecnico
-
-- [x] definizione OECD attribuita e limitata;
-- [x] convenzione modello/sistema dichiarata;
-- [x] formula lineare e risultati eseguiti invariati;
-- [x] distinzione probabilistica conservata;
-- [x] GAN e foundation model attribuiti alle fonti;
-- [x] generalizzazione separata dalla diminuzione della loss;
-- [x] `eval()` e `inference_mode()` distinti.
-
-### Lettore che riprende il capitolo
-
-- [x] sette sezioni semantiche;
-- [x] tre domande riprese nella tabella e nel riepilogo;
-- [x] termini principali localizzabili senza consultare gli audit;
-- [x] fonti e materiali restano accessibili senza interrompere la conclusione.
-
 ### Controllo linguistico
 
-- [x] periodi astratti spezzati o seguiti da esempi;
-- [x] gergo tradotto immediatamente in azioni osservabili;
-- [x] italiano idiomatico;
+- [x] italiano scritto direttamente;
 - [x] nessun em dash;
+- [x] calchi principali rimossi;
 - [x] ritmo variato;
-- [x] ridotte negazioni e cautele duplicate;
-- [x] lettura lineare senza dipendere dalle formule;
-- [x] nessuna sequenza con tono da specifica o reference API.
+- [x] ridotte formule negative ripetute;
+- [x] referenti chiari;
+- [x] lettura ad alta voce superata.
+
+## `ACCESS-AI-01`. Lettore non esperto
+
+- Versione: `0.3.0-rc2`
+- Esito: **superato dopo riscrittura completa**
+
+Controlli:
+
+- [x] apertura guidata da tre domande in linguaggio comune;
+- [x] definizione OECD seguita da parafrasi esplicativa;
+- [x] parametri descritti come numeri regolabili prima del formalismo;
+- [x] loss, gradienti, optimizer, iperparametri e checkpoint definiti nel punto d'uso;
+- [x] training e inference distinti prima del codice;
+- [x] discriminativo e generativo spiegati con esempi prima delle formule;
+- [x] foundation model presentato come base adattabile;
+- [x] nessuna precisione tecnica dipende da gergo non introdotto;
+- [x] seconda lettura integrale superata.
+
+## `VIS-AI-01`. Visuali e controllo incrociato
+
+- Versione: `0.4.0-rc3`
+- Figure: `AI-01/candidate-v1.png`, `AI-02/candidate-v1.png`
+- Esito: **superato tecnicamente**
+
+### `AI-01`
+
+- [x] stessa richiesta usata nel testo;
+- [x] meccanismo, obiettivo e ampiezza presentati come aspetti indipendenti;
+- [x] nessuna scala da semplice ad avanzato;
+- [x] nessun aspetto determina automaticamente gli altri;
+- [x] testo contenuto nei box;
+- [x] sfondo bianco puro;
+- [x] alt text verificato.
+
+### `AI-02`
+
+- [x] target collegato alla loss;
+- [x] gradienti successivi alla loss;
+- [x] optimizer step unico nodo che modifica i parametri;
+- [x] inference senza target, loss, gradienti o optimizer;
+- [x] checkpoint fissato coerente con la prosa;
+- [x] `eval()` e `inference_mode()` non presentati come sinonimi;
+- [x] testo contenuto nei box;
+- [x] alt text verificato.
+
+### Coerenza trasversale
+
+- [x] figure introdotte e concluse dalla prosa;
+- [x] `AI-02` precede lo snippet e mostra lo stesso contratto;
+- [x] `AI-01` segue la tabella dei tre aspetti;
+- [x] nessun valore visuale contraddice codice, fonti o claim;
+- [x] immagini generate e decodificate dal workflow registrato;
+- [x] rilettura completa dopo l'inserimento delle figure.
 
 ## Audit fattuale e matematico
 
@@ -209,7 +190,7 @@ Correzioni nella versione `0.3.0-rc2`:
 - [x] fonti primarie, istituzionali o ufficiali con limiti;
 - [x] definizioni attribuite;
 - [x] formula lineare coerente;
-- [x] `p(y|x)` e `p(x,y)` usate nel significato dichiarato;
+- [x] `p(y|x)`, `p(x,y)` e `p(x|c)` usate nel significato dichiarato;
 - [x] risultati allineati agli output;
 - [x] nessuna inferenza fattuale presentata come fatto.
 
@@ -219,14 +200,14 @@ Correzioni nella versione `0.3.0-rc2`:
 - [x] inference non modifica i parametri;
 - [x] output di shape `[1,2]`;
 - [x] tre test superati nel run registrato;
-- [x] codice invariato dalla review tecnica;
-- [x] nessuna nuova esecuzione dichiarata per la sola riscrittura editoriale.
+- [x] codice invariato dalle revisioni editoriali e visuali.
 
 ## Elementi aperti
 
-- `AI-01` e `AI-02` devono essere generate e sottoposte ad audit;
-- dopo l'inserimento occorre ripetere controllo incrociato, review linguistica e lettura integrale.
+- approvazione autoriale della candidatura completa;
+- rinomina delle figure in `final.png` soltanto dopo approvazione;
+- congelamento del capitolo con commit e data.
 
 ## Esito
 
-Il testo `0.3.0-rc2` supera i gate fattuali, didattici, anti-template, editoriali, linguistici e di chiarezza per un lettore non esperto. Il capitolo resta bloccato dalle visuali mancanti e non passa alla revisione autoriale completa finché `AI-01` e `AI-02` non vengono validate e integrate.
+Il testo `0.4.0-rc3`, le due figure candidate e il codice superano i gate fattuali, didattici, anti-template, editoriali, linguistici, di accessibilità e di coerenza trasversale. Il capitolo è disponibile per la revisione autoriale completa.
