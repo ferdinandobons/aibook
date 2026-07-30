@@ -21,6 +21,12 @@ Per mantenere leggibile e verificabile la copia nel repository, il file original
 
 I segmenti vanno letti nell'ordine numerico. La divisione non modifica il contenuto.
 
+Dati del file ricevuto:
+
+- righe: `496`;
+- byte: `21858`;
+- SHA-256: `c2ceb5be83b7d8fede41d82a98b9c1cf8a12a7cad3c8a702d6546d214196726b`.
+
 ## Documento canonico derivato
 
 - `../EXPLANATION_STYLE_AND_VISUALS.md`
