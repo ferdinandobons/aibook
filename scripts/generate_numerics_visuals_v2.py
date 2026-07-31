@@ -16,13 +16,15 @@ def patch_num01() -> Path:
     draw = ImageDraw.Draw(image)
 
     x_positions = [45, 480, 915, 1350]
+    border_colors = [C["amber"], C["purple"], C["blue"], C["green"]]
     labels = ["segno", "esponente", "significando"]
     widths = [54, 100, 175]
     colors = [C["red"], C["blue"], C["purple"]]
     fills = [C["red_fill"], C["blue_fill"], C["purple_fill"]]
 
-    for x in x_positions:
-        draw.rectangle((x + 22, 328, x + 383, 440), fill=C["white"])
+    for x, border_color in zip(x_positions, border_colors):
+        draw.rectangle((x + 22, 328, min(x + 430, 1799), 440), fill=C["white"])
+        draw.line((x + 405, 328, x + 405, 440), fill=border_color, width=3)
         cursor = x + 28
         for label, width, color, fill in zip(labels, widths, colors, fills):
             rounded(draw, (cursor, 335, cursor + width, 430), 10, fill, color, 2)
