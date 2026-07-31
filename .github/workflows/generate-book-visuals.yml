@@ -16,6 +16,7 @@ on:
       - 'scripts/generate_numerics_visuals.py'
       - 'scripts/generate_numerics_visuals_v2.py'
       - 'scripts/generate_search_visuals.py'
+      - 'scripts/generate_knowledge_visuals.py'
       - 'scripts/integrate_generated_visuals.py'
       - '.github/workflows/generate-book-visuals.yml'
 
@@ -71,6 +72,9 @@ jobs:
       - name: Generate Chapter 10 visuals
         run: python scripts/generate_search_visuals.py
 
+      - name: Generate Chapter 11 visuals
+        run: python scripts/generate_knowledge_visuals.py
+
       - name: Integrate generated visual references
         run: python scripts/integrate_generated_visuals.py
 
@@ -101,6 +105,8 @@ jobs:
             assets/chapters/09_numerics_hardware/NUM-02/candidate-v1.png \
             assets/chapters/10_search_planning/SEARCH-01/candidate-v2.png \
             assets/chapters/10_search_planning/SEARCH-02/candidate-v2.png \
+            assets/chapters/11_knowledge_logic/KNOW-01/candidate-v2.png \
+            assets/chapters/11_knowledge_logic/KNOW-02/candidate-v3.png \
             assets/chapters/28_attention/ATT-01/candidate-v3.png \
             chapters/02_history/CHAPTER.md \
             chapters/03_lifecycle/CHAPTER.md \
@@ -111,6 +117,7 @@ jobs:
             chapters/08_information_theory/CHAPTER.md \
             chapters/09_numerics_hardware/CHAPTER.md \
             chapters/10_search_planning/CHAPTER.md \
+            chapters/11_knowledge_logic/CHAPTER.md \
             chapters/28_attention/CHAPTER.md
           if git diff --cached --quiet; then
             echo 'Generated PNG files and references are already current.'
