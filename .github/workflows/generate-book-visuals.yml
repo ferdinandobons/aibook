@@ -9,6 +9,7 @@ on:
       - 'scripts/generate_history_visuals.py'
       - 'scripts/generate_lifecycle_visuals.py'
       - 'scripts/generate_evaluation_visuals.py'
+      - 'scripts/generate_linear_algebra_visuals.py'
       - 'scripts/integrate_generated_visuals.py'
       - '.github/workflows/generate-book-visuals.yml'
 
@@ -44,6 +45,9 @@ jobs:
       - name: Generate Chapter 4 visuals
         run: python scripts/generate_evaluation_visuals.py
 
+      - name: Generate Chapter 5 visuals
+        run: python scripts/generate_linear_algebra_visuals.py
+
       - name: Integrate generated visual references
         run: python scripts/integrate_generated_visuals.py
 
@@ -62,10 +66,13 @@ jobs:
             assets/chapters/03_lifecycle/LIFE-02/candidate-v1.png \
             assets/chapters/04_critical_evaluation/EVAL-01/candidate-v1.png \
             assets/chapters/04_critical_evaluation/EVAL-02/candidate-v1.png \
+            assets/chapters/05_linear_algebra/LA-01/candidate-v1.png \
+            assets/chapters/05_linear_algebra/LA-02/candidate-v1.png \
             assets/chapters/28_attention/ATT-01/candidate-v3.png \
             chapters/02_history/CHAPTER.md \
             chapters/03_lifecycle/CHAPTER.md \
             chapters/04_critical_evaluation/CHAPTER.md \
+            chapters/05_linear_algebra/CHAPTER.md \
             chapters/28_attention/CHAPTER.md
           if git diff --cached --quiet; then
             echo 'Generated PNG files and references are already current.'
