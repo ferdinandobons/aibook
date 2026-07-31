@@ -7,10 +7,10 @@
 - Branch di produzione: `feature/full-book-production`
 - Pull request: `#2`, draft
 - Opera pianificata: 98 capitoli e 12 appendici
-- Produzione: seriale controllata
+- Produzione: candidature seriali con congelamento dopo revisione autoriale
 - Ultima ricerca globale: 30 luglio 2026
 - Ultima verifica locale delle fonti: 31 luglio 2026
-- Unità corrente: `CH-P02-PROBABILITY`, Capitolo 7, stato `research`
+- Unità corrente: `CH-P02-NUMERICS-HARDWARE`, Capitolo 9
 
 ## Documentazione canonica
 
@@ -37,56 +37,57 @@ Ogni capitolo attraversa ricerca, claim, stesura, codice, visuali, audit tecnico
 | 4 | `CH-P01-CRITICAL-EVALUATION` | `0.2.0-rc1` | revisione autoriale |
 | 5 | `CH-P02-LINEAR-ALGEBRA` | `0.2.0-rc1` | revisione autoriale |
 | 6 | `CH-P02-CALCULUS-BACKPROP` | `0.2.0-rc1` | revisione autoriale |
+| 7 | `CH-P02-PROBABILITY` | `0.2.0-rc1` | revisione autoriale |
 | 28 | `CH-P06-ATTENTION` | `0.6.0-rc6` | revisione autoriale |
 
-## Capitolo 6. Calcolo differenziale e backpropagation
+## Capitolo 8. Teoria dell'informazione e funzioni obiettivo
 
 Completato:
 
-- testo completo su derivata, gradiente, Jacobiana, chain rule, reverse mode e backpropagation;
-- fonti e venti claim;
-- `SNIP-CALC-001` con derivazione manuale, autograd, differenze finite e `gradcheck`;
-- cinque test superati;
-- `CALC-01/candidate-v1.png`;
-- `CALC-02/candidate-v2.png`;
-- specifiche, audit e alt text;
-- doppia review didattica, matematica, editoriale e linguistica;
-- controllo incrociato dei valori.
+- testo, fonti, venticinque claim e codice;
+- cross-entropy, NLL, KL divergence, entropia condizionale e mutual information;
+- `SNIP-INFO-001` con sei test superati;
+- specifiche, audit e alt text di `INFO-01` e `INFO-02`;
+- review didattica, editoriale e linguistica.
 
 Aperto:
 
+- materializzazione dei due PNG candidati nel branch;
+- controllo incrociato sul raster pubblicato;
+- revisione autoriale e congelamento.
+
+## Capitolo 9. Calcolo numerico, precisione e hardware
+
+Completato:
+
+- piano, fonti e ventinove claim;
+- testo completo su floating point, range, precisione, non associatività, overflow, stabilità, dtype, mixed precision, hardware e riproducibilità;
+- `SNIP-NUM-001` con output registrato;
+- sette test superati;
+- renderer raster per `NUM-01` e `NUM-02`;
+- due iterazioni di review visuale;
+- specifiche, audit e alt text;
+- review fattuale, numerica, didattica, editoriale e linguistica della bozza.
+
+Aperto:
+
+- materializzazione dei PNG `NUM-01` e `NUM-02` nel branch;
+- sostituzione dei commenti nel capitolo con i riferimenti alle immagini;
+- nuova lettura integrale con le figure;
 - revisione autoriale;
-- eventuali correzioni;
-- rinomina delle figure in `final.png`;
-- congelamento.
-
-## Unità corrente. Capitolo 7
-
-```text
-CH-P02-PROBABILITY
-Probabilità, statistica e inferenza
-```
-
-Obiettivo immediato:
-
-- definire oggetto continuo e perimetro;
-- verificare fonti;
-- costruire claim;
-- produrre testo, snippet e visuali;
-- completare le review prima di passare al Capitolo 8.
+- promozione a release candidate e congelamento.
 
 ## Tooling visuale
 
-Il workflow include generatori raster per i Capitoli 1-6 e il pilota. Le figure hanno sfondo bianco puro, controlli di contenimento e file `SPEC.md`, `AUDIT.md` e `ALT_TEXT.md`. Le candidate image-gen che rappresentano un soggetto diverso dalla specifica vengono respinte.
+Il workflow comprende generatori raster per i Capitoli 1-9 e il pilota. Le figure hanno sfondo bianco puro, controllo del contenimento e file `SPEC.md`, `AUDIT.md` e `ALT_TEXT.md`. Le candidate image-gen che ignorano la specifica o inventano lo stato del progetto vengono respinte e registrate negli audit.
 
 ## Sequenza successiva
 
 ```text
-Capitolo 7
--> Capitolo 8
--> Capitolo 9
--> Parte P03
--> prosecuzione seriale dell'indice canonico
+chiusura visuale Capitolo 8
+-> chiusura visuale Capitolo 9
+-> Capitolo 10, ricerca e pianificazione
+-> prosecuzione dell'indice canonico
 ```
 
 Non vengono prodotti render raster delle pagine complete. Gli artefatti sono Markdown, formule, tabelle, immagini tecniche, codice, test, output, fonti e audit.
