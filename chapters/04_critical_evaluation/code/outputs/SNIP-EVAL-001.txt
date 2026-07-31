@@ -1,0 +1,9 @@
+model_A_accuracy: 0.792
+model_A_group_accuracy: {'standard': 0.75, 'urgent': 0.875}
+model_A_weighted_error_cost: 8.0
+model_B_accuracy: 0.833
+model_B_group_accuracy: {'standard': 0.9375, 'urgent': 0.625}
+model_B_weighted_error_cost: 13.0
+accuracy_difference_B_minus_A: 0.042
+paired_bootstrap_95pct_interval: [-0.208, 0.292]
+interval_contains_zero: True
