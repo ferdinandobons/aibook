@@ -1,0 +1,11 @@
+Python 3.13.5
+PyTorch 2.10.0+cpu
+Device: CPU
+Primary dtype: torch.float64
+Seeds: dataset 11, 12, 13; model 7
+Training steps: 500
+Optimizer: Adam, learning_rate=0.05
+L2 strength: 0.01
+Threshold candidates: 0.10, 0.15, ..., 0.90
+False-negative cost: 5.0
+False-positive cost: 1.0
