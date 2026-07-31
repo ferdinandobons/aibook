@@ -79,8 +79,31 @@ def update_search_chapter() -> Path:
     return path
 
 
+def update_knowledge_chapter() -> Path:
+    path = ROOT / "chapters/11_knowledge_logic/CHAPTER.md"
+    text = path.read_text(encoding="utf-8")
+    text = replace_once_or_confirm(
+        text,
+        "status: testo e codice completi, visuali in revisione",
+        "status: candidatura completa in revisione autoriale",
+        path=path,
+    )
+    text = replace_once_or_confirm(
+        text,
+        "version: 0.1.0-draft1",
+        "version: 0.2.0-rc1",
+        path=path,
+    )
+    path.write_text(text, encoding="utf-8")
+    return path
+
+
 def main() -> None:
-    for path in [update_numerics_chapter(), update_search_chapter()]:
+    for path in [
+        update_numerics_chapter(),
+        update_search_chapter(),
+        update_knowledge_chapter(),
+    ]:
         print(path.relative_to(ROOT))
 
 
