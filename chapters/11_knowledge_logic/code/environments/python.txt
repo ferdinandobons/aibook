@@ -1,0 +1,10 @@
+Python 3.13.5
+standard library
+CPU
+
+Run date: 2026-07-31
+
+Commands:
+
+python snip_knowledge_001_rules_bayes.py
+python -m unittest -v test_knowledge_logic.py
