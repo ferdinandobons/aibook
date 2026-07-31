@@ -1,0 +1,17 @@
+uniform_cost
+states: ('message_received', 'order_identified', 'tracking_checked', 'delay_confirmed', 'ticket_opened')
+actions: ('identify_order', 'check_tracking', 'confirm_delay', 'open_delay_ticket')
+cost: 6.0
+expanded: ('message_received', 'order_identified', 'payment_inspected', 'agent_asked', 'payment_ok', 'tracking_checked', 'delay_confirmed', 'ticket_opened')
+
+astar
+states: ('message_received', 'order_identified', 'tracking_checked', 'delay_confirmed', 'ticket_opened')
+actions: ('identify_order', 'check_tracking', 'confirm_delay', 'open_delay_ticket')
+cost: 6.0
+expanded: ('message_received', 'order_identified', 'tracking_checked', 'delay_confirmed', 'ticket_opened')
+
+game_tree
+minimax_value: 4.0
+minimax_leaves: 6
+alpha_beta_value: 4.0
+alpha_beta_leaves: 5
