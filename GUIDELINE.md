@@ -4,7 +4,7 @@
 
 Questo file è l'entry point operativo del progetto `ferdinandobons/aibook`.
 
-Una persona o un sistema AI senza il contesto della conversazione originaria deve poterlo usare per comprendere il libro, leggere la documentazione, scrivere o revisionare capitoli, aggiungere tecniche e conservare accuratezza, voce editoriale e tracciabilità.
+Una persona o un sistema AI senza il contesto della conversazione originaria deve poterlo usare per comprendere il libro, leggere la documentazione, scrivere o revisionare capitoli, aggiungere tecniche e conservare accuratezza, voce editoriale, continuità e tracciabilità.
 
 La fonte di verità è il repository, non la memoria della conversazione.
 
@@ -17,7 +17,8 @@ Ogni capitolo tecnico integra:
 1. testo verificato e scritto come manuale;
 2. immagini tecniche sottoposte a review iterativa;
 3. codice eseguito e testato;
-4. fonti, claim e audit.
+4. fonti, claim e audit;
+5. un contratto di continuità con i capitoli precedente e successivo.
 
 ## 2. Ordine di lettura
 
@@ -39,7 +40,8 @@ Documenti specialistici:
 - testo e didattica: `docs/02_STILE_E_QA_TESTO.md`;
 - immagini: `docs/03_VISUALI.md`;
 - fonti, claim, codice e riproducibilità: `docs/04_CODICE_FONTI_E_RIPRODUCIBILITA.md`;
-- workflow, repository e aggiornamenti U1-U8: `docs/05_WORKFLOW_E_REPOSITORY.md`.
+- workflow, repository e aggiornamenti U1-U8: `docs/05_WORKFLOW_E_REPOSITORY.md`;
+- prerequisiti e passaggi tra lezioni: `docs/06_CONTINUITA_TRA_CAPITOLI.md`.
 
 ## 3. Accuratezza
 
@@ -78,7 +80,39 @@ Lo scaffold di stato, problema, input, trasformazione, output, invariante, confi
 
 Ogni capitolo supera review didattica, gate anti-template, review editoriale e linguistica, verifica con tre profili di lettore e nuova lettura integrale dopo le correzioni.
 
-## 5. Architettura stabile
+## 5. Continuità tra lezioni
+
+Il lettore non deve incontrare prerequisiti nascosti.
+
+Ogni `PLAN.md` registra:
+
+```text
+Prerequisiti stabili:
+Concetti richiamati ma rispiegati localmente:
+Forward reference non necessarie alla comprensione:
+Gap che apre il capitolo:
+Output consegnato al capitolo successivo:
+```
+
+Un concetto usato in una lezione appartiene a una delle seguenti classi:
+
+1. già stabilizzato in un capitolo precedente;
+2. rispiegato localmente nel perimetro necessario;
+3. citato come forward reference senza dipendenza dal meccanismo;
+4. costruito come concetto nuovo della lezione corrente.
+
+Un uso che non rientra in nessuna classe è un buco di spiegazione.
+
+Prima di promuovere una candidatura si rileggono almeno:
+
+- il riepilogo del capitolo precedente;
+- l'apertura e il riepilogo del capitolo corrente;
+- l'apertura pianificata del capitolo successivo;
+- formule, termini, API ed esercizi che potrebbero richiedere contenuti futuri.
+
+La matrice corrente e le forward reference controllate sono in `docs/06_CONTINUITA_TRA_CAPITOLI.md`.
+
+## 6. Architettura stabile
 
 Il repository contiene una sola opera canonica. Volume unico, tomi, sito e corso sono export della stessa sorgente.
 
@@ -103,7 +137,7 @@ Le parti stabili sono:
 
 Una nuova tecnica non rinomina o riordina automaticamente le parti.
 
-## 6. Routing e maturità
+## 7. Routing e maturità
 
 Per collocare una tecnica:
 
@@ -121,7 +155,7 @@ Maturità:
 
 La maturità può cambiare senza spostare la tecnica tra le parti.
 
-## 7. Identità
+## 8. Identità
 
 Il numero stampato non è l'identità.
 
@@ -142,7 +176,7 @@ alias
 
 Gli ID restano stabili. Split e merge richiedono migrazione, alias e controllo dei riferimenti.
 
-## 8. Visuali
+## 9. Visuali
 
 Ogni immagine tecnica:
 
@@ -157,7 +191,7 @@ Ogni immagine tecnica:
 
 Non si usano render completi delle pagine come figure tecniche.
 
-## 9. Codice
+## 10. Codice
 
 Ogni capitolo tecnico include almeno uno snippet eseguibile, salvo eccezione motivata.
 
@@ -169,12 +203,12 @@ Ogni capitolo tecnico include almeno uno snippet eseguibile, salvo eccezione mot
 - Gli invarianti vengono testati.
 - Un output è `Eseguito` soltanto con ambiente, comando e log o test.
 
-## 10. Workflow
+## 11. Workflow
 
 ```text
 ricerca
 -> claim
--> piano interno
+-> piano interno e contratto di continuità
 -> stesura
 -> formule
 -> codice e test
@@ -183,15 +217,16 @@ ricerca
 -> review didattica
 -> gate anti-template
 -> review editoriale e linguistica
+-> audit tra capitoli
 -> lettura ad alta voce
 -> seconda lettura completa
 -> revisione autoriale
 -> congelamento
 ```
 
-Non si passa al capitolo successivo finché quello corrente non è approvato o formalmente sospeso.
+La produzione può aprire il capitolo successivo quando la candidatura corrente ha superato tutti i gate interni ed è disponibile per la revisione autoriale. La rinomina in `final.png`, il congelamento e il merge in `main` richiedono approvazione autoriale.
 
-## 11. Aggiornamenti
+## 12. Aggiornamenti
 
 Le operazioni U1-U8 sono definite in `docs/05_WORKFLOW_E_REPOSITORY.md`:
 
@@ -206,7 +241,7 @@ Le operazioni U1-U8 sono definite in `docs/05_WORKFLOW_E_REPOSITORY.md`:
 
 Il catalogo non dichiara completezza assoluta. Censisce le principali famiglie che soddisfano i criteri di inclusione alla data registrata.
 
-## 12. Convenzioni Git
+## 13. Convenzioni Git
 
 Ogni report di modifica indica:
 
@@ -224,7 +259,7 @@ Data di verifica:
 
 Non dichiarare approvazione quando i gate non sono completi.
 
-## 13. Azioni vietate
+## 14. Azioni vietate
 
 Non:
 
@@ -238,9 +273,11 @@ Non:
 - chiamare `Eseguito` un output non prodotto;
 - approvare una visuale ambigua;
 - approvare una lezione schematica, frammentata o poco naturale;
+- usare un concetto futuro come prerequisito nascosto;
+- eliminare un ponte necessario tra capitoli;
 - dichiarare il libro aggiornato oltre la data verificata.
 
-## 14. Inizializzazione di una nuova sessione
+## 15. Inizializzazione di una nuova sessione
 
 ```text
 Sto operando sul repository aibook.
@@ -249,5 +286,6 @@ Leggo GUIDELINE.md e i documenti canonici prima di modificare contenuti.
 Non introduco fatti senza prova.
 Non modifico le parti stabili senza governance.
 Uso uno scaffold rigoroso internamente e prosa da manuale nel testo pubblico.
+Controllo il contratto di ingresso e uscita di ogni capitolo.
 Applico routing, maturità, review e tracciabilità a ogni aggiornamento.
 ```
