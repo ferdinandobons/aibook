@@ -1,0 +1,14 @@
+train_positive_rate: 0.317
+validation_positive_rate: 0.340
+test_positive_rate: 0.460
+initial_objective: 0.778276
+final_objective: 0.313711
+model_weight: [1.774188336893833, 1.9123432814931904]
+model_bias: [-1.0376440102094568]
+selected_threshold_from_validation: 0.30
+validation_selected: count=50, accuracy=0.860, precision=0.727, recall=0.941, f1=0.821, cost=11.0, tp=16, tn=27, fp=6, fn=1
+test_selected: count=50, accuracy=0.900, precision=0.875, recall=0.913, f1=0.894, cost=13.0, tp=21, tn=24, fp=3, fn=2
+test_default_0.50: count=50, accuracy=0.900, precision=0.950, recall=0.826, f1=0.884, cost=21.0, tp=19, tn=26, fp=1, fn=4
+test_majority_baseline: count=50, accuracy=0.540, precision=0.000, recall=0.000, f1=0.000, cost=115.0, tp=0, tn=27, fp=0, fn=23
+test_slice_tracking_available: count=34, accuracy=0.912, precision=0.824, recall=1.000, f1=0.903, cost=3.0, tp=14, tn=17, fp=3, fn=0
+test_slice_tracking_missing: count=16, accuracy=0.875, precision=1.000, recall=0.778, f1=0.875, cost=10.0, tp=7, tn=7, fp=0, fn=2
