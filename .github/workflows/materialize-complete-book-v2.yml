@@ -1,0 +1,214 @@
+name: Materialize complete AI book v2
+
+on:
+  push:
+    branches:
+      - feature/full-book-production
+    paths:
+      - 'payloads/complete_book_v2/READY'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: complete-book-materialization
+  cancel-in-progress: false
+
+jobs:
+  materialize:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+
+    steps:
+      - name: Checkout production branch
+        uses: actions/checkout@v4
+        with:
+          ref: feature/full-book-production
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install runtime dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check pillow==11.3.0
+          python -m pip install --disable-pip-version-check --index-url https://download.pytorch.org/whl/cpu torch
+
+      - name: Verify and reconstruct payloads
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f payloads/complete_book_v2/READY
+          test -d payloads/complete_book_v2/gen14
+          test -d payloads/complete_book_v2/remaining
+          mkdir -p /tmp/complete-book
+
+          cat $(find payloads/complete_book_v2/gen14 -maxdepth 1 -name 'part_*.b64' | sort) \
+            | base64 --decode > /tmp/complete-book/gen14.py.xz
+          echo '92532bcf15fcf09251ae8753c139ddbcf60ec7239e77418e05e192fcdfc674ac  /tmp/complete-book/gen14.py.xz' \
+            | sha256sum --check
+
+          cat $(find payloads/complete_book_v2/remaining -maxdepth 1 -name 'part_*.b64' | sort) \
+            | base64 --decode > /tmp/complete-book/remaining.tar.xz
+          echo 'ae320d7ed3851d48eac87ef6d52a242375f91ebd438981418986a888fe1cf7ce  /tmp/complete-book/remaining.tar.xz' \
+            | sha256sum --check
+
+          xz --test /tmp/complete-book/gen14.py.xz
+          xz --test /tmp/complete-book/remaining.tar.xz
+
+      - name: Materialize Chapters 14-30
+        shell: bash
+        run: |
+          set -euo pipefail
+          xz --decompress --stdout /tmp/complete-book/gen14.py.xz > scripts/generate_chapters_14_30.py
+          python scripts/generate_chapters_14_30.py
+          test -f chapters/14_reinforcement_learning/CHAPTER.md
+          test -f chapters/30_pretraining_families/CHAPTER.md
+
+      - name: Materialize Chapters 31-45
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f scripts/generate_milestone_31_45.py
+          python scripts/generate_milestone_31_45.py
+          test -f chapters/31_llm_behavior/CHAPTER.md
+          test -f chapters/45_alternative_prediction/CHAPTER.md
+
+      - name: Overlay Chapters 46-98 and Appendices A-L
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/complete-book/unpacked
+          tar -xJf /tmp/complete-book/remaining.tar.xz -C /tmp/complete-book/unpacked
+          source_dir=$(find /tmp/complete-book/unpacked -type f -name COMPLETE_BOOK_MANIFEST.md -printf '%h\n' | head -n 1)
+          test -n "$source_dir"
+          rsync -a "$source_dir"/ ./
+          test -f chapters/46_sft/CHAPTER.md
+          test -f chapters/98_frontier_observatory/CHAPTER.md
+          test -f appendices/A_python_numpy_pytorch/APPENDIX.md
+          test -f appendices/L_edizioni_alias/APPENDIX.md
+
+      - name: Generate technical visuals for Chapters 1-13 and pilot
+        shell: bash
+        run: |
+          set -euo pipefail
+          generators=(
+            scripts/generate_book_visuals.py
+            scripts/generate_history_visuals.py
+            scripts/generate_lifecycle_visuals.py
+            scripts/generate_evaluation_visuals.py
+            scripts/generate_linear_algebra_visuals.py
+            scripts/generate_calculus_visuals.py
+            scripts/generate_probability_visuals.py
+            scripts/generate_information_visuals.py
+            scripts/generate_numerics_visuals.py
+            scripts/generate_numerics_visuals_v2.py
+            scripts/generate_search_visuals.py
+            scripts/generate_knowledge_visuals.py
+            scripts/generate_supervised_visuals.py
+            scripts/generate_unsupervised_visuals.py
+          )
+          for generator in "${generators[@]}"; do
+            test -f "$generator"
+          done
+          python scripts/generate_book_visuals.py
+          python scripts/generate_history_visuals.py
+          python scripts/generate_lifecycle_visuals.py
+          python scripts/generate_evaluation_visuals.py
+          python scripts/generate_linear_algebra_visuals.py
+          python scripts/generate_calculus_visuals.py
+          python scripts/generate_probability_visuals.py
+          sed -i 's/font(21, True)/font(18, True)/g' scripts/generate_information_visuals.py
+          python scripts/generate_information_visuals.py
+          python scripts/generate_numerics_visuals.py
+          python scripts/generate_numerics_visuals_v2.py
+          python scripts/generate_search_visuals.py
+          python scripts/generate_knowledge_visuals.py
+          python scripts/generate_supervised_visuals.py
+          python scripts/generate_unsupervised_visuals.py
+
+      - name: Generate technical visuals for Chapters 46-98 and Appendices
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/generate_remaining_visuals.py
+
+      - name: Integrate visual references and final metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/finalize_complete_book.py
+          rm -f docs/06_CONTINUITA_TRA_CAPITOLI_31_45.md
+
+      - name: Validate the complete book
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/validate_complete_book.py | tee COMPLETE_BOOK_VALIDATION.txt
+
+      - name: Additional repository checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          root = Path('.')
+          chapter_files = sorted((root / 'chapters').glob('*/CHAPTER.md'))
+          appendix_files = sorted((root / 'appendices').glob('*/APPENDIX.md'))
+          assert len(chapter_files) == 98, len(chapter_files)
+          assert len(appendix_files) == 12, len(appendix_files)
+
+          numbers = []
+          for path in chapter_files:
+              text = path.read_text(encoding='utf-8')
+              match = re.search(r'^# Capitolo\s+(\d+)\.', text, re.M)
+              assert match, path
+              numbers.append(int(match.group(1)))
+              assert '—' not in text, path
+          assert sorted(numbers) == list(range(1, 99)), numbers
+
+          assert (root / 'docs' / '06_CONTINUITA_TRA_CAPITOLI.md').is_file()
+          assert (root / 'docs' / 'COMPLETE_BOOK_AUDIT.md').is_file()
+          assert (root / 'COMPLETE_BOOK_MANIFEST.md').is_file()
+          print('additional checks passed')
+          PY
+
+      - name: Remove transient payloads, caches and obsolete workflows
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf payloads/complete_book_v2
+          rm -rf payloads/complete_book
+          rm -rf payloads/milestone_14_30
+          rm -rf payloads/generator_14_30
+          rm -rf payloads/milestone_31_45
+          find . -type d -name '__pycache__' -prune -exec rm -rf {} +
+          find . -type f -name '*.pyc' -delete
+          rm -f .github/workflows/materialize-milestone-14-30.yml
+          rm -f .github/workflows/generate-milestone-31-45.yml
+          rm -f .github/workflows/finalize-milestone-45.yml
+          rm -f .github/workflows/generate-book-visuals.yml
+          rm -f .github/workflows/materialize-complete-book.yml
+          rm -f .github/workflows/materialize-complete-book-v2.yml
+
+      - name: Commit complete book to production branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          if git diff --cached --quiet; then
+            echo 'Complete book is already current.'
+            exit 0
+          fi
+          git commit -m 'Materialize complete AI book, Chapters 1-98 and Appendices A-L'
+          git push origin HEAD:feature/full-book-production
