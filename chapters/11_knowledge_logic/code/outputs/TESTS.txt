@@ -1,0 +1,12 @@
+test_absence_does_not_create_negation (test_knowledge_logic.KnowledgeLogicTests.test_absence_does_not_create_negation) ... ok
+test_absent_signals_reduce_posterior (test_knowledge_logic.KnowledgeLogicTests.test_absent_signals_reduce_posterior) ... ok
+test_conditional_factorization_is_explicit (test_knowledge_logic.KnowledgeLogicTests.test_conditional_factorization_is_explicit) ... ok
+test_forward_chain_derives_expected_facts (test_knowledge_logic.KnowledgeLogicTests.test_forward_chain_derives_expected_facts) ... ok
+test_forward_chain_is_idempotent (test_knowledge_logic.KnowledgeLogicTests.test_forward_chain_is_idempotent) ... ok
+test_joint_distribution_normalizes (test_knowledge_logic.KnowledgeLogicTests.test_joint_distribution_normalizes) ... ok
+test_posterior_with_two_positive_signals (test_knowledge_logic.KnowledgeLogicTests.test_posterior_with_two_positive_signals) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.000s
+
+OK
