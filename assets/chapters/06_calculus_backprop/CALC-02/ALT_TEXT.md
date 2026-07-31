@@ -1,0 +1,3 @@
+# Alt text `CALC-02`
+
+Diagramma orizzontale su sfondo bianco con tre pannelli. Il pannello `Nodo loss` riceve un gradiente pari a uno, applica la derivata locale `dL/dy_hat = y_hat - y` e restituisce `-0,890630`. Il pannello `Nodo affine` riceve `-0,890630`, usa le derivate locali rispetto a `h`, `w2` e `b2` e restituisce i gradienti `0,623441`, `-0,878708` e `-0,890630`. Il pannello `Nodo tanh` riceve `0,623441`, applica `dh/dz = 1-h^2 = 0,026592` e restituisce `dL/dz = 0,016579`. Le frecce tra i pannelli sono etichettate `VJP`. In basso, un riquadro separa la differenziazione, che calcola i gradienti, dall'optimizer step, che usa quei gradienti per proporre un aggiornamento dei parametri.
