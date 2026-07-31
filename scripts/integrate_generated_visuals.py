@@ -17,92 +17,8 @@ def replace_once_or_confirm(text: str, old: str, new: str, *, path: Path) -> str
     )
 
 
-def update_attention_chapter() -> Path:
-    path = ROOT / "chapters/28_attention/CHAPTER.md"
-    text = path.read_text(encoding="utf-8")
-    text = replace_once_or_confirm(
-        text,
-        "status: revisione di accessibilità per lettore non esperto completata, controllo visuale riaperto",
-        "status: controllo visuale completato, revisione autoriale aperta",
-        path=path,
-    )
-    text = replace_once_or_confirm(text, "version: 0.5.0-rc5", "version: 0.6.0-rc6", path=path)
-    text = replace_once_or_confirm(
-        text,
-        "Nel pannello sinistro, `v1`, `v2` e `v3` confluiscono in un solo vettore `c`, riutilizzato da entrambe le posizioni, chiamate `consumer 1` e `consumer 2` nella figura.",
-        "Nel pannello sinistro, `v1`, `v2` e `v3` confluiscono in un solo vettore `c`, riutilizzato da entrambe le posizioni, indicate nella figura come `Posizione 1` e `Posizione 2`.",
-        path=path,
-    )
-    text = replace_once_or_confirm(
-        text,
-        "../../assets/chapters/28_attention/ATT-01/candidate-v2.png",
-        "../../assets/chapters/28_attention/ATT-01/candidate-v3.png",
-        path=path,
-    )
-    path.write_text(text, encoding="utf-8")
-    return path
-
-
-def update_history_chapter() -> Path:
-    path = ROOT / "chapters/02_history/CHAPTER.md"
-    text = path.read_text(encoding="utf-8")
-    text = replace_once_or_confirm(
-        text,
-        "status: prima stesura completa, visuali e codice in revisione",
-        "status: candidatura completa in revisione autoriale",
-        path=path,
-    )
-    text = replace_once_or_confirm(text, "version: 0.1.0-draft1", "version: 0.2.0-rc1", path=path)
-    text = replace_once_or_confirm(
-        text,
-        "Il seguente snippet mostra una ricerca in ampiezza su un piccolo workflow. Non riproduce un programma storico specifico; rende osservabile il contratto di base: stati espliciti, azioni esplicite e ricerca di un percorso.",
-        "Il seguente snippet mostra una ricerca in ampiezza su un piccolo workflow. L'algoritmo mantiene una coda ed esplora prima i percorsi con meno transizioni. Non riproduce un programma storico specifico; rende osservabile il contratto di base: stati espliciti, azioni esplicite e ricerca di un percorso.",
-        path=path,
-    )
-    text = replace_once_or_confirm(
-        text,
-        "Le support vector network del 1995, per esempio, costruiscono una superficie decisionale in uno spazio di feature e rappresentano una delle famiglie importanti dell'apprendimento statistico [Cortes e Vapnik, 1995].",
-        "Il lavoro del 1995 sulle support-vector network costruisce una superficie decisionale in uno spazio di feature e rappresenta uno degli esempi importanti dell'apprendimento statistico [Cortes e Vapnik, 1995].",
-        path=path,
-    )
-    text = replace_once_or_confirm(
-        text,
-        "Nel 2012, Krizhevsky, Sutskever e Hinton addestrarono una rete convoluzionale profonda sul dataset ImageNet usando una implementazione GPU e riportarono un risultato nettamente migliore rispetto agli altri sistemi della competizione descritta nel paper [Krizhevsky et al., 2012].",
-        "Nel 2012, Krizhevsky, Sutskever e Hinton addestrarono una rete convoluzionale profonda su ImageNet, un grande benchmark di immagini etichettate, usando unità di calcolo parallelo GPU. Nel paper riportarono un risultato nettamente migliore rispetto agli altri sistemi della competizione [Krizhevsky et al., 2012].",
-        path=path,
-    )
-    text = replace_once_or_confirm(
-        text,
-        "BERT usa il pretraining bidirezionale di un Transformer e il fine-tuning per diversi compiti linguistici [Devlin et al., 2019].",
-        "BERT usa il pretraining bidirezionale di un Transformer e un ulteriore addestramento, chiamato fine-tuning, per diversi compiti linguistici [Devlin et al., 2019].",
-        path=path,
-    )
-    text = replace_once_or_confirm(
-        text,
-        "Nel 2020, Kaplan e colleghi studiarono relazioni empiriche tra loss, dimensione del modello, quantità di dati e compute per la famiglia di language model analizzata [Kaplan et al., 2020].",
-        "Nel 2020, Kaplan e colleghi studiarono relazioni empiriche tra loss, dimensione del modello, quantità di dati e risorse di calcolo per la famiglia di language model analizzata [Kaplan et al., 2020].",
-        path=path,
-    )
-    path.write_text(text, encoding="utf-8")
-    return path
-
-
-def update_lifecycle_chapter() -> Path:
-    path = ROOT / "chapters/03_lifecycle/CHAPTER.md"
-    text = path.read_text(encoding="utf-8")
-    text = replace_once_or_confirm(
-        text,
-        "status: prima stesura completa, visuali e codice in revisione",
-        "status: candidatura completa in revisione autoriale",
-        path=path,
-    )
-    text = replace_once_or_confirm(text, "version: 0.1.0-draft1", "version: 0.2.0-rc1", path=path)
-    path.write_text(text, encoding="utf-8")
-    return path
-
-
-def update_evaluation_chapter() -> Path:
-    path = ROOT / "chapters/04_critical_evaluation/CHAPTER.md"
+def update_numerics_chapter() -> Path:
+    path = ROOT / "chapters/09_numerics_hardware/CHAPTER.md"
     text = path.read_text(encoding="utf-8")
     text = replace_once_or_confirm(
         text,
@@ -110,13 +26,30 @@ def update_evaluation_chapter() -> Path:
         "status: candidatura completa in revisione autoriale",
         path=path,
     )
-    text = replace_once_or_confirm(text, "version: 0.1.0-draft1", "version: 0.2.0-rc1", path=path)
+    text = replace_once_or_confirm(
+        text,
+        "version: 0.1.0-draft1",
+        "version: 0.2.0-rc1",
+        path=path,
+    )
+    text = replace_once_or_confirm(
+        text,
+        "<!-- Inserire NUM-01 dopo la materializzazione e l'audit del PNG. -->",
+        "![Range e precisione dei dtype floating point](../../assets/chapters/09_numerics_hardware/NUM-01/candidate-v1.png)\n\nLa figura confronta range e precisione senza trasformare la larghezza del dtype in una graduatoria universale. Float16 e bfloat16 occupano entrambi due byte, ma distribuiscono diversamente i bit tra esponente e significando.",
+        path=path,
+    )
+    text = replace_once_or_confirm(
+        text,
+        "<!-- Inserire NUM-02 dopo la materializzazione e l'audit del PNG. -->",
+        "![Contratto tipico della mixed precision](../../assets/chapters/09_numerics_hardware/NUM-02/candidate-v1.png)\n\nLa figura separa storage, autocast, accumulo, gradienti e aggiornamento dei pesi. L'optimizer modifica i parametri, non l'input, e il dtype visibile del tensore non descrive da solo l'intero percorso numerico.",
+        path=path,
+    )
     path.write_text(text, encoding="utf-8")
     return path
 
 
-def update_linear_algebra_chapter() -> Path:
-    path = ROOT / "chapters/05_linear_algebra/CHAPTER.md"
+def update_search_chapter() -> Path:
+    path = ROOT / "chapters/10_search_planning/CHAPTER.md"
     text = path.read_text(encoding="utf-8")
     text = replace_once_or_confirm(
         text,
@@ -124,20 +57,30 @@ def update_linear_algebra_chapter() -> Path:
         "status: candidatura completa in revisione autoriale",
         path=path,
     )
-    text = replace_once_or_confirm(text, "version: 0.1.0-draft1", "version: 0.2.0-rc1", path=path)
+    text = replace_once_or_confirm(
+        text,
+        "version: 0.1.0-draft1",
+        "version: 0.2.0-rc1",
+        path=path,
+    )
+    text = replace_once_or_confirm(
+        text,
+        "<!-- Inserire SEARCH-01 dopo la materializzazione e l'audit del PNG. -->",
+        "![Uniform-cost e A* sullo stesso grafo](../../assets/chapters/10_search_planning/SEARCH-01/candidate-v2.png)\n\nLa figura mantiene fisso il grafo e confronta soltanto l'ordine di espansione. Nel caso illustrativo, uniform-cost e A* restituiscono lo stesso piano di costo 6; l'euristica consistente evita l'espansione dei tre stati del ramo di pagamento e dell'intervento dell'agente.",
+        path=path,
+    )
+    text = replace_once_or_confirm(
+        text,
+        "<!-- Inserire SEARCH-02 dopo la materializzazione e l'audit del PNG. -->",
+        "![Minimax e potatura alpha-beta](../../assets/chapters/10_search_planning/SEARCH-02/candidate-v2.png)\n\nLa figura mostra l'albero minimax completo e marca il ramo che alpha-beta non deve valutare. La foglia 9 resta visibile per ricostruire il valore minimax, ma il collegamento tratteggiato indica che non viene visitata nell'ordine usato dal codice.",
+        path=path,
+    )
     path.write_text(text, encoding="utf-8")
     return path
 
 
 def main() -> None:
-    paths = [
-        update_attention_chapter(),
-        update_history_chapter(),
-        update_lifecycle_chapter(),
-        update_evaluation_chapter(),
-        update_linear_algebra_chapter(),
-    ]
-    for path in paths:
+    for path in [update_numerics_chapter(), update_search_chapter()]:
         print(path.relative_to(ROOT))
 
 
