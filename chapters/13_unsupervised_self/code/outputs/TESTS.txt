@@ -1,0 +1,14 @@
+test_centroids_match_assigned_means (test_unsupervised_self.UnsupervisedSelfSupervisedTests.test_centroids_match_assigned_means) ... ok
+test_dataset_shapes (test_unsupervised_self.UnsupervisedSelfSupervisedTests.test_dataset_shapes) ... ok
+test_embedding_shape (test_unsupervised_self.UnsupervisedSelfSupervisedTests.test_embedding_shape) ... ok
+test_kmeans_has_three_nonempty_clusters (test_unsupervised_self.UnsupervisedSelfSupervisedTests.test_kmeans_has_three_nonempty_clusters) ... ok
+test_kmeans_objective_is_non_increasing (test_unsupervised_self.UnsupervisedSelfSupervisedTests.test_kmeans_objective_is_non_increasing) ... ok
+test_mask_construction_masks_every_example (test_unsupervised_self.UnsupervisedSelfSupervisedTests.test_mask_construction_masks_every_example) ... ok
+test_masked_reconstruction_loss_decreases (test_unsupervised_self.UnsupervisedSelfSupervisedTests.test_masked_reconstruction_loss_decreases) ... ok
+test_reconstruction_beats_mean_baseline_on_fixed_test (test_unsupervised_self.UnsupervisedSelfSupervisedTests.test_reconstruction_beats_mean_baseline_on_fixed_test) ... ok
+test_run_is_deterministic (test_unsupervised_self.UnsupervisedSelfSupervisedTests.test_run_is_deterministic) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 11.475s
+
+OK
