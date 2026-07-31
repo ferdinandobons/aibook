@@ -1,0 +1,11 @@
+Python 3.13.5
+PyTorch 2.10.0+cpu
+Device: CPU
+Dtype: torch.float64
+Platform: Linux 6.12.13 x86_64, glibc 2.41
+Commands:
+  python snip_calc_001_manual_autograd.py
+  python -m unittest -v
+Finite difference epsilon: 1e-6
+Gradcheck: eps=1e-6, atol=1e-5, rtol=1e-3
+Documentation checked separately: PyTorch stable 2.13
