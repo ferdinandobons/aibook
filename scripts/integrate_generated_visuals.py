@@ -115,12 +115,27 @@ def update_evaluation_chapter() -> Path:
     return path
 
 
+def update_linear_algebra_chapter() -> Path:
+    path = ROOT / "chapters/05_linear_algebra/CHAPTER.md"
+    text = path.read_text(encoding="utf-8")
+    text = replace_once_or_confirm(
+        text,
+        "status: testo e codice completi, visuali in revisione",
+        "status: candidatura completa in revisione autoriale",
+        path=path,
+    )
+    text = replace_once_or_confirm(text, "version: 0.1.0-draft1", "version: 0.2.0-rc1", path=path)
+    path.write_text(text, encoding="utf-8")
+    return path
+
+
 def main() -> None:
     paths = [
         update_attention_chapter(),
         update_history_chapter(),
         update_lifecycle_chapter(),
         update_evaluation_chapter(),
+        update_linear_algebra_chapter(),
     ]
     for path in paths:
         print(path.relative_to(ROOT))
