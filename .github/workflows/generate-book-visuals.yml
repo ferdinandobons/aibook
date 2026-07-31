@@ -1,6 +1,5 @@
 name: Generate reviewed book visuals
 
-# Chapter 8 information-theory visual generation enabled.
 on:
   push:
     branches:
@@ -14,6 +13,8 @@ on:
       - 'scripts/generate_calculus_visuals.py'
       - 'scripts/generate_probability_visuals.py'
       - 'scripts/generate_information_visuals.py'
+      - 'scripts/generate_numerics_visuals.py'
+      - 'scripts/generate_numerics_visuals_v2.py'
       - 'scripts/integrate_generated_visuals.py'
       - '.github/workflows/generate-book-visuals.yml'
 
@@ -61,6 +62,11 @@ jobs:
       - name: Generate Chapter 8 visuals
         run: python scripts/generate_information_visuals.py
 
+      - name: Generate and review Chapter 9 visuals
+        run: |
+          python scripts/generate_numerics_visuals.py
+          python scripts/generate_numerics_visuals_v2.py
+
       - name: Integrate generated visual references
         run: python scripts/integrate_generated_visuals.py
 
@@ -87,6 +93,8 @@ jobs:
             assets/chapters/07_probability/PROB-02/candidate-v1.png \
             assets/chapters/08_information_theory/INFO-01/candidate-v1.png \
             assets/chapters/08_information_theory/INFO-02/candidate-v1.png \
+            assets/chapters/09_numerics_hardware/NUM-01/candidate-v1.png \
+            assets/chapters/09_numerics_hardware/NUM-02/candidate-v1.png \
             assets/chapters/28_attention/ATT-01/candidate-v3.png \
             chapters/02_history/CHAPTER.md \
             chapters/03_lifecycle/CHAPTER.md \
