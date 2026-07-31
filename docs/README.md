@@ -15,6 +15,7 @@ La documentazione è organizzata per tema in pochi file canonici. I materiali me
 - Capitoli pianificati: 98
 - Appendici: 12
 - Ultima ricerca approfondita globale: **30 luglio 2026**
+- Ultimo audit di continuità: **31 luglio 2026**
 
 ## Ordine di lettura
 
@@ -34,9 +35,10 @@ Una persona o un sistema AI senza contesto legge:
 Per scrivere o revisionare una lezione:
 
 1. `02_STILE_E_QA_TESTO.md`;
-2. `04_CODICE_FONTI_E_RIPRODUCIBILITA.md`;
-3. `05_WORKFLOW_E_REPOSITORY.md`;
-4. `03_VISUALI.md`, quando sono previste figure.
+2. `06_CONTINUITA_TRA_CAPITOLI.md`;
+3. `04_CODICE_FONTI_E_RIPRODUCIBILITA.md`;
+4. `05_WORKFLOW_E_REPOSITORY.md`;
+5. `03_VISUALI.md`, quando sono previste figure.
 
 ## Documenti canonici
 
@@ -48,9 +50,12 @@ Per scrivere o revisionare una lezione:
 | `03_VISUALI.md` | Standard visivo, sfondo bianco, orientamento, palette, contenimento e QA. |
 | `04_CODICE_FONTI_E_RIPRODUCIBILITA.md` | Gerarchia delle fonti, claim, citazioni, snippet, test, API e ambienti. |
 | `05_WORKFLOW_E_REPOSITORY.md` | Struttura delle cartelle, produzione seriale, aggiornamenti U1-U8, commit e congelamento. |
+| `06_CONTINUITA_TRA_CAPITOLI.md` | Contratti di ingresso e uscita, prerequisiti, forward reference e audit dei passaggi tra lezioni. |
 | `14_CATALOGO_STATO_ARTE.md` | Registro dettagliato delle famiglie, tecniche, maturità e destinazioni editoriali. |
 | `15_REGISTRO_RICERCHE_APPROFONDITE.md` | Dossier delle ricognizioni globali, fonti seme, limiti e date. |
 | `source/README.md` | Indice dei materiali metodologici originali conservati integralmente. |
+
+`06_CONTINUITA_TRA_CAPITOLI.md` resta separato perché possiede un ciclo di aggiornamento trasversale: una modifica a una lezione può richiedere di rileggere il capitolo precedente e quello successivo, anche quando nessuna regola di stile cambia.
 
 ## Alias di compatibilità
 
@@ -67,11 +72,18 @@ La versione approvata non contiene fatti basati su inferenze editoriali. Ogni af
 
 `CLAIMS.md` collega le frasi alle prove. `FONTI_PRIMARIE.md` registra sezioni, versioni e limiti.
 
-## Prosa
+## Prosa e continuità
 
 Il capitolo deve leggersi come un manuale tecnico scritto direttamente in italiano. Lo scaffold resta in `PLAN.md` e `TEXT_AUDIT.md`; il lettore vede titoli semantici, paragrafi naturali e un esempio continuo.
 
 Ogni capitolo supera review tecnica, review didattica, gate anti-template, review editoriale e linguistica, controllo per un lettore non esperto e nuova lettura integrale.
+
+Ogni passaggio tra capitoli viene inoltre controllato per verificare che:
+
+- i prerequisiti siano già stati costruiti oppure rispiegati localmente;
+- una forward reference non diventi un prerequisito nascosto;
+- apertura e riepilogo consegnino un oggetto chiaro;
+- non esistano formule, termini o esercizi che richiedano contenuti futuri non segnalati.
 
 ## Visuali
 
@@ -93,9 +105,10 @@ Ogni capitolo tecnico include almeno uno snippet eseguibile, salvo eccezione mot
 
 ## Stato della produzione
 
-- Capitolo 1: candidatura completa `0.4.0-rc3`;
-- Capitolo 2: candidatura completa `0.2.0-rc1`;
-- Capitolo 3: ricerca aperta;
+- Capitoli 1-7: candidature complete;
+- Capitoli 8-11: testo, fonti, claim, codice e audit completi, PNG da materializzare nel branch;
+- Capitolo 12: candidatura completa `0.2.0-rc1`, PNG candidati in corso di materializzazione;
+- Capitolo 13: unità successiva;
 - Capitolo 28: candidatura completa `0.6.0-rc6`.
 
 Lo stato dettagliato è in `../PROGRESS.md` e `../BOOK_PRODUCTION.md`.
