@@ -1,5 +1,6 @@
 name: Generate reviewed book visuals
 
+# Chapter 8 information-theory visual generation enabled.
 on:
   push:
     branches:
