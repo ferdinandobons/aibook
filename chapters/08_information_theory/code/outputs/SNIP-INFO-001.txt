@@ -1,0 +1,13 @@
+probabilities: tensor([0.7856, 0.1753, 0.0391], dtype=torch.float64)
+probability_target_class: 0.785597
+manual_nll: 0.241311
+api_cross_entropy: 0.241311
+gradient_logits: tensor([-0.2144,  0.1753,  0.0391], dtype=torch.float64)
+prediction_entropy_nats: 0.621585
+soft_target_entropy: 0.394398
+soft_target_cross_entropy: 0.466311
+soft_target_kl: 0.071914
+entropy_plus_kl: 0.466311
+confident_wrong_loss: 3.241311
+naive_large_logits_probabilities: tensor([nan, nan, nan], dtype=torch.float64)
+stable_large_logits_log_probabilities: tensor([-0.4076, -1.4076, -2.4076], dtype=torch.float64)
