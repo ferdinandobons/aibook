@@ -4,8 +4,8 @@ part_id: P01
 order_key: 030
 title: Il ciclo di vita di un sistema di AI
 maturity: CORE
-status: prima stesura completa, visuali e codice in revisione
-version: 0.1.0-draft1
+status: candidatura completa in revisione autoriale
+version: 0.2.0-rc1
 opened: 2026-07-30
 last_web_research: 2026-07-30
 last_source_check: 2026-07-30
