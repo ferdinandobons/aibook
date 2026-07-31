@@ -1,0 +1,9 @@
+Python 3.13.5
+PyTorch 2.10.0+cpu
+Device: CPU
+Default dtype in snippet: torch.float64
+Platform: Linux 6.12.13 x86_64, glibc 2.41
+Commands:
+  python snip_la_001_shapes_linear_svd.py
+  python -m unittest -v
+Documentation checked separately: PyTorch stable 2.13
