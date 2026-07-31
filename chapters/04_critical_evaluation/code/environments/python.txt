@@ -1,0 +1,7 @@
+Python 3.13.5
+Platform: Linux 6.12.13 x86_64, glibc 2.41
+Dependencies: Python standard library only
+Command: python snip_eval_001_paired_comparison.py
+Tests: python -m unittest -v
+Seed: 7
+Bootstrap resamples: 10000
