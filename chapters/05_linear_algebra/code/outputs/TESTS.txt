@@ -1,0 +1,9 @@
+test_affine_shape_and_values (test_linear_algebra_snippet.LinearAlgebraSnippetTests.test_affine_shape_and_values) ... ok
+test_bias_broadcast_matches_explicit_rows (test_linear_algebra_snippet.LinearAlgebraSnippetTests.test_bias_broadcast_matches_explicit_rows) ... ok
+test_gram_matrix_contains_row_dot_products (test_linear_algebra_snippet.LinearAlgebraSnippetTests.test_gram_matrix_contains_row_dot_products) ... ok
+test_rank_and_svd_reconstruction (test_linear_algebra_snippet.LinearAlgebraSnippetTests.test_rank_and_svd_reconstruction) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.006s
+
+OK
