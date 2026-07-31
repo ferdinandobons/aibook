@@ -1,0 +1,9 @@
+train_shape: (120, 4)
+test_shape: (60, 4)
+cluster_counts: [40, 40, 40]
+kmeans_objective_history: [203.144502, 60.284823]
+masked_train_initial_loss: 2.218895
+masked_train_final_loss: 0.359401
+masked_test_loss: 0.391415
+mean_baseline_test_loss: 1.900604
+embedding_shape: (60, 2)
