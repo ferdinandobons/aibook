@@ -1,5 +1,14 @@
 # Specifica visuale `SEARCH-02`
 
+## Identità
+
+- Capitolo: `CH-P03-SEARCH-PLANNING`
+- Famiglia: albero di gioco con potatura
+- Orientamento: orizzontale
+- File candidato: `candidate-v2.png`
+- Canvas: `1800 × 1000`
+- Sfondo: bianco puro `#FFFFFF`
+
 ## Domanda unica
 
 Come può alpha-beta evitare una foglia senza modificare il valore minimax?
@@ -19,21 +28,21 @@ Dopo il ramo A, `alpha=3`. Nel ramo B, MIN osserva `2`; la foglia `9` non può r
 
 - radice `MAX · 4`;
 - tre nodi `MIN` con valori 3, 2 e 4;
-- sei foglie minimax;
-- foglia `9` barrata o marcata come non valutata da alpha-beta;
+- sei foglie del minimax completo;
+- foglia `9` ancora leggibile ma marcata come non valutata da alpha-beta;
 - `minimax: 6 foglie`;
 - `alpha-beta: 5 foglie`;
-- nota che il valore resta `4`.
+- nota che il valore finale resta `4`.
 
 ## Layout
 
-- sfondo bianco puro;
 - albero verticale;
-- MAX blu, MIN viola, foglie verdi;
-- ramo potato rosso tenue;
+- MAX blu, MIN viola e foglie valutate verdi;
+- ramo potato tratteggiato in rosso;
+- valore `9` leggibile dentro un box barrato ai margini;
 - linee con partenza e arrivo inequivocabili;
 - nessun testo fuori dai box.
 
-## Stato
+## Provenienza
 
-Storyboard completo. Renderer raster v1 presente; materializzazione e audit del raster ancora aperti.
+Valori e ordine dei figli derivano da `SNIP-SEARCH-001`. Il PNG raster è prodotto da `scripts/generate_search_visuals.py`; non viene usato SVG.
