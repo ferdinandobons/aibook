@@ -22,9 +22,11 @@ Il catalogo contiene tecniche, maturità e destinazioni editoriali. L'indice con
 | N. | chapter_id | Titolo |
 |---:|---|---|
 | 1 | `CH-P01-AI-FIELD` | Che cos'è l'intelligenza artificiale |
-| 2 | `CH-P01-HISTORY` | Storia delle idee e dei sistemi di AI |
-| 3 | `CH-P01-LEARNING-OVERVIEW` | Come apprende una macchina |
+| 2 | `CH-P01-HISTORY` | Dai simboli ai foundation model |
+| 3 | `CH-P01-LIFECYCLE` | Il ciclo di vita di un sistema di AI |
 | 4 | `CH-P01-CRITICAL-EVALUATION` | Come valutare criticamente un risultato di AI |
+
+`CH-P01-LEARNING-OVERVIEW` era un ID di pianificazione non congelato. È stato ritirato prima della produzione canonica perché l'overview dell'apprendimento è distribuita nei capitoli P03 e P04, mentre P01 richiedeva un capitolo metodologico sul ciclo di vita. Non esiste una versione approvata da migrare.
 
 # P02. Matematica, informazione e calcolo
 
