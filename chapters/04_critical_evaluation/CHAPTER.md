@@ -4,8 +4,8 @@ part_id: P01
 order_key: 040
 title: Come valutare criticamente un risultato di AI
 maturity: CORE
-status: testo e codice completi, visuali in revisione
-version: 0.1.0-draft1
+status: candidatura completa in revisione autoriale
+version: 0.2.0-rc1
 opened: 2026-07-31
 last_web_research: 2026-07-31
 last_source_check: 2026-07-31
