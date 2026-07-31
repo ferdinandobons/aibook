@@ -1,0 +1,3 @@
+# Alt text `EVAL-02`
+
+Confronto in due pannelli su sfondo bianco. A sinistra, barre blu e viola confrontano i modelli A e B. B ha accuratezza complessiva e accuratezza sulla slice standard maggiori; A ha accuratezza sulla slice urgente maggiore. Due box mostrano la somma pesata degli errori, `8,0` per A e `13,0` per B. A destra, un asse orizzontale mostra la differenza di accuratezza B meno A. Un punto a `+0,042` è contenuto in un intervallo da `-0,208` a `+0,292`, attraversato dalla linea verticale dello zero. Una nota chiarisce che l'intervallo include zero, non dimostra equivalenza e non elimina il peggior risultato di B sui casi urgenti.
