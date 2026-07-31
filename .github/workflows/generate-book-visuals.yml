@@ -72,7 +72,9 @@ jobs:
         run: python scripts/generate_probability_visuals.py
 
       - name: Generate Chapter 8 visuals
-        run: python scripts/generate_information_visuals.py
+        run: |
+          sed -i 's/font(21, True)/font(18, True)/g' scripts/generate_information_visuals.py
+          python scripts/generate_information_visuals.py
 
       - name: Generate and review Chapter 9 visuals
         run: |
