@@ -1,0 +1,3 @@
+# Alt text `CALC-01`
+
+Diagramma orizzontale su sfondo bianco diviso in tre fasce. In alto il forward procede da sinistra a destra: input `x=2,0`, `w1=1,5`, `b1=-0,5`; primo nodo affine con `z=2,5`; attivazione `h=tanh(z)=0,986614`; secondo nodo affine con `w2=-0,7`, `b2=0,2` e previsione `y_hat=-0,490630`; loss quadratica con target `y=0,4` e valore `0,396611`. Al centro compaiono le derivate locali delle operazioni. In basso il backward procede da destra a sinistra e mostra i gradienti `dL/dw2=-0,878708`, `dL/db2=-0,890630`, `dL/dh=0,623441`, `dL/dz=0,016579`, `dL/dw1=0,033157` e `dL/db1=0,016579`. Un footer chiarisce che la backpropagation calcola gradienti, mentre l'optimizer decide separatamente come aggiornare i parametri.
