@@ -8,7 +8,7 @@
 - Commit di partenza: `a10235cf384ebda23060a05a3e25ef7b490595a1`
 - Opera pianificata: 98 capitoli e 12 appendici
 - Modalità: produzione seriale controllata
-- Unità corrente: `CH-P02-PROBABILITY`, Capitolo 7, stato `research`
+- Unità corrente: `CH-P03-SUPERVISED`, Capitolo 12, stato `research`
 - Data di apertura del branch: 30 luglio 2026
 - Ultimo aggiornamento: 31 luglio 2026
 
@@ -51,8 +51,8 @@ Una candidatura può lasciare l'unità corrente quando claim, testo, codice e vi
 | Parte | Intervallo | Stato |
 |---|---:|---|
 | `P01` Campo, metodo e storia dell'AI | 1-4 | quattro candidature complete |
-| `P02` Matematica, informazione e calcolo | 5-9 | Capitoli 5 e 6 completi; Capitolo 7 in ricerca |
-| `P03` Apprendimento, ottimizzazione e decisione | 10-14 | `planned` |
+| `P02` Matematica, informazione e calcolo | 5-9 | Capitoli 5-7 completi; 8-9 in finalizzazione visuale |
+| `P03` Apprendimento, ottimizzazione e decisione | 10-14 | Capitoli 10-11 in finalizzazione visuale; Capitolo 12 in ricerca |
 | `P04` Reti neurali e rappresentazioni | 15-19 | `planned` |
 | `P05` Modellazione generativa | 20-25 | `planned` |
 | `P06` Sequenze, linguaggio e contesto | 26-31 | Capitolo 28 completo; altri `planned` |
@@ -65,7 +65,7 @@ Una candidatura può lasciare l'unità corrente quando claim, testo, codice e vi
 | `P13` Valutazione, interpretabilità, sicurezza e governance | 83-93 | `planned` |
 | `P14` Laboratori, integrazione e osservatorio | 94-98 | `planned` |
 
-## Candidature complete
+## Candidature complete in revisione autoriale
 
 | Capitolo | chapter_id | Versione | Visuali | Test |
 |---:|---|---|---:|---:|
@@ -75,42 +75,43 @@ Una candidatura può lasciare l'unità corrente quando claim, testo, codice e vi
 | 4 | `CH-P01-CRITICAL-EVALUATION` | `0.2.0-rc1` | 2 | 4 |
 | 5 | `CH-P02-LINEAR-ALGEBRA` | `0.2.0-rc1` | 2 | 4 |
 | 6 | `CH-P02-CALCULUS-BACKPROP` | `0.2.0-rc1` | 2 | 5 |
+| 7 | `CH-P02-PROBABILITY` | `0.2.0-rc1` | 2 | 6 |
 | 28 | `CH-P06-ATTENTION` | `0.6.0-rc6` | 2 | 3 |
 
-## Capitolo 6
+## Pacchetti completi salvo materializzazione dei PNG
 
-Il capitolo completato include:
+| Capitolo | chapter_id | Test | Visuali locali |
+|---:|---|---:|---:|
+| 8 | `CH-P02-INFORMATION-THEORY` | 7 | 2 |
+| 9 | `CH-P02-NUMERICS-HARDWARE` | 7 | 2 |
+| 10 | `CH-P03-SEARCH-PLANNING` | 6 | 2 |
+| 11 | `CH-P03-KNOWLEDGE-LOGIC` | 7 | 2 |
 
-- derivata, derivate parziali, gradiente, Jacobiana e derivata direzionale;
-- chain rule, grafo computazionale, forward e backward numerico;
-- reverse mode, VJP e distinzione dal forward mode;
-- backpropagation separata dall'optimizer step;
-- autograd PyTorch, accumulo, output non scalari, `grad`, `gradcheck`, modalità dei gradienti e operazioni in-place;
-- `SNIP-CALC-001` con cinque test;
-- `CALC-01` e `CALC-02` validate tecnicamente;
-- doppia review completa.
+I quattro capitoli hanno testo, fonti, claim, codice, audit, review e generatori. I commit effettuati tramite il connettore non hanno avviato GitHub Actions nelle ultime sessioni, quindi i PNG generati localmente non sono ancora presenti nei rispettivi percorsi del branch.
 
-## Unità corrente. Capitolo 7
+## Unità corrente. Capitolo 12
 
 ```text
-CH-P02-PROBABILITY
-Probabilità, statistica e inferenza
+CH-P03-SUPERVISED
+Apprendimento supervisionato
 ```
 
-Il capitolo dovrà stabilire:
+Il piano interno è aperto. La produzione prevista comprende:
 
-- evento, variabile aleatoria e distribuzione;
-- probabilità congiunta, marginale e condizionata;
-- indipendenza e teorema di Bayes;
-- valore atteso, varianza e covarianza;
-- campione, popolazione, stimatore e incertezza;
-- likelihood e massima verosimiglianza;
-- distinzione tra parametro, stima e previsione;
-- ruolo del campionamento e dei controlli numerici.
+- coppie input-target;
+- classificazione e regressione;
+- rischio empirico e generalizzazione;
+- logistic regression e soglie;
+- overfitting, bias, varianza e regolarizzazione;
+- alberi, margini ed ensemble come famiglie alternative;
+- class imbalance e analisi per slice;
+- snippet PyTorch con split, baseline e test.
 
 ## Tooling visuale
 
-Il workflow include generatori raster per i Capitoli 1-6 e il pilota. Le visuali candidate sono PNG con sfondo bianco, controllo del contenimento e artefatti `SPEC.md`, `AUDIT.md` e `ALT_TEXT.md`.
+Il workflow include generatori raster per i Capitoli 1-11 e il pilota. Le visuali candidate sono PNG con sfondo bianco, controllo del contenimento e artefatti `SPEC.md`, `AUDIT.md` e `ALT_TEXT.md`.
+
+Quando image-gen ignora la specifica o inventa informazioni sul progetto, la candidata viene respinta e il difetto viene registrato. Per grafi, formule e connessioni che richiedono precisione viene usato il renderer raster deterministico, mai SVG come artefatto principale.
 
 ## Aggiornamento del piano
 
