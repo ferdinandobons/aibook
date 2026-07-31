@@ -1,0 +1,9 @@
+test_overall_accuracy_prefers_model_b (test_evaluation_snippet.EvaluationSnippetTests.test_overall_accuracy_prefers_model_b) ... ok
+test_paired_interval_is_deterministic_and_contains_zero (test_evaluation_snippet.EvaluationSnippetTests.test_paired_interval_is_deterministic_and_contains_zero) ... ok
+test_urgent_group_prefers_model_a (test_evaluation_snippet.EvaluationSnippetTests.test_urgent_group_prefers_model_a) ... ok
+test_weighted_cost_prefers_model_a (test_evaluation_snippet.EvaluationSnippetTests.test_weighted_cost_prefers_model_a) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.087s
+
+OK
