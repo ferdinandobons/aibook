@@ -1,0 +1,12 @@
+test_cpu_autocast_uses_bfloat16_for_matmul (test_numerics_hardware.NumericalContractsTests.test_cpu_autocast_uses_bfloat16_for_matmul) ... ok
+test_dtype_range_and_precision_contracts (test_numerics_hardware.NumericalContractsTests.test_dtype_range_and_precision_contracts) ... ok
+test_eps_is_observable_near_one (test_numerics_hardware.NumericalContractsTests.test_eps_is_observable_near_one) ... ok
+test_float32_addition_is_not_associative_for_constructed_case (test_numerics_hardware.NumericalContractsTests.test_float32_addition_is_not_associative_for_constructed_case) ... ok
+test_fp16_and_bfloat16_have_different_range (test_numerics_hardware.NumericalContractsTests.test_fp16_and_bfloat16_have_different_range) ... ok
+test_stable_logsumexp_remains_finite (test_numerics_hardware.NumericalContractsTests.test_stable_logsumexp_remains_finite) ... ok
+test_storage_bytes_follow_element_size (test_numerics_hardware.NumericalContractsTests.test_storage_bytes_follow_element_size) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.003s
+
+OK
