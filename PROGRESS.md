@@ -5,12 +5,12 @@
 - Repository: `ferdinandobons/aibook`
 - Branch canonico: `main`
 - Branch di produzione: `feature/full-book-production`
-- Pull request di produzione: `#2`, draft
+- Pull request: `#2`, draft
 - Opera pianificata: 98 capitoli e 12 appendici
 - Produzione: seriale controllata
 - Ultima ricerca globale: 30 luglio 2026
-- Ultima verifica locale delle fonti: 30 luglio 2026
-- Unità corrente: `CH-P01-LIFECYCLE`, Capitolo 3, stato `research`
+- Ultima verifica locale delle fonti: 31 luglio 2026
+- Unità corrente: `CH-P02-PROBABILITY`, Capitolo 7, stato `research`
 
 ## Documentazione canonica
 
@@ -25,124 +25,67 @@
 
 ## Gate attivi
 
-Ogni capitolo attraversa:
+Ogni capitolo attraversa ricerca, claim, stesura, codice, visuali, audit tecnico, review didattica, gate anti-template, review editoriale e linguistica, verifica per lettore non esperto, controllo incrociato e revisione autoriale. `final.png` e congelamento richiedono approvazione.
 
-1. ricerca e claim;
-2. stesura e verifica tecnica;
-3. codice e test, quando pertinenti;
-4. visuali e audit;
-5. review didattica e gate anti-template;
-6. review editoriale e linguistica;
-7. verifica per un lettore non esperto;
-8. controllo incrociato;
-9. revisione autoriale;
-10. congelamento.
+## Candidature complete
 
-Un capitolo può lasciare l'unità corrente quando la candidatura completa è disponibile per la revisione autoriale. Il congelamento e la rinomina delle figure in `final.png` richiedono approvazione.
+| Capitolo | chapter_id | Versione | Stato |
+|---:|---|---|---|
+| 1 | `CH-P01-AI-FIELD` | `0.4.0-rc3` | revisione autoriale |
+| 2 | `CH-P01-HISTORY` | `0.2.0-rc1` | revisione autoriale |
+| 3 | `CH-P01-LIFECYCLE` | `0.2.0-rc1` | revisione autoriale |
+| 4 | `CH-P01-CRITICAL-EVALUATION` | `0.2.0-rc1` | revisione autoriale |
+| 5 | `CH-P02-LINEAR-ALGEBRA` | `0.2.0-rc1` | revisione autoriale |
+| 6 | `CH-P02-CALCULUS-BACKPROP` | `0.2.0-rc1` | revisione autoriale |
+| 28 | `CH-P06-ATTENTION` | `0.6.0-rc6` | revisione autoriale |
 
-## Capitolo 1. Che cos'è l'intelligenza artificiale
-
-- `chapter_id`: `CH-P01-AI-FIELD`
-- Versione: `0.4.0-rc3`
-- Stato: candidatura completa in revisione autoriale
+## Capitolo 6. Calcolo differenziale e backpropagation
 
 Completato:
 
-- testo verificato e riscritto per un lettore non esperto;
-- 18 claim e fonti primarie;
-- snippet PyTorch e tre test;
-- `AI-01/candidate-v1.png`;
-- `AI-02/candidate-v1.png`;
-- audit delle visuali e controllo incrociato;
-- review fattuale, didattica, editoriale, linguistica e di accessibilità.
+- testo completo su derivata, gradiente, Jacobiana, chain rule, reverse mode e backpropagation;
+- fonti e venti claim;
+- `SNIP-CALC-001` con derivazione manuale, autograd, differenze finite e `gradcheck`;
+- cinque test superati;
+- `CALC-01/candidate-v1.png`;
+- `CALC-02/candidate-v2.png`;
+- specifiche, audit e alt text;
+- doppia review didattica, matematica, editoriale e linguistica;
+- controllo incrociato dei valori.
 
 Aperto:
 
-- approvazione autoriale del testo e delle due figure;
-- rinomina in `final.png`;
-- congelamento.
-
-## Capitolo 2. Dai simboli ai foundation model
-
-- `chapter_id`: `CH-P01-HISTORY`
-- Versione: `0.2.0-rc1`
-- Stato: candidatura completa in revisione autoriale
-
-Completato:
-
-- quattordici fonti primarie e diciotto claim;
-- testo completo con oggetto continuo;
-- snippet di ricerca simbolica;
-- tre test superati;
-- `HIST-01/candidate-v1.png`;
-- `HIST-02/candidate-v1.png`;
-- audit fattuale, didattico, editoriale, linguistico, visuale e del codice;
-- controllo incrociato completo.
-
-Aperto:
-
-- approvazione autoriale;
+- revisione autoriale;
+- eventuali correzioni;
 - rinomina delle figure in `final.png`;
 - congelamento.
 
-## Capitolo 3. Il ciclo di vita di un sistema di AI
+## Unità corrente. Capitolo 7
 
-- `chapter_id`: `CH-P01-LIFECYCLE`
-- Stato: `research`
+```text
+CH-P02-PROBABILITY
+Probabilità, statistica e inferenza
+```
 
-Completato:
+Obiettivo immediato:
 
-- piano interno;
-- oggetto continuo;
-- visuali e snippet pianificati;
-- gate specifici definiti.
-
-Prossimi artefatti:
-
-- `FONTI_PRIMARIE.md`;
-- `CLAIMS.md`;
-- prima stesura;
-- snippet con split train, validation e test;
-- visuali `LIFE-01` e `LIFE-02`.
-
-## Capitolo 28. Il meccanismo di attention
-
-- `chapter_id`: `CH-P06-ATTENTION`
-- Versione nel branch: `0.6.0-rc6`
-- Stato: candidatura completa in revisione autoriale
-
-Completato:
-
-- riscrittura per un lettore non esperto;
-- `ATT-01/candidate-v3.png` con `Posizione 1/2`;
-- `ATT-02/candidate-v2.png` ricontrollata;
-- alt text di `ATT-01` corretto;
-- tre snippet e tre test invariati;
-- controllo incrociato testo, formule, visuali e codice.
-
-Aperto:
-
-- approvazione autoriale delle due figure e del testo;
-- rinomina in `final.png`;
-- nuovo congelamento prima dell'aggiornamento di `main`.
+- definire oggetto continuo e perimetro;
+- verificare fonti;
+- costruire claim;
+- produrre testo, snippet e visuali;
+- completare le review prima di passare al Capitolo 8.
 
 ## Tooling visuale
 
-Sono presenti:
-
-- `scripts/generate_book_visuals.py`;
-- `scripts/generate_history_visuals.py`;
-- `scripts/integrate_generated_visuals.py`;
-- `.github/workflows/generate-book-visuals.yml`.
-
-Il workflow genera PNG raster su sfondo bianco, verifica che siano decodificabili e committa i candidati nel feature branch. La prima immagine resta sempre una bozza e la denominazione `final.png` è riservata agli asset approvati.
+Il workflow include generatori raster per i Capitoli 1-6 e il pilota. Le figure hanno sfondo bianco puro, controlli di contenimento e file `SPEC.md`, `AUDIT.md` e `ALT_TEXT.md`. Le candidate image-gen che rappresentano un soggetto diverso dalla specifica vengono respinte.
 
 ## Sequenza successiva
 
 ```text
-Capitolo 3
--> Capitolo 4
--> Parte P02
+Capitolo 7
+-> Capitolo 8
+-> Capitolo 9
+-> Parte P03
 -> prosecuzione seriale dell'indice canonico
 ```
 
