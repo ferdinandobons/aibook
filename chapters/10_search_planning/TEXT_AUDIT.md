@@ -2,15 +2,17 @@
 
 ## Stato
 
-- Versione corrente: `0.1.0-draft1`
+- Versione corrente: `0.2.0-rc1`
 - Data: 31 luglio 2026
-- Esito fattuale: **superato per il testo corrente**
+- Esito fattuale: **superato**
 - Esito algoritmico: **superato**
 - Esito del codice: **superato, sei test**
 - Esito didattico: **superato dopo seconda lettura**
-- Esito editoriale e linguistico: **superato per la bozza**
-- Visuali: storyboard e renderer presenti, raster da materializzare e revisionare
-- Review autoriale: non aperta
+- Gate anti-template: **superato**
+- Esito editoriale e linguistico: **superato**
+- Chiarezza per lettore non esperto: **superata**
+- Visuali: **validate tecnicamente dopo iterazione**
+- Revisione autoriale: aperta
 
 ## Review tecnica
 
@@ -46,7 +48,7 @@ Il lettore deve poter ricostruire:
 
 Esito: positivo. I termini compaiono dopo il caso concreto e le formule non sono l'unico accesso ai concetti.
 
-## Review editoriale
+## Review editoriale e linguistica
 
 Correzioni applicate:
 
@@ -57,7 +59,9 @@ Correzioni applicate:
 - limitati i dettagli storici alle transizioni necessarie;
 - mantenuto il caso base prima di chance nodes e informazione incompleta;
 - spiegata MCTS prima di citare le reti neurali;
-- rimossi confronti di prestazione non misurati.
+- rimossi confronti di prestazione non misurati;
+- controllati ritmo, referenti e leggibilità ad alta voce;
+- mantenuta una struttura in prosa, senza esporre lo scaffold interno.
 
 ## Controllo incrociato
 
@@ -67,24 +71,39 @@ Correzioni applicate:
 - [x] game tree e ordine dei figli coincidono con il codice;
 - [x] conteggi 6 e 5 delle foglie sono testati;
 - [x] claim storici associati a fonti primarie;
-- [x] concetti differiti non sono anticipati come meccanismi completi.
+- [x] concetti differiti non sono anticipati come meccanismi completi;
+- [x] testo, visuali e codice usano gli stessi stati, costi e valori.
 
 ## Visuali
 
-La candidata image-gen è stata respinta perché mostrava una dashboard del progetto e inventava progressi editoriali. `SEARCH-01` e `SEARCH-02` dispongono di renderer raster e storyboard, ma non sono ancora approvate:
+La candidata image-gen è stata respinta perché mostrava una dashboard del progetto e inventava progressi editoriali.
 
-- `SEARCH-01` richiede controllo geometrico degli archi e delle label;
-- `SEARCH-02` richiede verifica del ramo potato e del conteggio delle foglie.
+### `SEARCH-01`
+
+- il raster iniziale è stato respinto per collegamenti lunghi ambigui;
+- la seconda composizione instrada gli archi sopra o sotto i nodi;
+- costi, cammino ottimo e ordini di espansione sono verificati;
+- esito tecnico positivo.
+
+### `SEARCH-02`
+
+- il raster iniziale nascondeva il valore della foglia potata;
+- la seconda composizione mantiene leggibile il valore 9 e distingue il ramo non visitato;
+- valori propagati e conteggi delle foglie sono verificati;
+- esito tecnico positivo.
+
+## Codice
+
+Lo snippet e i test sono stati rieseguiti in un processo Python pulito il 31 luglio 2026. Sei test risultano superati. Il caso non viene presentato come benchmark generale.
 
 ## Elementi aperti
 
-- materializzare i due PNG nel feature branch;
-- eseguire audit sul raster effettivo;
-- rigenerare in caso di linee ambigue o overflow;
-- inserire le figure nel capitolo;
-- ripetere la lettura integrale;
-- aprire la revisione autoriale.
+- materializzazione automatica dei due PNG nel feature branch;
+- revisione autoriale del testo e delle figure;
+- eventuali correzioni;
+- rinomina in `final.png`;
+- congelamento con data e commit.
 
 ## Verdetto
 
-Testo, fonti, claim e codice sono pronti. Il capitolo resta una bozza completa ma non una release candidate finché le visuali non superano il gate.
+La candidatura `0.2.0-rc1` supera i gate fattuali, algoritmici, didattici, anti-template, editoriali, linguistici, di accessibilità e di coerenza interna. Può essere sottoposta alla revisione autoriale non appena i PNG generati dal workflow risultano presenti nel branch.
