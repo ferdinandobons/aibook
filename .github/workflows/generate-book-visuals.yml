@@ -2,6 +2,13 @@ name: Generate reviewed book visuals
 
 on:
   workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - synchronize
+      - reopened
   push:
     branches:
       - feature/full-book-production
@@ -88,6 +95,7 @@ jobs:
         run: python scripts/integrate_generated_visuals.py
 
       - name: Commit generated candidates and integrations
+        if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
         shell: bash
         run: |
           set -euo pipefail
