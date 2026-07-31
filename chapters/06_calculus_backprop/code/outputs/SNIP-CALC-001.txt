@@ -1,0 +1,11 @@
+z: 2.500000
+h: 0.986614
+y_hat: -0.490630
+loss: 0.396611
+autograd_loss: 0.396611
+manual_gradients: Gradients(w1=0.0331573691152693, b1=0.01657868455763465, w2=-0.8787083009520738, b2=-0.8906300087060013)
+autograd_gradients: Gradients(w1=0.033157369115269356, b1=0.016578684557634678, w2=-0.8787083009520738, b2=-0.8906300087060013)
+finite_difference_gradients: Gradients(w1=0.03315736910036726, b1=0.016578684536305843, w2=-0.8787083009553776, b2=-0.8906300086874985)
+gradcheck_passes: True
+accumulated_gradient_after_first_backward: 4.0
+accumulated_gradient_after_second_backward: 8.0
