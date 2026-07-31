@@ -2,27 +2,48 @@
 
 ## Stato
 
-- Esito: **aperto**
-- PNG nel branch: no
-- Approvazione tecnica: no
-- Approvazione autoriale: no
+- File revisionato localmente: `candidate-v2.png`
+- Dimensioni: `1800 × 1000`
+- SHA-256 locale: `505fd11d305e487a3f1d8aaa56074f2ea02fa11719e885c320ce612368ef1bb1`
+- Esito tecnico: **validata tecnicamente**
+- Approvazione autoriale: aperta
 
-## Iterazione image-gen
+## Iterazioni
 
-Respinta perché rappresentava una dashboard sullo stato del libro e inventava capitoli completati. Non rispondeva alla domanda su uniform-cost e A*.
+### Image-gen
 
-## Renderer raster
+Respinta. La candidata mostrava una dashboard sullo stato del libro e inventava progressi editoriali. Non rappresentava uniform-cost, A* o il grafo richiesto.
 
-`scripts/generate_search_visuals.py` contiene una prima composizione deterministica. Prima della pubblicazione occorre controllare sul raster:
+### Raster v1
 
-- assenza di archi che attraversano nodi;
-- leggibilità dei costi;
-- corrispondenza tra grafo e snippet;
-- ordine di espansione completo;
-- visibilità del cammino ottimo;
-- assenza di false gerarchie;
-- testo e padding.
+Respinta durante la review geometrica. Alcuni archi lunghi attraversavano l'area centrale e rendevano poco chiara la loro origine.
 
-## Gate
+### Raster v2
 
-La figura non può essere referenziata in `CHAPTER.md` finché il raster non viene materializzato, aperto e revisionato almeno due volte in caso di difetti.
+I collegamenti lunghi sono stati instradati sopra o sotto i nodi. I costi sono contenuti in label separate e il cammino ottimo resta leggibile senza nascondere i rami alternativi.
+
+## Verifica algoritmica
+
+- [x] grafo coerente con `SNIP-SEARCH-001`;
+- [x] costi `1, 2, 1, 2` sul cammino ottimo;
+- [x] costo totale `6`;
+- [x] ticket diretto di costo `7`;
+- [x] rami di pagamento e agente con i costi registrati;
+- [x] uniform-cost espande otto stati;
+- [x] A* espande cinque stati;
+- [x] entrambi restituiscono lo stesso piano.
+
+## Verifica visuale
+
+- [x] sfondo bianco puro;
+- [x] nessun arco attraversa un nodo;
+- [x] partenza e arrivo dei collegamenti lunghi identificabili;
+- [x] costi interamente visibili;
+- [x] testo contenuto nei box;
+- [x] ordine di espansione leggibile;
+- [x] nessun elemento editoriale estraneo;
+- [x] colore non usato come unico segnale.
+
+## Verdetto
+
+`SEARCH-01/candidate-v2.png` può essere inserita nella candidatura del capitolo e sottoposta alla revisione autoriale.
