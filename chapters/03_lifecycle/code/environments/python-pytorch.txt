@@ -1,0 +1,7 @@
+Python 3.13.5
+PyTorch 2.10.0+cpu
+Device: CPU
+Default dtype in snippet: torch.float32
+Run date: 2026-07-30
+Run command: python snip_life_001_split_train_monitor.py
+Test command: python -m unittest -v

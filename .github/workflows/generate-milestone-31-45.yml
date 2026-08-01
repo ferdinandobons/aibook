@@ -1,0 +1,121 @@
+name: Generate milestone chapters 31-45
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - synchronize
+      - reopened
+  push:
+    branches:
+      - feature/full-book-production
+    paths:
+      - 'scripts/generate_milestone_31_45.py'
+      - '.github/workflows/generate-milestone-31-45.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout production branch
+        uses: actions/checkout@v4
+        with:
+          ref: feature/full-book-production
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install runtime dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check pillow==11.3.0
+          python -m pip install --disable-pip-version-check --index-url https://download.pytorch.org/whl/cpu torch
+
+      - name: Generate chapters, code, tests and visual candidates
+        run: python scripts/generate_milestone_31_45.py
+
+      - name: Validate milestone
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f chapters/31_llm_behavior/CHAPTER.md
+          test -f chapters/45_alternative_prediction/CHAPTER.md
+          test -f docs/06_CONTINUITA_TRA_CAPITOLI_31_45.md
+          test -f assets/chapters/31_llm_behavior/LLM-01/candidate-v1.png
+          test -f assets/chapters/45_alternative_prediction/ALT-02/candidate-v1.png
+          chapter_count=$(find chapters -mindepth 1 -maxdepth 1 -type d | awk -F/ '$3 ~ /^(31_|32_|33_|34_|35_|36_|37_|38_|39_|40_|41_|42_|43_|44_|45_)/ {count++} END {print count+0}')
+          png_count=$(find assets/chapters -path '*/candidate-v1.png' | awk -F/ '$3 ~ /^(31_|32_|33_|34_|35_|36_|37_|38_|39_|40_|41_|42_|43_|44_|45_)/ {count++} END {print count+0}')
+          test "$chapter_count" -eq 15
+          test "$png_count" -eq 30
+          grep -R --line-number 'Ran 3 tests' chapters/{31_llm_behavior,32_data_lifecycle,33_data_mixture,34_scaling_laws,35_pretraining_recipe,36_distributed_training,37_modern_block,38_position_context,39_attention_kv,40_hardware_attention,41_linear_attention,42_sequence_alternatives,43_hybrid_memory,44_moe_conditional,45_alternative_prediction}/code/outputs/TESTS.txt >/dev/null
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image
+          roots = [p for p in Path('assets/chapters').iterdir() if p.is_dir() and p.name.split('_', 1)[0].isdigit() and 31 <= int(p.name.split('_', 1)[0]) <= 45]
+          pngs = sorted(p for root in roots for p in root.glob('*/candidate-v1.png'))
+          assert len(pngs) == 30, len(pngs)
+          for path in pngs:
+              with Image.open(path) as image:
+                  assert image.size == (1800, 1000), (path, image.size)
+                  rgb = image.convert('RGB')
+                  assert rgb.getpixel((0, 0)) == (255, 255, 255), path
+                  assert rgb.getpixel((1799, 999)) == (255, 255, 255), path
+          print(f'validated {len(roots)} chapters and {len(pngs)} PNG files')
+          PY
+
+      - name: Commit milestone to production branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add \
+            chapters/31_llm_behavior \
+            chapters/32_data_lifecycle \
+            chapters/33_data_mixture \
+            chapters/34_scaling_laws \
+            chapters/35_pretraining_recipe \
+            chapters/36_distributed_training \
+            chapters/37_modern_block \
+            chapters/38_position_context \
+            chapters/39_attention_kv \
+            chapters/40_hardware_attention \
+            chapters/41_linear_attention \
+            chapters/42_sequence_alternatives \
+            chapters/43_hybrid_memory \
+            chapters/44_moe_conditional \
+            chapters/45_alternative_prediction \
+            assets/chapters/31_llm_behavior \
+            assets/chapters/32_data_lifecycle \
+            assets/chapters/33_data_mixture \
+            assets/chapters/34_scaling_laws \
+            assets/chapters/35_pretraining_recipe \
+            assets/chapters/36_distributed_training \
+            assets/chapters/37_modern_block \
+            assets/chapters/38_position_context \
+            assets/chapters/39_attention_kv \
+            assets/chapters/40_hardware_attention \
+            assets/chapters/41_linear_attention \
+            assets/chapters/42_sequence_alternatives \
+            assets/chapters/43_hybrid_memory \
+            assets/chapters/44_moe_conditional \
+            assets/chapters/45_alternative_prediction \
+            docs/06_CONTINUITA_TRA_CAPITOLI_31_45.md \
+            MILESTONE_31_45.md
+          if git diff --cached --quiet; then
+            echo 'Milestone 31-45 already current.'
+            exit 0
+          fi
+          git commit -m 'Generate reviewed chapters 31-45'
+          git push origin HEAD:feature/full-book-production

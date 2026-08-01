@@ -1,0 +1,11 @@
+test_alpha_beta_preserves_minimax_value (test_search_planning.SearchPlanningTests.test_alpha_beta_preserves_minimax_value) ... ok
+test_astar_and_uniform_cost_find_same_optimal_plan (test_search_planning.SearchPlanningTests.test_astar_and_uniform_cost_find_same_optimal_plan) ... ok
+test_astar_expands_fewer_states_in_the_fixed_example (test_search_planning.SearchPlanningTests.test_astar_expands_fewer_states_in_the_fixed_example) ... ok
+test_game_tree_has_three_min_children (test_search_planning.SearchPlanningTests.test_game_tree_has_three_min_children) ... ok
+test_heuristic_is_admissible_and_consistent_for_example (test_search_planning.SearchPlanningTests.test_heuristic_is_admissible_and_consistent_for_example) ... ok
+test_negative_cost_is_rejected (test_search_planning.SearchPlanningTests.test_negative_cost_is_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.001s
+
+OK

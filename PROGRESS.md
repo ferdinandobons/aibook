@@ -2,79 +2,107 @@
 
 ## Stato corrente
 
-- Repository operativo: `ferdinandobons/aibook`
+- Repository: `ferdinandobons/aibook`
 - Branch canonico: `main`
-- Branch di review: `review/chapter-28-pilot`
-- Pull request: `#1`
-- Modalità: produzione seriale controllata
-- Capitolo pilota: `CH-P06-ATTENTION`, numero di lavoro 28
-- Versione candidata: `0.3.0-rc3`
-- Stato: **revisione autoriale aperta**
-- Ultima ricerca approfondita globale: 30 luglio 2026
-- Ultima verifica delle fonti del capitolo: 30 luglio 2026
-- Standard visivo canonico adottato: 30 luglio 2026
-- Struttura logica in prosa adottata: 30 luglio 2026
+- Branch di produzione: `feature/full-book-production`
+- Pull request: `#2`, draft
+- Opera pianificata: 98 capitoli e 12 appendici
+- Produzione: candidature seriali con congelamento dopo revisione autoriale
+- Ultima ricerca globale: 30 luglio 2026
+- Ultima verifica locale delle fonti: 31 luglio 2026
+- Unità corrente: `CH-P03-SUPERVISED`, Capitolo 12, stato `research`
 
-## Pacchetto disponibile
+## Documentazione canonica
 
-Il branch di review contiene:
+- `docs/00_GOVERNANCE_E_ARCHITETTURA.md`;
+- `docs/01_INDICE_EDITORIALE.md`;
+- `docs/02_STILE_E_QA_TESTO.md`;
+- `docs/03_VISUALI.md`;
+- `docs/04_CODICE_FONTI_E_RIPRODUCIBILITA.md`;
+- `docs/05_WORKFLOW_E_REPOSITORY.md`;
+- `docs/14_CATALOGO_STATO_ARTE.md`;
+- `docs/15_REGISTRO_RICERCHE_APPROFONDITE.md`.
 
-- capitolo Markdown completo, riscritto come prosa tecnica naturale;
-- fonti primarie e documentazione ufficiale;
-- registro delle affermazioni;
-- audit fattuale, matematico, algoritmico e temporale;
-- quattro review didattiche registrate;
-- tre snippet Python/PyTorch;
-- tre test pertinenti superati;
-- ambiente e output registrati;
-- due immagini tecniche candidate con specifiche, alt text e audit;
-- checklist per la revisione dell'autore.
+## Gate attivi
 
-Non contiene render delle pagine, mockup editoriali o screenshot di impaginazioni.
+Ogni capitolo attraversa ricerca, claim, stesura, codice, visuali, audit tecnico, review didattica, gate anti-template, review editoriale e linguistica, verifica per lettore non esperto, controllo incrociato e revisione autoriale. `final.png` e congelamento richiedono approvazione.
 
-## Review didattica
+## Candidature complete in revisione autoriale
 
-La prima candidatura è stata corretta in due cicli distinti:
+| Capitolo | chapter_id | Versione |
+|---:|---|---|
+| 1 | `CH-P01-AI-FIELD` | `0.4.0-rc3` |
+| 2 | `CH-P01-HISTORY` | `0.2.0-rc1` |
+| 3 | `CH-P01-LIFECYCLE` | `0.2.0-rc1` |
+| 4 | `CH-P01-CRITICAL-EVALUATION` | `0.2.0-rc1` |
+| 5 | `CH-P02-LINEAR-ALGEBRA` | `0.2.0-rc1` |
+| 6 | `CH-P02-CALCULUS-BACKPROP` | `0.2.0-rc1` |
+| 7 | `CH-P02-PROBABILITY` | `0.2.0-rc1` |
+| 28 | `CH-P06-ATTENTION` | `0.6.0-rc6` |
 
-1. revisione della sequenza didattica, dei gate e dei confini;
-2. revisione della superficie editoriale e rimozione delle intestazioni metacognitive ripetute.
+## Candidature con testo e codice completi, visuali da materializzare
 
-La versione `0.3.0-rc3` mantiene internamente stato, problema, trasformazione, output, invariante e confine, ma li integra in paragrafi e titoli semantici.
+### Capitolo 8. Teoria dell'informazione e funzioni obiettivo
 
-Documenti pertinenti:
+- testo, fonti, claim e codice completi;
+- sette test superati;
+- `INFO-01` e `INFO-02` validate localmente;
+- generatori, specifiche, audit e alt text presenti;
+- PNG ancora assenti dal branch.
 
-- `docs/EXPLANATION_STYLE_AND_VISUALS.md`;
-- `docs/18_PROTOCOLLO_QA_DIDATTICO.md`;
-- `docs/19_STRUTTURA_LOGICA_IN_PROSA.md`;
-- `docs/01_TEMPLATE_CAPITOLO.md`.
+### Capitolo 9. Calcolo numerico, precisione e hardware
 
-## Stato delle visuali
+- testo, fonti, ventinove claim e codice completi;
+- sette test superati;
+- `NUM-01` e `NUM-02` revisionate in più iterazioni;
+- generatori, specifiche, audit e alt text presenti;
+- PNG ancora assenti dal branch.
 
-- `ATT-01/candidate-v2.png`: `validata tecnicamente`; approvazione autoriale aperta.
-- `ATT-02/candidate-v2.png`: `validata tecnicamente`; approvazione autoriale aperta.
-- Le versioni `candidate-v1.png` sono state rimosse perché corrotte e non revisionabili.
-- Nessuna immagine è denominata `final.png` prima dell'approvazione.
+### Capitolo 10. Ricerca, pianificazione e giochi
 
-## Standard visivo adottato
+- testo, fonti, ventitré claim e codice completi;
+- sei test rieseguiti in un processo pulito;
+- `SEARCH-01` revisionata instradando i collegamenti lunghi fuori dai nodi;
+- `SEARCH-02` revisionata mantenendo leggibile la foglia potata;
+- `REVIEW.md`, `CHANGELOG.md` e audit completi;
+- PNG ancora assenti dal branch.
 
-Tutte le immagini future seguono `docs/17_STANDARD_VISIVO_CANONICO.md`:
+### Capitolo 11. Conoscenza, logica e modelli probabilistici
 
-- sfondo bianco puro `#FFFFFF`;
-- orientamento orizzontale o verticale scelto in base al contenuto;
-- palette semantica stabile;
-- box, frecce e gerarchia tipografica comuni;
-- una domanda didattica principale per figura;
-- nessuna renderizzazione completa della pagina usata come figura tecnica;
-- prima generazione sempre trattata come bozza.
+- testo completo su logica, Horn clauses, RDF, OWL, reti bayesiane, Markov network e factor graph;
+- quindici fonti e trentuno claim;
+- `SNIP-KNOW-001` con forward chaining e rete bayesiana;
+- sette test superati;
+- `KNOW-01` corretta dopo un problema di overflow;
+- `KNOW-02` corretta dopo una relazione grafica ambigua tra prior e variabili;
+- generatori, specifiche, audit, alt text e review presenti;
+- PNG ancora assenti dal branch.
 
-Il contenimento del testo è un gate obbligatorio. Overflow, clipping, sovrapposizioni e padding insufficiente bloccano l'approvazione.
+## Unità corrente. Capitolo 12
 
-## Prossimo gate
+```text
+CH-P03-SUPERVISED
+Apprendimento supervisionato
+```
 
-1. review del capitolo `0.3.0-rc3` e degli artefatti nella pull request;
-2. commenti e correzioni;
-3. riapertura degli audit interessati quando necessario;
-4. approvazione della prosa, del formato pilota e delle due visuali;
-5. rinomina delle figure approvate in `final.png`;
-6. congelamento del capitolo e merge;
-7. avvio seriale dei capitoli successivi.
+Il piano interno è aperto. I prossimi artefatti sono fonti, claim, testo, snippet, test e visuali.
+
+## Tooling visuale
+
+Il workflow comprende generatori raster per i Capitoli 1-11 e il pilota. Le figure usano sfondo bianco puro, controlli di contenimento e file `SPEC.md`, `AUDIT.md` e `ALT_TEXT.md`.
+
+Le candidate image-gen che ignorano la specifica o inventano lo stato del progetto vengono respinte. I generatori raster costituiscono la procedura di fallback per formule, grafi e collegamenti che richiedono precisione deterministica.
+
+I commit prodotti tramite il connettore non hanno avviato il workflow durante le ultime sessioni. Per questo i PNG dei Capitoli 8-11 restano da materializzare, benché script e audit siano presenti.
+
+## Sequenza successiva
+
+```text
+Capitolo 12
+-> Capitolo 13
+-> Capitolo 14
+-> Parte P04
+-> prosecuzione seriale dell'indice canonico
+```
+
+Non vengono prodotti render raster delle pagine complete. Gli artefatti sono Markdown, formule, tabelle, immagini tecniche, codice, test, output, fonti e audit.

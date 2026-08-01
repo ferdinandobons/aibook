@@ -1,0 +1,7 @@
+Python 3.13.5
+PyTorch 2.10.0+cpu
+device: CPU
+default dtype used in the snippet: torch.float64
+execution date: 2026-07-31
+
+Documentation checked separately: PyTorch stable 2.13.

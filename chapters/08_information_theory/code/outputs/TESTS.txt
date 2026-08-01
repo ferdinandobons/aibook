@@ -1,0 +1,12 @@
+test_cross_entropy_decomposes_into_entropy_plus_kl (test_information_objectives.InformationObjectivesTests.test_cross_entropy_decomposes_into_entropy_plus_kl) ... ok
+test_gradient_is_probability_minus_one_hot_target (test_information_objectives.InformationObjectivesTests.test_gradient_is_probability_minus_one_hot_target) ... ok
+test_log_softmax_stays_finite_for_large_logits (test_information_objectives.InformationObjectivesTests.test_log_softmax_stays_finite_for_large_logits) ... ok
+test_manual_nll_matches_cross_entropy (test_information_objectives.InformationObjectivesTests.test_manual_nll_matches_cross_entropy) ... ok
+test_one_hot_cross_entropy_equals_kl (test_information_objectives.InformationObjectivesTests.test_one_hot_cross_entropy_equals_kl) ... ok
+test_probabilities_sum_to_one (test_information_objectives.InformationObjectivesTests.test_probabilities_sum_to_one) ... ok
+test_wrong_confident_prediction_has_larger_loss (test_information_objectives.InformationObjectivesTests.test_wrong_confident_prediction_has_larger_loss) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.010s
+
+OK

@@ -1,0 +1,14 @@
+Python 3.13.5
+PyTorch 2.10.0+cpu
+Device: CPU
+Dtype: torch.float64
+Dataset seeds: train 11, test 12
+Network seed: 17
+Training mask generator seed: 303
+Fixed train audit mask seed: 101
+Fixed test mask seed: 202
+K-means clusters: 3
+K-means max steps: 30
+Masked autoencoder steps: 1800
+Optimizer: Adam
+Learning rate: 0.01

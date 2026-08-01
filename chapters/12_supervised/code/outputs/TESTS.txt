@@ -1,0 +1,13 @@
+test_majority_baseline_predicts_training_majority (test_supervised_learning.SupervisedLearningTests.test_majority_baseline_predicts_training_majority) ... ok
+test_probabilities_are_valid (test_supervised_learning.SupervisedLearningTests.test_probabilities_are_valid) ... ok
+test_selected_threshold_improves_test_cost_in_fixed_example (test_supervised_learning.SupervisedLearningTests.test_selected_threshold_improves_test_cost_in_fixed_example) ... ok
+test_slice_counts_reconstruct_test_set (test_supervised_learning.SupervisedLearningTests.test_slice_counts_reconstruct_test_set) ... ok
+test_splits_have_expected_shapes (test_supervised_learning.SupervisedLearningTests.test_splits_have_expected_shapes) ... ok
+test_threshold_is_selected_only_from_validation_inputs (test_supervised_learning.SupervisedLearningTests.test_threshold_is_selected_only_from_validation_inputs) ... ok
+test_training_reduces_regularized_objective (test_supervised_learning.SupervisedLearningTests.test_training_reduces_regularized_objective) ... ok
+test_validation_selection_reduces_fixed_weighted_cost (test_supervised_learning.SupervisedLearningTests.test_validation_selection_reduces_fixed_weighted_cost) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 2.826s
+
+OK

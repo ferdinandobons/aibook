@@ -1,0 +1,4 @@
+start: request_received
+step_1: ask_order_id -> order_identified
+step_2: open_ticket_immediately -> ticket_opened
+plan_length: 2

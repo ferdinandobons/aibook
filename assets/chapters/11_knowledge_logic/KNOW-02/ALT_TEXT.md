@@ -1,0 +1,3 @@
+# Alt text `KNOW-02`
+
+Diagramma su sfondo bianco. Nel pannello sinistro, il nodo viola `H`, ritardo reale, ha due archi diretti verso i nodi blu `M`, segnale nel messaggio, e `T`, tracking fermo. Una annotazione laterale riporta `P(H=1)=0,20`; sotto i due figli compaiono le rispettive probabilità condizionate. Nel pannello destro è mostrata la fattorizzazione `P(H,M,T)=P(H)P(M|H)P(T|H)`. Con evidenza `M=1` e `T=1`, il numeratore per `H=1` è `0,112`, quello per `H=0` è `0,016` e il posterior è `0,875`. Il footer chiarisce che l'indipendenza dei due segnali, una volta fissato `H`, è una assunzione del modello.

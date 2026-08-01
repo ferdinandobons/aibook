@@ -1,76 +1,49 @@
 # GUIDELINE
 
-## Stato e funzione
+## Funzione
 
-- Stato: `vincolante`
-- Repository: `ferdinandobons/aibook`
-- Branch predefinito: `main`
-- Lingua: italiano
-- Formato sorgente: Markdown
-- Ultima ricerca approfondita globale: **30 luglio 2026**
-- Architettura editoriale: `docs/12_ARCHITETTURA_EDITORIALE_EVOLUTIVA.md`
-- Aggiornamenti futuri: `docs/13_PROTOCOLLO_AGGIORNAMENTO_CONTENUTI.md`
+Questo file è l'entry point operativo del progetto `ferdinandobons/aibook`.
 
-Questo file è l'entry point operativo del progetto. Una persona o un sistema AI senza il contesto della conversazione originaria deve poterlo usare per capire come leggere il repository e come modificare il libro senza rompere accuratezza, struttura o coerenza.
+Una persona o un sistema AI senza il contesto della conversazione originaria deve poterlo usare per comprendere il libro, leggere la documentazione, scrivere o revisionare capitoli, aggiungere tecniche e conservare accuratezza, voce editoriale, continuità e tracciabilità.
+
+La fonte di verità è il repository, non la memoria della conversazione.
 
 ## 1. Obiettivo
 
 Il repository contiene l'opera canonica **Intelligenza artificiale generativa**, un manuale tecnico in italiano dai fondamenti matematici ai modelli generativi, alle architetture, al post-training, alla multimodalità, agli agenti, ai sistemi, alla valutazione e alla sicurezza.
 
-Il libro è organizzato per problemi, meccanismi e contratti tecnici. I singoli modelli vengono usati come studi di caso, non come struttura dell'opera.
-
 Ogni capitolo tecnico integra:
 
-1. testo verificato;
-2. immagini tecniche sottoposte ad audit iterativo;
-3. codice eseguito e testato.
+1. testo verificato e scritto come manuale;
+2. immagini tecniche sottoposte a review iterativa;
+3. codice eseguito e testato;
+4. fonti, claim e audit;
+5. un contratto di continuità con i capitoli precedente e successivo.
 
-## 2. Ordine di lettura obbligatorio
+## 2. Ordine di lettura
 
 Leggere:
 
 1. `GUIDELINE.md`;
 2. `README.md`;
 3. `docs/README.md`;
-4. `docs/00_CONTRATTO_EDITORIALE.md`;
-5. `docs/08_REGISTRO_DECISIONI.md`;
-6. `docs/12_ARCHITETTURA_EDITORIALE_EVOLUTIVA.md`;
-7. `docs/14_CATALOGO_STATO_ARTE.md`;
-8. `docs/10_INDICE_EDITORIALE.md`;
-9. `docs/13_PROTOCOLLO_AGGIORNAMENTO_CONTENUTI.md`;
-10. il protocollo specialistico relativo al compito;
-11. `PROGRESS.md`;
-12. gli artefatti dell'area coinvolta.
+4. `docs/00_GOVERNANCE_E_ARCHITETTURA.md`;
+5. `docs/01_INDICE_EDITORIALE.md`;
+6. `docs/14_CATALOGO_STATO_ARTE.md`;
+7. `docs/15_REGISTRO_RICERCHE_APPROFONDITE.md`;
+8. il documento specialistico necessario;
+9. `PROGRESS.md`;
+10. gli artefatti del capitolo coinvolto.
 
-Per scrivere o revisionare una lezione, leggere inoltre:
+Documenti specialistici:
 
-- `docs/EXPLANATION_STYLE_AND_VISUALS.md`;
-- `docs/19_STRUTTURA_LOGICA_IN_PROSA.md`;
-- `docs/18_PROTOCOLLO_QA_DIDATTICO.md`;
-- `docs/01_TEMPLATE_CAPITOLO.md`;
-- `docs/04_PROTOCOLLO_QA_TESTO.md`.
+- testo e didattica: `docs/02_STILE_E_QA_TESTO.md`;
+- immagini: `docs/03_VISUALI.md`;
+- fonti, claim, codice e riproducibilità: `docs/04_CODICE_FONTI_E_RIPRODUCIBILITA.md`;
+- workflow, repository e aggiornamenti U1-U8: `docs/05_WORKFLOW_E_REPOSITORY.md`;
+- prerequisiti e passaggi tra lezioni: `docs/06_CONTINUITA_TRA_CAPITOLI.md`.
 
-Per le immagini:
-
-- `docs/17_STANDARD_VISIVO_CANONICO.md`;
-- `docs/16_REGOLA_CONTENIMENTO_TESTO_VISUALI.md`;
-- `docs/02_TEMPLATE_VISUALE.md`;
-- `docs/03_PROTOCOLLO_QA_VISUALE.md`.
-
-## 3. Fonte di verità
-
-La fonte di verità è il repository, non la memoria della conversazione.
-
-In caso di conflitto:
-
-1. sospendere la modifica;
-2. identificare i documenti incompatibili;
-3. consultare il registro delle decisioni;
-4. proporre una risoluzione esplicita;
-5. aggiornare tutti i documenti coinvolti;
-6. registrare il cambiamento con un commit descrittivo.
-
-## 4. Accuratezza
+## 3. Accuratezza
 
 La versione approvata non contiene affermazioni fattuali basate su inferenze editoriali.
 
@@ -86,42 +59,60 @@ Ogni affermazione tecnica, storica, architetturale, quantitativa o temporale ric
 
 Una frase plausibile non è sufficiente. Se una fonte non stabilisce un punto, il punto viene ristretto, omesso o mantenuto fuori dal testo approvato.
 
-## 5. Metodo didattico
+## 4. Prosa del manuale
 
-Ogni capitolo porta un oggetto concreto dall'apertura alla ricostruzione finale.
+Ogni capitolo mantiene un oggetto concreto dall'apertura alla ricostruzione finale.
 
-Ogni transizione:
+Lo scaffold di stato, problema, input, trasformazione, output, invariante, confine e passaggio successivo resta in `PLAN.md` e `TEXT_AUDIT.md`.
 
-- parte dall'output della precedente;
-- introduce un solo concetto nuovo;
-- rende comprensibili input, operazione, output, cambiamento, invariante e confine;
-- consegna il risultato al passaggio successivo.
+`CHAPTER.md` deve invece leggersi come un manuale tecnico in italiano:
 
-Termini, formule, codice, varianti e visuali compaiono dopo che il referente concreto è stabile.
+- titoli semantici;
+- sezioni abbastanza ampie da sostenere un ragionamento;
+- paragrafi naturali e causali;
+- esempio continuo;
+- termini introdotti dopo il referente;
+- formule e codice dopo il meccanismo;
+- niente metadati o registri di audit nel flusso;
+- niente ritmo da checklist o reference API;
+- niente calchi non necessari dall'inglese;
+- lettura ad alta voce obbligatoria.
 
-### Scaffold interno e prosa pubblicata
+Ogni capitolo supera review didattica, gate anti-template, review editoriale e linguistica, verifica con tre profili di lettore e nuova lettura integrale dopo le correzioni.
 
-Lo scaffold didattico è obbligatorio in `PLAN.md` e `TEXT_AUDIT.md`. Il capitolo destinato al lettore non deve però apparire come una checklist compilata.
+## 5. Continuità tra lezioni
 
-Per impostazione predefinita non si usano ripetutamente come titoli:
+Il lettore non deve incontrare prerequisiti nascosti.
+
+Ogni `PLAN.md` registra:
 
 ```text
-Stato del lettore
-Dove siamo
-Problema locale
-Trasformazione
-Cosa è cambiato
-Cosa è rimasto invariato
-Cosa non fa
-Frase di continuità
-Contratto dello snippet
+Prerequisiti stabili:
+Concetti richiamati ma rispiegati localmente:
+Forward reference non necessarie alla comprensione:
+Gap che apre il capitolo:
+Output consegnato al capitolo successivo:
 ```
 
-Queste funzioni vengono incorporate in paragrafi naturali e titoli semantici. Il reviewer deve poter ricostruire la logica; il lettore non deve vedere il modulo di progettazione.
+Un concetto usato in una lezione appartiene a una delle seguenti classi:
 
-La review didattica include un gate anti-template e viene ripetuta dopo ogni correzione strutturale.
+1. già stabilizzato in un capitolo precedente;
+2. rispiegato localmente nel perimetro necessario;
+3. citato come forward reference senza dipendenza dal meccanismo;
+4. costruito come concetto nuovo della lezione corrente.
 
-## 6. Architettura stabile dell'opera
+Un uso che non rientra in nessuna classe è un buco di spiegazione.
+
+Prima di promuovere una candidatura si rileggono almeno:
+
+- il riepilogo del capitolo precedente;
+- l'apertura e il riepilogo del capitolo corrente;
+- l'apertura pianificata del capitolo successivo;
+- formule, termini, API ed esercizi che potrebbero richiedere contenuti futuri.
+
+La matrice corrente e le forward reference controllate sono in `docs/06_CONTINUITA_TRA_CAPITOLI.md`.
+
+## 6. Architettura stabile
 
 Il repository contiene una sola opera canonica. Volume unico, tomi, sito e corso sono export della stessa sorgente.
 
@@ -146,9 +137,9 @@ Le parti stabili sono:
 
 Una nuova tecnica non rinomina o riordina automaticamente le parti.
 
-## 7. Routing di una tecnica
+## 7. Routing e maturità
 
-Per assegnare una collocazione primaria:
+Per collocare una tecnica:
 
 1. descrivere il problema risolto;
 2. identificare l'oggetto modificato;
@@ -156,23 +147,15 @@ Per assegnare una collocazione primaria:
 4. scegliere la parte proprietaria dell'oggetto;
 5. registrare collegamenti secondari senza duplicare la spiegazione.
 
-Un modello che combina tecniche già note viene normalmente trattato come studio di caso.
+Maturità:
 
-## 8. Maturità
+- `CORE`, durevole e necessario;
+- `ESTABLISHED`, verificato e rilevante, ma ancora in evoluzione o non universale;
+- `FRONTIER`, recente, sperimentale o con evidenza limitata.
 
-- `CORE`: durevole e necessario per numerosi sviluppi successivi.
-- `ESTABLISHED`: verificato e rilevante, ma non universale o ancora in evoluzione.
-- `FRONTIER`: recente, sperimentale o con evidenza limitata.
+La maturità può cambiare senza spostare la tecnica tra le parti.
 
-Il percorso ordinario è:
-
-```text
-FRONTIER -> ESTABLISHED -> CORE
-```
-
-Una modifica di maturità richiede nuove prove e non sposta automaticamente la tecnica tra le parti.
-
-## 9. Identità dei capitoli
+## 8. Identità
 
 Il numero stampato non è l'identità.
 
@@ -188,42 +171,27 @@ maturità
 stato editoriale
 prerequisiti
 successori
-alias storici
+alias
 ```
 
-Gli ID restano stabili. Split e merge richiedono una mappa di migrazione.
+Gli ID restano stabili. Split e merge richiedono migrazione, alias e controllo dei riferimenti.
 
-## 10. Nuove tecniche e aggiornamenti
-
-Seguire una delle procedure U1-U8 di `docs/13_PROTOCOLLO_AGGIORNAMENTO_CONTENUTI.md`:
-
-- nuova tecnica;
-- nuova evidenza;
-- aggiornamento API;
-- cambio di maturità;
-- nuovo capitolo;
-- split o merge;
-- correzione tecnica;
-- nuova edizione.
-
-Il catalogo non dichiara completezza assoluta. Censisce le principali famiglie che soddisfano i criteri di inclusione alla data registrata.
-
-## 11. Visuali
+## 9. Visuali
 
 Ogni immagine tecnica:
 
 - risponde a una domanda;
 - usa sfondo bianco puro `#FFFFFF`;
-- sceglie orientamento orizzontale o verticale in base al contenuto;
-- segue la palette e la grammatica comuni;
-- contiene integralmente testo e simboli nei propri box;
-- non presenta frecce ambigue;
+- sceglie orientamento in base al contenuto;
+- segue palette, box, frecce e tipografia comuni;
+- contiene integralmente testo e simboli;
+- non presenta collegamenti ambigui;
 - viene rigenerata finché non supera l'audit;
 - diventa `final.png` soltanto dopo approvazione tecnica e autoriale.
 
 Non si usano render completi delle pagine come figure tecniche.
 
-## 12. Codice
+## 10. Codice
 
 Ogni capitolo tecnico include almeno uno snippet eseguibile, salvo eccezione motivata.
 
@@ -233,34 +201,52 @@ Ogni capitolo tecnico include almeno uno snippet eseguibile, salvo eccezione mot
 - Le API vengono verificate sulla documentazione ufficiale.
 - Il codice viene eseguito in un processo pulito.
 - Gli invarianti vengono testati.
-- Un output è `Eseguito` soltanto quando esistono ambiente, comando e log o test.
+- Un output è `Eseguito` soltanto con ambiente, comando e log o test.
 
-## 13. Workflow di un capitolo
+## 11. Workflow
 
 ```text
 ricerca
 -> claim
--> piano interno
--> prima stesura
+-> piano interno e contratto di continuità
+-> stesura
 -> formule
 -> codice e test
 -> visuali e audit
--> audit fattuale e matematico
+-> audit tecnico
 -> review didattica
 -> gate anti-template
+-> review editoriale e linguistica
+-> audit tra capitoli
+-> lettura ad alta voce
 -> seconda lettura completa
 -> revisione autoriale
 -> congelamento
 ```
 
-Non si passa al capitolo successivo finché quello corrente non è approvato o formalmente sospeso.
+La produzione può aprire il capitolo successivo quando la candidatura corrente ha superato tutti i gate interni ed è disponibile per la revisione autoriale. La rinomina in `final.png`, il congelamento e il merge in `main` richiedono approvazione autoriale.
 
-## 14. Convenzioni Git
+## 12. Aggiornamenti
 
-I commit descrivono l'unità di cambiamento. Il report finale indica:
+Le operazioni U1-U8 sono definite in `docs/05_WORKFLOW_E_REPOSITORY.md`:
+
+- U1 nuova tecnica;
+- U2 nuova evidenza;
+- U3 API o implementazione;
+- U4 maturità;
+- U5 nuovo capitolo;
+- U6 split o merge;
+- U7 correzione tecnica;
+- U8 nuova edizione.
+
+Il catalogo non dichiara completezza assoluta. Censisce le principali famiglie che soddisfano i criteri di inclusione alla data registrata.
+
+## 13. Convenzioni Git
+
+Ogni report di modifica indica:
 
 ```text
-Operazione eseguita:
+Operazione:
 File modificati:
 Fonti riaperte:
 Claim modificati:
@@ -271,11 +257,13 @@ Commit:
 Data di verifica:
 ```
 
-## 15. Azioni vietate
+Non dichiarare approvazione quando i gate non sono completi.
+
+## 14. Azioni vietate
 
 Non:
 
-- inventare fonti, risultati, versioni o citazioni;
+- inventare fonti, versioni, risultati o citazioni;
 - usare un blog come unica prova portante;
 - estendere il risultato di un paper a tutte le implementazioni;
 - creare un capitolo per ogni prodotto;
@@ -284,12 +272,12 @@ Non:
 - presentare pseudocodice come eseguibile;
 - chiamare `Eseguito` un output non prodotto;
 - approvare una visuale ambigua;
-- approvare una lezione che appare come una checklist ripetitiva;
+- approvare una lezione schematica, frammentata o poco naturale;
+- usare un concetto futuro come prerequisito nascosto;
+- eliminare un ponte necessario tra capitoli;
 - dichiarare il libro aggiornato oltre la data verificata.
 
-## 16. Inizializzazione di una nuova sessione
-
-Una nuova sessione deve assumere internamente:
+## 15. Inizializzazione di una nuova sessione
 
 ```text
 Sto operando sul repository aibook.
@@ -297,6 +285,7 @@ La fonte di verità è il repository.
 Leggo GUIDELINE.md e i documenti canonici prima di modificare contenuti.
 Non introduco fatti senza prova.
 Non modifico le parti stabili senza governance.
-Uso uno scaffold rigoroso internamente e prosa naturale nel capitolo destinato al lettore.
+Uso uno scaffold rigoroso internamente e prosa da manuale nel testo pubblico.
+Controllo il contratto di ingresso e uscita di ogni capitolo.
 Applico routing, maturità, review e tracciabilità a ogni aggiornamento.
 ```

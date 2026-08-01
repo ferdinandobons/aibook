@@ -1,0 +1,5 @@
+Python 3.13.5
+standard library only
+execution device: CPU
+seed: not required; all graphs and child orders are deterministic
+execution date: 2026-07-31

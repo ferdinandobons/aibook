@@ -1,0 +1,13 @@
+forward_chaining
+('delivery_date_passed', 'order_42')
+('eligible_for_delay_workflow', 'order_42')
+('message_mentions_missing_delivery', 'order_42')
+('needs_review', 'order_42')
+('possible_delay', 'order_42')
+('tracking_stalled', 'order_42')
+absence_does_not_imply_negation: True
+
+bayesian_network
+joint_total: 1.000000
+posterior_delay_given_message_and_tracking: 0.875000
+posterior_delay_given_no_signals: 0.020408

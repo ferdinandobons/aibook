@@ -1,0 +1,3 @@
+# Alt text `UNSUP-02`
+
+Pipeline orizzontale su sfondo bianco. Il dato originale è il vettore `x=[a,b,c,d]`. Una maschera `m=[0,1,0,1]` nasconde le coordinate `b` e `d`, producendo l'input corrotto `[a,0,c,0]` insieme alla mask. L'encoder produce un embedding `z` di shape 2; il decoder produce una ricostruzione di shape 4; la mean squared error viene calcolata soltanto sulle coordinate `b` e `d`. Una linea blu separata collega il dato originale alla loss e specifica che il target è auto-generato dai valori originali nelle posizioni mascherate. Due note chiariscono che la maschera non assegna un significato umano e che l'encoder deve essere valutato successivamente con linear probe, fine-tuning o altri task downstream.

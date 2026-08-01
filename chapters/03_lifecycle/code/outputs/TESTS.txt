@@ -1,0 +1,9 @@
+test_shift_metric_detects_changed_first_feature (test_lifecycle_snippet.LifecycleSnippetTests.test_shift_metric_detects_changed_first_feature) ... ok
+test_splits_are_disjoint_and_complete (test_lifecycle_snippet.LifecycleSnippetTests.test_splits_are_disjoint_and_complete) ... ok
+test_test_set_is_used_after_selection (test_lifecycle_snippet.LifecycleSnippetTests.test_test_set_is_used_after_selection) ... ok
+test_validation_selects_the_better_candidate (test_lifecycle_snippet.LifecycleSnippetTests.test_validation_selects_the_better_candidate) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.019s
+
+OK

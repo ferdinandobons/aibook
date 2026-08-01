@@ -1,0 +1,13 @@
+prior_delivery_issue: 0.200000
+probability_first_evidence: 0.240000
+posterior_after_text_evidence: 0.666667
+posterior_after_tracking_evidence: 0.875000
+bernoulli_positives: 7
+bernoulli_trials: 20
+bernoulli_mle: 0.350000
+log_likelihood_at_mle: -12.948933
+theoretical_mean: 0.300000
+theoretical_variance: 0.210000
+sample_size=10: sample_mean=0.600000, sample_variance=0.240000
+sample_size=100: sample_mean=0.320000, sample_variance=0.217600
+sample_size=10000: sample_mean=0.304200, sample_variance=0.211662

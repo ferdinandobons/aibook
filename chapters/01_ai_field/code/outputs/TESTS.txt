@@ -1,0 +1,8 @@
+test_inference_keeps_parameters_fixed (test_ai_snippets.TrainingInferenceTests.test_inference_keeps_parameters_fixed) ... ok
+test_inference_output_contract (test_ai_snippets.TrainingInferenceTests.test_inference_output_contract) ... ok
+test_training_reduces_loss_and_updates_parameters (test_ai_snippets.TrainingInferenceTests.test_training_reduces_loss_and_updates_parameters) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.605s
+
+OK

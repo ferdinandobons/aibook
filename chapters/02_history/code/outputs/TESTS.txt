@@ -1,0 +1,8 @@
+test_finds_known_shortest_plan (test_history_snippet.SymbolicSearchTests.test_finds_known_shortest_plan) ... ok
+test_reaches_goal_without_repeating_states (test_history_snippet.SymbolicSearchTests.test_reaches_goal_without_repeating_states) ... ok
+test_unreachable_goal_raises (test_history_snippet.SymbolicSearchTests.test_unreachable_goal_raises) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.000s
+
+OK

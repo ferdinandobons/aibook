@@ -1,0 +1,10 @@
+test_backward_accumulates_gradients (test_calculus_backprop.CalculusBackpropTests.test_backward_accumulates_gradients) ... ok
+test_finite_differences_match_manual (test_calculus_backprop.CalculusBackpropTests.test_finite_differences_match_manual) ... ok
+test_forward_values (test_calculus_backprop.CalculusBackpropTests.test_forward_values) ... ok
+test_gradcheck (test_calculus_backprop.CalculusBackpropTests.test_gradcheck) ... ok
+test_manual_matches_autograd (test_calculus_backprop.CalculusBackpropTests.test_manual_matches_autograd) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.244s
+
+OK

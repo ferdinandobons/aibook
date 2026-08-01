@@ -1,0 +1,152 @@
+name: Generate reviewed book visuals
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - synchronize
+      - reopened
+  push:
+    branches:
+      - feature/full-book-production
+    paths:
+      - 'scripts/generate_book_visuals.py'
+      - 'scripts/generate_history_visuals.py'
+      - 'scripts/generate_lifecycle_visuals.py'
+      - 'scripts/generate_evaluation_visuals.py'
+      - 'scripts/generate_linear_algebra_visuals.py'
+      - 'scripts/generate_calculus_visuals.py'
+      - 'scripts/generate_probability_visuals.py'
+      - 'scripts/generate_information_visuals.py'
+      - 'scripts/generate_numerics_visuals.py'
+      - 'scripts/generate_numerics_visuals_v2.py'
+      - 'scripts/generate_search_visuals.py'
+      - 'scripts/generate_knowledge_visuals.py'
+      - 'scripts/generate_supervised_visuals.py'
+      - 'scripts/generate_unsupervised_visuals.py'
+      - 'scripts/integrate_generated_visuals.py'
+      - '.github/workflows/generate-book-visuals.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install image dependency
+        run: python -m pip install --disable-pip-version-check pillow==11.3.0
+
+      - name: Generate shared and pilot visuals
+        run: python scripts/generate_book_visuals.py
+
+      - name: Generate Chapter 2 visuals
+        run: python scripts/generate_history_visuals.py
+
+      - name: Generate Chapter 3 visuals
+        run: python scripts/generate_lifecycle_visuals.py
+
+      - name: Generate Chapter 4 visuals
+        run: python scripts/generate_evaluation_visuals.py
+
+      - name: Generate Chapter 5 visuals
+        run: python scripts/generate_linear_algebra_visuals.py
+
+      - name: Generate Chapter 6 visuals
+        run: python scripts/generate_calculus_visuals.py
+
+      - name: Generate Chapter 7 visuals
+        run: python scripts/generate_probability_visuals.py
+
+      - name: Generate Chapter 8 visuals
+        run: |
+          sed -i 's/font(21, True)/font(18, True)/g' scripts/generate_information_visuals.py
+          python scripts/generate_information_visuals.py
+
+      - name: Generate and review Chapter 9 visuals
+        run: |
+          python scripts/generate_numerics_visuals.py
+          python scripts/generate_numerics_visuals_v2.py
+
+      - name: Generate Chapter 10 visuals
+        run: python scripts/generate_search_visuals.py
+
+      - name: Generate Chapter 11 visuals
+        run: python scripts/generate_knowledge_visuals.py
+
+      - name: Generate Chapter 12 visuals
+        run: python scripts/generate_supervised_visuals.py
+
+      - name: Generate Chapter 13 visuals
+        run: python scripts/generate_unsupervised_visuals.py
+
+      - name: Integrate generated visual references
+        run: python scripts/integrate_generated_visuals.py
+
+      - name: Commit generated candidates and integrations
+        if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add \
+            assets/chapters/01_ai_field/AI-01/candidate-v1.png \
+            assets/chapters/01_ai_field/AI-02/candidate-v1.png \
+            assets/chapters/02_history/HIST-01/candidate-v1.png \
+            assets/chapters/02_history/HIST-02/candidate-v1.png \
+            assets/chapters/03_lifecycle/LIFE-01/candidate-v1.png \
+            assets/chapters/03_lifecycle/LIFE-02/candidate-v1.png \
+            assets/chapters/04_critical_evaluation/EVAL-01/candidate-v1.png \
+            assets/chapters/04_critical_evaluation/EVAL-02/candidate-v1.png \
+            assets/chapters/05_linear_algebra/LA-01/candidate-v1.png \
+            assets/chapters/05_linear_algebra/LA-02/candidate-v1.png \
+            assets/chapters/06_calculus_backprop/CALC-01/candidate-v1.png \
+            assets/chapters/06_calculus_backprop/CALC-02/candidate-v2.png \
+            assets/chapters/07_probability/PROB-01/candidate-v1.png \
+            assets/chapters/07_probability/PROB-02/candidate-v1.png \
+            assets/chapters/08_information_theory/INFO-01/candidate-v1.png \
+            assets/chapters/08_information_theory/INFO-02/candidate-v1.png \
+            assets/chapters/09_numerics_hardware/NUM-01/candidate-v1.png \
+            assets/chapters/09_numerics_hardware/NUM-02/candidate-v1.png \
+            assets/chapters/10_search_planning/SEARCH-01/candidate-v2.png \
+            assets/chapters/10_search_planning/SEARCH-02/candidate-v2.png \
+            assets/chapters/11_knowledge_logic/KNOW-01/candidate-v2.png \
+            assets/chapters/11_knowledge_logic/KNOW-02/candidate-v3.png \
+            assets/chapters/12_supervised/SUP-01/candidate-v1.png \
+            assets/chapters/12_supervised/SUP-02/candidate-v1.png \
+            assets/chapters/13_unsupervised_self/UNSUP-01/candidate-v1.png \
+            assets/chapters/13_unsupervised_self/UNSUP-02/candidate-v1.png \
+            assets/chapters/28_attention/ATT-01/candidate-v3.png \
+            chapters/02_history/CHAPTER.md \
+            chapters/03_lifecycle/CHAPTER.md \
+            chapters/04_critical_evaluation/CHAPTER.md \
+            chapters/05_linear_algebra/CHAPTER.md \
+            chapters/06_calculus_backprop/CHAPTER.md \
+            chapters/07_probability/CHAPTER.md \
+            chapters/08_information_theory/CHAPTER.md \
+            chapters/09_numerics_hardware/CHAPTER.md \
+            chapters/10_search_planning/CHAPTER.md \
+            chapters/11_knowledge_logic/CHAPTER.md \
+            chapters/12_supervised/CHAPTER.md \
+            chapters/13_unsupervised_self/CHAPTER.md \
+            chapters/28_attention/CHAPTER.md
+          if git diff --cached --quiet; then
+            echo 'Generated PNG files and references are already current.'
+            exit 0
+          fi
+          git commit -m 'Generate and integrate reviewed technical visuals'
+          git push origin HEAD:feature/full-book-production

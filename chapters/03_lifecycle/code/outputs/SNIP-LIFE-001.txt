@@ -1,0 +1,4 @@
+chosen_learning_rate: 0.1
+validation_accuracy: 1.000
+test_accuracy: 1.000
+standardized_mean_shift: [0.7267609238624573, 0.26456522941589355]

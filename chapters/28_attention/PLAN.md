@@ -1,38 +1,84 @@
-# Piano del Capitolo 28
+# Piano interno. Capitolo 28
+
+## Identità
 
 - `chapter_id`: `CH-P06-ATTENTION`
-- Versione candidata: `0.2.0-rc2`
-- Domanda centrale: come un vettore corrente costruisce una combinazione dei vettori sorgente che dipende dai confronti con la sorgente?
-- Oggetto continuo: un vettore corrente e tre coppie sorgente con `d_k=d_v=2`.
-- Stato finale: esempio numerico, pseudocodice, formula, shape, causal mask, implementazione diretta e confronto API.
-- Concetti differiti: posizione, multi-head attention, varianti KV, cache e implementazioni hardware-aware.
+- Versione candidata: `0.6.0-rc6`
+- Stato: candidatura completa in revisione autoriale
+- Domanda centrale: come una posizione costruisce una combinazione dei vettori disponibili in funzione dei confronti con le key?
+- Oggetto continuo: una frase intuitiva, poi una query e tre coppie key-value con `d_k=d_v=2`
+- Stato finale: intuizione linguistica, esempio numerico, pseudocodice, formula, shape, causal mask e implementazione diretta
+- Concetti differiti: informazione posizionale, multi-head attention completa, varianti KV, cache e implementazioni hardware-aware
 
-## Progressione didattica
+## Prerequisiti
 
-1. vettori sorgente già noti;
-2. insufficienza di una combinazione fissa;
-3. coefficienti dipendenti dalla posizione corrente;
-4. descrizione dei tre ruoli prima dei nomi query, key e value;
-5. score numerici;
-6. scaling numerico;
-7. softmax numerica;
-8. combinazione numerica delle value;
-9. ispezione guidata di `ATT-02`;
-10. pseudocodice;
-11. nome tecnico e formula generale;
-12. provenienza di `Q`, `K` e `V`;
-13. causal mask matematica;
-14. codice diretto;
-15. API e semantica delle mask;
-16. complessità e confini;
-17. ponte verso multi-head attention.
+- idea generale di sequenza e vettore;
+- prodotto scalare e matrici utili per il secondo livello della spiegazione;
+- Python e PyTorch soltanto per eseguire gli snippet.
+
+Il problema e il meccanismo di base devono restare comprensibili anche a chi salta la derivazione e il codice.
+
+## Progressione didattica interna
+
+1. frase concreta e contributi diversi nelle diverse posizioni;
+2. limite di un contesto fisso;
+3. ruoli di query, key e value;
+4. prodotto scalare e score;
+5. scaling;
+6. softmax;
+7. combinazione delle value;
+8. pseudocodice;
+9. formula matriciale e shape;
+10. self-attention, cross-attention e causalità;
+11. causal mask;
+12. implementazione PyTorch;
+13. costo e limiti;
+14. ponte verso la multi-head attention.
+
+La versione destinata al lettore raccoglie score, scaling, softmax e somma pesata in un'unica sezione narrativa. Lo scaffold resta verificabile senza determinare il numero dei titoli.
+
+## Superficie editoriale adottata
+
+La candidatura usa otto sezioni principali:
+
+1. perché una combinazione fissa non basta;
+2. query, key e value;
+3. il calcolo completo su una query;
+4. forma matriciale;
+5. causal mask;
+6. PyTorch;
+7. costo, limiti e multi-head;
+8. riepilogo.
+
+Regole applicate:
+
+- problema concreto prima dei vettori;
+- token, vettore, shape e prodotto scalare spiegati nel punto d'uso;
+- query, key e value presentate come ruoli;
+- formula compatta dopo esempio e pseudocodice;
+- derivazione sulla varianza in un approfondimento;
+- dettagli API confinati in nota;
+- un solo snippet completo nel corpo;
+- costo quadratico spiegato prima con le `n²` celle;
+- metadati e audit fuori dal testo del manuale;
+- italiano idiomatico e seconda lettura completa.
 
 ## Visuali incluse
 
-- `ATT-01`: differenza tra contesto fisso e coefficienti dipendenti dalla posizione corrente.
-- `ATT-02`: esempio numerico completo per una query.
+### `ATT-01`. Perché servono pesi dipendenti dalla query
 
-Ogni visuale viene inquadrata, attraversata e conclusa nella prosa.
+- File: `assets/chapters/28_attention/ATT-01/candidate-v3.png`.
+- Funzione: confrontare contesto fisso e combinazioni dipendenti dalla posizione.
+- Correzione: `consumer 1/2` sostituito con `Posizione 1/2`.
+- Stato: validata tecnicamente, approvazione autoriale aperta.
+
+### `ATT-02`. Esempio numerico completo
+
+- File: `assets/chapters/28_attention/ATT-02/candidate-v2.png`.
+- Funzione: seguire input, score, scaling, softmax, somma pesata e output.
+- Stato: validata tecnicamente, approvazione autoriale aperta.
+
+Ogni visuale viene introdotta, attraversata e conclusa nella prosa.
 
 ## Codice incluso
 
@@ -40,19 +86,28 @@ Ogni visuale viene inquadrata, attraversata e conclusa nella prosa.
 - `SNIP-ATT-002`: formula matriciale e confronto API.
 - `SNIP-ATT-003`: causal mask e coefficienti futuri nulli.
 
-## Materiale rimosso dopo la review didattica
+Il codice è invariato rispetto alla versione testata. La prosa descrive gli stessi input, lo stesso ordine e gli stessi output.
 
-- formula e snippet completi della multi-head attention, trasferiti al capitolo successivo;
-- spiegazione interna di FlashAttention, ridotta a confine hardware-aware;
-- semantica API delle mask nella stessa transizione della mask matematica;
-- uso anticipato del nome `scaled dot-product attention` prima del calcolo completo.
+## Materiale differito
+
+- formula completa della multi-head attention;
+- concatenazione e proiezione finale;
+- shape per head;
+- meccanismo interno di FlashAttention;
+- varianti KV e cache.
 
 ## Gate di completamento
 
-- termini introdotti dopo i referenti;
-- esempio, shape e pseudocodice prima della formula generale;
-- blocchi atomici per score, scaling, softmax, output e mask;
-- codice dopo il meccanismo;
-- varianti soltanto come confini;
-- due review didattiche complete registrate in `TEXT_AUDIT.md`;
-- nessun difetto bloccante residuo prima della revisione autoriale.
+- [x] termini introdotti dopo i referenti;
+- [x] esempio e pseudocodice prima della formula;
+- [x] codice dopo il meccanismo;
+- [x] varianti come confini o rinvii;
+- [x] prosa non frammentata;
+- [x] metadati separati dal manuale;
+- [x] italiano idiomatico;
+- [x] chiarezza per lettore non esperto;
+- [x] controllo incrociato visuale ripetuto;
+- [x] alt text verificati;
+- [ ] approvazione autoriale;
+- [ ] rinomina delle figure in `final.png`;
+- [ ] congelamento prima dell'aggiornamento di `main`.

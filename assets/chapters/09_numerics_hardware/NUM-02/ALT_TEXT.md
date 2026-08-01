@@ -1,0 +1,3 @@
+# Alt text `NUM-02`
+
+Diagramma orizzontale su sfondo bianco. Il flusso principale parte da `Input e pesi`, passa attraverso `Autocast`, `Matmul e conv`, `Riduzioni e loss` e `Backward`. Una freccia rossa etichettata `gradienti` collega il backward al box inferiore `Optimizer e master weights`, che specifica che aggiornamenti e stati sensibili possono restare in float32. Una freccia blu etichettata `pesi aggiornati` torna verso il box iniziale. Il footer chiarisce che questo è un contratto tipico ma non universale e che dtype interno e accumulatore dipendono da hardware, backend, shape e versione.
