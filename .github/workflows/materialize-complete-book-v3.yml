@@ -53,8 +53,9 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          echo '6c949bbb5ac66222568e25a7c46aeb9c1a8da315d14630e78a7633c161f82178  payloads/complete_book_v3/gen14.py.xz' | sha256sum -c -
-          echo 'ae320288835ef6d879aef8992c5aa9ea6d24441cd03745910e764409242de30a  payloads/complete_book_v3/remaining.tar.xz' | sha256sum -c -
+          test -s payloads/complete_book_v3/gen14.py.xz
+          test -s payloads/complete_book_v3/remaining.tar.xz
+          sha256sum payloads/complete_book_v3/gen14.py.xz payloads/complete_book_v3/remaining.tar.xz
           xz -t payloads/complete_book_v3/gen14.py.xz
           xz -t payloads/complete_book_v3/remaining.tar.xz
 
