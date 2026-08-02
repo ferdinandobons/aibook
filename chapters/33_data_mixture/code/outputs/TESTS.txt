@@ -1,0 +1,8 @@
+test_all_contracts_hold (test_mix.ContractTests.test_all_contracts_hold) ... ok
+test_demo_is_deterministic (test_mix.ContractTests.test_demo_is_deterministic) ... ok
+test_result_is_observable (test_mix.ContractTests.test_result_is_observable) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.000s
+
+OK

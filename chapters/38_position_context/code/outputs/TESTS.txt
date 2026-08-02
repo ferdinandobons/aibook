@@ -1,0 +1,10 @@
+/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:368: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /__w/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:84.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+test_all_contracts_hold (test_pos.ContractTests.test_all_contracts_hold) ... ok
+test_demo_is_deterministic (test_pos.ContractTests.test_demo_is_deterministic) ... ok
+test_result_is_observable (test_pos.ContractTests.test_result_is_observable) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.002s
+
+OK
