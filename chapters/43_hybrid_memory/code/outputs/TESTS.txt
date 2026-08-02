@@ -5,6 +5,6 @@ test_demo_is_deterministic (test_hybrid.ContractTests.test_demo_is_deterministic
 test_result_is_observable (test_hybrid.ContractTests.test_result_is_observable) ... ok
 
 ----------------------------------------------------------------------
-Ran 3 tests in 0.001s
+Ran 3 tests in 0.002s
 
 OK
