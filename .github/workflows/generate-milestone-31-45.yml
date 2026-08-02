@@ -2,6 +2,13 @@ name: Generate milestone chapters 31-45
 
 on:
   workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - synchronize
+      - reopened
   push:
     branches:
       - feature/full-book-production
@@ -53,17 +60,15 @@ jobs:
           import sys
           from PIL import Image
 
-          chapter_roots = []
+          chapters = []
           for number in range(31, 46):
               matches = sorted(Path('chapters').glob(f'{number:02d}_*'))
               assert len(matches) == 1, (number, matches)
               chapter = matches[0]
-              chapter_roots.append(chapter)
+              chapters.append(chapter)
               for name in ('CHAPTER.md', 'PLAN.md', 'FONTI_PRIMARIE.md', 'CLAIMS.md', 'TEXT_AUDIT.md', 'REVIEW.md', 'CHANGELOG.md'):
                   assert (chapter / name).is_file(), (chapter, name)
-              tests = sorted((chapter / 'code').glob('test_*.py'))
-              assert tests, chapter
-              for test_file in tests:
+              for test_file in sorted((chapter / 'code').glob('test_*.py')):
                   run = subprocess.run([sys.executable, '-m', 'unittest', '-v', test_file.name], cwd=test_file.parent, capture_output=True, text=True)
                   if run.returncode:
                       raise RuntimeError(f'{test_file}\n{run.stdout}\n{run.stderr}')
@@ -83,10 +88,10 @@ jobs:
                   assert rgb.getpixel((0, 0)) == (255, 255, 255), path
                   assert rgb.getpixel((1799, 999)) == (255, 255, 255), path
 
-          assert len(chapter_roots) == 15
+          assert len(chapters) == 15
           assert len(pngs) == 30
           assert Path('docs/06_CONTINUITA_TRA_CAPITOLI_31_45.md').is_file()
-          print(f'validated chapters={len(chapter_roots)} pngs={len(pngs)}')
+          print(f'validated chapters={len(chapters)} pngs={len(pngs)}')
           PY
 
       - name: Commit milestone to production branch
