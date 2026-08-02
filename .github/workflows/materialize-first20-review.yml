@@ -7,6 +7,13 @@ on:
       - review/chapters-01-20-total
     paths:
       - '.github/workflows/materialize-first20-review.yml'
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - synchronize
+      - reopened
 
 permissions:
   contents: write
