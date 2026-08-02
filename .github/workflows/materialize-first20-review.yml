@@ -1,0 +1,102 @@
+name: Materialize reviewed Chapters 01-20
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - review/chapters-01-20-total
+    paths:
+      - '.github/workflows/materialize-first20-review.yml'
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+permissions:
+  contents: write
+
+concurrency:
+  group: materialize-reviewed-chapters-01-20
+  cancel-in-progress: false
+
+jobs:
+  materialize:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+
+    steps:
+      - name: Checkout review branch
+        uses: actions/checkout@v4
+        with:
+          ref: review/chapters-01-20-total
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check pillow==11.3.0
+          python -m pip install --disable-pip-version-check --index-url https://download.pytorch.org/whl/cpu torch
+
+      - name: Reconstruct the reviewed visual generator
+        shell: bash
+        run: |
+          set -euo pipefail
+          base64 --decode payloads/review_first20_final/review_script.py.xz.b64 > /tmp/review_first20_finalize.py.xz
+          sha256sum /tmp/review_first20_finalize.py.xz
+          xz -t /tmp/review_first20_finalize.py.xz
+          xz -dc /tmp/review_first20_finalize.py.xz > scripts/review_first20_finalize.py
+          python -m py_compile scripts/review_first20_finalize.py
+
+      - name: Apply the reviewed text, code and audit overlay
+        shell: bash
+        run: |
+          set -euo pipefail
+          base64 --decode payloads/review_first20_final/text_overlay.tar.xz.b64 > /tmp/first20_text_overlay.tar.xz
+          sha256sum /tmp/first20_text_overlay.tar.xz
+          xz -t /tmp/first20_text_overlay.tar.xz
+          tar -tJf /tmp/first20_text_overlay.tar.xz >/dev/null
+          tar -xJf /tmp/first20_text_overlay.tar.xz -C .
+          while IFS= read -r path; do
+            test -n "$path" || continue
+            rm -rf -- "$path"
+          done < DELETIONS.txt
+          rm -f DELETIONS.txt
+
+      - name: Generate and review all missing technical visuals
+        run: python scripts/review_first20_finalize.py
+
+      - name: Run the durable 01-20 validator
+        run: python scripts/validate_chapters_01_20.py
+
+      - name: Remove temporary materialization files
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf payloads/review_first20_final
+          rm -f .github/workflows/materialize-first20-review.yml
+          find . -type d -name '__pycache__' -prune -exec rm -rf {} +
+          find . -type f -name '*.pyc' -delete
+
+      - name: Commit the completed review
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          if git diff --cached --quiet; then
+            echo 'No review changes to commit.'
+            exit 0
+          fi
+          git commit -m 'Complete and verify Chapters 01-20'
+          git push origin HEAD:review/chapters-01-20-total
