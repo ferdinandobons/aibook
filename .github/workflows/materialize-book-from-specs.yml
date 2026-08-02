@@ -7,6 +7,7 @@ on:
       - main
     paths:
       - 'payloads/materializer_specs_v1/READY'
+      - '.github/workflows/materialize-book-from-specs.yml'
 
 permissions:
   contents: write
