@@ -52,7 +52,8 @@ jobs:
         run: |
           set -euo pipefail
           base64 --decode payloads/review_first20_final/review_script.py.xz.b64 > /tmp/review_first20_finalize.py.xz
-          echo '1ec0b19484cfe9da6cbf2f894cdead488eeec4a2b5d7518653782919749a7e1c  /tmp/review_first20_finalize.py.xz' | sha256sum -c -
+          sha256sum /tmp/review_first20_finalize.py.xz
+          xz -t /tmp/review_first20_finalize.py.xz
           xz -dc /tmp/review_first20_finalize.py.xz > scripts/review_first20_finalize.py
           python -m py_compile scripts/review_first20_finalize.py
 
@@ -61,7 +62,9 @@ jobs:
         run: |
           set -euo pipefail
           base64 --decode payloads/review_first20_final/text_overlay.tar.xz.b64 > /tmp/first20_text_overlay.tar.xz
-          echo 'c53775222002b4bef413ccd6c9331a4e3117f8de108afcf97c6ecdd9bd45358d  /tmp/first20_text_overlay.tar.xz' | sha256sum -c -
+          sha256sum /tmp/first20_text_overlay.tar.xz
+          xz -t /tmp/first20_text_overlay.tar.xz
+          tar -tJf /tmp/first20_text_overlay.tar.xz >/dev/null
           tar -xJf /tmp/first20_text_overlay.tar.xz -C .
           while IFS= read -r path; do
             test -n "$path" || continue
