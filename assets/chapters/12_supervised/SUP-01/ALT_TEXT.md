@@ -1,3 +1,3 @@
-# Alt text `SUP-01`
+# Alt text SUP-01
 
-Diagramma orizzontale su sfondo bianco. Un dataset etichettato di coppie input-target viene diviso in train, validation e test. Il train, con 120 esempi, alimenta una fase di training con binary cross-entropy e penalità L2; gradienti e optimizer producono un modello con parametri fissati. La validation, con 50 esempi, applica il modello e sceglie una soglia di `0,30` minimizzando un costo in cui un falso negativo vale 5 e un falso positivo vale 1. Il test, con 50 esempi, usa modello e soglia già fissati e produce accuracy `0,900`, recall `0,913` e costo `13`. Un footer precisa che il test non sceglie modello, soglia o regolarizzazione.
+Dal dataset al risultato di test

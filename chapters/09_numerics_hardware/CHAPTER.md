@@ -482,3 +482,9 @@ L'hardware non si descrive soltanto con il picco di operazioni. Shape, kernel, l
 Le fonti portanti sono IEEE 754-2019, Goldberg e Higham per l'aritmetica numerica, la documentazione ufficiale PyTorch per dtype, accuratezza, AMP e riproducibilità, i lavori su mixed precision e bfloat16, la documentazione CUDA/cuBLAS e il modello Roofline.
 
 Le schede complete e i limiti d'uso sono in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md). Claim, codice, test, output e ambiente sono raccolti in [`CLAIMS.md`](CLAIMS.md) e nella cartella [`code/`](code/).
+
+
+![Diagramma tecnico 1](../../assets/chapters/09_numerics_hardware/AUTO-09-01/final.png)
+
+
+![Diagramma tecnico 2](../../assets/chapters/09_numerics_hardware/AUTO-09-02/final.png)

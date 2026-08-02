@@ -448,3 +448,9 @@ Ricerca e apprendimento non sono alternative assolute. Una rete può proporre, o
 Le fonti portanti sono Dijkstra per i cammini minimi, Hart, Nilsson e Raphael per A*, Bellman per dynamic programming, STRIPS e PDDL per il planning, Shannon e Knuth-Moore per game search, Kocsis-Szepesvári per UCT e i paper AlphaGo per l'integrazione tra reti neurali e tree search.
 
 Le schede complete e i limiti d'uso sono in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md). Claim, codice, test, output e ambiente sono raccolti in [`CLAIMS.md`](CLAIMS.md) e nella cartella [`code/`](code/).
+
+
+![Diagramma tecnico 1](../../assets/chapters/10_search_planning/AUTO-10-01/final.png)
+
+
+![Diagramma tecnico 2](../../assets/chapters/10_search_planning/AUTO-10-02/final.png)

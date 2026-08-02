@@ -1,0 +1,44 @@
+# Fonti primarie e autorevoli. Capitolo 73
+
+- Ultima verifica: 2 agosto 2026
+- Le fonti quantitative restano limitate ai setup dichiarati.
+
+## SRC-73-001
+
+Hinton et al., Distilling the Knowledge in a Neural Network
+
+URL: https://arxiv.org/abs/1503.02531
+
+Uso: definizioni e meccanismi nel perimetro del capitolo.
+
+Limite: nessuna generalizzazione automatica oltre il setup della fonte.
+
+## SRC-73-002
+
+Frantar et al., GPTQ
+
+URL: https://arxiv.org/abs/2210.17323
+
+Uso: definizioni e meccanismi nel perimetro del capitolo.
+
+Limite: nessuna generalizzazione automatica oltre il setup della fonte.
+
+## SRC-73-003
+
+Leviathan et al., Fast Inference from Transformers via Speculative Decoding
+
+URL: https://arxiv.org/abs/2211.17192
+
+Uso: definizioni e meccanismi nel perimetro del capitolo.
+
+Limite: nessuna generalizzazione automatica oltre il setup della fonte.
+
+## SRC-73-004
+
+Kwon et al., Efficient Memory Management for LLM Serving with PagedAttention
+
+URL: https://arxiv.org/abs/2309.06180
+
+Uso: definizioni e meccanismi nel perimetro del capitolo.
+
+Limite: nessuna generalizzazione automatica oltre il setup della fonte.
