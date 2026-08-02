@@ -1,3 +1,3 @@
-# Alt text `SUP-02`
+# Alt text SUP-02
 
-Confronto su sfondo bianco tra due confusion matrix calcolate sullo stesso test di 50 esempi. Con soglia `0,30`, scelta sulla validation, il modello produce 21 veri positivi, 24 veri negativi, 3 falsi positivi e 2 falsi negativi: accuracy `0,900` e costo pesato `13`. Con soglia `0,50`, produce 19 veri positivi, 26 veri negativi, 1 falso positivo e 4 falsi negativi: la stessa accuracy `0,900`, ma costo `21`. Un riquadro centrale evidenzia che entrambe hanno 45 predizioni corrette, ma errori diversi. In basso, con soglia `0,30`, la slice con tracking disponibile contiene 34 casi, recall `1,000` e costo `3`; la slice con tracking mancante contiene 16 casi, recall `0,778` e costo `10`. Il costo assegna valore 5 a un falso negativo e 1 a un falso positivo.
+Stessa accuracy, decisioni diverse

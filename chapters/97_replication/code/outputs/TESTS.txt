@@ -1,0 +1,8 @@
+test_invalid_shapes_are_rejected (test_97_replication.ContractTests.test_invalid_shapes_are_rejected) ... ok
+test_output_dimension (test_97_replication.ContractTests.test_output_dimension) ... ok
+test_weights_sum_to_one (test_97_replication.ContractTests.test_weights_sum_to_one) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.000s
+
+OK

@@ -1,0 +1,3 @@
+chapter: 17
+title: Convolutional network e apprendimento geometrico
+output: [0.755272, 0.334759]

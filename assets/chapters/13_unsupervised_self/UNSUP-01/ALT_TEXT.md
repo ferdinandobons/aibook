@@ -1,3 +1,3 @@
-# Alt text `UNSUP-01`
+# Alt text UNSUP-01
 
-Diagramma orizzontale su sfondo bianco con tre pannelli. Il pannello blu mostra punti raggruppati geometricamente, una freccia verso l'obiettivo che minimizza la distanza tra esempi e centroidi e l'output gruppi e centroidi. Il pannello viola parte da un vettore di quattro valori, nasconde due coordinate, chiede al modello di ricostruirle usando come target il dato originale e produce embedding e ricostruzione. Il pannello verde collega due viste dello stesso dato oppure un contesto e una parte futura, applica un obiettivo contrastivo o predittivo e produce una rappresentazione trasferibile. Un footer chiarisce che senza label esterne non significa senza obiettivo: distanza, maschera, augmentazioni, contesto e campioni negativi determinano ciò che il modello conserva.
+Tre modi di costruire un segnale senza label esterne
