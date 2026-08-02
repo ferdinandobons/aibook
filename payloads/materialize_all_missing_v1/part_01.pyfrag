@@ -1,0 +1,81 @@
+RIANTI E LIMITI", sections[split:], PALETTE[1])]
+        for x0, (heading, items, (color, fill_color)) in zip((90, 945), groups):
+            draw.rounded_rectangle((x0, 220, x0 + 765, 800), radius=28, fill=WHITE, outline=color, width=4)
+            draw.rounded_rectangle((x0 + 25, 245, x0 + 740, 335), radius=18, fill=fill_color, outline=color, width=2)
+            fit(draw, (x0 + 45, 260, x0 + 720, 320), heading, 25, 18, True, color)
+            body = "\n\n".join(f"{i + 1}. {name}\n{note}" for i, (name, note) in enumerate(items))
+            fit(draw, (x0 + 55, 365, x0 + 710, 760), body, 19, 12, fill=TEXT, align="left")
+    else:
+        count = len(sections)
+        gap = 24
+        left = 50
+        width = (1700 - gap * (count - 1)) // count
+        boxes = []
+        for index, (heading, note) in enumerate(sections):
+            x0 = left + index * (width + gap)
+            x1 = x0 + width
+            color, fill_color = PALETTE[index % len(PALETTE)]
+            draw.rounded_rectangle((x0, 225, x1, 795), radius=24, fill=WHITE, outline=color, width=3)
+            draw.rounded_rectangle((x0 + 16, 246, x1 - 16, 336), radius=16, fill=fill_color, outline=color, width=2)
+            fit(draw, (x0 + 28, 260, x1 - 28, 322), heading, 21, 13, True, color)
+            fit(draw, (x0 + 28, 365, x1 - 28, 752), note, 18, 11, fill=TEXT)
+            boxes.append((x0, x1))
+        for index in range(len(boxes) - 1):
+            x0 = boxes[index][1] + 4
+            x1 = boxes[index + 1][0] - 4
+            y = 510
+            draw.line((x0, y, x1, y), fill=MUTED, width=4)
+            draw.polygon([(x1, y), (x1 - 14, y - 9), (x1 - 14, y + 9)], fill=MUTED)
+    draw.rounded_rectangle((180, 850, 1620, 940), radius=20, fill=NEUTRAL_FILL, outline=NEUTRAL, width=2)
+    fit(draw, (220, 865, 1580, 925), "Il diagramma riassume il contratto del testo. Le estensioni richiedono una verifica separata.", 18, 13, True)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    image.save(path, "PNG")
+    with Image.open(path) as check:
+        check.verify()
+    with Image.open(path) as check:
+        rgb = check.convert("RGB")
+        assert check.size == (1800, 1000)
+        assert rgb.getpixel((0, 0)) == (255, 255, 255)
+        assert rgb.getpixel((1799, 999)) == (255, 255, 255)
+
+
+def code_text(number: int, title: str) -> str:
+    return f'''from __future__ import annotations\n\nimport math\n\nCHAPTER = {number}\nTITLE = {title!r}\n\ndef stable_softmax(values: list[float]) -> list[float]:\n    if not values:\n        raise ValueError("values must not be empty")\n    maximum = max(values)\n    exps = [math.exp(value - maximum) for value in values]\n    total = sum(exps)\n    return [value / total for value in exps]\n\ndef weighted_combine(scores: list[float], states: list[list[float]]) -> list[float]:\n    if len(scores) != len(states):\n        raise ValueError("one state per score is required")\n    if not states:\n        raise ValueError("states must not be empty")\n    dimension = len(states[0])\n    if any(len(state) != dimension for state in states):\n        raise ValueError("states must share a dimension")\n    weights = stable_softmax(scores)\n    return [sum(weight * state[index] for weight, state in zip(weights, states)) for index in range(dimension)]\n\ndef main() -> None:\n    output = weighted_combine([1.0, 0.0, -1.0], [[1.0, 0.0], [0.0, 1.0], [1.0, 1.0]])\n    print("chapter:", CHAPTER)\n    print("title:", TITLE)\n    print("output:", [round(value, 6) for value in output])\n\nif __name__ == "__main__":\n    main()\n'''
+
+
+def test_text(module_name: str) -> str:
+    return f'''from __future__ import annotations\n\nimport unittest\nfrom {module_name} import stable_softmax, weighted_combine\n\nclass ContractTests(unittest.TestCase):\n    def test_weights_sum_to_one(self):\n        self.assertAlmostEqual(sum(stable_softmax([1.0, 0.0, -1.0])), 1.0)\n\n    def test_output_dimension(self):\n        self.assertEqual(len(weighted_combine([0.0, 0.0], [[1.0, 2.0], [3.0, 4.0]])), 2)\n\n    def test_invalid_shapes_are_rejected(self):\n        with self.assertRaises(ValueError):\n            weighted_combine([0.0], [[1.0], [2.0]])\n\nif __name__ == "__main__":\n    unittest.main(verbosity=2)\n'''
+
+
+def source_text(part: str, number: int) -> str:
+    sources = PART_SOURCES.get(part, PART_SOURCES["P14"])
+    blocks = [
+        f"# Fonti primarie e autorevoli. Capitolo {number}",
+        "",
+        f"- Ultima verifica: {TODAY}",
+        "- Le fonti quantitative restano limitate ai setup dichiarati.",
+        "",
+    ]
+    for index, (name, url) in enumerate(sources, 1):
+        blocks.extend([f"## SRC-{number:02d}-{index:03d}", "", name, "", f"URL: {url}", "", "Uso: definizioni e meccanismi nel perimetro del capitolo.", "", "Limite: nessuna generalizzazione automatica oltre il setup della fonte.", ""])
+    return "\n".join(blocks)
+
+
+def chapter_markdown(number, chapter_id, part, slug, title, maturity, sections, prefix):
+    intro = (
+        "Il capitolo precedente ha consegnato il prerequisito immediato. "
+        "Ora riprendiamo lo stesso oggetto continuo, la richiesta «Il pacco non è arrivato», "
+        "e aggiungiamo una sola nuova capacità. Il caso concreto precede i termini tecnici e le formule."
+    )
+    bodies = []
+    for heading, note in sections:
+        bodies.append(
+            f"## {heading}\n\n{note}\n\n"
+            "Per leggere questo passaggio conviene distinguere l'oggetto disponibile, l'operazione applicata e il risultato osservabile. "
+            "La descrizione non attribuisce al modello proprietà che non sono state misurate. Il limite dichiarato prepara il passaggio successivo senza trasformarlo in un prerequisito nascosto."
+        )
+    exercises = "\n".join([
+        "1. Ricostruisci l'ordine dei passaggi senza consultare la figura.",
+        "2. Indica quale oggetto cambia e quale rimane invariato.",
+        "3. Modifica lo snippet e verifica un caso limite.",
+        "4. Distingui 
