@@ -1,0 +1,13 @@
+/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:368: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /__w/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:84.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+test_all_contracts_hold (test_moe.ContractTests.test_all_contracts_hold) ... /home/runner/work/aibook/aibook/chapters/44_moe_conditional/code/snip_moe_001.py:13: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:822.)
+  torch.manual_seed(7); m=MoE(4,3,2); o,r,l,d,a=m(torch.randn(8,4)); return {"shape":tuple(o.shape),"load":l.tolist(),"dropped":int(d.sum()),"aux":float(a)}
+ok
+test_demo_is_deterministic (test_moe.ContractTests.test_demo_is_deterministic) ... ok
+test_result_is_observable (test_moe.ContractTests.test_result_is_observable) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.008s
+
+OK
