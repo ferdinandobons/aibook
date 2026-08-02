@@ -1,0 +1,17 @@
+pendices}\nlinked_images={images}\nstatus=PASS\n", encoding="utf-8")
+
+
+def main():
+    specs, appendices = load_specs()
+    for spec in specs:
+        generate_chapter(spec)
+    for appendix in appendices:
+        generate_appendix(appendix)
+    create_missing_linked_images()
+    chapters, appendix_count, images = validate_complete_book()
+    update_project_docs(chapters, appendix_count, images)
+    print(f"MATERIALIZATION PASS chapters={chapters} appendices={appendix_count} images={images}")
+
+
+if __name__ == "__main__":
+    main()
