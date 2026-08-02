@@ -2,13 +2,6 @@ name: Generate milestone chapters 31-45
 
 on:
   workflow_dispatch:
-  pull_request:
-    branches:
-      - main
-    types:
-      - opened
-      - synchronize
-      - reopened
   push:
     branches:
       - feature/full-book-production
@@ -19,10 +12,15 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: generate-chapters-31-45
+  cancel-in-progress: false
+
 jobs:
   generate:
     if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-24.04
+    timeout-minutes: 120
     steps:
       - name: Checkout production branch
         uses: actions/checkout@v4
@@ -49,29 +47,46 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test -f chapters/31_llm_behavior/CHAPTER.md
-          test -f chapters/45_alternative_prediction/CHAPTER.md
-          test -f docs/06_CONTINUITA_TRA_CAPITOLI_31_45.md
-          test -f assets/chapters/31_llm_behavior/LLM-01/candidate-v1.png
-          test -f assets/chapters/45_alternative_prediction/ALT-02/candidate-v1.png
-          chapter_count=$(find chapters -mindepth 1 -maxdepth 1 -type d | awk -F/ '$3 ~ /^(31_|32_|33_|34_|35_|36_|37_|38_|39_|40_|41_|42_|43_|44_|45_)/ {count++} END {print count+0}')
-          png_count=$(find assets/chapters -path '*/candidate-v1.png' | awk -F/ '$3 ~ /^(31_|32_|33_|34_|35_|36_|37_|38_|39_|40_|41_|42_|43_|44_|45_)/ {count++} END {print count+0}')
-          test "$chapter_count" -eq 15
-          test "$png_count" -eq 30
-          grep -R --line-number 'Ran 3 tests' chapters/{31_llm_behavior,32_data_lifecycle,33_data_mixture,34_scaling_laws,35_pretraining_recipe,36_distributed_training,37_modern_block,38_position_context,39_attention_kv,40_hardware_attention,41_linear_attention,42_sequence_alternatives,43_hybrid_memory,44_moe_conditional,45_alternative_prediction}/code/outputs/TESTS.txt >/dev/null
           python - <<'PY'
           from pathlib import Path
+          import subprocess
+          import sys
           from PIL import Image
-          roots = [p for p in Path('assets/chapters').iterdir() if p.is_dir() and p.name.split('_', 1)[0].isdigit() and 31 <= int(p.name.split('_', 1)[0]) <= 45]
-          pngs = sorted(p for root in roots for p in root.glob('*/candidate-v1.png'))
-          assert len(pngs) == 30, len(pngs)
+
+          chapter_roots = []
+          for number in range(31, 46):
+              matches = sorted(Path('chapters').glob(f'{number:02d}_*'))
+              assert len(matches) == 1, (number, matches)
+              chapter = matches[0]
+              chapter_roots.append(chapter)
+              for name in ('CHAPTER.md', 'PLAN.md', 'FONTI_PRIMARIE.md', 'CLAIMS.md', 'TEXT_AUDIT.md', 'REVIEW.md', 'CHANGELOG.md'):
+                  assert (chapter / name).is_file(), (chapter, name)
+              tests = sorted((chapter / 'code').glob('test_*.py'))
+              assert tests, chapter
+              for test_file in tests:
+                  run = subprocess.run([sys.executable, '-m', 'unittest', '-v', test_file.name], cwd=test_file.parent, capture_output=True, text=True)
+                  if run.returncode:
+                      raise RuntimeError(f'{test_file}\n{run.stdout}\n{run.stderr}')
+
+          pngs = []
+          for number in range(31, 46):
+              roots = sorted(Path('assets/chapters').glob(f'{number:02d}_*'))
+              assert len(roots) == 1, (number, roots)
+              current = sorted(roots[0].glob('*/candidate-v1.png'))
+              assert len(current) == 2, (number, current)
+              pngs.extend(current)
+
           for path in pngs:
               with Image.open(path) as image:
                   assert image.size == (1800, 1000), (path, image.size)
                   rgb = image.convert('RGB')
                   assert rgb.getpixel((0, 0)) == (255, 255, 255), path
                   assert rgb.getpixel((1799, 999)) == (255, 255, 255), path
-          print(f'validated {len(roots)} chapters and {len(pngs)} PNG files')
+
+          assert len(chapter_roots) == 15
+          assert len(pngs) == 30
+          assert Path('docs/06_CONTINUITA_TRA_CAPITOLI_31_45.md').is_file()
+          print(f'validated chapters={len(chapter_roots)} pngs={len(pngs)}')
           PY
 
       - name: Commit milestone to production branch
@@ -80,39 +95,7 @@ jobs:
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add \
-            chapters/31_llm_behavior \
-            chapters/32_data_lifecycle \
-            chapters/33_data_mixture \
-            chapters/34_scaling_laws \
-            chapters/35_pretraining_recipe \
-            chapters/36_distributed_training \
-            chapters/37_modern_block \
-            chapters/38_position_context \
-            chapters/39_attention_kv \
-            chapters/40_hardware_attention \
-            chapters/41_linear_attention \
-            chapters/42_sequence_alternatives \
-            chapters/43_hybrid_memory \
-            chapters/44_moe_conditional \
-            chapters/45_alternative_prediction \
-            assets/chapters/31_llm_behavior \
-            assets/chapters/32_data_lifecycle \
-            assets/chapters/33_data_mixture \
-            assets/chapters/34_scaling_laws \
-            assets/chapters/35_pretraining_recipe \
-            assets/chapters/36_distributed_training \
-            assets/chapters/37_modern_block \
-            assets/chapters/38_position_context \
-            assets/chapters/39_attention_kv \
-            assets/chapters/40_hardware_attention \
-            assets/chapters/41_linear_attention \
-            assets/chapters/42_sequence_alternatives \
-            assets/chapters/43_hybrid_memory \
-            assets/chapters/44_moe_conditional \
-            assets/chapters/45_alternative_prediction \
-            docs/06_CONTINUITA_TRA_CAPITOLI_31_45.md \
-            MILESTONE_31_45.md
+          git add chapters assets/chapters docs/06_CONTINUITA_TRA_CAPITOLI_31_45.md MILESTONE_31_45.md
           if git diff --cached --quiet; then
             echo 'Milestone 31-45 already current.'
             exit 0
