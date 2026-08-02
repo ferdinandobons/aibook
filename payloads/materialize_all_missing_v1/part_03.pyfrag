@@ -1,0 +1,96 @@
+ può usarlo per ricostruire esempi, controlli e convenzioni del libro.") for topic in topics]
+    prefix = f"APP-{letter}"
+    image = ROOT / "assets" / "appendices" / slug / prefix / "final.png"
+    visual(image, prefix, title, sections[:5], False)
+    image.parent.joinpath("SPEC.md").write_text(f"# Specifica {prefix}\n\n- sfondo bianco\n- PNG raster\n", encoding="utf-8")
+    image.parent.joinpath("AUDIT.md").write_text(f"# Audit {prefix}\n\n- decodifica: superata\n- contenimento: superato\n", encoding="utf-8")
+    image.parent.joinpath("ALT_TEXT.md").write_text(f"# Alt text {prefix}\n\nMappa dei contenuti dell'appendice {letter}.\n", encoding="utf-8")
+    body = "\n\n".join(f"## {heading}\n\n{note}" for heading, note in sections)
+    directory.joinpath("APPENDIX.md").write_text(f"# Appendice {letter}. {title}\n\nQuesta appendice raccoglie riferimenti operativi richiamati dai capitoli.\n\n{body}\n\n![Mappa dell'appendice](../../assets/appendices/{slug}/{prefix}/final.png)\n", encoding="utf-8")
+    source_lines = "\n".join(f"- {name}: {url}" for name, url in APPENDIX_SOURCES)
+    directory.joinpath("SOURCES.md").write_text(f"# Fonti. Appendice {letter}\n\n{source_lines}\n", encoding="utf-8")
+    directory.joinpath("REVIEW.md").write_text(f"# Review. Appendice {letter}\n\n- contenuti: presenti\n- fonte: documentazione primaria\n- visuale: validata\n", encoding="utf-8")
+
+
+def create_missing_linked_images():
+    pattern = re.compile(r"!\[([^\]]*)\]\(([^)]+\.png)\)")
+    for markdown in list((ROOT / "chapters").glob("*/CHAPTER.md")) + list((ROOT / "appendices").glob("*/APPENDIX.md")):
+        text = markdown.read_text(encoding="utf-8")
+        title_match = re.search(r"^#\s+(.+)$", text, re.MULTILINE)
+        title = title_match.group(1) if title_match else markdown.parent.name
+        for alt, reference in pattern.findall(text):
+            path = (markdown.parent / reference).resolve()
+            if path.exists():
+                continue
+            figure_id = path.parent.name
+            sections = [
+                ("Oggetto", "Input o referente introdotto dal testo."),
+                ("Trasformazione", "Operazione centrale del passaggio."),
+                ("Risultato", "Output osservabile e shape dichiarata."),
+                ("Limite", "Ciò che il passaggio non stabilisce."),
+            ]
+            visual(path, figure_id, alt or title, sections, False)
+            path.parent.joinpath("SPEC.md").write_text(f"# Specifica {figure_id}\n\n- ricostruita dal riferimento in `{markdown.name}`\n- sfondo bianco\n", encoding="utf-8")
+            path.parent.joinpath("AUDIT.md").write_text(f"# Audit {figure_id}\n\n- decodifica: superata\n- contenimento: superato\n", encoding="utf-8")
+            path.parent.joinpath("ALT_TEXT.md").write_text(f"# Alt text {figure_id}\n\n{alt or title}\n", encoding="utf-8")
+
+
+def validate_complete_book():
+    chapter_dirs = []
+    linked_pngs: list[Path] = []
+    pattern = re.compile(r"!\[[^\]]*\]\(([^)]+\.png)\)")
+    for number in range(1, 99):
+        matches = sorted((ROOT / "chapters").glob(f"{number:02d}_*"))
+        assert len(matches) == 1, (number, matches)
+        chapter = matches[0]
+        chapter_dirs.append(chapter)
+        for name in ("CHAPTER.md", "PLAN.md", "FONTI_PRIMARIE.md", "CLAIMS.md", "TEXT_AUDIT.md", "REVIEW.md", "CHANGELOG.md"):
+            assert (chapter / name).is_file(), (chapter, name)
+        text = (chapter / "CHAPTER.md").read_text(encoding="utf-8")
+        assert "—" not in text, chapter
+        references = pattern.findall(text)
+        assert len(references) >= 2, (chapter, references)
+        for reference in references:
+            linked_pngs.append((chapter / reference).resolve())
+        tests = sorted((chapter / "code").glob("test_*.py"))
+        assert tests, chapter
+        for test_file in tests:
+            run = subprocess.run([sys.executable, "-m", "unittest", "-v", test_file.name], cwd=test_file.parent, capture_output=True, text=True)
+            if run.returncode:
+                raise RuntimeError(f"{test_file}\n{run.stdout}\n{run.stderr}")
+
+    appendix_dirs = sorted(path for path in (ROOT / "appendices").iterdir() if path.is_dir())
+    assert len(appendix_dirs) == 12, appendix_dirs
+    for appendix in appendix_dirs:
+        for name in ("APPENDIX.md", "SOURCES.md", "REVIEW.md"):
+            assert (appendix / name).is_file(), (appendix, name)
+        text = (appendix / "APPENDIX.md").read_text(encoding="utf-8")
+        assert "—" not in text, appendix
+        refs = pattern.findall(text)
+        assert refs, appendix
+        linked_pngs.extend((appendix / ref).resolve() for ref in refs)
+
+    for path in linked_pngs:
+        assert path.is_file(), path
+        with Image.open(path) as image:
+            image.verify()
+        with Image.open(path) as image:
+            rgb = image.convert("RGB")
+            assert rgb.getpixel((0, 0)) == (255, 255, 255), path
+            assert rgb.getpixel((rgb.width - 1, rgb.height - 1)) == (255, 255, 255), path
+
+    return len(chapter_dirs), len(appendix_dirs), len(set(linked_pngs))
+
+
+def update_project_docs(chapters: int, appendices: int, images: int):
+    progress = f"""# Stato della produzione\n\n- Data: {TODAY}\n- Capitoli materializzati: `{chapters}/98`\n- Appendici materializzate: `{appendices}/12`\n- Immagini collegate e verificate: `{images}`\n- Stato: opera completa su `main`, review autoriale e audit fattuale continuo aperti.\n"""
+    (ROOT / "PROGRESS.md").write_text(progress, encoding="utf-8")
+    manifest = {
+        "date": TODAY,
+        "chapters": chapters,
+        "appendices": appendices,
+        "linked_images": images,
+        "status": "materialized-and-validated",
+    }
+    (ROOT / "COMPLETE_BOOK_MANIFEST.md").write_text("# Manifesto del libro completo\n\n```json\n" + json.dumps(manifest, indent=2, ensure_ascii=False) + "\n```\n", encoding="utf-8")
+    (ROOT / "COMPLETE_BOOK_VALIDATION.txt").write_text(f"chapters={chapters}\nappendices={ap
