@@ -8,6 +8,6 @@ test_demo_is_deterministic (test_recipe.ContractTests.test_demo_is_deterministic
 test_result_is_observable (test_recipe.ContractTests.test_result_is_observable) ... ok
 
 ----------------------------------------------------------------------
-Ran 3 tests in 1.157s
+Ran 3 tests in 1.144s
 
 OK
