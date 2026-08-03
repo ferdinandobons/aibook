@@ -1,0 +1,59 @@
+name: Export Chapters 21-30 for total review
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - review/chapters-21-30-total
+    paths:
+      - '.github/workflows/export-chapters-21-30-review.yml'
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+permissions:
+  contents: read
+
+jobs:
+  export:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout review branch
+        uses: actions/checkout@v4
+        with:
+          ref: review/chapters-21-30-total
+          fetch-depth: 1
+
+      - name: Build review bundle
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p review_bundle/chapters review_bundle/assets/chapters review_bundle/docs
+          for n in $(seq -w 21 30); do
+            chapter_dir=$(find chapters -mindepth 1 -maxdepth 1 -type d -name "${n}_*" -print -quit)
+            asset_dir=$(find assets/chapters -mindepth 1 -maxdepth 1 -type d -name "${n}_*" -print -quit)
+            test -n "$chapter_dir"
+            cp -a "$chapter_dir" review_bundle/chapters/
+            if [ -n "$asset_dir" ]; then
+              cp -a "$asset_dir" review_bundle/assets/chapters/
+            fi
+          done
+          cp docs/01_INDICE_EDITORIALE.md review_bundle/docs/
+          cp docs/02_STILE_E_QA_TESTO.md review_bundle/docs/
+          cp docs/03_VISUALI.md review_bundle/docs/
+          cp docs/04_CODICE_FONTI_E_RIPRODUCIBILITA.md review_bundle/docs/
+          cp docs/06_CONTINUITA_TRA_CAPITOLI.md review_bundle/docs/ || true
+          find review_bundle -type f | sort > review_bundle/FILES.txt
+          tar -czf chapters-21-30-review.tar.gz review_bundle
+
+      - name: Upload review bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: chapters-21-30-review
+          path: chapters-21-30-review.tar.gz
+          if-no-files-found: error
+          retention-days: 7
