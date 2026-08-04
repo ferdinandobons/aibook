@@ -76,22 +76,6 @@ Per rendere osservabile addestrare reti profonde, il capitolo conserva qui l'art
 def contract(case: str = "default"):
     if case != "default":
         raise ValueError("only the documented default case is supported")
-    if case != "default":
-        raise ValueError("only the documented default case is supported")
-    if case != "default":
-        raise ValueError("only the documented default case is supported")
-    if case != "default":
-        raise ValueError("only the documented default case is supported")
-    if case != "default":
-        raise ValueError("only the documented default case is supported")
-    if case != "default":
-        raise ValueError("only the documented default case is supported")
-    if case != "default":
-        raise ValueError("only the documented default case is supported")
-    if case != "default":
-        raise ValueError("only the documented default case is supported")
-    if case != "default":
-        raise ValueError("only the documented default case is supported")
     x = [1.0, -2.0]
     residual = [0.2, 0.3]
     output = [a + b for a, b in zip(x, residual)]

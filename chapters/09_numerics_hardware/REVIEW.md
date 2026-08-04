@@ -6,8 +6,8 @@
 - Versione: `0.1.0-draft1`
 - Testo: review tecnica, didattica, editoriale e linguistica superate internamente
 - Codice: sette test superati
-- Visuali: revisionate localmente, PNG da materializzare nel branch
-- Review autoriale completa: non ancora aperta
+- Visuali: `NUM-01` e `NUM-02` materializzate e validate tecnicamente
+- Review autoriale: aperta
 
 ## Percorso consigliato
 
@@ -47,9 +47,10 @@ Il lettore dovrebbe poter dire, senza formule:
 
 ## Elementi aperti
 
-- [ ] materializzazione di `NUM-01`;
-- [ ] materializzazione di `NUM-02`;
-- [ ] controllo incrociato sul raster GitHub;
-- [ ] sostituzione dei commenti nel capitolo con le immagini;
+- [x] materializzazione di `NUM-01`;
+- [x] materializzazione di `NUM-02`;
+- [x] controllo incrociato sul raster locale;
+- [x] sostituzione dei commenti nel capitolo con le immagini;
+- [ ] rilettura nel flusso impaginato;
 - [ ] revisione autoriale completa;
 - [ ] congelamento.

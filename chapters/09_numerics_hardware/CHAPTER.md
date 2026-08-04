@@ -103,8 +103,6 @@ bfloat16 -> 70144
 
 Float16 supera il proprio massimo finito. Bfloat16 conserva il range, ma arrotonda il valore a `70144`. Nessuno dei due risultati è una copia esatta del numero reale richiesto.
 
-<!-- Inserire NUM-01 dopo la materializzazione e l'audit del PNG. -->
-
 ## L'arrotondamento avviene dopo ogni operazione
 
 Supponiamo di lavorare in float32 con
@@ -250,8 +248,6 @@ Bfloat16 occupa due byte e conserva un esponente ampio come float32. Riduce quin
 
 Questo formato è spesso utile quando il range è più importante della precisione fine. Non significa che ogni modello possa essere convertito senza verifiche. Operazioni sensibili, riduzioni e aggiornamenti possono comunque richiedere float32.
 
-<!-- Inserire NUM-01 dopo la materializzazione e l'audit del PNG. -->
-
 ## Storage, calcolo, accumulo e output
 
 La frase «il modello usa bfloat16» è spesso troppo vaga. Per una singola operazione possiamo distinguere:
@@ -316,8 +312,6 @@ float16: 2.097.152 byte
 ```
 
 Questi sono i byte teorici dei soli elementi, non la memoria totale del processo.
-
-<!-- Inserire NUM-02 dopo la materializzazione e l'audit del PNG. -->
 
 ## Hardware: il picco di calcolo non basta
 

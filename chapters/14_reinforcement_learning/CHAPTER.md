@@ -76,22 +76,6 @@ Questa sezione apre il contratto Python di reinforcement learning: il lettore pu
 def contract(case: str = "default"):
     if case != "default":
         raise ValueError("only the documented default case is supported")
-    if case != "default":
-        raise ValueError("only the documented default case is supported")
-    if case != "default":
-        raise ValueError("only the documented default case is supported")
-    if case != "default":
-        raise ValueError("only the documented default case is supported")
-    if case != "default":
-        raise ValueError("only the documented default case is supported")
-    if case != "default":
-        raise ValueError("only the documented default case is supported")
-    if case != "default":
-        raise ValueError("only the documented default case is supported")
-    if case != "default":
-        raise ValueError("only the documented default case is supported")
-    if case != "default":
-        raise ValueError("only the documented default case is supported")
     gamma = 0.9
     reward = 1.0
     next_value = 0.5

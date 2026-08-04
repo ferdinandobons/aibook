@@ -10,7 +10,8 @@ Repository sorgente di un manuale tecnico in italiano, dai fondamenti matematici
 - 12 appendici.
 - Branch canonico: `main`.
 - Stato corrente: revisione editoriale, autoriale e fattuale ancora aperta.
-- Verifica locale: `544` test superati in `115` file di test e `272/272` file Python analizzati sintatticamente.
+- Verifica locale: `544` test superati in `115` file di test e `273/273` file Python analizzati sintatticamente.
+- Compiler editoriale: `80/80` contratti generati rigenerabili senza drift e senza guard duplicati.
 - Dossier fonti: `420` fonti uniche e `503` collegamenti fonte-claim nel report di verifica; `0` record richiedono ancora un URL o un record primario.
 - Ultimo audit globale: 4 agosto 2026.
 

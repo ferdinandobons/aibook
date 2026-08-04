@@ -214,6 +214,17 @@ Paper, report, documentazione, repository e prodotto non sono intercambiabili.
 
 Ogni capitolo tecnico include almeno uno snippet eseguibile collegato a una trasformazione centrale.
 
+Il compiler che produce gli esempi deve essere idempotente: eseguire una seconda
+ricostruzione sullo stesso artefatto non può aggiungere guard, import, sezioni o
+altre righe al codice pubblico. Il controllo canonico è:
+
+```bash
+PYTHONDONTWRITEBYTECODE=1 python scripts/audit_generator_idempotence.py --strict
+```
+
+Il gate confronta il codice versionato con quello che il compiler rigenererebbe
+e riapre anche i blocchi Python incorporati nel testo.
+
 Un capitolo non computazionale può non includere codice soltanto quando:
 
 - l'eccezione è motivata;

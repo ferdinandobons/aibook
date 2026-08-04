@@ -76,22 +76,6 @@ Il caso computazionale di convolutional network e apprendimento geometrico è ri
 def contract(case: str = "default"):
     if case != "default":
         raise ValueError("only the documented default case is supported")
-    if case != "default":
-        raise ValueError("only the documented default case is supported")
-    if case != "default":
-        raise ValueError("only the documented default case is supported")
-    if case != "default":
-        raise ValueError("only the documented default case is supported")
-    if case != "default":
-        raise ValueError("only the documented default case is supported")
-    if case != "default":
-        raise ValueError("only the documented default case is supported")
-    if case != "default":
-        raise ValueError("only the documented default case is supported")
-    if case != "default":
-        raise ValueError("only the documented default case is supported")
-    if case != "default":
-        raise ValueError("only the documented default case is supported")
     image = [[1.0, 2.0, 0.0], [0.0, 1.0, 2.0], [2.0, 0.0, 1.0]]
     kernel = [[1.0, 0.0], [0.0, -1.0]]
     output = [

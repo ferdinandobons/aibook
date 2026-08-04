@@ -85,22 +85,6 @@ La prova locale di representation learning parte da un esempio minimo, registrat
 def contract(case: str = "default"):
     if case != "default":
         raise ValueError("only the documented default case is supported")
-    if case != "default":
-        raise ValueError("only the documented default case is supported")
-    if case != "default":
-        raise ValueError("only the documented default case is supported")
-    if case != "default":
-        raise ValueError("only the documented default case is supported")
-    if case != "default":
-        raise ValueError("only the documented default case is supported")
-    if case != "default":
-        raise ValueError("only the documented default case is supported")
-    if case != "default":
-        raise ValueError("only the documented default case is supported")
-    if case != "default":
-        raise ValueError("only the documented default case is supported")
-    if case != "default":
-        raise ValueError("only the documented default case is supported")
     left = [1.0, 2.0, 0.0]
     right = [2.0, 1.0, 0.0]
     dot = sum(a * b for a, b in zip(left, right))

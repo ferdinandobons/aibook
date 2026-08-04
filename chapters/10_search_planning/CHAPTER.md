@@ -185,8 +185,6 @@ ticket_opened
 
 Trova lo stesso piano di costo `6` di uniform-cost, ma non espande i rami relativi al pagamento e all'agente.
 
-<!-- Inserire SEARCH-01 dopo la materializzazione e l'audit del PNG. -->
-
 ### Un'euristica non è una prova automatica
 
 Una stima appresa da dati può essere molto accurata in media e tuttavia sovrastimare alcuni stati. Questo può essere accettabile se l'obiettivo è trovare rapidamente una buona soluzione, ma modifica le garanzie.
@@ -318,8 +316,6 @@ alpha-beta: valore 4, foglie visitate 5
 ```
 
 L'ordine delle mosse è decisivo. Se le mosse migliori vengono esplorate presto, i limiti diventano informativi prima e i tagli aumentano. Nel caso peggiore, alpha-beta può visitare quasi lo stesso albero di minimax [Knuth e Moore, 1975].
-
-<!-- Inserire SEARCH-02 dopo la materializzazione e l'audit del PNG. -->
 
 ### Oltre il caso base
 

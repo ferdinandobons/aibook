@@ -6,7 +6,7 @@
 - Parte: `P02`, Matematica, informazione e calcolo
 - Titolo: `Calcolo numerico, precisione e hardware`
 - Maturità: `CORE`
-- Stato: testo e codice in produzione, visuali da materializzare
+- Stato: testo, codice e visuali materializzati; revisione autoriale aperta
 - Domanda centrale: come cambiano risultati, memoria e prestazioni quando numeri e operazioni vengono eseguiti con precisioni e hardware differenti?
 - Oggetto continuo: un piccolo classificatore che calcola prodotti matriciali e softmax, osservato in `float16`, `bfloat16`, `float32` e `float64`
 - Output finale: il lettore sa distinguere range, precisione, dtype di storage, dtype di calcolo e dtype di accumulo; riconosce overflow, underflow, non associatività, formule instabili, mixed precision e limiti di riproducibilità

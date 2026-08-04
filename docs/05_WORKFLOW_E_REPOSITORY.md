@@ -227,6 +227,9 @@ Verificare documentazione, eseguire in processo pulito, testare invarianti e rie
 
 La policy `reference` richiede evidenza eseguibile completa. La policy `exception` richiede una motivazione nel capitolo e in `code/CODE_AUDIT.md`; non può convivere con script storici che fingano di verificare il tema.
 
+Per gli artefatti generati, verificare anche l'idempotenza del compiler: la
+seconda passata deve produrre lo stesso codice e lo stesso snippet pubblico.
+
 ### Fase 8. Visuali
 
 Generare una bozza, eseguire audit tecnico, stilistico, compositivo e di contenimento. Rigenerare finché non restano difetti bloccanti.

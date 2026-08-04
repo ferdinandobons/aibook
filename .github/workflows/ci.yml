@@ -25,7 +25,7 @@ jobs:
           python-version: '3.12'
 
       - name: Install local audit dependencies
-        run: python -m pip install --disable-pip-version-check --no-input pillow ruff
+        run: python -m pip install --disable-pip-version-check --no-input 'pillow==12.1.1' 'ruff==0.15.2'
 
       - name: Check book structure and image references
         shell: bash
@@ -43,17 +43,36 @@ jobs:
 
           documents = chapters + appendices
           references = []
+          references_by_document = []
           for document in documents:
               text = document.read_text(encoding='utf-8')
               assert text.strip(), document
               assert '—' not in text, document
+              assert not re.search(r'<!--\s*(?:inserire|todo|fixme|tbd)\b', text, re.IGNORECASE), document
+              document_references = []
               for relative in re.findall(r'!\[[^]]*\]\(([^)]+\.png)\)', text):
                   target = (document.parent / relative).resolve()
                   assert target.is_file(), f'{document}: missing {relative}'
                   references.append(target)
+                  document_references.append(target)
+              references_by_document.append(document_references)
 
-          assert len(references) >= len(documents), 'each chapter or appendix needs at least one active visual on average'
+          assert all(
+              references_by_document,
+          ), 'each chapter or appendix needs at least one active visual'
           assert len(set(references)) == len(references), 'duplicate active image reference'
+
+          for final_path in root.joinpath('assets').rglob('final.png'):
+              metadata = '\n'.join(
+                  candidate.read_text(encoding='utf-8')
+                  for candidate in sorted(final_path.parent.glob('*.md'))
+              )
+              assert re.search(
+                  r'approvazione autoriale:\s*approvata',
+                  metadata,
+                  re.IGNORECASE,
+              ), f'{final_path}: final asset lacks author approval'
+
           print(f'OK: {len(chapters)} chapters, {len(appendices)} appendices, {len(references)} images')
           PY
 
@@ -80,6 +99,7 @@ jobs:
             scripts/audit_editorial_quality.py \
             scripts/audit_editorial_variation.py \
             scripts/audit_formula_contracts.py \
+            scripts/audit_generator_idempotence.py \
             scripts/audit_semantic_alignment.py \
             scripts/audit_visual_geometry.py \
             scripts/generate_visuals_v2.py \
@@ -108,6 +128,7 @@ jobs:
           set -euo pipefail
           PYTHONDONTWRITEBYTECODE=1 python scripts/audit_visual_geometry.py --strict
           PYTHONDONTWRITEBYTECODE=1 python scripts/audit_code_alignment.py --strict
+          PYTHONDONTWRITEBYTECODE=1 python scripts/audit_generator_idempotence.py --strict
           PYTHONDONTWRITEBYTECODE=1 python scripts/audit_editorial_variation.py --strict
           PYTHONDONTWRITEBYTECODE=1 python scripts/audit_editorial_quality.py --strict
           PYTHONDONTWRITEBYTECODE=1 python scripts/audit_formula_contracts.py --strict

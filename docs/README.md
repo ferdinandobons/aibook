@@ -110,9 +110,10 @@ Ogni capitolo tecnico include almeno uno snippet eseguibile, salvo eccezione mot
 - Visuali PNG attive: `196` nei capitoli e `208` includendo le 12 appendici, tutte referenziate;
 - Audit strutturale e semantico: `98/98` capitoli senza problemi rilevati;
 - Audit editoriale: `98/98` capitoli senza problemi automatici, `0` immagini problematiche, `0` formule non etichettate e `0` paragrafi duplicati;
-- Profondità misurata: `910-3.402` parole nell'audit editoriale e `988-3.670` nell'audit generale;
+- Profondità misurata: `910-3.402` parole nell'audit editoriale e `988-3.637` nell'audit generale;
 - Visuali: `15` famiglie compositive principali, differenziate per concetto e non applicate come immagine standard a ogni capitolo;
-- Codice: `544` test superati in `115` file e `272/272` file Python analizzati sintatticamente;
+- Codice: `544` test superati in `115` file e `273/273` file Python analizzati sintatticamente;
+- Compiler: `80/80` contratti generati rigenerabili senza drift e senza guard duplicati;
 - Gate trasversali: `208/208` immagini passano il controllo raster/geometrico, `68/68` formule o schemi hanno presenza e spiegazione verificate, nessuna frase è condivisa da più di `12` capitoli;
 - Policy Python: `94/98` capitoli con riferimento eseguibile; eccezioni motivate nei capitoli 20, 30, 93 e 98;
 - Fonti: `420` fonti uniche e `503` collegamenti fonte-claim; `332` con contesto aperto, `128` con contesto parziale e `43` confermati tramite accesso web ufficiale;

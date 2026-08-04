@@ -98,7 +98,6 @@ Lo snippet e i test sono stati rieseguiti in un processo Python pulito il 31 lug
 
 ## Elementi aperti
 
-- materializzazione automatica dei due PNG nel feature branch;
 - revisione autoriale del testo e delle figure;
 - eventuali correzioni;
 - rinomina in `final.png`;
@@ -106,4 +105,4 @@ Lo snippet e i test sono stati rieseguiti in un processo Python pulito il 31 lug
 
 ## Verdetto
 
-La candidatura `0.2.0-rc1` supera i gate fattuali, algoritmici, didattici, anti-template, editoriali, linguistici, di accessibilità e di coerenza interna. Può essere sottoposta alla revisione autoriale non appena i PNG generati dal workflow risultano presenti nel branch.
+La candidatura `0.2.0-rc1` supera i gate fattuali, algoritmici, didattici, anti-template, editoriali, linguistici, di accessibilità e di coerenza interna. I PNG candidati sono presenti nel branch; restano revisione autoriale e congelamento.

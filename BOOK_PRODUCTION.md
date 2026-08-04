@@ -6,7 +6,7 @@
 - Opera materializzata: 98 capitoli e 12 appendici
 - Modalità: audit seriale controllato e revisione autoriale
 - Stato corrente: 98 candidature tecniche con testo, fonti e visuali; 94 con codice testato e 4 con eccezione motivata
-- Verifica corrente: 544 test in 115 file, 272/272 file Python analizzati sintatticamente, 98/98 capitoli senza problemi automatici
+- Verifica corrente: 544 test in 115 file, 273/273 file Python analizzati sintatticamente, 98/98 capitoli senza problemi automatici
 - Data di apertura del branch: 30 luglio 2026
 - Ultimo aggiornamento: 4 agosto 2026
 
@@ -69,10 +69,11 @@ Una candidatura può lasciare l'unità corrente quando claim, testo, policy del 
 
 - `98/98` capitoli hanno una coppia di immagini PNG attive, per `196` riferimenti risolti; le 12 appendici portano il totale attivo a `208` immagini; il gate geometrico copre `180` manifest semantici e `28` asset storici rasterizzati;
 - l'audit semantico e quello strutturale non rilevano capitoli problematici;
-- i test locali sono `544` superati in `115` file e i file Python analizzati sintatticamente sono `272/272`; il runner esegue anche l'appendice NumPy/PyTorch e l'appendice JAX in ambiente CPU;
+- i test locali sono `544` superati in `115` file e i file Python analizzati sintatticamente sono `273/273`; il runner esegue anche l'appendice NumPy/PyTorch e l'appendice JAX in ambiente CPU;
+- il compiler dei capitoli generati è idempotente su `80/80` contratti: una seconda ricostruzione non accumula righe nel codice né nel blocco Python pubblico;
 - la verifica delle fonti registra `420` fonti uniche e `503` collegamenti fonte-claim: `332` con contesto aperto, `128` con contesto parziale e `43` confermati tramite accesso web ufficiale;
-- le immagini storiche non referenziate sono state spostate fuori dal repository in una cartella temporanea recuperabile;
-- la revisione della prosa ha eliminato i paragrafi pubblici identici tra tre o più capitoli; l'audit editoriale misura `910-3.402` parole pubbliche, mentre l'audit generale misura `988-3.670` parole secondo i rispettivi perimetri di conteggio; l'audit di variazione non trova frasi condivise da più di 12 capitoli;
+- i 12 raster storici non referenziati delle appendici sono conservati come `candidate-v1.png`, mentre `final.png` resta riservato agli asset approvati;
+- la revisione della prosa ha eliminato i paragrafi pubblici identici tra tre o più capitoli; l'audit editoriale misura `910-3.402` parole pubbliche, mentre l'audit generale misura `988-3.637` parole secondo i rispettivi perimetri di conteggio; l'audit di variazione non trova frasi condivise da più di 12 capitoli;
 - le 196 visuali dei capitoli usano 84 coppie distinte e 165 modelli semantici ricondotti a dieci primitive controllabili. Processi, stack, tree, grid, boundary, grafi, evidenza, confronti, cicli e tile vengono scelti in base alla relazione da spiegare; non vengono usati grafici quantitativi senza misure;
 - `94/98` capitoli includono codice testato. I capitoli 20, 30, 93 e 98 conservano un'eccezione documentata e non contengono vecchi script generici;
 

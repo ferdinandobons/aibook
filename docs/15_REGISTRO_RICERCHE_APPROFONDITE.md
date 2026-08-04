@@ -575,7 +575,7 @@ Il controllo HTTP sui 73 URL unici presenti nei dossier ha rilevato 65 risposte 
 - `94/98` capitoli conservano un riferimento eseguibile con blocco Python nel testo, output letterale, file completo, test e output versionato.
 - I capitoli 20, 30, 93 e 98 dichiarano un'eccezione motivata. I vecchi script generici sono stati rimossi, perché contraddicevano la prova documentale richiesta dal tema.
 - Sono stati eseguiti `541` test in `114` file con Python 3.13.12, NumPy 2.5.1 e PyTorch 2.12.1; altri `3` test JAX sono passati nell'ambiente JAX 0.11.0. Totale: `544` test in `115` file, `0` fallimenti.
-- `272/272` file Python sono stati analizzati sintatticamente.
+- `273/273` file Python sono stati analizzati sintatticamente.
 - Sono stati rimossi 51 test storici scollegati che importavano funzioni non più presenti e 159 output o record ambiente duplicati della prima materializzazione.
 
 ## Fonti
@@ -598,6 +598,7 @@ Il controllo HTTP sui 73 URL unici presenti nei dossier ha rilevato 65 risposte 
 - `audit_editorial_variation.py --strict`: nessun marker dello scaffold storico e nessuna frase condivisa da più di `12` capitoli.
 - `audit_formula_contracts.py --strict`: `68/68` formule o schemi previsti presenti, delimitati e accompagnati da una spiegazione.
 - `audit_code_alignment.py --strict`: `80/80` capitoli generati con policy `reference` hanno blocchi Python e output inline contenuti negli artefatti eseguiti e versionati.
+- `audit_generator_idempotence.py --strict`: `80/80` contratti rigenerano lo stesso codice senza drift e senza guard duplicati nei blocchi pubblici.
 - `run_all_examples.py --include-appendix-a`: `541` test in `114` file senza failure; l'appendice B aggiunge `3` test JAX in ambiente CPU, per `544` test in `115` file.
 - `ruff check` sui blocchi Python dei capitoli e sugli script di audit: nessun errore.
 

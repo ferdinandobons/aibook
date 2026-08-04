@@ -76,22 +76,6 @@ Questa sezione apre il contratto Python di reti ricorrenti e modelli sequenziali
 def contract(case: str = "default"):
     if case != "default":
         raise ValueError("only the documented default case is supported")
-    if case != "default":
-        raise ValueError("only the documented default case is supported")
-    if case != "default":
-        raise ValueError("only the documented default case is supported")
-    if case != "default":
-        raise ValueError("only the documented default case is supported")
-    if case != "default":
-        raise ValueError("only the documented default case is supported")
-    if case != "default":
-        raise ValueError("only the documented default case is supported")
-    if case != "default":
-        raise ValueError("only the documented default case is supported")
-    if case != "default":
-        raise ValueError("only the documented default case is supported")
-    if case != "default":
-        raise ValueError("only the documented default case is supported")
     state = 0.0
     for value in (1.0, 2.0, -1.0):
         state = math.tanh(0.5 * value + 0.8 * state)

@@ -9,8 +9,8 @@
 - Esito del codice: **superato, sette test**
 - Esito didattico: **superato dopo seconda lettura**
 - Esito editoriale e linguistico: **superato per la bozza**
-- Visuali: tecnicamente validate localmente, PNG da materializzare nel branch
-- Review autoriale: non aperta
+- Visuali: PNG materializzati e tecnicamente validati localmente
+- Review autoriale: aperta
 
 ## Review 1. Accuratezza tecnica
 
@@ -78,12 +78,10 @@ Correzioni applicate durante la stesura:
 
 ## Elementi aperti
 
-- materializzare `NUM-01/candidate-v1.png` e `NUM-02/candidate-v1.png` nel feature branch;
-- inserire i due riferimenti al posto dei commenti nel capitolo;
 - rileggere il capitolo con le figure nel flusso;
-- aprire la revisione autoriale;
+- approvare autorialmente testo, visuali e alt text;
 - promuovere la versione soltanto dopo controllo del raster pubblicato.
 
 ## Verdetto
 
-Testo, fonti, claim e codice sono pronti per il controllo finale con le immagini. Il capitolo non è ancora una candidatura completa perché i PNG revisionati non sono materializzati nel repository.
+Testo, fonti, claim, codice e PNG candidati sono presenti nel repository. Restano la rilettura nel flusso editoriale, l'approvazione autoriale e il congelamento.

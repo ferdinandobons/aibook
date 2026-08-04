@@ -431,6 +431,18 @@ def clean_code_source(number: int, title: str) -> str:
         if not match:
             raise ValueError(f"contract non trovato per il capitolo {number}")
         body = "def contract():\n" + match.group(1).rstrip() + "\n"
+    # Rebuilding must be idempotent. Older generated files already contained
+    # the unsupported-case guard, so blindly inserting it again made every
+    # rebuild grow the same two lines in the public example. Remove any
+    # leading copies before adding the canonical guard below.
+    body_lines = body.splitlines()
+    guard_lines = [
+        '    if case != "default":',
+        '        raise ValueError("only the documented default case is supported")',
+    ]
+    while len(body_lines) >= 3 and body_lines[1:3] == guard_lines:
+        del body_lines[1:3]
+    body = "\n".join(body_lines) + "\n"
     helper = ""
     if "normalize(" in body:
         helper = (
