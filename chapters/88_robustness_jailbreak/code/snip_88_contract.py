@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-import hashlib
 import json
-import math
-import statistics
-from collections import Counter
 
 CHAPTER = 88
 TITLE = 'Robustezza, jailbreak e attacchi adversarial'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     prompts = [("base", False), ("perturbed", True)]
     failures = [name for name, attack_succeeded in prompts if attack_succeeded]
     return {"attack_success_rate": len(failures) / len(prompts), "failures": failures, "invariant": "robustness is defined relative to an explicit threat model"}

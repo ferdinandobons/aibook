@@ -1,6 +1,6 @@
 # Fonti primarie e autorevoli. Capitolo 45
 
-- Data di consultazione: 3 agosto 2026
+- Data di consultazione: 4 agosto 2026
 - Routing semantico: capitolo 45 -> tema `alternative_prediction`.
 - Perimetro: definizioni, meccanismi e limiti portanti del capitolo.
 - Regola: risultati numerici locali restano distinti dalle evidenze sperimentali delle fonti.
@@ -11,9 +11,9 @@
 - Autori o organizzazione: Xue et al..
 - Tipo: paper o report tecnico.
 - Data: data della revisione consultata.
-- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 4 agosto 2026.
 - URL o identificatore: https://arxiv.org/abs/2105.13626
-- Data di consultazione: 3 agosto 2026.
+- Data di consultazione: 4 agosto 2026.
 - Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
 - Sezioni rilevanti: Abstract / pagina iniziale; ByT5: Towards a Token-Free Future with Pre-trained Byte-to-Byte Models.
 - Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
@@ -27,9 +27,9 @@
 - Autori o organizzazione: Yu et al..
 - Tipo: paper o report tecnico.
 - Data: data della revisione consultata.
-- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 4 agosto 2026.
 - URL o identificatore: https://arxiv.org/abs/2305.07185
-- Data di consultazione: 3 agosto 2026.
+- Data di consultazione: 4 agosto 2026.
 - Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
 - Sezioni rilevanti: Abstract / pagina iniziale; MegaByte : Predicting Million-byte Sequences with Multiscale Transformers; 2 MegaByte Transformer.
 - Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
@@ -43,9 +43,9 @@
 - Autori o organizzazione: Gloeckle et al..
 - Tipo: paper o report tecnico.
 - Data: data della revisione consultata.
-- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 4 agosto 2026.
 - URL o identificatore: https://arxiv.org/abs/2404.19737
-- Data di consultazione: 3 agosto 2026.
+- Data di consultazione: 4 agosto 2026.
 - Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
 - Sezioni rilevanti: Abstract / pagina iniziale; Better & Faster Large Language Models via Multi-token Prediction; 3.3 Learning global patterns with multi-byte prediction; 3.6 Finetuning multi-token predictors.
 - Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
@@ -59,9 +59,9 @@
 - Autori o organizzazione: Li et al..
 - Tipo: paper o report tecnico.
 - Data: data della revisione consultata.
-- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 4 agosto 2026.
 - URL o identificatore: https://arxiv.org/abs/2205.14217
-- Data di consultazione: 3 agosto 2026.
+- Data di consultazione: 4 agosto 2026.
 - Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
 - Sezioni rilevanti: Abstract / pagina iniziale; Diffusion-LM Improves Controllable Text Generation; Diffusion Models for Text.; 3.3 Diffusion Models for Continuous Domains.
 - Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.

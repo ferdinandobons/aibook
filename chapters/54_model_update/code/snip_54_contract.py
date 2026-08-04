@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-import hashlib
 import json
-import math
-import statistics
-from collections import Counter
 
 CHAPTER = 54
 TITLE = 'Aggiornamento, merging ed editing del modello'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     original = {"pacco": "in_transito", "ritardo": 1}
     edited = dict(original)
     edited["ritardo"] = 0

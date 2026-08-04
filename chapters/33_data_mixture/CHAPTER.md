@@ -14,7 +14,7 @@ deferred: benchmark applicativi non eseguiti e approvazione autoriale delle visu
 
 # Capitolo 33. Dataset mixture, curriculum e dati sintetici
 
-La domanda guida di questa lezione è come collegare «Peso effettivo delle sorgenti» e «Dati sintetici» senza perdere il contratto tecnico di dataset mixture, curriculum e dati sintetici. L'oggetto osservato è la miscela effettiva di sorgenti durante il training. Il contratto locale è: input, pesi, temperatura, curriculum e conteggio dei token; operazione, campionamento, ripesatura e generazione controllata; output, probabilità effettive e mix osservato. Il caso guida è questo: Due sorgenti con conteggi diversi confrontate dopo una regola di campionamento dichiarata. Il confine da mantenere esplicito è: peso nominale e esposizione effettiva non sono la stessa misura.
+In dataset mixture, curriculum e dati sintetici il percorso dei record è il filo conduttore: da «Peso effettivo delle sorgenti» a «Dati sintetici» ogni trasformazione lascia una traccia. L'oggetto osservato è la miscela effettiva di sorgenti durante il training. Il contratto locale dichiara input, pesi, temperatura, curriculum e conteggio dei token; operazione, campionamento, ripesatura e generazione controllata; output, probabilità effettive e mix osservato. Il primo esempio osservabile è Due sorgenti con conteggi diversi confrontate dopo una regola di campionamento dichiarata. Il limite da non nascondere è: peso nominale e esposizione effettiva non sono la stessa misura.
 
 ## Peso effettivo delle sorgenti
 
@@ -24,7 +24,16 @@ Il campionamento modifica le esposizioni effettive, non la dimensione grezza del
 
 **Caso da seguire.** Due sorgenti con conteggi diversi confrontate dopo una regola di campionamento dichiarata.
 
-**Controllo.** Conserva record iniziale, regola applicata e record finale; un conteggio aggregato non basta a spiegare la trasformazione.
+**Controllo.** Per «Peso effettivo delle sorgenti», conserva record iniziale, regola applicata e record finale; un conteggio aggregato non basta a spiegare la trasformazione.
+
+
+La relazione centrale può essere scritta come:
+
+$$
+p_i = w_i^tau / sum_j w_j^tau
+$$
+
+Il campionamento modifica le esposizioni effettive, non la dimensione grezza delle sorgenti. [SRC-33-001]
 
 
 ![Dataset mixture, curriculum e dati sintetici: compare](../../assets/chapters/33_data_mixture/MIX-01/candidate-v47.png)
@@ -47,15 +56,17 @@ Pesi appresi con proxy model dipendono da domini, validation e budget. [SRC-33-0
 
 **Caso da seguire.** Per «Mixture ottimizzata» si mantiene l'input del capitolo e si isola questa condizione: Pesi appresi con proxy model dipendono da domini, validation e budget.
 
-**Controllo.** Aggiungi un record che deve essere escluso e verifica che l'output conservi anche il motivo dell'esclusione.
+**Controllo.** Per «Mixture ottimizzata», aggiungi un record che deve essere escluso e verifica che l'output conservi anche il motivo dell'esclusione.
 
 
 ## Esempio Python eseguito
 
-Il frammento seguente è lo stesso conservato nel repository. Usa valori piccoli perché l'obiettivo è osservare il meccanismo, non simulare una scala che non abbiamo eseguito.
+Il caso computazionale di dataset mixture, curriculum e dati sintetici è riportato senza trasformazioni: il file e l'output sono quelli verificati. Per «Dataset mixture, curriculum e dati sintetici», il caso di default usa valori piccoli per isolare il meccanismo. La suite conserva inoltre una failure esplicita per separare il contratto osservato da «dataset mixture, curriculum e dati sintetici».
 
 ```python
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     weights = [0.6, 0.3, 0.1]
     temperature = 0.5
     powered = [weight ** temperature for weight in weights]
@@ -79,7 +90,7 @@ Cambiare ordine e difficoltà nel tempo modifica la traiettoria di ottimizzazion
 
 **Caso da seguire.** Per «Curriculum» si mantiene l'input del capitolo e si isola questa condizione: Cambiare ordine e difficoltà nel tempo modifica la traiettoria di ottimizzazione.
 
-**Controllo.** Modifica una sola regola della pipeline e misura quali record cambiano, evitando di confrontare raccolte di origine diversa.
+**Controllo.** Per «Curriculum», modifica una sola regola della pipeline e misura quali record cambiano, evitando di confrontare raccolte di origine diversa.
 
 
 ## Dati sintetici
@@ -88,7 +99,7 @@ Modello generatore, prompt, filtri e provenienza devono essere registrati per ev
 
 **Caso da seguire.** Per «Dati sintetici» si mantiene l'input del capitolo e si isola questa condizione: Modello generatore, prompt, filtri e provenienza devono essere registrati per evitare feedback non controllato.
 
-**Controllo.** Descrivi ciò che la pipeline perde oltre a ciò che produce. Il limite locale è: Modello generatore, prompt, filtri e provenienza devono essere registrati per evitare feedback non controllato.
+**Controllo.** Per «Dati sintetici», descrivi ciò che la pipeline perde oltre a ciò che produce. Nel caso «Dati sintetici», il limite locale è: Modello generatore, prompt, filtri e provenienza devono essere registrati per evitare feedback non controllato.
 
 
 ![Dataset mixture, curriculum e dati sintetici: chart](../../assets/chapters/33_data_mixture/MIX-02/candidate-v47.png)
@@ -98,13 +109,13 @@ La seconda figura mette a confronto «Curriculum» e il limite discusso in «Dat
 
 ## Come si collegano i passaggi
 
-- **Da «Peso effettivo delle sorgenti» a «Temperature sampling».** Dimensione grezza, probabilità di campionamento e ripetizione determinano le esposizioni. Un esponente sulle proporzioni aumenta o riduce il peso relativo dei domini piccoli. Il primo passaggio identifica il record e la sua provenienza; il secondo dichiara la trasformazione che cambia la popolazione osservata. [SRC-33-001; SRC-33-002]
+- **Da «Peso effettivo delle sorgenti» a «Temperature sampling».** Dimensione grezza, probabilità di campionamento e ripetizione determinano le esposizioni. Un esponente sulle proporzioni aumenta o riduce il peso relativo dei domini piccoli. «Peso effettivo delle sorgenti» identifica il record e «Temperature sampling» dichiara la trasformazione sulla popolazione osservata. Da «Peso effettivo delle sorgenti» a «Temperature sampling» cambia la domanda osservabile. [SRC-33-001; SRC-33-002]
 
-- **Da «Temperature sampling» a «Mixture ottimizzata».** Un esponente sulle proporzioni aumenta o riduce il peso relativo dei domini piccoli. Pesi appresi con proxy model dipendono da domini, validation e budget. La trasformazione diventa confrontabile soltanto quando il passaggio successivo conserva configurazione, conteggi e artefatti intermedi. [SRC-33-002; SRC-33-003]
+- **Da «Temperature sampling» a «Mixture ottimizzata».** Un esponente sulle proporzioni aumenta o riduce il peso relativo dei domini piccoli. Pesi appresi con proxy model dipendono da domini, validation e budget. Il passaggio da «Temperature sampling» a «Mixture ottimizzata» conserva configurazione, conteggi e artefatti intermedi. Il passaggio successivo rende misurabile «Mixture ottimizzata». [SRC-33-002; SRC-33-003]
 
-- **Da «Mixture ottimizzata» a «Curriculum».** Pesi appresi con proxy model dipendono da domini, validation e budget. Cambiare ordine e difficoltà nel tempo modifica la traiettoria di ottimizzazione. Una volta resa tracciabile la pipeline, il quarto passaggio può affrontare selezione o uso senza confondere un cambiamento nei dati con uno nel modello. [SRC-33-003; SRC-33-004]
+- **Da «Mixture ottimizzata» a «Curriculum».** Pesi appresi con proxy model dipendono da domini, validation e budget. Cambiare ordine e difficoltà nel tempo modifica la traiettoria di ottimizzazione. Con «Curriculum» la pipeline può selezionare o usare dati senza confonderli con una modifica del modello. Da «Mixture ottimizzata» a «Curriculum» cambia la domanda osservabile. [SRC-33-003; SRC-33-004]
 
-- **Da «Curriculum» a «Dati sintetici».** Cambiare ordine e difficoltà nel tempo modifica la traiettoria di ottimizzazione. Modello generatore, prompt, filtri e provenienza devono essere registrati per evitare feedback non controllato. L'ultima sezione porta il risultato alla valutazione e chiede quali record, slice o failure restano fuori dalla media. [SRC-33-004; SRC-33-001]
+- **Da «Curriculum» a «Dati sintetici».** Cambiare ordine e difficoltà nel tempo modifica la traiettoria di ottimizzazione. Modello generatore, prompt, filtri e provenienza devono essere registrati per evitare feedback non controllato. «Dati sintetici» porta il risultato alla valutazione e rende visibili record, slice e failure esclusi. Il passaggio successivo rende misurabile «Dati sintetici». [SRC-33-004; SRC-33-001]
 
 La catena completa produce probabilità effettive e mix osservato a partire da pesi, temperatura, curriculum e conteggio dei token. Ogni collegamento conserva un oggetto osservabile diverso; per questo il risultato non può essere esteso oltre il limite dichiarato: peso nominale e esposizione effettiva non sono la stessa misura.
 
@@ -120,4 +131,4 @@ La catena completa produce probabilità effettive e mix osservato a partire da p
 
 ## L'artefatto che deve sopravvivere
 
-La lezione parte da «pesi, temperatura, curriculum e conteggio dei token» e arriva fino a «probabilità effettive e mix osservato». Il limite da conservare è questo: peso nominale e esposizione effettiva non sono la stessa misura. Definizioni e risultati citati sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md); la mappa dei claim è in [`CLAIMS.md`](CLAIMS.md).
+La lezione parte da «pesi, temperatura, curriculum e conteggio dei token» e arriva fino a «probabilità effettive e mix osservato». Il limite da conservare è questo: peso nominale e esposizione effettiva non sono la stessa misura. Per «Dati sintetici», provenienza e trasformazioni sono registrate in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md), [`CLAIMS.md`](CLAIMS.md) e negli artefatti di `code/`.

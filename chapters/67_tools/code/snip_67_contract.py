@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-import hashlib
 import json
-import math
-import statistics
-from collections import Counter
 
 CHAPTER = 67
 TITLE = 'Output strutturato e uso degli strumenti'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     request = {"tool": "lookup_order", "order_id": "A1"}
     allowlist = {"lookup_order"}
     allowed = request["tool"] in allowlist and bool(request["order_id"])

@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-import hashlib
 import json
-import math
-import statistics
-from collections import Counter
 
 CHAPTER = 62
 TITLE = 'World model, embodied AI e vision-language-action'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     state = {"position": 0, "battery": 2}
     action = "move"
     next_state = dict(state)

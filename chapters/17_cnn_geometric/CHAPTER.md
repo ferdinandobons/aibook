@@ -14,7 +14,7 @@ deferred: benchmark applicativi non eseguiti e approvazione autoriale delle visu
 
 # Capitolo 17. Convolutional network e apprendimento geometrico
 
-La domanda guida di questa lezione è come collegare «Condivisione locale dei pesi» e «Grafi e message passing» senza perdere il contratto tecnico di convolutional network e apprendimento geometrico. L'oggetto osservato è una griglia locale di feature. Il contratto locale è: input, una matrice 3 x 3 e un kernel 2 x 2; operazione, lo stesso kernel scorre posizioni definite da stride e padding; output, una griglia di attivazioni con dimensioni calcolabili. Il caso guida è questo: Una griglia 3x3 e un kernel 2x2 in cui una sola posizione dell'output viene calcolata a mano. Il confine da mantenere esplicito è: la condivisione dei pesi non implica invariance a ogni trasformazione.
+La lezione prende un caso piccolo e lo accompagna da «Condivisione locale dei pesi» fino a «Grafi e message passing», senza saltare i passaggi. L'oggetto osservato è una griglia locale di feature. Il contratto locale dichiara input, una matrice 3 x 3 e un kernel 2 x 2; operazione, lo stesso kernel scorre posizioni definite da stride e padding; output, una griglia di attivazioni con dimensioni calcolabili. Per fissare il riferimento usiamo Una griglia 3x3 e un kernel 2x2 in cui una sola posizione dell'output viene calcolata a mano. Il limite da non nascondere è: la condivisione dei pesi non implica invariance a ogni trasformazione.
 
 ## Condivisione locale dei pesi
 
@@ -24,7 +24,7 @@ Lo stesso kernel viene riutilizzato nelle posizioni della griglia.
 
 **Caso da seguire.** Una griglia 3x3 e un kernel 2x2 in cui una sola posizione dell'output viene calcolata a mano.
 
-**Controllo.** Scrivi il risultato atteso prima del calcolo, modifica una sola quantità e localizza il primo passaggio che cambia. Il vincolo da conservare è: Questa condivisione incorpora una ipotesi di regolarità locale.
+**Controllo.** Per «Condivisione locale dei pesi», scrivi il risultato atteso prima del calcolo, modifica una sola quantità e localizza il primo passaggio che cambia. Nel caso «Condivisione locale dei pesi», il vincolo da conservare è: Questa condivisione incorpora una ipotesi di regolarità locale.
 
 
 ## Stride, padding e receptive field
@@ -33,7 +33,7 @@ Stride e padding determinano la griglia dell'output. Il receptive field cresce c
 
 **Caso da seguire.** Per «Stride, padding e receptive field» si mantiene l'input del capitolo e si isola questa condizione: Stride e padding determinano la griglia dell'output.
 
-**Controllo.** Ricalcola il caso a mano e con lo snippet. Se i risultati divergono, confronta prima i valori intermedi e soltanto dopo l'output finale.
+**Controllo.** Per «Stride, padding e receptive field», ricalcola il caso a mano e con lo snippet. Nel caso «Stride, padding e receptive field», se i risultati divergono, confronta prima i valori intermedi e soltanto dopo l'output finale.
 
 
 La relazione centrale può essere scritta come:
@@ -56,7 +56,7 @@ La convoluzione è equivariant a traslazioni entro le condizioni del bordo. Pool
 
 **Caso da seguire.** Un caso in cui la condivisione dei pesi non implica invariance a ogni trasformazione.
 
-**Controllo.** Aggiungi un valore limite e verifica separatamente forma, valore e ipotesi. Una shape valida non dimostra da sola «Equivarianza e invariance».
+**Controllo.** Per «Equivarianza e invariance», aggiungi un valore limite e verifica separatamente forma, valore e ipotesi. Una shape valida non dimostra da sola «Equivarianza e invariance».
 
 
 ## Vision Transformer e ibridi
@@ -65,19 +65,47 @@ Patch embedding e attention offrono una geometria diversa. CNN e Transformer pos
 
 **Caso da seguire.** Per «Vision Transformer e ibridi» si mantiene l'input del capitolo e si isola questa condizione: Patch embedding e attention offrono una geometria diversa.
 
-**Controllo.** Mantieni fisso l'input e sostituisci soltanto il meccanismo discusso nella sezione. Il confronto deve attribuire la differenza a quel passaggio, non al setup.
+**Controllo.** Per «Vision Transformer e ibridi», mantieni fisso l'input e sostituisci soltanto il meccanismo discusso nella sezione. Nel caso «Vision Transformer e ibridi», il confronto deve attribuire la differenza a quel passaggio, non al setup.
 
 
 ## Esempio Python eseguito
 
-Il frammento seguente è lo stesso conservato nel repository. Usa valori piccoli perché l'obiettivo è osservare il meccanismo, non simulare una scala che non abbiamo eseguito.
+Il caso computazionale di convolutional network e apprendimento geometrico è riportato senza trasformazioni: il file e l'output sono quelli verificati. Per «Convolutional network e apprendimento geometrico», il caso di default usa valori piccoli per isolare il meccanismo. La suite conserva inoltre una failure esplicita per separare il contratto osservato da «convolutional network e apprendimento geometrico».
 
 ```python
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     image = [[1.0, 2.0, 0.0], [0.0, 1.0, 2.0], [2.0, 0.0, 1.0]]
     kernel = [[1.0, 0.0], [0.0, -1.0]]
-    output = [[sum(image[i + u][j + v] * kernel[u][v] for u in range(2) for v in range(2)) for j in range(2)] for i in range(2)]
-    return {"output": output, "shape": [2, 2], "invariant": "the same kernel is reused at every position"}
+    output = [
+        [
+            sum(image[i + u][j + v] * kernel[u][v] for u in range(2) for v in range(2))
+            for j in range(2)
+        ]
+        for i in range(2)
+    ]
+    return {
+        "output": output,
+        "shape": [2, 2],
+        "invariant": "the same kernel is reused at every position",
+    }
 ```
 
 Esecuzione con `python snip_17_contract.py`:
@@ -95,7 +123,7 @@ Su un grafo, i vicini non sono disposti in una griglia regolare. Le GNN aggregan
 
 **Caso da seguire.** Per «Grafi e message passing» si mantiene l'input del capitolo e si isola questa condizione: Su un grafo, i vicini non sono disposti in una griglia regolare.
 
-**Controllo.** Costruisci un controesempio che rispetti il tipo di dato ma violi l'ipotesi centrale. Il test deve rendere riconoscibile perché «Grafi e message passing» non si applica.
+**Controllo.** Per «Grafi e message passing», costruisci un controesempio che rispetti il tipo di dato ma violi l'ipotesi centrale. Il test deve rendere riconoscibile perché «Grafi e message passing» non si applica.
 
 
 ![Convolutional network e apprendimento geometrico: matrix](../../assets/chapters/17_cnn_geometric/GEOMETRI-02/candidate-v49.png)
@@ -105,13 +133,13 @@ La seconda figura mette a confronto «Vision Transformer e ibridi» e il limite 
 
 ## Come si collegano i passaggi
 
-- **Da «Condivisione locale dei pesi» a «Stride, padding e receptive field».** Una convoluzione applica lo stesso kernel in posizioni differenti. Stride e padding determinano la griglia dell'output. Il primo passaggio definisce che cosa entra nel calcolo; il secondo stabilisce la regola che produce il valore osservabile. [SRC-17-001; SRC-17-002]
+- **Da «Condivisione locale dei pesi» a «Stride, padding e receptive field».** Una convoluzione applica lo stesso kernel in posizioni differenti. Stride e padding determinano la griglia dell'output. Tra «Condivisione locale dei pesi» e «Stride, padding e receptive field» l'ingresso viene fissato prima della regola che produce il valore. Da «Condivisione locale dei pesi» a «Stride, padding e receptive field» cambia la domanda osservabile. [SRC-17-001; SRC-17-002]
 
-- **Da «Stride, padding e receptive field» a «Equivarianza e invariance».** Stride e padding determinano la griglia dell'output. La convoluzione è equivariant a traslazioni entro le condizioni del bordo. La regola generale viene poi letta dentro il componente: questa separazione permette di localizzare un errore prima di attribuirlo all'intero modello. [SRC-17-002; SRC-17-003]
+- **Da «Stride, padding e receptive field» a «Equivarianza e invariance».** Stride e padding determinano la griglia dell'output. La convoluzione è equivariant a traslazioni entro le condizioni del bordo. Nel caso «Equivarianza e invariance» il componente diventa il punto in cui localizzare l'errore. Il passaggio successivo rende misurabile «Equivarianza e invariance». [SRC-17-002; SRC-17-003]
 
-- **Da «Equivarianza e invariance» a «Vision Transformer e ibridi».** La convoluzione è equivariant a traslazioni entro le condizioni del bordo. Patch embedding e attention offrono una geometria diversa. Dopo avere reso visibile il componente, il percorso introduce la variante o l'ottimizzazione senza cambiare di nascosto il caso di partenza. [SRC-17-003; SRC-17-004]
+- **Da «Equivarianza e invariance» a «Vision Transformer e ibridi».** La convoluzione è equivariant a traslazioni entro le condizioni del bordo. Patch embedding e attention offrono una geometria diversa. Dopo «Equivarianza e invariance», la variante di «Vision Transformer e ibridi» cambia una proprietà alla volta. Da «Equivarianza e invariance» a «Vision Transformer e ibridi» cambia la domanda osservabile. [SRC-17-003; SRC-17-004]
 
-- **Da «Vision Transformer e ibridi» a «Grafi e message passing».** Patch embedding e attention offrono una geometria diversa. Su un grafo, i vicini non sono disposti in una griglia regolare. L'ultimo passaggio sposta l'attenzione dal funzionamento locale alla misura: correttezza del calcolo e qualità applicativa restano domande distinte. [SRC-17-004; SRC-17-001]
+- **Da «Vision Transformer e ibridi» a «Grafi e message passing».** Patch embedding e attention offrono una geometria diversa. Su un grafo, i vicini non sono disposti in una griglia regolare. Da «Grafi e message passing» in poi la misura resta distinta dalla correttezza locale del calcolo. Il passaggio successivo rende misurabile «Grafi e message passing». [SRC-17-004; SRC-17-001]
 
 La catena completa produce una griglia di attivazioni con dimensioni calcolabili a partire da una matrice 3 x 3 e un kernel 2 x 2. Ogni collegamento conserva un oggetto osservabile diverso; per questo il risultato non può essere esteso oltre il limite dichiarato: la condivisione dei pesi non implica invariance a ogni trasformazione.
 
@@ -127,4 +155,4 @@ La catena completa produce una griglia di attivazioni con dimensioni calcolabili
 
 ## Che cosa deve restare chiaro
 
-La lezione parte da «una matrice 3 x 3 e un kernel 2 x 2» e arriva fino a «una griglia di attivazioni con dimensioni calcolabili». Il limite da conservare è questo: la condivisione dei pesi non implica invariance a ogni trasformazione. Definizioni e risultati citati sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md); la mappa dei claim è in [`CLAIMS.md`](CLAIMS.md).
+La lezione parte da «una matrice 3 x 3 e un kernel 2 x 2» e arriva fino a «una griglia di attivazioni con dimensioni calcolabili». Il limite da conservare è questo: la condivisione dei pesi non implica invariance a ogni trasformazione. La formula e il codice collegati a «Grafi e message passing» sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md), [`CLAIMS.md`](CLAIMS.md) e `code/`.

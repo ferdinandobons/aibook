@@ -15,7 +15,7 @@ deferred: benchmark applicativi non eseguiti e approvazione autoriale delle visu
 
 # Capitolo 20. Fondamenti della modellazione generativa
 
-La domanda guida di questa lezione è come collegare «Imparare una distribuzione» e «Qualità, copertura e valutazione» senza perdere il contratto tecnico di fondamenti della modellazione generativa. L'oggetto osservato è una distribuzione sui dati o su una variabile latente. Il contratto locale è: input, un dato x, un rumore epsilon o una variabile z; operazione, valutazione di likelihood, trasformazione o campionamento; output, una probabilità, un punteggio o un campione. Il caso guida è questo: Un caso minimo con input un dato x, un rumore epsilon o una variabile z e output «una probabilità, un punteggio o un campione». Il confine da mantenere esplicito è: un campione plausibile non dimostra copertura dell'intera distribuzione.
+Questa mappa di fondamenti della modellazione generativa parte da «Imparare una distribuzione» e arriva a «Qualità, copertura e valutazione» conservando le proprietà che non sono state misurate. L'oggetto osservato è una distribuzione sui dati o su una variabile latente. Il contratto locale dichiara input, un dato x, un rumore epsilon o una variabile z; operazione, valutazione di likelihood, trasformazione o campionamento; output, una probabilità, un punteggio o un campione. Il primo esempio osservabile è Un caso minimo con input un dato x, un rumore epsilon o una variabile z e output «una probabilità, un punteggio o un campione». Il limite da non nascondere è: un campione plausibile non dimostra copertura dell'intera distribuzione.
 
 ## Imparare una distribuzione
 
@@ -25,7 +25,7 @@ La variabile latente collega un prior a una distribuzione osservabile.
 
 **Caso da seguire.** Un caso minimo con input un dato x, un rumore epsilon o una variabile z e output «una probabilità, un punteggio o un campione».
 
-**Controllo.** Classifica lo stesso caso lungo un solo asse alla volta e annota quale proprietà non è stata misurata.
+**Controllo.** Per «Imparare una distribuzione», classifica lo stesso caso lungo un solo asse alla volta e annota quale proprietà non è stata misurata.
 
 
 ## Modelli espliciti e impliciti
@@ -34,7 +34,7 @@ Un modello esplicito assegna una densità o probabilità valutabile. Un modello 
 
 **Caso da seguire.** Tre probabilità che sommano a 1 prima della selezione.
 
-**Controllo.** Cambia la proprietà che distingue «Modelli espliciti e impliciti» dalle categorie vicine. Se la classificazione non cambia, la distinzione va formulata meglio.
+**Controllo.** Cambia la proprietà che distingue «Modelli espliciti e impliciti» dalle categorie vicine. Nel caso «Modelli espliciti e impliciti», se la classificazione non cambia, la distinzione va formulata meglio.
 
 
 ## Variabili latenti
@@ -43,7 +43,16 @@ Una variabile latente introduce struttura non osservata. L'inferenza deve colleg
 
 **Caso da seguire.** Tre probabilità che sommano a 1 prima del campionamento, distinguendo plausibilità del campione e copertura.
 
-**Controllo.** Confronta un caso positivo e uno di confine usando la medesima definizione; non trasformare l'esempio in una graduatoria generale.
+**Controllo.** Per «Variabili latenti», confronta un caso positivo e uno di confine usando la medesima definizione; non trasformare l'esempio in una graduatoria generale.
+
+
+La relazione centrale può essere scritta come:
+
+$$
+p(x)=\int p(x|z)p(z)\,dz
+$$
+
+La variabile latente collega un prior a una distribuzione osservabile. [SRC-20-001]
 
 
 ![Fondamenti della modellazione generativa: pipeline](../../assets/chapters/20_generative_foundations/FOUNDATI-01/candidate-v49.png)
@@ -62,11 +71,11 @@ Una energia non normalizzata assegna punteggi alle configurazioni. La costante d
 
 ## Qualità, copertura e valutazione
 
-Campioni plausibili non garantiscono copertura. Likelihood e precision-recall generativa rispondono a domande diverse e richiedono protocolli dichiarati. [SRC-20-001; SRC-20-005]
+Campioni plausibili non garantiscono copertura. Likelihood e precision-recall generativa rispondono a domande diverse e richiedono protocolli dichiarati. [SRC-20-005]
 
 **Caso da seguire.** Per «Qualità, copertura e valutazione» si mantiene l'input del capitolo e si isola questa condizione: Campioni plausibili non garantiscono copertura.
 
-**Controllo.** Limita la conclusione alla proprietà dichiarata: Likelihood e precision-recall generativa rispondono a domande diverse e richiedono protocolli dichiarati. Le dimensioni non osservate restano aperte.
+**Controllo.** Per «Qualità, copertura e valutazione», limita la conclusione alla proprietà dichiarata: Likelihood e precision-recall generativa rispondono a domande diverse e richiedono protocolli dichiarati. Nel caso «Qualità, copertura e valutazione», le dimensioni non osservate restano aperte.
 
 
 ![Fondamenti della modellazione generativa: timeline](../../assets/chapters/20_generative_foundations/FOUNDATI-02/candidate-v49.png)
@@ -81,13 +90,13 @@ Il capitolo confronta famiglie generative a livello concettuale; le implementazi
 
 ## Come si collegano i passaggi
 
-- **Da «Imparare una distribuzione» a «Modelli espliciti e impliciti».** Un modello generativo descrive o campiona dati secondo una distribuzione. Un modello esplicito assegna una densità o probabilità valutabile. La definizione iniziale stabilisce l'asse del confronto; la categoria successiva aggiunge una proprietà senza creare una classifica implicita. [SRC-20-001; SRC-20-002]
+- **Da «Imparare una distribuzione» a «Modelli espliciti e impliciti».** Un modello generativo descrive o campiona dati secondo una distribuzione. Un modello esplicito assegna una densità o probabilità valutabile. «Imparare una distribuzione» stabilisce l'asse e «Modelli espliciti e impliciti» aggiunge una proprietà senza creare una graduatoria. Il passaggio successivo rende misurabile «Modelli espliciti e impliciti». [SRC-20-001; SRC-20-002]
 
-- **Da «Modelli espliciti e impliciti» a «Variabili latenti».** Un modello esplicito assegna una densità o probabilità valutabile. Una variabile latente introduce struttura non osservata. Il terzo passaggio verifica se le categorie restano distinguibili sullo stesso caso e impedisce che termini vicini diventino sinonimi. [SRC-20-002; SRC-20-003]
+- **Da «Modelli espliciti e impliciti» a «Variabili latenti».** Un modello esplicito assegna una densità o probabilità valutabile. Una variabile latente introduce struttura non osservata. Il confronto tra «Modelli espliciti e impliciti» e «Variabili latenti» mantiene le categorie distinguibili sullo stesso caso. Da «Modelli espliciti e impliciti» a «Variabili latenti» cambia la domanda osservabile. [SRC-20-002; SRC-20-003]
 
-- **Da «Variabili latenti» a «Energy-based model».** Una variabile latente introduce struttura non osservata. Una energia non normalizzata assegna punteggi alle configurazioni. La quarta sezione introduce il punto in cui l'asse scelto smette di bastare e richiede una nuova osservazione. [SRC-20-003; SRC-20-004]
+- **Da «Variabili latenti» a «Energy-based model».** Una variabile latente introduce struttura non osservata. Una energia non normalizzata assegna punteggi alle configurazioni. «Energy-based model» mostra il punto in cui l'asse di «Variabili latenti» non è più sufficiente. Il passaggio successivo rende misurabile «Energy-based model». [SRC-20-003; SRC-20-004]
 
-- **Da «Energy-based model» a «Qualità, copertura e valutazione».** Una energia non normalizzata assegna punteggi alle configurazioni. Campioni plausibili non garantiscono copertura. La sezione finale riunisce le dimensioni della valutazione, ma conserva i limiti di ciascuna invece di fonderle in un unico punteggio. [SRC-20-004; SRC-20-001; SRC-20-005]
+- **Da «Energy-based model» a «Qualità, copertura e valutazione».** Una energia non normalizzata assegna punteggi alle configurazioni. Campioni plausibili non garantiscono copertura. Il passaggio su «Qualità, copertura e valutazione» riunisce più dimensioni senza cancellarne i limiti. Da «Energy-based model» a «Qualità, copertura e valutazione» cambia la domanda osservabile. [SRC-20-004; SRC-20-005]
 
 La catena completa produce una probabilità, un punteggio o un campione a partire da un dato x, un rumore epsilon o una variabile z. Ogni collegamento conserva un oggetto osservabile diverso; per questo il risultato non può essere esteso oltre il limite dichiarato: un campione plausibile non dimostra copertura dell'intera distribuzione.
 
@@ -103,4 +112,4 @@ La catena completa produce una probabilità, un punteggio o un campione a partir
 
 ## Una mappa, non una graduatoria
 
-La lezione parte da «un dato x, un rumore epsilon o una variabile z» e arriva fino a «una probabilità, un punteggio o un campione». Il limite da conservare è questo: un campione plausibile non dimostra copertura dell'intera distribuzione. Definizioni e risultati citati sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md); la mappa dei claim è in [`CLAIMS.md`](CLAIMS.md).
+La lezione parte da «un dato x, un rumore epsilon o una variabile z» e arriva fino a «una probabilità, un punteggio o un campione». Il limite da conservare è questo: un campione plausibile non dimostra copertura dell'intera distribuzione. Il confronto di «Qualità, copertura e valutazione» resta verificabile nei dossier [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md) e [`CLAIMS.md`](CLAIMS.md), senza trasformare la mappa in una graduatoria.

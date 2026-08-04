@@ -89,7 +89,9 @@ def main() -> None:
     for model in ("A", "B"):
         print(f"model_{model}_accuracy: {accuracy(EXAMPLES, model):.3f}")
         print(f"model_{model}_group_accuracy: {accuracy_by_group(EXAMPLES, model)}")
-        print(f"model_{model}_weighted_error_cost: {weighted_error_cost(EXAMPLES, model):.1f}")
+        print(
+            f"model_{model}_weighted_error_cost: {weighted_error_cost(EXAMPLES, model):.1f}"
+        )
     observed, lower, upper = paired_bootstrap_difference(EXAMPLES)
     print(f"accuracy_difference_B_minus_A: {observed:.3f}")
     print(f"paired_bootstrap_95pct_interval: [{lower:.3f}, {upper:.3f}]")

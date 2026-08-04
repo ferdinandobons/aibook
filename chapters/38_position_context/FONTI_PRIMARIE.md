@@ -1,6 +1,6 @@
 # Fonti primarie e autorevoli. Capitolo 38
 
-- Data di consultazione: 3 agosto 2026
+- Data di consultazione: 4 agosto 2026
 - Routing semantico: capitolo 38 -> tema `position`.
 - Perimetro: definizioni, meccanismi e limiti portanti del capitolo.
 - Regola: risultati numerici locali restano distinti dalle evidenze sperimentali delle fonti.
@@ -11,9 +11,9 @@
 - Autori o organizzazione: Su et al..
 - Tipo: paper o report tecnico.
 - Data: data della revisione consultata.
-- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 4 agosto 2026.
 - URL o identificatore: https://arxiv.org/abs/2104.09864
-- Data di consultazione: 3 agosto 2026.
+- Data di consultazione: 4 agosto 2026.
 - Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
 - Sezioni rilevanti: Abstract / pagina iniziale; RoFormer: Enhanced Transformer with Rotary Position Embedding; 2.2 Absolute position embedding; 2.3 Relative position embedding.
 - Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
@@ -27,9 +27,9 @@
 - Autori o organizzazione: Press.
 - Tipo: paper o report tecnico.
 - Data: data della revisione consultata.
-- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 4 agosto 2026.
 - URL o identificatore: https://arxiv.org/abs/2108.12409
-- Data di consultazione: 3 agosto 2026.
+- Data di consultazione: 4 agosto 2026.
 - Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
 - Sezioni rilevanti: Abstract / pagina iniziale; Train Short, Test Long: Attention with Linear Biases Enables Input Length Extrapolation.
 - Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
@@ -43,9 +43,9 @@
 - Autori o organizzazione: Peng et al..
 - Tipo: paper o report tecnico.
 - Data: data della revisione consultata.
-- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 4 agosto 2026.
 - URL o identificatore: https://arxiv.org/abs/2309.00071
-- Data di consultazione: 3 agosto 2026.
+- Data di consultazione: 4 agosto 2026.
 - Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
 - Sezioni rilevanti: Abstract / pagina iniziale; YaRN: Efficient Context Window Extension of Large Language Models; 2.1 Rotary Position Embeddings; 2.2 Position Interpolation.
 - Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
@@ -59,9 +59,9 @@
 - Autori o organizzazione: Ding et al..
 - Tipo: paper o report tecnico.
 - Data: data della revisione consultata.
-- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 4 agosto 2026.
 - URL o identificatore: https://arxiv.org/abs/2402.13753
-- Data di consultazione: 3 agosto 2026.
+- Data di consultazione: 4 agosto 2026.
 - Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
 - Sezioni rilevanti: Abstract / pagina iniziale; LongRoPE: Extending LLM Context Window Beyond 2 Million Tokens; 2 Non-uniformity in Positional Interpolation; 2.2 Study on Non-uniform Positional Interpolation.
 - Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.

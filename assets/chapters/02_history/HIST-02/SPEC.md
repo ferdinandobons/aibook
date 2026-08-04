@@ -45,3 +45,10 @@ L'input esterno resta lo stesso. I paradigmi possono convivere nella stessa appl
 - composizione raster revisionabile: `scripts/generate_history_visuals.py`;
 - decodifica verificata nel workflow `generate-book-visuals.yml`.
 - domanda principale: Quale confronto o limite chiarisce «Descrivere il problema con simboli e ricerca»?
+
+## Contratto geometrico
+
+- raster: margine di sicurezza di 20 px sul canvas 1800x1000;
+- contenimento: nessun testo oltre il proprio box o il canvas;
+- composizione: nessuna sovrapposizione o tangenza intenzionale tra elementi fratelli;
+- fonte: `GEOMETRY.json` e checklist dell'audit storico.

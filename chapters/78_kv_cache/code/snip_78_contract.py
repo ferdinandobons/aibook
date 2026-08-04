@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-import hashlib
 import json
-import math
-import statistics
-from collections import Counter
 
 CHAPTER = 78
 TITLE = 'KV cache e riuso del contesto'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     prefix = ["p0", "p1"]
     requests = {"r1": prefix + ["a"], "r2": prefix + ["b"]}
     shared_tokens = len(set(requests["r1"]) & set(requests["r2"]))

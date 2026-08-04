@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-import hashlib
 import json
-import math
-import statistics
-from collections import Counter
 
 CHAPTER = 60
 TITLE = 'Generazione video'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     frames = ["f0", "f1", "f2"]
     condition = "prompt"
     generated = [(frame, condition) for frame in frames]

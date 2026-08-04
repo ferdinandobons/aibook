@@ -1,16 +1,15 @@
 from __future__ import annotations
 
-import hashlib
 import json
 import math
-import statistics
-from collections import Counter
 
 CHAPTER = 40
 TITLE = 'Attention hardware-aware'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     scores = [[1.0, 2.0], [0.0, 3.0]]
     row_maxima = [max(row) for row in scores]
     exp_sums = [sum(math.exp(value - maximum) for value in row) for row, maximum in zip(scores, row_maxima)]

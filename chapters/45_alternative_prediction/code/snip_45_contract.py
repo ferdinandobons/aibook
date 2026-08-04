@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-import hashlib
 import json
-import math
-import statistics
-from collections import Counter
 
 CHAPTER = 45
 TITLE = 'Byte, predizione multi-token e language diffusion'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     payload = "AI"
     encoded = list(payload.encode("utf-8"))
     groups = [encoded[index:index + 2] for index in range(0, len(encoded), 2)]

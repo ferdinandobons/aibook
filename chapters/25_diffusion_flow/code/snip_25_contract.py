@@ -1,16 +1,15 @@
 from __future__ import annotations
 
-import hashlib
 import json
 import math
-import statistics
-from collections import Counter
 
 CHAPTER = 25
 TITLE = 'Diffusione, score matching e flow matching'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     alpha_bar = [0.9, 0.5, 0.1]
     signal = [math.sqrt(value) for value in alpha_bar]
     noise = [math.sqrt(1.0 - value) for value in alpha_bar]

@@ -1,6 +1,6 @@
 # Fonti primarie e autorevoli. Capitolo 64
 
-- Data di consultazione: 3 agosto 2026
+- Data di consultazione: 4 agosto 2026
 - Routing semantico: capitolo 64 -> tema `rag`.
 - Perimetro: definizioni, meccanismi e limiti portanti del capitolo.
 - Regola: risultati numerici locali restano distinti dalle evidenze sperimentali delle fonti.
@@ -11,9 +11,9 @@
 - Autori o organizzazione: Lewis et al..
 - Tipo: paper o report tecnico.
 - Data: data della revisione consultata.
-- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 4 agosto 2026.
 - URL o identificatore: https://arxiv.org/abs/2005.11401
-- Data di consultazione: 3 agosto 2026.
+- Data di consultazione: 4 agosto 2026.
 - Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
 - Sezioni rilevanti: Abstract / pagina iniziale; Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks; 3.3 Jeopardy Question Generation; 4.3 Jeopardy Question Generation.
 - Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
@@ -27,9 +27,9 @@
 - Autori o organizzazione: Karpukhin et al..
 - Tipo: paper o report tecnico.
 - Data: data della revisione consultata.
-- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 4 agosto 2026.
 - URL o identificatore: https://arxiv.org/abs/2004.04906
-- Data di consultazione: 3 agosto 2026.
+- Data di consultazione: 4 agosto 2026.
 - Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
 - Sezioni rilevanti: Abstract / pagina iniziale; Dense Passage Retrieval for Open-Domain Question Answering; 3 Dense Passage Retriever (DPR); 5 Experiments: Passage Retrieval.
 - Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
@@ -43,9 +43,9 @@
 - Autori o organizzazione: Asai et al..
 - Tipo: paper o report tecnico.
 - Data: data della revisione consultata.
-- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 4 agosto 2026.
 - URL o identificatore: https://arxiv.org/abs/2310.11511
-- Data di consultazione: 3 agosto 2026.
+- Data di consultazione: 4 agosto 2026.
 - Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
 - Sezioni rilevanti: Abstract / pagina iniziale; Self-Rag: Self-reflective Retrieval augmented Generation.
 - Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
@@ -59,9 +59,9 @@
 - Autori o organizzazione: Rashkin et al..
 - Tipo: paper o report tecnico.
 - Data: data della revisione consultata.
-- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 4 agosto 2026.
 - URL o identificatore: https://arxiv.org/abs/2112.12870
-- Data di consultazione: 3 agosto 2026.
+- Data di consultazione: 4 agosto 2026.
 - Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
 - Sezioni rilevanti: Abstract / pagina iniziale; Measuring Attribution in Natural Language Generation Models; 3.1 An Initial Definition of AIS: Attribution of Standalone Propositions; 3.2 Extending AIS: Attribution of Sentences in Context.
 - Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.

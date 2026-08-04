@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-import hashlib
 import json
-import math
-import statistics
-from collections import Counter
 
 CHAPTER = 56
 TITLE = 'Vision encoder e Vision-Language Model'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     patches = [[0.8, 0.1], [0.2, 0.7]]
     question = [0.5, 0.5]
     scores = [sum(a * b for a, b in zip(patch, question)) for patch in patches]

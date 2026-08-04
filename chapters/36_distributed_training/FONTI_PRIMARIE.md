@@ -1,6 +1,6 @@
 # Fonti primarie e autorevoli. Capitolo 36
 
-- Data di consultazione: 3 agosto 2026
+- Data di consultazione: 4 agosto 2026
 - Routing semantico: capitolo 36 -> tema `distributed_training`.
 - Perimetro: definizioni, meccanismi e limiti portanti del capitolo.
 - Regola: risultati numerici locali restano distinti dalle evidenze sperimentali delle fonti.
@@ -11,9 +11,9 @@
 - Autori o organizzazione: Shoeybi et al..
 - Tipo: paper o report tecnico.
 - Data: data della revisione consultata.
-- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 4 agosto 2026.
 - URL o identificatore: https://arxiv.org/abs/1909.08053
-- Data di consultazione: 3 agosto 2026.
+- Data di consultazione: 4 agosto 2026.
 - Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
 - Sezioni rilevanti: Abstract / pagina iniziale; Megatron-LM: Training Multi-Billion Parameter Language Models Using Model Parallelism; 2.3 Data and Model Parallelism in Deep Learning; 4.1 Training Dataset.
 - Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
@@ -27,9 +27,9 @@
 - Autori o organizzazione: Rajbhandari et al..
 - Tipo: paper o report tecnico.
 - Data: data della revisione consultata.
-- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 4 agosto 2026.
 - URL o identificatore: https://arxiv.org/abs/1910.02054
-- Data di consultazione: 3 agosto 2026.
+- Data di consultazione: 4 agosto 2026.
 - Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
 - Sezioni rilevanti: Abstract / pagina iniziale; ZeRO: Memory Optimizations Toward Training Trillion Parameter Models; 2.1 Data, Model and Pipeline Parallelism; 3.1 Model States: Optimizer States, Gradients and Parameters.
 - Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
@@ -43,9 +43,9 @@
 - Autori o organizzazione: PyTorch.
 - Tipo: standard o documentazione ufficiale.
 - Data: data della revisione consultata.
-- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 4 agosto 2026.
 - URL o identificatore: https://pytorch.org/docs/stable/fsdp.html
-- Data di consultazione: 3 agosto 2026.
+- Data di consultazione: 4 agosto 2026.
 - Verifica d'accesso: opened-partial; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
 - Sezioni rilevanti: Abstract / pagina iniziale.
 - Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
@@ -59,9 +59,9 @@
 - Autori o organizzazione: Narayanan et al..
 - Tipo: paper o report tecnico.
 - Data: data della revisione consultata.
-- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 4 agosto 2026.
 - URL o identificatore: https://arxiv.org/abs/2104.04473
-- Data di consultazione: 3 agosto 2026.
+- Data di consultazione: 4 agosto 2026.
 - Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
 - Sezioni rilevanti: Abstract / pagina iniziale; 2. Modes of Parallelism; 2.1. Data Parallelism; 2.2. Pipeline Model Parallelism.
 - Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.

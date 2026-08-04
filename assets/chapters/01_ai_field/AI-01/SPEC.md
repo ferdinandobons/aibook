@@ -99,3 +99,10 @@ I tre aspetti possono combinarsi: nessuno determina automaticamente gli altri.
 - valori: nessun dato misurato;
 - generazione raster riproducibile: `scripts/generate_book_visuals.py`.
 - domanda principale: Quale confronto o limite chiarisce «Quando il comportamento è scritto e quando viene appreso»?
+
+## Contratto geometrico
+
+- raster: margine di sicurezza di 20 px sul canvas 1800x1000;
+- contenimento: nessun testo oltre il proprio box o il canvas;
+- composizione: nessuna sovrapposizione o tangenza intenzionale tra elementi fratelli;
+- fonte: `GEOMETRY.json` e checklist dell'audit storico.

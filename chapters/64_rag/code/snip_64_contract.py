@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-import hashlib
 import json
-import math
-import statistics
-from collections import Counter
 
 CHAPTER = 64
 TITLE = 'Retrieval-Augmented Generation'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     retrieved = [("d1", 0.9), ("d2", 0.4)]
     answer = "Il pacco è in transito"
     cited = retrieved[0][0]

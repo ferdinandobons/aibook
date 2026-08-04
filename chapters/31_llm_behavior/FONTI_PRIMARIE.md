@@ -1,6 +1,6 @@
 # Fonti primarie e autorevoli. Capitolo 31
 
-- Data di consultazione: 3 agosto 2026
+- Data di consultazione: 4 agosto 2026
 - Routing semantico: capitolo 31 -> tema `llm_behavior`.
 - Perimetro: definizioni, meccanismi e limiti portanti del capitolo.
 - Regola: risultati numerici locali restano distinti dalle evidenze sperimentali delle fonti.
@@ -11,9 +11,9 @@
 - Autori o organizzazione: Brown et al..
 - Tipo: paper o report tecnico.
 - Data: data della revisione consultata.
-- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 4 agosto 2026.
 - URL o identificatore: https://arxiv.org/abs/2005.14165
-- Data di consultazione: 3 agosto 2026.
+- Data di consultazione: 4 agosto 2026.
 - Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
 - Sezioni rilevanti: Abstract / pagina iniziale; Language Models are Few-Shot Learners; 3.1 Language Modeling, Cloze, and Completion Tasks; 3.1.1 Language Modeling.
 - Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
@@ -27,9 +27,9 @@
 - Autori o organizzazione: Min et al..
 - Tipo: paper o report tecnico.
 - Data: data della revisione consultata.
-- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 4 agosto 2026.
 - URL o identificatore: https://arxiv.org/abs/2202.12837
-- Data di consultazione: 3 agosto 2026.
+- Data di consultazione: 4 agosto 2026.
 - Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
 - Sezioni rilevanti: Abstract / pagina iniziale; Rethinking the Role of Demonstrations: What Makes In-Context Learning Work?; 5 Why does In-Context Learning work?.
 - Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
@@ -43,9 +43,9 @@
 - Autori o organizzazione: Holtzman et al..
 - Tipo: paper o report tecnico.
 - Data: data della revisione consultata.
-- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 4 agosto 2026.
 - URL o identificatore: https://arxiv.org/abs/1904.09751
-- Data di consultazione: 3 agosto 2026.
+- Data di consultazione: 4 agosto 2026.
 - Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
 - Sezioni rilevanti: Abstract / pagina iniziale; 3 Language Model Decoding; 4.3 Natural Language Does Not Maximize Probability.
 - Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
@@ -59,9 +59,9 @@
 - Autori o organizzazione: Guo et al..
 - Tipo: paper o report tecnico.
 - Data: data della revisione consultata.
-- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 4 agosto 2026.
 - URL o identificatore: https://arxiv.org/abs/1706.04599
-- Data di consultazione: 3 agosto 2026.
+- Data di consultazione: 4 agosto 2026.
 - Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
 - Sezioni rilevanti: Abstract / pagina iniziale; On Calibration of Modern Neural Networks; Supplementary Materials for: On Calibration of Modern Neural Networks; Expected Calibration Error (ECE)..
 - Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.

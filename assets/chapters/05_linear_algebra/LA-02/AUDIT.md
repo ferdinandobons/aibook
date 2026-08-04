@@ -33,3 +33,11 @@ La figura è rasterizzata in PNG da `scripts/generate_linear_algebra_visuals.py`
 ## Verdetto
 
 La figura può essere inclusa nella candidatura del Capitolo 5. Resta candidate-v1.png fino all'approvazione autoriale.
+
+## Gate geometrico raster
+
+- [x] PNG decodificato e dimensione standard verificata;
+- [x] contenuto distante almeno 20 px dal bordo;
+- [x] checklist storica di padding e contenimento mantenuta;
+- [x] nessuna sovrapposizione o elemento attaccato dichiarato nell'audit della candidata;
+- [x] manifest `GEOMETRY.json` scritto per il controllo indipendente del raster.

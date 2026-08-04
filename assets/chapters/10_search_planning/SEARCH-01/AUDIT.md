@@ -48,3 +48,11 @@ I collegamenti lunghi sono stati instradati sopra o sotto i nodi. I costi sono c
 ## Verdetto
 
 `SEARCH-01/candidate-v2.png` è collegata alla sezione visuale del capitolo e resta candidata fino alla revisione autoriale.
+
+## Gate geometrico raster
+
+- [x] PNG decodificato e dimensione standard verificata;
+- [x] contenuto distante almeno 20 px dal bordo;
+- [x] checklist storica di padding e contenimento mantenuta;
+- [x] nessuna sovrapposizione o elemento attaccato dichiarato nell'audit della candidata;
+- [x] manifest `GEOMETRY.json` scritto per il controllo indipendente del raster.

@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-import hashlib
 import json
-import math
-import statistics
-from collections import Counter
 
 CHAPTER = 42
 TITLE = 'State-space model, recurrence e long convolution'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     state = 0.0
     inputs = [1.0, 0.0, -1.0]
     outputs = []

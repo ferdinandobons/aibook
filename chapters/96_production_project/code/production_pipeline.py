@@ -19,7 +19,11 @@ class ReleaseCandidate:
     def validate(self) -> None:
         if not self.version or not self.owner or not self.rollback_version:
             raise ValueError("version, owner e rollback_version sono obbligatori")
-        for value in (self.overall_accuracy, self.critical_slice_accuracy, self.canary_error_rate):
+        for value in (
+            self.overall_accuracy,
+            self.critical_slice_accuracy,
+            self.canary_error_rate,
+        ):
             if not 0.0 <= value <= 1.0:
                 raise ValueError("le metriche devono essere comprese tra 0 e 1")
 
@@ -33,17 +37,22 @@ class GatePolicy:
 
 def manifest_digest(candidate: ReleaseCandidate, policy: GatePolicy) -> str:
     payload = json.dumps(
-        {"candidate": asdict(candidate), "policy": asdict(policy)}, sort_keys=True, separators=(",", ":")
+        {"candidate": asdict(candidate), "policy": asdict(policy)},
+        sort_keys=True,
+        separators=(",", ":"),
     )
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()[:16]
 
 
 # BOOK-EXCERPT-START
-def evaluate_release(candidate: ReleaseCandidate, policy: GatePolicy = GatePolicy()) -> dict[str, object]:
+def evaluate_release(
+    candidate: ReleaseCandidate, policy: GatePolicy = GatePolicy()
+) -> dict[str, object]:
     candidate.validate()
     offline_checks = {
         "overall": candidate.overall_accuracy >= policy.minimum_overall_accuracy,
-        "critical_slice": candidate.critical_slice_accuracy >= policy.minimum_critical_slice_accuracy,
+        "critical_slice": candidate.critical_slice_accuracy
+        >= policy.minimum_critical_slice_accuracy,
     }
     offline_passed = all(offline_checks.values())
     canary_passed = candidate.canary_error_rate <= policy.maximum_canary_error_rate
@@ -59,6 +68,8 @@ def evaluate_release(candidate: ReleaseCandidate, policy: GatePolicy = GatePolic
         "rollback_target": candidate.rollback_version if rollback else None,
         "manifest_sha256": manifest_digest(candidate, policy),
     }
+
+
 # BOOK-EXCERPT-END
 
 

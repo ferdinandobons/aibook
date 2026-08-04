@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-import hashlib
 import json
-import math
-import statistics
-from collections import Counter
 
 CHAPTER = 65
 TITLE = 'RAG adattivo, correttivo e basato su grafi'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     graph = {"q1": ["d1"], "d1": ["q2"], "q2": ["d2"]}
     frontier = ["q1"]
     visited = []

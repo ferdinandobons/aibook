@@ -5,7 +5,9 @@
 - angoli bianchi #FFFFFF: superati
 - domanda didattica singola: verificata
 - composizione pertinente al concetto: adapter_stack
-- contenimento testo: verificato dal renderer sul raster prodotto
+- contenimento testo: verificato dal contratto geometrico e dal raster prodotto
+- sovrapposizioni e tangenze: controllate con `GEOMETRY.json`
+- margine canvas: controllato sul raster con soglia 20 px
 - frecce e relazioni: ogni collegamento rappresenta un flusso, una dipendenza o un controllo dichiarato
 - numeri non supportati: assenti
 - watermark o branding di terzi: assenti

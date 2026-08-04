@@ -1,7 +1,8 @@
 # Specifica visuale RECIPE-01
 
 - modello compositivo: recipe_pipeline
-- domanda principale: Come si passa da «Batch di token» a «AdamW» mantenendo osservabile lo stato completo di una ricetta di pretraining?
+- orientamento: orizzontale, lettura da sinistra a destra
+- domanda principale: Quale percorso collega Batch di token a AdamW nel capitolo 35?
 - formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
 - file candidato: candidate-v48.png
@@ -12,5 +13,7 @@
 - limite visualizzato: un checkpoint deve includere lo stato necessario a continuare il run
 - valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
 - accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- contenimento: safe margin 20 px; distanza minima tra elementi 8 px
+- geometria: `GEOMETRY.json`, nessuna intersezione o tangenza tra elementi fratelli
 - generatore: scripts/generate_visuals_v2.py
 - approvazione autoriale: aperta

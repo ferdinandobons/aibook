@@ -14,7 +14,7 @@ deferred: benchmark applicativi non eseguiti e approvazione autoriale delle visu
 
 # Capitolo 42. State-space model, recurrence e long convolution
 
-La domanda guida di questa lezione è come collegare «State-space model» e «RWKV, RetNet, xLSTM e Griffin» senza perdere il contratto tecnico di state-space model, recurrence e long convolution. L'oggetto osservato è lo stato dinamico di un modello state-space. Il contratto locale è: input, x_t, stato s_t e matrici A, B, C; operazione, recurrence, convolutione lunga o selezione; output, stato e uscita per ogni posizione. Il caso guida è questo: Un caso minimo con input x_t, stato s_t e matrici A, B, C e output «stato e uscita per ogni posizione». Il confine da mantenere esplicito è: stabilità e discretizzazione fanno parte dell'implementazione.
+Per entrare in state-space model, recurrence e long convolution, seguiamo il passaggio che unisce «State-space model» a «RWKV, RetNet, xLSTM e Griffin». L'oggetto osservato è lo stato dinamico di un modello state-space. Il contratto locale dichiara input, x_t, stato s_t e matrici A, B, C; operazione, recurrence, convolutione lunga o selezione; output, stato e uscita per ogni posizione. La situazione minima da seguire è Un caso minimo con input x_t, stato s_t e matrici A, B, C e output «stato e uscita per ogni posizione». Il limite da non nascondere è: stabilità e discretizzazione fanno parte dell'implementazione.
 
 ## State-space model
 
@@ -24,7 +24,7 @@ La ricorrenza espone stato, input e dinamica prima della scelta implementativa.
 
 **Caso da seguire.** Un caso minimo con input x_t, stato s_t e matrici A, B, C e output «stato e uscita per ogni posizione».
 
-**Controllo.** Scrivi il risultato atteso prima del calcolo, modifica una sola quantità e localizza il primo passaggio che cambia. Il vincolo da conservare è: Uno stato lineare ammette forma ricorrente e, in condizioni tempo-invarianti, forma convoluzionale.
+**Controllo.** Per «State-space model», scrivi il risultato atteso prima del calcolo, modifica una sola quantità e localizza il primo passaggio che cambia. Nel caso «State-space model», il vincolo da conservare è: Uno stato lineare ammette forma ricorrente e, in condizioni tempo-invarianti, forma convoluzionale.
 
 
 ## S4
@@ -33,7 +33,7 @@ Parametrizzazioni strutturate rendono gestibili kernel lunghi e dinamiche stabil
 
 **Caso da seguire.** Tre passi di una dinamica lineare con stato osservabile.
 
-**Controllo.** Ricalcola il caso a mano e con lo snippet. Se i risultati divergono, confronta prima i valori intermedi e soltanto dopo l'output finale.
+**Controllo.** Per «S4», ricalcola il caso a mano e con lo snippet. Nel caso «S4», se i risultati divergono, confronta prima i valori intermedi e soltanto dopo l'output finale.
 
 
 La relazione centrale può essere scritta come:
@@ -56,7 +56,7 @@ Parametri selettivi dipendenti dall'input modificano lo stato mediante una scan 
 
 **Caso da seguire.** Un caso in cui stabilità e discretizzazione fanno parte dell'implementazione.
 
-**Controllo.** Aggiungi un valore limite e verifica separatamente forma, valore e ipotesi. Una shape valida non dimostra da sola «Mamba».
+**Controllo.** Per «Mamba», aggiungi un valore limite e verifica separatamente forma, valore e ipotesi. Una shape valida non dimostra da sola «Mamba».
 
 
 ## Hyena e long convolution
@@ -65,15 +65,17 @@ Kernel lunghi impliciti e gate collegano posizioni distanti senza score pairwise
 
 **Caso da seguire.** Una griglia 3x3 e un kernel 2x2 in cui una sola posizione dell'output viene calcolata a mano.
 
-**Controllo.** Mantieni fisso l'input e sostituisci soltanto il meccanismo discusso nella sezione. Il confronto deve attribuire la differenza a quel passaggio, non al setup.
+**Controllo.** Per «Hyena e long convolution», mantieni fisso l'input e sostituisci soltanto il meccanismo discusso nella sezione. Nel caso «Hyena e long convolution», il confronto deve attribuire la differenza a quel passaggio, non al setup.
 
 
 ## Esempio Python eseguito
 
-Il frammento seguente è lo stesso conservato nel repository. Usa valori piccoli perché l'obiettivo è osservare il meccanismo, non simulare una scala che non abbiamo eseguito.
+Questa sezione apre il contratto Python di state-space model, recurrence e long convolution: il lettore può eseguire lo stesso file e confrontare il risultato. Per «State-space model, recurrence e long convolution», il caso di default usa valori piccoli per isolare il meccanismo. Il caso non supportato viene provato separatamente, così «state-space model, recurrence e long convolution» non viene generalizzato oltre l'esempio.
 
 ```python
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     state = 0.0
     inputs = [1.0, 0.0, -1.0]
     outputs = []
@@ -98,7 +100,7 @@ Recurrence moderne e ibridi usano stati e gate differenti; il confronto richiede
 
 **Caso da seguire.** Tre passi in cui lo stato precedente viene consumato prima di produrre il successivo.
 
-**Controllo.** Costruisci un controesempio che rispetti il tipo di dato ma violi l'ipotesi centrale. Il test deve rendere riconoscibile perché «RWKV, RetNet, xLSTM e Griffin» non si applica.
+**Controllo.** Per «RWKV, RetNet, xLSTM e Griffin», costruisci un controesempio che rispetti il tipo di dato ma violi l'ipotesi centrale. Il test deve rendere riconoscibile perché «RWKV, RetNet, xLSTM e Griffin» non si applica.
 
 
 ![State-space model, recurrence e long convolution: architecture](../../assets/chapters/42_sequence_alternatives/SSM-02/candidate-v47.png)
@@ -108,13 +110,13 @@ La seconda figura mette a confronto «Hyena e long convolution» e il limite dis
 
 ## Come si collegano i passaggi
 
-- **Da «State-space model» a «S4».** Uno stato lineare ammette forma ricorrente e, in condizioni tempo-invarianti, forma convoluzionale. Parametrizzazioni strutturate rendono gestibili kernel lunghi e dinamiche stabili. Il primo passaggio definisce che cosa entra nel calcolo; il secondo stabilisce la regola che produce il valore osservabile. [SRC-42-001; SRC-42-002]
+- **Da «State-space model» a «S4».** Uno stato lineare ammette forma ricorrente e, in condizioni tempo-invarianti, forma convoluzionale. Parametrizzazioni strutturate rendono gestibili kernel lunghi e dinamiche stabili. Tra «State-space model» e «S4» l'ingresso viene fissato prima della regola che produce il valore. Il passaggio successivo rende misurabile «S4». [SRC-42-001; SRC-42-002]
 
-- **Da «S4» a «Mamba».** Parametrizzazioni strutturate rendono gestibili kernel lunghi e dinamiche stabili. Parametri selettivi dipendenti dall'input modificano lo stato mediante una scan hardware-aware. La regola generale viene poi letta dentro il componente: questa separazione permette di localizzare un errore prima di attribuirlo all'intero modello. [SRC-42-002; SRC-42-003]
+- **Da «S4» a «Mamba».** Parametrizzazioni strutturate rendono gestibili kernel lunghi e dinamiche stabili. Parametri selettivi dipendenti dall'input modificano lo stato mediante una scan hardware-aware. Nel caso «Mamba» il componente diventa il punto in cui localizzare l'errore. Da «S4» a «Mamba» cambia la domanda osservabile. [SRC-42-002; SRC-42-003]
 
-- **Da «Mamba» a «Hyena e long convolution».** Parametri selettivi dipendenti dall'input modificano lo stato mediante una scan hardware-aware. Kernel lunghi impliciti e gate collegano posizioni distanti senza score pairwise. Dopo avere reso visibile il componente, il percorso introduce la variante o l'ottimizzazione senza cambiare di nascosto il caso di partenza. [SRC-42-003; SRC-42-004]
+- **Da «Mamba» a «Hyena e long convolution».** Parametri selettivi dipendenti dall'input modificano lo stato mediante una scan hardware-aware. Kernel lunghi impliciti e gate collegano posizioni distanti senza score pairwise. Dopo «Mamba», la variante di «Hyena e long convolution» cambia una proprietà alla volta. Il passaggio successivo rende misurabile «Hyena e long convolution». [SRC-42-003; SRC-42-004]
 
-- **Da «Hyena e long convolution» a «RWKV, RetNet, xLSTM e Griffin».** Kernel lunghi impliciti e gate collegano posizioni distanti senza score pairwise. Recurrence moderne e ibridi usano stati e gate differenti; il confronto richiede budget e hardware equivalenti. L'ultimo passaggio sposta l'attenzione dal funzionamento locale alla misura: correttezza del calcolo e qualità applicativa restano domande distinte. [SRC-42-004; SRC-42-001]
+- **Da «Hyena e long convolution» a «RWKV, RetNet, xLSTM e Griffin».** Kernel lunghi impliciti e gate collegano posizioni distanti senza score pairwise. Recurrence moderne e ibridi usano stati e gate differenti; il confronto richiede budget e hardware equivalenti. Da «RWKV, RetNet, xLSTM e Griffin» in poi la misura resta distinta dalla correttezza locale del calcolo. Da «Hyena e long convolution» a «RWKV, RetNet, xLSTM e Griffin» cambia la domanda osservabile. [SRC-42-004; SRC-42-001]
 
 La catena completa produce stato e uscita per ogni posizione a partire da x_t, stato s_t e matrici A, B, C. Ogni collegamento conserva un oggetto osservabile diverso; per questo il risultato non può essere esteso oltre il limite dichiarato: stabilità e discretizzazione fanno parte dell'implementazione.
 
@@ -130,4 +132,4 @@ La catena completa produce stato e uscita per ogni posizione a partire da x_t, s
 
 ## Che cosa deve restare chiaro
 
-La lezione parte da «x_t, stato s_t e matrici A, B, C» e arriva fino a «stato e uscita per ogni posizione». Il limite da conservare è questo: stabilità e discretizzazione fanno parte dell'implementazione. Definizioni e risultati citati sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md); la mappa dei claim è in [`CLAIMS.md`](CLAIMS.md).
+La lezione parte da «x_t, stato s_t e matrici A, B, C» e arriva fino a «stato e uscita per ogni posizione». Il limite da conservare è questo: stabilità e discretizzazione fanno parte dell'implementazione. La formula e il codice collegati a «RWKV, RetNet, xLSTM e Griffin» sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md), [`CLAIMS.md`](CLAIMS.md) e `code/`.

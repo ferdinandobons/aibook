@@ -2,7 +2,7 @@
 
 - versione: 0.5.0-draft3
 - data: 4 agosto 2026
-- parole fuori dai blocchi di codice: 1083
+- parole fuori dai blocchi di codice: 1176
 - nuclei semantici: 5 (Corrompere e ricostruire; Score matching; Parametrizzazioni epsilon, x0 e v; Sampler; Flow matching e rectified flow)
 - paragrafi del vecchio scaffold: assenti secondo `audit_book_quality.py`
 - ripetizioni lunghe tra tre o più capitoli: assenti secondo l'audit trasversale

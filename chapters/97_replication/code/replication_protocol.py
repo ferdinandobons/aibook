@@ -32,19 +32,26 @@ def protocol_digest(protocol: Protocol) -> str:
 def run_trial(protocol: Protocol, seed: int) -> dict[str, object]:
     protocol.validate()
     rng = random.Random(seed)
-    successes = sum(rng.random() < protocol.probability for _ in range(protocol.samples))
+    successes = sum(
+        rng.random() < protocol.probability for _ in range(protocol.samples)
+    )
     estimate = successes / protocol.samples
     standard_error = math.sqrt(estimate * (1.0 - estimate) / protocol.samples)
     return {
         "seed": seed,
         "successes": successes,
         "estimate": round(estimate, 6),
-        "ci95": [round(max(0.0, estimate - 1.96 * standard_error), 6), round(min(1.0, estimate + 1.96 * standard_error), 6)],
+        "ci95": [
+            round(max(0.0, estimate - 1.96 * standard_error), 6),
+            round(min(1.0, estimate + 1.96 * standard_error), 6),
+        ],
     }
 
 
 # BOOK-EXCERPT-START
-def replicate(protocol: Protocol, original_seed: int = 11, replica_seed: int = 29) -> dict[str, object]:
+def replicate(
+    protocol: Protocol, original_seed: int = 11, replica_seed: int = 29
+) -> dict[str, object]:
     original = run_trial(protocol, original_seed)
     replica = run_trial(protocol, replica_seed)
     difference = abs(float(replica["estimate"]) - float(original["estimate"]))
@@ -56,6 +63,8 @@ def replicate(protocol: Protocol, original_seed: int = 11, replica_seed: int = 2
         "within_declared_tolerance": difference <= protocol.tolerance,
         "interpretation": "stesso protocollo, campione indipendente; la tolleranza non prova equivalenza universale",
     }
+
+
 # BOOK-EXCERPT-END
 
 

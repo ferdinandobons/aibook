@@ -1,0 +1,267 @@
+{
+  "schema": 1,
+  "figure": "APP-G",
+  "canvas": [
+    1800,
+    1000
+  ],
+  "safe_margin": 20,
+  "minimum_gap": 8,
+  "objects": [
+    {
+      "id": "text-001",
+      "kind": "text",
+      "box": [
+        60.0,
+        28.0,
+        1740.0,
+        82.0
+      ],
+      "label": "APP-G · Model report e system report su livelli distinti",
+      "order": 1
+    },
+    {
+      "id": "text-002",
+      "kind": "text",
+      "box": [
+        80.0,
+        94.0,
+        1720.0,
+        142.0
+      ],
+      "label": "Mappa operativa dell'appendice: ogni nodo rinvia a un controllo descritto nel testo.",
+      "order": 2
+    },
+    {
+      "id": "rounded_rectangle-003",
+      "kind": "rounded_rectangle",
+      "box": [
+        500.0,
+        245.0,
+        1300.0,
+        375.0
+      ],
+      "label": "",
+      "order": 3
+    },
+    {
+      "id": "ellipse-004",
+      "kind": "ellipse",
+      "box": [
+        518.0,
+        263.0,
+        558.0,
+        303.0
+      ],
+      "label": "",
+      "order": 4
+    },
+    {
+      "id": "text-005",
+      "kind": "text",
+      "box": [
+        527.0,
+        269.0,
+        549.0,
+        295.0
+      ],
+      "label": "1",
+      "order": 5
+    },
+    {
+      "id": "text-006",
+      "kind": "text",
+      "box": [
+        572.0,
+        263.0,
+        1278.0,
+        307.0
+      ],
+      "label": "modello",
+      "order": 6
+    },
+    {
+      "id": "text-007",
+      "kind": "text",
+      "box": [
+        524.0,
+        322.0,
+        1276.0,
+        357.0
+      ],
+      "label": "checkpoint e dati",
+      "order": 7
+    },
+    {
+      "id": "rounded_rectangle-008",
+      "kind": "rounded_rectangle",
+      "box": [
+        500.0,
+        420.0,
+        1300.0,
+        550.0
+      ],
+      "label": "",
+      "order": 8
+    },
+    {
+      "id": "ellipse-009",
+      "kind": "ellipse",
+      "box": [
+        518.0,
+        438.0,
+        558.0,
+        478.0
+      ],
+      "label": "",
+      "order": 9
+    },
+    {
+      "id": "text-010",
+      "kind": "text",
+      "box": [
+        527.0,
+        444.0,
+        549.0,
+        470.0
+      ],
+      "label": "2",
+      "order": 10
+    },
+    {
+      "id": "text-011",
+      "kind": "text",
+      "box": [
+        572.0,
+        438.0,
+        1278.0,
+        482.0
+      ],
+      "label": "sistema",
+      "order": 11
+    },
+    {
+      "id": "text-012",
+      "kind": "text",
+      "box": [
+        524.0,
+        497.0,
+        1276.0,
+        532.0
+      ],
+      "label": "retrieval, tool, policy",
+      "order": 12
+    },
+    {
+      "id": "rounded_rectangle-013",
+      "kind": "rounded_rectangle",
+      "box": [
+        500.0,
+        595.0,
+        1300.0,
+        725.0
+      ],
+      "label": "",
+      "order": 14
+    },
+    {
+      "id": "ellipse-014",
+      "kind": "ellipse",
+      "box": [
+        518.0,
+        613.0,
+        558.0,
+        653.0
+      ],
+      "label": "",
+      "order": 15
+    },
+    {
+      "id": "text-015",
+      "kind": "text",
+      "box": [
+        527.0,
+        619.0,
+        549.0,
+        645.0
+      ],
+      "label": "3",
+      "order": 16
+    },
+    {
+      "id": "text-016",
+      "kind": "text",
+      "box": [
+        572.0,
+        613.0,
+        1278.0,
+        657.0
+      ],
+      "label": "run",
+      "order": 17
+    },
+    {
+      "id": "text-017",
+      "kind": "text",
+      "box": [
+        524.0,
+        672.0,
+        1276.0,
+        707.0
+      ],
+      "label": "configurazione e output",
+      "order": 18
+    },
+    {
+      "id": "rounded_rectangle-018",
+      "kind": "rounded_rectangle",
+      "box": [
+        170.0,
+        850.0,
+        1630.0,
+        940.0
+      ],
+      "label": "",
+      "order": 20
+    },
+    {
+      "id": "text-019",
+      "kind": "text",
+      "box": [
+        205.0,
+        873.0,
+        1595.0,
+        917.0
+      ],
+      "label": "LIMITE · la qualità del modello non riassume il sistema",
+      "order": 21
+    }
+  ],
+  "connectors": [
+    {
+      "id": "connector-001",
+      "start": [
+        900.0,
+        383.0
+      ],
+      "end": [
+        900.0,
+        413.0
+      ],
+      "order": 13
+    },
+    {
+      "id": "connector-002",
+      "start": [
+        900.0,
+        558.0
+      ],
+      "end": [
+        900.0,
+        588.0
+      ],
+      "order": 19
+    }
+  ],
+  "errors": []
+}

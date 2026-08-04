@@ -110,7 +110,9 @@ def main() -> None:
     print(f"bernoulli_positives: {int(observations.sum().item())}")
     print(f"bernoulli_trials: {observations.numel()}")
     print(f"bernoulli_mle: {estimate:.6f}")
-    print(f"log_likelihood_at_mle: {bernoulli_log_likelihood(observations, estimate):.6f}")
+    print(
+        f"log_likelihood_at_mle: {bernoulli_log_likelihood(observations, estimate):.6f}"
+    )
 
     distribution = torch.distributions.Bernoulli(
         probs=torch.tensor(0.30, dtype=torch.float64)

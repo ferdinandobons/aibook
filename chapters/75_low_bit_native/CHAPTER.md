@@ -14,7 +14,7 @@ deferred: benchmark applicativi non eseguiti e approvazione autoriale delle visu
 
 # Capitolo 75. Modelli low-bit nativi e co-design numerico
 
-La domanda guida di questa lezione è come collegare «Training nativo» e «Co-design hardware» senza perdere il contratto tecnico di modelli low-bit nativi e co-design numerico. L'oggetto osservato è un peso low-bit e il suo accumulo numerico. Il contratto locale è: input, peso reale, codice ternario, scala e attivazione; operazione, training nativo, STE e accumulazione; output, peso ricostruito, gradiente e costo hardware. Il caso guida è questo: I codici -1, 0 e 1 vengono ricostruiti con una scala e sommati nella precisione dichiarata. Il confine da mantenere esplicito è: bit nominali e precisione effettiva dell'accumulo sono distinti.
+Per entrare in modelli low-bit nativi e co-design numerico, seguiamo il passaggio che unisce «Training nativo» a «Co-design hardware». L'oggetto osservato è un peso low-bit e il suo accumulo numerico. Il contratto locale dichiara input, peso reale, codice ternario, scala e attivazione; operazione, training nativo, STE e accumulazione; output, peso ricostruito, gradiente e costo hardware. Il primo esempio osservabile è I codici -1, 0 e 1 vengono ricostruiti con una scala e sommati nella precisione dichiarata. Il limite da non nascondere è: bit nominali e precisione effettiva dell'accumulo sono distinti.
 
 ## Training nativo
 
@@ -24,7 +24,7 @@ Un formato low-bit introduce rappresentazione e operazione di ricostruzione.
 
 **Caso da seguire.** I codici -1, 0 e 1 vengono ricostruiti con una scala e sommati nella precisione dichiarata.
 
-**Controllo.** Scrivi il risultato atteso prima del calcolo, modifica una sola quantità e localizza il primo passaggio che cambia. Il vincolo da conservare è: Un modello low-bit nativo incorpora il formato ridotto nella ricetta, invece di comprimere un checkpoint floating point al termine.
+**Controllo.** Per «Training nativo», scrivi il risultato atteso prima del calcolo, modifica una sola quantità e localizza il primo passaggio che cambia. Nel caso «Training nativo», il vincolo da conservare è: Un modello low-bit nativo incorpora il formato ridotto nella ricetta, invece di comprimere un checkpoint floating point al termine.
 
 
 ## Pesi ternari e 1.58-bit
@@ -33,7 +33,7 @@ BitNet b1.58 usa pesi in {-1,0,1} con attivazioni e scaling specifici. Il numero
 
 **Caso da seguire.** Tre valori floating point quantizzati con una scala dichiarata e confrontati con la ricostruzione.
 
-**Controllo.** Ricalcola il caso a mano e con lo snippet. Se i risultati divergono, confronta prima i valori intermedi e soltanto dopo l'output finale.
+**Controllo.** Per «Pesi ternari e 1.58-bit», ricalcola il caso a mano e con lo snippet. Nel caso «Pesi ternari e 1.58-bit», se i risultati divergono, confronta prima i valori intermedi e soltanto dopo l'output finale.
 
 
 La relazione centrale può essere scritta come:
@@ -56,7 +56,7 @@ Operazioni discrete usano gradienti surrogati. La derivata applicata nel backwar
 
 **Caso da seguire.** Un caso in cui bit nominali e precisione effettiva dell'accumulo sono distinti.
 
-**Controllo.** Aggiungi un valore limite e verifica separatamente forma, valore e ipotesi. Una shape valida non dimostra da sola «Straight-through estimator».
+**Controllo.** Per «Straight-through estimator», aggiungi un valore limite e verifica separatamente forma, valore e ipotesi. Una shape valida non dimostra da sola «Straight-through estimator».
 
 
 ## Accumulazione
@@ -65,15 +65,17 @@ Prodotti low-bit possono accumulare in precisione maggiore. Storage, compute e a
 
 **Caso da seguire.** Ridurre i byte per elemento cambia memoria e potenzialmente errore. Il controllo richiede confronto numerico oltre alla misura di tempo.
 
-**Controllo.** Mantieni fisso l'input e sostituisci soltanto il meccanismo discusso nella sezione. Il confronto deve attribuire la differenza a quel passaggio, non al setup.
+**Controllo.** Per «Accumulazione», mantieni fisso l'input e sostituisci soltanto il meccanismo discusso nella sezione. Nel caso «Accumulazione», il confronto deve attribuire la differenza a quel passaggio, non al setup.
 
 
 ## Esempio Python eseguito
 
-Il frammento seguente è lo stesso conservato nel repository. Usa valori piccoli perché l'obiettivo è osservare il meccanismo, non simulare una scala che non abbiamo eseguito.
+La prova locale di modelli low-bit nativi e co-design numerico parte da un esempio minimo, registrato nel repository insieme ai suoi test. Per «Modelli low-bit nativi e co-design numerico», il caso di default usa valori piccoli per isolare il meccanismo. La prova negativa riguarda proprio «modelli low-bit nativi e co-design numerico» e interrompe l'interpretazione prima dell'output.
 
 ```python
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     codes = [-1, 0, 1]
     scale = 0.5
     restored = [code * scale for code in codes]
@@ -96,7 +98,7 @@ Il vantaggio richiede kernel, packing e unità aritmetiche che sfruttino il form
 
 **Caso da seguire.** La stessa operazione misurata separando bytes mossi, tempo del kernel e latenza end-to-end.
 
-**Controllo.** Costruisci un controesempio che rispetti il tipo di dato ma violi l'ipotesi centrale. Il test deve rendere riconoscibile perché «Co-design hardware» non si applica.
+**Controllo.** Per «Co-design hardware», costruisci un controesempio che rispetti il tipo di dato ma violi l'ipotesi centrale. Il test deve rendere riconoscibile perché «Co-design hardware» non si applica.
 
 
 ![Modelli low-bit nativi e co-design numerico: compare](../../assets/chapters/75_low_bit_native/NATIVE-02/candidate-v48.png)
@@ -106,13 +108,13 @@ La seconda figura mette a confronto «Accumulazione» e il limite discusso in «
 
 ## Come si collegano i passaggi
 
-- **Da «Training nativo» a «Pesi ternari e 1.58-bit».** Un modello low-bit nativo incorpora il formato ridotto nella ricetta, invece di comprimere un checkpoint floating point al termine. BitNet b1.58 usa pesi in {-1,0,1} con attivazioni e scaling specifici. Il primo passaggio definisce che cosa entra nel calcolo; il secondo stabilisce la regola che produce il valore osservabile. [SRC-75-001; SRC-75-002]
+- **Da «Training nativo» a «Pesi ternari e 1.58-bit».** Un modello low-bit nativo incorpora il formato ridotto nella ricetta, invece di comprimere un checkpoint floating point al termine. BitNet b1.58 usa pesi in {-1,0,1} con attivazioni e scaling specifici. Tra «Training nativo» e «Pesi ternari e 1.58-bit» l'ingresso viene fissato prima della regola che produce il valore. Da «Training nativo» a «Pesi ternari e 1.58-bit» cambia la domanda osservabile. [SRC-75-001; SRC-75-002]
 
-- **Da «Pesi ternari e 1.58-bit» a «Straight-through estimator».** BitNet b1.58 usa pesi in {-1,0,1} con attivazioni e scaling specifici. Operazioni discrete usano gradienti surrogati. La regola generale viene poi letta dentro il componente: questa separazione permette di localizzare un errore prima di attribuirlo all'intero modello. [SRC-75-002; SRC-75-003]
+- **Da «Pesi ternari e 1.58-bit» a «Straight-through estimator».** BitNet b1.58 usa pesi in {-1,0,1} con attivazioni e scaling specifici. Operazioni discrete usano gradienti surrogati. Nel caso «Straight-through estimator» il componente diventa il punto in cui localizzare l'errore. Il passaggio successivo rende misurabile «Straight-through estimator». [SRC-75-002; SRC-75-003]
 
-- **Da «Straight-through estimator» a «Accumulazione».** Operazioni discrete usano gradienti surrogati. Prodotti low-bit possono accumulare in precisione maggiore. Dopo avere reso visibile il componente, il percorso introduce la variante o l'ottimizzazione senza cambiare di nascosto il caso di partenza. [SRC-75-003; SRC-75-004]
+- **Da «Straight-through estimator» a «Accumulazione».** Operazioni discrete usano gradienti surrogati. Prodotti low-bit possono accumulare in precisione maggiore. Dopo «Straight-through estimator», la variante di «Accumulazione» cambia una proprietà alla volta. Da «Straight-through estimator» a «Accumulazione» cambia la domanda osservabile. [SRC-75-003; SRC-75-004]
 
-- **Da «Accumulazione» a «Co-design hardware».** Prodotti low-bit possono accumulare in precisione maggiore. Il vantaggio richiede kernel, packing e unità aritmetiche che sfruttino il formato. L'ultimo passaggio sposta l'attenzione dal funzionamento locale alla misura: correttezza del calcolo e qualità applicativa restano domande distinte. [SRC-75-004; SRC-75-001]
+- **Da «Accumulazione» a «Co-design hardware».** Prodotti low-bit possono accumulare in precisione maggiore. Il vantaggio richiede kernel, packing e unità aritmetiche che sfruttino il formato. Da «Co-design hardware» in poi la misura resta distinta dalla correttezza locale del calcolo. Il passaggio successivo rende misurabile «Co-design hardware». [SRC-75-004; SRC-75-001]
 
 La catena completa produce peso ricostruito, gradiente e costo hardware a partire da peso reale, codice ternario, scala e attivazione. Ogni collegamento conserva un oggetto osservabile diverso; per questo il risultato non può essere esteso oltre il limite dichiarato: bit nominali e precisione effettiva dell'accumulo sono distinti.
 
@@ -128,4 +130,4 @@ La catena completa produce peso ricostruito, gradiente e costo hardware a partir
 
 ## Che cosa deve restare chiaro
 
-La lezione parte da «peso reale, codice ternario, scala e attivazione» e arriva fino a «peso ricostruito, gradiente e costo hardware». Il limite da conservare è questo: bit nominali e precisione effettiva dell'accumulo sono distinti. Definizioni e risultati citati sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md); la mappa dei claim è in [`CLAIMS.md`](CLAIMS.md).
+La lezione parte da «peso reale, codice ternario, scala e attivazione» e arriva fino a «peso ricostruito, gradiente e costo hardware». Il limite da conservare è questo: bit nominali e precisione effettiva dell'accumulo sono distinti. La formula e il codice collegati a «Co-design hardware» sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md), [`CLAIMS.md`](CLAIMS.md) e `code/`.

@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-import hashlib
 import json
-import math
-import statistics
-from collections import Counter
 
 CHAPTER = 41
 TITLE = 'Linear attention, fast weights e delta rule'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     state = 0.0
     inputs = [1.0, -0.5, 2.0]
     for value in inputs:

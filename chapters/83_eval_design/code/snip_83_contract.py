@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-import hashlib
 import json
-import math
-import statistics
-from collections import Counter
 
 CHAPTER = 83
 TITLE = 'Progettare una valutazione'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     predictions = [1, 1, 0, 1]
     labels = [1, 0, 0, 1]
     correct = sum(prediction == label for prediction, label in zip(predictions, labels))

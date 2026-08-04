@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-import hashlib
 import json
-import math
-import statistics
-from collections import Counter
 
 CHAPTER = 48
 TITLE = 'Preferenze, reward model e RLHF'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     chosen = 0.8
     rejected = 0.2
     reward_margin = chosen - rejected

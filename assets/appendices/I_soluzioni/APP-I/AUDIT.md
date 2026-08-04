@@ -2,7 +2,8 @@
 
 - decodifica: superata
 - dimensione: 1800x1000 RGB
-- contenimento: verificato
+- contenimento: verificato dal contratto geometrico e dal raster
+- sovrapposizioni e tangenze: controllate con `GEOMETRY.json`
 - numeri inventati: assenti
 - composizione: flow
 - approvazione autoriale: aperta

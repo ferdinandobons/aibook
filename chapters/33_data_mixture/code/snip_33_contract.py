@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-import hashlib
 import json
-import math
-import statistics
-from collections import Counter
 
 CHAPTER = 33
 TITLE = 'Dataset mixture, curriculum e dati sintetici'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     weights = [0.6, 0.3, 0.1]
     temperature = 0.5
     powered = [weight ** temperature for weight in weights]

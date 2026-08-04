@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-import hashlib
 import json
-import math
-import statistics
-from collections import Counter
 
 CHAPTER = 55
 TITLE = 'Fondamenti della multimodalità'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     text = [0.2, 0.4]
     image = [0.6, 0.1]
     shared = [(a + b) / 2 for a, b in zip(text, image)]

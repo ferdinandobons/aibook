@@ -27,7 +27,7 @@ from specs_p11_p12 import SPECS_P11_P12  # noqa: E402
 from specs_p13_p14 import SPECS_P13_P14  # noqa: E402
 
 
-DATE = "3 agosto 2026"
+DATE = "4 agosto 2026"
 WHITE = "#FFFFFF"
 TEXT = "#0F172A"
 MUTED = "#475569"

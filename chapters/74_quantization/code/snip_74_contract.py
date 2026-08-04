@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-import hashlib
 import json
-import math
-import statistics
-from collections import Counter
 
 CHAPTER = 74
 TITLE = 'Quantizzazione'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     values = [-0.5, 0.0, 0.5]
     scale = 0.25
     quantized = [round(value / scale) for value in values]

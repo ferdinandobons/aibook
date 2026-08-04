@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-import hashlib
 import json
-import math
-import statistics
-from collections import Counter
 
 CHAPTER = 96
 TITLE = 'Progetto di produzione completo'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     release = {"version": "v2", "offline_gate": True, "canary": True, "rollback": True}
     ready = all(release[key] for key in ("offline_gate", "canary", "rollback"))
     return {"version": release["version"], "ready_for_review": ready, "invariant": "production readiness requires independent gates and a rollback path"}

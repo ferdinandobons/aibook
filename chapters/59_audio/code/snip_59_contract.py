@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-import hashlib
 import json
-import math
-import statistics
-from collections import Counter
 
 CHAPTER = 59
 TITLE = 'Audio, parlato e musica'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     waveform = [0.0, 0.5, -0.5, 0.0]
     frame_size = 2
     frames = [waveform[i:i + frame_size] for i in range(0, len(waveform), frame_size)]

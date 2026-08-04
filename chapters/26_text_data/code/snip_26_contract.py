@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-import hashlib
 import json
-import math
-import statistics
-from collections import Counter
 
 CHAPTER = 26
 TITLE = 'Il testo come dato'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     text = "pacco"
     code_points = list(text)
     token_ids = [ord(char) for char in code_points]

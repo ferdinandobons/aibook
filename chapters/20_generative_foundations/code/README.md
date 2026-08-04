@@ -2,4 +2,4 @@
 
 Il capitolo confronta famiglie generative a livello concettuale; le implementazioni verificabili sono distribuite nei capitoli 21-25.
 
-La verifica sostitutiva usa fonti primarie, locator e claim delimitati. Non viene conservato uno script giocattolo che potrebbe sembrare una prova computazionale dell'intera tassonomia.
+La verifica sostitutiva usa fonti primarie, locator, data di consultazione e claim delimitati. Non sono conservati script giocattolo che potrebbero sembrare una prova computazionale del tema.

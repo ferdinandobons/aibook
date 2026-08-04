@@ -1,7 +1,8 @@
 # Specifica visuale KV-01
 
 - modello compositivo: attention_compare
-- domanda principale: Come si passa da «MHA» a «GQA» mantenendo osservabile le teste di query e key-value che alimentano l'attention?
+- orientamento: a due colonne, confronto parallelo
+- domanda principale: Quale percorso collega MHA a GQA nel capitolo 39?
 - formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
 - file candidato: candidate-v47.png
@@ -12,5 +13,7 @@
 - limite visualizzato: raggruppamento delle teste e costo della KV cache restano espliciti
 - valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
 - accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- contenimento: safe margin 20 px; distanza minima tra elementi 8 px
+- geometria: `GEOMETRY.json`, nessuna intersezione o tangenza tra elementi fratelli
 - generatore: scripts/generate_visuals_v2.py
 - approvazione autoriale: aperta

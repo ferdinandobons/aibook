@@ -23,3 +23,10 @@ Quali segnali di training si possono costruire quando nessuna persona fornisce u
 
 L'assenza di label esterne non elimina l'obiettivo: cambia la procedura che costruisce il segnale supervisionante.
 - domanda principale: Quale trasformazione centrale rende osservabile «Senza label non significa senza obiettivo» nel capitolo 13?
+
+## Contratto geometrico
+
+- raster: margine di sicurezza di 20 px sul canvas 1800x1000;
+- contenimento: nessun testo oltre il proprio box o il canvas;
+- composizione: nessuna sovrapposizione o tangenza intenzionale tra elementi fratelli;
+- fonte: `GEOMETRY.json` e checklist dell'audit storico.

@@ -14,7 +14,7 @@ deferred: benchmark applicativi non eseguiti e approvazione autoriale delle visu
 
 # Capitolo 36. Training distribuito e continued pretraining
 
-La domanda guida di questa lezione è come collegare «Data parallelism» e «Continued pretraining» senza perdere il contratto tecnico di training distribuito e continued pretraining. L'oggetto osservato è gradienti e stato distribuiti tra worker. Il contratto locale è: input, microbatch, worker, shard e topologia; operazione, all-reduce, sharding, pipeline e recovery; output, gradiente ridotto, stato sincronizzato e fault osservato. Il caso guida è questo: Due record con ID, testo, licenza e timestamp che attraversano una sola trasformazione registrata. Il confine da mantenere esplicito è: la riduzione e il conteggio del batch devono essere dichiarati.
+Training distribuito e continued pretraining viene letto come un sistema: «Data parallelism» e «Continued pretraining» restano collegati da confini e decisioni osservabili. L'oggetto osservato è gradienti e stato distribuiti tra worker. Il contratto locale dichiara input, microbatch, worker, shard e topologia; operazione, all-reduce, sharding, pipeline e recovery; output, gradiente ridotto, stato sincronizzato e fault osservato. Il caso di partenza è Due record con ID, testo, licenza e timestamp che attraversano una sola trasformazione registrata. Il limite da non nascondere è: la riduzione e il conteggio del batch devono essere dichiarati.
 
 ## Data parallelism
 
@@ -24,7 +24,7 @@ La riduzione dei gradienti deve essere coerente con worker, batch e loss reducti
 
 **Caso da seguire.** Due record con ID, testo, licenza e timestamp che attraversano una sola trasformazione registrata.
 
-**Controllo.** Registra richiesta, decisione, stato e output finale. Un esito plausibile non deve nascondere il componente che lo ha prodotto.
+**Controllo.** Per «Data parallelism», registra richiesta, decisione, stato e output finale. Nel caso «Data parallelism», un esito plausibile non deve nascondere il componente che lo ha prodotto.
 
 
 ## ZeRO e FSDP
@@ -34,6 +34,15 @@ Parametri, gradienti e optimizer state vengono shardati tra worker. [SRC-36-002]
 **Caso da seguire.** Due worker con gradienti diversi e media esplicita.
 
 **Controllo.** Ripeti «ZeRO e FSDP» con una capability o un'autorizzazione rimossa e verifica che la failure preceda qualsiasi side effect.
+
+
+La relazione centrale può essere scritta come:
+
+$$
+g = (1 / W) sum_w g_w
+$$
+
+La riduzione dei gradienti deve essere coerente con worker, batch e loss reduction. [SRC-36-001]
 
 
 ![Training distribuito e continued pretraining: architecture](../../assets/chapters/36_distributed_training/DIST-01/candidate-v48.png)
@@ -47,7 +56,7 @@ Matrici o gruppi di layer vengono divisi, introducendo collective e microbatch. 
 
 **Caso da seguire.** Un caso in cui la riduzione e il conteggio del batch devono essere dichiarati.
 
-**Controllo.** Separa il test del singolo componente dal test end-to-end, usando lo stesso input e la stessa configurazione versionata.
+**Controllo.** Per «Tensor e pipeline parallelism», separa il test del singolo componente dal test end-to-end, usando lo stesso input e la stessa configurazione versionata.
 
 
 ## Topologia e fault tolerance
@@ -56,7 +65,7 @@ Banda, latenza, checkpoint e cursor dei dati diventano parte della ricetta. [SRC
 
 **Caso da seguire.** Due ricette con budget di token dichiarato, compute comparabile e loss osservata nello stesso intervallo.
 
-**Controllo.** Introduci una failure a un solo confine e controlla che log, stato e recovery identifichino quel confine senza ambiguità.
+**Controllo.** Per «Topologia e fault tolerance», introduci una failure a un solo confine e controlla che log, stato e recovery identifichino quel confine senza ambiguità.
 
 
 ## Continued pretraining
@@ -65,7 +74,7 @@ Un checkpoint viene adattato a nuovi dati con learning rate, mixture e valutazio
 
 **Caso da seguire.** Due vettori con shape compatibile confrontati prima e dopo il blocco, osservando separatamente scala e percorso residuale in «Continued pretraining».
 
-**Controllo.** Confronta il comportamento completo, non soltanto l'ultimo messaggio. Il risultato resta limitato da: Un checkpoint viene adattato a nuovi dati con learning rate, mixture e valutazioni di regressione dichiarate.
+**Controllo.** Per «Continued pretraining», confronta il comportamento completo, non soltanto l'ultimo messaggio. Nel caso «Continued pretraining», il risultato resta limitato da: Un checkpoint viene adattato a nuovi dati con learning rate, mixture e valutazioni di regressione dichiarate.
 
 
 ![Training distribuito e continued pretraining: graph](../../assets/chapters/36_distributed_training/DIST-02/candidate-v48.png)
@@ -75,10 +84,12 @@ La seconda figura mette a confronto «Topologia e fault tolerance» e il limite 
 
 ## Esempio Python eseguito
 
-Il frammento seguente è lo stesso conservato nel repository. Usa valori piccoli perché l'obiettivo è osservare il meccanismo, non simulare una scala che non abbiamo eseguito.
+Per rendere osservabile training distribuito e continued pretraining, il capitolo conserva qui l'artefatto Python eseguito. Per «Training distribuito e continued pretraining», il caso di default usa valori piccoli per isolare il meccanismo. Il test rifiuta anche un caso non documentato di «training distribuito e continued pretraining».
 
 ```python
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     worker_gradients = [[1.0, 3.0], [3.0, 1.0]]
     workers = len(worker_gradients)
     reduced = [sum(row[index] for row in worker_gradients) / workers for index in range(2)]
@@ -96,13 +107,13 @@ Il test associato è [`code/test_36_contract.py`](code/test_36_contract.py); l'o
 
 ## Come si collegano i passaggi
 
-- **Da «Data parallelism» a «ZeRO e FSDP».** Repliche elaborano sotto-batch e aggregano gradienti. Parametri, gradienti e optimizer state vengono shardati tra worker. Il contratto iniziale nomina messaggi e confini; il componente successivo implementa una parte del percorso senza ereditare autorizzazioni implicite. [SRC-36-001; SRC-36-002]
+- **Da «Data parallelism» a «ZeRO e FSDP».** Repliche elaborano sotto-batch e aggregano gradienti. Parametri, gradienti e optimizer state vengono shardati tra worker. «Data parallelism» nomina il confine e «ZeRO e FSDP» implementa il percorso senza ereditare autorizzazioni implicite. Il passaggio successivo rende misurabile «ZeRO e FSDP». [SRC-36-001; SRC-36-002]
 
-- **Da «ZeRO e FSDP» a «Tensor e pipeline parallelism».** Parametri, gradienti e optimizer state vengono shardati tra worker. Matrici o gruppi di layer vengono divisi, introducendo collective e microbatch. Il terzo passaggio compone più componenti e rende quindi necessario conservare stato, identità e decisione oltre all'output finale. [SRC-36-002; SRC-36-003]
+- **Da «ZeRO e FSDP» a «Tensor e pipeline parallelism».** Parametri, gradienti e optimizer state vengono shardati tra worker. Matrici o gruppi di layer vengono divisi, introducendo collective e microbatch. Componendo «ZeRO e FSDP» e «Tensor e pipeline parallelism» diventa necessario conservare stato, identità e decisione. Da «ZeRO e FSDP» a «Tensor e pipeline parallelism» cambia la domanda osservabile. [SRC-36-002; SRC-36-003]
 
-- **Da «Tensor e pipeline parallelism» a «Topologia e fault tolerance».** Matrici o gruppi di layer vengono divisi, introducendo collective e microbatch. Banda, latenza, checkpoint e cursor dei dati diventano parte della ricetta. La quarta sezione introduce failure e recovery nel punto in cui possono ancora precedere un side effect o una perdita di stato. [SRC-36-003; SRC-36-004]
+- **Da «Tensor e pipeline parallelism» a «Topologia e fault tolerance».** Matrici o gruppi di layer vengono divisi, introducendo collective e microbatch. Banda, latenza, checkpoint e cursor dei dati diventano parte della ricetta. «Topologia e fault tolerance» introduce failure e recovery prima di un side effect o di una perdita di stato. Il passaggio successivo rende misurabile «Topologia e fault tolerance». [SRC-36-003; SRC-36-004]
 
-- **Da «Topologia e fault tolerance» a «Continued pretraining».** Banda, latenza, checkpoint e cursor dei dati diventano parte della ricetta. Un checkpoint viene adattato a nuovi dati con learning rate, mixture e valutazioni di regressione dichiarate. La chiusura valuta il comportamento end-to-end: un componente corretto non basta se il collegamento, il carico o la policy cambiano l'esito. [SRC-36-004; SRC-36-001]
+- **Da «Topologia e fault tolerance» a «Continued pretraining».** Banda, latenza, checkpoint e cursor dei dati diventano parte della ricetta. Un checkpoint viene adattato a nuovi dati con learning rate, mixture e valutazioni di regressione dichiarate. La chiusura su «Continued pretraining» valuta il sistema completo, non soltanto il componente iniziale. Da «Topologia e fault tolerance» a «Continued pretraining» cambia la domanda osservabile. [SRC-36-004; SRC-36-001]
 
 La catena completa produce gradiente ridotto, stato sincronizzato e fault osservato a partire da microbatch, worker, shard e topologia. Ogni collegamento conserva un oggetto osservabile diverso; per questo il risultato non può essere esteso oltre il limite dichiarato: la riduzione e il conteggio del batch devono essere dichiarati.
 
@@ -118,4 +129,4 @@ La catena completa produce gradiente ridotto, stato sincronizzato e fault osserv
 
 ## Il confine operativo
 
-La lezione parte da «microbatch, worker, shard e topologia» e arriva fino a «gradiente ridotto, stato sincronizzato e fault osservato». Il limite da conservare è questo: la riduzione e il conteggio del batch devono essere dichiarati. Definizioni e risultati citati sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md); la mappa dei claim è in [`CLAIMS.md`](CLAIMS.md).
+La lezione parte da «microbatch, worker, shard e topologia» e arriva fino a «gradiente ridotto, stato sincronizzato e fault osservato». Il limite da conservare è questo: la riduzione e il conteggio del batch devono essere dichiarati. Il confine di «Continued pretraining» va ricontrollato tra claim, fonti e artefatti: i rinvii sono [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md), [`CLAIMS.md`](CLAIMS.md) e `code/`.

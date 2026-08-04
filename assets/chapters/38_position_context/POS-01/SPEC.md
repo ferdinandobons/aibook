@@ -1,7 +1,8 @@
 # Specifica visuale POS-01
 
 - modello compositivo: position_geometry
-- domanda principale: Come si passa da «Posizione assoluta» a «RoPE» mantenendo osservabile la relazione tra posizione e rappresentazione del token?
+- orientamento: a matrice, righe e colonne dichiarate
+- domanda principale: Quale percorso collega Posizione assoluta a RoPE nel capitolo 38?
 - formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
 - file candidato: candidate-v47.png
@@ -12,5 +13,7 @@
 - limite visualizzato: estendere il contesto richiede una misura fuori dalla lunghezza addestrata
 - valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
 - accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- contenimento: safe margin 20 px; distanza minima tra elementi 8 px
+- geometria: `GEOMETRY.json`, nessuna intersezione o tangenza tra elementi fratelli
 - generatore: scripts/generate_visuals_v2.py
 - approvazione autoriale: aperta

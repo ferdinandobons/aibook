@@ -14,7 +14,7 @@ deferred: benchmark applicativi non eseguiti e approvazione autoriale delle visu
 
 # Capitolo 49. Ottimizzazione diretta delle preferenze
 
-La domanda guida di questa lezione è come collegare «Evitare un reward model esplicito» e «Offline preference data» senza perdere il contratto tecnico di ottimizzazione diretta delle preferenze. L'oggetto osservato è una coppia chosen-rejected per l'ottimizzazione diretta. Il contratto locale è: input, prompt, log-probability della policy e riferimento; operazione, margine DPO, beta e variante offline; output, loss di preferenza e policy aggiornata. Il caso guida è questo: Un margine di policy pari a 0,8, un margine di riferimento pari a 0,2 e beta pari a 0,5 producono un logit di preferenza pari a 0,3. Il confine da mantenere esplicito è: la preferenza osservata non è una verità assoluta.
+Qui ottimizzazione diretta delle preferenze viene osservato come un meccanismo: il percorso va da «Evitare un reward model esplicito» a «Offline preference data». L'oggetto osservato è una coppia chosen-rejected per l'ottimizzazione diretta. Il contratto locale dichiara input, prompt, log-probability della policy e riferimento; operazione, margine DPO, beta e variante offline; output, loss di preferenza e policy aggiornata. Il primo esempio osservabile è Un margine di policy pari a 0,8, un margine di riferimento pari a 0,2 e beta pari a 0,5 producono un logit di preferenza pari a 0,3. Il limite da non nascondere è: la preferenza osservata non è una verità assoluta.
 
 ## Evitare un reward model esplicito
 
@@ -24,7 +24,7 @@ DPO usa il margine di preferenza senza presentarlo come verità assoluta.
 
 **Caso da seguire.** Un margine di policy pari a 0,8, un margine di riferimento pari a 0,2 e beta pari a 0,5 producono un logit di preferenza pari a 0,3.
 
-**Controllo.** Scrivi il risultato atteso prima del calcolo, modifica una sola quantità e localizza il primo passaggio che cambia. Il vincolo da conservare è: DPO riscrive un obiettivo di preferenza usando log-probability della policy e del riferimento, senza una fase PPO separata.
+**Controllo.** Per «Evitare un reward model esplicito», scrivi il risultato atteso prima del calcolo, modifica una sola quantità e localizza il primo passaggio che cambia. Nel caso «Evitare un reward model esplicito», il vincolo da conservare è: DPO riscrive un obiettivo di preferenza usando log-probability della policy e del riferimento, senza una fase PPO separata.
 
 
 ## Coppie chosen e rejected
@@ -33,7 +33,7 @@ Ogni esempio richiede la stessa condizione e due risposte confrontabili. Errori 
 
 **Caso da seguire.** Margine 0,8 con beta dichiarato e riferimento invariato.
 
-**Controllo.** Ricalcola il caso a mano e con lo snippet. Se i risultati divergono, confronta prima i valori intermedi e soltanto dopo l'output finale.
+**Controllo.** Per «Coppie chosen e rejected», ricalcola il caso a mano e con lo snippet. Nel caso «Coppie chosen e rejected», se i risultati divergono, confronta prima i valori intermedi e soltanto dopo l'output finale.
 
 
 La relazione centrale può essere scritta come:
@@ -56,7 +56,7 @@ Beta controlla la forza relativa del vincolo rispetto al modello di riferimento 
 
 **Caso da seguire.** Un caso in cui la preferenza osservata non è una verità assoluta.
 
-**Controllo.** Aggiungi un valore limite e verifica separatamente forma, valore e ipotesi. Una shape valida non dimostra da sola «Temperatura beta».
+**Controllo.** Per «Temperatura beta», aggiungi un valore limite e verifica separatamente forma, valore e ipotesi. Una shape valida non dimostra da sola «Temperatura beta».
 
 
 ## IPO, KTO, ORPO e varianti
@@ -65,15 +65,17 @@ Le varianti cambiano assunzioni, forma della loss o tipo di feedback. I nomi non
 
 **Caso da seguire.** Due risposte con log-probabilità diverse producono un margine; il margine può diventare un segnale di training, ma non è una misura assoluta di correttezza.
 
-**Controllo.** Mantieni fisso l'input e sostituisci soltanto il meccanismo discusso nella sezione. Il confronto deve attribuire la differenza a quel passaggio, non al setup.
+**Controllo.** Per «IPO, KTO, ORPO e varianti», mantieni fisso l'input e sostituisci soltanto il meccanismo discusso nella sezione. Nel caso «IPO, KTO, ORPO e varianti», il confronto deve attribuire la differenza a quel passaggio, non al setup.
 
 
 ## Esempio Python eseguito
 
-Il frammento seguente è lo stesso conservato nel repository. Usa valori piccoli perché l'obiettivo è osservare il meccanismo, non simulare una scala che non abbiamo eseguito.
+Il caso computazionale di ottimizzazione diretta delle preferenze è riportato senza trasformazioni: il file e l'output sono quelli verificati. Per «Ottimizzazione diretta delle preferenze», il caso di default usa valori piccoli per isolare il meccanismo. La suite conserva inoltre una failure esplicita per separare il contratto osservato da «ottimizzazione diretta delle preferenze».
 
 ```python
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     policy_margin = 0.8
     reference_margin = 0.2
     beta = 0.5
@@ -97,7 +99,7 @@ L'ottimizzazione resta limitata alla copertura del dataset. Nuove policy possono
 
 **Caso da seguire.** Due record con ID, testo, licenza e timestamp che attraversano una sola trasformazione registrata.
 
-**Controllo.** Costruisci un controesempio che rispetti il tipo di dato ma violi l'ipotesi centrale. Il test deve rendere riconoscibile perché «Offline preference data» non si applica.
+**Controllo.** Per «Offline preference data», costruisci un controesempio che rispetti il tipo di dato ma violi l'ipotesi centrale. Il test deve rendere riconoscibile perché «Offline preference data» non si applica.
 
 
 ![Ottimizzazione diretta delle preferenze: compare](../../assets/chapters/49_preference_opt/OPT-02/candidate-v48.png)
@@ -107,13 +109,13 @@ La seconda figura mette a confronto «IPO, KTO, ORPO e varianti» e il limite di
 
 ## Come si collegano i passaggi
 
-- **Da «Evitare un reward model esplicito» a «Coppie chosen e rejected».** DPO riscrive un obiettivo di preferenza usando log-probability della policy e del riferimento, senza una fase PPO separata. Ogni esempio richiede la stessa condizione e due risposte confrontabili. Il primo passaggio definisce che cosa entra nel calcolo; il secondo stabilisce la regola che produce il valore osservabile. [SRC-49-001; SRC-49-002]
+- **Da «Evitare un reward model esplicito» a «Coppie chosen e rejected».** DPO riscrive un obiettivo di preferenza usando log-probability della policy e del riferimento, senza una fase PPO separata. Ogni esempio richiede la stessa condizione e due risposte confrontabili. Tra «Evitare un reward model esplicito» e «Coppie chosen e rejected» l'ingresso viene fissato prima della regola che produce il valore. Da «Evitare un reward model esplicito» a «Coppie chosen e rejected» cambia la domanda osservabile. [SRC-49-001; SRC-49-002]
 
-- **Da «Coppie chosen e rejected» a «Temperatura beta».** Ogni esempio richiede la stessa condizione e due risposte confrontabili. Beta controlla la forza relativa del vincolo rispetto al modello di riferimento e modifica i gradienti sulle coppie. La regola generale viene poi letta dentro il componente: questa separazione permette di localizzare un errore prima di attribuirlo all'intero modello. [SRC-49-002; SRC-49-003]
+- **Da «Coppie chosen e rejected» a «Temperatura beta».** Ogni esempio richiede la stessa condizione e due risposte confrontabili. Beta controlla la forza relativa del vincolo rispetto al modello di riferimento e modifica i gradienti sulle coppie. Nel caso «Temperatura beta» il componente diventa il punto in cui localizzare l'errore. Il passaggio successivo rende misurabile «Temperatura beta». [SRC-49-002; SRC-49-003]
 
-- **Da «Temperatura beta» a «IPO, KTO, ORPO e varianti».** Beta controlla la forza relativa del vincolo rispetto al modello di riferimento e modifica i gradienti sulle coppie. Le varianti cambiano assunzioni, forma della loss o tipo di feedback. Dopo avere reso visibile il componente, il percorso introduce la variante o l'ottimizzazione senza cambiare di nascosto il caso di partenza. [SRC-49-003; SRC-49-004]
+- **Da «Temperatura beta» a «IPO, KTO, ORPO e varianti».** Beta controlla la forza relativa del vincolo rispetto al modello di riferimento e modifica i gradienti sulle coppie. Le varianti cambiano assunzioni, forma della loss o tipo di feedback. Dopo «Temperatura beta», la variante di «IPO, KTO, ORPO e varianti» cambia una proprietà alla volta. Da «Temperatura beta» a «IPO, KTO, ORPO e varianti» cambia la domanda osservabile. [SRC-49-003; SRC-49-004]
 
-- **Da «IPO, KTO, ORPO e varianti» a «Offline preference data».** Le varianti cambiano assunzioni, forma della loss o tipo di feedback. L'ottimizzazione resta limitata alla copertura del dataset. L'ultimo passaggio sposta l'attenzione dal funzionamento locale alla misura: correttezza del calcolo e qualità applicativa restano domande distinte. [SRC-49-004; SRC-49-001]
+- **Da «IPO, KTO, ORPO e varianti» a «Offline preference data».** Le varianti cambiano assunzioni, forma della loss o tipo di feedback. L'ottimizzazione resta limitata alla copertura del dataset. Da «Offline preference data» in poi la misura resta distinta dalla correttezza locale del calcolo. Il passaggio successivo rende misurabile «Offline preference data». [SRC-49-004; SRC-49-001]
 
 La catena completa produce loss di preferenza e policy aggiornata a partire da prompt, log-probability della policy e riferimento. Ogni collegamento conserva un oggetto osservabile diverso; per questo il risultato non può essere esteso oltre il limite dichiarato: la preferenza osservata non è una verità assoluta.
 
@@ -129,4 +131,4 @@ La catena completa produce loss di preferenza e policy aggiornata a partire da p
 
 ## Che cosa deve restare chiaro
 
-La lezione parte da «prompt, log-probability della policy e riferimento» e arriva fino a «loss di preferenza e policy aggiornata». Il limite da conservare è questo: la preferenza osservata non è una verità assoluta. Definizioni e risultati citati sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md); la mappa dei claim è in [`CLAIMS.md`](CLAIMS.md).
+La lezione parte da «prompt, log-probability della policy e riferimento» e arriva fino a «loss di preferenza e policy aggiornata». Il limite da conservare è questo: la preferenza osservata non è una verità assoluta. La formula e il codice collegati a «Offline preference data» sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md), [`CLAIMS.md`](CLAIMS.md) e `code/`.

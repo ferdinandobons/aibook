@@ -14,7 +14,7 @@ deferred: benchmark applicativi non eseguiti e approvazione autoriale delle visu
 
 # Capitolo 55. Fondamenti della multimodalità
 
-La domanda guida di questa lezione è come collegare «Modalità e misure» e «Valutazione» senza perdere il contratto tecnico di fondamenti della multimodalità. L'oggetto osservato è rappresentazioni di modalità differenti. Il contratto locale è: input, testo, immagine, audio e maschere di modalità; operazione, encoder, proiezione, alignment e fusion; output, spazio condiviso o output condizionato. Il caso guida è questo: Due vettori, testo e immagine, vengono proiettati nella stessa dimensione prima della fusione. Il confine da mantenere esplicito è: allineamento misurato non equivale a comprensione generale.
+Per distinguere fondamenti della multimodalità, mettiamo in relazione «Modalità e misure» e «Valutazione» mantenendo separati gli assi osservati. L'oggetto osservato è rappresentazioni di modalità differenti. Il contratto locale dichiara input, testo, immagine, audio e maschere di modalità; operazione, encoder, proiezione, alignment e fusion; output, spazio condiviso o output condizionato. Il caso di partenza è Due vettori, testo e immagine, vengono proiettati nella stessa dimensione prima della fusione. Il limite da non nascondere è: allineamento misurato non equivale a comprensione generale.
 
 ## Modalità e misure
 
@@ -24,7 +24,7 @@ Ogni modalità ha un encoder e un contratto prima dell'allineamento.
 
 **Caso da seguire.** Due vettori, testo e immagine, vengono proiettati nella stessa dimensione prima della fusione.
 
-**Controllo.** Classifica lo stesso caso lungo un solo asse alla volta e annota quale proprietà non è stata misurata.
+**Controllo.** Per «Modalità e misure», classifica lo stesso caso lungo un solo asse alla volta e annota quale proprietà non è stata misurata.
 
 
 ## Allineamento
@@ -33,7 +33,7 @@ Coppie sincronizzate o semanticamente collegate forniscono un segnale comune. Co
 
 **Caso da seguire.** Due vettori di modalità proiettati nella stessa dimensione.
 
-**Controllo.** Cambia la proprietà che distingue «Allineamento» dalle categorie vicine. Se la classificazione non cambia, la distinzione va formulata meglio.
+**Controllo.** Cambia la proprietà che distingue «Allineamento» dalle categorie vicine. Nel caso «Allineamento», se la classificazione non cambia, la distinzione va formulata meglio.
 
 
 ## Fusion
@@ -42,7 +42,16 @@ Early, intermediate e late fusion combinano modalità in punti diversi e cambian
 
 **Caso da seguire.** Un caso in cui allineamento misurato non equivale a comprensione generale.
 
-**Controllo.** Confronta un caso positivo e uno di confine usando la medesima definizione; non trasformare l'esempio in una graduatoria generale.
+**Controllo.** Per «Fusion», confronta un caso positivo e uno di confine usando la medesima definizione; non trasformare l'esempio in una graduatoria generale.
+
+
+La relazione centrale può essere scritta come:
+
+$$
+z_m = f_m(x_m)
+$$
+
+Ogni modalità ha un encoder e un contratto prima dell'allineamento. [SRC-55-001]
 
 
 ![Fondamenti della multimodalità: scatter](../../assets/chapters/55_multimodal_foundations/FOUNDATION-01/candidate-v48.png)
@@ -65,15 +74,17 @@ Comprensione, retrieval, grounding e generazione richiedono benchmark distinti. 
 
 **Caso da seguire.** Per «Valutazione» si mantiene l'input del capitolo e si isola questa condizione: Comprensione, retrieval, grounding e generazione richiedono benchmark distinti.
 
-**Controllo.** Limita la conclusione alla proprietà dichiarata: Una media multimodale può nascondere una modalità debole. Le dimensioni non osservate restano aperte.
+**Controllo.** Per «Valutazione», limita la conclusione alla proprietà dichiarata: Una media multimodale può nascondere una modalità debole. Nel caso «Valutazione», le dimensioni non osservate restano aperte.
 
 
 ## Esempio Python eseguito
 
-Il frammento seguente è lo stesso conservato nel repository. Usa valori piccoli perché l'obiettivo è osservare il meccanismo, non simulare una scala che non abbiamo eseguito.
+La prova locale di fondamenti della multimodalità parte da un esempio minimo, registrato nel repository insieme ai suoi test. Per «Fondamenti della multimodalità», il caso di default usa valori piccoli per isolare il meccanismo. La prova negativa riguarda proprio «fondamenti della multimodalità» e interrompe l'interpretazione prima dell'output.
 
 ```python
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     text = [0.2, 0.4]
     image = [0.6, 0.1]
     shared = [(a + b) / 2 for a, b in zip(text, image)]
@@ -96,13 +107,13 @@ La seconda figura mette a confronto «Missing modality» e il limite discusso in
 
 ## Come si collegano i passaggi
 
-- **Da «Modalità e misure» a «Allineamento».** Testo, immagine, audio e azione hanno strutture e scale differenti. Coppie sincronizzate o semanticamente collegate forniscono un segnale comune. La definizione iniziale stabilisce l'asse del confronto; la categoria successiva aggiunge una proprietà senza creare una classifica implicita. [SRC-55-001; SRC-55-002]
+- **Da «Modalità e misure» a «Allineamento».** Testo, immagine, audio e azione hanno strutture e scale differenti. Coppie sincronizzate o semanticamente collegate forniscono un segnale comune. «Modalità e misure» stabilisce l'asse e «Allineamento» aggiunge una proprietà senza creare una graduatoria. Da «Modalità e misure» a «Allineamento» cambia la domanda osservabile. [SRC-55-001; SRC-55-002]
 
-- **Da «Allineamento» a «Fusion».** Coppie sincronizzate o semanticamente collegate forniscono un segnale comune. Early, intermediate e late fusion combinano modalità in punti diversi e cambiano costo, dipendenze e disponibilità dei dati. Il terzo passaggio verifica se le categorie restano distinguibili sullo stesso caso e impedisce che termini vicini diventino sinonimi. [SRC-55-002; SRC-55-003]
+- **Da «Allineamento» a «Fusion».** Coppie sincronizzate o semanticamente collegate forniscono un segnale comune. Early, intermediate e late fusion combinano modalità in punti diversi e cambiano costo, dipendenze e disponibilità dei dati. Il confronto tra «Allineamento» e «Fusion» mantiene le categorie distinguibili sullo stesso caso. Il passaggio successivo rende misurabile «Fusion». [SRC-55-002; SRC-55-003]
 
-- **Da «Fusion» a «Missing modality».** Early, intermediate e late fusion combinano modalità in punti diversi e cambiano costo, dipendenze e disponibilità dei dati. Un sistema deve definire cosa accade quando una modalità è assente, corrotta o non autorizzata. La quarta sezione introduce il punto in cui l'asse scelto smette di bastare e richiede una nuova osservazione. [SRC-55-003; SRC-55-004]
+- **Da «Fusion» a «Missing modality».** Early, intermediate e late fusion combinano modalità in punti diversi e cambiano costo, dipendenze e disponibilità dei dati. Un sistema deve definire cosa accade quando una modalità è assente, corrotta o non autorizzata. «Missing modality» mostra il punto in cui l'asse di «Fusion» non è più sufficiente. Da «Fusion» a «Missing modality» cambia la domanda osservabile. [SRC-55-003; SRC-55-004]
 
-- **Da «Missing modality» a «Valutazione».** Un sistema deve definire cosa accade quando una modalità è assente, corrotta o non autorizzata. Comprensione, retrieval, grounding e generazione richiedono benchmark distinti. La sezione finale riunisce le dimensioni della valutazione, ma conserva i limiti di ciascuna invece di fonderle in un unico punteggio. [SRC-55-004; SRC-55-001]
+- **Da «Missing modality» a «Valutazione».** Un sistema deve definire cosa accade quando una modalità è assente, corrotta o non autorizzata. Comprensione, retrieval, grounding e generazione richiedono benchmark distinti. Il passaggio su «Valutazione» riunisce più dimensioni senza cancellarne i limiti. Il passaggio successivo rende misurabile «Valutazione». [SRC-55-004; SRC-55-001]
 
 La catena completa produce spazio condiviso o output condizionato a partire da testo, immagine, audio e maschere di modalità. Ogni collegamento conserva un oggetto osservabile diverso; per questo il risultato non può essere esteso oltre il limite dichiarato: allineamento misurato non equivale a comprensione generale.
 
@@ -118,4 +129,4 @@ La catena completa produce spazio condiviso o output condizionato a partire da t
 
 ## Una mappa, non una graduatoria
 
-La lezione parte da «testo, immagine, audio e maschere di modalità» e arriva fino a «spazio condiviso o output condizionato». Il limite da conservare è questo: allineamento misurato non equivale a comprensione generale. Definizioni e risultati citati sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md); la mappa dei claim è in [`CLAIMS.md`](CLAIMS.md).
+La lezione parte da «testo, immagine, audio e maschere di modalità» e arriva fino a «spazio condiviso o output condizionato». Il limite da conservare è questo: allineamento misurato non equivale a comprensione generale. Il confronto di «Valutazione» resta verificabile nei dossier [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md) e [`CLAIMS.md`](CLAIMS.md), senza trasformare la mappa in una graduatoria.

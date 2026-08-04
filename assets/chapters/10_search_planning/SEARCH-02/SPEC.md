@@ -47,3 +47,10 @@ Dopo il ramo A, `alpha=3`. Nel ramo B, MIN osserva `2`; la foglia `9` non può r
 
 Valori e ordine dei figli derivano da `SNIP-SEARCH-001`. Il PNG raster è prodotto da `scripts/generate_search_visuals.py`; non viene usato SVG.
 - domanda principale: Quale confronto o limite chiarisce «La frontiera decide che cosa esplorare dopo»?
+
+## Contratto geometrico
+
+- raster: margine di sicurezza di 20 px sul canvas 1800x1000;
+- contenimento: nessun testo oltre il proprio box o il canvas;
+- composizione: nessuna sovrapposizione o tangenza intenzionale tra elementi fratelli;
+- fonte: `GEOMETRY.json` e checklist dell'audit storico.

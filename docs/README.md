@@ -110,14 +110,15 @@ Ogni capitolo tecnico include almeno uno snippet eseguibile, salvo eccezione mot
 - Visuali PNG attive: `196` nei capitoli e `208` includendo le 12 appendici, tutte referenziate;
 - Audit strutturale e semantico: `98/98` capitoli senza problemi rilevati;
 - Audit editoriale: `98/98` capitoli senza problemi automatici, `0` immagini problematiche, `0` formule non etichettate e `0` paragrafi duplicati;
-- Profondità misurata: `2.159-3.402` parole nell'audit editoriale e `2.186-3.670` nell'audit generale;
+- Profondità misurata: `910-3.402` parole nell'audit editoriale e `988-3.670` nell'audit generale;
 - Visuali: `15` famiglie compositive principali, differenziate per concetto e non applicate come immagine standard a ogni capitolo;
-- Codice: `464` test superati in `115` file e `267/267` file Python analizzati sintatticamente;
+- Codice: `544` test superati in `115` file e `272/272` file Python analizzati sintatticamente;
+- Gate trasversali: `208/208` immagini passano il controllo raster/geometrico, `68/68` formule o schemi hanno presenza e spiegazione verificate, nessuna frase è condivisa da più di `12` capitoli;
 - Policy Python: `94/98` capitoli con riferimento eseguibile; eccezioni motivate nei capitoli 20, 30, 93 e 98;
-- Fonti: `419` fonti uniche e `502` collegamenti fonte-claim; `332` con contesto aperto, `127` con contesto parziale e `43` confermati tramite accesso web ufficiale;
+- Fonti: `420` fonti uniche e `503` collegamenti fonte-claim; `332` con contesto aperto, `128` con contesto parziale e `43` confermati tramite accesso web ufficiale;
 - stato editoriale: candidature tecniche complete, non ancora approvate per la pubblicazione.
 
-Restano aperti lettura ad alta voce, revisione per lettore non esperto, ricontrollo autoriale delle immagini, verifica fattuale delle fonti sensibili e congelamento dei file `final.png`. Il dettaglio tecnico dell'accesso alle fonti è in `source_verification_2026-08-03.json`; lo stato generale è in `../PROGRESS.md` e `../BOOK_PRODUCTION.md`.
+Restano aperti lettura ad alta voce, revisione per lettore non esperto, ricontrollo autoriale delle immagini, verifica fattuale delle fonti sensibili e congelamento dei file `final.png`. Il dettaglio tecnico dell'accesso alle fonti è in `source_verification_2026-08-04.json`; lo stato generale è in `../PROGRESS.md` e `../BOOK_PRODUCTION.md`.
 
 ## Regola per nuovi file in `docs/`
 

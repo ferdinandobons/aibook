@@ -17,13 +17,14 @@ import re
 import sys
 from pathlib import Path
 
-from PIL import Image, ImageDraw
+from PIL import Image
 
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 import revise_book_completeness as old  # noqa: E402
+from visual_geometry import GeometryRecorder, TrackingDraw, write_manifest  # noqa: E402
 
 
 TARGETS = tuple(number for number in range(14, 99) if number != 28)
@@ -186,11 +187,35 @@ COLORS = [
 
 
 def compact(text: str, limit: int = 135) -> str:
-    text = re.sub(r"\s+", " ", text).strip()
-    if len(text) <= limit:
-        return text
-    cut = text[: limit - 1].rsplit(" ", 1)[0]
-    return cut + "…"
+    """Return a complete, semantically bounded diagram label.
+
+    Character-level ellipses made labels look like clipped prose and made it
+    impossible to tell whether a concept had been omitted deliberately.  The
+    renderer now prefers a complete sentence or clause and never emits an
+    automatic ellipsis.  The full explanation remains in the chapter text and
+    alt text.
+    """
+
+    value = re.sub(r"\s+", " ", str(text)).strip()
+    if len(value) <= limit:
+        return value
+    sentences = re.split(r"(?<=[.!?])\s+", value)
+    for sentence in sentences:
+        sentence = sentence.strip()
+        if sentence and len(sentence) <= limit:
+            return sentence
+    for separator in (";", ":", ","):
+        prefix = value[:limit].rsplit(separator, 1)[0].strip(" ,;:")
+        if len(prefix) >= max(24, int(limit * 0.55)):
+            return prefix + "."
+    words = value.split()
+    result: list[str] = []
+    for word in words:
+        candidate = " ".join(result + [word])
+        if len(candidate) > limit:
+            break
+        result.append(word)
+    return " ".join(result).rstrip(" ,;:") + "."
 
 
 def title_for(number: int) -> str:
@@ -207,6 +232,30 @@ def detail_for(number: int):
 
 def model_label(model: str) -> str:
     return model.replace("_", " ").upper()
+
+
+def orientation_for(model: str) -> str:
+    if model in FLOW_MODELS:
+        return "orizzontale, lettura da sinistra a destra"
+    if model in CYCLE_MODELS:
+        return "radiale, lettura in senso orario"
+    if model in STACK_MODELS:
+        return "verticale, lettura dall'alto verso il basso"
+    if model in COMPARE_MODELS:
+        return "a due colonne, confronto parallelo"
+    if model in TREE_MODELS:
+        return "ramificato, radice in alto e foglie in basso"
+    if model in GRID_MODELS:
+        return "a matrice, righe e colonne dichiarate"
+    if model in BOUNDARY_MODELS:
+        return "a zone, esterno-controllo-effetto"
+    if model in GRAPH_MODELS:
+        return "a grafo, nodi e archi separati"
+    if model in EVIDENCE_MODELS:
+        return "a livelli, dalla base alla decisione"
+    if model in TILE_MODELS:
+        return "a blocchi, tensor a sinistra e trasformazione a destra"
+    raise KeyError(model)
 
 
 def question(number: int, model: str, figure_index: int) -> str:
@@ -370,8 +419,8 @@ def render_grid(draw, number: int, figure_index: int) -> None:
             )
     old.fit(draw, (80, 280, 360, 390), compact(items[0][0], 34) + "\nrighe / stati", 18, 11, True, old.BLUE)
     old.fit(draw, (620, 730, 1240, 785), compact(items[-1][0], 46) + " · colonne / trasformazioni", 18, 11, True, old.PURPLE)
-    node(draw, (1330, 275, 1710, 650), items[0][0], items[0][1], old.ORANGE, old.ORANGE_LIGHT)
-    old.arrow(draw, (1285, 470), (1320, 470), old.MUTED, 4)
+    node(draw, (1390, 275, 1720, 650), items[0][0], items[0][1], old.ORANGE, old.ORANGE_LIGHT)
+    old.arrow(draw, (1365, 470), (1380, 470), old.MUTED, 4)
     old.fit(draw, (450, 790, 1300, 830), "Le celle evidenziate mostrano la relazione strutturale, non una misura quantitativa.", 15, 10, True, old.MUTED)
 
 
@@ -379,9 +428,9 @@ def render_boundary(draw, number: int, figure_index: int) -> None:
     detail = detail_for(number)
     items = selected_items(number, figure_index)
     zones = [
-        (80, 230, 560, 750, "ESTERNO / NON FIDATO", old.RED, old.RED_LIGHT),
-        (660, 230, 1140, 750, "CONTROLLO", old.PURPLE, old.PURPLE_LIGHT),
-        (1240, 230, 1720, 750, "EFFETTO / OUTPUT", old.GREEN, old.GREEN_LIGHT),
+        (80, 230, 560, 630, "ESTERNO / NON FIDATO", old.RED, old.RED_LIGHT),
+        (660, 230, 1140, 630, "CONTROLLO", old.PURPLE, old.PURPLE_LIGHT),
+        (1240, 230, 1720, 630, "EFFETTO / OUTPUT", old.GREEN, old.GREEN_LIGHT),
     ]
     for index, (x0, y0, x1, y1, label, color, fill) in enumerate(zones):
         draw.rounded_rectangle((x0, y0, x1, y1), radius=28, fill=fill, outline=color, width=4)
@@ -466,7 +515,15 @@ def renderer_for(model: str):
     raise KeyError(f"No renderer for {model}")
 
 
-def write_visual_metadata(folder: Path, figure_id: str, number: int, model: str, figure_index: int, image_name: str) -> None:
+def write_visual_metadata(
+    folder: Path,
+    figure_id: str,
+    number: int,
+    model: str,
+    figure_index: int,
+    image_name: str,
+    geometry: dict,
+) -> None:
     detail = detail_for(number)
     sections = sections_for(number)
     q = question(number, model, figure_index)
@@ -475,6 +532,7 @@ def write_visual_metadata(folder: Path, figure_id: str, number: int, model: str,
     spec = f"""# Specifica visuale {figure_id}
 
 - modello compositivo: {model}
+- orientamento: {orientation_for(model)}
 - domanda principale: {q}
 - formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
@@ -486,6 +544,8 @@ def write_visual_metadata(folder: Path, figure_id: str, number: int, model: str,
 - limite visualizzato: {detail['invariant']}
 - valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
 - accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- contenimento: safe margin {geometry['safe_margin']} px; distanza minima tra elementi {geometry['minimum_gap']} px
+- geometria: `GEOMETRY.json`, nessuna intersezione o tangenza tra elementi fratelli
 - generatore: scripts/generate_visuals_v2.py
 - approvazione autoriale: aperta
 """
@@ -503,7 +563,9 @@ def write_visual_metadata(folder: Path, figure_id: str, number: int, model: str,
 - angoli bianchi #FFFFFF: superati
 - domanda didattica singola: verificata
 - composizione pertinente al concetto: {model}
-- contenimento testo: verificato dal renderer sul raster prodotto
+- contenimento testo: verificato dal contratto geometrico e dal raster prodotto
+- sovrapposizioni e tangenze: controllate con `GEOMETRY.json`
+- margine canvas: controllato sul raster con soglia 20 px
 - frecce e relazioni: ogni collegamento rappresenta un flusso, una dipendenza o un controllo dichiarato
 - numeri non supportati: assenti
 - watermark o branding di terzi: assenti
@@ -511,6 +573,7 @@ def write_visual_metadata(folder: Path, figure_id: str, number: int, model: str,
 - approvazione autoriale: aperta nel contesto impaginato
 - esito: candidata tecnica revisionata il 4 agosto 2026
 """
+    write_manifest(folder / "GEOMETRY.json", geometry)
     (folder / "SPEC.md").write_text(spec, encoding="utf-8")
     (folder / "ALT_TEXT.md").write_text(alt, encoding="utf-8")
     (folder / "AUDIT.md").write_text(audit, encoding="utf-8")
@@ -528,12 +591,28 @@ def generate_chapter(number: int) -> None:
         folder = image_path.parent
         figure_id = folder.name
         image = Image.new("RGB", (1800, 1000), old.WHITE)
-        draw = ImageDraw.Draw(image)
-        header(draw, figure_id, number, model, figure_index)
-        renderer_for(model)(draw, number, figure_index)
-        footer(draw, number)
+        geometry = GeometryRecorder(figure_id)
+        draw = TrackingDraw(image, geometry)
+        original_fit, original_arrow = old.fit, old.arrow
+
+        def tracked_fit(draw_obj, box, text, *args, **kwargs):
+            geometry.text(box, text)
+            return original_fit(draw_obj, box, text, *args, **kwargs)
+
+        def tracked_arrow(draw_obj, start, end, *args, **kwargs):
+            geometry.connector(start, end)
+            return original_arrow(draw_obj, start, end, *args, **kwargs)
+
+        old.fit, old.arrow = tracked_fit, tracked_arrow
+        try:
+            header(draw, figure_id, number, model, figure_index)
+            renderer_for(model)(draw, number, figure_index)
+            footer(draw, number)
+        finally:
+            old.fit, old.arrow = original_fit, original_arrow
+        geometry.validate()
         old.finish(image_path, image)
-        write_visual_metadata(folder, figure_id, number, model, figure_index, image_path.name)
+        write_visual_metadata(folder, figure_id, number, model, figure_index, image_path.name, geometry.manifest())
 
 
 APPENDICES = {
@@ -605,7 +684,19 @@ def render_appendix(folder_name: str, specification) -> None:
     folder = ROOT / "assets" / "appendices" / folder_name / figure_id
     image_path = folder / "candidate-v2.png"
     image = Image.new("RGB", (1800, 1000), old.WHITE)
-    draw = ImageDraw.Draw(image)
+    geometry = GeometryRecorder(figure_id)
+    draw = TrackingDraw(image, geometry)
+    original_fit, original_arrow = old.fit, old.arrow
+
+    def tracked_fit(draw_obj, box, text, *args, **kwargs):
+        geometry.text(box, text)
+        return original_fit(draw_obj, box, text, *args, **kwargs)
+
+    def tracked_arrow(draw_obj, start, end, *args, **kwargs):
+        geometry.connector(start, end)
+        return original_arrow(draw_obj, start, end, *args, **kwargs)
+
+    old.fit, old.arrow = tracked_fit, tracked_arrow
     old.fit(draw, (60, 28, 1740, 82), f"{figure_id} · {title}", 31, 20, True)
     old.fit(draw, (80, 94, 1720, 142), "Mappa operativa dell'appendice: ogni nodo rinvia a un controllo descritto nel testo.", 18, 12, fill=old.MUTED)
     # Appendix diagrams use compact bespoke arrangements, independent of chapter data.
@@ -661,7 +752,10 @@ def render_appendix(folder_name: str, specification) -> None:
             old.fit(draw, (x0 + 315, y0 + 13, x0 + width - 25, y0 + 77), body, 13, 9, fill=old.TEXT, align="left")
     draw.rounded_rectangle((170, 850, 1630, 940), radius=22, fill=old.ORANGE_LIGHT, outline=old.ORANGE, width=3)
     old.fit(draw, (205, 873, 1595, 917), f"LIMITE · {invariant}", 17, 12, True, old.TEXT)
+    old.fit, old.arrow = original_fit, original_arrow
+    geometry.validate()
     old.finish(image_path, image)
+    write_manifest(folder / "GEOMETRY.json", geometry.manifest())
 
     appendix = ROOT / "appendices" / folder_name / "APPENDIX.md"
     text = appendix.read_text(encoding="utf-8")
@@ -672,7 +766,7 @@ def render_appendix(folder_name: str, specification) -> None:
     )
     appendix.write_text(text, encoding="utf-8")
     (folder / "SPEC.md").write_text(
-        f"# Specifica {figure_id}\n\n- domanda: {title}\n- modello compositivo: {layout}\n- file candidato: {image_path.name}\n- sfondo: #FFFFFF\n- formato: PNG RGB 1800x1000\n- limite: {invariant}\n- generatore: scripts/generate_visuals_v2.py\n- approvazione autoriale: aperta\n",
+        f"# Specifica {figure_id}\n\n- domanda: {title}\n- modello compositivo: {layout}\n- orientamento: {layout}\n- file candidato: {image_path.name}\n- sfondo: #FFFFFF\n- formato: PNG RGB 1800x1000\n- limite: {invariant}\n- contenimento: safe margin {geometry.manifest()['safe_margin']} px; distanza minima {geometry.manifest()['minimum_gap']} px\n- geometria: `GEOMETRY.json`, nessuna intersezione o tangenza tra elementi fratelli\n- generatore: scripts/generate_visuals_v2.py\n- approvazione autoriale: aperta\n",
         encoding="utf-8",
     )
     (folder / "ALT_TEXT.md").write_text(
@@ -680,7 +774,7 @@ def render_appendix(folder_name: str, specification) -> None:
         encoding="utf-8",
     )
     (folder / "AUDIT.md").write_text(
-        f"# Audit {figure_id}\n\n- decodifica: superata\n- dimensione: 1800x1000 RGB\n- contenimento: verificato\n- numeri inventati: assenti\n- composizione: {layout}\n- approvazione autoriale: aperta\n",
+        f"# Audit {figure_id}\n\n- decodifica: superata\n- dimensione: 1800x1000 RGB\n- contenimento: verificato dal contratto geometrico e dal raster\n- sovrapposizioni e tangenze: controllate con `GEOMETRY.json`\n- numeri inventati: assenti\n- composizione: {layout}\n- approvazione autoriale: aperta\n",
         encoding="utf-8",
     )
 

@@ -1,0 +1,363 @@
+{
+  "schema": 1,
+  "figure": "LLMOPS-02",
+  "canvas": [
+    1800,
+    1000
+  ],
+  "safe_margin": 20,
+  "minimum_gap": 8,
+  "objects": [
+    {
+      "id": "text-001",
+      "kind": "text",
+      "box": [
+        60.0,
+        25.0,
+        1740.0,
+        77.0
+      ],
+      "label": "LLMOPS-02 · LLMOps, edge, costo ed energia",
+      "order": 1
+    },
+    {
+      "id": "text-002",
+      "kind": "text",
+      "box": [
+        80.0,
+        87.0,
+        1720.0,
+        140.0
+      ],
+      "label": "Quale controllo collega «Costo» a «Energia e sostenibilità» senza superare il limite dichiarato?",
+      "order": 2
+    },
+    {
+      "id": "text-003",
+      "kind": "text",
+      "box": [
+        80.0,
+        146.0,
+        1720.0,
+        178.0
+      ],
+      "label": "ROLLBACK PATH",
+      "order": 3
+    },
+    {
+      "id": "rounded_rectangle-004",
+      "kind": "rounded_rectangle",
+      "box": [
+        80.0,
+        230.0,
+        560.0,
+        630.0
+      ],
+      "label": "",
+      "order": 4
+    },
+    {
+      "id": "text-005",
+      "kind": "text",
+      "box": [
+        105.0,
+        255.0,
+        535.0,
+        305.0
+      ],
+      "label": "ESTERNO / NON FIDATO",
+      "order": 5
+    },
+    {
+      "id": "rounded_rectangle-006",
+      "kind": "rounded_rectangle",
+      "box": [
+        125.0,
+        355.0,
+        515.0,
+        605.0
+      ],
+      "label": "",
+      "order": 6
+    },
+    {
+      "id": "ellipse-007",
+      "kind": "ellipse",
+      "box": [
+        143.0,
+        373.0,
+        183.0,
+        413.0
+      ],
+      "label": "",
+      "order": 7
+    },
+    {
+      "id": "text-008",
+      "kind": "text",
+      "box": [
+        152.0,
+        379.0,
+        174.0,
+        405.0
+      ],
+      "label": "1",
+      "order": 8
+    },
+    {
+      "id": "text-009",
+      "kind": "text",
+      "box": [
+        197.0,
+        373.0,
+        493.0,
+        417.0
+      ],
+      "label": "Costo",
+      "order": 9
+    },
+    {
+      "id": "text-010",
+      "kind": "text",
+      "box": [
+        149.0,
+        432.0,
+        491.0,
+        587.0
+      ],
+      "label": "Costo per token, richiesta, utente e risultato utile sono metriche differenti. Cache e batching modificano l'allocazione.",
+      "order": 10
+    },
+    {
+      "id": "rounded_rectangle-011",
+      "kind": "rounded_rectangle",
+      "box": [
+        660.0,
+        230.0,
+        1140.0,
+        630.0
+      ],
+      "label": "",
+      "order": 11
+    },
+    {
+      "id": "text-012",
+      "kind": "text",
+      "box": [
+        685.0,
+        255.0,
+        1115.0,
+        305.0
+      ],
+      "label": "CONTROLLO",
+      "order": 12
+    },
+    {
+      "id": "rounded_rectangle-013",
+      "kind": "rounded_rectangle",
+      "box": [
+        705.0,
+        355.0,
+        1095.0,
+        605.0
+      ],
+      "label": "",
+      "order": 13
+    },
+    {
+      "id": "ellipse-014",
+      "kind": "ellipse",
+      "box": [
+        723.0,
+        373.0,
+        763.0,
+        413.0
+      ],
+      "label": "",
+      "order": 14
+    },
+    {
+      "id": "text-015",
+      "kind": "text",
+      "box": [
+        732.0,
+        379.0,
+        754.0,
+        405.0
+      ],
+      "label": "2",
+      "order": 15
+    },
+    {
+      "id": "text-016",
+      "kind": "text",
+      "box": [
+        777.0,
+        373.0,
+        1073.0,
+        417.0
+      ],
+      "label": "Energia e sostenibilità",
+      "order": 16
+    },
+    {
+      "id": "text-017",
+      "kind": "text",
+      "box": [
+        729.0,
+        432.0,
+        1071.0,
+        587.0
+      ],
+      "label": "Potenza, tempo, utilizzo hardware e mix energetico influenzano l'impatto. Stime devono dichiarare confini e metodologia.",
+      "order": 17
+    },
+    {
+      "id": "rounded_rectangle-018",
+      "kind": "rounded_rectangle",
+      "box": [
+        1240.0,
+        230.0,
+        1720.0,
+        630.0
+      ],
+      "label": "",
+      "order": 18
+    },
+    {
+      "id": "text-019",
+      "kind": "text",
+      "box": [
+        1265.0,
+        255.0,
+        1695.0,
+        305.0
+      ],
+      "label": "EFFETTO / OUTPUT",
+      "order": 19
+    },
+    {
+      "id": "rounded_rectangle-020",
+      "kind": "rounded_rectangle",
+      "box": [
+        1285.0,
+        355.0,
+        1675.0,
+        605.0
+      ],
+      "label": "",
+      "order": 20
+    },
+    {
+      "id": "ellipse-021",
+      "kind": "ellipse",
+      "box": [
+        1303.0,
+        373.0,
+        1343.0,
+        413.0
+      ],
+      "label": "",
+      "order": 21
+    },
+    {
+      "id": "text-022",
+      "kind": "text",
+      "box": [
+        1312.0,
+        379.0,
+        1334.0,
+        405.0
+      ],
+      "label": "3",
+      "order": 22
+    },
+    {
+      "id": "text-023",
+      "kind": "text",
+      "box": [
+        1357.0,
+        373.0,
+        1653.0,
+        417.0
+      ],
+      "label": "Controllo locale",
+      "order": 23
+    },
+    {
+      "id": "text-024",
+      "kind": "text",
+      "box": [
+        1309.0,
+        432.0,
+        1651.0,
+        587.0
+      ],
+      "label": "un costo locale non descrive l'intero ciclo di vita",
+      "order": 24
+    },
+    {
+      "id": "text-025",
+      "kind": "text",
+      "box": [
+        545.0,
+        655.0,
+        1180.0,
+        720.0
+      ],
+      "label": "GATE · un costo locale non descrive l'intero ciclo di vita",
+      "order": 27
+    },
+    {
+      "id": "rounded_rectangle-026",
+      "kind": "rounded_rectangle",
+      "box": [
+        170.0,
+        850.0,
+        1630.0,
+        940.0
+      ],
+      "label": "",
+      "order": 28
+    },
+    {
+      "id": "text-027",
+      "kind": "text",
+      "box": [
+        205.0,
+        873.0,
+        1595.0,
+        917.0
+      ],
+      "label": "LIMITE · un costo locale non descrive l'intero ciclo di vita",
+      "order": 29
+    }
+  ],
+  "connectors": [
+    {
+      "id": "connector-001",
+      "start": [
+        570.0,
+        490.0
+      ],
+      "end": [
+        650.0,
+        490.0
+      ],
+      "order": 25
+    },
+    {
+      "id": "connector-002",
+      "start": [
+        1150.0,
+        490.0
+      ],
+      "end": [
+        1230.0,
+        490.0
+      ],
+      "order": 26
+    }
+  ],
+  "errors": []
+}

@@ -14,7 +14,7 @@ deferred: benchmark applicativi non eseguiti e approvazione autoriale delle visu
 
 # Capitolo 85. Valutare contesto lungo, RAG, multimodalità e agenti
 
-La domanda guida di questa lezione è come collegare «Contesto lungo» e «Evaluation in production» senza perdere il contratto tecnico di valutare contesto lungo, rag, multimodalità e agenti. L'oggetto osservato è un sistema composto da modello, contesto, tool e interfaccia. Il contratto locale è: input, task, componenti, trace e policy; operazione, eval end-to-end, stress, slice e monitoraggio; output, score di sistema, failure e regressione. Il caso guida è questo: Il RAG risponde correttamente ma la citation fallisce, quindi il sistema non passa il gate end-to-end. Il confine da mantenere esplicito è: misurare il modello isolato non misura il comportamento del sistema.
+Il percorso di valutare contesto lungo, rag, multimodalità e agenti attraversa «Contesto lungo» e «Evaluation in production» senza attribuire al solo modello ciò che dipende dal sistema. L'oggetto osservato è un sistema composto da modello, contesto, tool e interfaccia. Il contratto locale dichiara input, task, componenti, trace e policy; operazione, eval end-to-end, stress, slice e monitoraggio; output, score di sistema, failure e regressione. La situazione minima da seguire è Il RAG risponde correttamente ma la citation fallisce, quindi il sistema non passa il gate end-to-end. Il limite da non nascondere è: misurare il modello isolato non misura il comportamento del sistema.
 
 ## Contesto lungo
 
@@ -24,7 +24,7 @@ La valutazione di sistema deve includere componenti che il modello non controlla
 
 **Caso da seguire.** Il RAG risponde correttamente ma la citation fallisce, quindi il sistema non passa il gate end-to-end.
 
-**Controllo.** Registra richiesta, decisione, stato e output finale. Un esito plausibile non deve nascondere il componente che lo ha prodotto.
+**Controllo.** Per «Contesto lungo», registra richiesta, decisione, stato e output finale. Nel caso «Contesto lungo», un esito plausibile non deve nascondere il componente che lo ha prodotto.
 
 
 ## RAG
@@ -34,6 +34,13 @@ Retrieval recall, context precision, attribution e risposta finale compongono un
 **Caso da seguire.** Una query confrontata con tre documenti, conservando ranking, chunk entrati nel contesto e risposta finale.
 
 **Controllo.** Ripeti «RAG» con una capability o un'autorizzazione rimossa e verifica che la failure preceda qualsiasi side effect.
+
+
+Qui la notazione serve a fissare un'interfaccia tra componenti.
+
+**Schema concettuale.** `system = model + tools + policy + ui`
+
+La valutazione di sistema deve includere componenti che il modello non controlla. [SRC-85-001]
 
 
 ![Valutare contesto lungo, RAG, multimodalità e agenti: funnel](../../assets/chapters/85_system_eval/EVAL-01/candidate-v48.png)
@@ -47,7 +54,7 @@ Modalità, risoluzione, sincronizzazione e grounding richiedono slice e metriche
 
 **Caso da seguire.** Due rappresentazioni di modalità diverse proiettate nella stessa dimensione prima di similarità, fusione o generazione.
 
-**Controllo.** Separa il test del singolo componente dal test end-to-end, usando lo stesso input e la stessa configurazione versionata.
+**Controllo.** Per «Multimodalità», separa il test del singolo componente dal test end-to-end, usando lo stesso input e la stessa configurazione versionata.
 
 
 ## Agenti
@@ -56,7 +63,7 @@ Successo, step, costo, side effect e recovery vengono misurati in ambienti versi
 
 **Caso da seguire.** Una traiettoria minima osservazione-azione-tool-verifica in cui una chiamata fuori allowlist viene bloccata prima dell'esecuzione.
 
-**Controllo.** Introduci una failure a un solo confine e controlla che log, stato e recovery identifichino quel confine senza ambiguità.
+**Controllo.** Per «Agenti», introduci una failure a un solo confine e controlla che log, stato e recovery identifichino quel confine senza ambiguità.
 
 
 ## Evaluation in production
@@ -65,7 +72,7 @@ Shadow traffic, canary e monitoraggio collegano benchmark offline a distribuzion
 
 **Caso da seguire.** Quattro casi con tre esiti corretti e una failure, riportando la media insieme alla slice e al protocollo per «Evaluation in production» e all'output score di sistema, failure e regressione.
 
-**Controllo.** Confronta il comportamento completo, non soltanto l'ultimo messaggio. Il risultato resta limitato da: Shadow traffic, canary e monitoraggio collegano benchmark offline a distribuzioni reali senza confonderli.
+**Controllo.** Per «Evaluation in production», confronta il comportamento completo, non soltanto l'ultimo messaggio. Nel caso «Evaluation in production», il risultato resta limitato da: Shadow traffic, canary e monitoraggio collegano benchmark offline a distribuzioni reali senza confonderli.
 
 
 ![Valutare contesto lungo, RAG, multimodalità e agenti: architecture](../../assets/chapters/85_system_eval/EVAL-02/candidate-v48.png)
@@ -75,10 +82,12 @@ La seconda figura mette a confronto «Agenti» e il limite discusso in «Evaluat
 
 ## Esempio Python eseguito
 
-Il frammento seguente è lo stesso conservato nel repository. Usa valori piccoli perché l'obiettivo è osservare il meccanismo, non simulare una scala che non abbiamo eseguito.
+Il caso computazionale di valutare contesto lungo, rag, multimodalità e agenti è riportato senza trasformazioni: il file e l'output sono quelli verificati. Per «Valutare contesto lungo, RAG, multimodalità e agenti», il caso di default usa valori piccoli per isolare il meccanismo. La suite conserva inoltre una failure esplicita per separare il contratto osservato da «valutare contesto lungo, rag, multimodalità e agenti».
 
 ```python
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     trace = {"retrieval": True, "answer": True, "citation": False, "tool": True}
     system_success = all(trace.values())
     return {"component_failures": [key for key, ok in trace.items() if not ok], "system_success": system_success, "invariant": "end-to-end evaluation keeps component failures visible"}
@@ -95,13 +104,13 @@ Il test associato è [`code/test_85_contract.py`](code/test_85_contract.py); l'o
 
 ## Come si collegano i passaggi
 
-- **Da «Contesto lungo» a «RAG».** Variare lunghezza, posizione dell'evidenza e distrattori misura utilizzo, non soltanto capacità nominale. Retrieval recall, context precision, attribution e risposta finale compongono una pipeline con errori localizzabili. Il contratto iniziale nomina messaggi e confini; il componente successivo implementa una parte del percorso senza ereditare autorizzazioni implicite. [SRC-85-001; SRC-85-002]
+- **Da «Contesto lungo» a «RAG».** Variare lunghezza, posizione dell'evidenza e distrattori misura utilizzo, non soltanto capacità nominale. Retrieval recall, context precision, attribution e risposta finale compongono una pipeline con errori localizzabili. «Contesto lungo» nomina il confine e «RAG» implementa il percorso senza ereditare autorizzazioni implicite. Da «Contesto lungo» a «RAG» cambia la domanda osservabile. [SRC-85-001; SRC-85-002]
 
-- **Da «RAG» a «Multimodalità».** Retrieval recall, context precision, attribution e risposta finale compongono una pipeline con errori localizzabili. Modalità, risoluzione, sincronizzazione e grounding richiedono slice e metriche specifiche. Il terzo passaggio compone più componenti e rende quindi necessario conservare stato, identità e decisione oltre all'output finale. [SRC-85-002; SRC-85-003]
+- **Da «RAG» a «Multimodalità».** Retrieval recall, context precision, attribution e risposta finale compongono una pipeline con errori localizzabili. Modalità, risoluzione, sincronizzazione e grounding richiedono slice e metriche specifiche. Componendo «RAG» e «Multimodalità» diventa necessario conservare stato, identità e decisione. Il passaggio successivo rende misurabile «Multimodalità». [SRC-85-002; SRC-85-003]
 
-- **Da «Multimodalità» a «Agenti».** Modalità, risoluzione, sincronizzazione e grounding richiedono slice e metriche specifiche. Successo, step, costo, side effect e recovery vengono misurati in ambienti versionati e resettabili. La quarta sezione introduce failure e recovery nel punto in cui possono ancora precedere un side effect o una perdita di stato. [SRC-85-003; SRC-85-004]
+- **Da «Multimodalità» a «Agenti».** Modalità, risoluzione, sincronizzazione e grounding richiedono slice e metriche specifiche. Successo, step, costo, side effect e recovery vengono misurati in ambienti versionati e resettabili. «Agenti» introduce failure e recovery prima di un side effect o di una perdita di stato. Da «Multimodalità» a «Agenti» cambia la domanda osservabile. [SRC-85-003; SRC-85-004]
 
-- **Da «Agenti» a «Evaluation in production».** Successo, step, costo, side effect e recovery vengono misurati in ambienti versionati e resettabili. Shadow traffic, canary e monitoraggio collegano benchmark offline a distribuzioni reali senza confonderli. La chiusura valuta il comportamento end-to-end: un componente corretto non basta se il collegamento, il carico o la policy cambiano l'esito. [SRC-85-004; SRC-85-001]
+- **Da «Agenti» a «Evaluation in production».** Successo, step, costo, side effect e recovery vengono misurati in ambienti versionati e resettabili. Shadow traffic, canary e monitoraggio collegano benchmark offline a distribuzioni reali senza confonderli. La chiusura su «Evaluation in production» valuta il sistema completo, non soltanto il componente iniziale. Il passaggio successivo rende misurabile «Evaluation in production». [SRC-85-004; SRC-85-001]
 
 La catena completa produce score di sistema, failure e regressione a partire da task, componenti, trace e policy. Ogni collegamento conserva un oggetto osservabile diverso; per questo il risultato non può essere esteso oltre il limite dichiarato: misurare il modello isolato non misura il comportamento del sistema.
 
@@ -117,4 +126,4 @@ La catena completa produce score di sistema, failure e regressione a partire da 
 
 ## Il confine operativo
 
-La lezione parte da «task, componenti, trace e policy» e arriva fino a «score di sistema, failure e regressione». Il limite da conservare è questo: misurare il modello isolato non misura il comportamento del sistema. Definizioni e risultati citati sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md); la mappa dei claim è in [`CLAIMS.md`](CLAIMS.md).
+La lezione parte da «task, componenti, trace e policy» e arriva fino a «score di sistema, failure e regressione». Il limite da conservare è questo: misurare il modello isolato non misura il comportamento del sistema. Il confine di «Evaluation in production» va ricontrollato tra claim, fonti e artefatti: i rinvii sono [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md), [`CLAIMS.md`](CLAIMS.md) e `code/`.

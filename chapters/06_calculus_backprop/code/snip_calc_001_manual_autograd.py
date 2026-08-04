@@ -98,7 +98,9 @@ def gradcheck_passes() -> bool:
         torch.tensor(value, dtype=torch.float64, requires_grad=True)
         for value in INITIAL
     )
-    return bool(torch.autograd.gradcheck(torch_loss, parameters, eps=1e-6, atol=1e-5, rtol=1e-3))
+    return bool(
+        torch.autograd.gradcheck(torch_loss, parameters, eps=1e-6, atol=1e-5, rtol=1e-3)
+    )
 
 
 def accumulated_gradient() -> tuple[float, float]:

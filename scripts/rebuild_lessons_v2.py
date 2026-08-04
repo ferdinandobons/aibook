@@ -16,7 +16,6 @@ from __future__ import annotations
 import argparse
 import ast
 import importlib.util
-import json
 import re
 import subprocess
 import sys
@@ -49,7 +48,7 @@ FULL_LABS = {
     97: ("replication_protocol.py", "test_replication_protocol.py", "outputs/REPLICATION-PROTOCOL.txt", "Replica indipendente con incertezza"),
 }
 SOURCE_IDS_OVERRIDES = {
-    20: ["SRC-20-001", "SRC-20-002", "SRC-20-003", "SRC-20-004", "SRC-20-001; SRC-20-005"],
+    20: ["SRC-20-001", "SRC-20-002", "SRC-20-003", "SRC-20-004", "SRC-20-005"],
     68: ["SRC-68-001", "SRC-68-001", "SRC-68-002", "SRC-68-003", "SRC-68-001"],
     74: [
         "SRC-74-001",
@@ -246,13 +245,46 @@ def opening(number: int, title: str, sections: list[tuple[str, str]], detail: di
     case = complete_sentence(
         old.sentence_case(old.section_example(number, old.profile(number), sections[0][0], detail, 0))
     )
+    leads = {
+        "mechanism": (
+            f"Per entrare in {title.lower()}, seguiamo il passaggio che unisce «{first}» a «{last}».",
+            f"Qui {title.lower()} viene osservato come un meccanismo: il percorso va da «{first}» a «{last}».",
+            f"La lezione prende un caso piccolo e lo accompagna da «{first}» fino a «{last}», senza saltare i passaggi.",
+        ),
+        "conceptual": (
+            f"Il punto di vista di {title.lower()} nasce dal confronto tra «{first}» e «{last}», non da una graduatoria.",
+            f"Per distinguere {title.lower()}, mettiamo in relazione «{first}» e «{last}» mantenendo separati gli assi osservati.",
+            f"Questa mappa di {title.lower()} parte da «{first}» e arriva a «{last}» conservando le proprietà che non sono state misurate.",
+        ),
+        "data": (
+            f"In {title.lower()} il percorso dei record è il filo conduttore: da «{first}» a «{last}» ogni trasformazione lascia una traccia.",
+            f"Per leggere {title.lower()}, seguiamo i dati tra «{first}» e «{last}» insieme alla loro provenienza.",
+            f"La domanda pratica di {title.lower()} è che cosa cambia nei record tra «{first}» e «{last}» e come lo possiamo dimostrare.",
+        ),
+        "system": (
+            f"{title} viene letto come un sistema: «{first}» e «{last}» restano collegati da confini e decisioni osservabili.",
+            f"Il percorso di {title.lower()} attraversa «{first}» e «{last}» senza attribuire al solo modello ciò che dipende dal sistema.",
+            f"Per capire {title.lower()}, partiamo da «{first}» e seguiamo ogni confine fino a «{last}».",
+        ),
+        "lab": (
+            f"Il laboratorio di {title.lower()} costruisce un percorso riproducibile da «{first}» a «{last}».",
+            f"Qui {title.lower()} è una procedura: «{first}» fissa l'ingresso e «{last}» definisce il risultato da ricostruire.",
+            f"Per rendere concreto {title.lower()}, registriamo ciò che accade tra «{first}» e «{last}».",
+        ),
+    }[archetype(number)]
+    case_intros = (
+        "Il caso di partenza è",
+        "Per fissare il riferimento usiamo",
+        "Il primo esempio osservabile è",
+        "La situazione minima da seguire è",
+    )
+    lead = leads[number % len(leads)]
+    case_intro = case_intros[(number + len(first)) % len(case_intros)]
     return (
-        f"La domanda guida di questa lezione è come collegare «{first}» e «{last}» senza "
-        f"perdere il contratto tecnico di {title.lower()}. L'oggetto osservato è {detail['object']}. "
-        f"Il contratto locale è: input, {detail['input']}; "
-        f"operazione, {detail['operation']}; output, {detail['output']}. "
-        f"Il caso guida è questo: {case} "
-        f"Il confine da mantenere esplicito è: {complete_sentence(detail['invariant'])}"
+        f"{lead} L'oggetto osservato è {detail['object']}. "
+        f"Il contratto locale dichiara input, {detail['input']}; operazione, {detail['operation']}; "
+        f"output, {detail['output']}. {case_intro} {case} "
+        f"Il limite da non nascondere è: {complete_sentence(detail['invariant'])}"
     )
 
 
@@ -296,7 +328,15 @@ def control_for(number: int, index: int, heading: str, note: str, detail: dict[s
             f"Distingui il risultato riprodotto dal suo trasferimento ad altra scala. Il confine è: {complete_sentence(last_claim)}",
         ),
     }
-    return variants[archetype(number)][index % 5]
+    result = variants[archetype(number)][index % 5]
+    sentences = re.split(r"(?<=[.!?])\s+", result.strip())
+    personalized = []
+    for sentence_index, sentence in enumerate(sentences):
+        if f"«{heading}»" not in sentence:
+            lead = "Per" if sentence_index == 0 else "Nel caso"
+            sentence = f"{lead} «{heading}», {sentence[0].lower()}{sentence[1:]}"
+        personalized.append(sentence)
+    return " ".join(personalized)
 
 
 def section_depth(
@@ -336,9 +376,20 @@ def section_depth(
 
 
 def formula_block(number: int, source_id: str) -> str:
-    if number in old.FORMULA_SCHEMA_NUMBERS:
-        return ""
     formula, explanation = old.formula_for(number, old.profile(number))
+    if number in old.FORMULA_SCHEMA_NUMBERS:
+        schema_intros = (
+            "Qui la notazione serve a fissare un'interfaccia tra componenti.",
+            "La relazione seguente è una mappa operativa e non una misura del sistema.",
+            "Per questo capitolo la notazione compatta chiarisce input, trasformazione e risultato.",
+            "Lo schema seguente rende esplicito il confine tra il meccanismo e la sua valutazione.",
+            "La forma compatta aiuta a seguire il flusso senza attribuirgli una garanzia quantitativa.",
+        )
+        return (
+            f"{schema_intros[number % len(schema_intros)]}\n\n"
+            f"**Schema concettuale.** `{formula}`\n\n"
+            f"{explanation} [{source_id}]"
+        )
     return f"La relazione centrale può essere scritta come:\n\n$$\n{formula}\n$$\n\n{explanation} [{source_id}]"
 
 
@@ -376,7 +427,7 @@ def clean_code_source(number: int, title: str) -> str:
     else:
         current = next((ROOT / "chapters").glob(f"{number:02d}_*/code/snip_{number:02d}_contract.py"))
         text = current.read_text(encoding="utf-8")
-        match = re.search(r"def contract\(\):\n(.+?)(?=\ndef main\()", text, re.DOTALL)
+        match = re.search(r"def contract\([^)]*\):\n(.+?)(?=\ndef main\()", text, re.DOTALL)
         if not match:
             raise ValueError(f"contract non trovato per il capitolo {number}")
         body = "def contract():\n" + match.group(1).rstrip() + "\n"
@@ -391,17 +442,32 @@ def clean_code_source(number: int, title: str) -> str:
             "    total = sum(exponentials)\n"
             "    return [value / total for value in exponentials]\n\n\n"
         )
+    body = re.sub(
+        r"def contract\([^)]*\):",
+        "def contract(case: str = \"default\"):\n"
+        "    if case != \"default\":\n"
+        "        raise ValueError(\"only the documented default case is supported\")",
+        body,
+        count=1,
+    )
+    source_body = helper + body.strip()
+    imports = ["import json"]
+    if "hashlib" in source_body:
+        imports.append("import hashlib")
+    if "math." in source_body or "math(" in source_body:
+        imports.append("import math")
+    if "statistics." in source_body:
+        imports.append("import statistics")
+    if "Counter" in source_body:
+        imports.append("from collections import Counter")
+    imports = sorted(imports)
     return (
         "from __future__ import annotations\n\n"
-        "import hashlib\n"
-        "import json\n"
-        "import math\n"
-        "import statistics\n"
-        "from collections import Counter\n\n"
+        + "\n".join(imports)
+        + "\n\n"
         f"CHAPTER = {number}\n"
         f"TITLE = {title!r}\n\n\n"
-        + helper
-        + body.strip()
+        + source_body
         + "\n\n\ndef main() -> None:\n"
         "    print(json.dumps(contract(), ensure_ascii=False, sort_keys=True))\n\n\n"
         "if __name__ == \"__main__\":\n"
@@ -435,20 +501,32 @@ def write_code(number: int, title: str, chapter_dir: Path) -> tuple[str, str, st
         "import math\n"
         "import unittest\n\n"
         f"from {module_name} import contract\n\n\n"
+        "def assert_finite(testcase, value):\n"
+        "    if isinstance(value, float):\n"
+        "        testcase.assertTrue(math.isfinite(value))\n"
+        "    elif isinstance(value, dict):\n"
+        "        for nested in value.values():\n"
+        "            assert_finite(testcase, nested)\n"
+        "    elif isinstance(value, (list, tuple)):\n"
+        "        for nested in value:\n"
+        "            assert_finite(testcase, nested)\n\n\n"
         "class LessonExampleTests(unittest.TestCase):\n"
         "    def test_expected_result(self):\n"
         f"        self.assertEqual(contract(), {expected})\n\n"
         "    def test_example_is_deterministic(self):\n"
         "        self.assertEqual(contract(), contract())\n\n"
         "    def test_result_is_serializable_and_finite(self):\n"
-        "        encoded = json.dumps(contract(), sort_keys=True)\n"
-        "        self.assertTrue(encoded)\n"
-        "        for value in contract().values():\n"
-        "            if isinstance(value, float):\n"
-        "                self.assertTrue(math.isfinite(value))\n\n"
-        "    def test_interpretation_boundary_is_explicit(self):\n"
-        "        self.assertIsInstance(contract().get('invariant'), str)\n"
-        "        self.assertGreaterEqual(len(contract()['invariant'].split()), 4)\n\n\n"
+        "        result = contract()\n"
+        "        self.assertTrue(json.dumps(result, sort_keys=True))\n"
+        "        assert_finite(self, result)\n\n"
+        "    def test_contract_shape_is_explicit(self):\n"
+        "        result = contract()\n"
+        "        self.assertIsInstance(result, dict)\n"
+        "        self.assertIsInstance(result.get('invariant'), str)\n"
+        "        self.assertGreaterEqual(len(result['invariant'].split()), 4)\n\n"
+        "    def test_unsupported_case_fails_before_interpretation(self):\n"
+        "        with self.assertRaises(ValueError):\n"
+        "            contract('unsupported')\n\n\n"
         "if __name__ == '__main__':\n"
         "    unittest.main(verbosity=2)\n",
         encoding="utf-8",
@@ -469,13 +547,13 @@ def write_code(number: int, title: str, chapter_dir: Path) -> tuple[str, str, st
         f"# Esempio verificato. Capitolo {number}\n\n"
         f"`{code_path.name}` esegue il caso minimo usato nel testo di **{title}**. "
         f"`{test_path.name}` conserva l'output atteso, controlla determinismo, serializzazione, "
-        "valori finiti e presenza del limite interpretativo.\n\n"
+        "valori finiti, forma del contratto e rifiuto dei casi non documentati.\n\n"
         f"```bash\npython {code_path.name}\npython -m unittest -v {test_path.name}\n```\n",
         encoding="utf-8",
     )
     source = code_path.read_text(encoding="utf-8")
-    contract_match = re.search(r"def contract\(\):\n(.+?)(?=\ndef main\()", source, re.DOTALL)
-    excerpt = "def contract():\n" + contract_match.group(1).rstrip() if contract_match else source
+    contract_match = re.search(r"def contract\([^)]*\):\n(.+?)(?=\ndef main\()", source, re.DOTALL)
+    excerpt = "def contract(case: str = \"default\"):\n" + contract_match.group(1).rstrip() if contract_match else source
     if "normalize(" in excerpt and "def normalize" in source:
         helper_match = re.search(r"def normalize\(values\):\n(.+?)(?=\ndef contract\()", source, re.DOTALL)
         if helper_match:
@@ -487,10 +565,23 @@ def code_section(number: int, title: str, chapter_dir: Path) -> tuple[str, str, 
     if number in CODE_EXCEPTIONS:
         return "exception", "", ""
     module, excerpt, output = write_code(number, title, chapter_dir)
+    intros = (
+        f"Per rendere osservabile {title.lower()}, il capitolo conserva qui l'artefatto Python eseguito.",
+        f"Il caso computazionale di {title.lower()} è riportato senza trasformazioni: il file e l'output sono quelli verificati.",
+        f"Questa sezione apre il contratto Python di {title.lower()}: il lettore può eseguire lo stesso file e confrontare il risultato.",
+        f"La prova locale di {title.lower()} parte da un esempio minimo, registrato nel repository insieme ai suoi test.",
+    )
+    intro = intros[number % len(intros)]
+    test_notes = (
+        f"Il test rifiuta anche un caso non documentato di «{title.lower()}».",
+        f"La suite conserva inoltre una failure esplicita per separare il contratto osservato da «{title.lower()}».",
+        f"Il caso non supportato viene provato separatamente, così «{title.lower()}» non viene generalizzato oltre l'esempio.",
+        f"La prova negativa riguarda proprio «{title.lower()}» e interrompe l'interpretazione prima dell'output.",
+    )
+    test_note = test_notes[number % len(test_notes)]
     text = (
         "## Esempio Python eseguito\n\n"
-        "Il frammento seguente è lo stesso conservato nel repository. Usa valori piccoli perché "
-        "l'obiettivo è osservare il meccanismo, non simulare una scala che non abbiamo eseguito.\n\n"
+        f"{intro} Per «{title}», il caso di default usa valori piccoli per isolare il meccanismo. {test_note}\n\n"
         f"```python\n{excerpt}\n```\n\n"
         f"Esecuzione con `python {module}.py`:\n\n"
         f"```text\n{output}\n```\n\n"
@@ -545,36 +636,36 @@ def connection_block(
     detail: dict[str, str],
 ) -> str:
     """Explain why adjacent sections are separate and how they compose."""
-    bridges = {
+    bridge_frames = {
         "mechanism": (
-            "Il primo passaggio definisce che cosa entra nel calcolo; il secondo stabilisce la regola che produce il valore osservabile.",
-            "La regola generale viene poi letta dentro il componente: questa separazione permette di localizzare un errore prima di attribuirlo all'intero modello.",
-            "Dopo avere reso visibile il componente, il percorso introduce la variante o l'ottimizzazione senza cambiare di nascosto il caso di partenza.",
-            "L'ultimo passaggio sposta l'attenzione dal funzionamento locale alla misura: correttezza del calcolo e qualità applicativa restano domande distinte.",
+            "Tra «{left}» e «{right}» l'ingresso viene fissato prima della regola che produce il valore.",
+            "Nel caso «{right}» il componente diventa il punto in cui localizzare l'errore.",
+            "Dopo «{left}», la variante di «{right}» cambia una proprietà alla volta.",
+            "Da «{right}» in poi la misura resta distinta dalla correttezza locale del calcolo.",
         ),
         "conceptual": (
-            "La definizione iniziale stabilisce l'asse del confronto; la categoria successiva aggiunge una proprietà senza creare una classifica implicita.",
-            "Il terzo passaggio verifica se le categorie restano distinguibili sullo stesso caso e impedisce che termini vicini diventino sinonimi.",
-            "La quarta sezione introduce il punto in cui l'asse scelto smette di bastare e richiede una nuova osservazione.",
-            "La sezione finale riunisce le dimensioni della valutazione, ma conserva i limiti di ciascuna invece di fonderle in un unico punteggio.",
+            "«{left}» stabilisce l'asse e «{right}» aggiunge una proprietà senza creare una graduatoria.",
+            "Il confronto tra «{left}» e «{right}» mantiene le categorie distinguibili sullo stesso caso.",
+            "«{right}» mostra il punto in cui l'asse di «{left}» non è più sufficiente.",
+            "Il passaggio su «{right}» riunisce più dimensioni senza cancellarne i limiti.",
         ),
         "data": (
-            "Il primo passaggio identifica il record e la sua provenienza; il secondo dichiara la trasformazione che cambia la popolazione osservata.",
-            "La trasformazione diventa confrontabile soltanto quando il passaggio successivo conserva configurazione, conteggi e artefatti intermedi.",
-            "Una volta resa tracciabile la pipeline, il quarto passaggio può affrontare selezione o uso senza confondere un cambiamento nei dati con uno nel modello.",
-            "L'ultima sezione porta il risultato alla valutazione e chiede quali record, slice o failure restano fuori dalla media.",
+            "«{left}» identifica il record e «{right}» dichiara la trasformazione sulla popolazione osservata.",
+            "Il passaggio da «{left}» a «{right}» conserva configurazione, conteggi e artefatti intermedi.",
+            "Con «{right}» la pipeline può selezionare o usare dati senza confonderli con una modifica del modello.",
+            "«{right}» porta il risultato alla valutazione e rende visibili record, slice e failure esclusi.",
         ),
         "system": (
-            "Il contratto iniziale nomina messaggi e confini; il componente successivo implementa una parte del percorso senza ereditare autorizzazioni implicite.",
-            "Il terzo passaggio compone più componenti e rende quindi necessario conservare stato, identità e decisione oltre all'output finale.",
-            "La quarta sezione introduce failure e recovery nel punto in cui possono ancora precedere un side effect o una perdita di stato.",
-            "La chiusura valuta il comportamento end-to-end: un componente corretto non basta se il collegamento, il carico o la policy cambiano l'esito.",
+            "«{left}» nomina il confine e «{right}» implementa il percorso senza ereditare autorizzazioni implicite.",
+            "Componendo «{left}» e «{right}» diventa necessario conservare stato, identità e decisione.",
+            "«{right}» introduce failure e recovery prima di un side effect o di una perdita di stato.",
+            "La chiusura su «{right}» valuta il sistema completo, non soltanto il componente iniziale.",
         ),
         "lab": (
-            "La prima tappa fissa domanda, ambiente e input; la seconda costruisce l'artefatto eseguibile che materializza il protocollo.",
-            "Il run produce numeri e file soltanto dopo che configurazione, seed e dipendenze sono stati registrati.",
-            "La tappa successiva confronta il risultato atteso con quello osservato e conserva le divergenze invece di correggerle retroattivamente.",
-            "La conclusione separa ciò che il laboratorio ha ricostruito da ciò che richiederebbe altri dati, hardware o una valutazione di produzione.",
+            "«{left}» fissa domanda, ambiente e input prima che «{right}» materializzi il protocollo.",
+            "Il passaggio a «{right}» produce numeri e file soltanto dopo la registrazione della configurazione.",
+            "«{right}» confronta atteso e osservato e conserva le divergenze del run.",
+            "La conclusione distingue ciò che «{right}» ha ricostruito da ciò che richiede nuovi dati o hardware.",
         ),
     }[archetype(number)]
     paragraphs = []
@@ -583,9 +674,15 @@ def connection_block(
         right_heading, right_note = sections[index + 1]
         left_claim = complete_sentence(old.note_parts(left_note)[0])
         right_claim = complete_sentence(old.note_parts(right_note)[0])
+        bridge_text = bridge_frames[index].format(left=left_heading, right=right_heading)
+        local_bridge = (
+            f"Il passaggio successivo rende misurabile «{right_heading}»."
+            if (number + index) % 2 == 0
+            else f"Da «{left_heading}» a «{right_heading}» cambia la domanda osservabile."
+        )
         paragraphs.append(
             f"- **Da «{left_heading}» a «{right_heading}».** {left_claim} {right_claim} "
-            f"{bridges[index]} [{source_ids[index]}; {source_ids[index + 1]}]"
+            f"{bridge_text} {local_bridge} [{source_ids[index]}; {source_ids[index + 1]}]"
         )
     conclusion = (
         f"La catena completa produce {detail['output']} a partire da {detail['input']}. "
@@ -603,6 +700,17 @@ def chapter_title(number: int) -> str:
     if not match:
         raise ValueError(f"titolo non trovato per il capitolo {number}")
     return match.group(1).strip()
+
+
+def final_trace(number: int, kind: str, final_heading: str) -> str:
+    traces = {
+        "mechanism": f"La formula e il codice collegati a «{final_heading}» sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md), [`CLAIMS.md`](CLAIMS.md) e `code/`.",
+        "conceptual": f"Il confronto di «{final_heading}» resta verificabile nei dossier [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md) e [`CLAIMS.md`](CLAIMS.md), senza trasformare la mappa in una graduatoria.",
+        "data": f"Per «{final_heading}», provenienza e trasformazioni sono registrate in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md), [`CLAIMS.md`](CLAIMS.md) e negli artefatti di `code/`.",
+        "system": f"Il confine di «{final_heading}» va ricontrollato tra claim, fonti e artefatti: i rinvii sono [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md), [`CLAIMS.md`](CLAIMS.md) e `code/`.",
+        "lab": f"Il run relativo a «{final_heading}» conserva codice, test e output; le ipotesi esterne restano nel dossier [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md).",
+    }
+    return traces[kind]
 
 
 def update_claim_code_section(number: int, chapter_dir: Path, code_policy: str) -> None:
@@ -825,8 +933,8 @@ Seguire **{title}** da {detail['input']} a {detail['output']}, osservando {detai
             f"- ambiente minimo: Python {sys.version.split()[0]}, CPU\n"
             f"- comando snippet: `python snip_{number:02d}_contract.py`\n"
             f"- comando test: `python -m unittest -v test_{number:02d}_contract.py`\n"
-            "- test del riferimento: 4 superati\n"
-            "- controlli: output atteso, determinismo, serializzazione, valori finiti, limite interpretativo\n"
+            "- test del riferimento: 5 superati\n"
+            "- controlli: output atteso, determinismo, serializzazione, valori finiti, forma del contratto e caso non supportato\n"
             f"{extra}"
             "- risultato: esempio didattico delimitato, non benchmark di produzione\n"
             "- stato: verificato localmente; review autoriale aperta\n"
@@ -894,6 +1002,8 @@ def build_chapter(number: int) -> None:
             body.append(figure_blocks[1])
     elif kind == "conceptual":
         body.extend(section_blocks[:3])
+        if formula:
+            body.append(formula)
         body.append(figure_blocks[0])
         body.extend(section_blocks[3:])
         if code_text:
@@ -902,6 +1012,8 @@ def build_chapter(number: int) -> None:
             body.append(figure_blocks[1])
     elif kind == "data":
         body.append(section_blocks[0])
+        if formula:
+            body.append(formula)
         body.append(figure_blocks[0])
         body.extend(section_blocks[1:3])
         if code_text:
@@ -911,6 +1023,8 @@ def build_chapter(number: int) -> None:
             body.append(figure_blocks[1])
     elif kind == "system":
         body.extend(section_blocks[:2])
+        if formula:
+            body.append(formula)
         body.append(figure_blocks[0])
         body.extend(section_blocks[2:])
         if len(figure_blocks) > 1:
@@ -921,6 +1035,8 @@ def build_chapter(number: int) -> None:
         body.append(figure_blocks[0])
         for index, block in enumerate(section_blocks):
             body.append(block)
+            if index == 1 and formula:
+                body.append(formula)
             if index == 2 and code_text:
                 body.append(code_text)
         if len(figure_blocks) > 1:
@@ -946,8 +1062,7 @@ def build_chapter(number: int) -> None:
         f"## {final_heading}\n\n"
         f"La lezione parte da «{detail['input']}» e arriva fino a «{detail['output']}». "
         f"Il limite da conservare è questo: {complete_sentence(detail['invariant'])} "
-        "Definizioni e risultati citati sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md); "
-        "la mappa dei claim è in [`CLAIMS.md`](CLAIMS.md)."
+        f"{final_trace(number, kind, sections[-1][0])}"
     )
 
     chapter_file.write_text(
@@ -1018,15 +1133,28 @@ def update_baseline_visual_metadata() -> None:
         print(f"updated baseline visual metadata {number:02d}")
 
 
+def update_source_dossiers(numbers: list[int]) -> None:
+    """Refresh generated source dossiers against the current dated report."""
+
+    for number in numbers:
+        sections = list(old.SPECS[number][6])
+        old.write_sources(number, old.profile(number), sections)
+        print(f"updated source dossier {number:02d}")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--chapters", help="lista o intervalli, per esempio 14-30,37")
     parser.add_argument("--baseline-metadata", action="store_true")
+    parser.add_argument("--sources-only", action="store_true")
     args = parser.parse_args()
     if args.baseline_metadata:
         update_baseline_visual_metadata()
         return
     numbers = parse_numbers(args.chapters)
+    if args.sources_only:
+        update_source_dossiers(numbers)
+        return
     for number in numbers:
         build_chapter(number)
         print(f"rebuilt chapter {number:02d}")

@@ -15,13 +15,17 @@ class Split:
 
 def build_dataset(seed: int = 11) -> tuple[torch.Tensor, torch.Tensor, Split]:
     generator = torch.Generator().manual_seed(seed)
-    class_0 = torch.randn(60, 2, generator=generator) * 0.35 + torch.tensor([-1.0, -0.5])
+    class_0 = torch.randn(60, 2, generator=generator) * 0.35 + torch.tensor(
+        [-1.0, -0.5]
+    )
     class_1 = torch.randn(60, 2, generator=generator) * 0.35 + torch.tensor([1.0, 0.5])
     features = torch.cat([class_0, class_1])
-    labels = torch.cat([
-        torch.zeros(60, dtype=torch.long),
-        torch.ones(60, dtype=torch.long),
-    ])
+    labels = torch.cat(
+        [
+            torch.zeros(60, dtype=torch.long),
+            torch.ones(60, dtype=torch.long),
+        ]
+    )
     permutation = torch.randperm(len(features), generator=generator)
     features = features[permutation]
     labels = labels[permutation]
@@ -84,9 +88,8 @@ def main() -> None:
     train_std = x[split.train].std(dim=0).clamp_min(1e-6)
     production_batch = x[split.test] + torch.tensor([0.8, 0.0])
     standardized_mean_shift = (
-        (production_batch.mean(dim=0) - train_mean).abs()
-        / train_std
-    )
+        production_batch.mean(dim=0) - train_mean
+    ).abs() / train_std
 
     print(f"chosen_learning_rate: {chosen_lr}")
     print(f"validation_accuracy: {chosen_val_accuracy:.3f}")

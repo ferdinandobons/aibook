@@ -1,6 +1,6 @@
 # Esempio verificato. Capitolo 24
 
-`snip_24_contract.py` esegue il caso minimo usato nel testo di **Normalizing flow e trasformazioni invertibili**. `test_24_contract.py` conserva l'output atteso, controlla determinismo, serializzazione, valori finiti e presenza del limite interpretativo.
+`snip_24_contract.py` esegue il caso minimo usato nel testo di **Normalizing flow e trasformazioni invertibili**. `test_24_contract.py` conserva l'output atteso, controlla determinismo, serializzazione, valori finiti, forma del contratto e rifiuto dei casi non documentati.
 
 ```bash
 python snip_24_contract.py

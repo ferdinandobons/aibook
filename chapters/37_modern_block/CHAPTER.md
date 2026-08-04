@@ -14,7 +14,7 @@ deferred: benchmark applicativi non eseguiti e approvazione autoriale delle visu
 
 # Capitolo 37. Anatomia del blocco moderno
 
-La domanda guida di questa lezione è come collegare «Residual stream» e «Ordine e parallelismo» senza perdere il contratto tecnico di anatomia del blocco moderno. L'oggetto osservato è un residual stream dentro un blocco moderno. Il contratto locale è: input, h di shape [batch, length, d] e norma misurata; operazione, norm, attention, MLP e gating nell'ordine scelto; output, h' con shape preservata e statistiche confrontabili. Il caso guida è questo: Due vettori con shape compatibile confrontati prima e dopo il blocco, osservando separatamente scala e percorso residuale in «Residual stream». Il confine da mantenere esplicito è: ordine dei sottolayer e shape sono parte del blocco.
+Qui anatomia del blocco moderno viene osservato come un meccanismo: il percorso va da «Residual stream» a «Ordine e parallelismo». L'oggetto osservato è un residual stream dentro un blocco moderno. Il contratto locale dichiara input, h di shape [batch, length, d] e norma misurata; operazione, norm, attention, MLP e gating nell'ordine scelto; output, h' con shape preservata e statistiche confrontabili. Il caso di partenza è Due vettori con shape compatibile confrontati prima e dopo il blocco, osservando separatamente scala e percorso residuale in «Residual stream». Il limite da non nascondere è: ordine dei sottolayer e shape sono parte del blocco.
 
 ## Residual stream
 
@@ -24,7 +24,7 @@ La posizione della norm e il percorso residuale sono parte del contratto del blo
 
 **Caso da seguire.** Due vettori con shape compatibile confrontati prima e dopo il blocco, osservando separatamente scala e percorso residuale in «Residual stream».
 
-**Controllo.** Scrivi il risultato atteso prima del calcolo, modifica una sola quantità e localizza il primo passaggio che cambia. Il vincolo da conservare è: Ogni sottolayer produce un aggiornamento sommato a un percorso identità.
+**Controllo.** Per «Residual stream», scrivi il risultato atteso prima del calcolo, modifica una sola quantità e localizza il primo passaggio che cambia. Nel caso «Residual stream», il vincolo da conservare è: Ogni sottolayer produce un aggiornamento sommato a un percorso identità.
 
 
 ## Pre-norm e post-norm
@@ -33,7 +33,7 @@ La posizione della normalizzazione cambia il percorso dei gradienti e il contrat
 
 **Caso da seguire.** Pre-norm e residuale su un vettore di due coordinate.
 
-**Controllo.** Ricalcola il caso a mano e con lo snippet. Se i risultati divergono, confronta prima i valori intermedi e soltanto dopo l'output finale.
+**Controllo.** Per «Pre-norm e post-norm», ricalcola il caso a mano e con lo snippet. Nel caso «Pre-norm e post-norm», se i risultati divergono, confronta prima i valori intermedi e soltanto dopo l'output finale.
 
 
 La relazione centrale può essere scritta come:
@@ -56,7 +56,7 @@ RMSNorm scala usando la media quadratica e non sottrae la media. [SRC-37-003]
 
 **Caso da seguire.** Un caso in cui ordine dei sottolayer e shape sono parte del blocco.
 
-**Controllo.** Aggiungi un valore limite e verifica separatamente forma, valore e ipotesi. Una shape valida non dimostra da sola «RMSNorm».
+**Controllo.** Per «RMSNorm», aggiungi un valore limite e verifica separatamente forma, valore e ipotesi. Una shape valida non dimostra da sola «RMSNorm».
 
 
 ## SwiGLU
@@ -65,15 +65,17 @@ Due proiezioni di ingresso costruiscono un gate moltiplicativo prima della proie
 
 **Caso da seguire.** Un blocco viene confrontato a parità di input e shape. Il vantaggio dichiarato resta un'ipotesi finché non viene misurato sullo stesso setup.
 
-**Controllo.** Mantieni fisso l'input e sostituisci soltanto il meccanismo discusso nella sezione. Il confronto deve attribuire la differenza a quel passaggio, non al setup.
+**Controllo.** Per «SwiGLU», mantieni fisso l'input e sostituisci soltanto il meccanismo discusso nella sezione. Nel caso «SwiGLU», il confronto deve attribuire la differenza a quel passaggio, non al setup.
 
 
 ## Esempio Python eseguito
 
-Il frammento seguente è lo stesso conservato nel repository. Usa valori piccoli perché l'obiettivo è osservare il meccanismo, non simulare una scala che non abbiamo eseguito.
+Il caso computazionale di anatomia del blocco moderno è riportato senza trasformazioni: il file e l'output sono quelli verificati. Per «Anatomia del blocco moderno», il caso di default usa valori piccoli per isolare il meccanismo. La suite conserva inoltre una failure esplicita per separare il contratto osservato da «anatomia del blocco moderno».
 
 ```python
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     state = [1.0, -2.0]
     update = [0.25, 0.5]
     output = [left + right for left, right in zip(state, update)]
@@ -95,7 +97,7 @@ Attention e MLP possono essere sequenziali o paralleli; il nome del modello non 
 
 **Caso da seguire.** Per «Ordine e parallelismo» si mantiene l'input del capitolo e si isola questa condizione: Attention e MLP possono essere sequenziali o paralleli; il nome del modello non basta a ricostruire l'ordine.
 
-**Controllo.** Costruisci un controesempio che rispetti il tipo di dato ma violi l'ipotesi centrale. Il test deve rendere riconoscibile perché «Ordine e parallelismo» non si applica.
+**Controllo.** Per «Ordine e parallelismo», costruisci un controesempio che rispetti il tipo di dato ma violi l'ipotesi centrale. Il test deve rendere riconoscibile perché «Ordine e parallelismo» non si applica.
 
 
 ![Anatomia del blocco moderno: architecture](../../assets/chapters/37_modern_block/BLOCK-02/candidate-v47.png)
@@ -105,13 +107,13 @@ La seconda figura mette a confronto «SwiGLU» e il limite discusso in «Ordine 
 
 ## Come si collegano i passaggi
 
-- **Da «Residual stream» a «Pre-norm e post-norm».** Ogni sottolayer produce un aggiornamento sommato a un percorso identità. La posizione della normalizzazione cambia il percorso dei gradienti e il contratto del blocco. Il primo passaggio definisce che cosa entra nel calcolo; il secondo stabilisce la regola che produce il valore osservabile. [SRC-37-001; SRC-37-002]
+- **Da «Residual stream» a «Pre-norm e post-norm».** Ogni sottolayer produce un aggiornamento sommato a un percorso identità. La posizione della normalizzazione cambia il percorso dei gradienti e il contratto del blocco. Tra «Residual stream» e «Pre-norm e post-norm» l'ingresso viene fissato prima della regola che produce il valore. Da «Residual stream» a «Pre-norm e post-norm» cambia la domanda osservabile. [SRC-37-001; SRC-37-002]
 
-- **Da «Pre-norm e post-norm» a «RMSNorm».** La posizione della normalizzazione cambia il percorso dei gradienti e il contratto del blocco. RMSNorm scala usando la media quadratica e non sottrae la media. La regola generale viene poi letta dentro il componente: questa separazione permette di localizzare un errore prima di attribuirlo all'intero modello. [SRC-37-002; SRC-37-003]
+- **Da «Pre-norm e post-norm» a «RMSNorm».** La posizione della normalizzazione cambia il percorso dei gradienti e il contratto del blocco. RMSNorm scala usando la media quadratica e non sottrae la media. Nel caso «RMSNorm» il componente diventa il punto in cui localizzare l'errore. Il passaggio successivo rende misurabile «RMSNorm». [SRC-37-002; SRC-37-003]
 
-- **Da «RMSNorm» a «SwiGLU».** RMSNorm scala usando la media quadratica e non sottrae la media. Due proiezioni di ingresso costruiscono un gate moltiplicativo prima della proiezione down. Dopo avere reso visibile il componente, il percorso introduce la variante o l'ottimizzazione senza cambiare di nascosto il caso di partenza. [SRC-37-003; SRC-37-004]
+- **Da «RMSNorm» a «SwiGLU».** RMSNorm scala usando la media quadratica e non sottrae la media. Due proiezioni di ingresso costruiscono un gate moltiplicativo prima della proiezione down. Dopo «RMSNorm», la variante di «SwiGLU» cambia una proprietà alla volta. Da «RMSNorm» a «SwiGLU» cambia la domanda osservabile. [SRC-37-003; SRC-37-004]
 
-- **Da «SwiGLU» a «Ordine e parallelismo».** Due proiezioni di ingresso costruiscono un gate moltiplicativo prima della proiezione down. Attention e MLP possono essere sequenziali o paralleli; il nome del modello non basta a ricostruire l'ordine. L'ultimo passaggio sposta l'attenzione dal funzionamento locale alla misura: correttezza del calcolo e qualità applicativa restano domande distinte. [SRC-37-004; SRC-37-001]
+- **Da «SwiGLU» a «Ordine e parallelismo».** Due proiezioni di ingresso costruiscono un gate moltiplicativo prima della proiezione down. Attention e MLP possono essere sequenziali o paralleli; il nome del modello non basta a ricostruire l'ordine. Da «Ordine e parallelismo» in poi la misura resta distinta dalla correttezza locale del calcolo. Il passaggio successivo rende misurabile «Ordine e parallelismo». [SRC-37-004; SRC-37-001]
 
 La catena completa produce h' con shape preservata e statistiche confrontabili a partire da h di shape [batch, length, d] e norma misurata. Ogni collegamento conserva un oggetto osservabile diverso; per questo il risultato non può essere esteso oltre il limite dichiarato: ordine dei sottolayer e shape sono parte del blocco.
 
@@ -127,4 +129,4 @@ La catena completa produce h' con shape preservata e statistiche confrontabili a
 
 ## Che cosa deve restare chiaro
 
-La lezione parte da «h di shape [batch, length, d] e norma misurata» e arriva fino a «h' con shape preservata e statistiche confrontabili». Il limite da conservare è questo: ordine dei sottolayer e shape sono parte del blocco. Definizioni e risultati citati sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md); la mappa dei claim è in [`CLAIMS.md`](CLAIMS.md).
+La lezione parte da «h di shape [batch, length, d] e norma misurata» e arriva fino a «h' con shape preservata e statistiche confrontabili». Il limite da conservare è questo: ordine dei sottolayer e shape sono parte del blocco. La formula e il codice collegati a «Ordine e parallelismo» sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md), [`CLAIMS.md`](CLAIMS.md) e `code/`.

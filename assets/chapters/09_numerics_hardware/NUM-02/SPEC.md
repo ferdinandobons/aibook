@@ -50,3 +50,10 @@ Input e pesi
 - NVIDIA CUDA/cuBLAS;
 - renderer: `scripts/generate_numerics_visuals.py` e revisione `generate_numerics_visuals_v2.py`.
 - domanda principale: Quale confronto o limite chiarisce «Range e precisione rispondono a domande diverse»?
+
+## Contratto geometrico
+
+- raster: margine di sicurezza di 20 px sul canvas 1800x1000;
+- contenimento: nessun testo oltre il proprio box o il canvas;
+- composizione: nessuna sovrapposizione o tangenza intenzionale tra elementi fratelli;
+- fonte: `GEOMETRY.json` e checklist dell'audit storico.

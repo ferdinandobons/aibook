@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-import hashlib
 import json
-import math
-import statistics
-from collections import Counter
 
 CHAPTER = 44
 TITLE = 'Mixture of Experts e calcolo condizionale'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     logits = [0.2, 1.1, 0.7, -0.3]
     top_indices = sorted(range(len(logits)), key=logits.__getitem__, reverse=True)[:2]
     loads = [int(index in top_indices) for index in range(len(logits))]

@@ -66,3 +66,11 @@ Nessun difetto tecnico bloccante noto. La figura resta una candidata fino all'ap
 ## Decisione
 
 Il gate visuale tecnico del Capitolo 1 è superato. Il capitolo può passare alla revisione autoriale completa.
+
+## Gate geometrico raster
+
+- [x] PNG decodificato e dimensione standard verificata;
+- [x] contenuto distante almeno 20 px dal bordo;
+- [x] checklist storica di padding e contenimento mantenuta;
+- [x] nessuna sovrapposizione o elemento attaccato dichiarato nell'audit della candidata;
+- [x] manifest `GEOMETRY.json` scritto per il controllo indipendente del raster.

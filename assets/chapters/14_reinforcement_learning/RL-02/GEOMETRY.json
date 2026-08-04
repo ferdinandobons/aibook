@@ -1,0 +1,387 @@
+{
+  "schema": 1,
+  "figure": "RL-02",
+  "canvas": [
+    1800,
+    1000
+  ],
+  "safe_margin": 20,
+  "minimum_gap": 8,
+  "objects": [
+    {
+      "id": "text-001",
+      "kind": "text",
+      "box": [
+        60.0,
+        25.0,
+        1740.0,
+        77.0
+      ],
+      "label": "RL-02 · Reinforcement learning",
+      "order": 1
+    },
+    {
+      "id": "text-002",
+      "kind": "text",
+      "box": [
+        80.0,
+        87.0,
+        1720.0,
+        140.0
+      ],
+      "label": "Quale controllo collega «Policy gradient e actor-critic» a «Esplorazione e valutazione» senza superare il limite dichiarato?",
+      "order": 2
+    },
+    {
+      "id": "text-003",
+      "kind": "text",
+      "box": [
+        80.0,
+        146.0,
+        1720.0,
+        178.0
+      ],
+      "label": "POLICY BRANCH",
+      "order": 3
+    },
+    {
+      "id": "rounded_rectangle-004",
+      "kind": "rounded_rectangle",
+      "box": [
+        650.0,
+        205.0,
+        1150.0,
+        350.0
+      ],
+      "label": "",
+      "order": 4
+    },
+    {
+      "id": "text-005",
+      "kind": "text",
+      "box": [
+        674.0,
+        223.0,
+        1128.0,
+        267.0
+      ],
+      "label": "RADICE",
+      "order": 5
+    },
+    {
+      "id": "text-006",
+      "kind": "text",
+      "box": [
+        674.0,
+        282.0,
+        1126.0,
+        332.0
+      ],
+      "label": "s_t = (in_transito, ritardo=1)",
+      "order": 6
+    },
+    {
+      "id": "rounded_rectangle-007",
+      "kind": "rounded_rectangle",
+      "box": [
+        95.0,
+        485.0,
+        565.0,
+        675.0
+      ],
+      "label": "",
+      "order": 8
+    },
+    {
+      "id": "ellipse-008",
+      "kind": "ellipse",
+      "box": [
+        113.0,
+        503.0,
+        153.0,
+        543.0
+      ],
+      "label": "",
+      "order": 9
+    },
+    {
+      "id": "text-009",
+      "kind": "text",
+      "box": [
+        122.0,
+        509.0,
+        144.0,
+        535.0
+      ],
+      "label": "A",
+      "order": 10
+    },
+    {
+      "id": "text-010",
+      "kind": "text",
+      "box": [
+        167.0,
+        503.0,
+        543.0,
+        547.0
+      ],
+      "label": "Policy gradient e actor-critic",
+      "order": 11
+    },
+    {
+      "id": "text-011",
+      "kind": "text",
+      "box": [
+        119.0,
+        562.0,
+        541.0,
+        657.0
+      ],
+      "label": "Il policy gradient aggiorna direttamente una policy stocastica.",
+      "order": 12
+    },
+    {
+      "id": "rounded_rectangle-012",
+      "kind": "rounded_rectangle",
+      "box": [
+        660.0,
+        485.0,
+        1130.0,
+        675.0
+      ],
+      "label": "",
+      "order": 14
+    },
+    {
+      "id": "ellipse-013",
+      "kind": "ellipse",
+      "box": [
+        678.0,
+        503.0,
+        718.0,
+        543.0
+      ],
+      "label": "",
+      "order": 15
+    },
+    {
+      "id": "text-014",
+      "kind": "text",
+      "box": [
+        687.0,
+        509.0,
+        709.0,
+        535.0
+      ],
+      "label": "B",
+      "order": 16
+    },
+    {
+      "id": "text-015",
+      "kind": "text",
+      "box": [
+        732.0,
+        503.0,
+        1108.0,
+        547.0
+      ],
+      "label": "Esplorazione e valutazione",
+      "order": 17
+    },
+    {
+      "id": "text-016",
+      "kind": "text",
+      "box": [
+        684.0,
+        562.0,
+        1106.0,
+        657.0
+      ],
+      "label": "Esplorare significa raccogliere informazione su azioni non ancora ben valutate.",
+      "order": 18
+    },
+    {
+      "id": "rounded_rectangle-017",
+      "kind": "rounded_rectangle",
+      "box": [
+        1225.0,
+        485.0,
+        1695.0,
+        675.0
+      ],
+      "label": "",
+      "order": 20
+    },
+    {
+      "id": "ellipse-018",
+      "kind": "ellipse",
+      "box": [
+        1243.0,
+        503.0,
+        1283.0,
+        543.0
+      ],
+      "label": "",
+      "order": 21
+    },
+    {
+      "id": "text-019",
+      "kind": "text",
+      "box": [
+        1252.0,
+        509.0,
+        1274.0,
+        535.0
+      ],
+      "label": "C",
+      "order": 22
+    },
+    {
+      "id": "text-020",
+      "kind": "text",
+      "box": [
+        1297.0,
+        503.0,
+        1673.0,
+        547.0
+      ],
+      "label": "Controllo locale",
+      "order": 23
+    },
+    {
+      "id": "text-021",
+      "kind": "text",
+      "box": [
+        1249.0,
+        562.0,
+        1671.0,
+        657.0
+      ],
+      "label": "un reward osservato non diventa automaticamente una misura del servizio reale",
+      "order": 24
+    },
+    {
+      "id": "rounded_rectangle-022",
+      "kind": "rounded_rectangle",
+      "box": [
+        560.0,
+        735.0,
+        1240.0,
+        825.0
+      ],
+      "label": "",
+      "order": 25
+    },
+    {
+      "id": "text-023",
+      "kind": "text",
+      "box": [
+        595.0,
+        758.0,
+        1205.0,
+        803.0
+      ],
+      "label": "SELEZIONE · la coppia (a_t, r_{t+1}) e il nuovo stato s_{t+1}",
+      "order": 26
+    },
+    {
+      "id": "rounded_rectangle-024",
+      "kind": "rounded_rectangle",
+      "box": [
+        170.0,
+        850.0,
+        1630.0,
+        940.0
+      ],
+      "label": "",
+      "order": 30
+    },
+    {
+      "id": "text-025",
+      "kind": "text",
+      "box": [
+        205.0,
+        873.0,
+        1595.0,
+        917.0
+      ],
+      "label": "LIMITE · un reward osservato non diventa automaticamente una misura del servizio reale",
+      "order": 31
+    }
+  ],
+  "connectors": [
+    {
+      "id": "connector-001",
+      "start": [
+        900.0,
+        365.0
+      ],
+      "end": [
+        330.0,
+        475.0
+      ],
+      "order": 7
+    },
+    {
+      "id": "connector-002",
+      "start": [
+        900.0,
+        365.0
+      ],
+      "end": [
+        895.0,
+        475.0
+      ],
+      "order": 13
+    },
+    {
+      "id": "connector-003",
+      "start": [
+        900.0,
+        365.0
+      ],
+      "end": [
+        1460.0,
+        475.0
+      ],
+      "order": 19
+    },
+    {
+      "id": "connector-004",
+      "start": [
+        330.0,
+        680.0
+      ],
+      "end": [
+        900.0,
+        725.0
+      ],
+      "order": 27
+    },
+    {
+      "id": "connector-005",
+      "start": [
+        895.0,
+        680.0
+      ],
+      "end": [
+        900.0,
+        725.0
+      ],
+      "order": 28
+    },
+    {
+      "id": "connector-006",
+      "start": [
+        1460.0,
+        680.0
+      ],
+      "end": [
+        900.0,
+        725.0
+      ],
+      "order": 29
+    }
+  ],
+  "errors": []
+}

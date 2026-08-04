@@ -14,7 +14,7 @@ deferred: benchmark applicativi non eseguiti e approvazione autoriale delle visu
 
 # Capitolo 51. Reinforcement learning con reward verificabili
 
-La domanda guida di questa lezione è come collegare «Reward verificabile» e «Verificabilità limitata» senza perdere il contratto tecnico di reinforcement learning con reward verificabili. L'oggetto osservato è una risposta valutata da una regola verificabile. Il contratto locale è: input, prompt, rollout, gruppo di risposte e verifier; operazione, reward verificabile, policy update e gestione di reward sparso; output, reward, vantaggio e nuova policy. Il caso guida è questo: Tre rollout ricevono reward 1, 0 e 1; il vantaggio viene centrato sulla media del gruppo. Il confine da mantenere esplicito è: la verificabilità vale solo per il dominio coperto dal verifier.
+Per entrare in reinforcement learning con reward verificabili, seguiamo il passaggio che unisce «Reward verificabile» a «Verificabilità limitata». L'oggetto osservato è una risposta valutata da una regola verificabile. Il contratto locale dichiara input, prompt, rollout, gruppo di risposte e verifier; operazione, reward verificabile, policy update e gestione di reward sparso; output, reward, vantaggio e nuova policy. Il primo esempio osservabile è Tre rollout ricevono reward 1, 0 e 1; il vantaggio viene centrato sulla media del gruppo. Il limite da non nascondere è: la verificabilità vale solo per il dominio coperto dal verifier.
 
 ## Reward verificabile
 
@@ -24,7 +24,7 @@ RLVR lega il segnale a una procedura di verifica esplicita e delimitata.
 
 **Caso da seguire.** Tre rollout ricevono reward 1, 0 e 1; il vantaggio viene centrato sulla media del gruppo.
 
-**Controllo.** Scrivi il risultato atteso prima del calcolo, modifica una sola quantità e localizza il primo passaggio che cambia. Il vincolo da conservare è: Problemi con risposta controllabile, come codice o matematica, consentono reward da test, parser o esecutori.
+**Controllo.** Per «Reward verificabile», scrivi il risultato atteso prima del calcolo, modifica una sola quantità e localizza il primo passaggio che cambia. Nel caso «Reward verificabile», il vincolo da conservare è: Problemi con risposta controllabile, come codice o matematica, consentono reward da test, parser o esecutori.
 
 
 ## Rollout e gruppi
@@ -33,7 +33,7 @@ La policy genera più soluzioni per la stessa richiesta. Il reward confronta tra
 
 **Caso da seguire.** Tre passi in cui lo stato precedente viene consumato prima di produrre il successivo.
 
-**Controllo.** Ricalcola il caso a mano e con lo snippet. Se i risultati divergono, confronta prima i valori intermedi e soltanto dopo l'output finale.
+**Controllo.** Per «Rollout e gruppi», ricalcola il caso a mano e con lo snippet. Nel caso «Rollout e gruppi», se i risultati divergono, confronta prima i valori intermedi e soltanto dopo l'output finale.
 
 
 La relazione centrale può essere scritta come:
@@ -56,7 +56,7 @@ Algoritmi group-relative normalizzano reward all'interno di gruppi e aggiornano 
 
 **Caso da seguire.** Una traiettoria di due passi in cui l'azione scelta modifica lo stato successivo prima del reward.
 
-**Controllo.** Aggiungi un valore limite e verifica separatamente forma, valore e ipotesi. Una shape valida non dimostra da sola «GRPO e policy update».
+**Controllo.** Per «GRPO e policy update», aggiungi un valore limite e verifica separatamente forma, valore e ipotesi. Una shape valida non dimostra da sola «GRPO e policy update».
 
 
 ## Sparse reward
@@ -65,15 +65,17 @@ Un risultato finale corretto non identifica quali passaggi siano utili. Explorat
 
 **Caso da seguire.** Per «Sparse reward» si mantiene l'input del capitolo e si isola questa condizione: Un risultato finale corretto non identifica quali passaggi siano utili.
 
-**Controllo.** Mantieni fisso l'input e sostituisci soltanto il meccanismo discusso nella sezione. Il confronto deve attribuire la differenza a quel passaggio, non al setup.
+**Controllo.** Per «Sparse reward», mantieni fisso l'input e sostituisci soltanto il meccanismo discusso nella sezione. Nel caso «Sparse reward», il confronto deve attribuire la differenza a quel passaggio, non al setup.
 
 
 ## Esempio Python eseguito
 
-Il frammento seguente è lo stesso conservato nel repository. Usa valori piccoli perché l'obiettivo è osservare il meccanismo, non simulare una scala che non abbiamo eseguito.
+La prova locale di reinforcement learning con reward verificabili parte da un esempio minimo, registrato nel repository insieme ai suoi test. Per «Reinforcement learning con reward verificabili», il caso di default usa valori piccoli per isolare il meccanismo. La prova negativa riguarda proprio «reinforcement learning con reward verificabili» e interrompe l'interpretazione prima dell'output.
 
 ```python
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     rewards = [1.0, 0.0, 1.0]
     mean = sum(rewards) / len(rewards)
     advantages = [round(value - mean, 6) for value in rewards]
@@ -95,7 +97,7 @@ Un test incompleto può premiare exploit. Il reward verificabile è affidabile s
 
 **Caso da seguire.** Due risposte con log-probabilità diverse producono un margine; il margine può diventare un segnale di training, ma non è una misura assoluta di correttezza.
 
-**Controllo.** Costruisci un controesempio che rispetti il tipo di dato ma violi l'ipotesi centrale. Il test deve rendere riconoscibile perché «Verificabilità limitata» non si applica.
+**Controllo.** Per «Verificabilità limitata», costruisci un controesempio che rispetti il tipo di dato ma violi l'ipotesi centrale. Il test deve rendere riconoscibile perché «Verificabilità limitata» non si applica.
 
 
 ![Reinforcement learning con reward verificabili: pipeline](../../assets/chapters/51_rlvr/RLVR-02/candidate-v48.png)
@@ -105,13 +107,13 @@ La seconda figura mette a confronto «Sparse reward» e il limite discusso in «
 
 ## Come si collegano i passaggi
 
-- **Da «Reward verificabile» a «Rollout e gruppi».** Problemi con risposta controllabile, come codice o matematica, consentono reward da test, parser o esecutori. La policy genera più soluzioni per la stessa richiesta. Il primo passaggio definisce che cosa entra nel calcolo; il secondo stabilisce la regola che produce il valore osservabile. [SRC-51-001; SRC-51-001]
+- **Da «Reward verificabile» a «Rollout e gruppi».** Problemi con risposta controllabile, come codice o matematica, consentono reward da test, parser o esecutori. La policy genera più soluzioni per la stessa richiesta. Tra «Reward verificabile» e «Rollout e gruppi» l'ingresso viene fissato prima della regola che produce il valore. Da «Reward verificabile» a «Rollout e gruppi» cambia la domanda osservabile. [SRC-51-001; SRC-51-001]
 
-- **Da «Rollout e gruppi» a «GRPO e policy update».** La policy genera più soluzioni per la stessa richiesta. Algoritmi group-relative normalizzano reward all'interno di gruppi e aggiornano log-probability con vincoli di stabilità. La regola generale viene poi letta dentro il componente: questa separazione permette di localizzare un errore prima di attribuirlo all'intero modello. [SRC-51-001; SRC-51-002]
+- **Da «Rollout e gruppi» a «GRPO e policy update».** La policy genera più soluzioni per la stessa richiesta. Algoritmi group-relative normalizzano reward all'interno di gruppi e aggiornano log-probability con vincoli di stabilità. Nel caso «GRPO e policy update» il componente diventa il punto in cui localizzare l'errore. Il passaggio successivo rende misurabile «GRPO e policy update». [SRC-51-001; SRC-51-002]
 
-- **Da «GRPO e policy update» a «Sparse reward».** Algoritmi group-relative normalizzano reward all'interno di gruppi e aggiornano log-probability con vincoli di stabilità. Un risultato finale corretto non identifica quali passaggi siano utili. Dopo avere reso visibile il componente, il percorso introduce la variante o l'ottimizzazione senza cambiare di nascosto il caso di partenza. [SRC-51-002; SRC-51-003]
+- **Da «GRPO e policy update» a «Sparse reward».** Algoritmi group-relative normalizzano reward all'interno di gruppi e aggiornano log-probability con vincoli di stabilità. Un risultato finale corretto non identifica quali passaggi siano utili. Dopo «GRPO e policy update», la variante di «Sparse reward» cambia una proprietà alla volta. Da «GRPO e policy update» a «Sparse reward» cambia la domanda osservabile. [SRC-51-002; SRC-51-003]
 
-- **Da «Sparse reward» a «Verificabilità limitata».** Un risultato finale corretto non identifica quali passaggi siano utili. Un test incompleto può premiare exploit. L'ultimo passaggio sposta l'attenzione dal funzionamento locale alla misura: correttezza del calcolo e qualità applicativa restano domande distinte. [SRC-51-003; SRC-51-004]
+- **Da «Sparse reward» a «Verificabilità limitata».** Un risultato finale corretto non identifica quali passaggi siano utili. Un test incompleto può premiare exploit. Da «Verificabilità limitata» in poi la misura resta distinta dalla correttezza locale del calcolo. Il passaggio successivo rende misurabile «Verificabilità limitata». [SRC-51-003; SRC-51-004]
 
 La catena completa produce reward, vantaggio e nuova policy a partire da prompt, rollout, gruppo di risposte e verifier. Ogni collegamento conserva un oggetto osservabile diverso; per questo il risultato non può essere esteso oltre il limite dichiarato: la verificabilità vale solo per il dominio coperto dal verifier.
 
@@ -127,4 +129,4 @@ La catena completa produce reward, vantaggio e nuova policy a partire da prompt,
 
 ## Che cosa deve restare chiaro
 
-La lezione parte da «prompt, rollout, gruppo di risposte e verifier» e arriva fino a «reward, vantaggio e nuova policy». Il limite da conservare è questo: la verificabilità vale solo per il dominio coperto dal verifier. Definizioni e risultati citati sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md); la mappa dei claim è in [`CLAIMS.md`](CLAIMS.md).
+La lezione parte da «prompt, rollout, gruppo di risposte e verifier» e arriva fino a «reward, vantaggio e nuova policy». Il limite da conservare è questo: la verificabilità vale solo per il dominio coperto dal verifier. La formula e il codice collegati a «Verificabilità limitata» sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md), [`CLAIMS.md`](CLAIMS.md) e `code/`.

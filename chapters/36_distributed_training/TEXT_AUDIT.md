@@ -2,7 +2,7 @@
 
 - versione: 0.5.0-draft3
 - data: 4 agosto 2026
-- parole fuori dai blocchi di codice: 959
+- parole fuori dai blocchi di codice: 1057
 - nuclei semantici: 5 (Data parallelism; ZeRO e FSDP; Tensor e pipeline parallelism; Topologia e fault tolerance; Continued pretraining)
 - paragrafi del vecchio scaffold: assenti secondo `audit_book_quality.py`
 - ripetizioni lunghe tra tre o più capitoli: assenti secondo l'audit trasversale

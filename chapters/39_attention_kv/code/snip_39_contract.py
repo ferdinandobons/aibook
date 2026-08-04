@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-import hashlib
 import json
-import math
-import statistics
-from collections import Counter
 
 CHAPTER = 39
 TITLE = "Varianti dell'attention e gestione KV"
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     query_heads = 4
     kv_heads = 2
     group_size = query_heads // kv_heads

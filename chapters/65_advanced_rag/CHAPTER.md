@@ -14,7 +14,7 @@ deferred: benchmark applicativi non eseguiti e approvazione autoriale delle visu
 
 # Capitolo 65. RAG adattivo, correttivo e basato su grafi
 
-La domanda guida di questa lezione è come collegare «Query transformation» e «RAG agentico» senza perdere il contratto tecnico di rag adattivo, correttivo e basato su grafi. L'oggetto osservato è una query instradata tra retriever e grafo. Il contratto locale è: input, domanda multi-hop, nodi, archi e documenti; operazione, query transformation, routing e corrective retrieval; output, sottoquery, percorso e contesto selezionato. Il caso guida è questo: Una domanda segue il percorso q1 -> d1 -> q2 -> d2. Il confine da mantenere esplicito è: un router può sbagliare anche quando il generatore è corretto.
+La domanda pratica di rag adattivo, correttivo e basato su grafi è che cosa cambia nei record tra «Query transformation» e «RAG agentico» e come lo possiamo dimostrare. L'oggetto osservato è una query instradata tra retriever e grafo. Il contratto locale dichiara input, domanda multi-hop, nodi, archi e documenti; operazione, query transformation, routing e corrective retrieval; output, sottoquery, percorso e contesto selezionato. Per fissare il riferimento usiamo Una domanda segue il percorso q1 -> d1 -> q2 -> d2. Il limite da non nascondere è: un router può sbagliare anche quando il generatore è corretto.
 
 ## Query transformation
 
@@ -24,7 +24,14 @@ Il router sceglie una fonte, ma la scelta resta da valutare.
 
 **Caso da seguire.** Una domanda segue il percorso q1 -> d1 -> q2 -> d2.
 
-**Controllo.** Conserva record iniziale, regola applicata e record finale; un conteggio aggregato non basta a spiegare la trasformazione.
+**Controllo.** Per «Query transformation», conserva record iniziale, regola applicata e record finale; un conteggio aggregato non basta a spiegare la trasformazione.
+
+
+Qui la notazione serve a fissare un'interfaccia tra componenti.
+
+**Schema concettuale.** `context = route(query, graph, retriever)`
+
+Il router sceglie una fonte, ma la scelta resta da valutare. [SRC-65-001]
 
 
 ![RAG adattivo, correttivo e basato su grafi: branch](../../assets/chapters/65_advanced_rag/RAG-01/candidate-v48.png)
@@ -47,15 +54,17 @@ Documenti vengono valutati, filtrati o sostituiti prima della generazione. Confi
 
 **Caso da seguire.** Per «Corrective RAG» si mantiene l'input del capitolo e si isola questa condizione: Documenti vengono valutati, filtrati o sostituiti prima della generazione.
 
-**Controllo.** Aggiungi un record che deve essere escluso e verifica che l'output conservi anche il motivo dell'esclusione.
+**Controllo.** Per «Corrective RAG», aggiungi un record che deve essere escluso e verifica che l'output conservi anche il motivo dell'esclusione.
 
 
 ## Esempio Python eseguito
 
-Il frammento seguente è lo stesso conservato nel repository. Usa valori piccoli perché l'obiettivo è osservare il meccanismo, non simulare una scala che non abbiamo eseguito.
+Il caso computazionale di rag adattivo, correttivo e basato su grafi è riportato senza trasformazioni: il file e l'output sono quelli verificati. Per «RAG adattivo, correttivo e basato su grafi», il caso di default usa valori piccoli per isolare il meccanismo. La suite conserva inoltre una failure esplicita per separare il contratto osservato da «rag adattivo, correttivo e basato su grafi».
 
 ```python
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     graph = {"q1": ["d1"], "d1": ["q2"], "q2": ["d2"]}
     frontier = ["q1"]
     visited = []
@@ -81,7 +90,7 @@ Entità, relazioni e comunità permettono query e sintesi multi-hop. Il grafo di
 
 **Caso da seguire.** Per «Graph RAG» si mantiene l'input del capitolo e si isola questa condizione: Entità, relazioni e comunità permettono query e sintesi multi-hop.
 
-**Controllo.** Modifica una sola regola della pipeline e misura quali record cambiano, evitando di confrontare raccolte di origine diversa.
+**Controllo.** Per «Graph RAG», modifica una sola regola della pipeline e misura quali record cambiano, evitando di confrontare raccolte di origine diversa.
 
 
 ## RAG agentico
@@ -90,7 +99,7 @@ Un agente può pianificare retrieval successivi. Più step aumentano copertura e
 
 **Caso da seguire.** Per «RAG agentico» si mantiene l'input del capitolo e si isola questa condizione: Un agente può pianificare retrieval successivi.
 
-**Controllo.** Descrivi ciò che la pipeline perde oltre a ciò che produce. Il limite locale è: Più step aumentano copertura e contemporaneamente costo, errori e superficie di attacco.
+**Controllo.** Per «RAG agentico», descrivi ciò che la pipeline perde oltre a ciò che produce. Nel caso «RAG agentico», il limite locale è: Più step aumentano copertura e contemporaneamente costo, errori e superficie di attacco.
 
 
 ![RAG adattivo, correttivo e basato su grafi: graph](../../assets/chapters/65_advanced_rag/RAG-02/candidate-v48.png)
@@ -100,13 +109,13 @@ La seconda figura mette a confronto «Graph RAG» e il limite discusso in «RAG 
 
 ## Come si collegano i passaggi
 
-- **Da «Query transformation» a «Retrieval adattivo».** Rewrite, expansion, decomposition e HyDE modificano la query prima del retrieval. Il sistema decide se recuperare, quante volte e con quale sorgente. Il primo passaggio identifica il record e la sua provenienza; il secondo dichiara la trasformazione che cambia la popolazione osservata. [SRC-65-001; SRC-65-002]
+- **Da «Query transformation» a «Retrieval adattivo».** Rewrite, expansion, decomposition e HyDE modificano la query prima del retrieval. Il sistema decide se recuperare, quante volte e con quale sorgente. «Query transformation» identifica il record e «Retrieval adattivo» dichiara la trasformazione sulla popolazione osservata. Da «Query transformation» a «Retrieval adattivo» cambia la domanda osservabile. [SRC-65-001; SRC-65-002]
 
-- **Da «Retrieval adattivo» a «Corrective RAG».** Il sistema decide se recuperare, quante volte e con quale sorgente. Documenti vengono valutati, filtrati o sostituiti prima della generazione. La trasformazione diventa confrontabile soltanto quando il passaggio successivo conserva configurazione, conteggi e artefatti intermedi. [SRC-65-002; SRC-65-003]
+- **Da «Retrieval adattivo» a «Corrective RAG».** Il sistema decide se recuperare, quante volte e con quale sorgente. Documenti vengono valutati, filtrati o sostituiti prima della generazione. Il passaggio da «Retrieval adattivo» a «Corrective RAG» conserva configurazione, conteggi e artefatti intermedi. Il passaggio successivo rende misurabile «Corrective RAG». [SRC-65-002; SRC-65-003]
 
-- **Da «Corrective RAG» a «Graph RAG».** Documenti vengono valutati, filtrati o sostituiti prima della generazione. Entità, relazioni e comunità permettono query e sintesi multi-hop. Una volta resa tracciabile la pipeline, il quarto passaggio può affrontare selezione o uso senza confondere un cambiamento nei dati con uno nel modello. [SRC-65-003; SRC-65-004]
+- **Da «Corrective RAG» a «Graph RAG».** Documenti vengono valutati, filtrati o sostituiti prima della generazione. Entità, relazioni e comunità permettono query e sintesi multi-hop. Con «Graph RAG» la pipeline può selezionare o usare dati senza confonderli con una modifica del modello. Da «Corrective RAG» a «Graph RAG» cambia la domanda osservabile. [SRC-65-003; SRC-65-004]
 
-- **Da «Graph RAG» a «RAG agentico».** Entità, relazioni e comunità permettono query e sintesi multi-hop. Un agente può pianificare retrieval successivi. L'ultima sezione porta il risultato alla valutazione e chiede quali record, slice o failure restano fuori dalla media. [SRC-65-004; SRC-65-001]
+- **Da «Graph RAG» a «RAG agentico».** Entità, relazioni e comunità permettono query e sintesi multi-hop. Un agente può pianificare retrieval successivi. «RAG agentico» porta il risultato alla valutazione e rende visibili record, slice e failure esclusi. Il passaggio successivo rende misurabile «RAG agentico». [SRC-65-004; SRC-65-001]
 
 La catena completa produce sottoquery, percorso e contesto selezionato a partire da domanda multi-hop, nodi, archi e documenti. Ogni collegamento conserva un oggetto osservabile diverso; per questo il risultato non può essere esteso oltre il limite dichiarato: un router può sbagliare anche quando il generatore è corretto.
 
@@ -122,4 +131,4 @@ La catena completa produce sottoquery, percorso e contesto selezionato a partire
 
 ## L'artefatto che deve sopravvivere
 
-La lezione parte da «domanda multi-hop, nodi, archi e documenti» e arriva fino a «sottoquery, percorso e contesto selezionato». Il limite da conservare è questo: un router può sbagliare anche quando il generatore è corretto. Definizioni e risultati citati sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md); la mappa dei claim è in [`CLAIMS.md`](CLAIMS.md).
+La lezione parte da «domanda multi-hop, nodi, archi e documenti» e arriva fino a «sottoquery, percorso e contesto selezionato». Il limite da conservare è questo: un router può sbagliare anche quando il generatore è corretto. Per «RAG agentico», provenienza e trasformazioni sono registrate in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md), [`CLAIMS.md`](CLAIMS.md) e negli artefatti di `code/`.

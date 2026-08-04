@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-import hashlib
 import json
-import math
-import statistics
-from collections import Counter
 
 CHAPTER = 69
 TITLE = 'Ciclo agentico, pianificazione e verifica'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     events = ["observe", "plan", "tool", "verify"]
     valid = events == ["observe", "plan", "tool", "verify"]
     return {"events": events, "valid": valid, "invariant": "an agent loop records observation, action and verification"}

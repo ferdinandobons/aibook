@@ -612,6 +612,7 @@ SOURCE_BANKS.update({
         ("Goodfellow et al., Generative Adversarial Nets", "https://arxiv.org/abs/1406.2661"),
         ("Dinh, Sohl-Dickstein e Bengio, Density Estimation using Real NVP", "https://arxiv.org/abs/1605.08803"),
         ("Ho, Jain e Abbeel, Denoising Diffusion Probabilistic Models", "https://arxiv.org/abs/2006.11239"),
+        ("Kynkäänniemi et al., Improved Precision and Recall Metric for Assessing Generative Models", "https://arxiv.org/abs/1904.06991"),
     ],
 })
 
@@ -717,6 +718,8 @@ def source_indices_for(number: int, section_count: int) -> list[int]:
     # Four dossier entries cover the five public transitions; the first source
     # is reused for the opening/closing boundary when a lesson has five parts.
     explicit = {
+        # The fifth generative section has its own precision/recall source.
+        20: [0, 1, 2, 3, 4],
         # MCP belongs to its own section; A2A belongs to the following one.
         68: [0, 0, 1, 2, 3],
         # NIST covers the incident/change boundary; Green AI is reserved for

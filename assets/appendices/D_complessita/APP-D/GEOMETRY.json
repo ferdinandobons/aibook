@@ -1,0 +1,242 @@
+{
+  "schema": 1,
+  "figure": "APP-D",
+  "canvas": [
+    1800,
+    1000
+  ],
+  "safe_margin": 20,
+  "minimum_gap": 8,
+  "objects": [
+    {
+      "id": "text-001",
+      "kind": "text",
+      "box": [
+        60.0,
+        28.0,
+        1740.0,
+        82.0
+      ],
+      "label": "APP-D · Compute, memoria e latenza non coincidono",
+      "order": 1
+    },
+    {
+      "id": "text-002",
+      "kind": "text",
+      "box": [
+        80.0,
+        94.0,
+        1720.0,
+        142.0
+      ],
+      "label": "Mappa operativa dell'appendice: ogni nodo rinvia a un controllo descritto nel testo.",
+      "order": 2
+    },
+    {
+      "id": "rounded_rectangle-003",
+      "kind": "rounded_rectangle",
+      "box": [
+        100.0,
+        300.0,
+        580.0,
+        680.0
+      ],
+      "label": "",
+      "order": 3
+    },
+    {
+      "id": "ellipse-004",
+      "kind": "ellipse",
+      "box": [
+        118.0,
+        318.0,
+        158.0,
+        358.0
+      ],
+      "label": "",
+      "order": 4
+    },
+    {
+      "id": "text-005",
+      "kind": "text",
+      "box": [
+        127.0,
+        324.0,
+        149.0,
+        350.0
+      ],
+      "label": "1",
+      "order": 5
+    },
+    {
+      "id": "text-006",
+      "kind": "text",
+      "box": [
+        172.0,
+        318.0,
+        558.0,
+        362.0
+      ],
+      "label": "compute",
+      "order": 6
+    },
+    {
+      "id": "text-007",
+      "kind": "text",
+      "box": [
+        124.0,
+        377.0,
+        556.0,
+        662.0
+      ],
+      "label": "operazioni",
+      "order": 7
+    },
+    {
+      "id": "rounded_rectangle-008",
+      "kind": "rounded_rectangle",
+      "box": [
+        660.0,
+        300.0,
+        1140.0,
+        680.0
+      ],
+      "label": "",
+      "order": 8
+    },
+    {
+      "id": "ellipse-009",
+      "kind": "ellipse",
+      "box": [
+        678.0,
+        318.0,
+        718.0,
+        358.0
+      ],
+      "label": "",
+      "order": 9
+    },
+    {
+      "id": "text-010",
+      "kind": "text",
+      "box": [
+        687.0,
+        324.0,
+        709.0,
+        350.0
+      ],
+      "label": "2",
+      "order": 10
+    },
+    {
+      "id": "text-011",
+      "kind": "text",
+      "box": [
+        732.0,
+        318.0,
+        1118.0,
+        362.0
+      ],
+      "label": "memoria",
+      "order": 11
+    },
+    {
+      "id": "text-012",
+      "kind": "text",
+      "box": [
+        684.0,
+        377.0,
+        1116.0,
+        662.0
+      ],
+      "label": "resident set e cache",
+      "order": 12
+    },
+    {
+      "id": "rounded_rectangle-013",
+      "kind": "rounded_rectangle",
+      "box": [
+        1220.0,
+        300.0,
+        1700.0,
+        680.0
+      ],
+      "label": "",
+      "order": 13
+    },
+    {
+      "id": "ellipse-014",
+      "kind": "ellipse",
+      "box": [
+        1238.0,
+        318.0,
+        1278.0,
+        358.0
+      ],
+      "label": "",
+      "order": 14
+    },
+    {
+      "id": "text-015",
+      "kind": "text",
+      "box": [
+        1247.0,
+        324.0,
+        1269.0,
+        350.0
+      ],
+      "label": "3",
+      "order": 15
+    },
+    {
+      "id": "text-016",
+      "kind": "text",
+      "box": [
+        1292.0,
+        318.0,
+        1678.0,
+        362.0
+      ],
+      "label": "latenza",
+      "order": 16
+    },
+    {
+      "id": "text-017",
+      "kind": "text",
+      "box": [
+        1244.0,
+        377.0,
+        1676.0,
+        662.0
+      ],
+      "label": "tempo end-to-end",
+      "order": 17
+    },
+    {
+      "id": "rounded_rectangle-018",
+      "kind": "rounded_rectangle",
+      "box": [
+        170.0,
+        850.0,
+        1630.0,
+        940.0
+      ],
+      "label": "",
+      "order": 18
+    },
+    {
+      "id": "text-019",
+      "kind": "text",
+      "box": [
+        205.0,
+        873.0,
+        1595.0,
+        917.0
+      ],
+      "label": "LIMITE · il confronto richiede stesso setup e stessa shape",
+      "order": 19
+    }
+  ],
+  "connectors": [],
+  "errors": []
+}

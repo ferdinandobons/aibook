@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-import hashlib
 import json
-import math
-import statistics
-from collections import Counter
 
 CHAPTER = 75
 TITLE = 'Modelli low-bit nativi e co-design numerico'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     codes = [-1, 0, 1]
     scale = 0.5
     restored = [code * scale for code in codes]

@@ -1,6 +1,6 @@
 # Esempio verificato. Capitolo 86
 
-`snip_86_contract.py` esegue il caso minimo usato nel testo di **Interpretabilità delle rappresentazioni e dei circuiti**. `test_86_contract.py` conserva l'output atteso, controlla determinismo, serializzazione, valori finiti e presenza del limite interpretativo.
+`snip_86_contract.py` esegue il caso minimo usato nel testo di **Interpretabilità delle rappresentazioni e dei circuiti**. `test_86_contract.py` conserva l'output atteso, controlla determinismo, serializzazione, valori finiti, forma del contratto e rifiuto dei casi non documentati.
 
 ```bash
 python snip_86_contract.py

@@ -23,3 +23,10 @@ Come il forward chaining trasforma fatti iniziali e regole positive in fatti der
 
 Ogni fatto derivato deve essere sostenuto da una regola e dai fatti disponibili prima della sua applicazione.
 - domanda principale: Quale trasformazione centrale rende osservabile «Da un testo a fatti dichiarati» nel capitolo 11?
+
+## Contratto geometrico
+
+- raster: margine di sicurezza di 20 px sul canvas 1800x1000;
+- contenimento: nessun testo oltre il proprio box o il canvas;
+- composizione: nessuna sovrapposizione o tangenza intenzionale tra elementi fratelli;
+- fonte: `GEOMETRY.json` e checklist dell'audit storico.

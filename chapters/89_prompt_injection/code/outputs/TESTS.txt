@@ -1,9 +1,10 @@
+test_contract_shape_is_explicit (test_89_contract.LessonExampleTests.test_contract_shape_is_explicit) ... ok
 test_example_is_deterministic (test_89_contract.LessonExampleTests.test_example_is_deterministic) ... ok
 test_expected_result (test_89_contract.LessonExampleTests.test_expected_result) ... ok
-test_interpretation_boundary_is_explicit (test_89_contract.LessonExampleTests.test_interpretation_boundary_is_explicit) ... ok
 test_result_is_serializable_and_finite (test_89_contract.LessonExampleTests.test_result_is_serializable_and_finite) ... ok
+test_unsupported_case_fails_before_interpretation (test_89_contract.LessonExampleTests.test_unsupported_case_fails_before_interpretation) ... ok
 
 ----------------------------------------------------------------------
-Ran 4 tests in 0.000s
+Ran 5 tests in 0.000s
 
 OK

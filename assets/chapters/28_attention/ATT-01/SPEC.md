@@ -13,3 +13,10 @@
 - Produzione: composizione visuale iterata e rasterizzazione deterministica tramite `scripts/render_attention_visuals.py`.
 - Stato: `validata tecnicamente`, in attesa di revisione autoriale.
 - domanda principale: Quale trasformazione centrale rende osservabile «Perché una combinazione fissa non basta» nel capitolo 28?
+
+## Contratto geometrico
+
+- raster: margine di sicurezza di 20 px sul canvas 1800x1000;
+- contenimento: nessun testo oltre il proprio box o il canvas;
+- composizione: nessuna sovrapposizione o tangenza intenzionale tra elementi fratelli;
+- fonte: `GEOMETRY.json` e checklist dell'audit storico.

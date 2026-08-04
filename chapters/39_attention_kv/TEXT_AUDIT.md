@@ -2,7 +2,7 @@
 
 - versione: 0.5.0-draft3
 - data: 4 agosto 2026
-- parole fuori dai blocchi di codice: 1017
+- parole fuori dai blocchi di codice: 1075
 - nuclei semantici: 5 (MHA; MQA; GQA; Local e sparse attention; MLA e cache)
 - paragrafi del vecchio scaffold: assenti secondo `audit_book_quality.py`
 - ripetizioni lunghe tra tre o più capitoli: assenti secondo l'audit trasversale

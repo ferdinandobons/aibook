@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-import hashlib
 import json
-import math
-import statistics
-from collections import Counter
 
 CHAPTER = 43
 TITLE = 'Architetture ibride e memoria interna'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     local = ["recent-a", "recent-b"]
     long_term = ["stable-fact"]
     read = local[-1] if local else long_term[0]

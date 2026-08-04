@@ -52,7 +52,7 @@
 
 - Affermazione esatta: Campioni plausibili non garantiscono copertura. Likelihood e precision-recall generativa rispondono a domande diverse e richiedono protocolli dichiarati.
 - Tipo: definizione o meccanismo attribuito alla fonte.
-- Fonte o prova: SRC-20-001; SRC-20-005, dossier `FONTI_PRIMARIE.md`.
+- Fonte o prova: SRC-20-005, dossier `FONTI_PRIMARIE.md`.
 - Sezione pubblica: «Qualità, copertura e valutazione».
 - Versione o data: revisione locale 4 agosto 2026; versione e data della fonte nel dossier.
 - Controllo indipendente: la citazione è adiacente al claim; titolo, URL, locator, perimetro e limiti sono registrati nel dossier; nessun risultato quantitativo viene trasferito senza il relativo setup.

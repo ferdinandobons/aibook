@@ -1,10 +1,7 @@
 from __future__ import annotations
 
-import hashlib
 import json
 import math
-import statistics
-from collections import Counter
 
 CHAPTER = 29
 TITLE = 'Il Transformer da zero'
@@ -19,7 +16,9 @@ def normalize(values):
     return [value / total for value in exponentials]
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     q = [[1.0, 0.0], [0.0, 1.0]]
     k = [[1.0, 0.0], [0.0, 1.0]]
     v = [[2.0, 0.0], [0.0, 3.0]]

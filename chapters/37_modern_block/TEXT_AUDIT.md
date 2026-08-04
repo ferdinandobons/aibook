@@ -2,7 +2,7 @@
 
 - versione: 0.5.0-draft3
 - data: 4 agosto 2026
-- parole fuori dai blocchi di codice: 1038
+- parole fuori dai blocchi di codice: 1097
 - nuclei semantici: 5 (Residual stream; Pre-norm e post-norm; RMSNorm; SwiGLU; Ordine e parallelismo)
 - paragrafi del vecchio scaffold: assenti secondo `audit_book_quality.py`
 - ripetizioni lunghe tra tre o più capitoli: assenti secondo l'audit trasversale

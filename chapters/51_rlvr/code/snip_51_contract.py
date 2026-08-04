@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-import hashlib
 import json
-import math
-import statistics
-from collections import Counter
 
 CHAPTER = 51
 TITLE = 'Reinforcement learning con reward verificabili'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     rewards = [1.0, 0.0, 1.0]
     mean = sum(rewards) / len(rewards)
     advantages = [round(value - mean, 6) for value in rewards]

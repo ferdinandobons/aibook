@@ -14,7 +14,7 @@ deferred: benchmark applicativi non eseguiti e approvazione autoriale delle visu
 
 # Capitolo 88. Robustezza, jailbreak e attacchi adversarial
 
-La domanda guida di questa lezione è come collegare «Threat model» e «Valutazione adattiva» senza perdere il contratto tecnico di robustezza, jailbreak e attacchi adversarial. L'oggetto osservato è una superficie di attacco e il comportamento sotto perturbazione. Il contratto locale è: input, threat model, prompt, budget e risposta; operazione, jailbreak, perturbazione, difesa e adaptive evaluation; output, success rate, failure mode e costo della difesa. Il caso guida è questo: Una perturbazione sullo stesso prompt produce un failure di attacco che la baseline non produce. Il confine da mantenere esplicito è: un test superato non copre minacce non incluse nel protocollo.
+Il percorso di robustezza, jailbreak e attacchi adversarial attraversa «Threat model» e «Valutazione adattiva» senza attribuire al solo modello ciò che dipende dal sistema. L'oggetto osservato è una superficie di attacco e il comportamento sotto perturbazione. Il contratto locale dichiara input, threat model, prompt, budget e risposta; operazione, jailbreak, perturbazione, difesa e adaptive evaluation; output, success rate, failure mode e costo della difesa. Il caso di partenza è Una perturbazione sullo stesso prompt produce un failure di attacco che la baseline non produce. Il limite da non nascondere è: un test superato non copre minacce non incluse nel protocollo.
 
 ## Threat model
 
@@ -24,7 +24,7 @@ Robustezza e jailbreak vanno definiti con minaccia e protocollo.
 
 **Caso da seguire.** Una perturbazione sullo stesso prompt produce un failure di attacco che la baseline non produce.
 
-**Controllo.** Registra richiesta, decisione, stato e output finale. Un esito plausibile non deve nascondere il componente che lo ha prodotto.
+**Controllo.** Per «Threat model», registra richiesta, decisione, stato e output finale. Nel caso «Threat model», un esito plausibile non deve nascondere il componente che lo ha prodotto.
 
 
 ## Perturbazioni
@@ -34,6 +34,13 @@ Typo, parafrasi, encoding e contenuti multimodali possono aggirare filtri superf
 **Caso da seguire.** Stesso prompt con perturbazione e controllo di policy.
 
 **Controllo.** Ripeti «Perturbazioni» con una capability o un'autorizzazione rimossa e verifica che la failure preceda qualsiasi side effect.
+
+
+Lo schema seguente rende esplicito il confine tra il meccanismo e la sua valutazione.
+
+**Schema concettuale.** `risk = attack_surface * exposure * impact`
+
+Robustezza e jailbreak vanno definiti con minaccia e protocollo. [SRC-88-001]
 
 
 ![Robustezza, jailbreak e attacchi adversarial: threat](../../assets/chapters/88_robustness_jailbreak/JAILBREAK-01/candidate-v48.png)
@@ -47,7 +54,7 @@ Suffix e prompt vengono cercati per aumentare una loss di attacco. Trasferibilit
 
 **Caso da seguire.** Un caso in cui un test superato non copre minacce non incluse nel protocollo.
 
-**Controllo.** Separa il test del singolo componente dal test end-to-end, usando lo stesso input e la stessa configurazione versionata.
+**Controllo.** Per «Ottimizzazione adversarial», separa il test del singolo componente dal test end-to-end, usando lo stesso input e la stessa configurazione versionata.
 
 
 ## Difese
@@ -56,7 +63,7 @@ Training, filtri, classificatori e refusal possono ridurre alcuni attacchi e int
 
 **Caso da seguire.** Un input non fidato attraversa una policy esterna. Il controllo deve restare attivo anche se il modello produce una richiesta testuale convincente.
 
-**Controllo.** Introduci una failure a un solo confine e controlla che log, stato e recovery identifichino quel confine senza ambiguità.
+**Controllo.** Per «Difese», introduci una failure a un solo confine e controlla che log, stato e recovery identifichino quel confine senza ambiguità.
 
 
 ## Valutazione adattiva
@@ -65,7 +72,7 @@ Una difesa deve essere testata da attaccanti che conoscono il metodo, entro un p
 
 **Caso da seguire.** Per «Valutazione adattiva» si mantiene l'input del capitolo e si isola questa condizione: Una difesa deve essere testata da attaccanti che conoscono il metodo, entro un protocollo sicuro e autorizzato.
 
-**Controllo.** Confronta il comportamento completo, non soltanto l'ultimo messaggio. Il risultato resta limitato da: Una difesa deve essere testata da attaccanti che conoscono il metodo, entro un protocollo sicuro e autorizzato.
+**Controllo.** Per «Valutazione adattiva», confronta il comportamento completo, non soltanto l'ultimo messaggio. Nel caso «Valutazione adattiva», il risultato resta limitato da: Una difesa deve essere testata da attaccanti che conoscono il metodo, entro un protocollo sicuro e autorizzato.
 
 
 ![Robustezza, jailbreak e attacchi adversarial: chart](../../assets/chapters/88_robustness_jailbreak/JAILBREAK-02/candidate-v50.png)
@@ -75,10 +82,12 @@ La seconda figura mette a confronto «Difese» e il limite discusso in «Valutaz
 
 ## Esempio Python eseguito
 
-Il frammento seguente è lo stesso conservato nel repository. Usa valori piccoli perché l'obiettivo è osservare il meccanismo, non simulare una scala che non abbiamo eseguito.
+Per rendere osservabile robustezza, jailbreak e attacchi adversarial, il capitolo conserva qui l'artefatto Python eseguito. Per «Robustezza, jailbreak e attacchi adversarial», il caso di default usa valori piccoli per isolare il meccanismo. Il test rifiuta anche un caso non documentato di «robustezza, jailbreak e attacchi adversarial».
 
 ```python
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     prompts = [("base", False), ("perturbed", True)]
     failures = [name for name, attack_succeeded in prompts if attack_succeeded]
     return {"attack_success_rate": len(failures) / len(prompts), "failures": failures, "invariant": "robustness is defined relative to an explicit threat model"}
@@ -95,13 +104,13 @@ Il test associato è [`code/test_88_contract.py`](code/test_88_contract.py); l'o
 
 ## Come si collegano i passaggi
 
-- **Da «Threat model» a «Perturbazioni».** Attaccante, accesso, obiettivo, budget e superficie definiscono il test. Typo, parafrasi, encoding e contenuti multimodali possono aggirare filtri superficiali. Il contratto iniziale nomina messaggi e confini; il componente successivo implementa una parte del percorso senza ereditare autorizzazioni implicite. [SRC-88-001; SRC-88-002]
+- **Da «Threat model» a «Perturbazioni».** Attaccante, accesso, obiettivo, budget e superficie definiscono il test. Typo, parafrasi, encoding e contenuti multimodali possono aggirare filtri superficiali. «Threat model» nomina il confine e «Perturbazioni» implementa il percorso senza ereditare autorizzazioni implicite. Il passaggio successivo rende misurabile «Perturbazioni». [SRC-88-001; SRC-88-002]
 
-- **Da «Perturbazioni» a «Ottimizzazione adversarial».** Typo, parafrasi, encoding e contenuti multimodali possono aggirare filtri superficiali. Suffix e prompt vengono cercati per aumentare una loss di attacco. Il terzo passaggio compone più componenti e rende quindi necessario conservare stato, identità e decisione oltre all'output finale. [SRC-88-002; SRC-88-003]
+- **Da «Perturbazioni» a «Ottimizzazione adversarial».** Typo, parafrasi, encoding e contenuti multimodali possono aggirare filtri superficiali. Suffix e prompt vengono cercati per aumentare una loss di attacco. Componendo «Perturbazioni» e «Ottimizzazione adversarial» diventa necessario conservare stato, identità e decisione. Da «Perturbazioni» a «Ottimizzazione adversarial» cambia la domanda osservabile. [SRC-88-002; SRC-88-003]
 
-- **Da «Ottimizzazione adversarial» a «Difese».** Suffix e prompt vengono cercati per aumentare una loss di attacco. Training, filtri, classificatori e refusal possono ridurre alcuni attacchi e introdurre falsi positivi o nuove bypass. La quarta sezione introduce failure e recovery nel punto in cui possono ancora precedere un side effect o una perdita di stato. [SRC-88-003; SRC-88-004]
+- **Da «Ottimizzazione adversarial» a «Difese».** Suffix e prompt vengono cercati per aumentare una loss di attacco. Training, filtri, classificatori e refusal possono ridurre alcuni attacchi e introdurre falsi positivi o nuove bypass. «Difese» introduce failure e recovery prima di un side effect o di una perdita di stato. Il passaggio successivo rende misurabile «Difese». [SRC-88-003; SRC-88-004]
 
-- **Da «Difese» a «Valutazione adattiva».** Training, filtri, classificatori e refusal possono ridurre alcuni attacchi e introdurre falsi positivi o nuove bypass. Una difesa deve essere testata da attaccanti che conoscono il metodo, entro un protocollo sicuro e autorizzato. La chiusura valuta il comportamento end-to-end: un componente corretto non basta se il collegamento, il carico o la policy cambiano l'esito. [SRC-88-004; SRC-88-001]
+- **Da «Difese» a «Valutazione adattiva».** Training, filtri, classificatori e refusal possono ridurre alcuni attacchi e introdurre falsi positivi o nuove bypass. Una difesa deve essere testata da attaccanti che conoscono il metodo, entro un protocollo sicuro e autorizzato. La chiusura su «Valutazione adattiva» valuta il sistema completo, non soltanto il componente iniziale. Da «Difese» a «Valutazione adattiva» cambia la domanda osservabile. [SRC-88-004; SRC-88-001]
 
 La catena completa produce success rate, failure mode e costo della difesa a partire da threat model, prompt, budget e risposta. Ogni collegamento conserva un oggetto osservabile diverso; per questo il risultato non può essere esteso oltre il limite dichiarato: un test superato non copre minacce non incluse nel protocollo.
 
@@ -117,4 +126,4 @@ La catena completa produce success rate, failure mode e costo della difesa a par
 
 ## Il confine operativo
 
-La lezione parte da «threat model, prompt, budget e risposta» e arriva fino a «success rate, failure mode e costo della difesa». Il limite da conservare è questo: un test superato non copre minacce non incluse nel protocollo. Definizioni e risultati citati sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md); la mappa dei claim è in [`CLAIMS.md`](CLAIMS.md).
+La lezione parte da «threat model, prompt, budget e risposta» e arriva fino a «success rate, failure mode e costo della difesa». Il limite da conservare è questo: un test superato non copre minacce non incluse nel protocollo. Il confine di «Valutazione adattiva» va ricontrollato tra claim, fonti e artefatti: i rinvii sono [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md), [`CLAIMS.md`](CLAIMS.md) e `code/`.

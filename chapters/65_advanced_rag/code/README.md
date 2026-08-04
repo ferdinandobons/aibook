@@ -1,6 +1,6 @@
 # Esempio verificato. Capitolo 65
 
-`snip_65_contract.py` esegue il caso minimo usato nel testo di **RAG adattivo, correttivo e basato su grafi**. `test_65_contract.py` conserva l'output atteso, controlla determinismo, serializzazione, valori finiti e presenza del limite interpretativo.
+`snip_65_contract.py` esegue il caso minimo usato nel testo di **RAG adattivo, correttivo e basato su grafi**. `test_65_contract.py` conserva l'output atteso, controlla determinismo, serializzazione, valori finiti, forma del contratto e rifiuto dei casi non documentati.
 
 ```bash
 python snip_65_contract.py

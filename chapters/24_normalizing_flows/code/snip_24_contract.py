@@ -1,16 +1,15 @@
 from __future__ import annotations
 
-import hashlib
 import json
 import math
-import statistics
-from collections import Counter
 
 CHAPTER = 24
 TITLE = 'Normalizing flow e trasformazioni invertibili'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     scale = [2.0, 0.5]
     log_det = sum(math.log(value) for value in scale)
     inverse = [1.0 / value for value in scale]

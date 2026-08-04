@@ -1,0 +1,651 @@
+{
+  "schema": 1,
+  "figure": "VQ-02",
+  "canvas": [
+    1800,
+    1000
+  ],
+  "safe_margin": 20,
+  "minimum_gap": 8,
+  "objects": [
+    {
+      "id": "text-001",
+      "kind": "text",
+      "box": [
+        60.0,
+        25.0,
+        1740.0,
+        77.0
+      ],
+      "label": "VQ-02 · Variational Autoencoder e latent discreti",
+      "order": 1
+    },
+    {
+      "id": "text-002",
+      "kind": "text",
+      "box": [
+        80.0,
+        87.0,
+        1720.0,
+        140.0
+      ],
+      "label": "Quale controllo collega «Posterior collapse» a «VQ-VAE» senza superare il limite dichiarato?",
+      "order": 2
+    },
+    {
+      "id": "text-003",
+      "kind": "text",
+      "box": [
+        80.0,
+        146.0,
+        1720.0,
+        178.0
+      ],
+      "label": "CODEBOOK LOOKUP",
+      "order": 3
+    },
+    {
+      "id": "rectangle-004",
+      "kind": "rectangle",
+      "box": [
+        100.0,
+        260.0,
+        184.0,
+        344.0
+      ],
+      "label": "",
+      "order": 4
+    },
+    {
+      "id": "rectangle-005",
+      "kind": "rectangle",
+      "box": [
+        192.0,
+        260.0,
+        276.0,
+        344.0
+      ],
+      "label": "",
+      "order": 5
+    },
+    {
+      "id": "rectangle-006",
+      "kind": "rectangle",
+      "box": [
+        284.0,
+        260.0,
+        368.0,
+        344.0
+      ],
+      "label": "",
+      "order": 6
+    },
+    {
+      "id": "rectangle-007",
+      "kind": "rectangle",
+      "box": [
+        376.0,
+        260.0,
+        460.0,
+        344.0
+      ],
+      "label": "",
+      "order": 7
+    },
+    {
+      "id": "rectangle-008",
+      "kind": "rectangle",
+      "box": [
+        468.0,
+        260.0,
+        552.0,
+        344.0
+      ],
+      "label": "",
+      "order": 8
+    },
+    {
+      "id": "rectangle-009",
+      "kind": "rectangle",
+      "box": [
+        560.0,
+        260.0,
+        644.0,
+        344.0
+      ],
+      "label": "",
+      "order": 9
+    },
+    {
+      "id": "rectangle-010",
+      "kind": "rectangle",
+      "box": [
+        100.0,
+        352.0,
+        184.0,
+        436.0
+      ],
+      "label": "",
+      "order": 10
+    },
+    {
+      "id": "rectangle-011",
+      "kind": "rectangle",
+      "box": [
+        192.0,
+        352.0,
+        276.0,
+        436.0
+      ],
+      "label": "",
+      "order": 11
+    },
+    {
+      "id": "rectangle-012",
+      "kind": "rectangle",
+      "box": [
+        284.0,
+        352.0,
+        368.0,
+        436.0
+      ],
+      "label": "",
+      "order": 12
+    },
+    {
+      "id": "rectangle-013",
+      "kind": "rectangle",
+      "box": [
+        376.0,
+        352.0,
+        460.0,
+        436.0
+      ],
+      "label": "",
+      "order": 13
+    },
+    {
+      "id": "rectangle-014",
+      "kind": "rectangle",
+      "box": [
+        468.0,
+        352.0,
+        552.0,
+        436.0
+      ],
+      "label": "",
+      "order": 14
+    },
+    {
+      "id": "rectangle-015",
+      "kind": "rectangle",
+      "box": [
+        560.0,
+        352.0,
+        644.0,
+        436.0
+      ],
+      "label": "",
+      "order": 15
+    },
+    {
+      "id": "rectangle-016",
+      "kind": "rectangle",
+      "box": [
+        100.0,
+        444.0,
+        184.0,
+        528.0
+      ],
+      "label": "",
+      "order": 16
+    },
+    {
+      "id": "rectangle-017",
+      "kind": "rectangle",
+      "box": [
+        192.0,
+        444.0,
+        276.0,
+        528.0
+      ],
+      "label": "",
+      "order": 17
+    },
+    {
+      "id": "rectangle-018",
+      "kind": "rectangle",
+      "box": [
+        284.0,
+        444.0,
+        368.0,
+        528.0
+      ],
+      "label": "",
+      "order": 18
+    },
+    {
+      "id": "rectangle-019",
+      "kind": "rectangle",
+      "box": [
+        376.0,
+        444.0,
+        460.0,
+        528.0
+      ],
+      "label": "",
+      "order": 19
+    },
+    {
+      "id": "rectangle-020",
+      "kind": "rectangle",
+      "box": [
+        468.0,
+        444.0,
+        552.0,
+        528.0
+      ],
+      "label": "",
+      "order": 20
+    },
+    {
+      "id": "rectangle-021",
+      "kind": "rectangle",
+      "box": [
+        560.0,
+        444.0,
+        644.0,
+        528.0
+      ],
+      "label": "",
+      "order": 21
+    },
+    {
+      "id": "rectangle-022",
+      "kind": "rectangle",
+      "box": [
+        100.0,
+        536.0,
+        184.0,
+        620.0
+      ],
+      "label": "",
+      "order": 22
+    },
+    {
+      "id": "rectangle-023",
+      "kind": "rectangle",
+      "box": [
+        192.0,
+        536.0,
+        276.0,
+        620.0
+      ],
+      "label": "",
+      "order": 23
+    },
+    {
+      "id": "rectangle-024",
+      "kind": "rectangle",
+      "box": [
+        284.0,
+        536.0,
+        368.0,
+        620.0
+      ],
+      "label": "",
+      "order": 24
+    },
+    {
+      "id": "rectangle-025",
+      "kind": "rectangle",
+      "box": [
+        376.0,
+        536.0,
+        460.0,
+        620.0
+      ],
+      "label": "",
+      "order": 25
+    },
+    {
+      "id": "rectangle-026",
+      "kind": "rectangle",
+      "box": [
+        468.0,
+        536.0,
+        552.0,
+        620.0
+      ],
+      "label": "",
+      "order": 26
+    },
+    {
+      "id": "rectangle-027",
+      "kind": "rectangle",
+      "box": [
+        560.0,
+        536.0,
+        644.0,
+        620.0
+      ],
+      "label": "",
+      "order": 27
+    },
+    {
+      "id": "rectangle-028",
+      "kind": "rectangle",
+      "box": [
+        100.0,
+        628.0,
+        184.0,
+        712.0
+      ],
+      "label": "",
+      "order": 28
+    },
+    {
+      "id": "rectangle-029",
+      "kind": "rectangle",
+      "box": [
+        192.0,
+        628.0,
+        276.0,
+        712.0
+      ],
+      "label": "",
+      "order": 29
+    },
+    {
+      "id": "rectangle-030",
+      "kind": "rectangle",
+      "box": [
+        284.0,
+        628.0,
+        368.0,
+        712.0
+      ],
+      "label": "",
+      "order": 30
+    },
+    {
+      "id": "rectangle-031",
+      "kind": "rectangle",
+      "box": [
+        376.0,
+        628.0,
+        460.0,
+        712.0
+      ],
+      "label": "",
+      "order": 31
+    },
+    {
+      "id": "rectangle-032",
+      "kind": "rectangle",
+      "box": [
+        468.0,
+        628.0,
+        552.0,
+        712.0
+      ],
+      "label": "",
+      "order": 32
+    },
+    {
+      "id": "rectangle-033",
+      "kind": "rectangle",
+      "box": [
+        560.0,
+        628.0,
+        644.0,
+        712.0
+      ],
+      "label": "",
+      "order": 33
+    },
+    {
+      "id": "text-034",
+      "kind": "text",
+      "box": [
+        120.0,
+        735.0,
+        630.0,
+        790.0
+      ],
+      "label": "Tensore diviso in blocchi espliciti",
+      "order": 34
+    },
+    {
+      "id": "rounded_rectangle-035",
+      "kind": "rounded_rectangle",
+      "box": [
+        900.0,
+        245.0,
+        1660.0,
+        380.0
+      ],
+      "label": "",
+      "order": 36
+    },
+    {
+      "id": "ellipse-036",
+      "kind": "ellipse",
+      "box": [
+        918.0,
+        263.0,
+        958.0,
+        303.0
+      ],
+      "label": "",
+      "order": 37
+    },
+    {
+      "id": "text-037",
+      "kind": "text",
+      "box": [
+        927.0,
+        269.0,
+        949.0,
+        295.0
+      ],
+      "label": "1",
+      "order": 38
+    },
+    {
+      "id": "text-038",
+      "kind": "text",
+      "box": [
+        972.0,
+        263.0,
+        1638.0,
+        307.0
+      ],
+      "label": "Posterior collapse",
+      "order": 39
+    },
+    {
+      "id": "text-039",
+      "kind": "text",
+      "box": [
+        924.0,
+        322.0,
+        1636.0,
+        362.0
+      ],
+      "label": "Un decoder molto potente può ignorare z e avvicinare il posterior al prior.",
+      "order": 40
+    },
+    {
+      "id": "rounded_rectangle-040",
+      "kind": "rounded_rectangle",
+      "box": [
+        900.0,
+        420.0,
+        1660.0,
+        555.0
+      ],
+      "label": "",
+      "order": 41
+    },
+    {
+      "id": "ellipse-041",
+      "kind": "ellipse",
+      "box": [
+        918.0,
+        438.0,
+        958.0,
+        478.0
+      ],
+      "label": "",
+      "order": 42
+    },
+    {
+      "id": "text-042",
+      "kind": "text",
+      "box": [
+        927.0,
+        444.0,
+        949.0,
+        470.0
+      ],
+      "label": "2",
+      "order": 43
+    },
+    {
+      "id": "text-043",
+      "kind": "text",
+      "box": [
+        972.0,
+        438.0,
+        1638.0,
+        482.0
+      ],
+      "label": "VQ-VAE",
+      "order": 44
+    },
+    {
+      "id": "text-044",
+      "kind": "text",
+      "box": [
+        924.0,
+        497.0,
+        1636.0,
+        537.0
+      ],
+      "label": "La quantizzazione vettoriale sostituisce il latent continuo con indici di un codebook.",
+      "order": 45
+    },
+    {
+      "id": "rounded_rectangle-045",
+      "kind": "rounded_rectangle",
+      "box": [
+        900.0,
+        595.0,
+        1660.0,
+        730.0
+      ],
+      "label": "",
+      "order": 46
+    },
+    {
+      "id": "ellipse-046",
+      "kind": "ellipse",
+      "box": [
+        918.0,
+        613.0,
+        958.0,
+        653.0
+      ],
+      "label": "",
+      "order": 47
+    },
+    {
+      "id": "text-047",
+      "kind": "text",
+      "box": [
+        927.0,
+        619.0,
+        949.0,
+        645.0
+      ],
+      "label": "3",
+      "order": 48
+    },
+    {
+      "id": "text-048",
+      "kind": "text",
+      "box": [
+        972.0,
+        613.0,
+        1638.0,
+        657.0
+      ],
+      "label": "Controllo locale",
+      "order": 49
+    },
+    {
+      "id": "text-049",
+      "kind": "text",
+      "box": [
+        924.0,
+        672.0,
+        1636.0,
+        712.0
+      ],
+      "label": "la ricostruzione non elimina il costo KL né dimostra disentanglement",
+      "order": 50
+    },
+    {
+      "id": "text-050",
+      "kind": "text",
+      "box": [
+        830.0,
+        765.0,
+        1670.0,
+        815.0
+      ],
+      "label": "Materializzare, ricostruire e trasferire sono costi distinti.",
+      "order": 51
+    },
+    {
+      "id": "rounded_rectangle-051",
+      "kind": "rounded_rectangle",
+      "box": [
+        170.0,
+        850.0,
+        1630.0,
+        940.0
+      ],
+      "label": "",
+      "order": 52
+    },
+    {
+      "id": "text-052",
+      "kind": "text",
+      "box": [
+        205.0,
+        873.0,
+        1595.0,
+        917.0
+      ],
+      "label": "LIMITE · la ricostruzione non elimina il costo KL né dimostra disentanglement",
+      "order": 53
+    }
+  ],
+  "connectors": [
+    {
+      "id": "connector-001",
+      "start": [
+        690.0,
+        490.0
+      ],
+      "end": [
+        860.0,
+        490.0
+      ],
+      "order": 35
+    }
+  ],
+  "errors": []
+}

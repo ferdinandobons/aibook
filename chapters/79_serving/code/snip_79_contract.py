@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-import hashlib
 import json
-import math
-import statistics
-from collections import Counter
 
 CHAPTER = 79
 TITLE = 'Serving, batching e scheduling'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     requests = [("short-1", 2), ("short-2", 2), ("long", 6)]
     batch = [request[0] for request in requests]
     total_tokens = sum(length for _request, length in requests)

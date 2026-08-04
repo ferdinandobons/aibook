@@ -1,16 +1,15 @@
 from __future__ import annotations
 
-import hashlib
 import json
 import math
-import statistics
-from collections import Counter
 
 CHAPTER = 49
 TITLE = 'Ottimizzazione diretta delle preferenze'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     policy_margin = 0.8
     reference_margin = 0.2
     beta = 0.5

@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-import hashlib
 import json
-import math
-import statistics
-from collections import Counter
 
 CHAPTER = 86
 TITLE = 'Interpretabilità delle rappresentazioni e dei circuiti'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     baseline = 0.60
     intervened = 0.25
     effect = intervened - baseline

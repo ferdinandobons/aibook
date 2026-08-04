@@ -1,6 +1,6 @@
 # Esempio verificato. Capitolo 42
 
-`snip_42_contract.py` esegue il caso minimo usato nel testo di **State-space model, recurrence e long convolution**. `test_42_contract.py` conserva l'output atteso, controlla determinismo, serializzazione, valori finiti e presenza del limite interpretativo.
+`snip_42_contract.py` esegue il caso minimo usato nel testo di **State-space model, recurrence e long convolution**. `test_42_contract.py` conserva l'output atteso, controlla determinismo, serializzazione, valori finiti, forma del contratto e rifiuto dei casi non documentati.
 
 ```bash
 python snip_42_contract.py

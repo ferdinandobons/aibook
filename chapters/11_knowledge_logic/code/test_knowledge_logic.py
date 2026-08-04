@@ -44,20 +44,16 @@ class KnowledgeLogicTests(unittest.TestCase):
 
     def test_conditional_factorization_is_explicit(self) -> None:
         for real_delay in (False, True):
-            product_probability = (
-                bernoulli_probability(
-                    True,
-                    P_MESSAGE_GIVEN_DELAY[real_delay],
-                )
-                * bernoulli_probability(
-                    True,
-                    P_TRACKING_GIVEN_DELAY[real_delay],
-                )
+            product_probability = bernoulli_probability(
+                True,
+                P_MESSAGE_GIVEN_DELAY[real_delay],
+            ) * bernoulli_probability(
+                True,
+                P_TRACKING_GIVEN_DELAY[real_delay],
             )
-            normalized = (
-                joint_probability(real_delay, True, True)
-                / bernoulli_probability(real_delay, P_DELAY)
-            )
+            normalized = joint_probability(
+                real_delay, True, True
+            ) / bernoulli_probability(real_delay, P_DELAY)
             self.assertAlmostEqual(normalized, product_probability)
 
 

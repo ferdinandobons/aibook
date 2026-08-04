@@ -36,8 +36,7 @@ def cross_entropy(target: torch.Tensor, prediction: torch.Tensor) -> torch.Tenso
 def kl_divergence(target: torch.Tensor, prediction: torch.Tensor) -> torch.Tensor:
     positive = target > 0
     return (
-        target[positive]
-        * (target[positive].log() - prediction[positive].log())
+        target[positive] * (target[positive].log() - prediction[positive].log())
     ).sum()
 
 
@@ -62,10 +61,7 @@ def main() -> None:
     print(f"manual_nll: {manual_nll.item():.6f}")
     print(f"api_cross_entropy: {api_cross_entropy.item():.6f}")
     print(f"gradient_logits: {logits.grad}")
-    print(
-        f"prediction_entropy_nats: "
-        f"{entropy(probabilities.detach()).item():.6f}"
-    )
+    print(f"prediction_entropy_nats: {entropy(probabilities.detach()).item():.6f}")
 
     soft_target = torch.tensor([0.90, 0.05, 0.05], dtype=torch.float64)
     soft_ce = cross_entropy(soft_target, probabilities.detach())
@@ -87,10 +83,7 @@ def main() -> None:
     naive_probabilities = torch.exp(large_logits) / torch.exp(large_logits).sum()
     stable_log_probabilities = torch.log_softmax(large_logits, dim=0)
     print(f"naive_large_logits_probabilities: {naive_probabilities}")
-    print(
-        f"stable_large_logits_log_probabilities: "
-        f"{stable_log_probabilities}"
-    )
+    print(f"stable_large_logits_log_probabilities: {stable_log_probabilities}")
 
 
 if __name__ == "__main__":

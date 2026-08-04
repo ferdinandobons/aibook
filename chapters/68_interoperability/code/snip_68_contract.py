@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-import hashlib
 import json
-import math
-import statistics
-from collections import Counter
 
 CHAPTER = 68
 TITLE = 'Protocolli e interoperabilità'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     producer = {"version": 1, "capability": "lookup_order"}
     consumer = {"accepted_versions": {1, 2}, "required": "lookup_order"}
     compatible = producer["version"] in consumer["accepted_versions"] and producer["capability"] == consumer["required"]

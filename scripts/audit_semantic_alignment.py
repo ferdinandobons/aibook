@@ -13,7 +13,6 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 import complete_remaining_book as base  # noqa: E402
 import lesson_evidence as evidence  # noqa: E402
-import revise_book_completeness as revise  # noqa: E402
 
 
 CHAPTER_RE = re.compile(r"^# Capitolo (\d+)\. ", re.MULTILINE)

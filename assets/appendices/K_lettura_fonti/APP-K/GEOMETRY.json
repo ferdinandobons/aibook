@@ -1,0 +1,206 @@
+{
+  "schema": 1,
+  "figure": "APP-K",
+  "canvas": [
+    1800,
+    1000
+  ],
+  "safe_margin": 20,
+  "minimum_gap": 8,
+  "objects": [
+    {
+      "id": "text-001",
+      "kind": "text",
+      "box": [
+        60.0,
+        28.0,
+        1740.0,
+        82.0
+      ],
+      "label": "APP-K · Claim, locator, prova e limite",
+      "order": 1
+    },
+    {
+      "id": "text-002",
+      "kind": "text",
+      "box": [
+        80.0,
+        94.0,
+        1720.0,
+        142.0
+      ],
+      "label": "Mappa operativa dell'appendice: ogni nodo rinvia a un controllo descritto nel testo.",
+      "order": 2
+    },
+    {
+      "id": "rounded_rectangle-003",
+      "kind": "rounded_rectangle",
+      "box": [
+        250.0,
+        250.0,
+        1550.0,
+        350.0
+      ],
+      "label": "",
+      "order": 3
+    },
+    {
+      "id": "text-004",
+      "kind": "text",
+      "box": [
+        275.0,
+        265.0,
+        550.0,
+        298.0
+      ],
+      "label": "claim",
+      "order": 4
+    },
+    {
+      "id": "text-005",
+      "kind": "text",
+      "box": [
+        565.0,
+        263.0,
+        1525.0,
+        327.0
+      ],
+      "label": "frase esatta",
+      "order": 5
+    },
+    {
+      "id": "rounded_rectangle-006",
+      "kind": "rounded_rectangle",
+      "box": [
+        360.0,
+        390.0,
+        1440.0,
+        490.0
+      ],
+      "label": "",
+      "order": 6
+    },
+    {
+      "id": "text-007",
+      "kind": "text",
+      "box": [
+        385.0,
+        405.0,
+        660.0,
+        438.0
+      ],
+      "label": "locator",
+      "order": 7
+    },
+    {
+      "id": "text-008",
+      "kind": "text",
+      "box": [
+        675.0,
+        403.0,
+        1415.0,
+        467.0
+      ],
+      "label": "pagina o sezione",
+      "order": 8
+    },
+    {
+      "id": "rounded_rectangle-009",
+      "kind": "rounded_rectangle",
+      "box": [
+        470.0,
+        530.0,
+        1330.0,
+        630.0
+      ],
+      "label": "",
+      "order": 9
+    },
+    {
+      "id": "text-010",
+      "kind": "text",
+      "box": [
+        495.0,
+        545.0,
+        770.0,
+        578.0
+      ],
+      "label": "prova",
+      "order": 10
+    },
+    {
+      "id": "text-011",
+      "kind": "text",
+      "box": [
+        785.0,
+        543.0,
+        1305.0,
+        607.0
+      ],
+      "label": "contenuto pertinente",
+      "order": 11
+    },
+    {
+      "id": "rounded_rectangle-012",
+      "kind": "rounded_rectangle",
+      "box": [
+        580.0,
+        670.0,
+        1220.0,
+        770.0
+      ],
+      "label": "",
+      "order": 12
+    },
+    {
+      "id": "text-013",
+      "kind": "text",
+      "box": [
+        605.0,
+        685.0,
+        880.0,
+        718.0
+      ],
+      "label": "limite",
+      "order": 13
+    },
+    {
+      "id": "text-014",
+      "kind": "text",
+      "box": [
+        895.0,
+        683.0,
+        1195.0,
+        747.0
+      ],
+      "label": "ciò che non segue",
+      "order": 14
+    },
+    {
+      "id": "rounded_rectangle-015",
+      "kind": "rounded_rectangle",
+      "box": [
+        170.0,
+        850.0,
+        1630.0,
+        940.0
+      ],
+      "label": "",
+      "order": 15
+    },
+    {
+      "id": "text-016",
+      "kind": "text",
+      "box": [
+        205.0,
+        873.0,
+        1595.0,
+        917.0
+      ],
+      "label": "LIMITE · una fonte autorevole può essere irrilevante per il claim specifico",
+      "order": 16
+    }
+  ],
+  "connectors": [],
+  "errors": []
+}

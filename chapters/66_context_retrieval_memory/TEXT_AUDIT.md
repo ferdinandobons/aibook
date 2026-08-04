@@ -2,7 +2,7 @@
 
 - versione: 0.5.0-draft3
 - data: 4 agosto 2026
-- parole fuori dai blocchi di codice: 949
+- parole fuori dai blocchi di codice: 1048
 - nuclei semantici: 5 (Tre risorse differenti; Quando usare il contesto; Quando recuperare; Memoria episodica; Routing ibrido)
 - paragrafi del vecchio scaffold: assenti secondo `audit_book_quality.py`
 - ripetizioni lunghe tra tre o più capitoli: assenti secondo l'audit trasversale

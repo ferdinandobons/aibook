@@ -31,3 +31,10 @@ L'asse feature, lungo quattro, viene contratto. Batch e classe restano. La compa
 - nota sulla contrazione collegata ai due fattori;
 - nessuna sovrapposizione tra bias, titolo e output.
 - domanda principale: Quale trasformazione centrale rende osservabile «Da un numero a un tensore» nel capitolo 5?
+
+## Contratto geometrico
+
+- raster: margine di sicurezza di 20 px sul canvas 1800x1000;
+- contenimento: nessun testo oltre il proprio box o il canvas;
+- composizione: nessuna sovrapposizione o tangenza intenzionale tra elementi fratelli;
+- fonte: `GEOMETRY.json` e checklist dell'audit storico.

@@ -40,7 +40,9 @@ class TinyCausalLM(nn.Module):
             batch_first=True,
             norm_first=True,
         )
-        self.blocks = nn.TransformerEncoder(layer, num_layers=1, enable_nested_tensor=False)
+        self.blocks = nn.TransformerEncoder(
+            layer, num_layers=1, enable_nested_tensor=False
+        )
         self.norm = nn.LayerNorm(width)
         self.head = nn.Linear(width, vocab_size, bias=False)
 
@@ -50,19 +52,30 @@ class TinyCausalLM(nn.Module):
         positions = torch.arange(token_ids.shape[1], device=token_ids.device)
         hidden = self.token(token_ids) + self.position(positions)
         mask = torch.triu(
-            torch.ones(token_ids.shape[1], token_ids.shape[1], dtype=torch.bool, device=token_ids.device),
+            torch.ones(
+                token_ids.shape[1],
+                token_ids.shape[1],
+                dtype=torch.bool,
+                device=token_ids.device,
+            ),
             diagonal=1,
         )
         hidden = self.blocks(hidden, mask=mask, is_causal=True)
         return self.head(self.norm(hidden))
 
 
-def build_training_batch(ids: list[int], context: int) -> tuple[torch.Tensor, torch.Tensor]:
+def build_training_batch(
+    ids: list[int], context: int
+) -> tuple[torch.Tensor, torch.Tensor]:
     if len(ids) <= context:
         raise ValueError("il corpus deve contenere più token della context window")
     inputs = [ids[start : start + context] for start in range(len(ids) - context)]
-    targets = [ids[start + 1 : start + context + 1] for start in range(len(ids) - context)]
-    return torch.tensor(inputs, dtype=torch.long), torch.tensor(targets, dtype=torch.long)
+    targets = [
+        ids[start + 1 : start + context + 1] for start in range(len(ids) - context)
+    ]
+    return torch.tensor(inputs, dtype=torch.long), torch.tensor(
+        targets, dtype=torch.long
+    )
 
 
 # BOOK-EXCERPT-START
@@ -83,7 +96,9 @@ def train_and_generate(steps: int = 24) -> dict[str, object]:
     for _ in range(steps):
         optimizer.zero_grad(set_to_none=True)
         logits = model(inputs)
-        loss = nn.functional.cross_entropy(logits.reshape(-1, logits.shape[-1]), targets.reshape(-1))
+        loss = nn.functional.cross_entropy(
+            logits.reshape(-1, logits.shape[-1]), targets.reshape(-1)
+        )
         loss.backward()
         optimizer.step()
         losses.append(float(loss.detach()))
@@ -104,6 +119,8 @@ def train_and_generate(steps: int = 24) -> dict[str, object]:
         "generated": tokenizer.decode(generated),
         "target_shift_verified": bool(torch.equal(inputs[:, 1:], targets[:, :-1])),
     }
+
+
 # BOOK-EXCERPT-END
 
 

@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-import hashlib
 import json
-import math
-import statistics
-from collections import Counter
 
 CHAPTER = 46
 TITLE = 'Supervised fine-tuning e instruction tuning'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     tokens = ["utente", "domanda", "assistente", "risposta"]
     labels = [False, False, True, True]
     supervised = [token for token, include in zip(tokens, labels) if include]

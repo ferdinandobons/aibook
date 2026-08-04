@@ -14,7 +14,7 @@ deferred: benchmark applicativi non eseguiti e approvazione autoriale delle visu
 
 # Capitolo 61. 3D, spazio e rappresentazione delle scene
 
-La domanda guida di questa lezione è come collegare «Coordinate e camera» e «Generazione e grounding spaziale» senza perdere il contratto tecnico di 3d, spazio e rappresentazione delle scene. L'oggetto osservato è punti e coordinate che descrivono una scena 3D. Il contratto locale è: input, punti, camera, raggi e profondità; operazione, proiezione, rendering, splatting o ricostruzione; output, immagine, campo radiance o geometria. Il caso guida è questo: Tre punti 3D producono un centroide con tre coordinate. Il confine da mantenere esplicito è: una vista proiettata non determina da sola la scena completa.
+Il percorso di 3d, spazio e rappresentazione delle scene attraversa «Coordinate e camera» e «Generazione e grounding spaziale» senza attribuire al solo modello ciò che dipende dal sistema. L'oggetto osservato è punti e coordinate che descrivono una scena 3D. Il contratto locale dichiara input, punti, camera, raggi e profondità; operazione, proiezione, rendering, splatting o ricostruzione; output, immagine, campo radiance o geometria. Il caso di partenza è Tre punti 3D producono un centroide con tre coordinate. Il limite da non nascondere è: una vista proiettata non determina da sola la scena completa.
 
 ## Coordinate e camera
 
@@ -24,7 +24,7 @@ La proiezione non ricostruisce da sola la geometria completa.
 
 **Caso da seguire.** Tre punti 3D producono un centroide con tre coordinate.
 
-**Controllo.** Registra richiesta, decisione, stato e output finale. Un esito plausibile non deve nascondere il componente che lo ha prodotto.
+**Controllo.** Per «Coordinate e camera», registra richiesta, decisione, stato e output finale. Nel caso «Coordinate e camera», un esito plausibile non deve nascondere il componente che lo ha prodotto.
 
 
 ## NeRF
@@ -34,6 +34,13 @@ Una funzione neurale mappa posizione e direzione a densità e colore. Volume ren
 **Caso da seguire.** Due punti proiettati con camera e profondità dichiarate.
 
 **Controllo.** Ripeti «NeRF» con una capability o un'autorizzazione rimossa e verifica che la failure preceda qualsiasi side effect.
+
+
+La relazione seguente è una mappa operativa e non una misura del sistema.
+
+**Schema concettuale.** `scene = project(points, camera)`
+
+La proiezione non ricostruisce da sola la geometria completa. [SRC-61-001]
 
 
 ![3D, spazio e rappresentazione delle scene: architecture](../../assets/chapters/61_spatial_3d/3D-01/candidate-v48.png)
@@ -47,7 +54,7 @@ Gaussiane 3D con posizione, covarianza e colore vengono rasterizzate efficientem
 
 **Caso da seguire.** Un caso in cui una vista proiettata non determina da sola la scena completa.
 
-**Controllo.** Separa il test del singolo componente dal test end-to-end, usando lo stesso input e la stessa configurazione versionata.
+**Controllo.** Per «Gaussian splatting», separa il test del singolo componente dal test end-to-end, usando lo stesso input e la stessa configurazione versionata.
 
 
 ## Mesh, point cloud e voxel
@@ -56,7 +63,7 @@ Rappresentazioni discrete offrono trade-off differenti tra topologia, memoria e 
 
 **Caso da seguire.** Due vettori di modalità diverse vengono proiettati in uno spazio comune prima della similarità o della fusione; la dimensione comune è un invariante esplicito.
 
-**Controllo.** Introduci una failure a un solo confine e controlla che log, stato e recovery identifichino quel confine senza ambiguità.
+**Controllo.** Per «Mesh, point cloud e voxel», introduci una failure a un solo confine e controlla che log, stato e recovery identifichino quel confine senza ambiguità.
 
 
 ## Generazione e grounding spaziale
@@ -65,7 +72,7 @@ Testo e immagini possono condizionare scene, ma consistenza geometrica e fisica 
 
 **Caso da seguire.** Per «Generazione e grounding spaziale» si mantiene l'input del capitolo e si isola questa condizione: Testo e immagini possono condizionare scene, ma consistenza geometrica e fisica richiedono valutazioni dedicate.
 
-**Controllo.** Confronta il comportamento completo, non soltanto l'ultimo messaggio. Il risultato resta limitato da: Testo e immagini possono condizionare scene, ma consistenza geometrica e fisica richiedono valutazioni dedicate.
+**Controllo.** Per «Generazione e grounding spaziale», confronta il comportamento completo, non soltanto l'ultimo messaggio. Nel caso «Generazione e grounding spaziale», il risultato resta limitato da: Testo e immagini possono condizionare scene, ma consistenza geometrica e fisica richiedono valutazioni dedicate.
 
 
 ![3D, spazio e rappresentazione delle scene: scatter](../../assets/chapters/61_spatial_3d/3D-02/candidate-v48.png)
@@ -75,10 +82,12 @@ La seconda figura mette a confronto «Mesh, point cloud e voxel» e il limite di
 
 ## Esempio Python eseguito
 
-Il frammento seguente è lo stesso conservato nel repository. Usa valori piccoli perché l'obiettivo è osservare il meccanismo, non simulare una scala che non abbiamo eseguito.
+Il caso computazionale di 3d, spazio e rappresentazione delle scene è riportato senza trasformazioni: il file e l'output sono quelli verificati. Per «3D, spazio e rappresentazione delle scene», il caso di default usa valori piccoli per isolare il meccanismo. La suite conserva inoltre una failure esplicita per separare il contratto osservato da «3d, spazio e rappresentazione delle scene».
 
 ```python
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     points = [(0.0, 0.0, 0.0), (1.0, 0.0, 0.0), (0.0, 1.0, 0.0)]
     centroid = [sum(point[index] for point in points) / len(points) for index in range(3)]
     return {"count": len(points), "centroid": centroid, "invariant": "a 3D representation preserves coordinate dimension"}
@@ -95,13 +104,13 @@ Il test associato è [`code/test_61_contract.py`](code/test_61_contract.py); l'o
 
 ## Come si collegano i passaggi
 
-- **Da «Coordinate e camera» a «NeRF».** Una scena 3D richiede sistemi di riferimento, intrinseci ed estrinseci della camera. Una funzione neurale mappa posizione e direzione a densità e colore. Il contratto iniziale nomina messaggi e confini; il componente successivo implementa una parte del percorso senza ereditare autorizzazioni implicite. [SRC-61-001; SRC-61-002]
+- **Da «Coordinate e camera» a «NeRF».** Una scena 3D richiede sistemi di riferimento, intrinseci ed estrinseci della camera. Una funzione neurale mappa posizione e direzione a densità e colore. «Coordinate e camera» nomina il confine e «NeRF» implementa il percorso senza ereditare autorizzazioni implicite. Da «Coordinate e camera» a «NeRF» cambia la domanda osservabile. [SRC-61-001; SRC-61-002]
 
-- **Da «NeRF» a «Gaussian splatting».** Una funzione neurale mappa posizione e direzione a densità e colore. Gaussiane 3D con posizione, covarianza e colore vengono rasterizzate efficientemente da punti di vista nuovi. Il terzo passaggio compone più componenti e rende quindi necessario conservare stato, identità e decisione oltre all'output finale. [SRC-61-002; SRC-61-003]
+- **Da «NeRF» a «Gaussian splatting».** Una funzione neurale mappa posizione e direzione a densità e colore. Gaussiane 3D con posizione, covarianza e colore vengono rasterizzate efficientemente da punti di vista nuovi. Componendo «NeRF» e «Gaussian splatting» diventa necessario conservare stato, identità e decisione. Il passaggio successivo rende misurabile «Gaussian splatting». [SRC-61-002; SRC-61-003]
 
-- **Da «Gaussian splatting» a «Mesh, point cloud e voxel».** Gaussiane 3D con posizione, covarianza e colore vengono rasterizzate efficientemente da punti di vista nuovi. Rappresentazioni discrete offrono trade-off differenti tra topologia, memoria e rendering. La quarta sezione introduce failure e recovery nel punto in cui possono ancora precedere un side effect o una perdita di stato. [SRC-61-003; SRC-61-004]
+- **Da «Gaussian splatting» a «Mesh, point cloud e voxel».** Gaussiane 3D con posizione, covarianza e colore vengono rasterizzate efficientemente da punti di vista nuovi. Rappresentazioni discrete offrono trade-off differenti tra topologia, memoria e rendering. «Mesh, point cloud e voxel» introduce failure e recovery prima di un side effect o di una perdita di stato. Da «Gaussian splatting» a «Mesh, point cloud e voxel» cambia la domanda osservabile. [SRC-61-003; SRC-61-004]
 
-- **Da «Mesh, point cloud e voxel» a «Generazione e grounding spaziale».** Rappresentazioni discrete offrono trade-off differenti tra topologia, memoria e rendering. Testo e immagini possono condizionare scene, ma consistenza geometrica e fisica richiedono valutazioni dedicate. La chiusura valuta il comportamento end-to-end: un componente corretto non basta se il collegamento, il carico o la policy cambiano l'esito. [SRC-61-004; SRC-61-001]
+- **Da «Mesh, point cloud e voxel» a «Generazione e grounding spaziale».** Rappresentazioni discrete offrono trade-off differenti tra topologia, memoria e rendering. Testo e immagini possono condizionare scene, ma consistenza geometrica e fisica richiedono valutazioni dedicate. La chiusura su «Generazione e grounding spaziale» valuta il sistema completo, non soltanto il componente iniziale. Il passaggio successivo rende misurabile «Generazione e grounding spaziale». [SRC-61-004; SRC-61-001]
 
 La catena completa produce immagine, campo radiance o geometria a partire da punti, camera, raggi e profondità. Ogni collegamento conserva un oggetto osservabile diverso; per questo il risultato non può essere esteso oltre il limite dichiarato: una vista proiettata non determina da sola la scena completa.
 
@@ -117,4 +126,4 @@ La catena completa produce immagine, campo radiance o geometria a partire da pun
 
 ## Il confine operativo
 
-La lezione parte da «punti, camera, raggi e profondità» e arriva fino a «immagine, campo radiance o geometria». Il limite da conservare è questo: una vista proiettata non determina da sola la scena completa. Definizioni e risultati citati sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md); la mappa dei claim è in [`CLAIMS.md`](CLAIMS.md).
+La lezione parte da «punti, camera, raggi e profondità» e arriva fino a «immagine, campo radiance o geometria». Il limite da conservare è questo: una vista proiettata non determina da sola la scena completa. Il confine di «Generazione e grounding spaziale» va ricontrollato tra claim, fonti e artefatti: i rinvii sono [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md), [`CLAIMS.md`](CLAIMS.md) e `code/`.

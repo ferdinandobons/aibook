@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-import hashlib
 import json
-import math
-import statistics
-from collections import Counter
 
 CHAPTER = 27
 TITLE = 'Embedding e spazio semantico'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     embedding_table = {1: [1.0, 0.0], 2: [0.0, 1.0]}
     static = embedding_table[1]
     contextual = [static[0] + 0.2, static[1] + 0.8]

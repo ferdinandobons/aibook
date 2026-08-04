@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-import hashlib
 import json
-import math
-import statistics
-from collections import Counter
 
 CHAPTER = 47
 TITLE = 'Fine-tuning efficiente'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     base = [1.0, 2.0]
     direction_a = [0.5, 0.0]
     direction_b = [0.0, -0.25]

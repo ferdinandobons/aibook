@@ -14,7 +14,7 @@ deferred: benchmark applicativi non eseguiti e approvazione autoriale delle visu
 
 # Capitolo 73. Distillazione e pruning
 
-La domanda guida di questa lezione è come collegare «Teacher e student» e «Recovery» senza perdere il contratto tecnico di distillazione e pruning. L'oggetto osservato è pesi del teacher, student e struttura da comprimere. Il contratto locale è: input, logits teacher, target, pruning mask e budget; operazione, distillazione, pruning e recovery; output, student più piccolo con loss e regressioni misurate. Il caso guida è questo: Teacher e student hanno due vettori di logits differenti e una mask conserva una connessione. Il confine da mantenere esplicito è: compressione e accuratezza vanno misurate sullo stesso perimetro.
+Qui distillazione e pruning viene osservato come un meccanismo: il percorso va da «Teacher e student» a «Recovery». L'oggetto osservato è pesi del teacher, student e struttura da comprimere. Il contratto locale dichiara input, logits teacher, target, pruning mask e budget; operazione, distillazione, pruning e recovery; output, student più piccolo con loss e regressioni misurate. Il primo esempio osservabile è Teacher e student hanno due vettori di logits differenti e una mask conserva una connessione. Il limite da non nascondere è: compressione e accuratezza vanno misurate sullo stesso perimetro.
 
 ## Teacher e student
 
@@ -24,7 +24,7 @@ Compressione e accuratezza vanno misurate nello stesso perimetro.
 
 **Caso da seguire.** Teacher e student hanno due vettori di logits differenti e una mask conserva una connessione.
 
-**Controllo.** Scrivi il risultato atteso prima del calcolo, modifica una sola quantità e localizza il primo passaggio che cambia. Il vincolo da conservare è: La distillazione usa logits, distribuzioni o sequenze del teacher come target aggiuntivi per uno student.
+**Controllo.** Per «Teacher e student», scrivi il risultato atteso prima del calcolo, modifica una sola quantità e localizza il primo passaggio che cambia. Nel caso «Teacher e student», il vincolo da conservare è: La distillazione usa logits, distribuzioni o sequenze del teacher come target aggiuntivi per uno student.
 
 
 ## Temperature e loss
@@ -33,7 +33,7 @@ Una temperatura più alta rivela relazioni tra classi o token. Hard target e sof
 
 **Caso da seguire.** Due logits trasferiti e una connessione potata con recovery.
 
-**Controllo.** Ricalcola il caso a mano e con lo snippet. Se i risultati divergono, confronta prima i valori intermedi e soltanto dopo l'output finale.
+**Controllo.** Per «Temperature e loss», ricalcola il caso a mano e con lo snippet. Nel caso «Temperature e loss», se i risultati divergono, confronta prima i valori intermedi e soltanto dopo l'output finale.
 
 
 La relazione centrale può essere scritta come:
@@ -56,7 +56,7 @@ Per modelli generativi, risposte del teacher diventano un nuovo dataset. Filtri 
 
 **Caso da seguire.** Un modello teacher e uno student confrontati sullo stesso input, con memoria e regressioni riportate insieme alla loss.
 
-**Controllo.** Aggiungi un valore limite e verifica separatamente forma, valore e ipotesi. Una shape valida non dimostra da sola «Sequence distillation».
+**Controllo.** Per «Sequence distillation», aggiungi un valore limite e verifica separatamente forma, valore e ipotesi. Una shape valida non dimostra da sola «Sequence distillation».
 
 
 ## Pruning
@@ -65,15 +65,17 @@ Pesi, canali, head o layer possono essere rimossi. Sparsità nominale e accelera
 
 **Caso da seguire.** Per «Pruning» si mantiene l'input del capitolo e si isola questa condizione: Pesi, canali, head o layer possono essere rimossi.
 
-**Controllo.** Mantieni fisso l'input e sostituisci soltanto il meccanismo discusso nella sezione. Il confronto deve attribuire la differenza a quel passaggio, non al setup.
+**Controllo.** Per «Pruning», mantieni fisso l'input e sostituisci soltanto il meccanismo discusso nella sezione. Nel caso «Pruning», il confronto deve attribuire la differenza a quel passaggio, non al setup.
 
 
 ## Esempio Python eseguito
 
-Il frammento seguente è lo stesso conservato nel repository. Usa valori piccoli perché l'obiettivo è osservare il meccanismo, non simulare una scala che non abbiamo eseguito.
+Il caso computazionale di distillazione e pruning è riportato senza trasformazioni: il file e l'output sono quelli verificati. Per «Distillazione e pruning», il caso di default usa valori piccoli per isolare il meccanismo. La suite conserva inoltre una failure esplicita per separare il contratto osservato da «distillazione e pruning».
 
 ```python
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     teacher = [0.8, 0.2]
     student = [0.6, 0.4]
     distillation_error = sum((a - b) ** 2 for a, b in zip(teacher, student))
@@ -96,7 +98,7 @@ Fine-tuning o calibration recuperano qualità dopo compressione. Il confronto de
 
 **Caso da seguire.** Una metrica del compito nuovo confrontata con la stessa metrica sul comportamento precedente.
 
-**Controllo.** Costruisci un controesempio che rispetti il tipo di dato ma violi l'ipotesi centrale. Il test deve rendere riconoscibile perché «Recovery» non si applica.
+**Controllo.** Per «Recovery», costruisci un controesempio che rispetti il tipo di dato ma violi l'ipotesi centrale. Il test deve rendere riconoscibile perché «Recovery» non si applica.
 
 
 ![Distillazione e pruning: compare](../../assets/chapters/73_distillation_pruning/PRUNING-02/candidate-v48.png)
@@ -106,13 +108,13 @@ La seconda figura mette a confronto «Pruning» e il limite discusso in «Recove
 
 ## Come si collegano i passaggi
 
-- **Da «Teacher e student» a «Temperature e loss».** La distillazione usa logits, distribuzioni o sequenze del teacher come target aggiuntivi per uno student. Una temperatura più alta rivela relazioni tra classi o token. Il primo passaggio definisce che cosa entra nel calcolo; il secondo stabilisce la regola che produce il valore osservabile. [SRC-73-001; SRC-73-002]
+- **Da «Teacher e student» a «Temperature e loss».** La distillazione usa logits, distribuzioni o sequenze del teacher come target aggiuntivi per uno student. Una temperatura più alta rivela relazioni tra classi o token. Tra «Teacher e student» e «Temperature e loss» l'ingresso viene fissato prima della regola che produce il valore. Da «Teacher e student» a «Temperature e loss» cambia la domanda osservabile. [SRC-73-001; SRC-73-002]
 
-- **Da «Temperature e loss» a «Sequence distillation».** Una temperatura più alta rivela relazioni tra classi o token. Per modelli generativi, risposte del teacher diventano un nuovo dataset. La regola generale viene poi letta dentro il componente: questa separazione permette di localizzare un errore prima di attribuirlo all'intero modello. [SRC-73-002; SRC-73-003]
+- **Da «Temperature e loss» a «Sequence distillation».** Una temperatura più alta rivela relazioni tra classi o token. Per modelli generativi, risposte del teacher diventano un nuovo dataset. Nel caso «Sequence distillation» il componente diventa il punto in cui localizzare l'errore. Il passaggio successivo rende misurabile «Sequence distillation». [SRC-73-002; SRC-73-003]
 
-- **Da «Sequence distillation» a «Pruning».** Per modelli generativi, risposte del teacher diventano un nuovo dataset. Pesi, canali, head o layer possono essere rimossi. Dopo avere reso visibile il componente, il percorso introduce la variante o l'ottimizzazione senza cambiare di nascosto il caso di partenza. [SRC-73-003; SRC-73-004]
+- **Da «Sequence distillation» a «Pruning».** Per modelli generativi, risposte del teacher diventano un nuovo dataset. Pesi, canali, head o layer possono essere rimossi. Dopo «Sequence distillation», la variante di «Pruning» cambia una proprietà alla volta. Da «Sequence distillation» a «Pruning» cambia la domanda osservabile. [SRC-73-003; SRC-73-004]
 
-- **Da «Pruning» a «Recovery».** Pesi, canali, head o layer possono essere rimossi. Fine-tuning o calibration recuperano qualità dopo compressione. L'ultimo passaggio sposta l'attenzione dal funzionamento locale alla misura: correttezza del calcolo e qualità applicativa restano domande distinte. [SRC-73-004; SRC-73-001]
+- **Da «Pruning» a «Recovery».** Pesi, canali, head o layer possono essere rimossi. Fine-tuning o calibration recuperano qualità dopo compressione. Da «Recovery» in poi la misura resta distinta dalla correttezza locale del calcolo. Il passaggio successivo rende misurabile «Recovery». [SRC-73-004; SRC-73-001]
 
 La catena completa produce student più piccolo con loss e regressioni misurate a partire da logits teacher, target, pruning mask e budget. Ogni collegamento conserva un oggetto osservabile diverso; per questo il risultato non può essere esteso oltre il limite dichiarato: compressione e accuratezza vanno misurate sullo stesso perimetro.
 
@@ -128,4 +130,4 @@ La catena completa produce student più piccolo con loss e regressioni misurate 
 
 ## Che cosa deve restare chiaro
 
-La lezione parte da «logits teacher, target, pruning mask e budget» e arriva fino a «student più piccolo con loss e regressioni misurate». Il limite da conservare è questo: compressione e accuratezza vanno misurate sullo stesso perimetro. Definizioni e risultati citati sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md); la mappa dei claim è in [`CLAIMS.md`](CLAIMS.md).
+La lezione parte da «logits teacher, target, pruning mask e budget» e arriva fino a «student più piccolo con loss e regressioni misurate». Il limite da conservare è questo: compressione e accuratezza vanno misurate sullo stesso perimetro. La formula e il codice collegati a «Recovery» sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md), [`CLAIMS.md`](CLAIMS.md) e `code/`.

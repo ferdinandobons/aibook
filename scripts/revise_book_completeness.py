@@ -9,7 +9,6 @@ non possono essere dichiarate approvate automaticamente.
 
 from __future__ import annotations
 
-import hashlib
 import json
 import re
 import subprocess
@@ -25,8 +24,8 @@ import complete_remaining_book as base  # noqa: E402
 import lesson_evidence as evidence  # noqa: E402
 
 
-DATE = "3 agosto 2026"
-SOURCE_VERIFICATION_PATH = ROOT / "docs" / "source_verification_2026-08-03.json"
+DATE = "4 agosto 2026"
+SOURCE_VERIFICATION_PATH = ROOT / "docs" / "source_verification_2026-08-04.json"
 WHITE = "#FFFFFF"
 TEXT = "#0F172A"
 MUTED = "#475569"
@@ -1105,7 +1104,7 @@ def source_metadata(name: str, url: str) -> tuple[str, str, str, str]:
         organization = name.split(",", 1)[0]
     year_match = re.search(r"\b(19|20)\d{2}\b", name)
     date = year_match.group(0) if year_match else "data della revisione consultata"
-    revision = "revisione o versione disponibile all'URL consultato il 3 agosto 2026"
+    revision = "revisione o versione disponibile all'URL consultato il 4 agosto 2026"
     return organization, source_type, date, revision
 
 
@@ -1149,7 +1148,6 @@ def write_sources(number: int, kind: str, sections) -> list[str]:
         ids.append(sid)
         organization, source_type, date, revision = source_metadata(name, url)
         relevant = sections_by_source[index - 1]
-        headings = "; ".join(heading for heading, _ in relevant)
         claims = " ".join(first_claim_sentence(note) for _, note in relevant)
         check = source_verification(number, index - 1)
         locator = str(check.get("locator") or "sezione tematica da aprire nel testo originale")
@@ -1443,7 +1441,8 @@ TOPIC_BODIES.update({
 """,
     50: """def contract():
     answers = ["4", "5", "4"]
-    verifier = lambda answer: answer == "4"
+    def verifier(answer):
+        return answer == "4"
     accepted = [answer for answer in answers if verifier(answer)]
     return {"accepted": accepted, "acceptance_rate": len(accepted) / len(answers), "invariant": "a verifier is an explicit signal with its own error surface"}
 """,
@@ -1672,7 +1671,10 @@ TOPIC_BODIES.update({
     activation = [1.0, 0.0, 0.5]
     dictionary = [[1.0, 0.0, 0.0], [0.0, 0.0, 1.0]]
     sparse_codes = [activation[0], activation[2]]
-    reconstruction = [sparse_codes[0], 0.0, sparse_codes[1]]
+    reconstruction = [
+        sum(code * vector[index] for code, vector in zip(sparse_codes, dictionary))
+        for index in range(len(activation))
+    ]
     error = sum((a - b) ** 2 for a, b in zip(activation, reconstruction))
     return {"active_features": len(sparse_codes), "reconstruction_error": error, "invariant": "sparsity and reconstruction must be evaluated together"}
 """,
@@ -1737,7 +1739,7 @@ TOPIC_BODIES.update({
     return {"difference": difference, "same_split": replica["split"] == original["split"], "invariant": "a replication records setup differences before interpreting outcome differences"}
 """,
     98: """def contract():
-    record = {"claim": "new method", "source_date": "2026-08-03", "evidence": "paper", "maturity": "FRONTIER"}
+    record = {"claim": "new method", "source_date": "2026-08-04", "evidence": "paper", "maturity": "FRONTIER"}
     required = {"claim", "source_date", "evidence", "maturity"}
     return {"record_complete": required <= set(record), "maturity": record["maturity"], "invariant": "novelty, evidence and readiness remain separate fields"}
 """,
@@ -3073,7 +3075,7 @@ def public_closure(number: int, title: str, detail: dict[str, str], sections, so
         f"1. Ricostruisci l'oggetto continuo a partire da «{first_heading}» e indica quale parte della frase «{first_claim}» entra nel caso.",
         f"2. Spiega quale trasformazione collega «{first_heading}» a «{last_heading}» e quale output osserviamo nel passaggio.",
         f"3. Usa lo snippet per controllare l'invariante del contratto: {detail['invariant']}.",
-        f"4. Separa una definizione sostenuta da una fonte, un esempio illustrativo e un risultato locale del caso guida.",
+        "4. Separa una definizione sostenuta da una fonte, un esempio illustrativo e un risultato locale del caso guida.",
         f"5. Indica quale parte della frase «{last_claim}» richiederebbe una misura nuova prima di essere estesa oltre il caso osservato.",
     )
     formula_intro, formula_description = formula_public_note(number, formula_note)

@@ -14,7 +14,7 @@ deferred: benchmark applicativi non eseguiti e approvazione autoriale delle visu
 
 # Capitolo 53. Test-time compute, ricerca e controllo del budget
 
-La domanda guida di questa lezione è come collegare «Più compute dopo il training» e «Metriche costo-qualità» senza perdere il contratto tecnico di test-time compute, ricerca e controllo del budget. L'oggetto osservato è un budget di compute aggiunto durante l'inferenza. Il contratto locale è: input, prompt, numero di campioni, token e deadline; operazione, best-of-n, tree search e adaptive compute; output, risposta, costo, latenza e qualità. Il caso guida è questo: Tre candidati vengono valutati entro un budget comune e si conserva il punteggio migliore. Il confine da mantenere esplicito è: qualità e costo devono essere riportati insieme.
+La lezione prende un caso piccolo e lo accompagna da «Più compute dopo il training» fino a «Metriche costo-qualità», senza saltare i passaggi. L'oggetto osservato è un budget di compute aggiunto durante l'inferenza. Il contratto locale dichiara input, prompt, numero di campioni, token e deadline; operazione, best-of-n, tree search e adaptive compute; output, risposta, costo, latenza e qualità. Per fissare il riferimento usiamo Tre candidati vengono valutati entro un budget comune e si conserva il punteggio migliore. Il limite da non nascondere è: qualità e costo devono essere riportati insieme.
 
 ## Più compute dopo il training
 
@@ -24,7 +24,7 @@ Il test-time compute è una risorsa da misurare insieme a qualità e latenza.
 
 **Caso da seguire.** Tre candidati vengono valutati entro un budget comune e si conserva il punteggio migliore.
 
-**Controllo.** Scrivi il risultato atteso prima del calcolo, modifica una sola quantità e localizza il primo passaggio che cambia. Il vincolo da conservare è: Il sistema può generare più candidate, approfondire una traiettoria o usare ricerca prima di restituire la risposta.
+**Controllo.** Per «Più compute dopo il training», scrivi il risultato atteso prima del calcolo, modifica una sola quantità e localizza il primo passaggio che cambia. Nel caso «Più compute dopo il training», il vincolo da conservare è: Il sistema può generare più candidate, approfondire una traiettoria o usare ricerca prima di restituire la risposta.
 
 
 ## Best-of-n
@@ -33,7 +33,14 @@ Un proposer genera n candidate e un verifier seleziona. Il beneficio dipende dal
 
 **Caso da seguire.** Quattro campioni con un budget massimo di token.
 
-**Controllo.** Ricalcola il caso a mano e con lo snippet. Se i risultati divergono, confronta prima i valori intermedi e soltanto dopo l'output finale.
+**Controllo.** Per «Best-of-n», ricalcola il caso a mano e con lo snippet. Nel caso «Best-of-n», se i risultati divergono, confronta prima i valori intermedi e soltanto dopo l'output finale.
+
+
+Lo schema seguente rende esplicito il confine tra il meccanismo e la sua valutazione.
+
+**Schema concettuale.** `budget = samples * tokens`
+
+Il test-time compute è una risorsa da misurare insieme a qualità e latenza. [SRC-53-001]
 
 
 ![Test-time compute, ricerca e controllo del budget: branch](../../assets/chapters/53_test_time_compute/COMPUTE-01/candidate-v48.png)
@@ -47,7 +54,7 @@ Stati parziali vengono espansi, valutati e potati. Branching factor, profondità
 
 **Caso da seguire.** Un caso in cui qualità e costo devono essere riportati insieme.
 
-**Controllo.** Aggiungi un valore limite e verifica separatamente forma, valore e ipotesi. Una shape valida non dimostra da sola «Tree search».
+**Controllo.** Per «Tree search», aggiungi un valore limite e verifica separatamente forma, valore e ipotesi. Una shape valida non dimostra da sola «Tree search».
 
 
 ## Adaptive compute
@@ -56,15 +63,17 @@ Problemi differenti ricevono budget differenti secondo confidenza, difficoltà o
 
 **Caso da seguire.** Due risposte con log-probabilità diverse producono un margine; il margine può diventare un segnale di training, ma non è una misura assoluta di correttezza.
 
-**Controllo.** Mantieni fisso l'input e sostituisci soltanto il meccanismo discusso nella sezione. Il confronto deve attribuire la differenza a quel passaggio, non al setup.
+**Controllo.** Per «Adaptive compute», mantieni fisso l'input e sostituisci soltanto il meccanismo discusso nella sezione. Nel caso «Adaptive compute», il confronto deve attribuire la differenza a quel passaggio, non al setup.
 
 
 ## Esempio Python eseguito
 
-Il frammento seguente è lo stesso conservato nel repository. Usa valori piccoli perché l'obiettivo è osservare il meccanismo, non simulare una scala che non abbiamo eseguito.
+Il caso computazionale di test-time compute, ricerca e controllo del budget è riportato senza trasformazioni: il file e l'output sono quelli verificati. Per «Test-time compute, ricerca e controllo del budget», il caso di default usa valori piccoli per isolare il meccanismo. La suite conserva inoltre una failure esplicita per separare il contratto osservato da «test-time compute, ricerca e controllo del budget».
 
 ```python
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     candidates = [0.4, 0.6, 0.5]
     best = max(candidates)
     return {"samples": len(candidates), "best_score": best, "invariant": "test-time compute changes the selection budget, not the base model weights"}
@@ -85,7 +94,7 @@ Accuracy o reward devono essere riportati insieme a token, forward, latenza e fa
 
 **Caso da seguire.** Quattro casi con protocollo, una failure e una slice conservati insieme al valore aggregato.
 
-**Controllo.** Costruisci un controesempio che rispetti il tipo di dato ma violi l'ipotesi centrale. Il test deve rendere riconoscibile perché «Metriche costo-qualità» non si applica.
+**Controllo.** Per «Metriche costo-qualità», costruisci un controesempio che rispetti il tipo di dato ma violi l'ipotesi centrale. Il test deve rendere riconoscibile perché «Metriche costo-qualità» non si applica.
 
 
 ![Test-time compute, ricerca e controllo del budget: chart](../../assets/chapters/53_test_time_compute/COMPUTE-02/candidate-v48.png)
@@ -95,13 +104,13 @@ La seconda figura mette a confronto «Adaptive compute» e il limite discusso in
 
 ## Come si collegano i passaggi
 
-- **Da «Più compute dopo il training» a «Best-of-n».** Il sistema può generare più candidate, approfondire una traiettoria o usare ricerca prima di restituire la risposta. Un proposer genera n candidate e un verifier seleziona. Il primo passaggio definisce che cosa entra nel calcolo; il secondo stabilisce la regola che produce il valore osservabile. [SRC-53-001; SRC-53-002]
+- **Da «Più compute dopo il training» a «Best-of-n».** Il sistema può generare più candidate, approfondire una traiettoria o usare ricerca prima di restituire la risposta. Un proposer genera n candidate e un verifier seleziona. Tra «Più compute dopo il training» e «Best-of-n» l'ingresso viene fissato prima della regola che produce il valore. Da «Più compute dopo il training» a «Best-of-n» cambia la domanda osservabile. [SRC-53-001; SRC-53-002]
 
-- **Da «Best-of-n» a «Tree search».** Un proposer genera n candidate e un verifier seleziona. Stati parziali vengono espansi, valutati e potati. La regola generale viene poi letta dentro il componente: questa separazione permette di localizzare un errore prima di attribuirlo all'intero modello. [SRC-53-002; SRC-53-003]
+- **Da «Best-of-n» a «Tree search».** Un proposer genera n candidate e un verifier seleziona. Stati parziali vengono espansi, valutati e potati. Nel caso «Tree search» il componente diventa il punto in cui localizzare l'errore. Il passaggio successivo rende misurabile «Tree search». [SRC-53-002; SRC-53-003]
 
-- **Da «Tree search» a «Adaptive compute».** Stati parziali vengono espansi, valutati e potati. Problemi differenti ricevono budget differenti secondo confidenza, difficoltà o policy. Dopo avere reso visibile il componente, il percorso introduce la variante o l'ottimizzazione senza cambiare di nascosto il caso di partenza. [SRC-53-003; SRC-53-004]
+- **Da «Tree search» a «Adaptive compute».** Stati parziali vengono espansi, valutati e potati. Problemi differenti ricevono budget differenti secondo confidenza, difficoltà o policy. Dopo «Tree search», la variante di «Adaptive compute» cambia una proprietà alla volta. Da «Tree search» a «Adaptive compute» cambia la domanda osservabile. [SRC-53-003; SRC-53-004]
 
-- **Da «Adaptive compute» a «Metriche costo-qualità».** Problemi differenti ricevono budget differenti secondo confidenza, difficoltà o policy. Accuracy o reward devono essere riportati insieme a token, forward, latenza e fallimenti del verifier. L'ultimo passaggio sposta l'attenzione dal funzionamento locale alla misura: correttezza del calcolo e qualità applicativa restano domande distinte. [SRC-53-004; SRC-53-001]
+- **Da «Adaptive compute» a «Metriche costo-qualità».** Problemi differenti ricevono budget differenti secondo confidenza, difficoltà o policy. Accuracy o reward devono essere riportati insieme a token, forward, latenza e fallimenti del verifier. Da «Metriche costo-qualità» in poi la misura resta distinta dalla correttezza locale del calcolo. Il passaggio successivo rende misurabile «Metriche costo-qualità». [SRC-53-004; SRC-53-001]
 
 La catena completa produce risposta, costo, latenza e qualità a partire da prompt, numero di campioni, token e deadline. Ogni collegamento conserva un oggetto osservabile diverso; per questo il risultato non può essere esteso oltre il limite dichiarato: qualità e costo devono essere riportati insieme.
 
@@ -117,4 +126,4 @@ La catena completa produce risposta, costo, latenza e qualità a partire da prom
 
 ## Che cosa deve restare chiaro
 
-La lezione parte da «prompt, numero di campioni, token e deadline» e arriva fino a «risposta, costo, latenza e qualità». Il limite da conservare è questo: qualità e costo devono essere riportati insieme. Definizioni e risultati citati sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md); la mappa dei claim è in [`CLAIMS.md`](CLAIMS.md).
+La lezione parte da «prompt, numero di campioni, token e deadline» e arriva fino a «risposta, costo, latenza e qualità». Il limite da conservare è questo: qualità e costo devono essere riportati insieme. La formula e il codice collegati a «Metriche costo-qualità» sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md), [`CLAIMS.md`](CLAIMS.md) e `code/`.

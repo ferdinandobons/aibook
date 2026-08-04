@@ -2,7 +2,7 @@
 
 - versione: 0.5.0-draft3
 - data: 4 agosto 2026
-- parole fuori dai blocchi di codice: 978
+- parole fuori dai blocchi di codice: 1083
 - nuclei semantici: 5 (Modello della dinamica; Planning nel modello; Embodied perception; Vision-language-action; Sicurezza e sim-to-real)
 - paragrafi del vecchio scaffold: assenti secondo `audit_book_quality.py`
 - ripetizioni lunghe tra tre o più capitoli: assenti secondo l'audit trasversale

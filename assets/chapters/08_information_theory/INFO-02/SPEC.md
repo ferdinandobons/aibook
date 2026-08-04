@@ -23,3 +23,10 @@ Come si vede numericamente la relazione `H(q,p) = H(q) + KL(q||p)`?
 
 I tre termini sono coerenti con gli stessi vettori `q` e `p`; il valore mostrato è illustrativo e non una misura di training.
 - domanda principale: Quale trasformazione centrale rende osservabile «Informazione di un evento» nel capitolo 8?
+
+## Contratto geometrico
+
+- raster: margine di sicurezza di 20 px sul canvas 1800x1000;
+- contenimento: nessun testo oltre il proprio box o il canvas;
+- composizione: nessuna sovrapposizione o tangenza intenzionale tra elementi fratelli;
+- fonte: `GEOMETRY.json` e checklist dell'audit storico.

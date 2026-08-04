@@ -15,7 +15,7 @@ deferred: benchmark applicativi non eseguiti e approvazione autoriale delle visu
 
 # Capitolo 93. Diritto, governance e sostenibilità
 
-La domanda guida di questa lezione è come collegare «Ruoli e responsabilità» e «Sostenibilità» senza perdere il contratto tecnico di diritto, governance e sostenibilità. L'oggetto osservato è una decisione di governance su un sistema e il suo rischio. Il contratto locale è: input, ruoli, uso previsto, evidenza, impatto e consumo; operazione, govern, map, measure, manage, document e change control; output, decisione, responsabilità, evidenza e registro d'incidente. Il caso guida è questo: Una scheda con owner, rischio, evidenza e decisione è completa, ma non certifica la compliance. Il confine da mantenere esplicito è: un framework orienta il rischio ma non certifica automaticamente la conformità.
+Il punto di vista di diritto, governance e sostenibilità nasce dal confronto tra «Ruoli e responsabilità» e «Sostenibilità», non da una graduatoria. L'oggetto osservato è una decisione di governance su un sistema e il suo rischio. Il contratto locale dichiara input, ruoli, uso previsto, evidenza, impatto e consumo; operazione, govern, map, measure, manage, document e change control; output, decisione, responsabilità, evidenza e registro d'incidente. La situazione minima da seguire è Una scheda con owner, rischio, evidenza e decisione è completa, ma non certifica la compliance. Il limite da non nascondere è: un framework orienta il rischio ma non certifica automaticamente la conformità.
 
 ## Ruoli e responsabilità
 
@@ -25,7 +25,7 @@ Governance traduce evidenza e rischio in una decisione documentata.
 
 **Caso da seguire.** Una scheda con owner, rischio, evidenza e decisione è completa, ma non certifica la compliance.
 
-**Controllo.** Classifica lo stesso caso lungo un solo asse alla volta e annota quale proprietà non è stata misurata.
+**Controllo.** Per «Ruoli e responsabilità», classifica lo stesso caso lungo un solo asse alla volta e annota quale proprietà non è stata misurata.
 
 
 ## Risk management
@@ -34,7 +34,7 @@ NIST AI RMF organizza govern, map, measure e manage. Il framework guida un proce
 
 **Caso da seguire.** Una tabella govern-map-measure-manage con evidenza e responsabile per ogni controllo.
 
-**Controllo.** Cambia la proprietà che distingue «Risk management» dalle categorie vicine. Se la classificazione non cambia, la distinzione va formulata meglio.
+**Controllo.** Cambia la proprietà che distingue «Risk management» dalle categorie vicine. Nel caso «Risk management», se la classificazione non cambia, la distinzione va formulata meglio.
 
 
 ## Norme e documentazione
@@ -43,7 +43,14 @@ Obblighi dipendono da giurisdizione, ruolo e uso. Versione, data e parere legale
 
 **Caso da seguire.** Un requisito normativo annotato con giurisdizione, ruolo, versione e data di lettura.
 
-**Controllo.** Confronta un caso positivo e uno di confine usando la medesima definizione; non trasformare l'esempio in una graduatoria generale.
+**Controllo.** Per «Norme e documentazione», confronta un caso positivo e uno di confine usando la medesima definizione; non trasformare l'esempio in una graduatoria generale.
+
+
+Lo schema seguente rende esplicito il confine tra il meccanismo e la sua valutazione.
+
+**Schema concettuale.** `decision = govern(policy, risk, evidence)`
+
+Governance traduce evidenza e rischio in una decisione documentata. [SRC-93-001]
 
 
 ![Diritto, governance e sostenibilità: loop](../../assets/chapters/93_governance/GOVERNANCE-01/candidate-v50.png)
@@ -66,7 +73,7 @@ Energia, acqua, emissioni e ciclo di vita dell'hardware richiedono indicatori, b
 
 **Caso da seguire.** Un confronto tra due configurazioni normalizzato per risultato utile, energia e hardware.
 
-**Controllo.** Limita la conclusione alla proprietà dichiarata: Energia, acqua, emissioni e ciclo di vita dell'hardware richiedono indicatori, baseline e confini di misura documentati. Le dimensioni non osservate restano aperte.
+**Controllo.** Per «Sostenibilità», limita la conclusione alla proprietà dichiarata: Energia, acqua, emissioni e ciclo di vita dell'hardware richiedono indicatori, baseline e confini di misura documentati. Nel caso «Sostenibilità», le dimensioni non osservate restano aperte.
 
 
 ![Diritto, governance e sostenibilità: checklist](../../assets/chapters/93_governance/GOVERNANCE-02/candidate-v48.png)
@@ -81,13 +88,13 @@ Norme e responsabilità dipendono da ruolo, giurisdizione e data: uno script loc
 
 ## Come si collegano i passaggi
 
-- **Da «Ruoli e responsabilità» a «Risk management».** Owner, sviluppatore, deployer, utente e fornitore hanno controlli e informazioni differenti. NIST AI RMF organizza govern, map, measure e manage. La definizione iniziale stabilisce l'asse del confronto; la categoria successiva aggiunge una proprietà senza creare una classifica implicita. [SRC-93-001; SRC-93-002]
+- **Da «Ruoli e responsabilità» a «Risk management».** Owner, sviluppatore, deployer, utente e fornitore hanno controlli e informazioni differenti. NIST AI RMF organizza govern, map, measure e manage. «Ruoli e responsabilità» stabilisce l'asse e «Risk management» aggiunge una proprietà senza creare una graduatoria. Da «Ruoli e responsabilità» a «Risk management» cambia la domanda osservabile. [SRC-93-001; SRC-93-002]
 
-- **Da «Risk management» a «Norme e documentazione».** NIST AI RMF organizza govern, map, measure e manage. Obblighi dipendono da giurisdizione, ruolo e uso. Il terzo passaggio verifica se le categorie restano distinguibili sullo stesso caso e impedisce che termini vicini diventino sinonimi. [SRC-93-002; SRC-93-003]
+- **Da «Risk management» a «Norme e documentazione».** NIST AI RMF organizza govern, map, measure e manage. Obblighi dipendono da giurisdizione, ruolo e uso. Il confronto tra «Risk management» e «Norme e documentazione» mantiene le categorie distinguibili sullo stesso caso. Il passaggio successivo rende misurabile «Norme e documentazione». [SRC-93-002; SRC-93-003]
 
-- **Da «Norme e documentazione» a «Incidenti e change management».** Obblighi dipendono da giurisdizione, ruolo e uso. Segnalazione, classificazione, risposta e comunicazione collegano monitoraggio e governance. La quarta sezione introduce il punto in cui l'asse scelto smette di bastare e richiede una nuova osservazione. [SRC-93-003; SRC-93-001]
+- **Da «Norme e documentazione» a «Incidenti e change management».** Obblighi dipendono da giurisdizione, ruolo e uso. Segnalazione, classificazione, risposta e comunicazione collegano monitoraggio e governance. «Incidenti e change management» mostra il punto in cui l'asse di «Norme e documentazione» non è più sufficiente. Da «Norme e documentazione» a «Incidenti e change management» cambia la domanda osservabile. [SRC-93-003; SRC-93-001]
 
-- **Da «Incidenti e change management» a «Sostenibilità».** Segnalazione, classificazione, risposta e comunicazione collegano monitoraggio e governance. Energia, acqua, emissioni e ciclo di vita dell'hardware richiedono indicatori, baseline e confini di misura documentati. La sezione finale riunisce le dimensioni della valutazione, ma conserva i limiti di ciascuna invece di fonderle in un unico punteggio. [SRC-93-001; SRC-93-004]
+- **Da «Incidenti e change management» a «Sostenibilità».** Segnalazione, classificazione, risposta e comunicazione collegano monitoraggio e governance. Energia, acqua, emissioni e ciclo di vita dell'hardware richiedono indicatori, baseline e confini di misura documentati. Il passaggio su «Sostenibilità» riunisce più dimensioni senza cancellarne i limiti. Il passaggio successivo rende misurabile «Sostenibilità». [SRC-93-001; SRC-93-004]
 
 La catena completa produce decisione, responsabilità, evidenza e registro d'incidente a partire da ruoli, uso previsto, evidenza, impatto e consumo. Ogni collegamento conserva un oggetto osservabile diverso; per questo il risultato non può essere esteso oltre il limite dichiarato: un framework orienta il rischio ma non certifica automaticamente la conformità.
 
@@ -103,4 +110,4 @@ La catena completa produce decisione, responsabilità, evidenza e registro d'inc
 
 ## Una mappa, non una graduatoria
 
-La lezione parte da «ruoli, uso previsto, evidenza, impatto e consumo» e arriva fino a «decisione, responsabilità, evidenza e registro d'incidente». Il limite da conservare è questo: un framework orienta il rischio ma non certifica automaticamente la conformità. Definizioni e risultati citati sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md); la mappa dei claim è in [`CLAIMS.md`](CLAIMS.md).
+La lezione parte da «ruoli, uso previsto, evidenza, impatto e consumo» e arriva fino a «decisione, responsabilità, evidenza e registro d'incidente». Il limite da conservare è questo: un framework orienta il rischio ma non certifica automaticamente la conformità. Il confronto di «Sostenibilità» resta verificabile nei dossier [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md) e [`CLAIMS.md`](CLAIMS.md), senza trasformare la mappa in una graduatoria.

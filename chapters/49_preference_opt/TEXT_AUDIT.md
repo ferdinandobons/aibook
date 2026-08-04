@@ -2,7 +2,7 @@
 
 - versione: 0.5.0-draft3
 - data: 4 agosto 2026
-- parole fuori dai blocchi di codice: 1100
+- parole fuori dai blocchi di codice: 1196
 - nuclei semantici: 5 (Evitare un reward model esplicito; Coppie chosen e rejected; Temperatura beta; IPO, KTO, ORPO e varianti; Offline preference data)
 - paragrafi del vecchio scaffold: assenti secondo `audit_book_quality.py`
 - ripetizioni lunghe tra tre o più capitoli: assenti secondo l'audit trasversale

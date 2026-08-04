@@ -14,7 +14,7 @@ deferred: benchmark applicativi non eseguiti e approvazione autoriale delle visu
 
 # Capitolo 97. Riprodurre e leggere un paper
 
-La domanda guida di questa lezione è come collegare «Domanda e claim» e «Conclusione sostenibile» senza perdere il contratto tecnico di riprodurre e leggere un paper. L'oggetto osservato è un claim di paper e il protocollo necessario per riprodurlo. Il contratto locale è: input, paper, codice, dati, seed, hardware e metriche; operazione, setup indipendente, run, confronto e analisi delle divergenze; output, risultato replicato o differenza spiegata. Il caso guida è questo: Due run con split uguale ma seed diversi producono una differenza che va registrata. Il confine da mantenere esplicito è: una replica richiede stesso claim e confini dichiarati, non solo stesso codice.
+Qui riprodurre e leggere un paper è una procedura: «Domanda e claim» fissa l'ingresso e «Conclusione sostenibile» definisce il risultato da ricostruire. L'oggetto osservato è un claim di paper e il protocollo necessario per riprodurlo. Il contratto locale dichiara input, paper, codice, dati, seed, hardware e metriche; operazione, setup indipendente, run, confronto e analisi delle divergenze; output, risultato replicato o differenza spiegata. Il caso di partenza è Due run con split uguale ma seed diversi producono una differenza che va registrata. Il limite da non nascondere è: una replica richiede stesso claim e confini dichiarati, non solo stesso codice.
 
 ![Riprodurre e leggere un paper: checklist](../../assets/chapters/97_replication/REPLICATIO-01/candidate-v48.png)
 
@@ -29,7 +29,7 @@ La replica verifica quanto il risultato dipenda dal setup originale.
 
 **Caso da seguire.** Due run con split uguale ma seed diversi producono una differenza che va registrata.
 
-**Controllo.** Esegui il caso con ambiente, seed e comando registrati; il risultato deve sopravvivere fuori dalla sessione interattiva.
+**Controllo.** Per «Domanda e claim», esegui il caso con ambiente, seed e comando registrati; il risultato deve sopravvivere fuori dalla sessione interattiva.
 
 
 ## Artefatti
@@ -41,21 +41,32 @@ Codice, checkpoint, dati e configurazioni vengono versionati e confrontati con l
 **Controllo.** Per «Artefatti» conserva almeno un artefatto verificabile e un caso fallito, insieme alla configurazione che li ha prodotti.
 
 
+La relazione centrale può essere scritta come:
+
+$$
+replica = run(protocol, independent_setup)
+$$
+
+La replica verifica quanto il risultato dipenda dal setup originale. [SRC-97-001]
+
+
 ## Replica
 
 Una riproduzione conferma lo stesso codice; una replica indipendente ricostruisce il metodo con scelte proprie. [SRC-97-003]
 
 **Caso da seguire.** Un setup indipendente che ripete il protocollo senza riusare l'output originale.
 
-**Controllo.** Scrivi prima l'esito atteso, poi confrontalo con output e log. Ogni differenza deve restare visibile nel report.
+**Controllo.** Per «Replica», scrivi prima l'esito atteso, poi confrontalo con output e log. Nel caso «Replica», ogni differenza deve restare visibile nel report.
 
 
 ## Esempio Python eseguito
 
-Il frammento seguente è lo stesso conservato nel repository. Usa valori piccoli perché l'obiettivo è osservare il meccanismo, non simulare una scala che non abbiamo eseguito.
+Il caso computazionale di riprodurre e leggere un paper è riportato senza trasformazioni: il file e l'output sono quelli verificati. Per «Riprodurre e leggere un paper», il caso di default usa valori piccoli per isolare il meccanismo. La suite conserva inoltre una failure esplicita per separare il contratto osservato da «riprodurre e leggere un paper».
 
 ```python
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     original = {"metric": 0.80, "seed": 1, "split": "fixed"}
     replica = {"metric": 0.78, "seed": 2, "split": "fixed"}
     difference = replica["metric"] - original["metric"]
@@ -75,7 +86,9 @@ Il test associato è [`code/test_97_contract.py`](code/test_97_contract.py); l'o
 Il contratto precedente isola un solo punto. Il laboratorio seguente attraversa invece più fasi e conserva sia l'esito valido sia una failure controllata. L'estratto è identico al file eseguito.
 
 ```python
-def replicate(protocol: Protocol, original_seed: int = 11, replica_seed: int = 29) -> dict[str, object]:
+def replicate(
+    protocol: Protocol, original_seed: int = 11, replica_seed: int = 29
+) -> dict[str, object]:
     original = run_trial(protocol, original_seed)
     replica = run_trial(protocol, replica_seed)
     difference = abs(float(replica["estimate"]) - float(original["estimate"]))
@@ -104,7 +117,7 @@ Differenze di hardware, seed, preprocessing e versioni vengono registrate invece
 
 **Caso da seguire.** Una tabella che separa divergenze di seed, preprocessing, hardware e implementazione.
 
-**Controllo.** Riparti da un processo pulito e ricostruisci input e ambiente prima di interpretare la metrica.
+**Controllo.** Per «Divergenze», riparti da un processo pulito e ricostruisci input e ambiente prima di interpretare la metrica.
 
 
 ## Conclusione sostenibile
@@ -113,7 +126,7 @@ Il risultato viene limitato al setup eseguito e confrontato con l'incertezza del
 
 **Caso da seguire.** Una conclusione limitata al claim e all'intervallo realmente eseguiti.
 
-**Controllo.** Distingui il risultato riprodotto dal suo trasferimento ad altra scala. Il confine è: Il risultato viene limitato al setup eseguito e confrontato con l'incertezza del paper originale.
+**Controllo.** Per «Conclusione sostenibile», distingui il risultato riprodotto dal suo trasferimento ad altra scala. Nel caso «Conclusione sostenibile», il confine è: Il risultato viene limitato al setup eseguito e confrontato con l'incertezza del paper originale.
 
 
 ![Riprodurre e leggere un paper: compare](../../assets/chapters/97_replication/REPLICATIO-02/candidate-v48.png)
@@ -123,13 +136,13 @@ La seconda figura mette a confronto «Divergenze» e il limite discusso in «Con
 
 ## Come si collegano i passaggi
 
-- **Da «Domanda e claim» a «Artefatti».** Il paper viene scomposto in domanda, baseline, metodo, setup, risultati e limiti. Codice, checkpoint, dati e configurazioni vengono versionati e confrontati con la descrizione. La prima tappa fissa domanda, ambiente e input; la seconda costruisce l'artefatto eseguibile che materializza il protocollo. [SRC-97-001; SRC-97-002]
+- **Da «Domanda e claim» a «Artefatti».** Il paper viene scomposto in domanda, baseline, metodo, setup, risultati e limiti. Codice, checkpoint, dati e configurazioni vengono versionati e confrontati con la descrizione. «Domanda e claim» fissa domanda, ambiente e input prima che «Artefatti» materializzi il protocollo. Da «Domanda e claim» a «Artefatti» cambia la domanda osservabile. [SRC-97-001; SRC-97-002]
 
-- **Da «Artefatti» a «Replica».** Codice, checkpoint, dati e configurazioni vengono versionati e confrontati con la descrizione. Una riproduzione conferma lo stesso codice; una replica indipendente ricostruisce il metodo con scelte proprie. Il run produce numeri e file soltanto dopo che configurazione, seed e dipendenze sono stati registrati. [SRC-97-002; SRC-97-003]
+- **Da «Artefatti» a «Replica».** Codice, checkpoint, dati e configurazioni vengono versionati e confrontati con la descrizione. Una riproduzione conferma lo stesso codice; una replica indipendente ricostruisce il metodo con scelte proprie. Il passaggio a «Replica» produce numeri e file soltanto dopo la registrazione della configurazione. Il passaggio successivo rende misurabile «Replica». [SRC-97-002; SRC-97-003]
 
-- **Da «Replica» a «Divergenze».** Una riproduzione conferma lo stesso codice; una replica indipendente ricostruisce il metodo con scelte proprie. Differenze di hardware, seed, preprocessing e versioni vengono registrate invece di essere nascoste. La tappa successiva confronta il risultato atteso con quello osservato e conserva le divergenze invece di correggerle retroattivamente. [SRC-97-003; SRC-97-004]
+- **Da «Replica» a «Divergenze».** Una riproduzione conferma lo stesso codice; una replica indipendente ricostruisce il metodo con scelte proprie. Differenze di hardware, seed, preprocessing e versioni vengono registrate invece di essere nascoste. «Divergenze» confronta atteso e osservato e conserva le divergenze del run. Da «Replica» a «Divergenze» cambia la domanda osservabile. [SRC-97-003; SRC-97-004]
 
-- **Da «Divergenze» a «Conclusione sostenibile».** Differenze di hardware, seed, preprocessing e versioni vengono registrate invece di essere nascoste. Il risultato viene limitato al setup eseguito e confrontato con l'incertezza del paper originale. La conclusione separa ciò che il laboratorio ha ricostruito da ciò che richiederebbe altri dati, hardware o una valutazione di produzione. [SRC-97-004; SRC-97-001]
+- **Da «Divergenze» a «Conclusione sostenibile».** Differenze di hardware, seed, preprocessing e versioni vengono registrate invece di essere nascoste. Il risultato viene limitato al setup eseguito e confrontato con l'incertezza del paper originale. La conclusione distingue ciò che «Conclusione sostenibile» ha ricostruito da ciò che richiede nuovi dati o hardware. Il passaggio successivo rende misurabile «Conclusione sostenibile». [SRC-97-004; SRC-97-001]
 
 La catena completa produce risultato replicato o differenza spiegata a partire da paper, codice, dati, seed, hardware e metriche. Ogni collegamento conserva un oggetto osservabile diverso; per questo il risultato non può essere esteso oltre il limite dichiarato: una replica richiede stesso claim e confini dichiarati, non solo stesso codice.
 
@@ -145,4 +158,4 @@ La catena completa produce risultato replicato o differenza spiegata a partire d
 
 ## Criterio di completamento
 
-La lezione parte da «paper, codice, dati, seed, hardware e metriche» e arriva fino a «risultato replicato o differenza spiegata». Il limite da conservare è questo: una replica richiede stesso claim e confini dichiarati, non solo stesso codice. Definizioni e risultati citati sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md); la mappa dei claim è in [`CLAIMS.md`](CLAIMS.md).
+La lezione parte da «paper, codice, dati, seed, hardware e metriche» e arriva fino a «risultato replicato o differenza spiegata». Il limite da conservare è questo: una replica richiede stesso claim e confini dichiarati, non solo stesso codice. Il run relativo a «Conclusione sostenibile» conserva codice, test e output; le ipotesi esterne restano nel dossier [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md).

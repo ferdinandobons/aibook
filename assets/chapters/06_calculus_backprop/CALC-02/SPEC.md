@@ -82,3 +82,10 @@ Il footer deve separare:
 
 La prima versione raster è stata respinta perché il footer copriva parzialmente i box inferiori. `candidate-v2.png` aumenta lo spazio verticale e mantiene tutti i contenuti separati. Il file è un PNG raster, non un SVG.
 - domanda principale: Quale confronto o limite chiarisce «Più input richiedono derivate parziali e gradienti»?
+
+## Contratto geometrico
+
+- raster: margine di sicurezza di 20 px sul canvas 1800x1000;
+- contenimento: nessun testo oltre il proprio box o il canvas;
+- composizione: nessuna sovrapposizione o tangenza intenzionale tra elementi fratelli;
+- fonte: `GEOMETRY.json` e checklist dell'audit storico.

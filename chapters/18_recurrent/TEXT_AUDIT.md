@@ -2,7 +2,7 @@
 
 - versione: 0.5.0-draft3
 - data: 4 agosto 2026
-- parole fuori dai blocchi di codice: 1093
+- parole fuori dai blocchi di codice: 1191
 - nuclei semantici: 5 (Uno stato che attraversa la sequenza; Backpropagation through time; LSTM e GRU; Bidirezionalità e causalità; RNN, attention e stato)
 - paragrafi del vecchio scaffold: assenti secondo `audit_book_quality.py`
 - ripetizioni lunghe tra tre o più capitoli: assenti secondo l'audit trasversale

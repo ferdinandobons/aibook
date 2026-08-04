@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-import hashlib
 import json
-import math
-import statistics
-from collections import Counter
 
 CHAPTER = 32
 TITLE = 'Il ciclo di vita dei dati'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     records = [{"id": "a", "source": "mail", "text": "pacco"}, {"id": "b", "source": "crm", "text": "ritardo"}]
     manifest = {"ids": [record["id"] for record in records], "sources": sorted({record["source"] for record in records})}
     return {"manifest": manifest, "invariant": "data transformations retain provenance and a stable record identity"}

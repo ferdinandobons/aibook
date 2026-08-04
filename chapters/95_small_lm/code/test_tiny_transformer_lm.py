@@ -4,7 +4,13 @@ import unittest
 
 import torch
 
-from tiny_transformer_lm import CORPUS, CharTokenizer, TinyCausalLM, build_training_batch, train_and_generate
+from tiny_transformer_lm import (
+    CORPUS,
+    CharTokenizer,
+    TinyCausalLM,
+    build_training_batch,
+    train_and_generate,
+)
 
 
 class TinyTransformerLMTests(unittest.TestCase):

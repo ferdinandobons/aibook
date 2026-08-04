@@ -49,3 +49,10 @@ Le famiglie si sovrappongono e continuano a convivere. Nessun pannello rappresen
 - composizione raster revisionabile: `scripts/generate_history_visuals.py`;
 - decodifica verificata nel workflow `generate-book-visuals.yml`.
 - domanda principale: Quale trasformazione centrale rende osservabile «Una storia di colli di bottiglia, non una marcia lineare» nel capitolo 2?
+
+## Contratto geometrico
+
+- raster: margine di sicurezza di 20 px sul canvas 1800x1000;
+- contenimento: nessun testo oltre il proprio box o il canvas;
+- composizione: nessuna sovrapposizione o tangenza intenzionale tra elementi fratelli;
+- fonte: `GEOMETRY.json` e checklist dell'audit storico.

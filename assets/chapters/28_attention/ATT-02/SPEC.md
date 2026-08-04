@@ -12,3 +12,10 @@
 - Produzione: composizione iterata con image generation; testo, valori e collegamenti rasterizzati con `scripts/render_attention_visuals.py`.
 - Stato: `validata tecnicamente`, in attesa di revisione autoriale.
 - domanda principale: Quale confronto o limite chiarisce «I tre ruoli: query, key e value»?
+
+## Contratto geometrico
+
+- raster: margine di sicurezza di 20 px sul canvas 1800x1000;
+- contenimento: nessun testo oltre il proprio box o il canvas;
+- composizione: nessuna sovrapposizione o tangenza intenzionale tra elementi fratelli;
+- fonte: `GEOMETRY.json` e checklist dell'audit storico.

@@ -14,7 +14,7 @@ deferred: benchmark applicativi non eseguiti e approvazione autoriale delle visu
 
 # Capitolo 72. Sicurezza operativa degli agenti
 
-La domanda guida di questa lezione è come collegare «Least privilege» e «Prompt injection» senza perdere il contratto tecnico di sicurezza operativa degli agenti. L'oggetto osservato è una decisione agentica su una risorsa reale. Il contratto locale è: input, input non fidato, tool, scope e approvazione; operazione, least privilege, sandbox, human approval e rollback; output, allow/deny, side effect o rollback auditabile. Il caso guida è questo: Lookup_order è consentito, mentre refund richiede approvazione o viene negato dalla policy esterna. Il confine da mantenere esplicito è: l'enforcement deve stare fuori dal testo generato.
+Sicurezza operativa degli agenti viene letto come un sistema: «Least privilege» e «Prompt injection» restano collegati da confini e decisioni osservabili. L'oggetto osservato è una decisione agentica su una risorsa reale. Il contratto locale dichiara input, input non fidato, tool, scope e approvazione; operazione, least privilege, sandbox, human approval e rollback; output, allow/deny, side effect o rollback auditabile. La situazione minima da seguire è Lookup_order è consentito, mentre refund richiede approvazione o viene negato dalla policy esterna. Il limite da non nascondere è: l'enforcement deve stare fuori dal testo generato.
 
 ## Least privilege
 
@@ -24,7 +24,7 @@ Sicurezza agentica richiede una decisione esterna alla sola generazione.
 
 **Caso da seguire.** Lookup_order è consentito, mentre refund richiede approvazione o viene negato dalla policy esterna.
 
-**Controllo.** Registra richiesta, decisione, stato e output finale. Un esito plausibile non deve nascondere il componente che lo ha prodotto.
+**Controllo.** Per «Least privilege», registra richiesta, decisione, stato e output finale. Nel caso «Least privilege», un esito plausibile non deve nascondere il componente che lo ha prodotto.
 
 
 ## Sandbox
@@ -34,6 +34,13 @@ Codice e browser vengono eseguiti in ambienti isolati con rete, processi e risor
 **Caso da seguire.** Una traiettoria minima osservazione-azione-tool-verifica in cui una chiamata fuori allowlist viene bloccata prima dell'esecuzione.
 
 **Controllo.** Ripeti «Sandbox» con una capability o un'autorizzazione rimossa e verifica che la failure preceda qualsiasi side effect.
+
+
+Per questo capitolo la notazione compatta chiarisce input, trasformazione e risultato.
+
+**Schema concettuale.** `allow = policy(input, tool, scope)`
+
+Sicurezza agentica richiede una decisione esterna alla sola generazione. [SRC-72-001]
 
 
 ![Sicurezza operativa degli agenti: threat](../../assets/chapters/72_agent_safety/SAFETY-01/candidate-v50.png)
@@ -47,7 +54,7 @@ Azioni ad alto impatto richiedono conferma con anteprima, differenza e destinata
 
 **Caso da seguire.** Per «Human approval» si mantiene l'input del capitolo e si isola questa condizione: Azioni ad alto impatto richiedono conferma con anteprima, differenza e destinatario espliciti.
 
-**Controllo.** Separa il test del singolo componente dal test end-to-end, usando lo stesso input e la stessa configurazione versionata.
+**Controllo.** Per «Human approval», separa il test del singolo componente dal test end-to-end, usando lo stesso input e la stessa configurazione versionata.
 
 
 ## Rollback e audit
@@ -56,7 +63,7 @@ Transaction log, snapshot e operazioni compensative permettono di ricostruire e 
 
 **Caso da seguire.** Per «Rollback e audit» si mantiene l'input del capitolo e si isola questa condizione: Transaction log, snapshot e operazioni compensative permettono di ricostruire e correggere una traiettoria.
 
-**Controllo.** Introduci una failure a un solo confine e controlla che log, stato e recovery identifichino quel confine senza ambiguità.
+**Controllo.** Per «Rollback e audit», introduci una failure a un solo confine e controlla che log, stato e recovery identifichino quel confine senza ambiguità.
 
 
 ## Prompt injection
@@ -65,7 +72,7 @@ Contenuti esterni possono tentare di cambiare il piano. Dati non fidati e istruz
 
 **Caso da seguire.** Un input non fidato che raggiunge una policy esterna, con decisione allow/deny e traccia dell'evento conservate separatamente.
 
-**Controllo.** Confronta il comportamento completo, non soltanto l'ultimo messaggio. Il risultato resta limitato da: Dati non fidati e istruzioni di sistema devono restare separati.
+**Controllo.** Per «Prompt injection», confronta il comportamento completo, non soltanto l'ultimo messaggio. Nel caso «Prompt injection», il risultato resta limitato da: Dati non fidati e istruzioni di sistema devono restare separati.
 
 
 ![Sicurezza operativa degli agenti: loop](../../assets/chapters/72_agent_safety/SAFETY-02/candidate-v48.png)
@@ -75,10 +82,12 @@ La seconda figura mette a confronto «Rollback e audit» e il limite discusso in
 
 ## Esempio Python eseguito
 
-Il frammento seguente è lo stesso conservato nel repository. Usa valori piccoli perché l'obiettivo è osservare il meccanismo, non simulare una scala che non abbiamo eseguito.
+Per rendere osservabile sicurezza operativa degli agenti, il capitolo conserva qui l'artefatto Python eseguito. Per «Sicurezza operativa degli agenti», il caso di default usa valori piccoli per isolare il meccanismo. Il test rifiuta anche un caso non documentato di «sicurezza operativa degli agenti».
 
 ```python
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     request = {"tool": "refund", "scope": "order:A1"}
     policy = {"allowed_tools": {"lookup_order"}, "requires_approval": {"refund"}}
     allowed = request["tool"] in policy["allowed_tools"]
@@ -96,13 +105,13 @@ Il test associato è [`code/test_72_contract.py`](code/test_72_contract.py); l'o
 
 ## Come si collegano i passaggi
 
-- **Da «Least privilege» a «Sandbox».** Ogni tool riceve soltanto gli scope necessari. Codice e browser vengono eseguiti in ambienti isolati con rete, processi e risorse limitate. Il contratto iniziale nomina messaggi e confini; il componente successivo implementa una parte del percorso senza ereditare autorizzazioni implicite. [SRC-72-001; SRC-72-002]
+- **Da «Least privilege» a «Sandbox».** Ogni tool riceve soltanto gli scope necessari. Codice e browser vengono eseguiti in ambienti isolati con rete, processi e risorse limitate. «Least privilege» nomina il confine e «Sandbox» implementa il percorso senza ereditare autorizzazioni implicite. Il passaggio successivo rende misurabile «Sandbox». [SRC-72-001; SRC-72-002]
 
-- **Da «Sandbox» a «Human approval».** Codice e browser vengono eseguiti in ambienti isolati con rete, processi e risorse limitate. Azioni ad alto impatto richiedono conferma con anteprima, differenza e destinatario espliciti. Il terzo passaggio compone più componenti e rende quindi necessario conservare stato, identità e decisione oltre all'output finale. [SRC-72-002; SRC-72-003]
+- **Da «Sandbox» a «Human approval».** Codice e browser vengono eseguiti in ambienti isolati con rete, processi e risorse limitate. Azioni ad alto impatto richiedono conferma con anteprima, differenza e destinatario espliciti. Componendo «Sandbox» e «Human approval» diventa necessario conservare stato, identità e decisione. Da «Sandbox» a «Human approval» cambia la domanda osservabile. [SRC-72-002; SRC-72-003]
 
-- **Da «Human approval» a «Rollback e audit».** Azioni ad alto impatto richiedono conferma con anteprima, differenza e destinatario espliciti. Transaction log, snapshot e operazioni compensative permettono di ricostruire e correggere una traiettoria. La quarta sezione introduce failure e recovery nel punto in cui possono ancora precedere un side effect o una perdita di stato. [SRC-72-003; SRC-72-004]
+- **Da «Human approval» a «Rollback e audit».** Azioni ad alto impatto richiedono conferma con anteprima, differenza e destinatario espliciti. Transaction log, snapshot e operazioni compensative permettono di ricostruire e correggere una traiettoria. «Rollback e audit» introduce failure e recovery prima di un side effect o di una perdita di stato. Il passaggio successivo rende misurabile «Rollback e audit». [SRC-72-003; SRC-72-004]
 
-- **Da «Rollback e audit» a «Prompt injection».** Transaction log, snapshot e operazioni compensative permettono di ricostruire e correggere una traiettoria. Contenuti esterni possono tentare di cambiare il piano. La chiusura valuta il comportamento end-to-end: un componente corretto non basta se il collegamento, il carico o la policy cambiano l'esito. [SRC-72-004; SRC-72-001]
+- **Da «Rollback e audit» a «Prompt injection».** Transaction log, snapshot e operazioni compensative permettono di ricostruire e correggere una traiettoria. Contenuti esterni possono tentare di cambiare il piano. La chiusura su «Prompt injection» valuta il sistema completo, non soltanto il componente iniziale. Da «Rollback e audit» a «Prompt injection» cambia la domanda osservabile. [SRC-72-004; SRC-72-001]
 
 La catena completa produce allow/deny, side effect o rollback auditabile a partire da input non fidato, tool, scope e approvazione. Ogni collegamento conserva un oggetto osservabile diverso; per questo il risultato non può essere esteso oltre il limite dichiarato: l'enforcement deve stare fuori dal testo generato.
 
@@ -118,4 +127,4 @@ La catena completa produce allow/deny, side effect o rollback auditabile a parti
 
 ## Il confine operativo
 
-La lezione parte da «input non fidato, tool, scope e approvazione» e arriva fino a «allow/deny, side effect o rollback auditabile». Il limite da conservare è questo: l'enforcement deve stare fuori dal testo generato. Definizioni e risultati citati sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md); la mappa dei claim è in [`CLAIMS.md`](CLAIMS.md).
+La lezione parte da «input non fidato, tool, scope e approvazione» e arriva fino a «allow/deny, side effect o rollback auditabile». Il limite da conservare è questo: l'enforcement deve stare fuori dal testo generato. Il confine di «Prompt injection» va ricontrollato tra claim, fonti e artefatti: i rinvii sono [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md), [`CLAIMS.md`](CLAIMS.md) e `code/`.

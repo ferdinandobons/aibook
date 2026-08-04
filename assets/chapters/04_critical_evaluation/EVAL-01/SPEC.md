@@ -49,3 +49,10 @@ La figura mostra una sequenza di domande di audit, non una garanzia che ogni esp
 - nessuna sovrapposizione tra titolo, box e footer;
 - colore associato anche a numero e titolo, non unico segnale.
 - domanda principale: Quale trasformazione centrale rende osservabile «Un numero non è ancora una conclusione» nel capitolo 4?
+
+## Contratto geometrico
+
+- raster: margine di sicurezza di 20 px sul canvas 1800x1000;
+- contenimento: nessun testo oltre il proprio box o il canvas;
+- composizione: nessuna sovrapposizione o tangenza intenzionale tra elementi fratelli;
+- fonte: `GEOMETRY.json` e checklist dell'audit storico.

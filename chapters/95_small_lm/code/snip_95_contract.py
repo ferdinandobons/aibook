@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-import hashlib
 import json
-import math
-import statistics
-from collections import Counter
 
 CHAPTER = 95
 TITLE = 'Costruire un piccolo language model'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     tokens = [[1, 2, 3], [2, 3, 4]]
     inputs = [row[:-1] for row in tokens]
     targets = [row[1:] for row in tokens]

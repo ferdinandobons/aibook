@@ -14,7 +14,7 @@ deferred: benchmark applicativi non eseguiti e approvazione autoriale delle visu
 
 # Capitolo 95. Costruire un piccolo language model
 
-La domanda guida di questa lezione è come collegare «Corpus e tokenizer» e «Limiti» senza perdere il contratto tecnico di costruire un piccolo language model. L'oggetto osservato è un piccolo language model dalla stringa ai logits. Il contratto locale è: input, corpus, tokenizer, batch di sequenze e target; operazione, embedding, decoder causale, cross-entropy e sampling; output, logits, loss, token generati e checkpoint. Il caso guida è questo: Due sequenze di tre token diventano input e target spostati con shape coerenti. Il confine da mantenere esplicito è: tokenizer, mask, target shift e sampling devono essere coerenti.
+Per rendere concreto costruire un piccolo language model, registriamo ciò che accade tra «Corpus e tokenizer» e «Limiti». L'oggetto osservato è un piccolo language model dalla stringa ai logits. Il contratto locale dichiara input, corpus, tokenizer, batch di sequenze e target; operazione, embedding, decoder causale, cross-entropy e sampling; output, logits, loss, token generati e checkpoint. Per fissare il riferimento usiamo Due sequenze di tre token diventano input e target spostati con shape coerenti. Il limite da non nascondere è: tokenizer, mask, target shift e sampling devono essere coerenti.
 
 ![Costruire un piccolo language model: matrix](../../assets/chapters/95_small_lm/LM-01/candidate-v48.png)
 
@@ -29,7 +29,7 @@ Un piccolo LM consente di osservare la relazione tra dati, logits e loss.
 
 **Caso da seguire.** Due sequenze di tre token diventano input e target spostati con shape coerenti.
 
-**Controllo.** Esegui il caso con ambiente, seed e comando registrati; il risultato deve sopravvivere fuori dalla sessione interattiva.
+**Controllo.** Per «Corpus e tokenizer», esegui il caso con ambiente, seed e comando registrati; il risultato deve sopravvivere fuori dalla sessione interattiva.
 
 
 ## Decoder Transformer
@@ -41,21 +41,32 @@ Embedding, posizione, causal attention, MLP, norm e head di output vengono assem
 **Controllo.** Per «Decoder Transformer» conserva almeno un artefatto verificabile e un caso fallito, insieme alla configurazione che li ha prodotti.
 
 
+La relazione centrale può essere scritta come:
+
+$$
+loss = cross_entropy(logits, targets)
+$$
+
+Un piccolo LM consente di osservare la relazione tra dati, logits e loss. [SRC-95-001]
+
+
 ## Training
 
 AdamW, schedule, gradient clipping e checkpoint producono un run riproducibile su CPU o singola GPU. [SRC-95-003]
 
 **Caso da seguire.** Un optimizer step confrontato con loss, seed e stato del checkpoint salvato.
 
-**Controllo.** Scrivi prima l'esito atteso, poi confrontalo con output e log. Ogni differenza deve restare visibile nel report.
+**Controllo.** Per «Training», scrivi prima l'esito atteso, poi confrontalo con output e log. Nel caso «Training», ogni differenza deve restare visibile nel report.
 
 
 ## Esempio Python eseguito
 
-Il frammento seguente è lo stesso conservato nel repository. Usa valori piccoli perché l'obiettivo è osservare il meccanismo, non simulare una scala che non abbiamo eseguito.
+La prova locale di costruire un piccolo language model parte da un esempio minimo, registrato nel repository insieme ai suoi test. Per «Costruire un piccolo language model», il caso di default usa valori piccoli per isolare il meccanismo. La prova negativa riguarda proprio «costruire un piccolo language model» e interrompe l'interpretazione prima dell'output.
 
 ```python
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     tokens = [[1, 2, 3], [2, 3, 4]]
     inputs = [row[:-1] for row in tokens]
     targets = [row[1:] for row in tokens]
@@ -92,7 +103,9 @@ def train_and_generate(steps: int = 24) -> dict[str, object]:
     for _ in range(steps):
         optimizer.zero_grad(set_to_none=True)
         logits = model(inputs)
-        loss = nn.functional.cross_entropy(logits.reshape(-1, logits.shape[-1]), targets.reshape(-1))
+        loss = nn.functional.cross_entropy(
+            logits.reshape(-1, logits.shape[-1]), targets.reshape(-1)
+        )
         loss.backward()
         optimizer.step()
         losses.append(float(loss.detach()))
@@ -130,7 +143,7 @@ Greedy, temperature e top-k mostrano la differenza tra distribuzione e traiettor
 
 **Caso da seguire.** Lo stesso vettore di logits decodificato con greedy e top-k.
 
-**Controllo.** Riparti da un processo pulito e ricostruisci input e ambiente prima di interpretare la metrica.
+**Controllo.** Per «Sampling», riparti da un processo pulito e ricostruisci input e ambiente prima di interpretare la metrica.
 
 
 ## Limiti
@@ -139,7 +152,7 @@ Un piccolo LM non rappresenta capacità o sicurezza di modelli su larga scala, m
 
 **Caso da seguire.** Un confronto tra loss del piccolo modello e un claim che non può essere trasferito a modelli grandi.
 
-**Controllo.** Distingui il risultato riprodotto dal suo trasferimento ad altra scala. Il confine è: Un piccolo LM non rappresenta capacità o sicurezza di modelli su larga scala, ma rende osservabile l'intero contratto.
+**Controllo.** Per «Limiti», distingui il risultato riprodotto dal suo trasferimento ad altra scala. Nel caso «Limiti», il confine è: Un piccolo LM non rappresenta capacità o sicurezza di modelli su larga scala, ma rende osservabile l'intero contratto.
 
 
 ![Costruire un piccolo language model: pipeline](../../assets/chapters/95_small_lm/LM-02/candidate-v48.png)
@@ -149,13 +162,13 @@ La seconda figura mette a confronto «Sampling» e il limite discusso in «Limit
 
 ## Come si collegano i passaggi
 
-- **Da «Corpus e tokenizer» a «Decoder Transformer».** Un corpus ridotto e un tokenizer identificabile costruiscono sequenze e split verificabili. Embedding, posizione, causal attention, MLP, norm e head di output vengono assemblati con test di shape. La prima tappa fissa domanda, ambiente e input; la seconda costruisce l'artefatto eseguibile che materializza il protocollo. [SRC-95-001; SRC-95-002]
+- **Da «Corpus e tokenizer» a «Decoder Transformer».** Un corpus ridotto e un tokenizer identificabile costruiscono sequenze e split verificabili. Embedding, posizione, causal attention, MLP, norm e head di output vengono assemblati con test di shape. «Corpus e tokenizer» fissa domanda, ambiente e input prima che «Decoder Transformer» materializzi il protocollo. Da «Corpus e tokenizer» a «Decoder Transformer» cambia la domanda osservabile. [SRC-95-001; SRC-95-002]
 
-- **Da «Decoder Transformer» a «Training».** Embedding, posizione, causal attention, MLP, norm e head di output vengono assemblati con test di shape. AdamW, schedule, gradient clipping e checkpoint producono un run riproducibile su CPU o singola GPU. Il run produce numeri e file soltanto dopo che configurazione, seed e dipendenze sono stati registrati. [SRC-95-002; SRC-95-003]
+- **Da «Decoder Transformer» a «Training».** Embedding, posizione, causal attention, MLP, norm e head di output vengono assemblati con test di shape. AdamW, schedule, gradient clipping e checkpoint producono un run riproducibile su CPU o singola GPU. Il passaggio a «Training» produce numeri e file soltanto dopo la registrazione della configurazione. Il passaggio successivo rende misurabile «Training». [SRC-95-002; SRC-95-003]
 
-- **Da «Training» a «Sampling».** AdamW, schedule, gradient clipping e checkpoint producono un run riproducibile su CPU o singola GPU. Greedy, temperature e top-k mostrano la differenza tra distribuzione e traiettoria. La tappa successiva confronta il risultato atteso con quello osservato e conserva le divergenze invece di correggerle retroattivamente. [SRC-95-003; SRC-95-004]
+- **Da «Training» a «Sampling».** AdamW, schedule, gradient clipping e checkpoint producono un run riproducibile su CPU o singola GPU. Greedy, temperature e top-k mostrano la differenza tra distribuzione e traiettoria. «Sampling» confronta atteso e osservato e conserva le divergenze del run. Da «Training» a «Sampling» cambia la domanda osservabile. [SRC-95-003; SRC-95-004]
 
-- **Da «Sampling» a «Limiti».** Greedy, temperature e top-k mostrano la differenza tra distribuzione e traiettoria. Un piccolo LM non rappresenta capacità o sicurezza di modelli su larga scala, ma rende osservabile l'intero contratto. La conclusione separa ciò che il laboratorio ha ricostruito da ciò che richiederebbe altri dati, hardware o una valutazione di produzione. [SRC-95-004; SRC-95-001]
+- **Da «Sampling» a «Limiti».** Greedy, temperature e top-k mostrano la differenza tra distribuzione e traiettoria. Un piccolo LM non rappresenta capacità o sicurezza di modelli su larga scala, ma rende osservabile l'intero contratto. La conclusione distingue ciò che «Limiti» ha ricostruito da ciò che richiede nuovi dati o hardware. Il passaggio successivo rende misurabile «Limiti». [SRC-95-004; SRC-95-001]
 
 La catena completa produce logits, loss, token generati e checkpoint a partire da corpus, tokenizer, batch di sequenze e target. Ogni collegamento conserva un oggetto osservabile diverso; per questo il risultato non può essere esteso oltre il limite dichiarato: tokenizer, mask, target shift e sampling devono essere coerenti.
 
@@ -171,4 +184,4 @@ La catena completa produce logits, loss, token generati e checkpoint a partire d
 
 ## Criterio di completamento
 
-La lezione parte da «corpus, tokenizer, batch di sequenze e target» e arriva fino a «logits, loss, token generati e checkpoint». Il limite da conservare è questo: tokenizer, mask, target shift e sampling devono essere coerenti. Definizioni e risultati citati sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md); la mappa dei claim è in [`CLAIMS.md`](CLAIMS.md).
+La lezione parte da «corpus, tokenizer, batch di sequenze e target» e arriva fino a «logits, loss, token generati e checkpoint». Il limite da conservare è questo: tokenizer, mask, target shift e sampling devono essere coerenti. Il run relativo a «Limiti» conserva codice, test e output; le ipotesi esterne restano nel dossier [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md).

@@ -14,7 +14,7 @@ deferred: benchmark applicativi non eseguiti e approvazione autoriale delle visu
 
 # Capitolo 64. Retrieval-Augmented Generation
 
-La domanda guida di questa lezione è come collegare «Una pipeline in due fasi» e «Valutazione end-to-end» senza perdere il contratto tecnico di retrieval-augmented generation. L'oggetto osservato è la pipeline che collega query, contesto e risposta. Il contratto locale è: input, query, chunk, fonti e prompt; operazione, chunking, retrieval, attribution e generazione; output, risposta con evidenza e score end-to-end. Il caso guida è questo: Due chunk vengono recuperati e una risposta mantiene il documento citato come record distinto. Il confine da mantenere esplicito è: contesto recuperato e testo generato devono restare distinguibili.
+Per leggere retrieval-augmented generation, seguiamo i dati tra «Una pipeline in due fasi» e «Valutazione end-to-end» insieme alla loro provenienza. L'oggetto osservato è la pipeline che collega query, contesto e risposta. Il contratto locale dichiara input, query, chunk, fonti e prompt; operazione, chunking, retrieval, attribution e generazione; output, risposta con evidenza e score end-to-end. Il caso di partenza è Due chunk vengono recuperati e una risposta mantiene il documento citato come record distinto. Il limite da non nascondere è: contesto recuperato e testo generato devono restare distinguibili.
 
 ## Una pipeline in due fasi
 
@@ -24,7 +24,16 @@ Il contesto recuperato deve essere ispezionabile e separato dalla risposta.
 
 **Caso da seguire.** Due chunk vengono recuperati e una risposta mantiene il documento citato come record distinto.
 
-**Controllo.** Conserva record iniziale, regola applicata e record finale; un conteggio aggregato non basta a spiegare la trasformazione.
+**Controllo.** Per «Una pipeline in due fasi», conserva record iniziale, regola applicata e record finale; un conteggio aggregato non basta a spiegare la trasformazione.
+
+
+La relazione centrale può essere scritta come:
+
+$$
+answer = generate(query, retrieve(query))
+$$
+
+Il contesto recuperato deve essere ispezionabile e separato dalla risposta. [SRC-64-001]
 
 
 ![Retrieval-Augmented Generation: pipeline](../../assets/chapters/64_rag/RAG-01/candidate-v48.png)
@@ -47,15 +56,17 @@ Documenti, istruzioni e domanda devono avere confini espliciti. Il modello può 
 
 **Caso da seguire.** Un caso in cui contesto recuperato e testo generato devono restare distinguibili.
 
-**Controllo.** Aggiungi un record che deve essere escluso e verifica che l'output conservi anche il motivo dell'esclusione.
+**Controllo.** Per «Prompt con fonti», aggiungi un record che deve essere escluso e verifica che l'output conservi anche il motivo dell'esclusione.
 
 
 ## Esempio Python eseguito
 
-Il frammento seguente è lo stesso conservato nel repository. Usa valori piccoli perché l'obiettivo è osservare il meccanismo, non simulare una scala che non abbiamo eseguito.
+Per rendere osservabile retrieval-augmented generation, il capitolo conserva qui l'artefatto Python eseguito. Per «Retrieval-Augmented Generation», il caso di default usa valori piccoli per isolare il meccanismo. Il test rifiuta anche un caso non documentato di «retrieval-augmented generation».
 
 ```python
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     retrieved = [("d1", 0.9), ("d2", 0.4)]
     answer = "Il pacco è in transito"
     cited = retrieved[0][0]
@@ -77,7 +88,7 @@ Una risposta supportata deve essere collegabile a passaggi recuperati. Citazione
 
 **Caso da seguire.** Quattro casi con tre esiti corretti e una failure, riportando la media insieme alla slice e al protocollo per «Attribution» e all'output risposta con evidenza e score end-to-end.
 
-**Controllo.** Modifica una sola regola della pipeline e misura quali record cambiano, evitando di confrontare raccolte di origine diversa.
+**Controllo.** Per «Attribution», modifica una sola regola della pipeline e misura quali record cambiano, evitando di confrontare raccolte di origine diversa.
 
 
 ## Valutazione end-to-end
@@ -86,7 +97,7 @@ Recall del retriever, precisione del contesto, fedeltà e utilità della rispost
 
 **Caso da seguire.** Una query e tre documenti ricevono punteggi distinti. Prima di generare, controlliamo quale documento è entrato nel contesto e con quale ranking.
 
-**Controllo.** Descrivi ciò che la pipeline perde oltre a ciò che produce. Il limite locale è: Recall del retriever, precisione del contesto, fedeltà e utilità della risposta devono essere misurate separatamente e insieme.
+**Controllo.** Per «Valutazione end-to-end», descrivi ciò che la pipeline perde oltre a ciò che produce. Nel caso «Valutazione end-to-end», il limite locale è: Recall del retriever, precisione del contesto, fedeltà e utilità della risposta devono essere misurate separatamente e insieme.
 
 
 ![Retrieval-Augmented Generation: graph](../../assets/chapters/64_rag/RAG-02/candidate-v48.png)
@@ -96,13 +107,13 @@ La seconda figura mette a confronto «Attribution» e il limite discusso in «Va
 
 ## Come si collegano i passaggi
 
-- **Da «Una pipeline in due fasi» a «Chunking».** Il retriever seleziona contesto esterno; il generatore produce la risposta condizionata sui documenti recuperati. Dimensione, overlap e struttura dei chunk modificano recall e quantità di contesto. Il primo passaggio identifica il record e la sua provenienza; il secondo dichiara la trasformazione che cambia la popolazione osservata. [SRC-64-001; SRC-64-002]
+- **Da «Una pipeline in due fasi» a «Chunking».** Il retriever seleziona contesto esterno; il generatore produce la risposta condizionata sui documenti recuperati. Dimensione, overlap e struttura dei chunk modificano recall e quantità di contesto. «Una pipeline in due fasi» identifica il record e «Chunking» dichiara la trasformazione sulla popolazione osservata. Il passaggio successivo rende misurabile «Chunking». [SRC-64-001; SRC-64-002]
 
-- **Da «Chunking» a «Prompt con fonti».** Dimensione, overlap e struttura dei chunk modificano recall e quantità di contesto. Documenti, istruzioni e domanda devono avere confini espliciti. La trasformazione diventa confrontabile soltanto quando il passaggio successivo conserva configurazione, conteggi e artefatti intermedi. [SRC-64-002; SRC-64-003]
+- **Da «Chunking» a «Prompt con fonti».** Dimensione, overlap e struttura dei chunk modificano recall e quantità di contesto. Documenti, istruzioni e domanda devono avere confini espliciti. Il passaggio da «Chunking» a «Prompt con fonti» conserva configurazione, conteggi e artefatti intermedi. Da «Chunking» a «Prompt con fonti» cambia la domanda osservabile. [SRC-64-002; SRC-64-003]
 
-- **Da «Prompt con fonti» a «Attribution».** Documenti, istruzioni e domanda devono avere confini espliciti. Una risposta supportata deve essere collegabile a passaggi recuperati. Una volta resa tracciabile la pipeline, il quarto passaggio può affrontare selezione o uso senza confondere un cambiamento nei dati con uno nel modello. [SRC-64-003; SRC-64-004]
+- **Da «Prompt con fonti» a «Attribution».** Documenti, istruzioni e domanda devono avere confini espliciti. Una risposta supportata deve essere collegabile a passaggi recuperati. Con «Attribution» la pipeline può selezionare o usare dati senza confonderli con una modifica del modello. Il passaggio successivo rende misurabile «Attribution». [SRC-64-003; SRC-64-004]
 
-- **Da «Attribution» a «Valutazione end-to-end».** Una risposta supportata deve essere collegabile a passaggi recuperati. Recall del retriever, precisione del contesto, fedeltà e utilità della risposta devono essere misurate separatamente e insieme. L'ultima sezione porta il risultato alla valutazione e chiede quali record, slice o failure restano fuori dalla media. [SRC-64-004; SRC-64-001]
+- **Da «Attribution» a «Valutazione end-to-end».** Una risposta supportata deve essere collegabile a passaggi recuperati. Recall del retriever, precisione del contesto, fedeltà e utilità della risposta devono essere misurate separatamente e insieme. «Valutazione end-to-end» porta il risultato alla valutazione e rende visibili record, slice e failure esclusi. Da «Attribution» a «Valutazione end-to-end» cambia la domanda osservabile. [SRC-64-004; SRC-64-001]
 
 La catena completa produce risposta con evidenza e score end-to-end a partire da query, chunk, fonti e prompt. Ogni collegamento conserva un oggetto osservabile diverso; per questo il risultato non può essere esteso oltre il limite dichiarato: contesto recuperato e testo generato devono restare distinguibili.
 
@@ -118,4 +129,4 @@ La catena completa produce risposta con evidenza e score end-to-end a partire da
 
 ## L'artefatto che deve sopravvivere
 
-La lezione parte da «query, chunk, fonti e prompt» e arriva fino a «risposta con evidenza e score end-to-end». Il limite da conservare è questo: contesto recuperato e testo generato devono restare distinguibili. Definizioni e risultati citati sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md); la mappa dei claim è in [`CLAIMS.md`](CLAIMS.md).
+La lezione parte da «query, chunk, fonti e prompt» e arriva fino a «risposta con evidenza e score end-to-end». Il limite da conservare è questo: contesto recuperato e testo generato devono restare distinguibili. Per «Valutazione end-to-end», provenienza e trasformazioni sono registrate in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md), [`CLAIMS.md`](CLAIMS.md) e negli artefatti di `code/`.

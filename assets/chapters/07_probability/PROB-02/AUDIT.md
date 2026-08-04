@@ -42,3 +42,11 @@ La prima revisione usava l'abbreviazione `SE` senza spiegarla. La label è stata
 ## Verdetto
 
 `PROB-02/candidate-v1.png` può essere sottoposta alla revisione autoriale.
+
+## Gate geometrico raster
+
+- [x] PNG decodificato e dimensione standard verificata;
+- [x] contenuto distante almeno 20 px dal bordo;
+- [x] checklist storica di padding e contenimento mantenuta;
+- [x] nessuna sovrapposizione o elemento attaccato dichiarato nell'audit della candidata;
+- [x] manifest `GEOMETRY.json` scritto per il controllo indipendente del raster.

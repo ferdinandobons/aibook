@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-import hashlib
 import json
-import math
-import statistics
-from collections import Counter
 
 CHAPTER = 37
 TITLE = 'Anatomia del blocco moderno'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     state = [1.0, -2.0]
     update = [0.25, 0.5]
     output = [left + right for left, right in zip(state, update)]

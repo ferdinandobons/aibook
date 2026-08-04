@@ -14,7 +14,7 @@ deferred: benchmark applicativi non eseguiti e approvazione autoriale delle visu
 
 # Capitolo 69. Ciclo agentico, pianificazione e verifica
 
-La domanda guida di questa lezione è come collegare «Osservare e aggiornare lo stato» e «Terminare» senza perdere il contratto tecnico di ciclo agentico, pianificazione e verifica. L'oggetto osservato è lo stato di una traiettoria agentica. Il contratto locale è: input, osservazione, piano, azione e risultato del tool; operazione, observe, plan, act, verify e terminate; output, stato successivo o arresto motivato. Il caso guida è questo: Una traiettoria minima registra observe, plan, tool e verify. Il confine da mantenere esplicito è: ogni side effect deve avere precondizioni e verifica.
+Ciclo agentico, pianificazione e verifica viene letto come un sistema: «Osservare e aggiornare lo stato» e «Terminare» restano collegati da confini e decisioni osservabili. L'oggetto osservato è lo stato di una traiettoria agentica. Il contratto locale dichiara input, osservazione, piano, azione e risultato del tool; operazione, observe, plan, act, verify e terminate; output, stato successivo o arresto motivato. Il caso di partenza è Una traiettoria minima registra observe, plan, tool e verify. Il limite da non nascondere è: ogni side effect deve avere precondizioni e verifica.
 
 ## Osservare e aggiornare lo stato
 
@@ -24,7 +24,7 @@ Il ciclo deve rendere visibili azione, osservazione e arresto.
 
 **Caso da seguire.** Una traiettoria minima registra observe, plan, tool e verify.
 
-**Controllo.** Registra richiesta, decisione, stato e output finale. Un esito plausibile non deve nascondere il componente che lo ha prodotto.
+**Controllo.** Per «Osservare e aggiornare lo stato», registra richiesta, decisione, stato e output finale. Nel caso «Osservare e aggiornare lo stato», un esito plausibile non deve nascondere il componente che lo ha prodotto.
 
 
 ## Pianificare
@@ -34,6 +34,13 @@ Un piano scompone il compito in passi e dipendenze. Il piano iniziale può esser
 **Caso da seguire.** Lookup, conferma utente e aggiornamento dell'ordine.
 
 **Controllo.** Ripeti «Pianificare» con una capability o un'autorizzazione rimossa e verifica che la failure preceda qualsiasi side effect.
+
+
+La forma compatta aiuta a seguire il flusso senza attribuirgli una garanzia quantitativa.
+
+**Schema concettuale.** `state_{t+1} = step(state_t, action_t, observation_t)`
+
+Il ciclo deve rendere visibili azione, osservazione e arresto. [SRC-69-001]
 
 
 ![Ciclo agentico, pianificazione e verifica: timeline](../../assets/chapters/69_agent_loop/LOOP-01/candidate-v48.png)
@@ -47,7 +54,7 @@ Ogni azione usa un tool o modifica un ambiente. Parametri, autorizzazioni e cost
 
 **Caso da seguire.** Un caso in cui ogni side effect deve avere precondizioni e verifica.
 
-**Controllo.** Separa il test del singolo componente dal test end-to-end, usando lo stesso input e la stessa configurazione versionata.
+**Controllo.** Per «Agire», separa il test del singolo componente dal test end-to-end, usando lo stesso input e la stessa configurazione versionata.
 
 
 ## Verificare
@@ -56,7 +63,7 @@ Test, controlli di stato o giudici indipendenti valutano il risultato. Una autoc
 
 **Caso da seguire.** Una traiettoria minima alterna osservazione, decisione, tool e verifica. Il test può controllare che un'azione non autorizzata venga bloccata.
 
-**Controllo.** Introduci una failure a un solo confine e controlla che log, stato e recovery identifichino quel confine senza ambiguità.
+**Controllo.** Per «Verificare», introduci una failure a un solo confine e controlla che log, stato e recovery identifichino quel confine senza ambiguità.
 
 
 ## Terminare
@@ -65,7 +72,7 @@ Budget, goal raggiunto, errore irreversibile o richiesta di approvazione definis
 
 **Caso da seguire.** Per «Terminare» si mantiene l'input del capitolo e si isola questa condizione: Budget, goal raggiunto, errore irreversibile o richiesta di approvazione definiscono condizioni di stop.
 
-**Controllo.** Confronta il comportamento completo, non soltanto l'ultimo messaggio. Il risultato resta limitato da: Budget, goal raggiunto, errore irreversibile o richiesta di approvazione definiscono condizioni di stop.
+**Controllo.** Per «Terminare», confronta il comportamento completo, non soltanto l'ultimo messaggio. Nel caso «Terminare», il risultato resta limitato da: Budget, goal raggiunto, errore irreversibile o richiesta di approvazione definiscono condizioni di stop.
 
 
 ![Ciclo agentico, pianificazione e verifica: loop](../../assets/chapters/69_agent_loop/LOOP-02/candidate-v50.png)
@@ -75,10 +82,12 @@ La seconda figura mette a confronto «Verificare» e il limite discusso in «Ter
 
 ## Esempio Python eseguito
 
-Il frammento seguente è lo stesso conservato nel repository. Usa valori piccoli perché l'obiettivo è osservare il meccanismo, non simulare una scala che non abbiamo eseguito.
+Il caso computazionale di ciclo agentico, pianificazione e verifica è riportato senza trasformazioni: il file e l'output sono quelli verificati. Per «Ciclo agentico, pianificazione e verifica», il caso di default usa valori piccoli per isolare il meccanismo. La suite conserva inoltre una failure esplicita per separare il contratto osservato da «ciclo agentico, pianificazione e verifica».
 
 ```python
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     events = ["observe", "plan", "tool", "verify"]
     valid = events == ["observe", "plan", "tool", "verify"]
     return {"events": events, "valid": valid, "invariant": "an agent loop records observation, action and verification"}
@@ -95,13 +104,13 @@ Il test associato è [`code/test_69_contract.py`](code/test_69_contract.py); l'o
 
 ## Come si collegano i passaggi
 
-- **Da «Osservare e aggiornare lo stato» a «Pianificare».** Un agente riceve input, risultato dei tool e memoria. Un piano scompone il compito in passi e dipendenze. Il contratto iniziale nomina messaggi e confini; il componente successivo implementa una parte del percorso senza ereditare autorizzazioni implicite. [SRC-69-001; SRC-69-002]
+- **Da «Osservare e aggiornare lo stato» a «Pianificare».** Un agente riceve input, risultato dei tool e memoria. Un piano scompone il compito in passi e dipendenze. «Osservare e aggiornare lo stato» nomina il confine e «Pianificare» implementa il percorso senza ereditare autorizzazioni implicite. Da «Osservare e aggiornare lo stato» a «Pianificare» cambia la domanda osservabile. [SRC-69-001; SRC-69-002]
 
-- **Da «Pianificare» a «Agire».** Un piano scompone il compito in passi e dipendenze. Ogni azione usa un tool o modifica un ambiente. Il terzo passaggio compone più componenti e rende quindi necessario conservare stato, identità e decisione oltre all'output finale. [SRC-69-002; SRC-69-003]
+- **Da «Pianificare» a «Agire».** Un piano scompone il compito in passi e dipendenze. Ogni azione usa un tool o modifica un ambiente. Componendo «Pianificare» e «Agire» diventa necessario conservare stato, identità e decisione. Il passaggio successivo rende misurabile «Agire». [SRC-69-002; SRC-69-003]
 
-- **Da «Agire» a «Verificare».** Ogni azione usa un tool o modifica un ambiente. Test, controlli di stato o giudici indipendenti valutano il risultato. La quarta sezione introduce failure e recovery nel punto in cui possono ancora precedere un side effect o una perdita di stato. [SRC-69-003; SRC-69-004]
+- **Da «Agire» a «Verificare».** Ogni azione usa un tool o modifica un ambiente. Test, controlli di stato o giudici indipendenti valutano il risultato. «Verificare» introduce failure e recovery prima di un side effect o di una perdita di stato. Da «Agire» a «Verificare» cambia la domanda osservabile. [SRC-69-003; SRC-69-004]
 
-- **Da «Verificare» a «Terminare».** Test, controlli di stato o giudici indipendenti valutano il risultato. Budget, goal raggiunto, errore irreversibile o richiesta di approvazione definiscono condizioni di stop. La chiusura valuta il comportamento end-to-end: un componente corretto non basta se il collegamento, il carico o la policy cambiano l'esito. [SRC-69-004; SRC-69-001]
+- **Da «Verificare» a «Terminare».** Test, controlli di stato o giudici indipendenti valutano il risultato. Budget, goal raggiunto, errore irreversibile o richiesta di approvazione definiscono condizioni di stop. La chiusura su «Terminare» valuta il sistema completo, non soltanto il componente iniziale. Il passaggio successivo rende misurabile «Terminare». [SRC-69-004; SRC-69-001]
 
 La catena completa produce stato successivo o arresto motivato a partire da osservazione, piano, azione e risultato del tool. Ogni collegamento conserva un oggetto osservabile diverso; per questo il risultato non può essere esteso oltre il limite dichiarato: ogni side effect deve avere precondizioni e verifica.
 
@@ -117,4 +126,4 @@ La catena completa produce stato successivo o arresto motivato a partire da osse
 
 ## Il confine operativo
 
-La lezione parte da «osservazione, piano, azione e risultato del tool» e arriva fino a «stato successivo o arresto motivato». Il limite da conservare è questo: ogni side effect deve avere precondizioni e verifica. Definizioni e risultati citati sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md); la mappa dei claim è in [`CLAIMS.md`](CLAIMS.md).
+La lezione parte da «osservazione, piano, azione e risultato del tool» e arriva fino a «stato successivo o arresto motivato». Il limite da conservare è questo: ogni side effect deve avere precondizioni e verifica. Il confine di «Terminare» va ricontrollato tra claim, fonti e artefatti: i rinvii sono [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md), [`CLAIMS.md`](CLAIMS.md) e `code/`.

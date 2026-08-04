@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-import hashlib
 import json
-import math
-import statistics
-from collections import Counter
 
 CHAPTER = 91
 TITLE = 'Privacy, fairness e unlearning'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     groups = {"A": {"correct": 3, "total": 4}, "B": {"correct": 2, "total": 4}}
     accuracy = {group: value["correct"] / value["total"] for group, value in groups.items()}
     gap = abs(accuracy["A"] - accuracy["B"])

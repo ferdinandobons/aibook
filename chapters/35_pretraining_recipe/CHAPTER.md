@@ -14,7 +14,7 @@ deferred: benchmark applicativi non eseguiti e approvazione autoriale delle visu
 
 # Capitolo 35. La ricetta di pretraining
 
-La domanda guida di questa lezione è come collegare «Batch di token» e «Checkpoint e recovery» senza perdere il contratto tecnico di la ricetta di pretraining. L'oggetto osservato è lo stato completo di una ricetta di pretraining. Il contratto locale è: input, batch, learning rate, seed, optimizer e checkpoint; operazione, forward, backward, update, schedule e recovery; output, loss, parametri e checkpoint ripristinabile. Il caso guida è questo: Un prefisso corto con ID, lunghezza, posizione e output del token successivo dichiarati. Il confine da mantenere esplicito è: un checkpoint deve includere lo stato necessario a continuare il run.
+La domanda pratica di la ricetta di pretraining è che cosa cambia nei record tra «Batch di token» e «Checkpoint e recovery» e come lo possiamo dimostrare. L'oggetto osservato è lo stato completo di una ricetta di pretraining. Il contratto locale dichiara input, batch, learning rate, seed, optimizer e checkpoint; operazione, forward, backward, update, schedule e recovery; output, loss, parametri e checkpoint ripristinabile. Per fissare il riferimento usiamo Un prefisso corto con ID, lunghezza, posizione e output del token successivo dichiarati. Il limite da non nascondere è: un checkpoint deve includere lo stato necessario a continuare il run.
 
 ## Batch di token
 
@@ -24,7 +24,16 @@ Optimizer, schedule e stato del checkpoint formano una sola ricetta.
 
 **Caso da seguire.** Un prefisso corto con ID, lunghezza, posizione e output del token successivo dichiarati.
 
-**Controllo.** Conserva record iniziale, regola applicata e record finale; un conteggio aggregato non basta a spiegare la trasformazione.
+**Controllo.** Per «Batch di token», conserva record iniziale, regola applicata e record finale; un conteggio aggregato non basta a spiegare la trasformazione.
+
+
+La relazione centrale può essere scritta come:
+
+$$
+theta_t = AdamW(theta_{t-1}, grad_t, lr_t)
+$$
+
+Optimizer, schedule e stato del checkpoint formano una sola ricetta. [SRC-35-001]
 
 
 ![La ricetta di pretraining: timeline](../../assets/chapters/35_pretraining_recipe/RECIPE-01/candidate-v48.png)
@@ -47,15 +56,17 @@ Learning rate, beta, epsilon e weight decay descrivono insieme l'optimizer. [SRC
 
 **Caso da seguire.** Un caso in cui un checkpoint deve includere lo stato necessario a continuare il run.
 
-**Controllo.** Aggiungi un record che deve essere escluso e verifica che l'output conservi anche il motivo dell'esclusione.
+**Controllo.** Per «AdamW», aggiungi un record che deve essere escluso e verifica che l'output conservi anche il motivo dell'esclusione.
 
 
 ## Esempio Python eseguito
 
-Il frammento seguente è lo stesso conservato nel repository. Usa valori piccoli perché l'obiettivo è osservare il meccanismo, non simulare una scala che non abbiamo eseguito.
+La prova locale di la ricetta di pretraining parte da un esempio minimo, registrato nel repository insieme ai suoi test. Per «La ricetta di pretraining», il caso di default usa valori piccoli per isolare il meccanismo. La prova negativa riguarda proprio «la ricetta di pretraining» e interrompe l'interpretazione prima dell'output.
 
 ```python
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     base_lr = 0.001
     warmup_steps = 4
     steps = [0, 1, 4, 8]
@@ -78,7 +89,7 @@ Il learning rate dipende da step o token e deve riprendere dal contatore corrett
 
 **Caso da seguire.** Due ricette con budget di token dichiarato, compute comparabile e loss osservata nello stesso intervallo.
 
-**Controllo.** Modifica una sola regola della pipeline e misura quali record cambiano, evitando di confrontare raccolte di origine diversa.
+**Controllo.** Per «Warmup e schedule», modifica una sola regola della pipeline e misura quali record cambiano, evitando di confrontare raccolte di origine diversa.
 
 
 ## Checkpoint e recovery
@@ -87,7 +98,7 @@ Modello, optimizer, scheduler, scaler, RNG e posizione nei dati servono per un r
 
 **Caso da seguire.** Una metrica del compito nuovo confrontata con la stessa metrica sul comportamento precedente.
 
-**Controllo.** Descrivi ciò che la pipeline perde oltre a ciò che produce. Il limite locale è: Modello, optimizer, scheduler, scaler, RNG e posizione nei dati servono per un resume fedele.
+**Controllo.** Per «Checkpoint e recovery», descrivi ciò che la pipeline perde oltre a ciò che produce. Nel caso «Checkpoint e recovery», il limite locale è: Modello, optimizer, scheduler, scaler, RNG e posizione nei dati servono per un resume fedele.
 
 
 ![La ricetta di pretraining: pipeline](../../assets/chapters/35_pretraining_recipe/RECIPE-02/candidate-v48.png)
@@ -97,13 +108,13 @@ La seconda figura mette a confronto «Warmup e schedule» e il limite discusso i
 
 ## Come si collegano i passaggi
 
-- **Da «Batch di token» a «Inizializzazione».** Packing, padding e mask determinano quanti token validi contribuiscono alla loss. Scala dei pesi e residual deve restare coerente con profondità, norm e dtype. Il primo passaggio identifica il record e la sua provenienza; il secondo dichiara la trasformazione che cambia la popolazione osservata. [SRC-35-001; SRC-35-002]
+- **Da «Batch di token» a «Inizializzazione».** Packing, padding e mask determinano quanti token validi contribuiscono alla loss. Scala dei pesi e residual deve restare coerente con profondità, norm e dtype. «Batch di token» identifica il record e «Inizializzazione» dichiara la trasformazione sulla popolazione osservata. Da «Batch di token» a «Inizializzazione» cambia la domanda osservabile. [SRC-35-001; SRC-35-002]
 
-- **Da «Inizializzazione» a «AdamW».** Scala dei pesi e residual deve restare coerente con profondità, norm e dtype. Learning rate, beta, epsilon e weight decay descrivono insieme l'optimizer. La trasformazione diventa confrontabile soltanto quando il passaggio successivo conserva configurazione, conteggi e artefatti intermedi. [SRC-35-002; SRC-35-003]
+- **Da «Inizializzazione» a «AdamW».** Scala dei pesi e residual deve restare coerente con profondità, norm e dtype. Learning rate, beta, epsilon e weight decay descrivono insieme l'optimizer. Il passaggio da «Inizializzazione» a «AdamW» conserva configurazione, conteggi e artefatti intermedi. Il passaggio successivo rende misurabile «AdamW». [SRC-35-002; SRC-35-003]
 
-- **Da «AdamW» a «Warmup e schedule».** Learning rate, beta, epsilon e weight decay descrivono insieme l'optimizer. Il learning rate dipende da step o token e deve riprendere dal contatore corretto. Una volta resa tracciabile la pipeline, il quarto passaggio può affrontare selezione o uso senza confondere un cambiamento nei dati con uno nel modello. [SRC-35-003; SRC-35-004]
+- **Da «AdamW» a «Warmup e schedule».** Learning rate, beta, epsilon e weight decay descrivono insieme l'optimizer. Il learning rate dipende da step o token e deve riprendere dal contatore corretto. Con «Warmup e schedule» la pipeline può selezionare o usare dati senza confonderli con una modifica del modello. Da «AdamW» a «Warmup e schedule» cambia la domanda osservabile. [SRC-35-003; SRC-35-004]
 
-- **Da «Warmup e schedule» a «Checkpoint e recovery».** Il learning rate dipende da step o token e deve riprendere dal contatore corretto. Modello, optimizer, scheduler, scaler, RNG e posizione nei dati servono per un resume fedele. L'ultima sezione porta il risultato alla valutazione e chiede quali record, slice o failure restano fuori dalla media. [SRC-35-004; SRC-35-001]
+- **Da «Warmup e schedule» a «Checkpoint e recovery».** Il learning rate dipende da step o token e deve riprendere dal contatore corretto. Modello, optimizer, scheduler, scaler, RNG e posizione nei dati servono per un resume fedele. «Checkpoint e recovery» porta il risultato alla valutazione e rende visibili record, slice e failure esclusi. Il passaggio successivo rende misurabile «Checkpoint e recovery». [SRC-35-004; SRC-35-001]
 
 La catena completa produce loss, parametri e checkpoint ripristinabile a partire da batch, learning rate, seed, optimizer e checkpoint. Ogni collegamento conserva un oggetto osservabile diverso; per questo il risultato non può essere esteso oltre il limite dichiarato: un checkpoint deve includere lo stato necessario a continuare il run.
 
@@ -119,4 +130,4 @@ La catena completa produce loss, parametri e checkpoint ripristinabile a partire
 
 ## L'artefatto che deve sopravvivere
 
-La lezione parte da «batch, learning rate, seed, optimizer e checkpoint» e arriva fino a «loss, parametri e checkpoint ripristinabile». Il limite da conservare è questo: un checkpoint deve includere lo stato necessario a continuare il run. Definizioni e risultati citati sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md); la mappa dei claim è in [`CLAIMS.md`](CLAIMS.md).
+La lezione parte da «batch, learning rate, seed, optimizer e checkpoint» e arriva fino a «loss, parametri e checkpoint ripristinabile». Il limite da conservare è questo: un checkpoint deve includere lo stato necessario a continuare il run. Per «Checkpoint e recovery», provenienza e trasformazioni sono registrate in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md), [`CLAIMS.md`](CLAIMS.md) e negli artefatti di `code/`.

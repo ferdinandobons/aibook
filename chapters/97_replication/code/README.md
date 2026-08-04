@@ -1,6 +1,6 @@
 # Esempio verificato. Capitolo 97
 
-`snip_97_contract.py` esegue il caso minimo usato nel testo di **Riprodurre e leggere un paper**. `test_97_contract.py` conserva l'output atteso, controlla determinismo, serializzazione, valori finiti e presenza del limite interpretativo.
+`snip_97_contract.py` esegue il caso minimo usato nel testo di **Riprodurre e leggere un paper**. `test_97_contract.py` conserva l'output atteso, controlla determinismo, serializzazione, valori finiti, forma del contratto e rifiuto dei casi non documentati.
 
 ```bash
 python snip_97_contract.py

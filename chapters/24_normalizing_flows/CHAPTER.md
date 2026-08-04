@@ -14,7 +14,7 @@ deferred: benchmark applicativi non eseguiti e approvazione autoriale delle visu
 
 # Capitolo 24. Normalizing flow e trasformazioni invertibili
 
-La domanda guida di questa lezione è come collegare «Cambio di variabile» e «Sampling e costo» senza perdere il contratto tecnico di normalizing flow e trasformazioni invertibili. L'oggetto osservato è un dato trasformato da una mappa invertibile. Il contratto locale è: input, x, log-determinante e variabile latente z; operazione, coupling, cambio di variabile e inversione; output, log-likelihood, z e campione ricostruito. Il caso guida è questo: Un caso minimo con input x, log-determinante e variabile latente z e output «log-likelihood, z e campione ricostruito». Il confine da mantenere esplicito è: l'inversione richiede una trasformazione e un log-determinante coerenti.
+Per entrare in normalizing flow e trasformazioni invertibili, seguiamo il passaggio che unisce «Cambio di variabile» a «Sampling e costo». L'oggetto osservato è un dato trasformato da una mappa invertibile. Il contratto locale dichiara input, x, log-determinante e variabile latente z; operazione, coupling, cambio di variabile e inversione; output, log-likelihood, z e campione ricostruito. La situazione minima da seguire è Un caso minimo con input x, log-determinante e variabile latente z e output «log-likelihood, z e campione ricostruito». Il limite da non nascondere è: l'inversione richiede una trasformazione e un log-determinante coerenti.
 
 ## Cambio di variabile
 
@@ -24,7 +24,7 @@ Il cambio di variabile richiede trasformazione invertibile e Jacobiano.
 
 **Caso da seguire.** Un caso minimo con input x, log-determinante e variabile latente z e output «log-likelihood, z e campione ricostruito».
 
-**Controllo.** Scrivi il risultato atteso prima del calcolo, modifica una sola quantità e localizza il primo passaggio che cambia. Il vincolo da conservare è: La densità usa il determinante Jacobiano.
+**Controllo.** Per «Cambio di variabile», scrivi il risultato atteso prima del calcolo, modifica una sola quantità e localizza il primo passaggio che cambia. Nel caso «Cambio di variabile», il vincolo da conservare è: La densità usa il determinante Jacobiano.
 
 
 ## Coupling layer
@@ -33,7 +33,7 @@ RealNVP e Glow costruiscono trasformazioni triangolari, con inversa e log-determ
 
 **Caso da seguire.** Due vettori con shape compatibile confrontati prima e dopo il blocco, osservando separatamente scala e percorso residuale in «Coupling layer».
 
-**Controllo.** Ricalcola il caso a mano e con lo snippet. Se i risultati divergono, confronta prima i valori intermedi e soltanto dopo l'output finale.
+**Controllo.** Per «Coupling layer», ricalcola il caso a mano e con lo snippet. Nel caso «Coupling layer», se i risultati divergono, confronta prima i valori intermedi e soltanto dopo l'output finale.
 
 
 La relazione centrale può essere scritta come:
@@ -56,7 +56,7 @@ L'invertibilità limita operazioni e dimensioni. Squeeze, split e permutazioni r
 
 **Caso da seguire.** Un caso in cui l'inversione richiede una trasformazione e un log-determinante coerenti.
 
-**Controllo.** Aggiungi un valore limite e verifica separatamente forma, valore e ipotesi. Una shape valida non dimostra da sola «Invertibilità e architettura».
+**Controllo.** Per «Invertibilità e architettura», aggiungi un valore limite e verifica separatamente forma, valore e ipotesi. Una shape valida non dimostra da sola «Invertibilità e architettura».
 
 
 ## Continuous normalizing flow
@@ -65,15 +65,17 @@ Una ODE definisce una trasformazione continua. La likelihood usa la variazione d
 
 **Caso da seguire.** Un dato trasformato e ricostruito con la quantità di probabilità o di errore dichiarata.
 
-**Controllo.** Mantieni fisso l'input e sostituisci soltanto il meccanismo discusso nella sezione. Il confronto deve attribuire la differenza a quel passaggio, non al setup.
+**Controllo.** Per «Continuous normalizing flow», mantieni fisso l'input e sostituisci soltanto il meccanismo discusso nella sezione. Nel caso «Continuous normalizing flow», il confronto deve attribuire la differenza a quel passaggio, non al setup.
 
 
 ## Esempio Python eseguito
 
-Il frammento seguente è lo stesso conservato nel repository. Usa valori piccoli perché l'obiettivo è osservare il meccanismo, non simulare una scala che non abbiamo eseguito.
+Per rendere osservabile normalizing flow e trasformazioni invertibili, il capitolo conserva qui l'artefatto Python eseguito. Per «Normalizing flow e trasformazioni invertibili», il caso di default usa valori piccoli per isolare il meccanismo. Il test rifiuta anche un caso non documentato di «normalizing flow e trasformazioni invertibili».
 
 ```python
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     scale = [2.0, 0.5]
     log_det = sum(math.log(value) for value in scale)
     inverse = [1.0 / value for value in scale]
@@ -95,7 +97,7 @@ I flow offrono likelihood e campionamento esatto rispetto al modello, ma possono
 
 **Caso da seguire.** Un prefisso corretto confrontato con lo stesso prefisso dopo che il modello ha prodotto il token precedente.
 
-**Controllo.** Costruisci un controesempio che rispetti il tipo di dato ma violi l'ipotesi centrale. Il test deve rendere riconoscibile perché «Sampling e costo» non si applica.
+**Controllo.** Per «Sampling e costo», costruisci un controesempio che rispetti il tipo di dato ma violi l'ipotesi centrale. Il test deve rendere riconoscibile perché «Sampling e costo» non si applica.
 
 
 ![Normalizing flow e trasformazioni invertibili: timeline](../../assets/chapters/24_normalizing_flows/FLOWS-02/candidate-v48.png)
@@ -105,13 +107,13 @@ La seconda figura mette a confronto «Continuous normalizing flow» e il limite 
 
 ## Come si collegano i passaggi
 
-- **Da «Cambio di variabile» a «Coupling layer».** Una trasformazione invertibile collega una distribuzione semplice ai dati. RealNVP e Glow costruiscono trasformazioni triangolari, con inversa e log-determinante efficienti. Il primo passaggio definisce che cosa entra nel calcolo; il secondo stabilisce la regola che produce il valore osservabile. [SRC-24-001; SRC-24-002]
+- **Da «Cambio di variabile» a «Coupling layer».** Una trasformazione invertibile collega una distribuzione semplice ai dati. RealNVP e Glow costruiscono trasformazioni triangolari, con inversa e log-determinante efficienti. Tra «Cambio di variabile» e «Coupling layer» l'ingresso viene fissato prima della regola che produce il valore. Il passaggio successivo rende misurabile «Coupling layer». [SRC-24-001; SRC-24-002]
 
-- **Da «Coupling layer» a «Invertibilità e architettura».** RealNVP e Glow costruiscono trasformazioni triangolari, con inversa e log-determinante efficienti. L'invertibilità limita operazioni e dimensioni. La regola generale viene poi letta dentro il componente: questa separazione permette di localizzare un errore prima di attribuirlo all'intero modello. [SRC-24-002; SRC-24-003]
+- **Da «Coupling layer» a «Invertibilità e architettura».** RealNVP e Glow costruiscono trasformazioni triangolari, con inversa e log-determinante efficienti. L'invertibilità limita operazioni e dimensioni. Nel caso «Invertibilità e architettura» il componente diventa il punto in cui localizzare l'errore. Da «Coupling layer» a «Invertibilità e architettura» cambia la domanda osservabile. [SRC-24-002; SRC-24-003]
 
-- **Da «Invertibilità e architettura» a «Continuous normalizing flow».** L'invertibilità limita operazioni e dimensioni. Una ODE definisce una trasformazione continua. Dopo avere reso visibile il componente, il percorso introduce la variante o l'ottimizzazione senza cambiare di nascosto il caso di partenza. [SRC-24-003; SRC-24-004]
+- **Da «Invertibilità e architettura» a «Continuous normalizing flow».** L'invertibilità limita operazioni e dimensioni. Una ODE definisce una trasformazione continua. Dopo «Invertibilità e architettura», la variante di «Continuous normalizing flow» cambia una proprietà alla volta. Il passaggio successivo rende misurabile «Continuous normalizing flow». [SRC-24-003; SRC-24-004]
 
-- **Da «Continuous normalizing flow» a «Sampling e costo».** Una ODE definisce una trasformazione continua. I flow offrono likelihood e campionamento esatto rispetto al modello, ma possono richiedere molte trasformazioni o solve numerici. L'ultimo passaggio sposta l'attenzione dal funzionamento locale alla misura: correttezza del calcolo e qualità applicativa restano domande distinte. [SRC-24-004; SRC-24-001]
+- **Da «Continuous normalizing flow» a «Sampling e costo».** Una ODE definisce una trasformazione continua. I flow offrono likelihood e campionamento esatto rispetto al modello, ma possono richiedere molte trasformazioni o solve numerici. Da «Sampling e costo» in poi la misura resta distinta dalla correttezza locale del calcolo. Da «Continuous normalizing flow» a «Sampling e costo» cambia la domanda osservabile. [SRC-24-004; SRC-24-001]
 
 La catena completa produce log-likelihood, z e campione ricostruito a partire da x, log-determinante e variabile latente z. Ogni collegamento conserva un oggetto osservabile diverso; per questo il risultato non può essere esteso oltre il limite dichiarato: l'inversione richiede una trasformazione e un log-determinante coerenti.
 
@@ -127,4 +129,4 @@ La catena completa produce log-likelihood, z e campione ricostruito a partire da
 
 ## Che cosa deve restare chiaro
 
-La lezione parte da «x, log-determinante e variabile latente z» e arriva fino a «log-likelihood, z e campione ricostruito». Il limite da conservare è questo: l'inversione richiede una trasformazione e un log-determinante coerenti. Definizioni e risultati citati sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md); la mappa dei claim è in [`CLAIMS.md`](CLAIMS.md).
+La lezione parte da «x, log-determinante e variabile latente z» e arriva fino a «log-likelihood, z e campione ricostruito». Il limite da conservare è questo: l'inversione richiede una trasformazione e un log-determinante coerenti. La formula e il codice collegati a «Sampling e costo» sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md), [`CLAIMS.md`](CLAIMS.md) e `code/`.

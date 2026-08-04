@@ -19,3 +19,10 @@ Come possono due soglie avere la stessa accuracy ma costi e distribuzioni di err
 - pannello centrale con accuracy comune;
 - footer che separa le slice con tracking disponibile e mancante.
 - domanda principale: Quale confronto o limite chiarisce «Predittore, loss e rischio empirico»?
+
+## Contratto geometrico
+
+- raster: margine di sicurezza di 20 px sul canvas 1800x1000;
+- contenimento: nessun testo oltre il proprio box o il canvas;
+- composizione: nessuna sovrapposizione o tangenza intenzionale tra elementi fratelli;
+- fonte: `GEOMETRY.json` e checklist dell'audit storico.

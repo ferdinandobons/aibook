@@ -45,3 +45,10 @@ Quattro schede parallele:
 - `SNIP-NUM-001` per i valori stampati;
 - renderer: `scripts/generate_numerics_visuals.py` e revisione `generate_numerics_visuals_v2.py`.
 - domanda principale: Quale trasformazione centrale rende osservabile «I numeri del modello non sono numeri reali» nel capitolo 9?
+
+## Contratto geometrico
+
+- raster: margine di sicurezza di 20 px sul canvas 1800x1000;
+- contenimento: nessun testo oltre il proprio box o il canvas;
+- composizione: nessuna sovrapposizione o tangenza intenzionale tra elementi fratelli;
+- fonte: `GEOMETRY.json` e checklist dell'audit storico.

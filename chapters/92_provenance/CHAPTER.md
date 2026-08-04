@@ -14,7 +14,7 @@ deferred: benchmark applicativi non eseguiti e approvazione autoriale delle visu
 
 # Capitolo 92. Watermarking e provenienza dei contenuti
 
-La domanda guida di questa lezione è come collegare «Provenienza crittografica» e «Policy e interfaccia» senza perdere il contratto tecnico di watermarking e provenienza dei contenuti. L'oggetto osservato è un contenuto e la sua attestazione di provenienza. Il contratto locale è: input, payload, metadata, manifest e chiave o watermark; operazione, digest, firma, C2PA, watermark e detection; output, record verificabile e stato di rilevazione. Il caso guida è questo: Cambiare il payload cambia il digest e rende rilevabile la manomissione. Il confine da mantenere esplicito è: provenienza dell'artefatto non certifica la verità del contenuto.
+Questa mappa di watermarking e provenienza dei contenuti parte da «Provenienza crittografica» e arriva a «Policy e interfaccia» conservando le proprietà che non sono state misurate. L'oggetto osservato è un contenuto e la sua attestazione di provenienza. Il contratto locale dichiara input, payload, metadata, manifest e chiave o watermark; operazione, digest, firma, C2PA, watermark e detection; output, record verificabile e stato di rilevazione. Per fissare il riferimento usiamo Cambiare il payload cambia il digest e rende rilevabile la manomissione. Il limite da non nascondere è: provenienza dell'artefatto non certifica la verità del contenuto.
 
 ## Provenienza crittografica
 
@@ -24,7 +24,7 @@ Il digest collega contenuto e metadati senza certificare la verità semantica.
 
 **Caso da seguire.** Cambiare il payload cambia il digest e rende rilevabile la manomissione.
 
-**Controllo.** Classifica lo stesso caso lungo un solo asse alla volta e annota quale proprietà non è stata misurata.
+**Controllo.** Per «Provenienza crittografica», classifica lo stesso caso lungo un solo asse alla volta e annota quale proprietà non è stata misurata.
 
 
 ## C2PA
@@ -33,7 +33,7 @@ Credenziali di contenuto registrano asserzioni e ingredienti. Assenza di credenz
 
 **Caso da seguire.** Digest di payload e metadati con verifica di una modifica.
 
-**Controllo.** Cambia la proprietà che distingue «C2PA» dalle categorie vicine. Se la classificazione non cambia, la distinzione va formulata meglio.
+**Controllo.** Cambia la proprietà che distingue «C2PA» dalle categorie vicine. Nel caso «C2PA», se la classificazione non cambia, la distinzione va formulata meglio.
 
 
 ## Watermarking
@@ -42,7 +42,14 @@ Un generatore può modulare token o segnali per consentire rilevamento statistic
 
 **Caso da seguire.** Un payload modificato dopo la firma, con digest e metadati confrontati separatamente.
 
-**Controllo.** Confronta un caso positivo e uno di confine usando la medesima definizione; non trasformare l'esempio in una graduatoria generale.
+**Controllo.** Per «Watermarking», confronta un caso positivo e uno di confine usando la medesima definizione; non trasformare l'esempio in una graduatoria generale.
+
+
+Per questo capitolo la notazione compatta chiarisce input, trasformazione e risultato.
+
+**Schema concettuale.** `digest = hash(content + metadata)`
+
+Il digest collega contenuto e metadati senza certificare la verità semantica. [SRC-92-001]
 
 
 ![Watermarking e provenienza dei contenuti: manifest](../../assets/chapters/92_provenance/PROVENANCE-01/candidate-v48.png)
@@ -65,15 +72,17 @@ Provenienza, disclosure e conservazione dei metadati devono essere progettate lu
 
 **Caso da seguire.** Una traiettoria di due passi in cui l'azione scelta modifica lo stato successivo prima del reward.
 
-**Controllo.** Limita la conclusione alla proprietà dichiarata: Provenienza, disclosure e conservazione dei metadati devono essere progettate lungo la pipeline di pubblicazione. Le dimensioni non osservate restano aperte.
+**Controllo.** Per «Policy e interfaccia», limita la conclusione alla proprietà dichiarata: Provenienza, disclosure e conservazione dei metadati devono essere progettate lungo la pipeline di pubblicazione. Nel caso «Policy e interfaccia», le dimensioni non osservate restano aperte.
 
 
 ## Esempio Python eseguito
 
-Il frammento seguente è lo stesso conservato nel repository. Usa valori piccoli perché l'obiettivo è osservare il meccanismo, non simulare una scala che non abbiamo eseguito.
+Per rendere osservabile watermarking e provenienza dei contenuti, il capitolo conserva qui l'artefatto Python eseguito. Per «Watermarking e provenienza dei contenuti», il caso di default usa valori piccoli per isolare il meccanismo. Il test rifiuta anche un caso non documentato di «watermarking e provenienza dei contenuti».
 
 ```python
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     payload = "Il pacco non è arrivato"
     manifest = {"payload": payload, "creator": "local-test", "version": "v1"}
     digest = hashlib.sha256(json.dumps(manifest, ensure_ascii=False, sort_keys=True).encode()).hexdigest()
@@ -98,13 +107,13 @@ La seconda figura mette a confronto «Detection» e il limite discusso in «Poli
 
 ## Come si collegano i passaggi
 
-- **Da «Provenienza crittografica» a «C2PA».** Firma e manifest collegano un contenuto a un attore o a una catena di modifiche, se le chiavi e il workflow sono affidabili. Credenziali di contenuto registrano asserzioni e ingredienti. La definizione iniziale stabilisce l'asse del confronto; la categoria successiva aggiunge una proprietà senza creare una classifica implicita. [SRC-92-001; SRC-92-002]
+- **Da «Provenienza crittografica» a «C2PA».** Firma e manifest collegano un contenuto a un attore o a una catena di modifiche, se le chiavi e il workflow sono affidabili. Credenziali di contenuto registrano asserzioni e ingredienti. «Provenienza crittografica» stabilisce l'asse e «C2PA» aggiunge una proprietà senza creare una graduatoria. Il passaggio successivo rende misurabile «C2PA». [SRC-92-001; SRC-92-002]
 
-- **Da «C2PA» a «Watermarking».** Credenziali di contenuto registrano asserzioni e ingredienti. Un generatore può modulare token o segnali per consentire rilevamento statistico. Il terzo passaggio verifica se le categorie restano distinguibili sullo stesso caso e impedisce che termini vicini diventino sinonimi. [SRC-92-002; SRC-92-003]
+- **Da «C2PA» a «Watermarking».** Credenziali di contenuto registrano asserzioni e ingredienti. Un generatore può modulare token o segnali per consentire rilevamento statistico. Il confronto tra «C2PA» e «Watermarking» mantiene le categorie distinguibili sullo stesso caso. Da «C2PA» a «Watermarking» cambia la domanda osservabile. [SRC-92-002; SRC-92-003]
 
-- **Da «Watermarking» a «Detection».** Un generatore può modulare token o segnali per consentire rilevamento statistico. Classificatori di contenuto sintetico degradano sotto editing, nuovi modelli e shift. La quarta sezione introduce il punto in cui l'asse scelto smette di bastare e richiede una nuova osservazione. [SRC-92-003; SRC-92-003]
+- **Da «Watermarking» a «Detection».** Un generatore può modulare token o segnali per consentire rilevamento statistico. Classificatori di contenuto sintetico degradano sotto editing, nuovi modelli e shift. «Detection» mostra il punto in cui l'asse di «Watermarking» non è più sufficiente. Il passaggio successivo rende misurabile «Detection». [SRC-92-003; SRC-92-003]
 
-- **Da «Detection» a «Policy e interfaccia».** Classificatori di contenuto sintetico degradano sotto editing, nuovi modelli e shift. Provenienza, disclosure e conservazione dei metadati devono essere progettate lungo la pipeline di pubblicazione. La sezione finale riunisce le dimensioni della valutazione, ma conserva i limiti di ciascuna invece di fonderle in un unico punteggio. [SRC-92-003; SRC-92-004]
+- **Da «Detection» a «Policy e interfaccia».** Classificatori di contenuto sintetico degradano sotto editing, nuovi modelli e shift. Provenienza, disclosure e conservazione dei metadati devono essere progettate lungo la pipeline di pubblicazione. Il passaggio su «Policy e interfaccia» riunisce più dimensioni senza cancellarne i limiti. Da «Detection» a «Policy e interfaccia» cambia la domanda osservabile. [SRC-92-003; SRC-92-004]
 
 La catena completa produce record verificabile e stato di rilevazione a partire da payload, metadata, manifest e chiave o watermark. Ogni collegamento conserva un oggetto osservabile diverso; per questo il risultato non può essere esteso oltre il limite dichiarato: provenienza dell'artefatto non certifica la verità del contenuto.
 
@@ -120,4 +129,4 @@ La catena completa produce record verificabile e stato di rilevazione a partire 
 
 ## Una mappa, non una graduatoria
 
-La lezione parte da «payload, metadata, manifest e chiave o watermark» e arriva fino a «record verificabile e stato di rilevazione». Il limite da conservare è questo: provenienza dell'artefatto non certifica la verità del contenuto. Definizioni e risultati citati sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md); la mappa dei claim è in [`CLAIMS.md`](CLAIMS.md).
+La lezione parte da «payload, metadata, manifest e chiave o watermark» e arriva fino a «record verificabile e stato di rilevazione». Il limite da conservare è questo: provenienza dell'artefatto non certifica la verità del contenuto. Il confronto di «Policy e interfaccia» resta verificabile nei dossier [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md) e [`CLAIMS.md`](CLAIMS.md), senza trasformare la mappa in una graduatoria.

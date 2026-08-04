@@ -2,7 +2,7 @@
 
 - versione: 0.5.0-draft3
 - data: 4 agosto 2026
-- parole fuori dai blocchi di codice: 1018
+- parole fuori dai blocchi di codice: 1075
 - nuclei semantici: 5 (Inferenza approssimata; ELBO; Reparameterization trick; Posterior collapse; VQ-VAE)
 - paragrafi del vecchio scaffold: assenti secondo `audit_book_quality.py`
 - ripetizioni lunghe tra tre o più capitoli: assenti secondo l'audit trasversale

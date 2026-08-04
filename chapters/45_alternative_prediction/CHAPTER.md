@@ -14,7 +14,7 @@ deferred: benchmark applicativi non eseguiti e approvazione autoriale delle visu
 
 # Capitolo 45. Byte, predizione multi-token e language diffusion
 
-La domanda guida di questa lezione è come collegare «Byte e caratteri» e «Assi separati» senza perdere il contratto tecnico di byte, predizione multi-token e language diffusion. L'oggetto osservato è unità di predizione dal byte al token multiplo. Il contratto locale è: input, byte, gerarchia, target e numero di passi; operazione, raggruppamento, multi-token prediction o diffusione discreta; output, unità predette, loss e durata di decoding. Il caso guida è questo: La stessa stringa convertita prima in code point e poi in byte UTF-8, conservando la reversibilità. Il confine da mantenere esplicito è: granularità della rappresentazione e parallelismo sono assi distinti.
+Il punto di vista di byte, predizione multi-token e language diffusion nasce dal confronto tra «Byte e caratteri» e «Assi separati», non da una graduatoria. L'oggetto osservato è unità di predizione dal byte al token multiplo. Il contratto locale dichiara input, byte, gerarchia, target e numero di passi; operazione, raggruppamento, multi-token prediction o diffusione discreta; output, unità predette, loss e durata di decoding. Per fissare il riferimento usiamo La stessa stringa convertita prima in code point e poi in byte UTF-8, conservando la reversibilità. Il limite da non nascondere è: granularità della rappresentazione e parallelismo sono assi distinti.
 
 ## Byte e caratteri
 
@@ -24,7 +24,7 @@ Byte, unità gerarchiche e numero di passi sono assi separati del design.
 
 **Caso da seguire.** La stessa stringa convertita prima in code point e poi in byte UTF-8, conservando la reversibilità.
 
-**Controllo.** Classifica lo stesso caso lungo un solo asse alla volta e annota quale proprietà non è stata misurata.
+**Controllo.** Per «Byte e caratteri», classifica lo stesso caso lungo un solo asse alla volta e annota quale proprietà non è stata misurata.
 
 
 ## Gerarchie di byte
@@ -33,7 +33,7 @@ Patch fisse o dinamiche riducono la lunghezza vista dal modello globale. [SRC-45
 
 **Caso da seguire.** Per «Gerarchie di byte» si mantiene l'input del capitolo e si isola questa condizione: Patch fisse o dinamiche riducono la lunghezza vista dal modello globale.
 
-**Controllo.** Cambia la proprietà che distingue «Gerarchie di byte» dalle categorie vicine. Se la classificazione non cambia, la distinzione va formulata meglio.
+**Controllo.** Cambia la proprietà che distingue «Gerarchie di byte» dalle categorie vicine. Nel caso «Gerarchie di byte», se la classificazione non cambia, la distinzione va formulata meglio.
 
 
 ## Predizione multi-token
@@ -42,7 +42,14 @@ Head aggiuntive predicono più offset futuri e forniscono segnali oltre il token
 
 **Caso da seguire.** Un prefisso corto con ID, lunghezza, posizione e output del token successivo dichiarati.
 
-**Controllo.** Confronta un caso positivo e uno di confine usando la medesima definizione; non trasformare l'esempio in una graduatoria generale.
+**Controllo.** Per «Predizione multi-token», confronta un caso positivo e uno di confine usando la medesima definizione; non trasformare l'esempio in una graduatoria generale.
+
+
+Qui la notazione serve a fissare un'interfaccia tra componenti.
+
+**Schema concettuale.** `x = decode(bytes, hierarchy, steps)`
+
+Byte, unità gerarchiche e numero di passi sono assi separati del design. [SRC-45-001]
 
 
 ![Byte, predizione multi-token e language diffusion: pipeline](../../assets/chapters/45_alternative_prediction/ALT-01/candidate-v47.png)
@@ -65,15 +72,17 @@ Unità del testo, architettura e obiettivo di predizione sono scelte distinte ch
 
 **Caso da seguire.** Un messaggio con ruolo, contenuto e maschera che assegna il gradiente soltanto alla risposta.
 
-**Controllo.** Limita la conclusione alla proprietà dichiarata: Unità del testo, architettura e obiettivo di predizione sono scelte distinte che interagiscono. Le dimensioni non osservate restano aperte.
+**Controllo.** Per «Assi separati», limita la conclusione alla proprietà dichiarata: Unità del testo, architettura e obiettivo di predizione sono scelte distinte che interagiscono. Nel caso «Assi separati», le dimensioni non osservate restano aperte.
 
 
 ## Esempio Python eseguito
 
-Il frammento seguente è lo stesso conservato nel repository. Usa valori piccoli perché l'obiettivo è osservare il meccanismo, non simulare una scala che non abbiamo eseguito.
+Il caso computazionale di byte, predizione multi-token e language diffusion è riportato senza trasformazioni: il file e l'output sono quelli verificati. Per «Byte, predizione multi-token e language diffusion», il caso di default usa valori piccoli per isolare il meccanismo. La suite conserva inoltre una failure esplicita per separare il contratto osservato da «byte, predizione multi-token e language diffusion».
 
 ```python
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     payload = "AI"
     encoded = list(payload.encode("utf-8"))
     groups = [encoded[index:index + 2] for index in range(0, len(encoded), 2)]
@@ -96,13 +105,13 @@ La seconda figura mette a confronto «Diffusione linguistica» e il limite discu
 
 ## Come si collegano i passaggi
 
-- **Da «Byte e caratteri» a «Gerarchie di byte».** Modelli byte-level usano un vocabolario piccolo e sequenze più lunghe. Patch fisse o dinamiche riducono la lunghezza vista dal modello globale. La definizione iniziale stabilisce l'asse del confronto; la categoria successiva aggiunge una proprietà senza creare una classifica implicita. [SRC-45-001; SRC-45-002]
+- **Da «Byte e caratteri» a «Gerarchie di byte».** Modelli byte-level usano un vocabolario piccolo e sequenze più lunghe. Patch fisse o dinamiche riducono la lunghezza vista dal modello globale. «Byte e caratteri» stabilisce l'asse e «Gerarchie di byte» aggiunge una proprietà senza creare una graduatoria. Da «Byte e caratteri» a «Gerarchie di byte» cambia la domanda osservabile. [SRC-45-001; SRC-45-002]
 
-- **Da «Gerarchie di byte» a «Predizione multi-token».** Patch fisse o dinamiche riducono la lunghezza vista dal modello globale. Head aggiuntive predicono più offset futuri e forniscono segnali oltre il token immediato. Il terzo passaggio verifica se le categorie restano distinguibili sullo stesso caso e impedisce che termini vicini diventino sinonimi. [SRC-45-002; SRC-45-003]
+- **Da «Gerarchie di byte» a «Predizione multi-token».** Patch fisse o dinamiche riducono la lunghezza vista dal modello globale. Head aggiuntive predicono più offset futuri e forniscono segnali oltre il token immediato. Il confronto tra «Gerarchie di byte» e «Predizione multi-token» mantiene le categorie distinguibili sullo stesso caso. Il passaggio successivo rende misurabile «Predizione multi-token». [SRC-45-002; SRC-45-003]
 
-- **Da «Predizione multi-token» a «Diffusione linguistica».** Head aggiuntive predicono più offset futuri e forniscono segnali oltre il token immediato. Processi continui, discreti o masked denoisano più posizioni attraverso step iterativi. La quarta sezione introduce il punto in cui l'asse scelto smette di bastare e richiede una nuova osservazione. [SRC-45-003; SRC-45-004]
+- **Da «Predizione multi-token» a «Diffusione linguistica».** Head aggiuntive predicono più offset futuri e forniscono segnali oltre il token immediato. Processi continui, discreti o masked denoisano più posizioni attraverso step iterativi. «Diffusione linguistica» mostra il punto in cui l'asse di «Predizione multi-token» non è più sufficiente. Da «Predizione multi-token» a «Diffusione linguistica» cambia la domanda osservabile. [SRC-45-003; SRC-45-004]
 
-- **Da «Diffusione linguistica» a «Assi separati».** Processi continui, discreti o masked denoisano più posizioni attraverso step iterativi. Unità del testo, architettura e obiettivo di predizione sono scelte distinte che interagiscono. La sezione finale riunisce le dimensioni della valutazione, ma conserva i limiti di ciascuna invece di fonderle in un unico punteggio. [SRC-45-004; SRC-45-001]
+- **Da «Diffusione linguistica» a «Assi separati».** Processi continui, discreti o masked denoisano più posizioni attraverso step iterativi. Unità del testo, architettura e obiettivo di predizione sono scelte distinte che interagiscono. Il passaggio su «Assi separati» riunisce più dimensioni senza cancellarne i limiti. Il passaggio successivo rende misurabile «Assi separati». [SRC-45-004; SRC-45-001]
 
 La catena completa produce unità predette, loss e durata di decoding a partire da byte, gerarchia, target e numero di passi. Ogni collegamento conserva un oggetto osservabile diverso; per questo il risultato non può essere esteso oltre il limite dichiarato: granularità della rappresentazione e parallelismo sono assi distinti.
 
@@ -118,4 +127,4 @@ La catena completa produce unità predette, loss e durata di decoding a partire 
 
 ## Una mappa, non una graduatoria
 
-La lezione parte da «byte, gerarchia, target e numero di passi» e arriva fino a «unità predette, loss e durata di decoding». Il limite da conservare è questo: granularità della rappresentazione e parallelismo sono assi distinti. Definizioni e risultati citati sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md); la mappa dei claim è in [`CLAIMS.md`](CLAIMS.md).
+La lezione parte da «byte, gerarchia, target e numero di passi» e arriva fino a «unità predette, loss e durata di decoding». Il limite da conservare è questo: granularità della rappresentazione e parallelismo sono assi distinti. Il confronto di «Assi separati» resta verificabile nei dossier [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md) e [`CLAIMS.md`](CLAIMS.md), senza trasformare la mappa in una graduatoria.

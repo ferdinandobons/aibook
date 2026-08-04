@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-import hashlib
 import json
-import math
-import statistics
-from collections import Counter
 
 CHAPTER = 72
 TITLE = 'Sicurezza operativa degli agenti'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     request = {"tool": "refund", "scope": "order:A1"}
     policy = {"allowed_tools": {"lookup_order"}, "requires_approval": {"refund"}}
     allowed = request["tool"] in policy["allowed_tools"]

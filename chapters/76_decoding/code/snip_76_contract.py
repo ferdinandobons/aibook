@@ -1,10 +1,7 @@
 from __future__ import annotations
 
-import hashlib
 import json
 import math
-import statistics
-from collections import Counter
 
 CHAPTER = 76
 TITLE = 'Decoding e generazione vincolata'
@@ -19,7 +16,9 @@ def normalize(values):
     return [value / total for value in exponentials]
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     logits = [2.0, 1.0, 0.5]
     greedy = max(range(len(logits)), key=logits.__getitem__)
     sampled_support = [index for index, probability in enumerate(normalize(logits)) if probability >= 0.2]

@@ -50,3 +50,10 @@ Ogni fase produce decisioni e versioni rintracciabili. Il diagramma non impone u
 - direzione del ciclo inequivocabile;
 - nessuna fase appare come conclusione definitiva del processo.
 - domanda principale: Quale trasformazione centrale rende osservabile «Prima del modello viene il problema» nel capitolo 3?
+
+## Contratto geometrico
+
+- raster: margine di sicurezza di 20 px sul canvas 1800x1000;
+- contenimento: nessun testo oltre il proprio box o il canvas;
+- composizione: nessuna sovrapposizione o tangenza intenzionale tra elementi fratelli;
+- fonte: `GEOMETRY.json` e checklist dell'audit storico.

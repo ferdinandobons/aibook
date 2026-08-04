@@ -2,7 +2,7 @@
 
 - versione: 0.5.0-draft3
 - data: 4 agosto 2026
-- parole fuori dai blocchi di codice: 967
+- parole fuori dai blocchi di codice: 1047
 - nuclei semantici: 5 (Least privilege; Sandbox; Human approval; Rollback e audit; Prompt injection)
 - paragrafi del vecchio scaffold: assenti secondo `audit_book_quality.py`
 - ripetizioni lunghe tra tre o più capitoli: assenti secondo l'audit trasversale

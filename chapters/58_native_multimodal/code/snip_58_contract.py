@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-import hashlib
 import json
-import math
-import statistics
-from collections import Counter
 
 CHAPTER = 58
 TITLE = 'Modelli multimodali nativi e any-to-any'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     sequence = [("text", 1), ("image", 7), ("text", 2)]
     vocabulary = {"text": {1, 2}, "image": {7}}
     valid = all(token in vocabulary[modality] for modality, token in sequence)

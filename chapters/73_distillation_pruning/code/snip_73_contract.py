@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-import hashlib
 import json
-import math
-import statistics
-from collections import Counter
 
 CHAPTER = 73
 TITLE = 'Distillazione e pruning'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     teacher = [0.8, 0.2]
     student = [0.6, 0.4]
     distillation_error = sum((a - b) ** 2 for a, b in zip(teacher, student))

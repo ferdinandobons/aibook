@@ -14,7 +14,7 @@ deferred: benchmark applicativi non eseguiti e approvazione autoriale delle visu
 
 # Capitolo 70. Multi-agent, browser, computer e code agents
 
-La domanda guida di questa lezione è come collegare «Browser agent» e «Confronto con un singolo workflow» senza perdere il contratto tecnico di multi-agent, browser, computer e code agents. L'oggetto osservato è una traiettoria composta da agenti e strumenti. Il contratto locale è: input, task, ruoli, browser, codice e handoff; operazione, delega, comunicazione, esecuzione e aggregazione; output, risultato con responsabilità e log per componente. Il caso guida è questo: Planner, executor e critic scambiano tre messaggi con ruoli espliciti. Il confine da mantenere esplicito è: più agenti ampliano anche superficie e costo dell'errore.
+Il percorso di multi-agent, browser, computer e code agents attraversa «Browser agent» e «Confronto con un singolo workflow» senza attribuire al solo modello ciò che dipende dal sistema. L'oggetto osservato è una traiettoria composta da agenti e strumenti. Il contratto locale dichiara input, task, ruoli, browser, codice e handoff; operazione, delega, comunicazione, esecuzione e aggregazione; output, risultato con responsabilità e log per componente. La situazione minima da seguire è Planner, executor e critic scambiano tre messaggi con ruoli espliciti. Il limite da non nascondere è: più agenti ampliano anche superficie e costo dell'errore.
 
 ## Browser agent
 
@@ -24,7 +24,7 @@ Più componenti ampliano la traiettoria e anche la superficie di errore.
 
 **Caso da seguire.** Planner, executor e critic scambiano tre messaggi con ruoli espliciti.
 
-**Controllo.** Registra richiesta, decisione, stato e output finale. Un esito plausibile non deve nascondere il componente che lo ha prodotto.
+**Controllo.** Per «Browser agent», registra richiesta, decisione, stato e output finale. Nel caso «Browser agent», un esito plausibile non deve nascondere il componente che lo ha prodotto.
 
 
 ## Computer use
@@ -34,6 +34,13 @@ Screenshot, coordinate e azioni di input formano un loop percettivo. Risoluzione
 **Caso da seguire.** Un planner delega ricerca e verifica a due ruoli separati.
 
 **Controllo.** Ripeti «Computer use» con una capability o un'autorizzazione rimossa e verifica che la failure preceda qualsiasi side effect.
+
+
+Qui la notazione serve a fissare un'interfaccia tra componenti.
+
+**Schema concettuale.** `trajectory = compose(agents, tools, browser)`
+
+Più componenti ampliano la traiettoria e anche la superficie di errore. [SRC-70-001]
 
 
 ![Multi-agent, browser, computer e code agents: graph](../../assets/chapters/70_agent_systems/SYSTEMS-01/candidate-v50.png)
@@ -47,7 +54,7 @@ Repository, test, shell e diff definiscono l'ambiente. Modifiche devono essere l
 
 **Caso da seguire.** Una traiettoria minima osservazione-azione-tool-verifica in cui una chiamata fuori allowlist viene bloccata prima dell'esecuzione.
 
-**Controllo.** Separa il test del singolo componente dal test end-to-end, usando lo stesso input e la stessa configurazione versionata.
+**Controllo.** Per «Code agent», separa il test del singolo componente dal test end-to-end, usando lo stesso input e la stessa configurazione versionata.
 
 
 ## Multi-agent
@@ -56,7 +63,7 @@ Ruoli distinti possono parallelizzare o criticare, ma introducono comunicazione,
 
 **Caso da seguire.** Per «Multi-agent» si mantiene l'input del capitolo e si isola questa condizione: Ruoli distinti possono parallelizzare o criticare, ma introducono comunicazione, ridondanza e propagazione degli errori.
 
-**Controllo.** Introduci una failure a un solo confine e controlla che log, stato e recovery identifichino quel confine senza ambiguità.
+**Controllo.** Per «Multi-agent», introduci una failure a un solo confine e controlla che log, stato e recovery identifichino quel confine senza ambiguità.
 
 
 ## Confronto con un singolo workflow
@@ -65,7 +72,7 @@ Il beneficio deve essere misurato rispetto a una baseline con stesso modello, to
 
 **Caso da seguire.** Un dato trasformato e ricostruito con la quantità di probabilità o di errore dichiarata.
 
-**Controllo.** Confronta il comportamento completo, non soltanto l'ultimo messaggio. Il risultato resta limitato da: Il beneficio deve essere misurato rispetto a una baseline con stesso modello, tool e budget.
+**Controllo.** Per «Confronto con un singolo workflow», confronta il comportamento completo, non soltanto l'ultimo messaggio. Nel caso «Confronto con un singolo workflow», il risultato resta limitato da: Il beneficio deve essere misurato rispetto a una baseline con stesso modello, tool e budget.
 
 
 ![Multi-agent, browser, computer e code agents: compare](../../assets/chapters/70_agent_systems/SYSTEMS-02/candidate-v48.png)
@@ -75,10 +82,12 @@ La seconda figura mette a confronto «Multi-agent» e il limite discusso in «Co
 
 ## Esempio Python eseguito
 
-Il frammento seguente è lo stesso conservato nel repository. Usa valori piccoli perché l'obiettivo è osservare il meccanismo, non simulare una scala che non abbiamo eseguito.
+Questa sezione apre il contratto Python di multi-agent, browser, computer e code agents: il lettore può eseguire lo stesso file e confrontare il risultato. Per «Multi-agent, browser, computer e code agents», il caso di default usa valori piccoli per isolare il meccanismo. Il caso non supportato viene provato separatamente, così «multi-agent, browser, computer e code agents» non viene generalizzato oltre l'esempio.
 
 ```python
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     messages = [("planner", "lookup"), ("executor", "done"), ("critic", "pass")]
     roles = [role for role, _message in messages]
     return {"roles": roles, "message_count": len(messages), "invariant": "multi-agent coordination exposes role and message boundaries"}
@@ -95,13 +104,13 @@ Il test associato è [`code/test_70_contract.py`](code/test_70_contract.py); l'o
 
 ## Come si collegano i passaggi
 
-- **Da «Browser agent» a «Computer use».** L'agente interpreta pagine, link e form e deve distinguere contenuto della pagina da istruzioni autorizzate. Screenshot, coordinate e azioni di input formano un loop percettivo. Il contratto iniziale nomina messaggi e confini; il componente successivo implementa una parte del percorso senza ereditare autorizzazioni implicite. [SRC-70-001; SRC-70-002]
+- **Da «Browser agent» a «Computer use».** L'agente interpreta pagine, link e form e deve distinguere contenuto della pagina da istruzioni autorizzate. Screenshot, coordinate e azioni di input formano un loop percettivo. «Browser agent» nomina il confine e «Computer use» implementa il percorso senza ereditare autorizzazioni implicite. Il passaggio successivo rende misurabile «Computer use». [SRC-70-001; SRC-70-002]
 
-- **Da «Computer use» a «Code agent».** Screenshot, coordinate e azioni di input formano un loop percettivo. Repository, test, shell e diff definiscono l'ambiente. Il terzo passaggio compone più componenti e rende quindi necessario conservare stato, identità e decisione oltre all'output finale. [SRC-70-002; SRC-70-003]
+- **Da «Computer use» a «Code agent».** Screenshot, coordinate e azioni di input formano un loop percettivo. Repository, test, shell e diff definiscono l'ambiente. Componendo «Computer use» e «Code agent» diventa necessario conservare stato, identità e decisione. Da «Computer use» a «Code agent» cambia la domanda osservabile. [SRC-70-002; SRC-70-003]
 
-- **Da «Code agent» a «Multi-agent».** Repository, test, shell e diff definiscono l'ambiente. Ruoli distinti possono parallelizzare o criticare, ma introducono comunicazione, ridondanza e propagazione degli errori. La quarta sezione introduce failure e recovery nel punto in cui possono ancora precedere un side effect o una perdita di stato. [SRC-70-003; SRC-70-004]
+- **Da «Code agent» a «Multi-agent».** Repository, test, shell e diff definiscono l'ambiente. Ruoli distinti possono parallelizzare o criticare, ma introducono comunicazione, ridondanza e propagazione degli errori. «Multi-agent» introduce failure e recovery prima di un side effect o di una perdita di stato. Il passaggio successivo rende misurabile «Multi-agent». [SRC-70-003; SRC-70-004]
 
-- **Da «Multi-agent» a «Confronto con un singolo workflow».** Ruoli distinti possono parallelizzare o criticare, ma introducono comunicazione, ridondanza e propagazione degli errori. Il beneficio deve essere misurato rispetto a una baseline con stesso modello, tool e budget. La chiusura valuta il comportamento end-to-end: un componente corretto non basta se il collegamento, il carico o la policy cambiano l'esito. [SRC-70-004; SRC-70-001]
+- **Da «Multi-agent» a «Confronto con un singolo workflow».** Ruoli distinti possono parallelizzare o criticare, ma introducono comunicazione, ridondanza e propagazione degli errori. Il beneficio deve essere misurato rispetto a una baseline con stesso modello, tool e budget. La chiusura su «Confronto con un singolo workflow» valuta il sistema completo, non soltanto il componente iniziale. Da «Multi-agent» a «Confronto con un singolo workflow» cambia la domanda osservabile. [SRC-70-004; SRC-70-001]
 
 La catena completa produce risultato con responsabilità e log per componente a partire da task, ruoli, browser, codice e handoff. Ogni collegamento conserva un oggetto osservabile diverso; per questo il risultato non può essere esteso oltre il limite dichiarato: più agenti ampliano anche superficie e costo dell'errore.
 
@@ -117,4 +126,4 @@ La catena completa produce risultato con responsabilità e log per componente a 
 
 ## Il confine operativo
 
-La lezione parte da «task, ruoli, browser, codice e handoff» e arriva fino a «risultato con responsabilità e log per componente». Il limite da conservare è questo: più agenti ampliano anche superficie e costo dell'errore. Definizioni e risultati citati sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md); la mappa dei claim è in [`CLAIMS.md`](CLAIMS.md).
+La lezione parte da «task, ruoli, browser, codice e handoff» e arriva fino a «risultato con responsabilità e log per componente». Il limite da conservare è questo: più agenti ampliano anche superficie e costo dell'errore. Il confine di «Confronto con un singolo workflow» va ricontrollato tra claim, fonti e artefatti: i rinvii sono [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md), [`CLAIMS.md`](CLAIMS.md) e `code/`.

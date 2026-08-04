@@ -17,7 +17,7 @@ Seguire **Fondamenti della modellazione generativa** da un dato x, un rumore eps
 2. **Modelli espliciti e impliciti.** Un modello esplicito assegna una densità o probabilità valutabile. Un modello implicito definisce il campionamento senza una likelihood semplice. Prova: SRC-20-002.
 3. **Variabili latenti.** Una variabile latente introduce struttura non osservata. L'inferenza deve collegare dati e latenti, esattamente o mediante approssimazione. Prova: SRC-20-003.
 4. **Energy-based model.** Una energia non normalizzata assegna punteggi alle configurazioni. La costante di partizione rende difficile la likelihood in molti casi. Prova: SRC-20-004.
-5. **Qualità, copertura e valutazione.** Campioni plausibili non garantiscono copertura. Likelihood e precision-recall generativa rispondono a domande diverse e richiedono protocolli dichiarati. Prova: SRC-20-001; SRC-20-005.
+5. **Qualità, copertura e valutazione.** Campioni plausibili non garantiscono copertura. Likelihood e precision-recall generativa rispondono a domande diverse e richiedono protocolli dichiarati. Prova: SRC-20-005.
 
 ## Prove e artefatti
 

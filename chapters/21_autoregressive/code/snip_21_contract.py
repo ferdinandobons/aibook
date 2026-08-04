@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-import hashlib
 import json
-import math
-import statistics
-from collections import Counter
 
 CHAPTER = 21
 TITLE = 'Modelli autoregressivi'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     logits = [[2.0, 1.0, 0.0], [4.0, 3.0, 2.0]]
     causal = [[True, False, False], [True, True, False]]
     visible = [[row[j] for j in range(len(row)) if causal[i][j]] for i, row in enumerate(logits)]

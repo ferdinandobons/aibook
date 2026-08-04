@@ -25,13 +25,17 @@ class CalculusBackpropTests(unittest.TestCase):
         autograd_loss, automatic = autograd_gradients()
         self.assertAlmostEqual(forward.loss, autograd_loss)
         for name in ("w1", "b1", "w2", "b2"):
-            self.assertAlmostEqual(getattr(manual, name), getattr(automatic, name), places=12)
+            self.assertAlmostEqual(
+                getattr(manual, name), getattr(automatic, name), places=12
+            )
 
     def test_finite_differences_match_manual(self) -> None:
         _, manual = manual_forward_backward(*INITIAL)
         numerical = finite_difference_gradients()
         for name in ("w1", "b1", "w2", "b2"):
-            self.assertAlmostEqual(getattr(manual, name), getattr(numerical, name), places=7)
+            self.assertAlmostEqual(
+                getattr(manual, name), getattr(numerical, name), places=7
+            )
 
     def test_gradcheck(self) -> None:
         self.assertTrue(gradcheck_passes())

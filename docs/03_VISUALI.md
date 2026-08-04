@@ -33,6 +33,12 @@ Ogni immagine tecnica:
 
 Una violazione blocca l'approvazione.
 
+### Gate geometrico automatico
+
+Le visuali generate con il renderer corrente conservano un manifest `GEOMETRY.json`. Il manifest registra box semantici, testo, connettori, contenimento nel canvas e relazioni di nesting. Sul canvas canonico `1800x1000` il margine sicuro è di `20 px` e la distanza minima tra elementi indipendenti è di `8 px`.
+
+Il gate fallisce quando un elemento esce dal canvas, quando testo o shape si sovrappongono senza essere contenuti intenzionalmente, quando due elementi indipendenti si toccano o quando un connettore attraversa testo. Un controllo raster aggiuntivo verifica dimensioni, angoli bianchi e contenuto vicino al bordo. Le `28` figure storiche senza manifest semantico usano esplicitamente il percorso più limitato `raster + checklist`: non vengono presentate come se fosse possibile recuperare automaticamente la geometria dal PNG.
+
 ## 3. Orientamento
 
 Sono ammessi orientamento orizzontale e verticale. La scelta viene registrata in `SPEC.md` e dipende dal contenuto.

@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-import hashlib
 import json
-import math
-import statistics
-from collections import Counter
 
 CHAPTER = 23
 TITLE = 'Generative Adversarial Network'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     real = [0.9, 0.8]
     fake = [0.2, 0.3]
     discriminator_gap = sum(real) / len(real) - sum(fake) / len(fake)

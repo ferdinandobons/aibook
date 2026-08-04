@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "figure": "LA-01",
+  "mode": "legacy-raster-plus-checklist",
+  "canvas": [
+    1800,
+    1000
+  ],
+  "safe_margin": 20,
+  "minimum_gap": 8,
+  "raster": {
+    "mode": "RGB",
+    "size": [
+      1800,
+      1000
+    ],
+    "content_bbox": [
+      55,
+      34,
+      1746,
+      951
+    ],
+    "content_margins": [
+      55,
+      34,
+      54,
+      49
+    ],
+    "border_has_content": false,
+    "problems": []
+  },
+  "objects": [],
+  "connectors": [],
+  "errors": [],
+  "note": "baseline storico: contenimento e assenza di sovrapposizioni conservati nella checklist autoriale; il raster gate controlla il canvas effettivo"
+}

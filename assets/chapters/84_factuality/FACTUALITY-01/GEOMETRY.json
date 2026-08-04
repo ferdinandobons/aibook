@@ -1,0 +1,230 @@
+{
+  "schema": 1,
+  "figure": "FACTUALITY-01",
+  "canvas": [
+    1800,
+    1000
+  ],
+  "safe_margin": 20,
+  "minimum_gap": 8,
+  "objects": [
+    {
+      "id": "text-001",
+      "kind": "text",
+      "box": [
+        60.0,
+        25.0,
+        1740.0,
+        77.0
+      ],
+      "label": "FACTUALITY-01 · Fattualità, incertezza e affidabilità",
+      "order": 1
+    },
+    {
+      "id": "text-002",
+      "kind": "text",
+      "box": [
+        80.0,
+        87.0,
+        1720.0,
+        140.0
+      ],
+      "label": "Come si passa da «Correttezza e supporto» a «Calibrazione» mantenendo osservabile una risposta con evidenza, confidenza e possibilità di errore?",
+      "order": 2
+    },
+    {
+      "id": "text-003",
+      "kind": "text",
+      "box": [
+        80.0,
+        146.0,
+        1720.0,
+        178.0
+      ],
+      "label": "CLAIM EVIDENCE",
+      "order": 3
+    },
+    {
+      "id": "rounded_rectangle-004",
+      "kind": "rounded_rectangle",
+      "box": [
+        260.0,
+        250.0,
+        1540.0,
+        346.0
+      ],
+      "label": "",
+      "order": 4
+    },
+    {
+      "id": "text-005",
+      "kind": "text",
+      "box": [
+        285.0,
+        264.0,
+        590.0,
+        298.0
+      ],
+      "label": "Correttezza e supporto",
+      "order": 5
+    },
+    {
+      "id": "text-006",
+      "kind": "text",
+      "box": [
+        605.0,
+        262.0,
+        1515.0,
+        325.0
+      ],
+      "label": "Una frase può essere vera senza essere sostenuta dal contesto fornito, oppure fedele al contesto ma riferita a una.",
+      "order": 6
+    },
+    {
+      "id": "rounded_rectangle-007",
+      "kind": "rounded_rectangle",
+      "box": [
+        375.0,
+        385.0,
+        1425.0,
+        481.0
+      ],
+      "label": "",
+      "order": 7
+    },
+    {
+      "id": "text-008",
+      "kind": "text",
+      "box": [
+        400.0,
+        399.0,
+        705.0,
+        433.0
+      ],
+      "label": "Hallucination",
+      "order": 8
+    },
+    {
+      "id": "text-009",
+      "kind": "text",
+      "box": [
+        720.0,
+        397.0,
+        1400.0,
+        460.0
+      ],
+      "label": "Il termine copre errori diversi: entità inventate, attribuzioni scorrette, contraddizioni e citazioni inesistenti.",
+      "order": 9
+    },
+    {
+      "id": "rounded_rectangle-010",
+      "kind": "rounded_rectangle",
+      "box": [
+        490.0,
+        520.0,
+        1310.0,
+        616.0
+      ],
+      "label": "",
+      "order": 10
+    },
+    {
+      "id": "text-011",
+      "kind": "text",
+      "box": [
+        515.0,
+        534.0,
+        820.0,
+        568.0
+      ],
+      "label": "Calibrazione",
+      "order": 11
+    },
+    {
+      "id": "text-012",
+      "kind": "text",
+      "box": [
+        835.0,
+        532.0,
+        1285.0,
+        595.0
+      ],
+      "label": "Probabilità del token, score di un verifier e frequenza empirica devono essere collegati con un protocollo di calib.",
+      "order": 12
+    },
+    {
+      "id": "rounded_rectangle-013",
+      "kind": "rounded_rectangle",
+      "box": [
+        605.0,
+        655.0,
+        1195.0,
+        751.0
+      ],
+      "label": "",
+      "order": 13
+    },
+    {
+      "id": "text-014",
+      "kind": "text",
+      "box": [
+        630.0,
+        669.0,
+        935.0,
+        703.0
+      ],
+      "label": "Decisione",
+      "order": 14
+    },
+    {
+      "id": "text-015",
+      "kind": "text",
+      "box": [
+        950.0,
+        667.0,
+        1170.0,
+        730.0
+      ],
+      "label": "risposta supportata o astensione motivata",
+      "order": 15
+    },
+    {
+      "id": "text-016",
+      "kind": "text",
+      "box": [
+        250.0,
+        790.0,
+        1550.0,
+        830.0
+      ],
+      "label": "La base conserva i casi esclusi; il livello superiore non cancella l'incertezza sottostante.",
+      "order": 16
+    },
+    {
+      "id": "rounded_rectangle-017",
+      "kind": "rounded_rectangle",
+      "box": [
+        170.0,
+        850.0,
+        1630.0,
+        940.0
+      ],
+      "label": "",
+      "order": 17
+    },
+    {
+      "id": "text-018",
+      "kind": "text",
+      "box": [
+        205.0,
+        873.0,
+        1595.0,
+        917.0
+      ],
+      "label": "LIMITE · confidenza alta non certifica la verità fattuale",
+      "order": 18
+    }
+  ],
+  "connectors": [],
+  "errors": []
+}

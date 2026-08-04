@@ -14,7 +14,7 @@ deferred: benchmark applicativi non eseguiti e approvazione autoriale delle visu
 
 # Capitolo 52. Addestrare e distillare il reasoning
 
-La domanda guida di questa lezione è come collegare «Tracce e risposte» e «Costo e lunghezza» senza perdere il contratto tecnico di addestrare e distillare il reasoning. L'oggetto osservato è una traccia di reasoning e la risposta che la segue. Il contratto locale è: input, prompt, trace del teacher, answer e costo in token; operazione, distillazione, self-consistency e rejection sampling; output, traccia selezionata, risposta e misura di costo. Il caso guida è questo: Tre tracce producono due risposte 4 e una risposta 5; la selezione majority sceglie 4. Il confine da mantenere esplicito è: una traccia leggibile non prova faithfulness causale.
+Qui addestrare e distillare il reasoning viene osservato come un meccanismo: il percorso va da «Tracce e risposte» a «Costo e lunghezza». L'oggetto osservato è una traccia di reasoning e la risposta che la segue. Il contratto locale dichiara input, prompt, trace del teacher, answer e costo in token; operazione, distillazione, self-consistency e rejection sampling; output, traccia selezionata, risposta e misura di costo. Per fissare il riferimento usiamo Tre tracce producono due risposte 4 e una risposta 5; la selezione majority sceglie 4. Il limite da non nascondere è: una traccia leggibile non prova faithfulness causale.
 
 ## Tracce e risposte
 
@@ -24,7 +24,7 @@ La distillazione trasferisce un comportamento osservato, non ogni capacità del 
 
 **Caso da seguire.** Tre tracce producono due risposte 4 e una risposta 5; la selezione majority sceglie 4.
 
-**Controllo.** Scrivi il risultato atteso prima del calcolo, modifica una sola quantità e localizza il primo passaggio che cambia. Il vincolo da conservare è: Può aiutare il training senza costituire una prova fedele del processo interno.
+**Controllo.** Per «Tracce e risposte», scrivi il risultato atteso prima del calcolo, modifica una sola quantità e localizza il primo passaggio che cambia. Nel caso «Tracce e risposte», il vincolo da conservare è: Può aiutare il training senza costituire una prova fedele del processo interno.
 
 
 ## Distillazione
@@ -33,7 +33,7 @@ Un teacher produce soluzioni o distribuzioni che diventano target per uno studen
 
 **Caso da seguire.** Un modello teacher e uno student confrontati sullo stesso input, con memoria e regressioni riportate insieme alla loss.
 
-**Controllo.** Ricalcola il caso a mano e con lo snippet. Se i risultati divergono, confronta prima i valori intermedi e soltanto dopo l'output finale.
+**Controllo.** Per «Distillazione», ricalcola il caso a mano e con lo snippet. Nel caso «Distillazione», se i risultati divergono, confronta prima i valori intermedi e soltanto dopo l'output finale.
 
 
 La relazione centrale può essere scritta come:
@@ -56,7 +56,7 @@ Più candidate vengono generate e selezionate con voto o verifier. Il dataset ri
 
 **Caso da seguire.** Un prefisso corretto confrontato con lo stesso prefisso dopo che il modello ha prodotto il token precedente.
 
-**Controllo.** Aggiungi un valore limite e verifica separatamente forma, valore e ipotesi. Una shape valida non dimostra da sola «Self-consistency e rejection sampling».
+**Controllo.** Per «Self-consistency e rejection sampling», aggiungi un valore limite e verifica separatamente forma, valore e ipotesi. Una shape valida non dimostra da sola «Self-consistency e rejection sampling».
 
 
 ## Faithfulness
@@ -65,15 +65,17 @@ Una spiegazione corretta può essere post-hoc. Valutare risposta e fedeltà rich
 
 **Caso da seguire.** Due risposte con log-probabilità diverse producono un margine; il margine può diventare un segnale di training, ma non è una misura assoluta di correttezza.
 
-**Controllo.** Mantieni fisso l'input e sostituisci soltanto il meccanismo discusso nella sezione. Il confronto deve attribuire la differenza a quel passaggio, non al setup.
+**Controllo.** Per «Faithfulness», mantieni fisso l'input e sostituisci soltanto il meccanismo discusso nella sezione. Nel caso «Faithfulness», il confronto deve attribuire la differenza a quel passaggio, non al setup.
 
 
 ## Esempio Python eseguito
 
-Il frammento seguente è lo stesso conservato nel repository. Usa valori piccoli perché l'obiettivo è osservare il meccanismo, non simulare una scala che non abbiamo eseguito.
+Per rendere osservabile addestrare e distillare il reasoning, il capitolo conserva qui l'artefatto Python eseguito. Per «Addestrare e distillare il reasoning», il caso di default usa valori piccoli per isolare il meccanismo. Il test rifiuta anche un caso non documentato di «addestrare e distillare il reasoning».
 
 ```python
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     traces = [("4", 0.9), ("4", 0.7), ("5", 0.8)]
     counts = {}
     for answer, _score in traces:
@@ -97,7 +99,7 @@ Tracce più lunghe aumentano token e latenza. Il training deve distinguere utili
 
 **Caso da seguire.** Un batch di richieste eterogenee in cui throughput, coda e time-to-first-token vengono misurati separatamente.
 
-**Controllo.** Costruisci un controesempio che rispetti il tipo di dato ma violi l'ipotesi centrale. Il test deve rendere riconoscibile perché «Costo e lunghezza» non si applica.
+**Controllo.** Per «Costo e lunghezza», costruisci un controesempio che rispetti il tipo di dato ma violi l'ipotesi centrale. Il test deve rendere riconoscibile perché «Costo e lunghezza» non si applica.
 
 
 ![Addestrare e distillare il reasoning: timeline](../../assets/chapters/52_reasoning_training/TRAINING-02/candidate-v48.png)
@@ -107,13 +109,13 @@ La seconda figura mette a confronto «Faithfulness» e il limite discusso in «C
 
 ## Come si collegano i passaggi
 
-- **Da «Tracce e risposte» a «Distillazione».** Una traccia di ragionamento è testo prodotto dal modello. Un teacher produce soluzioni o distribuzioni che diventano target per uno student. Il primo passaggio definisce che cosa entra nel calcolo; il secondo stabilisce la regola che produce il valore osservabile. [SRC-52-001; SRC-52-004]
+- **Da «Tracce e risposte» a «Distillazione».** Una traccia di ragionamento è testo prodotto dal modello. Un teacher produce soluzioni o distribuzioni che diventano target per uno student. Tra «Tracce e risposte» e «Distillazione» l'ingresso viene fissato prima della regola che produce il valore. Il passaggio successivo rende misurabile «Distillazione». [SRC-52-001; SRC-52-004]
 
-- **Da «Distillazione» a «Self-consistency e rejection sampling».** Un teacher produce soluzioni o distribuzioni che diventano target per uno student. Più candidate vengono generate e selezionate con voto o verifier. La regola generale viene poi letta dentro il componente: questa separazione permette di localizzare un errore prima di attribuirlo all'intero modello. [SRC-52-004; SRC-52-002]
+- **Da «Distillazione» a «Self-consistency e rejection sampling».** Un teacher produce soluzioni o distribuzioni che diventano target per uno student. Più candidate vengono generate e selezionate con voto o verifier. Nel caso «Self-consistency e rejection sampling» il componente diventa il punto in cui localizzare l'errore. Da «Distillazione» a «Self-consistency e rejection sampling» cambia la domanda osservabile. [SRC-52-004; SRC-52-002]
 
-- **Da «Self-consistency e rejection sampling» a «Faithfulness».** Più candidate vengono generate e selezionate con voto o verifier. Una spiegazione corretta può essere post-hoc. Dopo avere reso visibile il componente, il percorso introduce la variante o l'ottimizzazione senza cambiare di nascosto il caso di partenza. [SRC-52-002; SRC-52-003]
+- **Da «Self-consistency e rejection sampling» a «Faithfulness».** Più candidate vengono generate e selezionate con voto o verifier. Una spiegazione corretta può essere post-hoc. Dopo «Self-consistency e rejection sampling», la variante di «Faithfulness» cambia una proprietà alla volta. Il passaggio successivo rende misurabile «Faithfulness». [SRC-52-002; SRC-52-003]
 
-- **Da «Faithfulness» a «Costo e lunghezza».** Una spiegazione corretta può essere post-hoc. Tracce più lunghe aumentano token e latenza. L'ultimo passaggio sposta l'attenzione dal funzionamento locale alla misura: correttezza del calcolo e qualità applicativa restano domande distinte. [SRC-52-003; SRC-52-001]
+- **Da «Faithfulness» a «Costo e lunghezza».** Una spiegazione corretta può essere post-hoc. Tracce più lunghe aumentano token e latenza. Da «Costo e lunghezza» in poi la misura resta distinta dalla correttezza locale del calcolo. Da «Faithfulness» a «Costo e lunghezza» cambia la domanda osservabile. [SRC-52-003; SRC-52-001]
 
 La catena completa produce traccia selezionata, risposta e misura di costo a partire da prompt, trace del teacher, answer e costo in token. Ogni collegamento conserva un oggetto osservabile diverso; per questo il risultato non può essere esteso oltre il limite dichiarato: una traccia leggibile non prova faithfulness causale.
 
@@ -129,4 +131,4 @@ La catena completa produce traccia selezionata, risposta e misura di costo a par
 
 ## Che cosa deve restare chiaro
 
-La lezione parte da «prompt, trace del teacher, answer e costo in token» e arriva fino a «traccia selezionata, risposta e misura di costo». Il limite da conservare è questo: una traccia leggibile non prova faithfulness causale. Definizioni e risultati citati sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md); la mappa dei claim è in [`CLAIMS.md`](CLAIMS.md).
+La lezione parte da «prompt, trace del teacher, answer e costo in token» e arriva fino a «traccia selezionata, risposta e misura di costo». Il limite da conservare è questo: una traccia leggibile non prova faithfulness causale. La formula e il codice collegati a «Costo e lunghezza» sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md), [`CLAIMS.md`](CLAIMS.md) e `code/`.

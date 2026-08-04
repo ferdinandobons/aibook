@@ -1,0 +1,291 @@
+{
+  "schema": 1,
+  "figure": "LINATT-02",
+  "canvas": [
+    1800,
+    1000
+  ],
+  "safe_margin": 20,
+  "minimum_gap": 8,
+  "objects": [
+    {
+      "id": "text-001",
+      "kind": "text",
+      "box": [
+        60.0,
+        25.0,
+        1740.0,
+        77.0
+      ],
+      "label": "LINATT-02 · Linear attention, fast weights e delta rule",
+      "order": 1
+    },
+    {
+      "id": "text-002",
+      "kind": "text",
+      "box": [
+        80.0,
+        87.0,
+        1720.0,
+        140.0
+      ],
+      "label": "Quale controllo collega «Fast weights» a «Delta rule» senza superare il limite dichiarato?",
+      "order": 2
+    },
+    {
+      "id": "text-003",
+      "kind": "text",
+      "box": [
+        80.0,
+        146.0,
+        1720.0,
+        178.0
+      ],
+      "label": "MECHANISM COMPARE",
+      "order": 3
+    },
+    {
+      "id": "rounded_rectangle-004",
+      "kind": "rounded_rectangle",
+      "box": [
+        85.0,
+        220.0,
+        870.0,
+        770.0
+      ],
+      "label": "",
+      "order": 4
+    },
+    {
+      "id": "text-005",
+      "kind": "text",
+      "box": [
+        120.0,
+        247.0,
+        835.0,
+        300.0
+      ],
+      "label": "PROPOSTA",
+      "order": 5
+    },
+    {
+      "id": "rounded_rectangle-006",
+      "kind": "rounded_rectangle",
+      "box": [
+        130.0,
+        340.0,
+        825.0,
+        452.0
+      ],
+      "label": "",
+      "order": 6
+    },
+    {
+      "id": "text-007",
+      "kind": "text",
+      "box": [
+        155.0,
+        353.0,
+        415.0,
+        387.0
+      ],
+      "label": "Fast weights",
+      "order": 7
+    },
+    {
+      "id": "text-008",
+      "kind": "text",
+      "box": [
+        425.0,
+        352.0,
+        800.0,
+        432.0
+      ],
+      "label": "Lo stato può essere letto come memoria associativa che accumula coppie key-value.",
+      "order": 8
+    },
+    {
+      "id": "rounded_rectangle-009",
+      "kind": "rounded_rectangle",
+      "box": [
+        130.0,
+        485.0,
+        825.0,
+        597.0
+      ],
+      "label": "",
+      "order": 9
+    },
+    {
+      "id": "text-010",
+      "kind": "text",
+      "box": [
+        155.0,
+        498.0,
+        415.0,
+        532.0
+      ],
+      "label": "Delta rule",
+      "order": 10
+    },
+    {
+      "id": "text-011",
+      "kind": "text",
+      "box": [
+        425.0,
+        497.0,
+        800.0,
+        577.0
+      ],
+      "label": "L'update corregge l'errore tra value desiderato e value recuperato, riducendo la sovrascrittura ci.",
+      "order": 11
+    },
+    {
+      "id": "rounded_rectangle-012",
+      "kind": "rounded_rectangle",
+      "box": [
+        930.0,
+        220.0,
+        1715.0,
+        770.0
+      ],
+      "label": "",
+      "order": 12
+    },
+    {
+      "id": "text-013",
+      "kind": "text",
+      "box": [
+        965.0,
+        247.0,
+        1680.0,
+        300.0
+      ],
+      "label": "VERIFICA",
+      "order": 13
+    },
+    {
+      "id": "rounded_rectangle-014",
+      "kind": "rounded_rectangle",
+      "box": [
+        975.0,
+        340.0,
+        1670.0,
+        452.0
+      ],
+      "label": "",
+      "order": 14
+    },
+    {
+      "id": "text-015",
+      "kind": "text",
+      "box": [
+        1000.0,
+        353.0,
+        1260.0,
+        387.0
+      ],
+      "label": "Controllo",
+      "order": 15
+    },
+    {
+      "id": "text-016",
+      "kind": "text",
+      "box": [
+        1270.0,
+        352.0,
+        1645.0,
+        432.0
+      ],
+      "label": "la fattorizzazione cambia memoria e capacità di interazione",
+      "order": 16
+    },
+    {
+      "id": "rounded_rectangle-017",
+      "kind": "rounded_rectangle",
+      "box": [
+        975.0,
+        485.0,
+        1670.0,
+        597.0
+      ],
+      "label": "",
+      "order": 17
+    },
+    {
+      "id": "text-018",
+      "kind": "text",
+      "box": [
+        1000.0,
+        498.0,
+        1260.0,
+        532.0
+      ],
+      "label": "Output",
+      "order": 18
+    },
+    {
+      "id": "text-019",
+      "kind": "text",
+      "box": [
+        1270.0,
+        497.0,
+        1645.0,
+        577.0
+      ],
+      "label": "h_t e predizione con costo dichiarato",
+      "order": 19
+    },
+    {
+      "id": "text-020",
+      "kind": "text",
+      "box": [
+        620.0,
+        785.0,
+        1180.0,
+        830.0
+      ],
+      "label": "Stesso caso, proprietà confrontate separatamente",
+      "order": 21
+    },
+    {
+      "id": "rounded_rectangle-021",
+      "kind": "rounded_rectangle",
+      "box": [
+        170.0,
+        850.0,
+        1630.0,
+        940.0
+      ],
+      "label": "",
+      "order": 22
+    },
+    {
+      "id": "text-022",
+      "kind": "text",
+      "box": [
+        205.0,
+        873.0,
+        1595.0,
+        917.0
+      ],
+      "label": "LIMITE · la fattorizzazione cambia memoria e capacità di interazione",
+      "order": 23
+    }
+  ],
+  "connectors": [
+    {
+      "id": "connector-001",
+      "start": [
+        875.0,
+        490.0
+      ],
+      "end": [
+        920.0,
+        490.0
+      ],
+      "order": 20
+    }
+  ],
+  "errors": []
+}

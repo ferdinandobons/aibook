@@ -7,6 +7,17 @@ import unittest
 from snip_55_contract import contract
 
 
+def assert_finite(testcase, value):
+    if isinstance(value, float):
+        testcase.assertTrue(math.isfinite(value))
+    elif isinstance(value, dict):
+        for nested in value.values():
+            assert_finite(testcase, nested)
+    elif isinstance(value, (list, tuple)):
+        for nested in value:
+            assert_finite(testcase, nested)
+
+
 class LessonExampleTests(unittest.TestCase):
     def test_expected_result(self):
         self.assertEqual(contract(), {'shared': [0.4, 0.25], 'modalities': 2, 'invariant': 'modalities meet in a declared shared representation'})
@@ -15,15 +26,19 @@ class LessonExampleTests(unittest.TestCase):
         self.assertEqual(contract(), contract())
 
     def test_result_is_serializable_and_finite(self):
-        encoded = json.dumps(contract(), sort_keys=True)
-        self.assertTrue(encoded)
-        for value in contract().values():
-            if isinstance(value, float):
-                self.assertTrue(math.isfinite(value))
+        result = contract()
+        self.assertTrue(json.dumps(result, sort_keys=True))
+        assert_finite(self, result)
 
-    def test_interpretation_boundary_is_explicit(self):
-        self.assertIsInstance(contract().get('invariant'), str)
-        self.assertGreaterEqual(len(contract()['invariant'].split()), 4)
+    def test_contract_shape_is_explicit(self):
+        result = contract()
+        self.assertIsInstance(result, dict)
+        self.assertIsInstance(result.get('invariant'), str)
+        self.assertGreaterEqual(len(result['invariant'].split()), 4)
+
+    def test_unsupported_case_fails_before_interpretation(self):
+        with self.assertRaises(ValueError):
+            contract('unsupported')
 
 
 if __name__ == '__main__':

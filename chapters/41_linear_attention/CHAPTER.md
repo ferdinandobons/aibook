@@ -14,7 +14,7 @@ deferred: benchmark applicativi non eseguiti e approvazione autoriale delle visu
 
 # Capitolo 41. Linear attention, fast weights e delta rule
 
-La domanda guida di questa lezione è come collegare «Kernel fattorizzabile» e «Delta rule» senza perdere il contratto tecnico di linear attention, fast weights e delta rule. L'oggetto osservato è uno stato causale che sostituisce il prodotto quadratico. Il contratto locale è: input, sequenza x_t, kernel fattorizzabile e stato; operazione, recurrence, normalizzazione e fast weights; output, h_t e predizione con costo dichiarato. Il caso guida è questo: La stessa operazione misurata separando bytes mossi, tempo del kernel e latenza end-to-end. Il confine da mantenere esplicito è: la fattorizzazione cambia memoria e capacità di interazione.
+La lezione prende un caso piccolo e lo accompagna da «Kernel fattorizzabile» fino a «Delta rule», senza saltare i passaggi. L'oggetto osservato è uno stato causale che sostituisce il prodotto quadratico. Il contratto locale dichiara input, sequenza x_t, kernel fattorizzabile e stato; operazione, recurrence, normalizzazione e fast weights; output, h_t e predizione con costo dichiarato. Il primo esempio osservabile è La stessa operazione misurata separando bytes mossi, tempo del kernel e latenza end-to-end. Il limite da non nascondere è: la fattorizzazione cambia memoria e capacità di interazione.
 
 ## Kernel fattorizzabile
 
@@ -24,7 +24,7 @@ Una forma fattorizzata sostituisce una matrice completa con uno stato aggiornato
 
 **Caso da seguire.** La stessa operazione misurata separando bytes mossi, tempo del kernel e latenza end-to-end.
 
-**Controllo.** Scrivi il risultato atteso prima del calcolo, modifica una sola quantità e localizza il primo passaggio che cambia. Il vincolo da conservare è: Una feature map permette di riassociare i prodotti senza una matrice completa di score.
+**Controllo.** Per «Kernel fattorizzabile», scrivi il risultato atteso prima del calcolo, modifica una sola quantità e localizza il primo passaggio che cambia. Nel caso «Kernel fattorizzabile», il vincolo da conservare è: Una feature map permette di riassociare i prodotti senza una matrice completa di score.
 
 
 ## Recurrence causale
@@ -33,7 +33,7 @@ Statistiche S e z vengono aggiornate per token e hanno dimensione indipendente d
 
 **Caso da seguire.** Una matrice di visibilità in cui la posizione futura resta esclusa anche se la shape dei tensori è compatibile.
 
-**Controllo.** Ricalcola il caso a mano e con lo snippet. Se i risultati divergono, confronta prima i valori intermedi e soltanto dopo l'output finale.
+**Controllo.** Per «Recurrence causale», ricalcola il caso a mano e con lo snippet. Nel caso «Recurrence causale», se i risultati divergono, confronta prima i valori intermedi e soltanto dopo l'output finale.
 
 
 La relazione centrale può essere scritta come:
@@ -56,7 +56,7 @@ Il denominatore controlla la scala e richiede feature e stabilizzazione coerenti
 
 **Caso da seguire.** Due vettori con shape compatibile confrontati prima e dopo il blocco, osservando separatamente scala e percorso residuale in «Normalizzazione».
 
-**Controllo.** Aggiungi un valore limite e verifica separatamente forma, valore e ipotesi. Una shape valida non dimostra da sola «Normalizzazione».
+**Controllo.** Per «Normalizzazione», aggiungi un valore limite e verifica separatamente forma, valore e ipotesi. Una shape valida non dimostra da sola «Normalizzazione».
 
 
 ## Fast weights
@@ -65,15 +65,17 @@ Lo stato può essere letto come memoria associativa che accumula coppie key-valu
 
 **Caso da seguire.** Un blocco viene confrontato a parità di input e shape. Il vantaggio dichiarato resta un'ipotesi finché non viene misurato sullo stesso setup.
 
-**Controllo.** Mantieni fisso l'input e sostituisci soltanto il meccanismo discusso nella sezione. Il confronto deve attribuire la differenza a quel passaggio, non al setup.
+**Controllo.** Per «Fast weights», mantieni fisso l'input e sostituisci soltanto il meccanismo discusso nella sezione. Nel caso «Fast weights», il confronto deve attribuire la differenza a quel passaggio, non al setup.
 
 
 ## Esempio Python eseguito
 
-Il frammento seguente è lo stesso conservato nel repository. Usa valori piccoli perché l'obiettivo è osservare il meccanismo, non simulare una scala che non abbiamo eseguito.
+Il caso computazionale di linear attention, fast weights e delta rule è riportato senza trasformazioni: il file e l'output sono quelli verificati. Per «Linear attention, fast weights e delta rule», il caso di default usa valori piccoli per isolare il meccanismo. La suite conserva inoltre una failure esplicita per separare il contratto osservato da «linear attention, fast weights e delta rule».
 
 ```python
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     state = 0.0
     inputs = [1.0, -0.5, 2.0]
     for value in inputs:
@@ -96,7 +98,7 @@ L'update corregge l'errore tra value desiderato e value recuperato, riducendo la
 
 **Caso da seguire.** Per «Delta rule» si mantiene l'input del capitolo e si isola questa condizione: L'update corregge l'errore tra value desiderato e value recuperato, riducendo la sovrascrittura cieca.
 
-**Controllo.** Costruisci un controesempio che rispetti il tipo di dato ma violi l'ipotesi centrale. Il test deve rendere riconoscibile perché «Delta rule» non si applica.
+**Controllo.** Per «Delta rule», costruisci un controesempio che rispetti il tipo di dato ma violi l'ipotesi centrale. Il test deve rendere riconoscibile perché «Delta rule» non si applica.
 
 
 ![Linear attention, fast weights e delta rule: timeline](../../assets/chapters/41_linear_attention/LINATT-02/candidate-v47.png)
@@ -106,13 +108,13 @@ La seconda figura mette a confronto «Fast weights» e il limite discusso in «D
 
 ## Come si collegano i passaggi
 
-- **Da «Kernel fattorizzabile» a «Recurrence causale».** Una feature map permette di riassociare i prodotti senza una matrice completa di score. Statistiche S e z vengono aggiornate per token e hanno dimensione indipendente dalla lunghezza. Il primo passaggio definisce che cosa entra nel calcolo; il secondo stabilisce la regola che produce il valore osservabile. [SRC-41-001; SRC-41-002]
+- **Da «Kernel fattorizzabile» a «Recurrence causale».** Una feature map permette di riassociare i prodotti senza una matrice completa di score. Statistiche S e z vengono aggiornate per token e hanno dimensione indipendente dalla lunghezza. Tra «Kernel fattorizzabile» e «Recurrence causale» l'ingresso viene fissato prima della regola che produce il valore. Da «Kernel fattorizzabile» a «Recurrence causale» cambia la domanda osservabile. [SRC-41-001; SRC-41-002]
 
-- **Da «Recurrence causale» a «Normalizzazione».** Statistiche S e z vengono aggiornate per token e hanno dimensione indipendente dalla lunghezza. Il denominatore controlla la scala e richiede feature e stabilizzazione coerenti. La regola generale viene poi letta dentro il componente: questa separazione permette di localizzare un errore prima di attribuirlo all'intero modello. [SRC-41-002; SRC-41-003]
+- **Da «Recurrence causale» a «Normalizzazione».** Statistiche S e z vengono aggiornate per token e hanno dimensione indipendente dalla lunghezza. Il denominatore controlla la scala e richiede feature e stabilizzazione coerenti. Nel caso «Normalizzazione» il componente diventa il punto in cui localizzare l'errore. Il passaggio successivo rende misurabile «Normalizzazione». [SRC-41-002; SRC-41-003]
 
-- **Da «Normalizzazione» a «Fast weights».** Il denominatore controlla la scala e richiede feature e stabilizzazione coerenti. Lo stato può essere letto come memoria associativa che accumula coppie key-value. Dopo avere reso visibile il componente, il percorso introduce la variante o l'ottimizzazione senza cambiare di nascosto il caso di partenza. [SRC-41-003; SRC-41-004]
+- **Da «Normalizzazione» a «Fast weights».** Il denominatore controlla la scala e richiede feature e stabilizzazione coerenti. Lo stato può essere letto come memoria associativa che accumula coppie key-value. Dopo «Normalizzazione», la variante di «Fast weights» cambia una proprietà alla volta. Da «Normalizzazione» a «Fast weights» cambia la domanda osservabile. [SRC-41-003; SRC-41-004]
 
-- **Da «Fast weights» a «Delta rule».** Lo stato può essere letto come memoria associativa che accumula coppie key-value. L'update corregge l'errore tra value desiderato e value recuperato, riducendo la sovrascrittura cieca. L'ultimo passaggio sposta l'attenzione dal funzionamento locale alla misura: correttezza del calcolo e qualità applicativa restano domande distinte. [SRC-41-004; SRC-41-001]
+- **Da «Fast weights» a «Delta rule».** Lo stato può essere letto come memoria associativa che accumula coppie key-value. L'update corregge l'errore tra value desiderato e value recuperato, riducendo la sovrascrittura cieca. Da «Delta rule» in poi la misura resta distinta dalla correttezza locale del calcolo. Il passaggio successivo rende misurabile «Delta rule». [SRC-41-004; SRC-41-001]
 
 La catena completa produce h_t e predizione con costo dichiarato a partire da sequenza x_t, kernel fattorizzabile e stato. Ogni collegamento conserva un oggetto osservabile diverso; per questo il risultato non può essere esteso oltre il limite dichiarato: la fattorizzazione cambia memoria e capacità di interazione.
 
@@ -128,4 +130,4 @@ La catena completa produce h_t e predizione con costo dichiarato a partire da se
 
 ## Che cosa deve restare chiaro
 
-La lezione parte da «sequenza x_t, kernel fattorizzabile e stato» e arriva fino a «h_t e predizione con costo dichiarato». Il limite da conservare è questo: la fattorizzazione cambia memoria e capacità di interazione. Definizioni e risultati citati sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md); la mappa dei claim è in [`CLAIMS.md`](CLAIMS.md).
+La lezione parte da «sequenza x_t, kernel fattorizzabile e stato» e arriva fino a «h_t e predizione con costo dichiarato». Il limite da conservare è questo: la fattorizzazione cambia memoria e capacità di interazione. La formula e il codice collegati a «Delta rule» sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md), [`CLAIMS.md`](CLAIMS.md) e `code/`.

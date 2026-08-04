@@ -1,16 +1,15 @@
 from __future__ import annotations
 
-import hashlib
 import json
 import math
-import statistics
-from collections import Counter
 
 CHAPTER = 38
 TITLE = 'Posizione e contesto lungo'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     position = 2
     angle = position * 0.5
     query = [1.0, 0.0]

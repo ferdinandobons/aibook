@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-import hashlib
 import json
-import math
-import statistics
-from collections import Counter
 
 CHAPTER = 52
 TITLE = 'Addestrare e distillare il reasoning'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     traces = [("4", 0.9), ("4", 0.7), ("5", 0.8)]
     counts = {}
     for answer, _score in traces:

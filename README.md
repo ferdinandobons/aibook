@@ -10,8 +10,8 @@ Repository sorgente di un manuale tecnico in italiano, dai fondamenti matematici
 - 12 appendici.
 - Branch canonico: `main`.
 - Stato corrente: revisione editoriale, autoriale e fattuale ancora aperta.
-- Verifica locale: `464` test superati in `115` file di test e `267/267` file Python analizzati sintatticamente.
-- Dossier fonti: `419` fonti uniche e `502` collegamenti fonte-claim nel report di verifica; `0` record richiedono ancora un URL o un record primario.
+- Verifica locale: `544` test superati in `115` file di test e `272/272` file Python analizzati sintatticamente.
+- Dossier fonti: `420` fonti uniche e `503` collegamenti fonte-claim nel report di verifica; `0` record richiedono ancora un URL o un record primario.
 - Ultimo audit globale: 4 agosto 2026.
 
 ## Artefatti
@@ -48,7 +48,7 @@ Non contiene render raster delle pagine complete o mockup dell'impaginazione.
 
 ## Stato dei capitoli
 
-Tutti i 98 capitoli hanno testo, fonti, claim, visuali, alt text e audit dedicati. `94/98` includono codice eseguibile e test; i capitoli 20, 30, 93 e 98 registrano invece un'eccezione motivata, perché uno script giocattolo renderebbe fuorviante la prova concettuale, normativa o di frontiera. L'audit strutturale, editoriale e di allineamento semantico copre `98/98` capitoli. Le immagini PNG attive sono `196` per i capitoli e `208` includendo le appendici. Le 84 coppie revisionate usano 165 modelli semantici ricondotti a dieci primitive grafiche, senza grafici quantitativi inventati. Il report `docs/source_verification_2026-08-03.json` conserva l'ultima passata globale delle fonti; il 4 agosto sono state ricontrollate in modo mirato le fonti sensibili corrette nei capitoli 20, 68, 74 e 93.
+Tutti i 98 capitoli hanno testo, fonti, claim, visuali, alt text e audit dedicati. `94/98` includono codice eseguibile e test; i capitoli 20, 30, 93 e 98 registrano invece un'eccezione motivata, perché uno script giocattolo renderebbe fuorviante la prova concettuale, normativa o di frontiera. L'audit strutturale, editoriale e di allineamento semantico copre `98/98` capitoli. Le immagini PNG attive sono `196` per i capitoli e `208` includendo le appendici; il gate geometrico controlla `180` manifest semantici e `28` asset storici con controllo raster e checklist. Le 84 coppie revisionate usano 165 modelli semantici ricondotti a dieci primitive grafiche, senza grafici quantitativi inventati. Le `68/68` relazioni o schemi previsti sono rintracciabili e spiegati. Il report corrente è `docs/source_verification_2026-08-04.json`, con `420` fonti uniche e `503` record fonte-claim.
 
 La candidatura tecnica non equivale ancora ad approvazione editoriale: restano aperte lettura ad alta voce, verifica autoriale delle figure, ricontrollo fattuale delle fonti sensibili e congelamento. Le figure conservano il nome `candidate-vN.png` finché non vengono approvate dall'autore.
 

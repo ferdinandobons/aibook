@@ -2,7 +2,7 @@
 
 - versione: 0.5.0-draft3
 - data: 4 agosto 2026
-- parole fuori dai blocchi di codice: 966
+- parole fuori dai blocchi di codice: 1074
 - nuclei semantici: 5 (Continued adaptation; Task arithmetic; TIES e DARE; Model editing; Versioning e rollback)
 - paragrafi del vecchio scaffold: assenti secondo `audit_book_quality.py`
 - ripetizioni lunghe tra tre o più capitoli: assenti secondo l'audit trasversale

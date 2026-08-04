@@ -24,6 +24,9 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Install local audit dependencies
+        run: python -m pip install --disable-pip-version-check --no-input pillow ruff
+
       - name: Check book structure and image references
         shell: bash
         run: |
@@ -66,10 +69,61 @@ jobs:
           for path in files:
               ast.parse(path.read_text(encoding='utf-8'), filename=str(path))
           print(f'OK: parsed {len(files)} Python files')
-          PY
+
+      - name: Check generated Python style
+        shell: bash
+        run: |
+          set -euo pipefail
+          ruff check \
+            scripts/audit_book_general.py \
+            scripts/audit_code_alignment.py \
+            scripts/audit_editorial_quality.py \
+            scripts/audit_editorial_variation.py \
+            scripts/audit_formula_contracts.py \
+            scripts/audit_semantic_alignment.py \
+            scripts/audit_visual_geometry.py \
+            scripts/generate_visuals_v2.py \
+            scripts/rebuild_lessons_v2.py \
+            scripts/revise_book_completeness.py \
+            scripts/verify_source_claims.py \
+            scripts/visual_geometry.py \
+            chapters/[0-9][0-9]_*/code
 
       - name: Check lesson-specific quality contracts
         shell: bash
         run: |
           set -euo pipefail
-          python scripts/audit_book_quality.py --strict
+          PYTHONDONTWRITEBYTECODE=1 python scripts/audit_book_quality.py --strict
+
+      - name: Check semantic alignment and sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONDONTWRITEBYTECODE=1 python scripts/audit_semantic_alignment.py
+          PYTHONDONTWRITEBYTECODE=1 python scripts/audit_book_general.py --strict
+
+      - name: Check visual geometry and editorial variation
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONDONTWRITEBYTECODE=1 python scripts/audit_visual_geometry.py --strict
+          PYTHONDONTWRITEBYTECODE=1 python scripts/audit_code_alignment.py --strict
+          PYTHONDONTWRITEBYTECODE=1 python scripts/audit_editorial_variation.py --strict
+          PYTHONDONTWRITEBYTECODE=1 python scripts/audit_editorial_quality.py --strict
+          PYTHONDONTWRITEBYTECODE=1 python scripts/audit_formula_contracts.py --strict
+
+      - name: Execute chapter and NumPy/PyTorch examples
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONDONTWRITEBYTECODE=1 python scripts/run_all_examples.py --include-appendix-a
+
+      - name: Install JAX CPU environment
+        run: python -m pip install --disable-pip-version-check --no-input 'jax[cpu]==0.11.0'
+
+      - name: Execute JAX appendix example
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd appendices/B_jax
+          PYTHONDONTWRITEBYTECODE=1 python -m unittest -v test_example_jax.py

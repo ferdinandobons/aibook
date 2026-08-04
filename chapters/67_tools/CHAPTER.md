@@ -14,7 +14,7 @@ deferred: benchmark applicativi non eseguiti e approvazione autoriale delle visu
 
 # Capitolo 67. Output strutturato e uso degli strumenti
 
-La domanda guida di questa lezione è come collegare «Schema dell'output» e «Idempotenza e side effect» senza perdere il contratto tecnico di output strutturato e uso degli strumenti. L'oggetto osservato è una chiamata a tool con schema e autorizzazione. Il contratto locale è: input, nome, argomenti, scope e stato; operazione, parsing, selezione, esecuzione e osservazione; output, risultato del tool o rifiuto tracciato. Il caso guida è questo: Lookup_order passa l'allowlist, mentre refund viene rifiutato prima del side effect. Il confine da mantenere esplicito è: schema valido non significa permesso di eseguire il side effect.
+Il percorso di output strutturato e uso degli strumenti attraversa «Schema dell'output» e «Idempotenza e side effect» senza attribuire al solo modello ciò che dipende dal sistema. L'oggetto osservato è una chiamata a tool con schema e autorizzazione. Il contratto locale dichiara input, nome, argomenti, scope e stato; operazione, parsing, selezione, esecuzione e osservazione; output, risultato del tool o rifiuto tracciato. Per fissare il riferimento usiamo Lookup_order passa l'allowlist, mentre refund viene rifiutato prima del side effect. Il limite da non nascondere è: schema valido non significa permesso di eseguire il side effect.
 
 ## Schema dell'output
 
@@ -24,7 +24,7 @@ Lo schema rende l'azione parsabile, non automaticamente autorizzata.
 
 **Caso da seguire.** Lookup_order passa l'allowlist, mentre refund viene rifiutato prima del side effect.
 
-**Controllo.** Registra richiesta, decisione, stato e output finale. Un esito plausibile non deve nascondere il componente che lo ha prodotto.
+**Controllo.** Per «Schema dell'output», registra richiesta, decisione, stato e output finale. Nel caso «Schema dell'output», un esito plausibile non deve nascondere il componente che lo ha prodotto.
 
 
 ## Selezione del tool
@@ -34,6 +34,13 @@ Il modello sceglie una funzione tra opzioni descritte. Nomi, descrizioni e autor
 **Caso da seguire.** Una traiettoria minima osservazione-azione-tool-verifica in cui una chiamata fuori allowlist viene bloccata prima dell'esecuzione.
 
 **Controllo.** Ripeti «Selezione del tool» con una capability o un'autorizzazione rimossa e verifica che la failure preceda qualsiasi side effect.
+
+
+Per questo capitolo la notazione compatta chiarisce input, trasformazione e risultato.
+
+**Schema concettuale.** `tool_call = schema(name, args, scope)`
+
+Lo schema rende l'azione parsabile, non automaticamente autorizzata. [SRC-67-001]
 
 
 ![Output strutturato e uso degli strumenti: branch](../../assets/chapters/67_tools/TOOLS-01/candidate-v48.png)
@@ -47,7 +54,7 @@ Gli argomenti vengono estratti dal contesto e validati prima dell'esecuzione. Ca
 
 **Caso da seguire.** Un caso in cui schema valido non significa permesso di eseguire il side effect.
 
-**Controllo.** Separa il test del singolo componente dal test end-to-end, usando lo stesso input e la stessa configurazione versionata.
+**Controllo.** Per «Argomenti», separa il test del singolo componente dal test end-to-end, usando lo stesso input e la stessa configurazione versionata.
 
 
 ## Esecuzione e osservazione
@@ -56,7 +63,7 @@ Il sistema esegue il tool fuori dal modello e restituisce un risultato struttura
 
 **Caso da seguire.** Una traiettoria minima alterna osservazione, decisione, tool e verifica. Il test può controllare che un'azione non autorizzata venga bloccata.
 
-**Controllo.** Introduci una failure a un solo confine e controlla che log, stato e recovery identifichino quel confine senza ambiguità.
+**Controllo.** Per «Esecuzione e osservazione», introduci una failure a un solo confine e controlla che log, stato e recovery identifichino quel confine senza ambiguità.
 
 
 ## Idempotenza e side effect
@@ -65,7 +72,7 @@ Operazioni di lettura e scrittura hanno rischi differenti. Conferma, deduplicazi
 
 **Caso da seguire.** Per «Idempotenza e side effect» si mantiene l'input del capitolo e si isola questa condizione: Operazioni di lettura e scrittura hanno rischi differenti.
 
-**Controllo.** Confronta il comportamento completo, non soltanto l'ultimo messaggio. Il risultato resta limitato da: Conferma, deduplicazione e transaction ID impediscono ripetizioni non desiderate.
+**Controllo.** Per «Idempotenza e side effect», confronta il comportamento completo, non soltanto l'ultimo messaggio. Nel caso «Idempotenza e side effect», il risultato resta limitato da: Conferma, deduplicazione e transaction ID impediscono ripetizioni non desiderate.
 
 
 ![Output strutturato e uso degli strumenti: pipeline](../../assets/chapters/67_tools/TOOLS-02/candidate-v50.png)
@@ -75,10 +82,12 @@ La seconda figura mette a confronto «Esecuzione e osservazione» e il limite di
 
 ## Esempio Python eseguito
 
-Il frammento seguente è lo stesso conservato nel repository. Usa valori piccoli perché l'obiettivo è osservare il meccanismo, non simulare una scala che non abbiamo eseguito.
+La prova locale di output strutturato e uso degli strumenti parte da un esempio minimo, registrato nel repository insieme ai suoi test. Per «Output strutturato e uso degli strumenti», il caso di default usa valori piccoli per isolare il meccanismo. La prova negativa riguarda proprio «output strutturato e uso degli strumenti» e interrompe l'interpretazione prima dell'output.
 
 ```python
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     request = {"tool": "lookup_order", "order_id": "A1"}
     allowlist = {"lookup_order"}
     allowed = request["tool"] in allowlist and bool(request["order_id"])
@@ -96,13 +105,13 @@ Il test associato è [`code/test_67_contract.py`](code/test_67_contract.py); l'o
 
 ## Come si collegano i passaggi
 
-- **Da «Schema dell'output» a «Selezione del tool».** JSON Schema, grammar o tipi stabiliscono campi e vincoli. Il modello sceglie una funzione tra opzioni descritte. Il contratto iniziale nomina messaggi e confini; il componente successivo implementa una parte del percorso senza ereditare autorizzazioni implicite. [SRC-67-001; SRC-67-002]
+- **Da «Schema dell'output» a «Selezione del tool».** JSON Schema, grammar o tipi stabiliscono campi e vincoli. Il modello sceglie una funzione tra opzioni descritte. «Schema dell'output» nomina il confine e «Selezione del tool» implementa il percorso senza ereditare autorizzazioni implicite. Da «Schema dell'output» a «Selezione del tool» cambia la domanda osservabile. [SRC-67-001; SRC-67-002]
 
-- **Da «Selezione del tool» a «Argomenti».** Il modello sceglie una funzione tra opzioni descritte. Gli argomenti vengono estratti dal contesto e validati prima dell'esecuzione. Il terzo passaggio compone più componenti e rende quindi necessario conservare stato, identità e decisione oltre all'output finale. [SRC-67-002; SRC-67-003]
+- **Da «Selezione del tool» a «Argomenti».** Il modello sceglie una funzione tra opzioni descritte. Gli argomenti vengono estratti dal contesto e validati prima dell'esecuzione. Componendo «Selezione del tool» e «Argomenti» diventa necessario conservare stato, identità e decisione. Il passaggio successivo rende misurabile «Argomenti». [SRC-67-002; SRC-67-003]
 
-- **Da «Argomenti» a «Esecuzione e osservazione».** Gli argomenti vengono estratti dal contesto e validati prima dell'esecuzione. Il sistema esegue il tool fuori dal modello e restituisce un risultato strutturato. La quarta sezione introduce failure e recovery nel punto in cui possono ancora precedere un side effect o una perdita di stato. [SRC-67-003; SRC-67-004]
+- **Da «Argomenti» a «Esecuzione e osservazione».** Gli argomenti vengono estratti dal contesto e validati prima dell'esecuzione. Il sistema esegue il tool fuori dal modello e restituisce un risultato strutturato. «Esecuzione e osservazione» introduce failure e recovery prima di un side effect o di una perdita di stato. Da «Argomenti» a «Esecuzione e osservazione» cambia la domanda osservabile. [SRC-67-003; SRC-67-004]
 
-- **Da «Esecuzione e osservazione» a «Idempotenza e side effect».** Il sistema esegue il tool fuori dal modello e restituisce un risultato strutturato. Operazioni di lettura e scrittura hanno rischi differenti. La chiusura valuta il comportamento end-to-end: un componente corretto non basta se il collegamento, il carico o la policy cambiano l'esito. [SRC-67-004; SRC-67-001]
+- **Da «Esecuzione e osservazione» a «Idempotenza e side effect».** Il sistema esegue il tool fuori dal modello e restituisce un risultato strutturato. Operazioni di lettura e scrittura hanno rischi differenti. La chiusura su «Idempotenza e side effect» valuta il sistema completo, non soltanto il componente iniziale. Il passaggio successivo rende misurabile «Idempotenza e side effect». [SRC-67-004; SRC-67-001]
 
 La catena completa produce risultato del tool o rifiuto tracciato a partire da nome, argomenti, scope e stato. Ogni collegamento conserva un oggetto osservabile diverso; per questo il risultato non può essere esteso oltre il limite dichiarato: schema valido non significa permesso di eseguire il side effect.
 
@@ -118,4 +127,4 @@ La catena completa produce risultato del tool o rifiuto tracciato a partire da n
 
 ## Il confine operativo
 
-La lezione parte da «nome, argomenti, scope e stato» e arriva fino a «risultato del tool o rifiuto tracciato». Il limite da conservare è questo: schema valido non significa permesso di eseguire il side effect. Definizioni e risultati citati sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md); la mappa dei claim è in [`CLAIMS.md`](CLAIMS.md).
+La lezione parte da «nome, argomenti, scope e stato» e arriva fino a «risultato del tool o rifiuto tracciato». Il limite da conservare è questo: schema valido non significa permesso di eseguire il side effect. Il confine di «Idempotenza e side effect» va ricontrollato tra claim, fonti e artefatti: i rinvii sono [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md), [`CLAIMS.md`](CLAIMS.md) e `code/`.

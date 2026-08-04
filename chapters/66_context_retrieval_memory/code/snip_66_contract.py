@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-import hashlib
 import json
-import math
-import statistics
-from collections import Counter
 
 CHAPTER = 66
 TITLE = 'Contesto lungo, retrieval e memoria'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     short_term = ["ultimo evento"]
     long_term = ["fatto stabile"]
     recalled = long_term[0]

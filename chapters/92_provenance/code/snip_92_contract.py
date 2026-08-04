@@ -2,15 +2,14 @@ from __future__ import annotations
 
 import hashlib
 import json
-import math
-import statistics
-from collections import Counter
 
 CHAPTER = 92
 TITLE = 'Watermarking e provenienza dei contenuti'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     payload = "Il pacco non è arrivato"
     manifest = {"payload": payload, "creator": "local-test", "version": "v1"}
     digest = hashlib.sha256(json.dumps(manifest, ensure_ascii=False, sort_keys=True).encode()).hexdigest()

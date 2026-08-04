@@ -14,7 +14,7 @@ deferred: benchmark applicativi non eseguiti e approvazione autoriale delle visu
 
 # Capitolo 48. Preferenze, reward model e RLHF
 
-La domanda guida di questa lezione è come collegare «Dalle dimostrazioni alle preferenze» e «Valutazione e sicurezza» senza perdere il contratto tecnico di preferenze, reward model e rlhf. L'oggetto osservato è dimostrazioni, preferenze, reward model e policy. Il contratto locale è: input, prompt, risposta scelta, rifiutata e score; operazione, fit del reward, KL e aggiornamento della policy; output, reward, log-probability e comportamento aggiornato. Il caso guida è questo: Due risposte per lo stesso prompt ricevono score di reward diversi e una penalità KL separata. Il confine da mantenere esplicito è: il reward è un proxy e può essere ottimizzato in modo scorretto.
+Per entrare in preferenze, reward model e rlhf, seguiamo il passaggio che unisce «Dalle dimostrazioni alle preferenze» a «Valutazione e sicurezza». L'oggetto osservato è dimostrazioni, preferenze, reward model e policy. Il contratto locale dichiara input, prompt, risposta scelta, rifiutata e score; operazione, fit del reward, KL e aggiornamento della policy; output, reward, log-probability e comportamento aggiornato. La situazione minima da seguire è Due risposte per lo stesso prompt ricevono score di reward diversi e una penalità KL separata. Il limite da non nascondere è: il reward è un proxy e può essere ottimizzato in modo scorretto.
 
 ## Dalle dimostrazioni alle preferenze
 
@@ -24,7 +24,7 @@ Il confronto tra policy richiede una policy di riferimento e uno stesso prompt.
 
 **Caso da seguire.** Due risposte per lo stesso prompt ricevono score di reward diversi e una penalità KL separata.
 
-**Controllo.** Scrivi il risultato atteso prima del calcolo, modifica una sola quantità e localizza il primo passaggio che cambia. Il vincolo da conservare è: Il protocollo deve registrare istruzioni ai valutatori, accordo e slice.
+**Controllo.** Per «Dalle dimostrazioni alle preferenze», scrivi il risultato atteso prima del calcolo, modifica una sola quantità e localizza il primo passaggio che cambia. Nel caso «Dalle dimostrazioni alle preferenze», il vincolo da conservare è: Il protocollo deve registrare istruzioni ai valutatori, accordo e slice.
 
 
 ## Reward model
@@ -33,7 +33,7 @@ Un modello assegna uno score alle risposte e viene addestrato con una loss di ra
 
 **Caso da seguire.** Una traiettoria di due passi in cui l'azione scelta modifica lo stato successivo prima del reward.
 
-**Controllo.** Ricalcola il caso a mano e con lo snippet. Se i risultati divergono, confronta prima i valori intermedi e soltanto dopo l'output finale.
+**Controllo.** Per «Reward model», ricalcola il caso a mano e con lo snippet. Nel caso «Reward model», se i risultati divergono, confronta prima i valori intermedi e soltanto dopo l'output finale.
 
 
 La relazione centrale può essere scritta come:
@@ -56,7 +56,7 @@ PPO o algoritmi affini aggiornano la policy per aumentare reward mantenendo un v
 
 **Caso da seguire.** Per «Policy optimization» si mantiene l'input del capitolo e si isola questa condizione: PPO o algoritmi affini aggiornano la policy per aumentare reward mantenendo un vincolo rispetto al modello di riferimento.
 
-**Controllo.** Aggiungi un valore limite e verifica separatamente forma, valore e ipotesi. Una shape valida non dimostra da sola «Policy optimization».
+**Controllo.** Per «Policy optimization», aggiungi un valore limite e verifica separatamente forma, valore e ipotesi. Una shape valida non dimostra da sola «Policy optimization».
 
 
 ## KL e reward hacking
@@ -65,15 +65,17 @@ Il termine KL limita lo spostamento della policy. Un reward imperfetto può esse
 
 **Caso da seguire.** Per «KL e reward hacking» si mantiene l'input del capitolo e si isola questa condizione: Il termine KL limita lo spostamento della policy.
 
-**Controllo.** Mantieni fisso l'input e sostituisci soltanto il meccanismo discusso nella sezione. Il confronto deve attribuire la differenza a quel passaggio, non al setup.
+**Controllo.** Per «KL e reward hacking», mantieni fisso l'input e sostituisci soltanto il meccanismo discusso nella sezione. Nel caso «KL e reward hacking», il confronto deve attribuire la differenza a quel passaggio, non al setup.
 
 
 ## Esempio Python eseguito
 
-Il frammento seguente è lo stesso conservato nel repository. Usa valori piccoli perché l'obiettivo è osservare il meccanismo, non simulare una scala che non abbiamo eseguito.
+Per rendere osservabile preferenze, reward model e rlhf, il capitolo conserva qui l'artefatto Python eseguito. Per «Preferenze, reward model e RLHF», il caso di default usa valori piccoli per isolare il meccanismo. Il test rifiuta anche un caso non documentato di «preferenze, reward model e rlhf».
 
 ```python
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     chosen = 0.8
     rejected = 0.2
     reward_margin = chosen - rejected
@@ -95,7 +97,7 @@ Win rate, reward e giudizi automatici devono essere affiancati da controlli indi
 
 **Caso da seguire.** Due risposte con log-probabilità diverse producono un margine; il margine può diventare un segnale di training, ma non è una misura assoluta di correttezza.
 
-**Controllo.** Costruisci un controesempio che rispetti il tipo di dato ma violi l'ipotesi centrale. Il test deve rendere riconoscibile perché «Valutazione e sicurezza» non si applica.
+**Controllo.** Per «Valutazione e sicurezza», costruisci un controesempio che rispetti il tipo di dato ma violi l'ipotesi centrale. Il test deve rendere riconoscibile perché «Valutazione e sicurezza» non si applica.
 
 
 ![Preferenze, reward model e RLHF: loop](../../assets/chapters/48_rlhf/RLHF-02/candidate-v48.png)
@@ -105,13 +107,13 @@ La seconda figura mette a confronto «KL e reward hacking» e il limite discusso
 
 ## Come si collegano i passaggi
 
-- **Da «Dalle dimostrazioni alle preferenze» a «Reward model».** Dati di confronto ordinano risposte alla stessa richiesta. Un modello assegna uno score alle risposte e viene addestrato con una loss di ranking. Il primo passaggio definisce che cosa entra nel calcolo; il secondo stabilisce la regola che produce il valore osservabile. [SRC-48-001; SRC-48-002]
+- **Da «Dalle dimostrazioni alle preferenze» a «Reward model».** Dati di confronto ordinano risposte alla stessa richiesta. Un modello assegna uno score alle risposte e viene addestrato con una loss di ranking. Tra «Dalle dimostrazioni alle preferenze» e «Reward model» l'ingresso viene fissato prima della regola che produce il valore. Il passaggio successivo rende misurabile «Reward model». [SRC-48-001; SRC-48-002]
 
-- **Da «Reward model» a «Policy optimization».** Un modello assegna uno score alle risposte e viene addestrato con una loss di ranking. PPO o algoritmi affini aggiornano la policy per aumentare reward mantenendo un vincolo rispetto al modello di riferimento. La regola generale viene poi letta dentro il componente: questa separazione permette di localizzare un errore prima di attribuirlo all'intero modello. [SRC-48-002; SRC-48-003]
+- **Da «Reward model» a «Policy optimization».** Un modello assegna uno score alle risposte e viene addestrato con una loss di ranking. PPO o algoritmi affini aggiornano la policy per aumentare reward mantenendo un vincolo rispetto al modello di riferimento. Nel caso «Policy optimization» il componente diventa il punto in cui localizzare l'errore. Da «Reward model» a «Policy optimization» cambia la domanda osservabile. [SRC-48-002; SRC-48-003]
 
-- **Da «Policy optimization» a «KL e reward hacking».** PPO o algoritmi affini aggiornano la policy per aumentare reward mantenendo un vincolo rispetto al modello di riferimento. Il termine KL limita lo spostamento della policy. Dopo avere reso visibile il componente, il percorso introduce la variante o l'ottimizzazione senza cambiare di nascosto il caso di partenza. [SRC-48-003; SRC-48-004]
+- **Da «Policy optimization» a «KL e reward hacking».** PPO o algoritmi affini aggiornano la policy per aumentare reward mantenendo un vincolo rispetto al modello di riferimento. Il termine KL limita lo spostamento della policy. Dopo «Policy optimization», la variante di «KL e reward hacking» cambia una proprietà alla volta. Il passaggio successivo rende misurabile «KL e reward hacking». [SRC-48-003; SRC-48-004]
 
-- **Da «KL e reward hacking» a «Valutazione e sicurezza».** Il termine KL limita lo spostamento della policy. Win rate, reward e giudizi automatici devono essere affiancati da controlli indipendenti, red teaming e analisi di regressione. L'ultimo passaggio sposta l'attenzione dal funzionamento locale alla misura: correttezza del calcolo e qualità applicativa restano domande distinte. [SRC-48-004; SRC-48-001]
+- **Da «KL e reward hacking» a «Valutazione e sicurezza».** Il termine KL limita lo spostamento della policy. Win rate, reward e giudizi automatici devono essere affiancati da controlli indipendenti, red teaming e analisi di regressione. Da «Valutazione e sicurezza» in poi la misura resta distinta dalla correttezza locale del calcolo. Da «KL e reward hacking» a «Valutazione e sicurezza» cambia la domanda osservabile. [SRC-48-004; SRC-48-001]
 
 La catena completa produce reward, log-probability e comportamento aggiornato a partire da prompt, risposta scelta, rifiutata e score. Ogni collegamento conserva un oggetto osservabile diverso; per questo il risultato non può essere esteso oltre il limite dichiarato: il reward è un proxy e può essere ottimizzato in modo scorretto.
 
@@ -127,4 +129,4 @@ La catena completa produce reward, log-probability e comportamento aggiornato a 
 
 ## Che cosa deve restare chiaro
 
-La lezione parte da «prompt, risposta scelta, rifiutata e score» e arriva fino a «reward, log-probability e comportamento aggiornato». Il limite da conservare è questo: il reward è un proxy e può essere ottimizzato in modo scorretto. Definizioni e risultati citati sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md); la mappa dei claim è in [`CLAIMS.md`](CLAIMS.md).
+La lezione parte da «prompt, risposta scelta, rifiutata e score» e arriva fino a «reward, log-probability e comportamento aggiornato». Il limite da conservare è questo: il reward è un proxy e può essere ottimizzato in modo scorretto. La formula e il codice collegati a «Valutazione e sicurezza» sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md), [`CLAIMS.md`](CLAIMS.md) e `code/`.

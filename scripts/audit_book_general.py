@@ -11,8 +11,6 @@ from __future__ import annotations
 import argparse
 import json
 import re
-import subprocess
-import sys
 from collections import Counter
 from pathlib import Path
 
@@ -276,16 +274,25 @@ def markdown_report(result: dict[str, object]) -> str:
     return "\n".join(lines)
 
 
-def main() -> None:
+def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--json", action="store_true", help="stampa il risultato JSON")
     parser.add_argument("--write-report", type=Path, help="scrive un report Markdown nel percorso indicato")
+    parser.add_argument("--strict", action="store_true", help="fallisce se resta un problema automatico")
     args = parser.parse_args()
     result = audit()
     if args.write_report:
         args.write_report.write_text(markdown_report(result), encoding="utf-8")
     print(json.dumps(result if args.json else result["summary"], ensure_ascii=False, indent=2))
+    if args.strict:
+        summary = result["summary"]
+        problem_count = sum(
+            summary[key]
+            for key in ("missing_images", "image_issues", "source_problems", "claim_problems", "code_problems", "repeated_paragraphs_ge8")
+        )
+        return 1 if problem_count else 0
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

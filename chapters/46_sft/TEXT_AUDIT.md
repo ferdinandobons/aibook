@@ -2,7 +2,7 @@
 
 - versione: 0.5.0-draft3
 - data: 4 agosto 2026
-- parole fuori dai blocchi di codice: 1080
+- parole fuori dai blocchi di codice: 1170
 - nuclei semantici: 5 (Dal pretraining alle istruzioni; Formati conversazionali; Instruction mixture; Teacher forcing e generalizzazione; Catastrophic forgetting e controllo)
 - paragrafi del vecchio scaffold: assenti secondo `audit_book_quality.py`
 - ripetizioni lunghe tra tre o più capitoli: assenti secondo l'audit trasversale

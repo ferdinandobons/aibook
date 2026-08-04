@@ -1,6 +1,6 @@
 # Esempio verificato. Capitolo 67
 
-`snip_67_contract.py` esegue il caso minimo usato nel testo di **Output strutturato e uso degli strumenti**. `test_67_contract.py` conserva l'output atteso, controlla determinismo, serializzazione, valori finiti e presenza del limite interpretativo.
+`snip_67_contract.py` esegue il caso minimo usato nel testo di **Output strutturato e uso degli strumenti**. `test_67_contract.py` conserva l'output atteso, controlla determinismo, serializzazione, valori finiti, forma del contratto e rifiuto dei casi non documentati.
 
 ```bash
 python snip_67_contract.py

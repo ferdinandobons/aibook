@@ -14,7 +14,7 @@ deferred: benchmark applicativi non eseguiti e approvazione autoriale delle visu
 
 # Capitolo 31. Dalla rappresentazione linguistica agli LLM
 
-La domanda guida di questa lezione è come collegare «Distribuzione del token successivo» e «Modello e sistema» senza perdere il contratto tecnico di dalla rappresentazione linguistica agli llm. L'oggetto osservato è un prompt e la distribuzione del token successivo. Il contratto locale è: input, prefisso tokenizzato, esempi e temperatura dichiarati; operazione, in-context learning, decoding e calibrazione; output, logits, risposta e confidenza misurabile. Il caso guida è questo: Un prefisso corto con ID, lunghezza, posizione e output del token successivo dichiarati. Il confine da mantenere esplicito è: probabilità, comportamento osservato e correttezza non sono sinonimi.
+Per distinguere dalla rappresentazione linguistica agli llm, mettiamo in relazione «Distribuzione del token successivo» e «Modello e sistema» mantenendo separati gli assi osservati. L'oggetto osservato è un prompt e la distribuzione del token successivo. Il contratto locale dichiara input, prefisso tokenizzato, esempi e temperatura dichiarati; operazione, in-context learning, decoding e calibrazione; output, logits, risposta e confidenza misurabile. Per fissare il riferimento usiamo Un prefisso corto con ID, lunghezza, posizione e output del token successivo dichiarati. Il limite da non nascondere è: probabilità, comportamento osservato e correttezza non sono sinonimi.
 
 ## Distribuzione del token successivo
 
@@ -24,7 +24,7 @@ La softmax trasforma logits condizionati in una distribuzione; la scelta del tok
 
 **Caso da seguire.** Un prefisso corto con ID, lunghezza, posizione e output del token successivo dichiarati.
 
-**Controllo.** Classifica lo stesso caso lungo un solo asse alla volta e annota quale proprietà non è stata misurata.
+**Controllo.** Per «Distribuzione del token successivo», classifica lo stesso caso lungo un solo asse alla volta e annota quale proprietà non è stata misurata.
 
 
 ## Prompt e dimostrazioni
@@ -33,7 +33,7 @@ Istruzioni ed esempi entrano nel contesto senza un optimizer step. Il checkpoint
 
 **Caso da seguire.** Lo stesso prompt con greedy e top-p confrontati.
 
-**Controllo.** Cambia la proprietà che distingue «Prompt e dimostrazioni» dalle categorie vicine. Se la classificazione non cambia, la distinzione va formulata meglio.
+**Controllo.** Cambia la proprietà che distingue «Prompt e dimostrazioni» dalle categorie vicine. Nel caso «Prompt e dimostrazioni», se la classificazione non cambia, la distinzione va formulata meglio.
 
 
 ## Decoding
@@ -42,7 +42,16 @@ Greedy, sampling, temperature e truncation trasformano la distribuzione in una t
 
 **Caso da seguire.** Un prefisso corretto confrontato con lo stesso prefisso dopo che il modello ha prodotto il token precedente.
 
-**Controllo.** Confronta un caso positivo e uno di confine usando la medesima definizione; non trasformare l'esempio in una graduatoria generale.
+**Controllo.** Per «Decoding», confronta un caso positivo e uno di confine usando la medesima definizione; non trasformare l'esempio in una graduatoria generale.
+
+
+La relazione centrale può essere scritta come:
+
+$$
+p(x_t | x_{<t}) = softmax(z_t)
+$$
+
+La softmax trasforma logits condizionati in una distribuzione; la scelta del token viene dopo. [SRC-31-001]
 
 
 ![Dalla rappresentazione linguistica agli LLM: matrix](../../assets/chapters/31_llm_behavior/LLM-01/candidate-v48.png)
@@ -65,12 +74,12 @@ Post-training, messaggi di sistema, strumenti e filtri contribuiscono al comport
 
 **Caso da seguire.** Un confronto tra due prefissi con la stessa stringa, tokenizer dichiarato e mask causale esplicita.
 
-**Controllo.** Limita la conclusione alla proprietà dichiarata: Post-training, messaggi di sistema, strumenti e filtri contribuiscono al comportamento osservato. Le dimensioni non osservate restano aperte.
+**Controllo.** Per «Modello e sistema», limita la conclusione alla proprietà dichiarata: Post-training, messaggi di sistema, strumenti e filtri contribuiscono al comportamento osservato. Nel caso «Modello e sistema», le dimensioni non osservate restano aperte.
 
 
 ## Esempio Python eseguito
 
-Il frammento seguente è lo stesso conservato nel repository. Usa valori piccoli perché l'obiettivo è osservare il meccanismo, non simulare una scala che non abbiamo eseguito.
+La prova locale di dalla rappresentazione linguistica agli llm parte da un esempio minimo, registrato nel repository insieme ai suoi test. Per «Dalla rappresentazione linguistica agli LLM», il caso di default usa valori piccoli per isolare il meccanismo. La prova negativa riguarda proprio «dalla rappresentazione linguistica agli llm» e interrompe l'interpretazione prima dell'output.
 
 ```python
 def normalize(values):
@@ -82,7 +91,9 @@ def normalize(values):
     return [value / total for value in exponentials]
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     logits = [2.0, 1.0, 0.0]
     probabilities = normalize(logits)
     demonstrations = 2
@@ -106,13 +117,13 @@ La seconda figura mette a confronto «Calibrazione» e il limite discusso in «M
 
 ## Come si collegano i passaggi
 
-- **Da «Distribuzione del token successivo» a «Prompt e dimostrazioni».** Un LLM autoregressivo produce logits condizionati sul prefisso. Istruzioni ed esempi entrano nel contesto senza un optimizer step. La definizione iniziale stabilisce l'asse del confronto; la categoria successiva aggiunge una proprietà senza creare una classifica implicita. [SRC-31-001; SRC-31-002]
+- **Da «Distribuzione del token successivo» a «Prompt e dimostrazioni».** Un LLM autoregressivo produce logits condizionati sul prefisso. Istruzioni ed esempi entrano nel contesto senza un optimizer step. «Distribuzione del token successivo» stabilisce l'asse e «Prompt e dimostrazioni» aggiunge una proprietà senza creare una graduatoria. Da «Distribuzione del token successivo» a «Prompt e dimostrazioni» cambia la domanda osservabile. [SRC-31-001; SRC-31-002]
 
-- **Da «Prompt e dimostrazioni» a «Decoding».** Istruzioni ed esempi entrano nel contesto senza un optimizer step. Greedy, sampling, temperature e truncation trasformano la distribuzione in una traiettoria. Il terzo passaggio verifica se le categorie restano distinguibili sullo stesso caso e impedisce che termini vicini diventino sinonimi. [SRC-31-002; SRC-31-003]
+- **Da «Prompt e dimostrazioni» a «Decoding».** Istruzioni ed esempi entrano nel contesto senza un optimizer step. Greedy, sampling, temperature e truncation trasformano la distribuzione in una traiettoria. Il confronto tra «Prompt e dimostrazioni» e «Decoding» mantiene le categorie distinguibili sullo stesso caso. Il passaggio successivo rende misurabile «Decoding». [SRC-31-002; SRC-31-003]
 
-- **Da «Decoding» a «Calibrazione».** Greedy, sampling, temperature e truncation trasformano la distribuzione in una traiettoria. Probabilità del token, confidenza espressa e correttezza fattuale sono quantità differenti. La quarta sezione introduce il punto in cui l'asse scelto smette di bastare e richiede una nuova osservazione. [SRC-31-003; SRC-31-004]
+- **Da «Decoding» a «Calibrazione».** Greedy, sampling, temperature e truncation trasformano la distribuzione in una traiettoria. Probabilità del token, confidenza espressa e correttezza fattuale sono quantità differenti. «Calibrazione» mostra il punto in cui l'asse di «Decoding» non è più sufficiente. Da «Decoding» a «Calibrazione» cambia la domanda osservabile. [SRC-31-003; SRC-31-004]
 
-- **Da «Calibrazione» a «Modello e sistema».** Probabilità del token, confidenza espressa e correttezza fattuale sono quantità differenti. Post-training, messaggi di sistema, strumenti e filtri contribuiscono al comportamento osservato. La sezione finale riunisce le dimensioni della valutazione, ma conserva i limiti di ciascuna invece di fonderle in un unico punteggio. [SRC-31-004; SRC-31-001]
+- **Da «Calibrazione» a «Modello e sistema».** Probabilità del token, confidenza espressa e correttezza fattuale sono quantità differenti. Post-training, messaggi di sistema, strumenti e filtri contribuiscono al comportamento osservato. Il passaggio su «Modello e sistema» riunisce più dimensioni senza cancellarne i limiti. Il passaggio successivo rende misurabile «Modello e sistema». [SRC-31-004; SRC-31-001]
 
 La catena completa produce logits, risposta e confidenza misurabile a partire da prefisso tokenizzato, esempi e temperatura dichiarati. Ogni collegamento conserva un oggetto osservabile diverso; per questo il risultato non può essere esteso oltre il limite dichiarato: probabilità, comportamento osservato e correttezza non sono sinonimi.
 
@@ -128,4 +139,4 @@ La catena completa produce logits, risposta e confidenza misurabile a partire da
 
 ## Una mappa, non una graduatoria
 
-La lezione parte da «prefisso tokenizzato, esempi e temperatura dichiarati» e arriva fino a «logits, risposta e confidenza misurabile». Il limite da conservare è questo: probabilità, comportamento osservato e correttezza non sono sinonimi. Definizioni e risultati citati sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md); la mappa dei claim è in [`CLAIMS.md`](CLAIMS.md).
+La lezione parte da «prefisso tokenizzato, esempi e temperatura dichiarati» e arriva fino a «logits, risposta e confidenza misurabile». Il limite da conservare è questo: probabilità, comportamento osservato e correttezza non sono sinonimi. Il confronto di «Modello e sistema» resta verificabile nei dossier [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md) e [`CLAIMS.md`](CLAIMS.md), senza trasformare la mappa in una graduatoria.

@@ -24,3 +24,10 @@ Perché due distribuzioni con la stessa entropia possono produrre loss diverse q
 
 Le due distribuzioni sono permutazioni: la loro entropia è la stessa, ma la classe target riceve probabilità diversa.
 - domanda principale: Quale confronto o limite chiarisce «Entropia come informazione media»?
+
+## Contratto geometrico
+
+- raster: margine di sicurezza di 20 px sul canvas 1800x1000;
+- contenimento: nessun testo oltre il proprio box o il canvas;
+- composizione: nessuna sovrapposizione o tangenza intenzionale tra elementi fratelli;
+- fonte: `GEOMETRY.json` e checklist dell'audit storico.

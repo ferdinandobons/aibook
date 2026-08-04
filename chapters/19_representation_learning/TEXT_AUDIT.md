@@ -2,7 +2,7 @@
 
 - versione: 0.5.0-draft3
 - data: 4 agosto 2026
-- parole fuori dai blocchi di codice: 996
+- parole fuori dai blocchi di codice: 1102
 - nuclei semantici: 5 (Che cosa rappresenta un vettore; Bottleneck e autoencoder; Metric e contrastive learning; Disentanglement e identifiability; Valutare una rappresentazione)
 - paragrafi del vecchio scaffold: assenti secondo `audit_book_quality.py`
 - ripetizioni lunghe tra tre o più capitoli: assenti secondo l'audit trasversale

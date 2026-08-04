@@ -14,7 +14,7 @@ deferred: benchmark applicativi non eseguiti e approvazione autoriale delle visu
 
 # Capitolo 16. Addestrare reti profonde
 
-La domanda guida di questa lezione è come collegare «Segnali che attraversano molti layer» e «Regolarizzazione e diagnostica» senza perdere il contratto tecnico di addestrare reti profonde. L'oggetto osservato è il segnale che attraversa una rete profonda. Il contratto locale è: input, x_l con shape [batch, d] e norma misurata; operazione, un blocco, una normalizzazione o un percorso residuale; output, x_{l+1} con la stessa o con una nuova shape dichiarata. Il caso guida è questo: Due vettori con shape compatibile confrontati prima e dopo il blocco, osservando separatamente scala e percorso residuale in «Segnali che attraversano molti layer». Il confine da mantenere esplicito è: una somma residuale richiede shape compatibili e non prova da sola stabilità del training.
+Qui addestrare reti profonde viene osservato come un meccanismo: il percorso va da «Segnali che attraversano molti layer» a «Regolarizzazione e diagnostica». L'oggetto osservato è il segnale che attraversa una rete profonda. Il contratto locale dichiara input, x_l con shape [batch, d] e norma misurata; operazione, un blocco, una normalizzazione o un percorso residuale; output, x_{l+1} con la stessa o con una nuova shape dichiarata. Il caso di partenza è Due vettori con shape compatibile confrontati prima e dopo il blocco, osservando separatamente scala e percorso residuale in «Segnali che attraversano molti layer». Il limite da non nascondere è: una somma residuale richiede shape compatibili e non prova da sola stabilità del training.
 
 ## Segnali che attraversano molti layer
 
@@ -24,7 +24,7 @@ Il residual path conserva un percorso identità da controllare.
 
 **Caso da seguire.** Due vettori con shape compatibile confrontati prima e dopo il blocco, osservando separatamente scala e percorso residuale in «Segnali che attraversano molti layer».
 
-**Controllo.** Scrivi il risultato atteso prima del calcolo, modifica una sola quantità e localizza il primo passaggio che cambia. Il vincolo da conservare è: Inizializzazione, attivazioni e residual determinano la scala osservata.
+**Controllo.** Per «Segnali che attraversano molti layer», scrivi il risultato atteso prima del calcolo, modifica una sola quantità e localizza il primo passaggio che cambia. Nel caso «Segnali che attraversano molti layer», il vincolo da conservare è: Inizializzazione, attivazioni e residual determinano la scala osservata.
 
 
 ## Inizializzazione
@@ -33,7 +33,7 @@ Xavier e He initialization collegano la varianza dei pesi al fan-in o fan-out. L
 
 **Caso da seguire.** X + F(x) con due vettori di dimensione 2.
 
-**Controllo.** Ricalcola il caso a mano e con lo snippet. Se i risultati divergono, confronta prima i valori intermedi e soltanto dopo l'output finale.
+**Controllo.** Per «Inizializzazione», ricalcola il caso a mano e con lo snippet. Nel caso «Inizializzazione», se i risultati divergono, confronta prima i valori intermedi e soltanto dopo l'output finale.
 
 
 La relazione centrale può essere scritta come:
@@ -56,7 +56,7 @@ BatchNorm, LayerNorm e RMSNorm normalizzano assi e statistiche differenti. Non s
 
 **Caso da seguire.** Due vettori con shape compatibile confrontati prima e dopo il blocco, osservando separatamente scala e percorso residuale in «Normalizzazione».
 
-**Controllo.** Aggiungi un valore limite e verifica separatamente forma, valore e ipotesi. Una shape valida non dimostra da sola «Normalizzazione».
+**Controllo.** Per «Normalizzazione», aggiungi un valore limite e verifica separatamente forma, valore e ipotesi. Una shape valida non dimostra da sola «Normalizzazione».
 
 
 ## Residual e profondità
@@ -65,19 +65,41 @@ Un residual path conserva un percorso identità e facilita il trasporto di infor
 
 **Caso da seguire.** Due vettori con shape compatibile confrontati prima e dopo il blocco, osservando separatamente scala e percorso residuale in «Residual e profondità».
 
-**Controllo.** Mantieni fisso l'input e sostituisci soltanto il meccanismo discusso nella sezione. Il confronto deve attribuire la differenza a quel passaggio, non al setup.
+**Controllo.** Per «Residual e profondità», mantieni fisso l'input e sostituisci soltanto il meccanismo discusso nella sezione. Nel caso «Residual e profondità», il confronto deve attribuire la differenza a quel passaggio, non al setup.
 
 
 ## Esempio Python eseguito
 
-Il frammento seguente è lo stesso conservato nel repository. Usa valori piccoli perché l'obiettivo è osservare il meccanismo, non simulare una scala che non abbiamo eseguito.
+Per rendere osservabile addestrare reti profonde, il capitolo conserva qui l'artefatto Python eseguito. Per «Addestrare reti profonde», il caso di default usa valori piccoli per isolare il meccanismo. Il test rifiuta anche un caso non documentato di «addestrare reti profonde».
 
 ```python
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     x = [1.0, -2.0]
     residual = [0.2, 0.3]
     output = [a + b for a, b in zip(x, residual)]
-    return {"output": output, "shape": [2], "invariant": "residual operands share shape"}
+    return {
+        "output": output,
+        "shape": [2],
+        "invariant": "residual operands share shape",
+    }
 ```
 
 Esecuzione con `python snip_16_contract.py`:
@@ -95,7 +117,7 @@ Dropout, weight decay, data augmentation ed early stopping agiscono in punti div
 
 **Caso da seguire.** Un residual `x + F(x)` richiede shape compatibili. Se `F(x)` ha scala molto maggiore di `x`, la somma resta valida formalmente ma può destabilizzare il percorso.
 
-**Controllo.** Costruisci un controesempio che rispetti il tipo di dato ma violi l'ipotesi centrale. Il test deve rendere riconoscibile perché «Regolarizzazione e diagnostica» non si applica.
+**Controllo.** Per «Regolarizzazione e diagnostica», costruisci un controesempio che rispetti il tipo di dato ma violi l'ipotesi centrale. Il test deve rendere riconoscibile perché «Regolarizzazione e diagnostica» non si applica.
 
 
 ![Addestrare reti profonde: architecture](../../assets/chapters/16_deep_training/TRAINING-02/candidate-v49.png)
@@ -105,13 +127,13 @@ La seconda figura mette a confronto «Residual e profondità» e il limite discu
 
 ## Come si collegano i passaggi
 
-- **Da «Segnali che attraversano molti layer» a «Inizializzazione».** Attivazioni e gradienti possono crescere o ridursi lungo la profondità. Xavier e He initialization collegano la varianza dei pesi al fan-in o fan-out. Il primo passaggio definisce che cosa entra nel calcolo; il secondo stabilisce la regola che produce il valore osservabile. [SRC-16-001; SRC-16-002]
+- **Da «Segnali che attraversano molti layer» a «Inizializzazione».** Attivazioni e gradienti possono crescere o ridursi lungo la profondità. Xavier e He initialization collegano la varianza dei pesi al fan-in o fan-out. Tra «Segnali che attraversano molti layer» e «Inizializzazione» l'ingresso viene fissato prima della regola che produce il valore. Il passaggio successivo rende misurabile «Inizializzazione». [SRC-16-001; SRC-16-002]
 
-- **Da «Inizializzazione» a «Normalizzazione».** Xavier e He initialization collegano la varianza dei pesi al fan-in o fan-out. BatchNorm, LayerNorm e RMSNorm normalizzano assi e statistiche differenti. La regola generale viene poi letta dentro il componente: questa separazione permette di localizzare un errore prima di attribuirlo all'intero modello. [SRC-16-002; SRC-16-003]
+- **Da «Inizializzazione» a «Normalizzazione».** Xavier e He initialization collegano la varianza dei pesi al fan-in o fan-out. BatchNorm, LayerNorm e RMSNorm normalizzano assi e statistiche differenti. Nel caso «Normalizzazione» il componente diventa il punto in cui localizzare l'errore. Da «Inizializzazione» a «Normalizzazione» cambia la domanda osservabile. [SRC-16-002; SRC-16-003]
 
-- **Da «Normalizzazione» a «Residual e profondità».** BatchNorm, LayerNorm e RMSNorm normalizzano assi e statistiche differenti. Un residual path conserva un percorso identità e facilita il trasporto di informazione. Dopo avere reso visibile il componente, il percorso introduce la variante o l'ottimizzazione senza cambiare di nascosto il caso di partenza. [SRC-16-003; SRC-16-004]
+- **Da «Normalizzazione» a «Residual e profondità».** BatchNorm, LayerNorm e RMSNorm normalizzano assi e statistiche differenti. Un residual path conserva un percorso identità e facilita il trasporto di informazione. Dopo «Normalizzazione», la variante di «Residual e profondità» cambia una proprietà alla volta. Il passaggio successivo rende misurabile «Residual e profondità». [SRC-16-003; SRC-16-004]
 
-- **Da «Residual e profondità» a «Regolarizzazione e diagnostica».** Un residual path conserva un percorso identità e facilita il trasporto di informazione. Dropout, weight decay, data augmentation ed early stopping agiscono in punti diversi. L'ultimo passaggio sposta l'attenzione dal funzionamento locale alla misura: correttezza del calcolo e qualità applicativa restano domande distinte. [SRC-16-004; SRC-16-001]
+- **Da «Residual e profondità» a «Regolarizzazione e diagnostica».** Un residual path conserva un percorso identità e facilita il trasporto di informazione. Dropout, weight decay, data augmentation ed early stopping agiscono in punti diversi. Da «Regolarizzazione e diagnostica» in poi la misura resta distinta dalla correttezza locale del calcolo. Da «Residual e profondità» a «Regolarizzazione e diagnostica» cambia la domanda osservabile. [SRC-16-004; SRC-16-001]
 
 La catena completa produce x_{l+1} con la stessa o con una nuova shape dichiarata a partire da x_l con shape [batch, d] e norma misurata. Ogni collegamento conserva un oggetto osservabile diverso; per questo il risultato non può essere esteso oltre il limite dichiarato: una somma residuale richiede shape compatibili e non prova da sola stabilità del training.
 
@@ -127,4 +149,4 @@ La catena completa produce x_{l+1} con la stessa o con una nuova shape dichiarat
 
 ## Che cosa deve restare chiaro
 
-La lezione parte da «x_l con shape [batch, d] e norma misurata» e arriva fino a «x_{l+1} con la stessa o con una nuova shape dichiarata». Il limite da conservare è questo: una somma residuale richiede shape compatibili e non prova da sola stabilità del training. Definizioni e risultati citati sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md); la mappa dei claim è in [`CLAIMS.md`](CLAIMS.md).
+La lezione parte da «x_l con shape [batch, d] e norma misurata» e arriva fino a «x_{l+1} con la stessa o con una nuova shape dichiarata». Il limite da conservare è questo: una somma residuale richiede shape compatibili e non prova da sola stabilità del training. La formula e il codice collegati a «Regolarizzazione e diagnostica» sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md), [`CLAIMS.md`](CLAIMS.md) e `code/`.

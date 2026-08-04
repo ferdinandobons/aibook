@@ -33,11 +33,18 @@ def sigmoid(values: np.ndarray) -> np.ndarray:
 
 def binary_cross_entropy(probabilities: np.ndarray, labels: np.ndarray) -> float:
     probabilities = np.clip(probabilities, 1e-12, 1.0 - 1e-12)
-    return float(-np.mean(labels * np.log(probabilities) + (1.0 - labels) * np.log(1.0 - probabilities)))
+    return float(
+        -np.mean(
+            labels * np.log(probabilities)
+            + (1.0 - labels) * np.log(1.0 - probabilities)
+        )
+    )
 
 
 # BOOK-EXCERPT-START
-def train_classifier(data: np.ndarray, steps: int = 120, learning_rate: float = 0.2) -> dict[str, object]:
+def train_classifier(
+    data: np.ndarray, steps: int = 120, learning_rate: float = 0.2
+) -> dict[str, object]:
     if steps <= 0 or learning_rate <= 0:
         raise ValueError("steps e learning_rate devono essere positivi")
     dataset_digest(data)  # valida shape e rende esplicito l'artefatto usato
@@ -63,13 +70,17 @@ def train_classifier(data: np.ndarray, steps: int = 120, learning_rate: float = 
         "dataset_sha256": dataset_digest(data),
         "rows": int(len(data)),
     }
+
+
 # BOOK-EXCERPT-END
 
 
 def run_lab() -> dict[str, object]:
     result = train_classifier(DATA)
     result["baseline_accuracy"] = 0.5
-    result["acceptance"] = bool(result["accuracy"] >= 0.95 and result["final_loss"] < result["initial_loss"])
+    result["acceptance"] = bool(
+        result["accuracy"] >= 0.95 and result["final_loss"] < result["initial_loss"]
+    )
     return result
 
 

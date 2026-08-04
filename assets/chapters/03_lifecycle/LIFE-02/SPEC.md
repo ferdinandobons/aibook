@@ -49,3 +49,10 @@ Il checkpoint può restare invariato mentre cambiano dati, strumenti, regole, au
 - colori usati insieme a titoli e posizione, non come unico significato;
 - footer leggibile e non sovrapposto al confine del sistema.
 - domanda principale: Quale confronto o limite chiarisce «I dati sono un artefatto versionato»?
+
+## Contratto geometrico
+
+- raster: margine di sicurezza di 20 px sul canvas 1800x1000;
+- contenimento: nessun testo oltre il proprio box o il canvas;
+- composizione: nessuna sovrapposizione o tangenza intenzionale tra elementi fratelli;
+- fonte: `GEOMETRY.json` e checklist dell'audit storico.

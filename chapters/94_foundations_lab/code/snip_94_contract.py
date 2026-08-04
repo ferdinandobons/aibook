@@ -2,15 +2,14 @@ from __future__ import annotations
 
 import hashlib
 import json
-import math
-import statistics
-from collections import Counter
 
 CHAPTER = 94
 TITLE = 'Percorso pratico dai fondamenti'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     configuration = {"seed": 7, "split": "fixed", "dtype": "float32"}
     digest = hashlib.sha256(json.dumps(configuration, sort_keys=True).encode()).hexdigest()
     return {"configuration_digest": digest[:12], "configuration": configuration, "invariant": "a local run is reproducible only with its declared setup"}

@@ -2,7 +2,7 @@
 
 - versione: 0.5.0-draft3
 - data: 4 agosto 2026
-- parole fuori dai blocchi di codice: 1027
+- parole fuori dai blocchi di codice: 1105
 - nuclei semantici: 5 (Un gioco tra due modelli; Divergenze e gradienti; Mode collapse; Wasserstein GAN; Stabilità e valutazione)
 - paragrafi del vecchio scaffold: assenti secondo `audit_book_quality.py`
 - ripetizioni lunghe tra tre o più capitoli: assenti secondo l'audit trasversale

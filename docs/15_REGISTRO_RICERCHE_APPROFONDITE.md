@@ -566,7 +566,7 @@ Il controllo HTTP sui 73 URL unici presenti nei dossier ha rilevato 65 risposte 
 
 - `audit_book_quality.py --strict`: `98/98` capitoli e `12/12` appendici puliti; nessun paragrafo lungo riutilizzato in tre o più capitoli.
 - `audit_semantic_alignment.py`: `98/98` capitoli puliti.
-- `audit_editorial_quality.py --strict`: `0` capitoli problematici, `863-3.402` parole pubbliche, `261` formule, `0` formule schematiche non etichettate, `0` paragrafi duplicati e `0` immagini problematiche.
+- `audit_editorial_quality.py --strict`: `0` capitoli problematici, `910-3.402` parole pubbliche, `279` formule, `0` formule schematiche non etichettate, `0` paragrafi duplicati e `0` immagini problematiche.
 - `audit_book_general.py`: `0` problemi di fonti, claim, codice, immagini o paragrafi ripetuti nel proprio perimetro.
 - I capitoli 14-98, escluso il pilota 28, sono stati ricostruiti da nuclei semantici specifici e non da un paragrafo pubblico comune. Prerequisiti, casi, controlli, connessioni ed esercizi restano locali alla lezione.
 
@@ -574,13 +574,13 @@ Il controllo HTTP sui 73 URL unici presenti nei dossier ha rilevato 65 risposte 
 
 - `94/98` capitoli conservano un riferimento eseguibile con blocco Python nel testo, output letterale, file completo, test e output versionato.
 - I capitoli 20, 30, 93 e 98 dichiarano un'eccezione motivata. I vecchi script generici sono stati rimossi, perché contraddicevano la prova documentale richiesta dal tema.
-- Sono stati eseguiti `461` test in `114` file con Python 3.13.12, NumPy 2.5.1 e PyTorch 2.12.1; altri `3` test JAX sono passati nell'ambiente JAX 0.11.0. Totale: `464` test in `115` file, `0` fallimenti.
-- `267/267` file Python sono stati analizzati sintatticamente.
+- Sono stati eseguiti `541` test in `114` file con Python 3.13.12, NumPy 2.5.1 e PyTorch 2.12.1; altri `3` test JAX sono passati nell'ambiente JAX 0.11.0. Totale: `544` test in `115` file, `0` fallimenti.
+- `272/272` file Python sono stati analizzati sintatticamente.
 - Sono stati rimossi 51 test storici scollegati che importavano funzioni non più presenti e 159 output o record ambiente duplicati della prima materializzazione.
 
 ## Fonti
 
-- La passata globale rimane registrata in `source_verification_2026-08-03.json`: `419` fonti uniche e `502` record fonte-claim.
+- La passata globale corrente è registrata in `source_verification_2026-08-04.json`: `420` fonti uniche e `503` record fonte-claim; `332` contesti aperti, `128` parziali e `43` confermati tramite accesso web ufficiale.
 - Il 4 agosto sono stati ricontrollati i punti corretti ad alto rischio: tassonomia generativa e precision-recall del capitolo 20, lifecycle MCP e protocollo A2A del capitolo 68, QAT, GPTQ, AWQ e SmoothQuant del capitolo 74, testo ufficiale dell'AI Act e misura ambientale NIST del capitolo 93.
 - Questo controllo non trasforma automaticamente l'intero libro in un'opera fattualmente congelata: API, standard e normativa vanno ricontrollati alla data di pubblicazione.
 
@@ -591,6 +591,15 @@ Il controllo HTTP sui 73 URL unici presenti nei dossier ha rilevato 65 risposte 
 - I vecchi grafici quantitativi illustrativi sono stati eliminati dal percorso attivo. Una figura con numeri è ammessa soltanto quando conserva dati eseguiti o una fonte con setup e unità.
 - Sei contact sheet hanno coperto l'intero set revisionato; spot check a piena risoluzione hanno incluso attention hardware-aware, test-time compute, interoperabilità, quantizzazione, prompt injection e piccolo language model.
 - Tutte le figure restano candidate tecniche con approvazione autoriale aperta.
+
+## Gate trasversali aggiunti
+
+- `audit_visual_geometry.py --strict`: `208/208` immagini attive senza problemi; `180` manifest semantici e `28` asset storici controllati con raster e checklist.
+- `audit_editorial_variation.py --strict`: nessun marker dello scaffold storico e nessuna frase condivisa da più di `12` capitoli.
+- `audit_formula_contracts.py --strict`: `68/68` formule o schemi previsti presenti, delimitati e accompagnati da una spiegazione.
+- `audit_code_alignment.py --strict`: `80/80` capitoli generati con policy `reference` hanno blocchi Python e output inline contenuti negli artefatti eseguiti e versionati.
+- `run_all_examples.py --include-appendix-a`: `541` test in `114` file senza failure; l'appendice B aggiunge `3` test JAX in ambiente CPU, per `544` test in `115` file.
+- `ruff check` sui blocchi Python dei capitoli e sugli script di audit: nessun errore.
 
 ## Gate ancora aperti
 

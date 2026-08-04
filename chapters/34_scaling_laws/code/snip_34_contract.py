@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-import hashlib
 import json
-import math
-import statistics
-from collections import Counter
 
 CHAPTER = 34
 TITLE = 'Scaling law e progettazione del modello'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     tokens = [1000.0, 2000.0, 4000.0, 8000.0]
     losses = [3.10, 2.74, 2.47, 2.29]
     slope = (losses[-1] - losses[0]) / (tokens[-1] - tokens[0])

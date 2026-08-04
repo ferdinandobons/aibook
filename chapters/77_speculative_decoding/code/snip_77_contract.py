@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-import hashlib
 import json
-import math
-import statistics
-from collections import Counter
 
 CHAPTER = 77
 TITLE = 'Speculative e parallel decoding'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     draft = ["a", "b", "c"]
     target_accepts = [True, True, False]
     accepted = [token for token, ok in zip(draft, target_accepts) if ok]

@@ -29,19 +29,13 @@ GRAPH: dict[str, tuple[Edge, ...]] = {
         Edge("delay_confirmed", "confirm_delay", 1.0),
         Edge("ticket_opened", "open_ticket_after_tracking", 5.0),
     ),
-    "delay_confirmed": (
-        Edge("ticket_opened", "open_delay_ticket", 2.0),
-    ),
+    "delay_confirmed": (Edge("ticket_opened", "open_delay_ticket", 2.0),),
     "payment_inspected": (
         Edge("payment_ok", "confirm_payment_ok", 1.0),
         Edge("ticket_opened", "open_payment_ticket", 12.0),
     ),
-    "payment_ok": (
-        Edge("ticket_opened", "redirect_to_delivery", 10.0),
-    ),
-    "agent_asked": (
-        Edge("ticket_opened", "agent_opens_ticket", 8.0),
-    ),
+    "payment_ok": (Edge("ticket_opened", "redirect_to_delivery", 10.0),),
+    "agent_asked": (Edge("ticket_opened", "agent_opens_ticket", 8.0),),
     "ticket_opened": (),
 }
 

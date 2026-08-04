@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-import hashlib
 import json
-import math
-import statistics
-from collections import Counter
 
 CHAPTER = 97
 TITLE = 'Riprodurre e leggere un paper'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     original = {"metric": 0.80, "seed": 1, "split": "fixed"}
     replica = {"metric": 0.78, "seed": 2, "split": "fixed"}
     difference = replica["metric"] - original["metric"]

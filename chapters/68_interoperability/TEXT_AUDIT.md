@@ -2,7 +2,7 @@
 
 - versione: 0.5.0-draft3
 - data: 4 agosto 2026
-- parole fuori dai blocchi di codice: 916
+- parole fuori dai blocchi di codice: 1004
 - nuclei semantici: 5 (Contratti tra componenti; Model Context Protocol; Agent-to-agent; Identità e autorizzazione; Compatibilità ed evoluzione)
 - paragrafi del vecchio scaffold: assenti secondo `audit_book_quality.py`
 - ripetizioni lunghe tra tre o più capitoli: assenti secondo l'audit trasversale

@@ -1,0 +1,339 @@
+{
+  "schema": 1,
+  "figure": "PROVENANCE-02",
+  "canvas": [
+    1800,
+    1000
+  ],
+  "safe_margin": 20,
+  "minimum_gap": 8,
+  "objects": [
+    {
+      "id": "text-001",
+      "kind": "text",
+      "box": [
+        60.0,
+        25.0,
+        1740.0,
+        77.0
+      ],
+      "label": "PROVENANCE-02 · Watermarking e provenienza dei contenuti",
+      "order": 1
+    },
+    {
+      "id": "text-002",
+      "kind": "text",
+      "box": [
+        80.0,
+        87.0,
+        1720.0,
+        140.0
+      ],
+      "label": "Quale controllo collega «Detection» a «Policy e interfaccia» senza superare il limite dichiarato?",
+      "order": 2
+    },
+    {
+      "id": "text-003",
+      "kind": "text",
+      "box": [
+        80.0,
+        146.0,
+        1720.0,
+        178.0
+      ],
+      "label": "CREDENTIAL LAYERS",
+      "order": 3
+    },
+    {
+      "id": "rounded_rectangle-004",
+      "kind": "rounded_rectangle",
+      "box": [
+        620.0,
+        205.0,
+        1180.0,
+        297.0
+      ],
+      "label": "",
+      "order": 4
+    },
+    {
+      "id": "text-005",
+      "kind": "text",
+      "box": [
+        642.0,
+        217.0,
+        870.0,
+        249.0
+      ],
+      "label": "INPUT",
+      "order": 5
+    },
+    {
+      "id": "text-006",
+      "kind": "text",
+      "box": [
+        880.0,
+        217.0,
+        1158.0,
+        277.0
+      ],
+      "label": "payload, metadata, manifest e chiave o watermark",
+      "order": 6
+    },
+    {
+      "id": "rounded_rectangle-007",
+      "kind": "rounded_rectangle",
+      "box": [
+        620.0,
+        317.0,
+        1180.0,
+        409.0
+      ],
+      "label": "",
+      "order": 7
+    },
+    {
+      "id": "text-008",
+      "kind": "text",
+      "box": [
+        642.0,
+        329.0,
+        870.0,
+        361.0
+      ],
+      "label": "Detection",
+      "order": 8
+    },
+    {
+      "id": "text-009",
+      "kind": "text",
+      "box": [
+        880.0,
+        329.0,
+        1158.0,
+        389.0
+      ],
+      "label": "Classificatori di contenuto sintetico degradano sotto editing, nuovi modelli e shift.",
+      "order": 9
+    },
+    {
+      "id": "rounded_rectangle-010",
+      "kind": "rounded_rectangle",
+      "box": [
+        620.0,
+        429.0,
+        1180.0,
+        521.0
+      ],
+      "label": "",
+      "order": 11
+    },
+    {
+      "id": "text-011",
+      "kind": "text",
+      "box": [
+        642.0,
+        441.0,
+        870.0,
+        473.0
+      ],
+      "label": "Policy e interfaccia",
+      "order": 12
+    },
+    {
+      "id": "text-012",
+      "kind": "text",
+      "box": [
+        880.0,
+        441.0,
+        1158.0,
+        501.0
+      ],
+      "label": "Provenienza, disclosure e conservazione dei metadati devono essere progettate lungo la pipeline.",
+      "order": 13
+    },
+    {
+      "id": "rounded_rectangle-013",
+      "kind": "rounded_rectangle",
+      "box": [
+        620.0,
+        541.0,
+        1180.0,
+        633.0
+      ],
+      "label": "",
+      "order": 15
+    },
+    {
+      "id": "text-014",
+      "kind": "text",
+      "box": [
+        642.0,
+        553.0,
+        870.0,
+        585.0
+      ],
+      "label": "Controllo locale",
+      "order": 16
+    },
+    {
+      "id": "text-015",
+      "kind": "text",
+      "box": [
+        880.0,
+        553.0,
+        1158.0,
+        613.0
+      ],
+      "label": "provenienza dell'artefatto non certifica la verità del contenuto",
+      "order": 17
+    },
+    {
+      "id": "rounded_rectangle-016",
+      "kind": "rounded_rectangle",
+      "box": [
+        620.0,
+        653.0,
+        1180.0,
+        745.0
+      ],
+      "label": "",
+      "order": 19
+    },
+    {
+      "id": "text-017",
+      "kind": "text",
+      "box": [
+        642.0,
+        665.0,
+        870.0,
+        697.0
+      ],
+      "label": "OUTPUT",
+      "order": 20
+    },
+    {
+      "id": "text-018",
+      "kind": "text",
+      "box": [
+        880.0,
+        665.0,
+        1158.0,
+        725.0
+      ],
+      "label": "record verificabile e stato di rilevazione",
+      "order": 21
+    },
+    {
+      "id": "text-019",
+      "kind": "text",
+      "box": [
+        150.0,
+        400.0,
+        450.0,
+        540.0
+      ],
+      "label": "PERCORSO LATERALE identità, stato o metadati restano distinguibili",
+      "order": 25
+    },
+    {
+      "id": "rounded_rectangle-020",
+      "kind": "rounded_rectangle",
+      "box": [
+        170.0,
+        850.0,
+        1630.0,
+        940.0
+      ],
+      "label": "",
+      "order": 26
+    },
+    {
+      "id": "text-021",
+      "kind": "text",
+      "box": [
+        205.0,
+        873.0,
+        1595.0,
+        917.0
+      ],
+      "label": "LIMITE · provenienza dell'artefatto non certifica la verità del contenuto",
+      "order": 27
+    }
+  ],
+  "connectors": [
+    {
+      "id": "connector-001",
+      "start": [
+        900.0,
+        299.0
+      ],
+      "end": [
+        900.0,
+        315.0
+      ],
+      "order": 10
+    },
+    {
+      "id": "connector-002",
+      "start": [
+        900.0,
+        411.0
+      ],
+      "end": [
+        900.0,
+        427.0
+      ],
+      "order": 14
+    },
+    {
+      "id": "connector-003",
+      "start": [
+        900.0,
+        523.0
+      ],
+      "end": [
+        900.0,
+        539.0
+      ],
+      "order": 18
+    },
+    {
+      "id": "connector-004",
+      "start": [
+        900.0,
+        635.0
+      ],
+      "end": [
+        900.0,
+        651.0
+      ],
+      "order": 22
+    },
+    {
+      "id": "connector-005",
+      "start": [
+        500.0,
+        250.0
+      ],
+      "end": [
+        610.0,
+        250.0
+      ],
+      "order": 23
+    },
+    {
+      "id": "connector-006",
+      "start": [
+        500.0,
+        698.0
+      ],
+      "end": [
+        610.0,
+        698.0
+      ],
+      "order": 24
+    }
+  ],
+  "errors": []
+}

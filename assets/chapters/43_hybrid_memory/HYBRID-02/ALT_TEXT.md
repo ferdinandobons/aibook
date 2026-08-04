@@ -1,3 +1,3 @@
 # Testo alternativo
 
-HYBRID-02, Architetture ibride e memoria interna. Quale controllo collega «Memoria associativa» a «Memoria interna ed esterna» senza superare il limite dichiarato? La composizione memory layers collega «Memoria associativa», «Memoria interna ed esterna». L'input è segmento corrente, stato e memoria persistente; l'output è stato aggiornato e contenuto recuperato. Il limite esplicito è: durata e provenienza della memoria devono essere separate.
+Architetture ibride e memoria interna: loop. Quale failure o confronto separa Memoria associativa da Memoria interna ed esterna? La figura va letta insieme alla sezione pubblica corrispondente.

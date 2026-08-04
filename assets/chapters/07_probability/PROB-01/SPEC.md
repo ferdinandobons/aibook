@@ -55,3 +55,10 @@ P(H|E1) = 0,6667
 
 I valori derivano dalla tabella del capitolo e da `SNIP-PROB-001`. La candidata è un PNG raster generato da `scripts/generate_probability_visuals.py`; non viene usato SVG.
 - domanda principale: Quale trasformazione centrale rende osservabile «Esiti, eventi e probabilità» nel capitolo 7?
+
+## Contratto geometrico
+
+- raster: margine di sicurezza di 20 px sul canvas 1800x1000;
+- contenimento: nessun testo oltre il proprio box o il canvas;
+- composizione: nessuna sovrapposizione o tangenza intenzionale tra elementi fratelli;
+- fonte: `GEOMETRY.json` e checklist dell'audit storico.

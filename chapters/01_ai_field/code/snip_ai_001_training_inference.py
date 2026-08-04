@@ -20,7 +20,10 @@ class DemoResult:
 
 def parameters_changed(before: list[torch.Tensor], model: nn.Module) -> bool:
     """Restituisce True quando almeno un parametro differisce dalla copia iniziale."""
-    return any(not torch.equal(old, new.detach()) for old, new in zip(before, model.parameters()))
+    return any(
+        not torch.equal(old, new.detach())
+        for old, new in zip(before, model.parameters())
+    )
 
 
 def run_demo() -> DemoResult:
@@ -40,7 +43,9 @@ def run_demo() -> DemoResult:
     with torch.no_grad():
         initial_loss = loss_fn(model(features), labels).item()
 
-    parameters_before_training = [parameter.detach().clone() for parameter in model.parameters()]
+    parameters_before_training = [
+        parameter.detach().clone() for parameter in model.parameters()
+    ]
 
     model.train()
     for _ in range(100):
@@ -56,14 +61,18 @@ def run_demo() -> DemoResult:
     training_parameters_changed = parameters_changed(parameters_before_training, model)
 
     model.eval()
-    parameters_before_inference = [parameter.detach().clone() for parameter in model.parameters()]
+    parameters_before_inference = [
+        parameter.detach().clone() for parameter in model.parameters()
+    ]
 
     new_input = torch.tensor([[1.8, 0.1]], dtype=torch.float32)
     with torch.inference_mode():
         inference_logits = model(new_input)
         predicted_class = int(inference_logits.argmax(dim=-1).item())
 
-    inference_parameters_changed = parameters_changed(parameters_before_inference, model)
+    inference_parameters_changed = parameters_changed(
+        parameters_before_inference, model
+    )
 
     return DemoResult(
         initial_loss=initial_loss,

@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-import hashlib
 import json
-import math
-import statistics
-from collections import Counter
 
 CHAPTER = 84
 TITLE = 'Fattualità, incertezza e affidabilità'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     claims = [(True, 0.9), (True, 0.8), (False, 0.95), (True, 0.7)]
     confident_errors = sum((not correct) and score >= 0.9 for correct, score in claims)
     return {"accuracy": sum(correct for correct, _score in claims) / len(claims), "confident_errors": confident_errors, "invariant": "confidence is evaluated against factual correctness, not substituted for it"}

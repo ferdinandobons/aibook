@@ -14,7 +14,7 @@ deferred: benchmark applicativi non eseguiti e approvazione autoriale delle visu
 
 # Capitolo 79. Serving, batching e scheduling
 
-La domanda guida di questa lezione è come collegare «Richieste eterogenee» e «Metriche di servizio» senza perdere il contratto tecnico di serving, batching e scheduling. L'oggetto osservato è richieste eterogenee in una coda di serving. Il contratto locale è: input, prompt, deadline, lunghezza, memoria e priorità; operazione, batching continuo, admission e scheduling; output, throughput, latency p50/p99 e richieste ammesse. Il caso guida è questo: Due richieste brevi e una lunga entrano nello stesso batch, con token totali registrati. Il confine da mantenere esplicito è: throughput e latenza devono essere misurati insieme.
+Il percorso di serving, batching e scheduling attraversa «Richieste eterogenee» e «Metriche di servizio» senza attribuire al solo modello ciò che dipende dal sistema. L'oggetto osservato è richieste eterogenee in una coda di serving. Il contratto locale dichiara input, prompt, deadline, lunghezza, memoria e priorità; operazione, batching continuo, admission e scheduling; output, throughput, latency p50/p99 e richieste ammesse. La situazione minima da seguire è Due richieste brevi e una lunga entrano nello stesso batch, con token totali registrati. Il limite da non nascondere è: throughput e latenza devono essere misurati insieme.
 
 ## Richieste eterogenee
 
@@ -24,7 +24,7 @@ Batching e scheduling sono una decisione con vincoli, non solo una coda.
 
 **Caso da seguire.** Due richieste brevi e una lunga entrano nello stesso batch, con token totali registrati.
 
-**Controllo.** Registra richiesta, decisione, stato e output finale. Un esito plausibile non deve nascondere il componente che lo ha prodotto.
+**Controllo.** Per «Richieste eterogenee», registra richiesta, decisione, stato e output finale. Nel caso «Richieste eterogenee», un esito plausibile non deve nascondere il componente che lo ha prodotto.
 
 
 ## Continuous batching
@@ -34,6 +34,13 @@ Il scheduler inserisce nuove richieste tra iterazioni di decode e rimuove quelle
 **Caso da seguire.** Un batch di richieste eterogenee in cui throughput, coda e time-to-first-token vengono misurati separatamente.
 
 **Controllo.** Ripeti «Continuous batching» con una capability o un'autorizzazione rimossa e verifica che la failure preceda qualsiasi side effect.
+
+
+La forma compatta aiuta a seguire il flusso senza attribuirgli una garanzia quantitativa.
+
+**Schema concettuale.** `schedule = batch(requests, deadline, memory)`
+
+Batching e scheduling sono una decisione con vincoli, non solo una coda. [SRC-79-001]
 
 
 ![Serving, batching e scheduling: chart](../../assets/chapters/79_serving/SERVING-01/candidate-v48.png)
@@ -47,7 +54,7 @@ Aumentare batch migliora utilizzo ma può aumentare time-to-first-token e inter-
 
 **Caso da seguire.** Per «Throughput e latency» si mantiene l'input del capitolo e si isola questa condizione: Aumentare batch migliora utilizzo ma può aumentare time-to-first-token e inter-token latency.
 
-**Controllo.** Separa il test del singolo componente dal test end-to-end, usando lo stesso input e la stessa configurazione versionata.
+**Controllo.** Per «Throughput e latency», separa il test del singolo componente dal test end-to-end, usando lo stesso input e la stessa configurazione versionata.
 
 
 ## Admission control
@@ -56,7 +63,7 @@ Memoria KV, priorità, deadline e fairness determinano quali richieste entrano n
 
 **Caso da seguire.** Ridurre i byte per elemento cambia memoria e potenzialmente errore. Il controllo richiede confronto numerico oltre alla misura di tempo.
 
-**Controllo.** Introduci una failure a un solo confine e controlla che log, stato e recovery identifichino quel confine senza ambiguità.
+**Controllo.** Per «Admission control», introduci una failure a un solo confine e controlla che log, stato e recovery identifichino quel confine senza ambiguità.
 
 
 ## Metriche di servizio
@@ -65,7 +72,7 @@ TTFT, TPOT, goodput, queue time, error rate e costo devono essere osservati per 
 
 **Caso da seguire.** Quattro casi con protocollo, una failure e una slice conservati insieme al valore aggregato.
 
-**Controllo.** Confronta il comportamento completo, non soltanto l'ultimo messaggio. Il risultato resta limitato da: TTFT, TPOT, goodput, queue time, error rate e costo devono essere osservati per tenant e classe di richiesta.
+**Controllo.** Per «Metriche di servizio», confronta il comportamento completo, non soltanto l'ultimo messaggio. Nel caso «Metriche di servizio», il risultato resta limitato da: TTFT, TPOT, goodput, queue time, error rate e costo devono essere osservati per tenant e classe di richiesta.
 
 
 ![Serving, batching e scheduling: queue](../../assets/chapters/79_serving/SERVING-02/candidate-v48.png)
@@ -75,10 +82,12 @@ La seconda figura mette a confronto «Admission control» e il limite discusso i
 
 ## Esempio Python eseguito
 
-Il frammento seguente è lo stesso conservato nel repository. Usa valori piccoli perché l'obiettivo è osservare il meccanismo, non simulare una scala che non abbiamo eseguito.
+La prova locale di serving, batching e scheduling parte da un esempio minimo, registrato nel repository insieme ai suoi test. Per «Serving, batching e scheduling», il caso di default usa valori piccoli per isolare il meccanismo. La prova negativa riguarda proprio «serving, batching e scheduling» e interrompe l'interpretazione prima dell'output.
 
 ```python
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     requests = [("short-1", 2), ("short-2", 2), ("long", 6)]
     batch = [request[0] for request in requests]
     total_tokens = sum(length for _request, length in requests)
@@ -96,13 +105,13 @@ Il test associato è [`code/test_79_contract.py`](code/test_79_contract.py); l'o
 
 ## Come si collegano i passaggi
 
-- **Da «Richieste eterogenee» a «Continuous batching».** Prompt e output hanno lunghezze differenti. Il scheduler inserisce nuove richieste tra iterazioni di decode e rimuove quelle concluse. Il contratto iniziale nomina messaggi e confini; il componente successivo implementa una parte del percorso senza ereditare autorizzazioni implicite. [SRC-79-001; SRC-79-002]
+- **Da «Richieste eterogenee» a «Continuous batching».** Prompt e output hanno lunghezze differenti. Il scheduler inserisce nuove richieste tra iterazioni di decode e rimuove quelle concluse. «Richieste eterogenee» nomina il confine e «Continuous batching» implementa il percorso senza ereditare autorizzazioni implicite. Da «Richieste eterogenee» a «Continuous batching» cambia la domanda osservabile. [SRC-79-001; SRC-79-002]
 
-- **Da «Continuous batching» a «Throughput e latency».** Il scheduler inserisce nuove richieste tra iterazioni di decode e rimuove quelle concluse. Aumentare batch migliora utilizzo ma può aumentare time-to-first-token e inter-token latency. Il terzo passaggio compone più componenti e rende quindi necessario conservare stato, identità e decisione oltre all'output finale. [SRC-79-002; SRC-79-003]
+- **Da «Continuous batching» a «Throughput e latency».** Il scheduler inserisce nuove richieste tra iterazioni di decode e rimuove quelle concluse. Aumentare batch migliora utilizzo ma può aumentare time-to-first-token e inter-token latency. Componendo «Continuous batching» e «Throughput e latency» diventa necessario conservare stato, identità e decisione. Il passaggio successivo rende misurabile «Throughput e latency». [SRC-79-002; SRC-79-003]
 
-- **Da «Throughput e latency» a «Admission control».** Aumentare batch migliora utilizzo ma può aumentare time-to-first-token e inter-token latency. Memoria KV, priorità, deadline e fairness determinano quali richieste entrano nel sistema. La quarta sezione introduce failure e recovery nel punto in cui possono ancora precedere un side effect o una perdita di stato. [SRC-79-003; SRC-79-004]
+- **Da «Throughput e latency» a «Admission control».** Aumentare batch migliora utilizzo ma può aumentare time-to-first-token e inter-token latency. Memoria KV, priorità, deadline e fairness determinano quali richieste entrano nel sistema. «Admission control» introduce failure e recovery prima di un side effect o di una perdita di stato. Da «Throughput e latency» a «Admission control» cambia la domanda osservabile. [SRC-79-003; SRC-79-004]
 
-- **Da «Admission control» a «Metriche di servizio».** Memoria KV, priorità, deadline e fairness determinano quali richieste entrano nel sistema. TTFT, TPOT, goodput, queue time, error rate e costo devono essere osservati per tenant e classe di richiesta. La chiusura valuta il comportamento end-to-end: un componente corretto non basta se il collegamento, il carico o la policy cambiano l'esito. [SRC-79-004; SRC-79-001]
+- **Da «Admission control» a «Metriche di servizio».** Memoria KV, priorità, deadline e fairness determinano quali richieste entrano nel sistema. TTFT, TPOT, goodput, queue time, error rate e costo devono essere osservati per tenant e classe di richiesta. La chiusura su «Metriche di servizio» valuta il sistema completo, non soltanto il componente iniziale. Il passaggio successivo rende misurabile «Metriche di servizio». [SRC-79-004; SRC-79-001]
 
 La catena completa produce throughput, latency p50/p99 e richieste ammesse a partire da prompt, deadline, lunghezza, memoria e priorità. Ogni collegamento conserva un oggetto osservabile diverso; per questo il risultato non può essere esteso oltre il limite dichiarato: throughput e latenza devono essere misurati insieme.
 
@@ -118,4 +127,4 @@ La catena completa produce throughput, latency p50/p99 e richieste ammesse a par
 
 ## Il confine operativo
 
-La lezione parte da «prompt, deadline, lunghezza, memoria e priorità» e arriva fino a «throughput, latency p50/p99 e richieste ammesse». Il limite da conservare è questo: throughput e latenza devono essere misurati insieme. Definizioni e risultati citati sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md); la mappa dei claim è in [`CLAIMS.md`](CLAIMS.md).
+La lezione parte da «prompt, deadline, lunghezza, memoria e priorità» e arriva fino a «throughput, latency p50/p99 e richieste ammesse». Il limite da conservare è questo: throughput e latenza devono essere misurati insieme. Il confine di «Metriche di servizio» va ricontrollato tra claim, fonti e artefatti: i rinvii sono [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md), [`CLAIMS.md`](CLAIMS.md) e `code/`.

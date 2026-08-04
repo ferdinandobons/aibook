@@ -1,16 +1,14 @@
 from __future__ import annotations
 
-import hashlib
 import json
-import math
-import statistics
-from collections import Counter
 
 CHAPTER = 35
 TITLE = 'La ricetta di pretraining'
 
 
-def contract():
+def contract(case: str = "default"):
+    if case != "default":
+        raise ValueError("only the documented default case is supported")
     base_lr = 0.001
     warmup_steps = 4
     steps = [0, 1, 4, 8]

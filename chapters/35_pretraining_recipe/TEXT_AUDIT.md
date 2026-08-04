@@ -2,7 +2,7 @@
 
 - versione: 0.5.0-draft3
 - data: 4 agosto 2026
-- parole fuori dai blocchi di codice: 935
+- parole fuori dai blocchi di codice: 1022
 - nuclei semantici: 5 (Batch di token; Inizializzazione; AdamW; Warmup e schedule; Checkpoint e recovery)
 - paragrafi del vecchio scaffold: assenti secondo `audit_book_quality.py`
 - ripetizioni lunghe tra tre o più capitoli: assenti secondo l'audit trasversale

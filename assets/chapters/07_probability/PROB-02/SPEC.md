@@ -75,3 +75,10 @@ con valori arrotondati:
 
 Le medie derivano da `SNIP-PROB-001`. I momenti e la deviazione teorica derivano dalla Bernoulli. La candidata è un PNG raster generato da `scripts/generate_probability_visuals.py`; non viene usato SVG.
 - domanda principale: Quale confronto o limite chiarisce «Congiunta, marginale e condizionata»?
+
+## Contratto geometrico
+
+- raster: margine di sicurezza di 20 px sul canvas 1800x1000;
+- contenimento: nessun testo oltre il proprio box o il canvas;
+- composizione: nessuna sovrapposizione o tangenza intenzionale tra elementi fratelli;
+- fonte: `GEOMETRY.json` e checklist dell'audit storico.

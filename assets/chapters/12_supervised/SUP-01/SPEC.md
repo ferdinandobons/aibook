@@ -20,3 +20,10 @@ Come si separano apprendimento dei parametri, scelta della configurazione e stim
 - test finale con modello e soglia fissati;
 - risultati illustrativi e confine sul riuso del test.
 - domanda principale: Quale trasformazione centrale rende osservabile «Dalle osservazioni alle coppie input-target» nel capitolo 12?
+
+## Contratto geometrico
+
+- raster: margine di sicurezza di 20 px sul canvas 1800x1000;
+- contenimento: nessun testo oltre il proprio box o il canvas;
+- composizione: nessuna sovrapposizione o tangenza intenzionale tra elementi fratelli;
+- fonte: `GEOMETRY.json` e checklist dell'audit storico.

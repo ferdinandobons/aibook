@@ -2,7 +2,7 @@
 
 - versione: 0.5.0-draft3
 - data: 4 agosto 2026
-- parole fuori dai blocchi di codice: 991
+- parole fuori dai blocchi di codice: 1108
 - nuclei semantici: 5 (Coordinate e camera; NeRF; Gaussian splatting; Mesh, point cloud e voxel; Generazione e grounding spaziale)
 - paragrafi del vecchio scaffold: assenti secondo `audit_book_quality.py`
 - ripetizioni lunghe tra tre o più capitoli: assenti secondo l'audit trasversale

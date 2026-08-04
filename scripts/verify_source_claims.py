@@ -30,8 +30,8 @@ import lesson_evidence as evidence  # noqa: E402
 import revise_book_completeness as revise  # noqa: E402
 
 
-DATE = "3 agosto 2026"
-REPORT_PATH = ROOT / "docs" / "source_verification_2026-08-03.json"
+DATE = "4 agosto 2026"
+REPORT_PATH = ROOT / "docs" / "source_verification_2026-08-04.json"
 
 # A few publisher pages deliberately deny automated retrieval.  These entries
 # were opened through the web research pass and retain the public locator
@@ -399,7 +399,7 @@ def fetch_url(url: str) -> tuple[str, str]:
     target = url
     if parsed.netloc in {"arxiv.org", "export.arxiv.org"} and parsed.path.startswith("/abs/"):
         target = "https://ar5iv.labs.arxiv.org/html/" + parsed.path.rsplit("/", 1)[-1]
-    request = Request(target, headers={"User-Agent": "aibook-source-audit/2026-08-03"})
+    request = Request(target, headers={"User-Agent": "aibook-source-audit/2026-08-04"})
     with urlopen(request, timeout=25) as response:
         raw = response.read(4_000_000)
         charset = response.headers.get_content_charset() or "utf-8"
@@ -473,7 +473,6 @@ def sources_for_generated_chapters() -> list[tuple[str, str, str, int, int]]:
     for number in range(14, 99):
         if number == 28:
             continue
-        spec = base.SPECS[number]
         kind = revise.profile(number)
         topic = evidence.topic_for(number, kind)
         sources = evidence.source_list_for(number, kind, base.SOURCE_BANK)

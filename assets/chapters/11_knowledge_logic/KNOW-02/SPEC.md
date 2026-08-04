@@ -20,3 +20,10 @@ Come una struttura condizionatamente indipendente rende esplicita una fattorizza
 - evidenza numerica e posterior risultante;
 - confine esplicito: l'indipendenza è un'ipotesi del modello.
 - domanda principale: Quale confronto o limite chiarisce «Sintassi, interpretazione e conseguenza»?
+
+## Contratto geometrico
+
+- raster: margine di sicurezza di 20 px sul canvas 1800x1000;
+- contenimento: nessun testo oltre il proprio box o il canvas;
+- composizione: nessuna sovrapposizione o tangenza intenzionale tra elementi fratelli;
+- fonte: `GEOMETRY.json` e checklist dell'audit storico.

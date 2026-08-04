@@ -20,7 +20,9 @@ def causal_attention() -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
     weights = torch.softmax(masked_scores, dim=-1)
     output = weights @ v
 
-    api_output = F.scaled_dot_product_attention(q, k, v, attn_mask=allowed, dropout_p=0.0)
+    api_output = F.scaled_dot_product_attention(
+        q, k, v, attn_mask=allowed, dropout_p=0.0
+    )
     torch.testing.assert_close(output, api_output, rtol=1e-12, atol=1e-12)
     assert torch.count_nonzero(weights[..., ~allowed]).item() == 0
     return allowed, weights, output

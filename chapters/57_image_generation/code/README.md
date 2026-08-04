@@ -1,6 +1,6 @@
 # Esempio verificato. Capitolo 57
 
-`snip_57_contract.py` esegue il caso minimo usato nel testo di **Generazione e modifica delle immagini**. `test_57_contract.py` conserva l'output atteso, controlla determinismo, serializzazione, valori finiti e presenza del limite interpretativo.
+`snip_57_contract.py` esegue il caso minimo usato nel testo di **Generazione e modifica delle immagini**. `test_57_contract.py` conserva l'output atteso, controlla determinismo, serializzazione, valori finiti, forma del contratto e rifiuto dei casi non documentati.
 
 ```bash
 python snip_57_contract.py
