@@ -369,7 +369,7 @@ $$
 
 $\Omega$ può penalizzare parametri, imporre vincoli o rappresentare una preferenza progettuale. Il termine regolarizzante non deriva automaticamente dalla likelihood dei dati; va dichiarato separatamente.
 
-## La loss esprime una ipotesi sul problema
+## La loss esprime un'ipotesi sul problema
 
 La cross-entropy è adatta quando il modello produce una distribuzione sulle classi e il target viene interpretato in quel supporto. Non è una loss universale.
 

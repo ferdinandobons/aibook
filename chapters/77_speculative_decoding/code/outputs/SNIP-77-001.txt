@@ -1,0 +1,1 @@
+{"accepted": ["a", "b"], "fallback": "target_next", "invariant": "speculative decoding verifies draft tokens before committing them"}

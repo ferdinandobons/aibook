@@ -1,8 +1,14 @@
-# Specifica `MIX-02`
+# Specifica visuale MIX-02
 
-- Titolo: Dati sintetici e feedback
-- Domanda: Una sorgente sintetica richiede controlli indipendenti
-- Sfondo: `#FFFFFF`
-- Orientamento: orizzontale
-- File: `candidate-v1.png`
-- Nessun SVG.
+- famiglia: chart
+- domanda principale: Il diagramma segue il passaggio: Campionamento, ripesatura e generazione controllata. L'input è pesi, temperatura, curriculum e conteggio dei token, l'output è probabilità effettive e mix osservato; il vincolo da controllare è che peso nominale e esposizione effettiva non sono la stessa misura
+- orientamento: orizzontale
+- formato: PNG raster 1800x1000
+- sfondo: #FFFFFF
+- versione candidata: candidate-v47.png
+- ordine di lettura: titolo, domanda, chart, invariante o limite in chiusura
+- nodi e contenuti: 1: Peso effettivo delle sorgenti; 2: Temperature sampling; 3: Mixture ottimizzata; 4: Curriculum; 5: Dati sintetici
+- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
+- invariante: peso nominale e esposizione effettiva non sono la stessa misura
+- fonti collegate: SRC-33-001 ... SRC-33-004
+- alt text: Diagramma MIX-02 del Capitolo 33, famiglia chart. Domanda: Il diagramma segue il passaggio: Campionamento, ripesatura e generazione controllata. L'input è pesi, temperatura, curriculum e conteggio dei token, l'output è probabilità effettive e mix osservato; il vincolo da controllare è che peso nominale e esposizione effettiva non sono la stessa misura La composizione usa i passaggi Peso effettivo delle sorgenti, Temperature sampling, Mixture ottimizzata, Curriculum, Dati sintetici.

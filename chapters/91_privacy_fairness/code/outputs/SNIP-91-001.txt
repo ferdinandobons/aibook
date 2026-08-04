@@ -1,0 +1,1 @@
+{"accuracy_by_group": {"A": 0.75, "B": 0.5}, "gap": 0.25, "invariant": "aggregate utility does not hide group-specific outcomes"}

@@ -1,0 +1,1 @@
+{"batch": ["short-1", "short-2", "long"], "invariant": "serving reports throughput and latency for the same admitted requests", "total_tokens": 10}

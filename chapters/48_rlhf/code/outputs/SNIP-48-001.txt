@@ -1,0 +1,1 @@
+{"invariant": "preference learning compares responses under one prompt", "reward_margin": 0.6}

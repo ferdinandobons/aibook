@@ -1,0 +1,1 @@
+{"active_features": 2, "invariant": "sparsity and reconstruction must be evaluated together", "reconstruction_error": 0.0}

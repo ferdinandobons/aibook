@@ -1,0 +1,1 @@
+{"invariant": "visual grounding links a text query to explicit image features", "scores": [0.45, 0.44999999999999996], "selected_patch": 0}

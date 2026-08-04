@@ -45,7 +45,7 @@ I tre vettori disponibili sono gli stessi. Cambiano soltanto i coefficienti con 
 
 La figura seguente confronta le due possibilità. Nel pannello sinistro, `v1`, `v2` e `v3` confluiscono in un solo vettore `c`, riutilizzato da entrambe le posizioni, indicate nella figura come `Posizione 1` e `Posizione 2`. Nel pannello destro, gli stessi vettori restano disponibili, ma ogni posizione usa coefficienti propri.
 
-![Confronto tra contesto fisso e coefficienti dipendenti dalla posizione corrente](../../assets/chapters/28_attention/ATT-01/candidate-v3.png)
+![Confronto tra contesto fisso e coefficienti dipendenti dalla posizione corrente](../../assets/chapters/28_attention/ATT-01/candidate-v4.png)
 
 La figura mostra il risultato che vogliamo ottenere, ma non spiega ancora come ricavare i coefficienti. Per farlo dobbiamo separare tre ruoli.
 

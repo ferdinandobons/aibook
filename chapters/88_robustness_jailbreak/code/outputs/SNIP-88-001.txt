@@ -1,0 +1,1 @@
+{"attack_success_rate": 0.5, "failures": ["perturbed"], "invariant": "robustness is defined relative to an explicit threat model"}

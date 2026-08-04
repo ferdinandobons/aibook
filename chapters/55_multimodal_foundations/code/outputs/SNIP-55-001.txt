@@ -1,0 +1,1 @@
+{"invariant": "modalities meet in a declared shared representation", "modalities": 2, "shared": [0.4, 0.25]}

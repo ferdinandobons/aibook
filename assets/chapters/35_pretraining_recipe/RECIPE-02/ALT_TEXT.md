@@ -1,3 +1,3 @@
-# Alt text `RECIPE-02`
+# Alt text RECIPE-02
 
-Diagramma tecnico su sfondo bianco dedicato a checkpoint di inference e training. Pesi sufficienti per l'uso non bastano per il resume
+Diagramma RECIPE-02 del Capitolo 35, famiglia pipeline. Domanda: Il diagramma segue il passaggio: Forward, backward, update, schedule e recovery. L'input è batch, learning rate, seed, optimizer e checkpoint, l'output è loss, parametri e checkpoint ripristinabile; il vincolo da controllare è che un checkpoint deve includere lo stato necessario a continuare il run La composizione usa i passaggi Batch di token, Inizializzazione, AdamW, Warmup e schedule, Checkpoint e recovery.

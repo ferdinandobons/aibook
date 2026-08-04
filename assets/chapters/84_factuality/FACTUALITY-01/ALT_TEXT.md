@@ -1,3 +1,3 @@
 # Alt text FACTUALITY-01
 
-Diagramma causale dei concetti principali.
+Diagramma FACTUALITY-01 del Capitolo 84, famiglia funnel. Domanda: Il diagramma segue il passaggio: Verifica, calibrazione, astensione e retrieval. L'input è claim, predizione, fonti e score di confidenza, l'output è risposta supportata o astensione motivata; il vincolo da controllare è che confidenza alta non certifica la verità fattuale La composizione usa i passaggi Correttezza e supporto, Hallucination, Calibrazione, Astensione, Verifica e retrieval.

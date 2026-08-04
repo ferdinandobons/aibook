@@ -1,64 +1,74 @@
 # Fonti primarie e autorevoli. Capitolo 32
 
-- Ultima verifica: 31 luglio 2026
-- I risultati quantitativi restano legati al setup originale.
+- Data di consultazione: 3 agosto 2026
+- Routing semantico: capitolo 32 -> tema `data_lifecycle`.
+- Perimetro: definizioni, meccanismi e limiti portanti del capitolo.
+- Regola: risultati numerici locali restano distinti dalle evidenze sperimentali delle fonti.
 
-## SRC-DATA-001
+## SRC-32-001
 
-Gebru et al., Datasheets for Datasets.
+- Titolo o riferimento: Gebru et al., Datasheets for Datasets.
+- Autori o organizzazione: Gebru et al..
+- Tipo: paper o report tecnico.
+- Data: data della revisione consultata.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- URL o identificatore: https://doi.org/10.1145/3458723
+- Data di consultazione: 3 agosto 2026.
+- Verifica d'accesso: web-confirmed; arXiv author copy and publisher metadata opened via web research; nessun risultato numerico trasferito.
+- Sezioni rilevanti: Abstract; Section 2 context; Section 3 datasheet concept; Section 4 questions; Section 5 challenges.
+- Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
+- Affermazioni sostenibili: Record, documenti, timestamp e licenze devono restare tracciabili dalla raccolta allo shard. Confini temporali, tokenizer, packing, checksum e conteggi definiscono l'artefatto usato dal training.
+- Limiti: non autorizza generalizzazioni a ogni modello, dataset, implementazione o prodotto.
+- Divergenze note: eventuali differenze di obiettivo, dataset o implementazione vanno mantenute separate nel testo.
 
-URL: https://arxiv.org/abs/1803.09010
+## SRC-32-002
 
-Uso: definizione, meccanismo o risultato attribuito nel capitolo.
+- Titolo o riferimento: Bender and Friedman, Data Statements for Natural Language Processing.
+- Autori o organizzazione: Bender and Friedman.
+- Tipo: paper o report tecnico.
+- Data: data della revisione consultata.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- URL o identificatore: https://arxiv.org/abs/1804.07741
+- Data di consultazione: 3 agosto 2026.
+- Verifica d'accesso: opened-partial; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
+- Sezioni rilevanti: Abstract / pagina iniziale; Scalar bispectrum beyond slow-roll in the unified EFT of inflation; I Introduction; II Unified EFT of Inflation.
+- Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
+- Affermazioni sostenibili: Trasformazioni di HTML, PDF, codice e conversazioni possono perdere informazione e devono essere versionate.
+- Limiti: non autorizza generalizzazioni a ogni modello, dataset, implementazione o prodotto.
+- Divergenze note: eventuali differenze di obiettivo, dataset o implementazione vanno mantenute separate nel testo.
 
-Limite: nessuna estensione automatica ad altri modelli o implementazioni.
+## SRC-32-003
 
-## SRC-DATA-002
+- Titolo o riferimento: Lee et al., Deduplicating Training Data Makes Language Models Better.
+- Autori o organizzazione: Lee et al..
+- Tipo: paper o report tecnico.
+- Data: data della revisione consultata.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- URL o identificatore: https://arxiv.org/abs/2107.06499
+- Data di consultazione: 3 agosto 2026.
+- Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
+- Sezioni rilevanti: Abstract / pagina iniziale; Deduplicating Training Data Makes Language Models Better; 3 Language Modeling Datasets; 5 Deduplication Results.
+- Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
+- Affermazioni sostenibili: Filtri di qualità, lingua, sicurezza e PII modificano la distribuzione e richiedono statistiche prima e dopo.
+- Limiti: non autorizza generalizzazioni a ogni modello, dataset, implementazione o prodotto.
+- Divergenze note: eventuali differenze di obiettivo, dataset o implementazione vanno mantenute separate nel testo.
 
-Bender e Friedman, Data Statements.
+## SRC-32-004
 
-URL: https://aclanthology.org/Q18-1041/
+- Titolo o riferimento: Raffel et al., Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer.
+- Autori o organizzazione: Raffel et al..
+- Tipo: paper o report tecnico.
+- Data: data della revisione consultata.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- URL o identificatore: https://arxiv.org/abs/1910.10683
+- Data di consultazione: 3 agosto 2026.
+- Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
+- Sezioni rilevanti: Abstract / pagina iniziale; Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer; B Converting WNLI to Our Text-to-Text Format.
+- Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
+- Affermazioni sostenibili: Hash esatti e similarità approssimata rilevano forme differenti di duplicazione.
+- Limiti: non autorizza generalizzazioni a ogni modello, dataset, implementazione o prodotto.
+- Divergenze note: eventuali differenze di obiettivo, dataset o implementazione vanno mantenute separate nel testo.
 
-Uso: definizione, meccanismo o risultato attribuito nel capitolo.
+## Mappa d'uso
 
-Limite: nessuna estensione automatica ad altri modelli o implementazioni.
-
-## SRC-DATA-003
-
-Raffel et al., T5 and C4.
-
-URL: https://arxiv.org/abs/1910.10683
-
-Uso: definizione, meccanismo o risultato attribuito nel capitolo.
-
-Limite: nessuna estensione automatica ad altri modelli o implementazioni.
-
-## SRC-DATA-004
-
-Gao et al., The Pile.
-
-URL: https://arxiv.org/abs/2101.00027
-
-Uso: definizione, meccanismo o risultato attribuito nel capitolo.
-
-Limite: nessuna estensione automatica ad altri modelli o implementazioni.
-
-## SRC-DATA-005
-
-Lee et al., Deduplicating Training Data.
-
-URL: https://arxiv.org/abs/2107.06499
-
-Uso: definizione, meccanismo o risultato attribuito nel capitolo.
-
-Limite: nessuna estensione automatica ad altri modelli o implementazioni.
-
-## SRC-DATA-006
-
-Soldaini et al., Dolma.
-
-URL: https://arxiv.org/abs/2402.00159
-
-Uso: definizione, meccanismo o risultato attribuito nel capitolo.
-
-Limite: nessuna estensione automatica ad altri modelli o implementazioni.
+Le sezioni citano il proprio claim vicino al punto sostenuto. Esempi, derivazioni e output del codice locale sono marcati separatamente.

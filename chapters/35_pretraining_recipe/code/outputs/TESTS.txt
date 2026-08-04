@@ -1,13 +1,9 @@
-/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/site-packages/torch/_subclasses/functional_tensor.py:368: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at /__w/pytorch/pytorch/torch/csrc/utils/tensor_numpy.cpp:84.)
-  cpu = _conversion_method_template(device=torch.device("cpu"))
-test_all_contracts_hold (test_recipe.ContractTests.test_all_contracts_hold) ... /home/runner/work/aibook/aibook/chapters/35_pretraining_recipe/code/snip_recipe_001.py:10: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
-Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:822.)
-  opt.param_groups[0]["lr"]=lr(step,30,4,0.05); opt.zero_grad(); loss=nn.functional.cross_entropy(model(x),y); loss.backward(); nn.utils.clip_grad_norm_(model.parameters(),1.0); opt.step(); losses.append(float(loss))
-ok
-test_demo_is_deterministic (test_recipe.ContractTests.test_demo_is_deterministic) ... ok
-test_result_is_observable (test_recipe.ContractTests.test_result_is_observable) ... ok
+test_contract_has_invariant (test_35_contract.ContractTests.test_contract_has_invariant) ... ok
+test_contract_has_observable_output (test_35_contract.ContractTests.test_contract_has_observable_output) ... ok
+test_contract_is_deterministic (test_35_contract.ContractTests.test_contract_is_deterministic) ... ok
+test_contract_rejects_incoherent_shape (test_35_contract.ContractTests.test_contract_rejects_incoherent_shape) ... ok
 
 ----------------------------------------------------------------------
-Ran 3 tests in 1.183s
+Ran 4 tests in 0.000s
 
 OK

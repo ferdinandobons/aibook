@@ -1,0 +1,1 @@
+{"invariant": "the positional transform is indexed by position", "position": 2, "rotated": [0.540302, 0.841471]}

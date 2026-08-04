@@ -1,0 +1,1 @@
+{"acceptance_rate": 0.6666666666666666, "accepted": ["4", "4"], "invariant": "a verifier is an explicit signal with its own error surface"}

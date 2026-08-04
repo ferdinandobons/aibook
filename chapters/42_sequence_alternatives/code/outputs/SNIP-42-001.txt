@@ -1,0 +1,1 @@
+{"invariant": "the state update is explicit before each emitted value", "outputs": [0.4, 0.32, -0.144]}

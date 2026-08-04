@@ -1,0 +1,1 @@
+{"invariant": "queries read keys and values through the declared attention matrix", "output": [[1.462117, 0.806824], [0.537883, 2.193176]], "scores": [[1.0, 0.0], [0.0, 1.0]]}

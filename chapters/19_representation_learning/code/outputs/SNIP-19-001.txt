@@ -1,0 +1,1 @@
+{"cosine": 0.8, "invariant": "the denominator normalizes both vectors"}

@@ -1,0 +1,1 @@
+{"component_failures": ["citation"], "invariant": "end-to-end evaluation keeps component failures visible", "system_success": false}

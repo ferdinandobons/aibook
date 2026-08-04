@@ -1,44 +1,74 @@
 # Fonti primarie e autorevoli. Capitolo 90
 
-- Ultima verifica: 2 agosto 2026
-- Le fonti quantitative restano limitate ai setup dichiarati.
+- Data di consultazione: 3 agosto 2026
+- Routing semantico: capitolo 90 -> tema `supply_chain`.
+- Perimetro: definizioni, meccanismi e limiti portanti del capitolo.
+- Regola: risultati numerici locali restano distinti dalle evidenze sperimentali delle fonti.
 
 ## SRC-90-001
 
-NIST, Artificial Intelligence Risk Management Framework
-
-URL: https://www.nist.gov/itl/ai-risk-management-framework
-
-Uso: definizioni e meccanismi nel perimetro del capitolo.
-
-Limite: nessuna generalizzazione automatica oltre il setup della fonte.
+- Titolo o riferimento: Biggio, Nelson and Laskov, Poisoning Attacks against Machine Learning.
+- Autori o organizzazione: Biggio.
+- Tipo: standard o documentazione ufficiale.
+- Data: data della revisione consultata.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- URL o identificatore: https://arxiv.org/abs/1804.00792
+- Data di consultazione: 3 agosto 2026.
+- Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
+- Sezioni rilevanti: Abstract / pagina iniziale; Poison Frogs! Targeted Clean-Label Poisoning Attacks on Neural Networks; 3 Poisoning attacks on transfer learning; 4 Poisoning attacks on end-to-end training.
+- Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
+- Affermazioni sostenibili: Campioni modificati possono alterare comportamento generale o target specifici. File eseguibili, custom code e deserializzazione possono introdurre rischio indipendente dai pesi matematici.
+- Limiti: non autorizza generalizzazioni a ogni modello, dataset, implementazione o prodotto.
+- Divergenze note: eventuali differenze di obiettivo, dataset o implementazione vanno mantenute separate nel testo.
 
 ## SRC-90-002
 
-Ribeiro et al., Model Cards for Model Reporting
-
-URL: https://dl.acm.org/doi/10.1145/3287560.3287596
-
-Uso: definizioni e meccanismi nel perimetro del capitolo.
-
-Limite: nessuna generalizzazione automatica oltre il setup della fonte.
+- Titolo o riferimento: Carlini et al., Extracting Training Data from Large Language Models.
+- Autori o organizzazione: Carlini et al..
+- Tipo: paper o report tecnico.
+- Data: data della revisione consultata.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- URL o identificatore: https://arxiv.org/abs/2012.07805
+- Data di consultazione: 3 agosto 2026.
+- Verifica d'accesso: opened-partial; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
+- Sezioni rilevanti: Abstract / pagina iniziale; 3.3 Risks of Training Data Extraction; 4 Initial Training Data Extraction Attack; 4.3 Initial Extraction Results.
+- Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
+- Affermazioni sostenibili: Un trigger induce un comportamento nascosto mantenendo prestazioni normali altrove.
+- Limiti: non autorizza generalizzazioni a ogni modello, dataset, implementazione o prodotto.
+- Divergenze note: eventuali differenze di obiettivo, dataset o implementazione vanno mantenute separate nel testo.
 
 ## SRC-90-003
 
-Zou et al., Universal and Transferable Adversarial Attacks on Aligned Language Models
-
-URL: https://arxiv.org/abs/2307.15043
-
-Uso: definizioni e meccanismi nel perimetro del capitolo.
-
-Limite: nessuna generalizzazione automatica oltre il setup della fonte.
+- Titolo o riferimento: Tramer et al., Stealing Machine Learning Models via Prediction APIs.
+- Autori o organizzazione: Tramer et al..
+- Tipo: paper o report tecnico.
+- Data: data della revisione consultata.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- URL o identificatore: https://arxiv.org/abs/1609.02943
+- Data di consultazione: 3 agosto 2026.
+- Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
+- Sezioni rilevanti: Abstract / pagina iniziale; 3 Model Extraction Attacks; 4 Extraction with Confidence Values; 4.2.1 Extraction Algorithms.
+- Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
+- Affermazioni sostenibili: Query e output possono permettere di imitare capacità o recuperare informazioni.
+- Limiti: non autorizza generalizzazioni a ogni modello, dataset, implementazione o prodotto.
+- Divergenze note: eventuali differenze di obiettivo, dataset o implementazione vanno mantenute separate nel testo.
 
 ## SRC-90-004
 
-C2PA, Technical Specification
+- Titolo o riferimento: NIST, Secure Software Development Framework SP 800-218.
+- Autori o organizzazione: NIST.
+- Tipo: standard o documentazione ufficiale.
+- Data: data della revisione consultata.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- URL o identificatore: https://csrc.nist.gov/pubs/sp/800/218/final
+- Data di consultazione: 3 agosto 2026.
+- Verifica d'accesso: opened-partial; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
+- Sezioni rilevanti: Abstract / pagina iniziale; NIST SP 800-218; Secure Software Development Framework (SSDF) Version 1.1: Recommendations for Mitigating the Risk of Software Vulnerabilities; Author(s).
+- Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
+- Affermazioni sostenibili: Checkpoint, tokenizer, codice e dipendenze richiedono hash, firma, SBOM e policy di caricamento sicuro.
+- Limiti: non autorizza generalizzazioni a ogni modello, dataset, implementazione o prodotto.
+- Divergenze note: eventuali differenze di obiettivo, dataset o implementazione vanno mantenute separate nel testo.
 
-URL: https://c2pa.org/specifications/specifications/
+## Mappa d'uso
 
-Uso: definizioni e meccanismi nel perimetro del capitolo.
-
-Limite: nessuna generalizzazione automatica oltre il setup della fonte.
+Le sezioni citano il proprio claim vicino al punto sostenuto. Esempi, derivazioni e output del codice locale sono marcati separatamente.

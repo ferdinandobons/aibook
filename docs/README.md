@@ -8,14 +8,14 @@ La documentazione è organizzata per tema in pochi file canonici. I materiali me
 
 - Repository: `ferdinandobons/aibook`
 - Branch canonico: `main`
-- Branch di produzione: `feature/full-book-production`
+- Branch di produzione corrente: `main`
 - Formato: Markdown
 - Produzione: seriale, una candidatura completa alla volta
 - Opera: unica e continua
 - Capitoli pianificati: 98
 - Appendici: 12
-- Ultima ricerca approfondita globale: **30 luglio 2026**
-- Ultimo audit di continuità: **31 luglio 2026**
+- Ultima passata di audit globale: **3 agosto 2026**
+- Ultimo audit di continuità: **3 agosto 2026**
 
 ## Ordine di lettura
 
@@ -97,7 +97,7 @@ Le immagini:
 - vengono revisionate e rigenerate;
 - diventano `final.png` soltanto dopo approvazione tecnica e autoriale.
 
-I generatori raster correnti sono in `../scripts/`; il workflow `generate-book-visuals.yml` produce e verifica i PNG candidati nel feature branch.
+I generatori raster correnti sono in `../scripts/`; il workflow `generate-book-visuals.yml` produce e verifica i PNG candidati nel branch canonico.
 
 ## Codice
 
@@ -105,13 +105,18 @@ Ogni capitolo tecnico include almeno uno snippet eseguibile, salvo eccezione mot
 
 ## Stato della produzione
 
-- Capitoli 1-7: candidature complete;
-- Capitoli 8-11: testo, fonti, claim, codice e audit completi, PNG da materializzare nel branch;
-- Capitolo 12: candidatura completa `0.2.0-rc1`, PNG candidati in corso di materializzazione;
-- Capitolo 13: unità successiva;
-- Capitolo 28: candidatura completa `0.6.0-rc6`.
+- Capitoli materializzati: `98/98`;
+- Appendici materializzate: `12/12`;
+- Visuali PNG attive: `196` nei capitoli e `208` includendo le 12 appendici, tutte referenziate;
+- Audit strutturale e semantico: `98/98` capitoli senza problemi rilevati;
+- Audit editoriale: `98/98` capitoli senza problemi automatici, `0` immagini problematiche, `0` formule non etichettate e `0` paragrafi duplicati;
+- Profondità misurata: `2.159-3.402` parole nell'audit editoriale e `2.186-3.670` nell'audit generale;
+- Visuali: `15` famiglie compositive principali, differenziate per concetto e non applicate come immagine standard a ogni capitolo;
+- Codice: `166/166` test superati e `311/311` file Python compilati in memoria;
+- Fonti: `419` fonti uniche e `502` collegamenti fonte-claim; `332` con contesto aperto, `127` con contesto parziale e `43` confermati tramite accesso web ufficiale;
+- stato editoriale: candidature tecniche complete, non ancora approvate per la pubblicazione.
 
-Lo stato dettagliato è in `../PROGRESS.md` e `../BOOK_PRODUCTION.md`.
+Restano aperti lettura ad alta voce, revisione per lettore non esperto, ricontrollo autoriale delle immagini, verifica fattuale delle fonti sensibili e congelamento dei file `final.png`. Il dettaglio tecnico dell'accesso alle fonti è in `source_verification_2026-08-03.json`; lo stato generale è in `../PROGRESS.md` e `../BOOK_PRODUCTION.md`.
 
 ## Regola per nuovi file in `docs/`
 

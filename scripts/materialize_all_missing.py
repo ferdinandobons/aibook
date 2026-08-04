@@ -60,7 +60,7 @@ PART_SOURCES = {
         ("NIST, Artificial Intelligence Risk Management Framework", "https://www.nist.gov/itl/ai-risk-management-framework"),
         ("Ribeiro et al., Model Cards for Model Reporting", "https://dl.acm.org/doi/10.1145/3287560.3287596"),
         ("Zou et al., Universal and Transferable Adversarial Attacks on Aligned Language Models", "https://arxiv.org/abs/2307.15043"),
-        ("C2PA, Technical Specification", "https://c2pa.org/specifications/specifications/"),
+        ("C2PA, Technical Specification", "https://spec.c2pa.org/specifications/specifications/2.0/specs/C2PA_Specification.html"),
     ],
     "P14": [
         ("ACM, Artifact Review and Badging", "https://www.acm.org/publications/policies/artifact-review-and-badging-current"),

@@ -2,15 +2,15 @@
 
 ## Stato
 
-- Branch di produzione: `feature/full-book-production`
 - Branch canonico: `main`
-- Pull request: `#2`, draft
-- Commit di partenza: `a10235cf384ebda23060a05a3e25ef7b490595a1`
-- Opera pianificata: 98 capitoli e 12 appendici
-- Modalità: produzione seriale controllata
-- Unità corrente: `CH-P03-SUPERVISED`, Capitolo 12, stato `research`
+- Opera materializzata: 98 capitoli e 12 appendici
+- Modalità: audit seriale controllato e revisione autoriale
+- Stato corrente: 98 candidature tecniche con testo, fonti, codice, test e visuali candidate
+- Verifica corrente: 616 test in 166 file, 311/311 file Python compilati in memoria, 98/98 capitoli senza problemi automatici
 - Data di apertura del branch: 30 luglio 2026
-- Ultimo aggiornamento: 31 luglio 2026
+- Ultimo aggiornamento: 3 agosto 2026
+
+La produzione automatizzata ha raggiunto l'intero indice. Non è ancora un via libera editoriale: restano lettura ad alta voce, revisione per lettore non esperto, ricontrollo fattuale delle fonti sensibili, approvazione autoriale delle immagini e congelamento dei candidati in `final.png`.
 
 ## Documenti operativi
 
@@ -50,69 +50,39 @@ Una candidatura può lasciare l'unità corrente quando claim, testo, codice e vi
 
 | Parte | Intervallo | Stato |
 |---|---:|---|
-| `P01` Campo, metodo e storia dell'AI | 1-4 | quattro candidature complete |
-| `P02` Matematica, informazione e calcolo | 5-9 | Capitoli 5-7 completi; 8-9 in finalizzazione visuale |
-| `P03` Apprendimento, ottimizzazione e decisione | 10-14 | Capitoli 10-11 in finalizzazione visuale; Capitolo 12 in ricerca |
-| `P04` Reti neurali e rappresentazioni | 15-19 | `planned` |
-| `P05` Modellazione generativa | 20-25 | `planned` |
-| `P06` Sequenze, linguaggio e contesto | 26-31 | Capitolo 28 completo; altri `planned` |
-| `P07` Dati, pretraining e scaling | 32-36 | `planned` |
-| `P08` Progettazione delle architetture | 37-45 | `planned` |
-| `P09` Adattamento, allineamento e ragionamento | 46-54 | `planned` |
-| `P10` Multimodalità e modelli del mondo | 55-62 | `planned` |
-| `P11` Conoscenza esterna, memoria e azione | 63-72 | `planned` |
-| `P12` Efficienza, inference e sistemi | 73-82 | `planned` |
-| `P13` Valutazione, interpretabilità, sicurezza e governance | 83-93 | `planned` |
-| `P14` Laboratori, integrazione e osservatorio | 94-98 | `planned` |
+| `P01` Campo, metodo e storia dell'AI | 1-4 | candidature tecniche complete |
+| `P02` Matematica, informazione e calcolo | 5-9 | candidature tecniche complete |
+| `P03` Apprendimento, ottimizzazione e decisione | 10-14 | candidature tecniche complete |
+| `P04` Reti neurali e rappresentazioni | 15-19 | candidature tecniche complete |
+| `P05` Modellazione generativa | 20-25 | candidature tecniche complete |
+| `P06` Sequenze, linguaggio e contesto | 26-31 | candidature tecniche complete |
+| `P07` Dati, pretraining e scaling | 32-36 | candidature tecniche complete |
+| `P08` Progettazione delle architetture | 37-45 | candidature tecniche complete |
+| `P09` Adattamento, allineamento e ragionamento | 46-54 | candidature tecniche complete |
+| `P10` Multimodalità e modelli del mondo | 55-62 | candidature tecniche complete |
+| `P11` Conoscenza esterna, memoria e azione | 63-72 | candidature tecniche complete |
+| `P12` Efficienza, inference e sistemi | 73-82 | candidature tecniche complete |
+| `P13` Valutazione, interpretabilità, sicurezza e governance | 83-93 | candidature tecniche complete |
+| `P14` Laboratori, integrazione e osservatorio | 94-98 | candidature tecniche complete |
 
-## Candidature complete in revisione autoriale
+## Evidenza dell'ultimo audit
 
-| Capitolo | chapter_id | Versione | Visuali | Test |
-|---:|---|---|---:|---:|
-| 1 | `CH-P01-AI-FIELD` | `0.4.0-rc3` | 2 | 3 |
-| 2 | `CH-P01-HISTORY` | `0.2.0-rc1` | 2 | 3 |
-| 3 | `CH-P01-LIFECYCLE` | `0.2.0-rc1` | 2 | 4 |
-| 4 | `CH-P01-CRITICAL-EVALUATION` | `0.2.0-rc1` | 2 | 4 |
-| 5 | `CH-P02-LINEAR-ALGEBRA` | `0.2.0-rc1` | 2 | 4 |
-| 6 | `CH-P02-CALCULUS-BACKPROP` | `0.2.0-rc1` | 2 | 5 |
-| 7 | `CH-P02-PROBABILITY` | `0.2.0-rc1` | 2 | 6 |
-| 28 | `CH-P06-ATTENTION` | `0.6.0-rc6` | 2 | 3 |
+- `98/98` capitoli hanno una coppia di immagini PNG attive, per `196` riferimenti risolti; le 12 appendici portano il totale attivo a `208` immagini;
+- l'audit semantico e quello strutturale non rilevano capitoli problematici;
+- i test locali sono `616` superati in `166` file e i file Python compilati in memoria sono `311/311`;
+- la verifica delle fonti registra `419` fonti uniche e `502` collegamenti fonte-claim: `332` con contesto aperto, `127` con contesto parziale e `43` confermati tramite accesso web ufficiale;
+- le immagini storiche non referenziate sono state spostate fuori dal repository in una cartella temporanea recuperabile;
+- la revisione della prosa ha eliminato i paragrafi pubblici identici tra le candidature generate; l'audit editoriale misura `2.159-3.402` parole, mentre l'audit generale misura `2.186-3.670` parole secondo i rispettivi perimetri di conteggio.
+- le 196 visuali attive dei capitoli sono distribuite in 15 famiglie compositive principali, scelte in funzione del concetto: pipeline, branch, chart, architecture, matrix, loop, timeline, scatter, compare, manifest, queue, graph, funnel, threat e checklist; le 12 appendici usano una mappa coerente dedicata;
 
-## Pacchetti completi salvo materializzazione dei PNG
-
-| Capitolo | chapter_id | Test | Visuali locali |
-|---:|---|---:|---:|
-| 8 | `CH-P02-INFORMATION-THEORY` | 7 | 2 |
-| 9 | `CH-P02-NUMERICS-HARDWARE` | 7 | 2 |
-| 10 | `CH-P03-SEARCH-PLANNING` | 6 | 2 |
-| 11 | `CH-P03-KNOWLEDGE-LOGIC` | 7 | 2 |
-
-I quattro capitoli hanno testo, fonti, claim, codice, audit, review e generatori. I commit effettuati tramite il connettore non hanno avviato GitHub Actions nelle ultime sessioni, quindi i PNG generati localmente non sono ancora presenti nei rispettivi percorsi del branch.
-
-## Unità corrente. Capitolo 12
-
-```text
-CH-P03-SUPERVISED
-Apprendimento supervisionato
-```
-
-Il piano interno è aperto. La produzione prevista comprende:
-
-- coppie input-target;
-- classificazione e regressione;
-- rischio empirico e generalizzazione;
-- logistic regression e soglie;
-- overfitting, bias, varianza e regolarizzazione;
-- alberi, margini ed ensemble come famiglie alternative;
-- class imbalance e analisi per slice;
-- snippet PyTorch con split, baseline e test.
+Questi risultati dimostrano una candidatura tecnica completa, non l'approvazione finale. Il prossimo ciclo è editoriale: lettura integrale, lettura ad alta voce, controllo per un lettore non esperto e revisione autoriale delle figure.
 
 ## Tooling visuale
 
-Il workflow include generatori raster per i Capitoli 1-11 e il pilota. Le visuali candidate sono PNG con sfondo bianco, controllo del contenimento e artefatti `SPEC.md`, `AUDIT.md` e `ALT_TEXT.md`.
+Il workflow include generatori raster per l'intero indice. Le visuali candidate sono PNG con sfondo bianco, controllo del contenimento e artefatti `SPEC.md`, `AUDIT.md` e `ALT_TEXT.md`.
 
 Quando image-gen ignora la specifica o inventa informazioni sul progetto, la candidata viene respinta e il difetto viene registrato. Per grafi, formule e connessioni che richiedono precisione viene usato il renderer raster deterministico, mai SVG come artefatto principale.
 
 ## Aggiornamento del piano
 
-Dopo ogni unità si aggiornano questo file, `PROGRESS.md`, la pull request, lo stato del capitolo e gli eventuali riferimenti in indice e catalogo.
+Dopo ogni passata si aggiornano questo file, `PROGRESS.md`, lo stato del capitolo e gli eventuali riferimenti in indice e catalogo. Tag e release restano esclusi finché i gate editoriali e tecnici non sono chiusi.

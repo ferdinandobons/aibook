@@ -1,0 +1,1 @@
+{"invariant": "reconstruction and regularization stay separately observable", "kl": 0.1, "objective": 0.45, "reconstruction": 0.4}

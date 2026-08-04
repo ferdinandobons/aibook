@@ -1,0 +1,1 @@
+{"invariant": "the head grouping is declared before cache accounting", "kv_heads": 2, "queries_per_kv": 2, "query_heads": 4}

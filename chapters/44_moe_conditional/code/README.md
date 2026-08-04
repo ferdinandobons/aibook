@@ -1,5 +1,5 @@
-# Codice. Capitolo 44
+# Codice del Capitolo 44
 
-- Snippet: `snip_moe_001.py`
-- Test: `test_moe.py`
-- Tre test di contratto superati.
+Lo snippet snip_44_contract.py rende osservabile il contratto centrale di Mixture of Experts e calcolo condizionale con valori piccoli e leggibili.
+Il test test_44_contract.py controlla determinismo, output, invariante e una shape incoerente.
+Il risultato è un esempio locale, non un benchmark di produzione.

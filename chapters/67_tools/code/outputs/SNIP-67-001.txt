@@ -1,0 +1,1 @@
+{"allowed": true, "invariant": "tool execution requires validation outside generated text", "request": {"order_id": "A1", "tool": "lookup_order"}}

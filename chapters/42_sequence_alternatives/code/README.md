@@ -1,5 +1,5 @@
-# Codice. Capitolo 42
+# Codice del Capitolo 42
 
-- Snippet: `snip_ssm_001.py`
-- Test: `test_ssm.py`
-- Tre test di contratto superati.
+Lo snippet snip_42_contract.py rende osservabile il contratto centrale di State-space model, recurrence e long convolution con valori piccoli e leggibili.
+Il test test_42_contract.py controlla determinismo, output, invariante e una shape incoerente.
+Il risultato è un esempio locale, non un benchmark di produzione.

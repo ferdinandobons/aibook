@@ -1,6 +1,12 @@
-# Audit del codice. Capitolo 41
+# Audit del codice
 
-- Processo pulito: sì
-- Test: 3 superati
-- Output registrato: sì
-- Esempio illustrativo, non benchmark: sì
+- ambiente: Python 3.13.12, CPU, processo pulito
+- API: funzioni Python standard del modulo snip_41_contract
+- comando snippet: python snip_41_contract.py
+- comando test: python -m unittest -v test_41_contract.py
+- snippet: eseguito
+- test: 4 superati
+- controllo negativo: shape incoerente rifiutata
+- risultato: esempio delimitato, non benchmark di produzione
+- dipendenze esterne: nessuna
+- stato: verificato localmente, review autoriale aperta

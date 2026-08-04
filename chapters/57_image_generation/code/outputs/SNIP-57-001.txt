@@ -1,0 +1,1 @@
+{"denoised": [0.78, 0.21999999999999997], "invariant": "a generation step declares its noise level and update", "steps": 1}

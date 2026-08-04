@@ -20,7 +20,7 @@ Data dell'ultima verifica: **30 luglio 2026**.
 - Titolo: *Artificial Intelligence Risk Management Framework (AI RMF 1.0)*.
 - Identificatore: NIST AI 100-1.
 - Data: 26 gennaio 2023.
-- DOI: https://doi.org/10.6028/NIST.AI.100-1
+- PDF ufficiale: https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf
 - Pagina ufficiale: https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-ai-rmf-10
 - Sezioni usate: AI lifecycle, AI actors, distinzione tra prodotti, servizi, sistemi e contesti d'uso.
 - Sostiene: il sistema AI viene progettato, sviluppato, distribuito, usato e valutato lungo un ciclo di vita; la valutazione non riguarda soltanto un modello isolato.
@@ -67,8 +67,7 @@ Data dell'ultima verifica: **30 luglio 2026**.
 - Titolo: *Artificial Intelligence Risk Management Framework: Generative Artificial Intelligence Profile*.
 - Identificatore: NIST AI 600-1.
 - Data: luglio 2024; pagina ufficiale aggiornata l'8 aprile 2026.
-- DOI: https://doi.org/10.6028/NIST.AI.600-1
-- PDF ufficiale: https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=958388
+- PDF ufficiale: https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf
 - Sezione usata: Introduzione, nota 1, pagina 1 del corpo.
 - Sostiene:
   - generative AI come classe di modelli che emula struttura e caratteristiche dei dati di input per produrre contenuto sintetico derivato;
@@ -111,7 +110,7 @@ Data dell'ultima verifica: **30 luglio 2026**.
 - Organizzazione: PyTorch Foundation.
 - Documentazione:
   - `torch.nn.Module`: https://docs.pytorch.org/docs/stable/generated/torch.nn.Module.html
-  - `torch.inference_mode`: https://docs.pytorch.org/docs/stable/generated/torch.inference_mode.html
+  - `torch.inference_mode`: https://docs.pytorch.org/docs/stable/generated/torch.autograd.grad_mode.inference_mode.html
 - Versione verificata: stable 2.13.
 - Sostiene:
   - `Module.train()` e `Module.eval()` modificano il comportamento dei moduli che distinguono training ed evaluation, per esempio Dropout e BatchNorm;

@@ -1,0 +1,1 @@
+{"interval": [1000.0, 8000.0], "invariant": "the fit is interpreted only on the observed interval", "points": 4, "slope": -0.00011571}

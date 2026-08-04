@@ -1,0 +1,1 @@
+{"invariant": "the residual stream keeps the declared dimension", "output": [1.25, -1.5], "shape": [2]}

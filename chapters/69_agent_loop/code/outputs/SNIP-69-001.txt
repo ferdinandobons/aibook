@@ -1,0 +1,1 @@
+{"events": ["observe", "plan", "tool", "verify"], "invariant": "an agent loop records observation, action and verification", "valid": true}

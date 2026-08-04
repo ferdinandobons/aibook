@@ -1,3 +1,3 @@
-# Alt text `SCALE-02`
+# Alt text SCALE-02
 
-Diagramma tecnico su sfondo bianco dedicato a allocare compute. Lo stesso budget può distribuire parametri e token in modi diversi
+Diagramma SCALE-02 del Capitolo 34, famiglia architecture. Domanda: Il diagramma segue il passaggio: Fit, confronto isoFLOP ed estrapolazione. L'input è punti con parametri, token, FLOP e loss, l'output è stima con intervallo osservato e costo; il vincolo da controllare è che un fit fuori dominio non è una legge garantita La composizione usa i passaggi Fit empirico, Allocazione compute-optimal, Esperimenti isoFLOP, Extrapolation, Training e inference cost.

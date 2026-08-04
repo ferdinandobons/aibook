@@ -1,0 +1,1 @@
+{"complete": true, "escalation": false, "invariant": "a risk framework assigns evidence and responsibility without certifying compliance"}

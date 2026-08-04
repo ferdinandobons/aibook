@@ -1,0 +1,1 @@
+{"invariant": "data transformations retain provenance and a stable record identity", "manifest": {"ids": ["a", "b"], "sources": ["crm", "mail"]}}

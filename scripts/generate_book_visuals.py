@@ -6,8 +6,24 @@ from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parents[1]
-FONT_REG = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
-FONT_BOLD = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+FONT_REG = next(
+    path
+    for path in (
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+        "/System/Library/Fonts/Supplemental/Arial Unicode.ttf",
+        "/System/Library/Fonts/Supplemental/Arial.ttf",
+    )
+    if Path(path).exists()
+)
+FONT_BOLD = next(
+    path
+    for path in (
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+        "/System/Library/Fonts/Supplemental/Arial Unicode.ttf",
+        "/System/Library/Fonts/Supplemental/Arial Bold.ttf",
+    )
+    if Path(path).exists()
+)
 
 C = {
     "text": "#0F172A",
@@ -144,8 +160,9 @@ def title_block(draw: ImageDraw.ImageDraw, title: str, subtitle: str, width: int
 
 def save_png(image: Image.Image, path: Path) -> Path:
     path.parent.mkdir(parents=True, exist_ok=True)
-    quantized = image.convert("RGB").quantize(colors=128, method=Image.Quantize.MEDIANCUT, dither=Image.Dither.NONE)
-    quantized.save(path, optimize=True)
+    if image.size != (1800, 1000):
+        image = image.resize((1800, 1000), Image.Resampling.LANCZOS)
+    image.convert("RGB").save(path, optimize=True)
     with Image.open(path) as check:
         check.verify()
     return path

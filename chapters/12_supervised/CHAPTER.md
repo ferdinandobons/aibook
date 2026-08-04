@@ -33,7 +33,7 @@ $$
 
 dove $x_n$ è l'input e $y_n$ è il target associato. Nel nostro caso, `x` può contenere segnali numerici estratti dalla richiesta e dai dati di tracking, mentre `y` vale `1` per un caso urgente e `0` per un caso non urgente.
 
-Il target non coincide automaticamente con la realtà completa. È un valore osservato secondo una procedura. Può derivare dalla decisione di un operatore, dall'esito successivo del ticket, da una regola aziendale o da una annotazione manuale. Se la procedura è incoerente o misura un concetto diverso da quello che ci interessa, il modello può apprendere fedelmente la label e restare inadatto al compito reale.
+Il target non coincide automaticamente con la realtà completa. È un valore osservato secondo una procedura. Può derivare dalla decisione di un operatore, dall'esito successivo del ticket, da una regola aziendale o da un'annotazione manuale. Se la procedura è incoerente o misura un concetto diverso da quello che ci interessa, il modello può apprendere fedelmente la label e restare inadatto al compito reale.
 
 Questa distinzione impedisce una scorciatoia frequente. Il dataset non consegna al modello la verità in forma pura. Consegna input e target prodotti da un processo che deve essere documentato, controllato e mantenuto nel tempo.
 

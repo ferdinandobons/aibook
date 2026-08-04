@@ -1,0 +1,1 @@
+{"invariant": "loss masking distinguishes prompt tokens from target tokens", "label_count": 2, "supervised_tokens": ["assistente", "risposta"]}

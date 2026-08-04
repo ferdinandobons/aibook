@@ -151,7 +151,7 @@ Queste stime non sono prodotte da un modello appreso. Sono costruite per l'esemp
 
 ### Ammissibilità
 
-Una euristica è **ammissibile** se non sovrastima mai il costo ottimo rimanente:
+Un'euristica è **ammissibile** se non sovrastima mai il costo ottimo rimanente:
 
 $$
 0\leq h(n)\leq h^*(n),
@@ -163,7 +163,7 @@ L'ammissibilità impedisce alla stima di dichiarare un ramo più costoso di quan
 
 ### Consistenza
 
-Una euristica è **consistente** quando, per ogni transizione da `n` a `n'` di costo `c`, vale
+Un'euristica è **consistente** quando, per ogni transizione da `n` a `n'` di costo `c`, vale
 
 $$
 h(n)\leq c(n,n')+h(n').
@@ -187,7 +187,7 @@ Trova lo stesso piano di costo `6` di uniform-cost, ma non espande i rami relati
 
 <!-- Inserire SEARCH-01 dopo la materializzazione e l'audit del PNG. -->
 
-### Una euristica non è una prova automatica
+### Un'euristica non è una prova automatica
 
 Una stima appresa da dati può essere molto accurata in media e tuttavia sovrastimare alcuni stati. Questo può essere accettabile se l'obiettivo è trovare rapidamente una buona soluzione, ma modifica le garanzie.
 
@@ -205,7 +205,7 @@ Dire «la rete guida A*» non basta. Serve sapere come la stima entra nella prio
 
 Nel grafo precedente abbiamo elencato esplicitamente ogni transizione. Un problema più grande richiede una descrizione riutilizzabile delle azioni.
 
-Una azione di planning può avere:
+Un'azione di planning può avere:
 
 - **precondizioni**, che devono essere vere prima dell'esecuzione;
 - **effetti positivi**, che diventano veri dopo;
@@ -358,7 +358,7 @@ Non segue che una rete policy-value renda affidabile qualunque agente. Nei siste
 
 ## Budget, completezza e qualità del modello
 
-Ogni ricerca consuma risorse. Il numero di nodi può crescere esponenzialmente con la profondità. Una euristica riduce spesso il lavoro, ma richiede calcolo e può essere ingannevole. MCTS distribuisce un budget, ma una ricerca interrotta presto restituisce una decisione dipendente dalle visite accumulate.
+Ogni ricerca consuma risorse. Il numero di nodi può crescere esponenzialmente con la profondità. Un'euristica riduce spesso il lavoro, ma richiede calcolo e può essere ingannevole. MCTS distribuisce un budget, ma una ricerca interrotta presto restituisce una decisione dipendente dalle visite accumulate.
 
 Conviene separare quattro domande:
 
@@ -450,7 +450,7 @@ Le fonti portanti sono Dijkstra per i cammini minimi, Hart, Nilsson e Raphael pe
 Le schede complete e i limiti d'uso sono in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md). Claim, codice, test, output e ambiente sono raccolti in [`CLAIMS.md`](CLAIMS.md) e nella cartella [`code/`](code/).
 
 
-![Diagramma tecnico 1](../../assets/chapters/10_search_planning/AUTO-10-01/final.png)
+![Uniform-cost e A* sullo stesso grafo](../../assets/chapters/10_search_planning/SEARCH-01/candidate-v2.png)
 
 
-![Diagramma tecnico 2](../../assets/chapters/10_search_planning/AUTO-10-02/final.png)
+![Minimax e potatura alpha-beta](../../assets/chapters/10_search_planning/SEARCH-02/candidate-v2.png)

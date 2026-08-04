@@ -1,0 +1,1 @@
+{"invariant": "top-k routing and capacity accounting are explicit", "loads": [0, 1, 1, 0], "selected_experts": [1, 2]}

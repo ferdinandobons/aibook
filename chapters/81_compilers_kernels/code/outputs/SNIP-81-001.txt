@@ -1,0 +1,1 @@
+{"fused_ops": 2, "invariant": "compiler optimization preserves the declared operator result", "original_ops": 3}

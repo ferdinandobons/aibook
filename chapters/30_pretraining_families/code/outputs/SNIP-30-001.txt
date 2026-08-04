@@ -1,0 +1,1 @@
+{"invariant": "the training target and attention mask define the model family", "modes": {"decoder_only": "causal_next_token", "encoder_decoder": "conditioned_target", "encoder_only": "masked_or_bidirectional_input"}}

@@ -17,6 +17,8 @@ deferred: quantizzazione intera, formati fp8 e inferiori, kernel specializzati, 
 
 Nel capitolo precedente abbiamo trasformato tre logits in probabilità e cross-entropy. Sulla carta, le operazioni erano esatte: esponenziali, somme, divisioni e logaritmi. Su un computer, invece, ogni valore deve essere registrato con un numero finito di bit e ogni operazione restituisce un valore rappresentabile dal formato scelto.
 
+Riprendiamo la richiesta «Il pacco non è arrivato» come esempio comune: il classificatore deve trasformare segnali della richiesta in logits, e il capitolo mostra come precisione e hardware cambino il modo in cui quel calcolo viene eseguito.
+
 Questa differenza non è un dettaglio marginale. Consideriamo i logits
 
 $$
@@ -484,7 +486,7 @@ Le fonti portanti sono IEEE 754-2019, Goldberg e Higham per l'aritmetica numeric
 Le schede complete e i limiti d'uso sono in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md). Claim, codice, test, output e ambiente sono raccolti in [`CLAIMS.md`](CLAIMS.md) e nella cartella [`code/`](code/).
 
 
-![Diagramma tecnico 1](../../assets/chapters/09_numerics_hardware/AUTO-09-01/final.png)
+![Range e precisione dei dtype](../../assets/chapters/09_numerics_hardware/NUM-01/candidate-v1.png)
 
 
-![Diagramma tecnico 2](../../assets/chapters/09_numerics_hardware/AUTO-09-02/final.png)
+![Contratto della mixed precision](../../assets/chapters/09_numerics_hardware/NUM-02/candidate-v1.png)

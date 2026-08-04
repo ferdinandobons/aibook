@@ -1,3 +1,5 @@
-# Codice. Capitolo 57
+# Codice del Capitolo 57
 
-Snippet: `snip_57_contract.py`. Test: `test_57_image_generation.py`.
+Lo snippet snip_57_contract.py rende osservabile il contratto centrale di Generazione e modifica delle immagini con valori piccoli e leggibili.
+Il test test_57_contract.py controlla determinismo, output, invariante e una shape incoerente.
+Il risultato è un esempio locale, non un benchmark di produzione.

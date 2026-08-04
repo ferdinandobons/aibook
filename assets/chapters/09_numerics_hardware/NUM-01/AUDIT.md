@@ -5,7 +5,7 @@
 - Candidata: `candidate-v1.png`
 - Dimensioni previste: `1800 × 1000`
 - Esito tecnico: **validata dopo seconda iterazione locale**
-- Materializzazione nel branch: aperta
+- Materializzazione nel branch: eseguita e collegata a `chapters/09_numerics_hardware/CHAPTER.md`
 - Approvazione autoriale: aperta
 
 ## Iterazioni
@@ -56,4 +56,4 @@ Correzioni:
 
 ## Verdetto
 
-La seconda iterazione è tecnicamente idonea. Il file resta candidato finché il PNG non viene materializzato nel feature branch e approvato dall'autore.
+La seconda iterazione è tecnicamente idonea. Il file resta candidato fino all'approvazione autoriale.

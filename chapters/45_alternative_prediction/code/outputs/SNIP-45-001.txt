@@ -1,0 +1,1 @@
+{"bytes": [65, 73], "groups": [[65, 73]], "invariant": "byte grouping is explicit before any higher-level prediction"}

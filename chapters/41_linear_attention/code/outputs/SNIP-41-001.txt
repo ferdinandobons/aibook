@@ -1,0 +1,1 @@
+{"invariant": "the recurrence reuses one state in input order", "state": 0.642, "steps": 3}

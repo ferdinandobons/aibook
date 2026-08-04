@@ -1,8 +1,9 @@
-test_all_contracts_hold (test_mix.ContractTests.test_all_contracts_hold) ... ok
-test_demo_is_deterministic (test_mix.ContractTests.test_demo_is_deterministic) ... ok
-test_result_is_observable (test_mix.ContractTests.test_result_is_observable) ... ok
+test_contract_has_invariant (test_33_contract.ContractTests.test_contract_has_invariant) ... ok
+test_contract_has_observable_output (test_33_contract.ContractTests.test_contract_has_observable_output) ... ok
+test_contract_is_deterministic (test_33_contract.ContractTests.test_contract_is_deterministic) ... ok
+test_contract_rejects_incoherent_shape (test_33_contract.ContractTests.test_contract_rejects_incoherent_shape) ... ok
 
 ----------------------------------------------------------------------
-Ran 3 tests in 0.000s
+Ran 4 tests in 0.000s
 
 OK

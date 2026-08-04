@@ -1,0 +1,1 @@
+{"invariant": "self-consistency selects among traces and does not prove their faithfulness", "selected": "4", "trace_count": 3}

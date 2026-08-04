@@ -1,0 +1,1 @@
+{"invariant": "residual operands share shape", "output": [1.2, -1.7], "shape": [2]}

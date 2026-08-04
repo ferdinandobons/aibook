@@ -1,0 +1,1 @@
+{"invariant": "a causal position cannot read a future token", "visible_lengths": [1, 2]}

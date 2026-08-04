@@ -1,0 +1,1 @@
+{"invariant": "memory scope and retrieval source remain explicit", "recalled": "fatto stabile", "short_term": ["ultimo evento"]}

@@ -1,0 +1,1 @@
+{"invariant": "artifact integrity and content trust are separate checks", "release": true}

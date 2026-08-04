@@ -1,44 +1,74 @@
 # Fonti primarie e autorevoli. Capitolo 57
 
-- Ultima verifica: 2 agosto 2026
-- Le fonti quantitative restano limitate ai setup dichiarati.
+- Data di consultazione: 3 agosto 2026
+- Routing semantico: capitolo 57 -> tema `imagegen`.
+- Perimetro: definizioni, meccanismi e limiti portanti del capitolo.
+- Regola: risultati numerici locali restano distinti dalle evidenze sperimentali delle fonti.
 
 ## SRC-57-001
 
-Radford et al., Learning Transferable Visual Models From Natural Language Supervision
-
-URL: https://arxiv.org/abs/2103.00020
-
-Uso: definizioni e meccanismi nel perimetro del capitolo.
-
-Limite: nessuna generalizzazione automatica oltre il setup della fonte.
+- Titolo o riferimento: Ho, Jain and Abbeel, Denoising Diffusion Probabilistic Models.
+- Autori o organizzazione: Ho.
+- Tipo: paper o report tecnico.
+- Data: data della revisione consultata.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- URL o identificatore: https://arxiv.org/abs/2006.11239
+- Data di consultazione: 3 agosto 2026.
+- Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
+- Sezioni rilevanti: Abstract / pagina iniziale; Denoising Diffusion Probabilistic Models; 3 Diffusion models and denoising autoencoders.
+- Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
+- Affermazioni sostenibili: Un autoencoder comprime l'immagine e il denoiser opera nello spazio latente. ControlNet, adapter e reference image aggiungono vincoli.
+- Limiti: non autorizza generalizzazioni a ogni modello, dataset, implementazione o prodotto.
+- Divergenze note: eventuali differenze di obiettivo, dataset o implementazione vanno mantenute separate nel testo.
 
 ## SRC-57-002
 
-Alayrac et al., Flamingo
-
-URL: https://arxiv.org/abs/2204.14198
-
-Uso: definizioni e meccanismi nel perimetro del capitolo.
-
-Limite: nessuna generalizzazione automatica oltre il setup della fonte.
+- Titolo o riferimento: Rombach et al., High-Resolution Image Synthesis with Latent Diffusion Models.
+- Autori o organizzazione: Rombach et al..
+- Tipo: paper o report tecnico.
+- Data: data della revisione consultata.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- URL o identificatore: https://arxiv.org/abs/2112.10752
+- Data di consultazione: 3 agosto 2026.
+- Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
+- Sezioni rilevanti: Abstract / pagina iniziale; High-Resolution Image Synthesis with Latent Diffusion Models; 3.2 Latent Diffusion Models; 4.2 Image Generation with Latent Diffusion.
+- Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
+- Affermazioni sostenibili: Testo, classi, immagini o mappe strutturali entrano attraverso cross-attention, concatenazione o moduli dedicati.
+- Limiti: non autorizza generalizzazioni a ogni modello, dataset, implementazione o prodotto.
+- Divergenze note: eventuali differenze di obiettivo, dataset o implementazione vanno mantenute separate nel testo.
 
 ## SRC-57-003
 
-Rombach et al., High-Resolution Image Synthesis with Latent Diffusion Models
-
-URL: https://arxiv.org/abs/2112.10752
-
-Uso: definizioni e meccanismi nel perimetro del capitolo.
-
-Limite: nessuna generalizzazione automatica oltre il setup della fonte.
+- Titolo o riferimento: Zhang et al., Adding Conditional Control to Text-to-Image Diffusion Models.
+- Autori o organizzazione: Zhang et al..
+- Tipo: paper o report tecnico.
+- Data: data della revisione consultata.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- URL o identificatore: https://arxiv.org/abs/2302.05543
+- Data di consultazione: 3 agosto 2026.
+- Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
+- Sezioni rilevanti: Abstract / pagina iniziale; Adding Conditional Control to Text-to-Image Diffusion Models; 2.2 Image Diffusion; 2.3 Image-to-Image Translation.
+- Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
+- Affermazioni sostenibili: Combinare predizioni condizionate e non condizionate aumenta aderenza, con un trade-off rispetto a diversità e saturazione.
+- Limiti: non autorizza generalizzazioni a ogni modello, dataset, implementazione o prodotto.
+- Divergenze note: eventuali differenze di obiettivo, dataset o implementazione vanno mantenute separate nel testo.
 
 ## SRC-57-004
 
-Brohan et al., RT-2
+- Titolo o riferimento: Brooks, Holynski and Efros, InstructPix2Pix.
+- Autori o organizzazione: Brooks.
+- Tipo: paper o report tecnico.
+- Data: data della revisione consultata.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- URL o identificatore: https://arxiv.org/abs/2211.09800
+- Data di consultazione: 3 agosto 2026.
+- Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
+- Sezioni rilevanti: Abstract / pagina iniziale; InstructPix2Pix: Learning to Follow Image Editing Instructions; 3.1.2 Generating Paired Images from Paired Captions; A.2 Paired Image Generation.
+- Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
+- Affermazioni sostenibili: Una mask stabilisce regioni modificabili.
+- Limiti: non autorizza generalizzazioni a ogni modello, dataset, implementazione o prodotto.
+- Divergenze note: eventuali differenze di obiettivo, dataset o implementazione vanno mantenute separate nel testo.
 
-URL: https://arxiv.org/abs/2307.15818
+## Mappa d'uso
 
-Uso: definizioni e meccanismi nel perimetro del capitolo.
-
-Limite: nessuna generalizzazione automatica oltre il setup della fonte.
+Le sezioni citano il proprio claim vicino al punto sostenuto. Esempi, derivazioni e output del codice locale sono marcati separatamente.

@@ -1,44 +1,74 @@
 # Fonti primarie e autorevoli. Capitolo 74
 
-- Ultima verifica: 2 agosto 2026
-- Le fonti quantitative restano limitate ai setup dichiarati.
+- Data di consultazione: 3 agosto 2026
+- Routing semantico: capitolo 74 -> tema `quantization`.
+- Perimetro: definizioni, meccanismi e limiti portanti del capitolo.
+- Regola: risultati numerici locali restano distinti dalle evidenze sperimentali delle fonti.
 
 ## SRC-74-001
 
-Hinton et al., Distilling the Knowledge in a Neural Network
-
-URL: https://arxiv.org/abs/1503.02531
-
-Uso: definizioni e meccanismi nel perimetro del capitolo.
-
-Limite: nessuna generalizzazione automatica oltre il setup della fonte.
+- Titolo o riferimento: Frantar et al., GPTQ.
+- Autori o organizzazione: Frantar et al..
+- Tipo: paper o report tecnico.
+- Data: data della revisione consultata.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- URL o identificatore: https://arxiv.org/abs/2210.17323
+- Data di consultazione: 3 agosto 2026.
+- Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
+- Sezioni rilevanti: Abstract / pagina iniziale; GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers.
+- Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
+- Affermazioni sostenibili: Una mappa affine converte valori floating point in interi. GPTQ, AWQ, SmoothQuant e famiglie affini gestiscono salienza e outlier con contratti differenti.
+- Limiti: non autorizza generalizzazioni a ogni modello, dataset, implementazione o prodotto.
+- Divergenze note: eventuali differenze di obiettivo, dataset o implementazione vanno mantenute separate nel testo.
 
 ## SRC-74-002
 
-Frantar et al., GPTQ
-
-URL: https://arxiv.org/abs/2210.17323
-
-Uso: definizioni e meccanismi nel perimetro del capitolo.
-
-Limite: nessuna generalizzazione automatica oltre il setup della fonte.
+- Titolo o riferimento: Xiao et al., SmoothQuant.
+- Autori o organizzazione: Xiao et al..
+- Tipo: paper o report tecnico.
+- Data: data della revisione consultata.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- URL o identificatore: https://arxiv.org/abs/2211.10438
+- Data di consultazione: 3 agosto 2026.
+- Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
+- Sezioni rilevanti: Abstract / pagina iniziale; SmoothQuant: Accurate and Efficient Post-Training Quantization for Large Language Models; 3 Review of Quantization Difficulty; Migrate the quantization difficulty from activations to weights..
+- Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
+- Affermazioni sostenibili: Post-training quantization usa calibration senza riaddestrare completamente.
+- Limiti: non autorizza generalizzazioni a ogni modello, dataset, implementazione o prodotto.
+- Divergenze note: eventuali differenze di obiettivo, dataset o implementazione vanno mantenute separate nel testo.
 
 ## SRC-74-003
 
-Leviathan et al., Fast Inference from Transformers via Speculative Decoding
-
-URL: https://arxiv.org/abs/2211.17192
-
-Uso: definizioni e meccanismi nel perimetro del capitolo.
-
-Limite: nessuna generalizzazione automatica oltre il setup della fonte.
+- Titolo o riferimento: Lin et al., AWQ.
+- Autori o organizzazione: Lin et al..
+- Tipo: paper o report tecnico.
+- Data: data della revisione consultata.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- URL o identificatore: https://arxiv.org/abs/2306.00978
+- Data di consultazione: 3 agosto 2026.
+- Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
+- Sezioni rilevanti: Abstract / pagina iniziale; 2 AWQ: Activation-aware Weight Quantization; 2.1 Improving LLM Quantization by Preserving 1% Salient Weights; 2.2 Protecting Salient Weights by Activation-aware Scaling.
+- Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
+- Affermazioni sostenibili: Quantization-aware training simula arrotondamento e clipping durante il training per adattare i pesi.
+- Limiti: non autorizza generalizzazioni a ogni modello, dataset, implementazione o prodotto.
+- Divergenze note: eventuali differenze di obiettivo, dataset o implementazione vanno mantenute separate nel testo.
 
 ## SRC-74-004
 
-Kwon et al., Efficient Memory Management for LLM Serving with PagedAttention
+- Titolo o riferimento: Dettmers et al., QLoRA.
+- Autori o organizzazione: Dettmers et al..
+- Tipo: paper o report tecnico.
+- Data: data della revisione consultata.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- URL o identificatore: https://arxiv.org/abs/2305.14314
+- Data di consultazione: 3 agosto 2026.
+- Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
+- Sezioni rilevanti: Abstract / pagina iniziale; QLoRA : Efficient Finetuning of Quantized LLMs; Low-rank Adapters; Memory Requirement of Parameter-Efficient Finetuning.
+- Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
+- Affermazioni sostenibili: Quantizzare soltanto i pesi riduce memoria; quantizzare attivazioni modifica anche i kernel di calcolo.
+- Limiti: non autorizza generalizzazioni a ogni modello, dataset, implementazione o prodotto.
+- Divergenze note: eventuali differenze di obiettivo, dataset o implementazione vanno mantenute separate nel testo.
 
-URL: https://arxiv.org/abs/2309.06180
+## Mappa d'uso
 
-Uso: definizioni e meccanismi nel perimetro del capitolo.
-
-Limite: nessuna generalizzazione automatica oltre il setup della fonte.
+Le sezioni citano il proprio claim vicino al punto sostenuto. Esempi, derivazioni e output del codice locale sono marcati separatamente.

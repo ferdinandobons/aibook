@@ -1,0 +1,1 @@
+{"invariant": "all workers contribute to the same declared reduction", "reduced_gradient": [2.0, 2.0], "workers": 2}

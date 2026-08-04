@@ -1,0 +1,1 @@
+{"compatible": true, "invariant": "interoperability is a versioned contract, not a shared label"}

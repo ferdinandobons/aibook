@@ -1,44 +1,74 @@
 # Fonti primarie e autorevoli. Capitolo 64
 
-- Ultima verifica: 2 agosto 2026
-- Le fonti quantitative restano limitate ai setup dichiarati.
+- Data di consultazione: 3 agosto 2026
+- Routing semantico: capitolo 64 -> tema `rag`.
+- Perimetro: definizioni, meccanismi e limiti portanti del capitolo.
+- Regola: risultati numerici locali restano distinti dalle evidenze sperimentali delle fonti.
 
 ## SRC-64-001
 
-Robertson e Zaragoza, The Probabilistic Relevance Framework: BM25 and Beyond
-
-URL: https://doi.org/10.1561/1500000019
-
-Uso: definizioni e meccanismi nel perimetro del capitolo.
-
-Limite: nessuna generalizzazione automatica oltre il setup della fonte.
+- Titolo o riferimento: Lewis et al., Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks.
+- Autori o organizzazione: Lewis et al..
+- Tipo: paper o report tecnico.
+- Data: data della revisione consultata.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- URL o identificatore: https://arxiv.org/abs/2005.11401
+- Data di consultazione: 3 agosto 2026.
+- Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
+- Sezioni rilevanti: Abstract / pagina iniziale; Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks; 3.3 Jeopardy Question Generation; 4.3 Jeopardy Question Generation.
+- Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
+- Affermazioni sostenibili: Il retriever seleziona contesto esterno; il generatore produce la risposta condizionata sui documenti recuperati. Recall del retriever, precisione del contesto, fedeltà e utilità della risposta devono essere misurate separatamente e insieme.
+- Limiti: non autorizza generalizzazioni a ogni modello, dataset, implementazione o prodotto.
+- Divergenze note: eventuali differenze di obiettivo, dataset o implementazione vanno mantenute separate nel testo.
 
 ## SRC-64-002
 
-Lewis et al., Retrieval-Augmented Generation
-
-URL: https://arxiv.org/abs/2005.11401
-
-Uso: definizioni e meccanismi nel perimetro del capitolo.
-
-Limite: nessuna generalizzazione automatica oltre il setup della fonte.
+- Titolo o riferimento: Karpukhin et al., Dense Passage Retrieval.
+- Autori o organizzazione: Karpukhin et al..
+- Tipo: paper o report tecnico.
+- Data: data della revisione consultata.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- URL o identificatore: https://arxiv.org/abs/2004.04906
+- Data di consultazione: 3 agosto 2026.
+- Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
+- Sezioni rilevanti: Abstract / pagina iniziale; Dense Passage Retrieval for Open-Domain Question Answering; 3 Dense Passage Retriever (DPR); 5 Experiments: Passage Retrieval.
+- Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
+- Affermazioni sostenibili: Dimensione, overlap e struttura dei chunk modificano recall e quantità di contesto.
+- Limiti: non autorizza generalizzazioni a ogni modello, dataset, implementazione o prodotto.
+- Divergenze note: eventuali differenze di obiettivo, dataset o implementazione vanno mantenute separate nel testo.
 
 ## SRC-64-003
 
-Yao et al., ReAct
-
-URL: https://arxiv.org/abs/2210.03629
-
-Uso: definizioni e meccanismi nel perimetro del capitolo.
-
-Limite: nessuna generalizzazione automatica oltre il setup della fonte.
+- Titolo o riferimento: Asai et al., Self-RAG.
+- Autori o organizzazione: Asai et al..
+- Tipo: paper o report tecnico.
+- Data: data della revisione consultata.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- URL o identificatore: https://arxiv.org/abs/2310.11511
+- Data di consultazione: 3 agosto 2026.
+- Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
+- Sezioni rilevanti: Abstract / pagina iniziale; Self-Rag: Self-reflective Retrieval augmented Generation.
+- Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
+- Affermazioni sostenibili: Documenti, istruzioni e domanda devono avere confini espliciti.
+- Limiti: non autorizza generalizzazioni a ogni modello, dataset, implementazione o prodotto.
+- Divergenze note: eventuali differenze di obiettivo, dataset o implementazione vanno mantenute separate nel testo.
 
 ## SRC-64-004
 
-OWASP, Top 10 for LLM Applications
+- Titolo o riferimento: Rashkin et al., Measuring Attribution in Natural Language Generation Models.
+- Autori o organizzazione: Rashkin et al..
+- Tipo: paper o report tecnico.
+- Data: data della revisione consultata.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- URL o identificatore: https://arxiv.org/abs/2112.12870
+- Data di consultazione: 3 agosto 2026.
+- Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
+- Sezioni rilevanti: Abstract / pagina iniziale; Measuring Attribution in Natural Language Generation Models; 3.1 An Initial Definition of AIS: Attribution of Standalone Propositions; 3.2 Extending AIS: Attribution of Sentences in Context.
+- Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
+- Affermazioni sostenibili: Una risposta supportata deve essere collegabile a passaggi recuperati.
+- Limiti: non autorizza generalizzazioni a ogni modello, dataset, implementazione o prodotto.
+- Divergenze note: eventuali differenze di obiettivo, dataset o implementazione vanno mantenute separate nel testo.
 
-URL: https://owasp.org/www-project-top-10-for-large-language-model-applications/
+## Mappa d'uso
 
-Uso: definizioni e meccanismi nel perimetro del capitolo.
-
-Limite: nessuna generalizzazione automatica oltre il setup della fonte.
+Le sezioni citano il proprio claim vicino al punto sostenuto. Esempi, derivazioni e output del codice locale sono marcati separatamente.

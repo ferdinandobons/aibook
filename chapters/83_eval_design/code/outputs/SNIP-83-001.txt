@@ -1,0 +1,1 @@
+{"accuracy": 0.75, "failures": [1], "invariant": "a metric is reported with its decision target and failure cases"}

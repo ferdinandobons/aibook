@@ -1,0 +1,1 @@
+{"invariant": "local and long-term memory have separate lifetimes", "local_size": 2, "long_term_size": 1, "read": "recent-b"}

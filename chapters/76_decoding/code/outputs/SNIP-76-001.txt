@@ -1,0 +1,1 @@
+{"greedy": 0, "invariant": "decoding chooses a trajectory from logits without changing model parameters", "support": [0, 1]}

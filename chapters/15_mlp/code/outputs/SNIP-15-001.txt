@@ -1,0 +1,1 @@
+{"invariant": "the nonlinearity is after the affine map", "output": [0.0, 1.35], "shape": [2]}

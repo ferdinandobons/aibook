@@ -1,3 +1,5 @@
-# Codice. Capitolo 88
+# Codice del Capitolo 88
 
-Snippet: `snip_88_contract.py`. Test: `test_88_robustness_jailbreak.py`.
+Lo snippet snip_88_contract.py rende osservabile il contratto centrale di Robustezza, jailbreak e attacchi adversarial con valori piccoli e leggibili.
+Il test test_88_contract.py controlla determinismo, output, invariante e una shape incoerente.
+Il risultato è un esempio locale, non un benchmark di produzione.

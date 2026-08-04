@@ -2,11 +2,11 @@
 
 ## Stato
 
-- File esaminato: `candidate-v3.png`
-- Dimensioni: `1672 × 941`
-- Esito tecnico: **validata tecnicamente**
+- File esaminato: `candidate-v4.png`
+- Dimensioni: `1800 × 1000`
+- Esito tecnico: **validata tecnicamente dopo refake**
 - Approvazione autoriale: aperta
-- Versioni precedenti: `candidate-v1.png` corrotta; `candidate-v2.png` tecnicamente valida ma con lessico non più coerente con la prosa
+- Versioni precedenti: `candidate-v1.png` corrotta; `candidate-v2.png` tecnicamente valida ma con lessico non più coerente con la prosa; `candidate-v3.png` respinta dopo la revisione raster per occlusione e composizione incoerente con il sorgente
 
 ## Domanda unica
 
@@ -18,7 +18,8 @@ Perché una rappresentazione fissa non basta quando posizioni diverse devono com
 |---|---|---|---|
 | v1 | respinta | blob PNG corrotto; frecce interpretabili come generazione delle query; testo troppo vicino ai contenitori | rimossa dal branch |
 | v2 | validata tecnicamente | etichette `consumer 1/2` non coerenti con la nuova prosa | query trasformate in intestazioni di riga; connessioni separate; aperta la revisione lessicale |
-| v3 | validata tecnicamente | nessun difetto bloccante noto | pannello sinistro ricostruito; `consumer 1/2` sostituito con `Posizione 1/2`; footer e contenimento ricontrollati |
+| v3 | respinta | il raster effettivo mostrava un pannello sovrapposto e contenuto occluso, nonostante il controllo testuale del generatore risultasse positivo | sostituita da una nuova rasterizzazione code-native |
+| v4 | validata tecnicamente | nessun difetto bloccante rilevato nel raster; coefficienti coerenti con la specifica | pannello sinistro e destro ricostruiti; q₂ normalizzata a `0,05`, `0,15`, `0,80`; RGB e dimensione standard `1800 × 1000` |
 
 ## Audit tecnico
 
@@ -48,4 +49,4 @@ La composizione è stata iterata con lo strumento immagini. Per rendere esatti t
 
 ## Verdetto
 
-`ATT-01/candidate-v3.png` può essere sottoposta alla revisione autoriale. Il nome resta `candidate-v3.png` fino all'approvazione; soltanto dopo potrà diventare `final.png`.
+`ATT-01/candidate-v4.png` può essere sottoposta alla revisione autoriale. Il nome resta `candidate-v4.png` fino all'approvazione; soltanto dopo potrà diventare `final.png`.

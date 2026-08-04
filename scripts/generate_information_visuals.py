@@ -183,7 +183,7 @@ def make_info02() -> Path:
     arrow(draw, (1185, 375), (1040, 375), fill=C["blue"], width=5, head=14)
     rounded(draw, (775, 235, 1025, 510), 22, C["amber_fill"], C["amber"], 3)
     draw_centered_multiline(draw, (795, 255, 1005, 310), "CROSS-ENTROPY", font(18, True), C["amber"], max_lines=2)
-    draw_centered_multiline(draw, (795, 330, 1005, 475), "H(q,p)\n= −Σ qᵢ log pᵢ\n= 0,466311", font(20, True), C["text"], spacing=10, max_lines=3)
+    draw_centered_multiline(draw, (795, 330, 1005, 475), "H(q,p)\n= −Σ q_i log p_i\n= 0,466311", font(20, True), C["text"], spacing=10, max_lines=3)
 
     rounded(draw, (120, 650, 540, 855), 20, C["purple_fill"], C["purple"], 3)
     draw_centered_multiline(draw, (145, 670, 515, 720), "ENTROPIA DEL TARGET", font(18, True), C["purple"], max_lines=2)

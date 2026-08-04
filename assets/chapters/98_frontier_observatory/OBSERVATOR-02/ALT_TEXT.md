@@ -1,3 +1,3 @@
 # Alt text OBSERVATOR-02
 
-Confronto tra caso base, varianti e limiti.
+Diagramma OBSERVATOR-02 del Capitolo 98, famiglia timeline. Domanda: Il diagramma segue il passaggio: Scouting, routing, maturità, confronto e promozione. L'input è paper, release, benchmark, fonte e data di osservazione, l'output è scheda con evidenza, stato e prossima verifica; il vincolo da controllare è che novità, adozione e prova end-to-end sono dimensioni diverse La composizione usa i passaggi Scouting, Routing, Maturità, Promozione, Edizioni.

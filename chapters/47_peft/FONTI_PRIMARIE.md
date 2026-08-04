@@ -1,44 +1,74 @@
 # Fonti primarie e autorevoli. Capitolo 47
 
-- Ultima verifica: 2 agosto 2026
-- Le fonti quantitative restano limitate ai setup dichiarati.
+- Data di consultazione: 3 agosto 2026
+- Routing semantico: capitolo 47 -> tema `peft`.
+- Perimetro: definizioni, meccanismi e limiti portanti del capitolo.
+- Regola: risultati numerici locali restano distinti dalle evidenze sperimentali delle fonti.
 
 ## SRC-47-001
 
-Ouyang et al., Training language models to follow instructions with human feedback
-
-URL: https://arxiv.org/abs/2203.02155
-
-Uso: definizioni e meccanismi nel perimetro del capitolo.
-
-Limite: nessuna generalizzazione automatica oltre il setup della fonte.
+- Titolo o riferimento: Houlsby et al., Parameter-Efficient Transfer Learning for NLP.
+- Autori o organizzazione: Houlsby et al..
+- Tipo: paper o report tecnico.
+- Data: data della revisione consultata.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- URL o identificatore: https://arxiv.org/abs/1902.00751
+- Data di consultazione: 3 agosto 2026.
+- Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
+- Sezioni rilevanti: Abstract / pagina iniziale; Parameter-Efficient Transfer Learning for NLP; Supplementary Material for Parameter-Efficient Transfer Learning for NLP; 2 Adapter tuning for NLP.
+- Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
+- Affermazioni sostenibili: PEFT modifica un sottoinsieme di parametri o introduce moduli piccoli, lasciando invariata la maggior parte del checkpoint. Il modello base quantizzato riduce memoria, mentre gli adapter restano addestrabili.
+- Limiti: non autorizza generalizzazioni a ogni modello, dataset, implementazione o prodotto.
+- Divergenze note: eventuali differenze di obiettivo, dataset o implementazione vanno mantenute separate nel testo.
 
 ## SRC-47-002
 
-Hu et al., LoRA
-
-URL: https://arxiv.org/abs/2106.09685
-
-Uso: definizioni e meccanismi nel perimetro del capitolo.
-
-Limite: nessuna generalizzazione automatica oltre il setup della fonte.
+- Titolo o riferimento: Hu et al., LoRA: Low-Rank Adaptation of Large Language Models.
+- Autori o organizzazione: Hu et al..
+- Tipo: paper o report tecnico.
+- Data: data della revisione consultata.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- URL o identificatore: https://arxiv.org/abs/2106.09685
+- Data di consultazione: 3 agosto 2026.
+- Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
+- Sezioni rilevanti: Abstract / pagina iniziale; LoRA: Low-Rank Adaptation of Large Language Models; Adapter Layers Introduce Inference Latency; 4.1 Low-Rank-Parametrized Update Matrices.
+- Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
+- Affermazioni sostenibili: Blocchi bottleneck vengono inseriti nel percorso residuale.
+- Limiti: non autorizza generalizzazioni a ogni modello, dataset, implementazione o prodotto.
+- Divergenze note: eventuali differenze di obiettivo, dataset o implementazione vanno mantenute separate nel testo.
 
 ## SRC-47-003
 
-Rafailov et al., Direct Preference Optimization
-
-URL: https://arxiv.org/abs/2305.18290
-
-Uso: definizioni e meccanismi nel perimetro del capitolo.
-
-Limite: nessuna generalizzazione automatica oltre il setup della fonte.
+- Titolo o riferimento: Liu et al., Few-Shot Parameter-Efficient Fine-Tuning is Better and Cheaper than In-Context Learning.
+- Autori o organizzazione: Liu et al..
+- Tipo: paper o report tecnico.
+- Data: data della revisione consultata.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- URL o identificatore: https://arxiv.org/abs/2205.05638
+- Data di consultazione: 3 agosto 2026.
+- Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
+- Sezioni rilevanti: Abstract / pagina iniziale; Few-Shot Parameter-Efficient Fine-Tuning is Better and Cheaper than In-Context Learning; 2.2 Parameter-efficient fine-tuning; 3.3 Parameter-efficient fine-tuning with (IA) 3.
+- Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
+- Affermazioni sostenibili: Un aggiornamento di rango ridotto fattorizza la variazione di una matrice come BA e può essere fuso nei pesi per l'inference.
+- Limiti: non autorizza generalizzazioni a ogni modello, dataset, implementazione o prodotto.
+- Divergenze note: eventuali differenze di obiettivo, dataset o implementazione vanno mantenute separate nel testo.
 
 ## SRC-47-004
 
-Lightman et al., Let's Verify Step by Step
+- Titolo o riferimento: Dettmers et al., QLoRA.
+- Autori o organizzazione: Dettmers et al..
+- Tipo: paper o report tecnico.
+- Data: data della revisione consultata.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- URL o identificatore: https://arxiv.org/abs/2305.14314
+- Data di consultazione: 3 agosto 2026.
+- Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
+- Sezioni rilevanti: Abstract / pagina iniziale; QLoRA : Efficient Finetuning of Quantized LLMs; Low-rank Adapters; Memory Requirement of Parameter-Efficient Finetuning.
+- Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
+- Affermazioni sostenibili: Soft prompt, prefix key-value e vettori di scaling modificano punti diversi del calcolo e non sono equivalenti.
+- Limiti: non autorizza generalizzazioni a ogni modello, dataset, implementazione o prodotto.
+- Divergenze note: eventuali differenze di obiettivo, dataset o implementazione vanno mantenute separate nel testo.
 
-URL: https://arxiv.org/abs/2305.20050
+## Mappa d'uso
 
-Uso: definizioni e meccanismi nel perimetro del capitolo.
-
-Limite: nessuna generalizzazione automatica oltre il setup della fonte.
+Le sezioni citano il proprio claim vicino al punto sostenuto. Esempi, derivazioni e output del codice locale sono marcati separatamente.

@@ -1,0 +1,1 @@
+{"invariant": "the same kernel is reused at every position", "output": [[0.0, 0.0], [0.0, 0.0]], "shape": [2, 2]}

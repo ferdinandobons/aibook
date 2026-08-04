@@ -1,0 +1,1 @@
+{"invariant": "retrieval exposes document scores before generation", "ranking": [[2, "d1"], [1, "d2"], [0, "d3"]]}

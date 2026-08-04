@@ -1,5 +1,5 @@
-# Codice. Capitolo 33
+# Codice del Capitolo 33
 
-- Snippet: `snip_mix_001.py`
-- Test: `test_mix.py`
-- Tre test di contratto superati.
+Lo snippet snip_33_contract.py rende osservabile il contratto centrale di Dataset mixture, curriculum e dati sintetici con valori piccoli e leggibili.
+Il test test_33_contract.py controlla determinismo, output, invariante e una shape incoerente.
+Il risultato è un esempio locale, non un benchmark di produzione.

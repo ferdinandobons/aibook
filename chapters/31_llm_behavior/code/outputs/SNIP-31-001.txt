@@ -1,0 +1,1 @@
+{"chosen": 0, "demonstrations": 2, "invariant": "decoding selects from a distribution and does not certify truth", "probabilities": [0.665241, 0.244728, 0.090031]}

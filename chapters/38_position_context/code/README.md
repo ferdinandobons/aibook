@@ -1,5 +1,5 @@
-# Codice. Capitolo 38
+# Codice del Capitolo 38
 
-- Snippet: `snip_pos_001.py`
-- Test: `test_pos.py`
-- Tre test di contratto superati.
+Lo snippet snip_38_contract.py rende osservabile il contratto centrale di Posizione e contesto lungo con valori piccoli e leggibili.
+Il test test_38_contract.py controlla determinismo, output, invariante e una shape incoerente.
+Il risultato è un esempio locale, non un benchmark di produzione.

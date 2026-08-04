@@ -1,0 +1,1 @@
+{"invariant": "the previous state is consumed before the next step", "state": 0.200159}

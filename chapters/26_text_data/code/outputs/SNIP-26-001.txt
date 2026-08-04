@@ -1,0 +1,1 @@
+{"code_points": ["p", "a", "c", "c", "o"], "invariant": "tokenization preserves an explicit mapping from text to ids", "token_ids": [112, 97, 99, 99, 111]}

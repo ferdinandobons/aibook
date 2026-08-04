@@ -207,7 +207,7 @@ SPECS_14_45 = [
         ("Memoria associativa", "Key-value interne o moduli di memoria aggiornati online offrono accesso diverso dal residual stream."),
         ("Memoria interna ed esterna", "Lo stato neurale non coincide con retrieval documentale. Reset, isolamento e provenienza hanno contratti differenti."),
     ]),
-    (44, "CH-P08-MOE-CONDITIONAL", "P08", "44_moe", "Mixture of Experts e calcolo condizionale", "CORE", [
+    (44, "CH-P08-MOE-CONDITIONAL", "P08", "44_moe_conditional", "Mixture of Experts e calcolo condizionale", "CORE", [
         ("Router top-k", "Un router assegna probabilità agli esperti e attiva un sottoinsieme per token."),
         ("Capacità", "Ogni esperto riceve un limite di token. Overflow, rerouting o dropping devono essere dichiarati."),
         ("Load balancing", "Loss ausiliarie contrastano router collapse, ma possono competere con la specializzazione."),

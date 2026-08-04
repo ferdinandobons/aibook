@@ -1,0 +1,1 @@
+{"advantages": [0.333333, -0.666667, 0.333333], "invariant": "the policy update depends on declared reward and baseline", "mean_reward": 0.6666666666666666}

@@ -1,74 +1,74 @@
 # Fonti primarie e autorevoli. Capitolo 43
 
-- Ultima verifica: 31 luglio 2026
-- I risultati quantitativi restano legati al setup originale.
+- Data di consultazione: 3 agosto 2026
+- Routing semantico: capitolo 43 -> tema `hybrid_memory`.
+- Perimetro: definizioni, meccanismi e limiti portanti del capitolo.
+- Regola: risultati numerici locali restano distinti dalle evidenze sperimentali delle fonti.
 
-## SRC-HYBRID-001
+## SRC-43-001
 
-Dai et al., Transformer-XL.
+- Titolo o riferimento: De et al., Griffin: Mixing Gated Linear Recurrences with Local Attention.
+- Autori o organizzazione: De et al..
+- Tipo: paper o report tecnico.
+- Data: data della revisione consultata.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- URL o identificatore: https://arxiv.org/abs/2402.19427
+- Data di consultazione: 3 agosto 2026.
+- Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
+- Sezioni rilevanti: Abstract / pagina iniziale; Griffin: Mixing Gated Linear Recurrences with Local Attention for Efficient Language Models; 2.4 Real-Gated Linear Recurrent Unit (RG-LRU); 3 Recurrent Models Scale as Efficiently as Transformers.
+- Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
+- Affermazioni sostenibili: Transformer, SSM e recurrence possono alternarsi con rapporti e interfacce dichiarati. Lo stato neurale non coincide con retrieval documentale.
+- Limiti: non autorizza generalizzazioni a ogni modello, dataset, implementazione o prodotto.
+- Divergenze note: eventuali differenze di obiettivo, dataset o implementazione vanno mantenute separate nel testo.
 
-URL: https://arxiv.org/abs/1901.02860
+## SRC-43-002
 
-Uso: definizione, meccanismo o risultato attribuito nel capitolo.
+- Titolo o riferimento: Behrouz et al., Titans: Learning to Memorize at Test Time.
+- Autori o organizzazione: Behrouz et al..
+- Tipo: paper o report tecnico.
+- Data: data della revisione consultata.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- URL o identificatore: https://arxiv.org/abs/2501.00663
+- Data di consultazione: 3 agosto 2026.
+- Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
+- Sezioni rilevanti: Abstract / pagina iniziale; Memory Perspective; 3.1 Long-term Memory; 3.2 How to Parallelize the Long-term Memory Training.
+- Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
+- Affermazioni sostenibili: Una finestra precisa gestisce il vicino; uno stato compatto trasporta informazione oltre la finestra.
+- Limiti: non autorizza generalizzazioni a ogni modello, dataset, implementazione o prodotto.
+- Divergenze note: eventuali differenze di obiettivo, dataset o implementazione vanno mantenute separate nel testo.
 
-Limite: nessuna estensione automatica ad altri modelli o implementazioni.
+## SRC-43-003
 
-## SRC-HYBRID-002
+- Titolo o riferimento: Sun et al., Retentive Network.
+- Autori o organizzazione: Sun et al..
+- Tipo: paper o report tecnico.
+- Data: data della revisione consultata.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- URL o identificatore: https://arxiv.org/abs/2307.08621
+- Data di consultazione: 3 agosto 2026.
+- Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
+- Sezioni rilevanti: Abstract / pagina iniziale; Linear Attention.
+- Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
+- Affermazioni sostenibili: Stati di segmenti precedenti possono essere riusati o compressi con stop-gradient e capacità limitata.
+- Limiti: non autorizza generalizzazioni a ogni modello, dataset, implementazione o prodotto.
+- Divergenze note: eventuali differenze di obiettivo, dataset o implementazione vanno mantenute separate nel testo.
 
-Rae et al., Compressive Transformers.
+## SRC-43-004
 
-URL: https://arxiv.org/abs/1911.05507
+- Titolo o riferimento: Dao and Gu, Transformers are SSMs.
+- Autori o organizzazione: Dao and Gu.
+- Tipo: paper o report tecnico.
+- Data: data della revisione consultata.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- URL o identificatore: https://arxiv.org/abs/2405.21060
+- Data di consultazione: 3 agosto 2026.
+- Verifica d'accesso: opened-partial; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
+- Sezioni rilevanti: Abstract / pagina iniziale.
+- Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
+- Affermazioni sostenibili: Key-value interne o moduli di memoria aggiornati online offrono accesso diverso dal residual stream.
+- Limiti: non autorizza generalizzazioni a ogni modello, dataset, implementazione o prodotto.
+- Divergenze note: eventuali differenze di obiettivo, dataset o implementazione vanno mantenute separate nel testo.
 
-Uso: definizione, meccanismo o risultato attribuito nel capitolo.
+## Mappa d'uso
 
-Limite: nessuna estensione automatica ad altri modelli o implementazioni.
-
-## SRC-HYBRID-003
-
-Wu et al., Memorizing Transformers.
-
-URL: https://arxiv.org/abs/2203.08913
-
-Uso: definizione, meccanismo o risultato attribuito nel capitolo.
-
-Limite: nessuna estensione automatica ad altri modelli o implementazioni.
-
-## SRC-HYBRID-004
-
-Lieber et al., Jamba.
-
-URL: https://arxiv.org/abs/2403.19887
-
-Uso: definizione, meccanismo o risultato attribuito nel capitolo.
-
-Limite: nessuna estensione automatica ad altri modelli o implementazioni.
-
-## SRC-HYBRID-005
-
-Munkhdalai et al., Infini-attention.
-
-URL: https://arxiv.org/abs/2404.07143
-
-Uso: definizione, meccanismo o risultato attribuito nel capitolo.
-
-Limite: nessuna estensione automatica ad altri modelli o implementazioni.
-
-## SRC-HYBRID-006
-
-Behrouz et al., Titans.
-
-URL: https://arxiv.org/abs/2501.00663
-
-Uso: definizione, meccanismo o risultato attribuito nel capitolo.
-
-Limite: nessuna estensione automatica ad altri modelli o implementazioni.
-
-## SRC-HYBRID-007
-
-De et al., Griffin.
-
-URL: https://arxiv.org/abs/2402.19427
-
-Uso: definizione, meccanismo o risultato attribuito nel capitolo.
-
-Limite: nessuna estensione automatica ad altri modelli o implementazioni.
+Le sezioni citano il proprio claim vicino al punto sostenuto. Esempi, derivazioni e output del codice locale sono marcati separatamente.

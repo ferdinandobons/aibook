@@ -1,0 +1,1 @@
+{"discriminator_gap": 0.6, "invariant": "generator and discriminator signals are not the same loss"}

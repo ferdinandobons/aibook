@@ -1,3 +1,5 @@
-# Codice. Capitolo 92
+# Codice del Capitolo 92
 
-Snippet: `snip_92_contract.py`. Test: `test_92_provenance.py`.
+Lo snippet snip_92_contract.py rende osservabile il contratto centrale di Watermarking e provenienza dei contenuti con valori piccoli e leggibili.
+Il test test_92_contract.py controlla determinismo, output, invariante e una shape incoerente.
+Il risultato è un esempio locale, non un benchmark di produzione.

@@ -1,0 +1,1 @@
+{"exp_sums": [1.367879, 1.049787], "invariant": "softmax normalization is stable within each row", "row_maxima": [2.0, 3.0]}

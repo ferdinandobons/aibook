@@ -1,0 +1,1 @@
+{"invariant": "the transform exposes both an inverse and a log determinant", "inverse_scale": [0.5, 2.0], "log_det": 0.0}

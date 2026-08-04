@@ -1,0 +1,1 @@
+{"invariant": "scale and calibration determine quantization error", "max_error": 0.0, "quantized": [-2, 0, 2], "restored": [-0.5, 0.0, 0.5]}

@@ -6,6 +6,7 @@
 - Dimensioni: `1800 × 1000`
 - SHA-256 locale della composizione approvata: `a7428bd13c1c7fb786f2b90e97c933ae7b429573d0b9e49595730aa7034e3bb5`
 - Esito tecnico: **validata tecnicamente**
+- Collegamento in `CHAPTER.md`: eseguito
 - Approvazione autoriale: aperta
 
 ## Iterazioni
@@ -48,4 +49,4 @@ Il valore `9` è ora leggibile in un box rosso. Il ramo è tratteggiato e una la
 
 ## Verdetto
 
-`SEARCH-02/candidate-v2.png` può essere inserita nella candidatura del capitolo e sottoposta alla revisione autoriale.
+`SEARCH-02/candidate-v2.png` è collegata alla sezione visuale del capitolo e resta candidata fino alla revisione autoriale.

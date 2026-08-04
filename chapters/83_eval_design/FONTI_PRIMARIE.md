@@ -1,44 +1,74 @@
 # Fonti primarie e autorevoli. Capitolo 83
 
-- Ultima verifica: 2 agosto 2026
-- Le fonti quantitative restano limitate ai setup dichiarati.
+- Data di consultazione: 3 agosto 2026
+- Routing semantico: capitolo 83 -> tema `eval_design`.
+- Perimetro: definizioni, meccanismi e limiti portanti del capitolo.
+- Regola: risultati numerici locali restano distinti dalle evidenze sperimentali delle fonti.
 
 ## SRC-83-001
 
-NIST, Artificial Intelligence Risk Management Framework
-
-URL: https://www.nist.gov/itl/ai-risk-management-framework
-
-Uso: definizioni e meccanismi nel perimetro del capitolo.
-
-Limite: nessuna generalizzazione automatica oltre il setup della fonte.
+- Titolo o riferimento: Liang et al., Holistic Evaluation of Language Models.
+- Autori o organizzazione: Liang et al..
+- Tipo: paper o report tecnico.
+- Data: data della revisione consultata.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- URL o identificatore: https://arxiv.org/abs/2211.09110
+- Data di consultazione: 3 agosto 2026.
+- Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
+- Sezioni rilevanti: Abstract / pagina iniziale; Holistic Evaluation of Language Models; Holistic Evaluation of Language Models; 2.3 Metrics.
+- Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
+- Affermazioni sostenibili: Una valutazione parte dalla decisione che deve sostenere. Intervalli, fallimenti, costi e limiti accompagnano il punteggio.
+- Limiti: non autorizza generalizzazioni a ogni modello, dataset, implementazione o prodotto.
+- Divergenze note: eventuali differenze di obiettivo, dataset o implementazione vanno mantenute separate nel testo.
 
 ## SRC-83-002
 
-Ribeiro et al., Model Cards for Model Reporting
-
-URL: https://dl.acm.org/doi/10.1145/3287560.3287596
-
-Uso: definizioni e meccanismi nel perimetro del capitolo.
-
-Limite: nessuna generalizzazione automatica oltre il setup della fonte.
+- Titolo o riferimento: Hendrycks et al., Measuring Massive Multitask Language Understanding.
+- Autori o organizzazione: Hendrycks et al..
+- Tipo: paper o report tecnico.
+- Data: data della revisione consultata.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- URL o identificatore: https://arxiv.org/abs/2009.03300
+- Data di consultazione: 3 agosto 2026.
+- Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
+- Sezioni rilevanti: Abstract / pagina iniziale; Benchmarks..
+- Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
+- Affermazioni sostenibili: Prompt, input, reference e rubric devono rappresentare l'uso previsto.
+- Limiti: non autorizza generalizzazioni a ogni modello, dataset, implementazione o prodotto.
+- Divergenze note: eventuali differenze di obiettivo, dataset o implementazione vanno mantenute separate nel testo.
 
 ## SRC-83-003
 
-Zou et al., Universal and Transferable Adversarial Attacks on Aligned Language Models
-
-URL: https://arxiv.org/abs/2307.15043
-
-Uso: definizioni e meccanismi nel perimetro del capitolo.
-
-Limite: nessuna generalizzazione automatica oltre il setup della fonte.
+- Titolo o riferimento: Mitchell et al., Model Cards for Model Reporting.
+- Autori o organizzazione: Mitchell et al..
+- Tipo: paper o report tecnico.
+- Data: data della revisione consultata.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- URL o identificatore: https://doi.org/10.1145/3287560.3287596
+- Data di consultazione: 3 agosto 2026.
+- Verifica d'accesso: web-confirmed; publisher metadata and official article record opened via web research; nessun risultato numerico trasferito.
+- Sezioni rilevanti: Abstract; sections on model cards and reporting context.
+- Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
+- Affermazioni sostenibili: Metriche automatiche, giudizi umani e verificatori misurano proprietà differenti.
+- Limiti: non autorizza generalizzazioni a ogni modello, dataset, implementazione o prodotto.
+- Divergenze note: eventuali differenze di obiettivo, dataset o implementazione vanno mantenute separate nel testo.
 
 ## SRC-83-004
 
-C2PA, Technical Specification
+- Titolo o riferimento: NIST, AI Risk Management Framework.
+- Autori o organizzazione: NIST.
+- Tipo: standard o documentazione ufficiale.
+- Data: data della revisione consultata.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- URL o identificatore: https://www.nist.gov/itl/ai-risk-management-framework
+- Data di consultazione: 3 agosto 2026.
+- Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
+- Sezioni rilevanti: Abstract / pagina iniziale; AI Risk Management Framework; Quick Links; Overview of the AI RMF.
+- Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
+- Affermazioni sostenibili: LLM-as-a-judge può scalare confronti, ma è sensibile a posizione, stile, modello e rubric.
+- Limiti: non autorizza generalizzazioni a ogni modello, dataset, implementazione o prodotto.
+- Divergenze note: eventuali differenze di obiettivo, dataset o implementazione vanno mantenute separate nel testo.
 
-URL: https://c2pa.org/specifications/specifications/
+## Mappa d'uso
 
-Uso: definizioni e meccanismi nel perimetro del capitolo.
-
-Limite: nessuna generalizzazione automatica oltre il setup della fonte.
+Le sezioni citano il proprio claim vicino al punto sostenuto. Esempi, derivazioni e output del codice locale sono marcati separatamente.

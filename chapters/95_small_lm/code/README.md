@@ -1,3 +1,5 @@
-# Codice. Capitolo 95
+# Codice del Capitolo 95
 
-Snippet: `snip_95_contract.py`. Test: `test_95_small_lm.py`.
+Lo snippet snip_95_contract.py rende osservabile il contratto centrale di Costruire un piccolo language model con valori piccoli e leggibili.
+Il test test_95_contract.py controlla determinismo, output, invariante e una shape incoerente.
+Il risultato è un esempio locale, non un benchmark di produzione.

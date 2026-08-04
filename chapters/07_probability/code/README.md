@@ -29,7 +29,7 @@ Gli output registrati sono in `outputs/`. L'ambiente è in `environments/python-
 ## Confini
 
 - le probabilità del caso di consegna sono illustrative;
-- il secondo aggiornamento usa una ipotesi dichiarata di indipendenza condizionata;
+- il secondo aggiornamento usa un'ipotesi dichiarata di indipendenza condizionata;
 - il seed rende riproducibile il run registrato, non stabilisce un risultato generale;
 - la simulazione non sostituisce legge dei grandi numeri o teorema centrale del limite;
 - non viene stimato un prodotto reale.

@@ -1,0 +1,1 @@
+{"invariant": "reward and discounted next value are explicit", "target": 1.45}

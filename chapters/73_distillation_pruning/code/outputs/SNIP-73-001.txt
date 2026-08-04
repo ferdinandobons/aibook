@@ -1,0 +1,1 @@
+{"distillation_error": 0.08, "invariant": "compression quality and structural pruning are measured separately", "kept_weights": 1}

@@ -1,0 +1,1 @@
+{"baseline": 0.6, "effect": -0.35, "intervened": 0.25, "invariant": "an intervention is compared with a baseline before causal language"}

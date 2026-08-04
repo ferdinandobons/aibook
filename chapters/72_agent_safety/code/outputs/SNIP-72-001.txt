@@ -1,0 +1,1 @@
+{"allowed": false, "approval_required": true, "invariant": "authorization and rollback live outside the model text"}

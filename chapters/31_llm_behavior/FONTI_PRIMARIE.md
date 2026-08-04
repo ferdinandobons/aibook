@@ -1,64 +1,74 @@
 # Fonti primarie e autorevoli. Capitolo 31
 
-- Ultima verifica: 31 luglio 2026
-- I risultati quantitativi restano legati al setup originale.
+- Data di consultazione: 3 agosto 2026
+- Routing semantico: capitolo 31 -> tema `llm_behavior`.
+- Perimetro: definizioni, meccanismi e limiti portanti del capitolo.
+- Regola: risultati numerici locali restano distinti dalle evidenze sperimentali delle fonti.
 
-## SRC-LLM-001
+## SRC-31-001
 
-Brown et al., Language Models are Few-Shot Learners.
+- Titolo o riferimento: Brown et al., Language Models are Few-Shot Learners.
+- Autori o organizzazione: Brown et al..
+- Tipo: paper o report tecnico.
+- Data: data della revisione consultata.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- URL o identificatore: https://arxiv.org/abs/2005.14165
+- Data di consultazione: 3 agosto 2026.
+- Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
+- Sezioni rilevanti: Abstract / pagina iniziale; Language Models are Few-Shot Learners; 3.1 Language Modeling, Cloze, and Completion Tasks; 3.1.1 Language Modeling.
+- Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
+- Affermazioni sostenibili: Un LLM autoregressivo produce logits condizionati sul prefisso. Post-training, messaggi di sistema, strumenti e filtri contribuiscono al comportamento osservato.
+- Limiti: non autorizza generalizzazioni a ogni modello, dataset, implementazione o prodotto.
+- Divergenze note: eventuali differenze di obiettivo, dataset o implementazione vanno mantenute separate nel testo.
 
-URL: https://arxiv.org/abs/2005.14165
+## SRC-31-002
 
-Uso: definizione, meccanismo o risultato attribuito nel capitolo.
+- Titolo o riferimento: Min et al., Rethinking the Role of Demonstrations: What Makes In-Context Learning Work?.
+- Autori o organizzazione: Min et al..
+- Tipo: paper o report tecnico.
+- Data: data della revisione consultata.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- URL o identificatore: https://arxiv.org/abs/2202.12837
+- Data di consultazione: 3 agosto 2026.
+- Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
+- Sezioni rilevanti: Abstract / pagina iniziale; Rethinking the Role of Demonstrations: What Makes In-Context Learning Work?; 5 Why does In-Context Learning work?.
+- Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
+- Affermazioni sostenibili: Istruzioni ed esempi entrano nel contesto senza un optimizer step.
+- Limiti: non autorizza generalizzazioni a ogni modello, dataset, implementazione o prodotto.
+- Divergenze note: eventuali differenze di obiettivo, dataset o implementazione vanno mantenute separate nel testo.
 
-Limite: nessuna estensione automatica ad altri modelli o implementazioni.
+## SRC-31-003
 
-## SRC-LLM-002
+- Titolo o riferimento: Holtzman et al., The Curious Case of Neural Text Degeneration.
+- Autori o organizzazione: Holtzman et al..
+- Tipo: paper o report tecnico.
+- Data: data della revisione consultata.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- URL o identificatore: https://arxiv.org/abs/1904.09751
+- Data di consultazione: 3 agosto 2026.
+- Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
+- Sezioni rilevanti: Abstract / pagina iniziale; 3 Language Model Decoding; 4.3 Natural Language Does Not Maximize Probability.
+- Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
+- Affermazioni sostenibili: Greedy, sampling, temperature e truncation trasformano la distribuzione in una traiettoria.
+- Limiti: non autorizza generalizzazioni a ogni modello, dataset, implementazione o prodotto.
+- Divergenze note: eventuali differenze di obiettivo, dataset o implementazione vanno mantenute separate nel testo.
 
-Min et al., Rethinking the Role of Demonstrations.
+## SRC-31-004
 
-URL: https://arxiv.org/abs/2202.12837
+- Titolo o riferimento: Guo et al., On Calibration of Modern Neural Networks.
+- Autori o organizzazione: Guo et al..
+- Tipo: paper o report tecnico.
+- Data: data della revisione consultata.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- URL o identificatore: https://arxiv.org/abs/1706.04599
+- Data di consultazione: 3 agosto 2026.
+- Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
+- Sezioni rilevanti: Abstract / pagina iniziale; On Calibration of Modern Neural Networks; Supplementary Materials for: On Calibration of Modern Neural Networks; Expected Calibration Error (ECE)..
+- Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
+- Affermazioni sostenibili: Probabilità del token, confidenza espressa e correttezza fattuale sono quantità differenti.
+- Limiti: non autorizza generalizzazioni a ogni modello, dataset, implementazione o prodotto.
+- Divergenze note: eventuali differenze di obiettivo, dataset o implementazione vanno mantenute separate nel testo.
 
-Uso: definizione, meccanismo o risultato attribuito nel capitolo.
+## Mappa d'uso
 
-Limite: nessuna estensione automatica ad altri modelli o implementazioni.
-
-## SRC-LLM-003
-
-Xie et al., In-Context Learning as Implicit Bayesian Inference.
-
-URL: https://arxiv.org/abs/2111.02080
-
-Uso: definizione, meccanismo o risultato attribuito nel capitolo.
-
-Limite: nessuna estensione automatica ad altri modelli o implementazioni.
-
-## SRC-LLM-004
-
-Olsson et al., In-context Learning and Induction Heads.
-
-URL: https://arxiv.org/abs/2209.11895
-
-Uso: definizione, meccanismo o risultato attribuito nel capitolo.
-
-Limite: nessuna estensione automatica ad altri modelli o implementazioni.
-
-## SRC-LLM-005
-
-Zhao et al., Calibrate Before Use.
-
-URL: https://arxiv.org/abs/2102.09690
-
-Uso: definizione, meccanismo o risultato attribuito nel capitolo.
-
-Limite: nessuna estensione automatica ad altri modelli o implementazioni.
-
-## SRC-LLM-006
-
-Holtzman et al., Neural Text Degeneration.
-
-URL: https://arxiv.org/abs/1904.09751
-
-Uso: definizione, meccanismo o risultato attribuito nel capitolo.
-
-Limite: nessuna estensione automatica ad altri modelli o implementazioni.
+Le sezioni citano il proprio claim vicino al punto sostenuto. Esempi, derivazioni e output del codice locale sono marcati separatamente.

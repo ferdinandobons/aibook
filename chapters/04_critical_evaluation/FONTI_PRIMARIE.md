@@ -8,7 +8,7 @@
 ## `SRC-EVAL-001`. NIST AI RMF 1.0
 
 - Elham Tabassi, *Artificial Intelligence Risk Management Framework (AI RMF 1.0)*, NIST AI 100-1, 2023.
-- URL: https://doi.org/10.6028/NIST.AI.100-1
+- PDF ufficiale: https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf
 - Uso: valutazione collegata a contesto, rischio, misurazione e gestione lungo il ciclo di vita.
 - Limite: framework volontario e use-case agnostic; non prescrive un'unica metrica o procedura sperimentale.
 

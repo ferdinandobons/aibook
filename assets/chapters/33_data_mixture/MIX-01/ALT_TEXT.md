@@ -1,3 +1,3 @@
-# Alt text `MIX-01`
+# Alt text MIX-01
 
-Diagramma tecnico su sfondo bianco dedicato a dalla dimensione alla mixture. Il training osserva una distribuzione progettata
+Diagramma MIX-01 del Capitolo 33, famiglia compare. Domanda: Il diagramma segue il passaggio: Campionamento, ripesatura e generazione controllata. L'input è pesi, temperatura, curriculum e conteggio dei token, l'output è probabilità effettive e mix osservato; il vincolo da controllare è che peso nominale e esposizione effettiva non sono la stessa misura La composizione usa i passaggi Peso effettivo delle sorgenti, Temperature sampling, Mixture ottimizzata, Curriculum, Dati sintetici.

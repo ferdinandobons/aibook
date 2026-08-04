@@ -1,0 +1,1 @@
+{"end_to_end_ms": 6, "invariant": "distributed inference includes communication in end-to-end latency", "workers": 2}

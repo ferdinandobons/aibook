@@ -1,3 +1,5 @@
-# Codice. Capitolo 68
+# Codice del Capitolo 68
 
-Snippet: `snip_68_contract.py`. Test: `test_68_interoperability.py`.
+Lo snippet snip_68_contract.py rende osservabile il contratto centrale di Protocolli e interoperabilità con valori piccoli e leggibili.
+Il test test_68_contract.py controlla determinismo, output, invariante e una shape incoerente.
+Il risultato è un esempio locale, non un benchmark di produzione.

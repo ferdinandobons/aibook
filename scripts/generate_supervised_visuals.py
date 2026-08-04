@@ -6,8 +6,22 @@ from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parents[1]
-FONT_REG = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
-FONT_BOLD = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+FONT_REG = next(
+    path
+    for path in (
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+        "/System/Library/Fonts/Supplemental/Arial Unicode.ttf",
+    )
+    if Path(path).exists()
+)
+FONT_BOLD = next(
+    path
+    for path in (
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+        "/System/Library/Fonts/Supplemental/Arial Unicode.ttf",
+    )
+    if Path(path).exists()
+)
 
 C = {
     "text": "#0F172A",

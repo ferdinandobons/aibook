@@ -1,0 +1,1 @@
+{"invariant": "multi-agent coordination exposes role and message boundaries", "message_count": 3, "roles": ["planner", "executor", "critic"]}

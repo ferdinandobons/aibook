@@ -1,5 +1,5 @@
-# Codice. Capitolo 36
+# Codice del Capitolo 36
 
-- Snippet: `snip_dist_001.py`
-- Test: `test_dist.py`
-- Tre test di contratto superati.
+Lo snippet snip_36_contract.py rende osservabile il contratto centrale di Training distribuito e continued pretraining con valori piccoli e leggibili.
+Il test test_36_contract.py controlla determinismo, output, invariante e una shape incoerente.
+Il risultato è un esempio locale, non un benchmark di produzione.

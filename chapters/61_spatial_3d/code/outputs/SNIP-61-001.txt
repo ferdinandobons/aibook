@@ -1,0 +1,1 @@
+{"centroid": [0.3333333333333333, 0.3333333333333333, 0.0], "count": 3, "invariant": "a 3D representation preserves coordinate dimension"}

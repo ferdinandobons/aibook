@@ -1,0 +1,1 @@
+{"difference": -0.020000000000000018, "invariant": "a replication records setup differences before interpreting outcome differences", "same_split": true}

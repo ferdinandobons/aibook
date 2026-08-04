@@ -1,0 +1,1 @@
+{"best_score": 0.6, "invariant": "test-time compute changes the selection budget, not the base model weights", "samples": 3}

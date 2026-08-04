@@ -1,3 +1,5 @@
-# Codice. Capitolo 75
+# Codice del Capitolo 75
 
-Snippet: `snip_75_contract.py`. Test: `test_75_low_bit_native.py`.
+Lo snippet snip_75_contract.py rende osservabile il contratto centrale di Modelli low-bit nativi e co-design numerico con valori piccoli e leggibili.
+Il test test_75_contract.py controlla determinismo, output, invariante e una shape incoerente.
+Il risultato è un esempio locale, non un benchmark di produzione.

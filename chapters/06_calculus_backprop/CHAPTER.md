@@ -17,6 +17,8 @@ deferred: ottimizzatori, Hessiane, metodi del secondo ordine, differenziazione i
 
 Nel capitolo precedente abbiamo trasformato un batch di richieste con matrici e vettori. Sapevamo calcolare l'output di un layer, ma non ancora come attribuire un errore ai numeri che avevano contribuito a produrlo. È questo il problema che affrontiamo ora.
 
+Il filo comune resta la richiesta «Il pacco non è arrivato»: qui la traduciamo in feature e target, poi seguiamo come una loss attribuisce il proprio cambiamento ai parametri della rete.
+
 Consideriamo una rete minuscola, con un solo input e quattro parametri:
 
 $$

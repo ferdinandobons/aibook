@@ -6,6 +6,7 @@
 - Dimensioni: `1800 × 1000`
 - SHA-256 locale: `505fd11d305e487a3f1d8aaa56074f2ea02fa11719e885c320ce612368ef1bb1`
 - Esito tecnico: **validata tecnicamente**
+- Collegamento in `CHAPTER.md`: eseguito
 - Approvazione autoriale: aperta
 
 ## Iterazioni
@@ -46,4 +47,4 @@ I collegamenti lunghi sono stati instradati sopra o sotto i nodi. I costi sono c
 
 ## Verdetto
 
-`SEARCH-01/candidate-v2.png` può essere inserita nella candidatura del capitolo e sottoposta alla revisione autoriale.
+`SEARCH-01/candidate-v2.png` è collegata alla sezione visuale del capitolo e resta candidata fino alla revisione autoriale.

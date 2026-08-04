@@ -1,3 +1,5 @@
-# Codice. Capitolo 74
+# Codice del Capitolo 74
 
-Snippet: `snip_74_contract.py`. Test: `test_74_quantization.py`.
+Lo snippet snip_74_contract.py rende osservabile il contratto centrale di Quantizzazione con valori piccoli e leggibili.
+Il test test_74_contract.py controlla determinismo, output, invariante e una shape incoerente.
+Il risultato è un esempio locale, non un benchmark di produzione.

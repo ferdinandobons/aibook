@@ -12,6 +12,7 @@
 
 - NIST, *Artificial Intelligence Risk Management Framework (AI RMF 1.0)*, NIST AI 100-1, gennaio 2023.
 - DOI: `10.6028/NIST.AI.100-1`.
+- Fonte ufficiale: https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf
 - Sostiene: gestione del rischio lungo il ciclo di vita e funzioni `GOVERN`, `MAP`, `MEASURE`, `MANAGE`.
 - Limite: è un framework volontario e non prescrive una singola pipeline tecnica.
 

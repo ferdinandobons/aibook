@@ -6,11 +6,13 @@ Repository sorgente di un manuale tecnico in italiano, dai fondamenti matematici
 
 - Opera unica e continua.
 - 14 parti stabili.
-- 98 capitoli pianificati.
+- 98 capitoli materializzati e revisionati come candidature tecniche.
 - 12 appendici.
 - Branch canonico: `main`.
-- Produzione: `feature/full-book-production`, pull request `#2`.
-- Ultima ricerca approfondita globale: 30 luglio 2026.
+- Stato corrente: revisione editoriale, autoriale e fattuale ancora aperta.
+- Verifica locale: `616` test superati in `166` file di test e `311/311` file Python compilati in memoria.
+- Dossier fonti: `419` fonti uniche e `502` collegamenti fonte-claim nel report di verifica; `0` record richiedono ancora un URL o un record primario.
+- Ultimo audit globale: 3 agosto 2026.
 
 ## Artefatti
 
@@ -30,7 +32,7 @@ Non contiene render raster delle pagine complete o mockup dell'impaginazione.
 1. [`GUIDELINE.md`](GUIDELINE.md), entry point operativo;
 2. [`docs/README.md`](docs/README.md), mappa della documentazione;
 3. [`PROGRESS.md`](PROGRESS.md), stato corrente;
-4. [`BOOK_PRODUCTION.md`](BOOK_PRODUCTION.md), piano seriale;
+4. [`BOOK_PRODUCTION.md`](BOOK_PRODUCTION.md), workflow e stato della produzione;
 5. [`docs/01_INDICE_EDITORIALE.md`](docs/01_INDICE_EDITORIALE.md), indice completo.
 
 ## Documentazione canonica
@@ -46,12 +48,9 @@ Non contiene render raster delle pagine complete o mockup dell'impaginazione.
 
 ## Stato dei capitoli
 
-- Capitolo 1, `CH-P01-AI-FIELD`: candidatura completa `0.4.0-rc3`.
-- Capitolo 2, `CH-P01-HISTORY`: candidatura completa `0.2.0-rc1`.
-- Capitolo 3, `CH-P01-LIFECYCLE`: ricerca aperta.
-- Capitolo 28, `CH-P06-ATTENTION`: candidatura completa `0.6.0-rc6`.
+Tutti i 98 capitoli hanno testo, fonti, claim, codice, test, due visuali candidate, alt text e audit dedicati. L'audit strutturale, editoriale e di allineamento semantico copre `98/98` capitoli; le immagini PNG attive sono `196` per i capitoli e `208` includendo le 12 appendici, tutte referenziate. Le composizioni coprono famiglie diverse in base al concetto, tra cui pipeline, branch, chart, architecture, matrix, loop, timeline, scatter, compare, manifest, queue, graph, funnel, threat e checklist. Il report `docs/source_verification_2026-08-03.json` conserva l'esito dell'accesso alle fonti e i relativi locator.
 
-Le candidature complete hanno testo, fonti, codice, visuali e audit. Le figure conservano il nome `candidate-vN.png` finché non vengono approvate dall'autore.
+La candidatura tecnica non equivale ancora ad approvazione editoriale: restano aperte lettura ad alta voce, verifica autoriale delle figure, ricontrollo fattuale delle fonti sensibili e congelamento. Le figure conservano il nome `candidate-vN.png` finché non vengono approvate dall'autore.
 
 ## Produzione visuale
 

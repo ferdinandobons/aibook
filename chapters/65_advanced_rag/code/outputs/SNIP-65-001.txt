@@ -1,0 +1,1 @@
+{"invariant": "multi-hop retrieval records the path rather than only the final context", "path": ["q1", "d1", "q2", "d2"]}

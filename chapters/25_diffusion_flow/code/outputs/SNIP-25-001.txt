@@ -1,0 +1,1 @@
+{"invariant": "the sampler uses the same noise schedule as the forward process", "noise": [0.316228, 0.707107, 0.948683], "signal": [0.948683, 0.707107, 0.316228]}

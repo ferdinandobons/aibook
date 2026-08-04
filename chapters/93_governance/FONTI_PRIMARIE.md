@@ -1,44 +1,74 @@
 # Fonti primarie e autorevoli. Capitolo 93
 
-- Ultima verifica: 2 agosto 2026
-- Le fonti quantitative restano limitate ai setup dichiarati.
+- Data di consultazione: 3 agosto 2026
+- Routing semantico: capitolo 93 -> tema `governance`.
+- Perimetro: definizioni, meccanismi e limiti portanti del capitolo.
+- Regola: risultati numerici locali restano distinti dalle evidenze sperimentali delle fonti.
 
 ## SRC-93-001
 
-NIST, Artificial Intelligence Risk Management Framework
-
-URL: https://www.nist.gov/itl/ai-risk-management-framework
-
-Uso: definizioni e meccanismi nel perimetro del capitolo.
-
-Limite: nessuna generalizzazione automatica oltre il setup della fonte.
+- Titolo o riferimento: NIST, Artificial Intelligence Risk Management Framework.
+- Autori o organizzazione: NIST.
+- Tipo: standard o documentazione ufficiale.
+- Data: data della revisione consultata.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- URL o identificatore: https://www.nist.gov/itl/ai-risk-management-framework
+- Data di consultazione: 3 agosto 2026.
+- Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
+- Sezioni rilevanti: Abstract / pagina iniziale; AI Risk Management Framework; NIST Risk Management Framework Aims to Improve Trustworthiness of Artificial Intelligence; NIST Seeks Comments on AI Risk Management Framework Guidance, Workshop Date Set.
+- Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
+- Affermazioni sostenibili: Owner, sviluppatore, deployer, utente e fornitore hanno controlli e informazioni differenti. Segnalazione, classificazione, rollback e comunicazione collegano monitoraggio e governance.
+- Limiti: non autorizza generalizzazioni a ogni modello, dataset, implementazione o prodotto.
+- Divergenze note: eventuali differenze di obiettivo, dataset o implementazione vanno mantenute separate nel testo.
 
 ## SRC-93-002
 
-Ribeiro et al., Model Cards for Model Reporting
-
-URL: https://dl.acm.org/doi/10.1145/3287560.3287596
-
-Uso: definizioni e meccanismi nel perimetro del capitolo.
-
-Limite: nessuna generalizzazione automatica oltre il setup della fonte.
+- Titolo o riferimento: NIST, Artificial Intelligence Risk Management Framework: Generative AI Profile.
+- Autori o organizzazione: NIST.
+- Tipo: standard o documentazione ufficiale.
+- Data: data della revisione consultata.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- URL o identificatore: https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence
+- Data di consultazione: 3 agosto 2026.
+- Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
+- Sezioni rilevanti: Abstract / pagina iniziale; Artificial Intelligence Risk Management Framework: Generative Artificial Intelligence Profile.
+- Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
+- Affermazioni sostenibili: NIST AI RMF organizza govern, map, measure e manage.
+- Limiti: non autorizza generalizzazioni a ogni modello, dataset, implementazione o prodotto.
+- Divergenze note: eventuali differenze di obiettivo, dataset o implementazione vanno mantenute separate nel testo.
 
 ## SRC-93-003
 
-Zou et al., Universal and Transferable Adversarial Attacks on Aligned Language Models
-
-URL: https://arxiv.org/abs/2307.15043
-
-Uso: definizioni e meccanismi nel perimetro del capitolo.
-
-Limite: nessuna generalizzazione automatica oltre il setup della fonte.
+- Titolo o riferimento: European Union, Regulation (EU) 2024/1689.
+- Autori o organizzazione: European Union.
+- Tipo: paper o report tecnico.
+- Data: 2024.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- URL o identificatore: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32024R1689
+- Data di consultazione: 3 agosto 2026.
+- Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
+- Sezioni rilevanti: Abstract / pagina iniziale; Need help?; Follow us; Legal.
+- Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
+- Affermazioni sostenibili: Obblighi dipendono da giurisdizione, ruolo e uso.
+- Limiti: non autorizza generalizzazioni a ogni modello, dataset, implementazione o prodotto.
+- Divergenze note: eventuali differenze di obiettivo, dataset o implementazione vanno mantenute separate nel testo.
 
 ## SRC-93-004
 
-C2PA, Technical Specification
+- Titolo o riferimento: Schwartz et al., Green AI.
+- Autori o organizzazione: Schwartz et al..
+- Tipo: paper o report tecnico.
+- Data: data della revisione consultata.
+- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- URL o identificatore: https://arxiv.org/abs/1907.10597
+- Data di consultazione: 3 agosto 2026.
+- Verifica d'accesso: opened-partial; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
+- Sezioni rilevanti: Abstract / pagina iniziale; Green AI; 1 Introduction and Motivation; 2 Red AI.
+- Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
+- Affermazioni sostenibili: Compute, energia, acqua, hardware e ciclo di vita richiedono confini di misura e confronti normalizzati per risultato utile.
+- Limiti: non autorizza generalizzazioni a ogni modello, dataset, implementazione o prodotto.
+- Divergenze note: eventuali differenze di obiettivo, dataset o implementazione vanno mantenute separate nel testo.
 
-URL: https://c2pa.org/specifications/specifications/
+## Mappa d'uso
 
-Uso: definizioni e meccanismi nel perimetro del capitolo.
-
-Limite: nessuna generalizzazione automatica oltre il setup della fonte.
+Le sezioni citano il proprio claim vicino al punto sostenuto. Esempi, derivazioni e output del codice locale sono marcati separatamente.

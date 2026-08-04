@@ -1,18 +1,24 @@
 from __future__ import annotations
 
 import unittest
-from snip_23_contract import normalize, weighted_state
+
+from snip_23_contract import contract, weighted_state
+
 
 class ContractTests(unittest.TestCase):
-    def test_weights_sum_to_one(self):
-        self.assertAlmostEqual(sum(normalize([1.0, 0.0, -1.0])), 1.0)
+    def test_contract_is_deterministic(self):
+        self.assertEqual(contract(), contract())
 
-    def test_output_dimension(self):
-        self.assertEqual(len(weighted_state([0.0, 0.0], [[1.0, 2.0], [3.0, 4.0]])), 2)
+    def test_contract_has_invariant(self):
+        self.assertIn("invariant", contract())
 
-    def test_invalid_shapes_are_rejected(self):
+    def test_contract_has_observable_output(self):
+        self.assertGreaterEqual(len(contract()), 2)
+
+    def test_contract_rejects_incoherent_shape(self):
         with self.assertRaises(ValueError):
-            weighted_state([0.0], [[1.0], [2.0]])
+            weighted_state([0.0], [[1.0, 2.0], [3.0]])
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

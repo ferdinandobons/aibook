@@ -1,0 +1,1 @@
+{"invariant": "DPO uses a policy-versus-reference margin", "loss": 0.554355, "preference_logit": 0.3}

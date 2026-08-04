@@ -13,10 +13,10 @@
 | `CLM-SEARCH-003` | BFS trova un cammino con il minor numero di archi quando ogni azione ha costo uniforme. | Risultato standard; AIMA | Non minimizza costi arbitrari. |
 | `CLM-SEARCH-004` | Uniform-cost espande il nodo di frontiera con costo accumulato minimo. | Dijkstra 1959; AIMA | Richiede costi non negativi per la garanzia standard. |
 | `CLM-SEARCH-005` | A* usa `f(n)=g(n)+h(n)`. | Hart, Nilsson e Raphael 1968 | La gestione dei duplicati è parte dell'algoritmo completo. |
-| `CLM-SEARCH-006` | Una euristica ammissibile non sovrastima il costo ottimo rimanente. | Hart et al.; AIMA | Proprietà rispetto a un problema e a un goal specifici. |
-| `CLM-SEARCH-007` | Una euristica consistente soddisfa una disuguaglianza triangolare lungo ogni transizione. | Hart et al.; AIMA | La consistenza implica ammissibilità nelle condizioni standard. |
+| `CLM-SEARCH-006` | Un'euristica ammissibile non sovrastima il costo ottimo rimanente. | Hart et al.; AIMA | Proprietà rispetto a un problema e a un goal specifici. |
+| `CLM-SEARCH-007` | Un'euristica consistente soddisfa una disuguaglianza triangolare lungo ogni transizione. | Hart et al.; AIMA | La consistenza implica ammissibilità nelle condizioni standard. |
 | `CLM-SEARCH-008` | Con costi non negativi e gestione appropriata della frontiera, A* graph search con euristica consistente restituisce un cammino ottimo. | Hart et al.; AIMA | Non vale per qualunque implementazione denominata A*. |
-| `CLM-SEARCH-009` | Una euristica più informativa può ridurre le espansioni, ma il vantaggio dipende anche dai pareggi e dal grafo. | Teoria A*; esempio eseguito | Non è una garanzia di riduzione per ogni istanza. |
+| `CLM-SEARCH-009` | Un'euristica più informativa può ridurre le espansioni, ma il vantaggio dipende anche dai pareggi e dal grafo. | Teoria A*; esempio eseguito | Non è una garanzia di riduzione per ogni istanza. |
 | `CLM-SEARCH-010` | STRIPS rappresenta azioni tramite condizioni e cambiamenti dello stato per cercare una sequenza che soddisfi il goal. | Fikes e Nilsson 1971 | Le formulazioni moderne possono essere più espressive. |
 | `CLM-SEARCH-011` | PDDL è stato introdotto per descrivere domini e problemi di planning in una notazione comparabile. | McDermott et al. 1998 | Versioni successive estendono la lingua. |
 | `CLM-SEARCH-012` | Il principio di Bellman collega una soluzione ottima a sottosoluzioni ottime. | Bellman 1957 | Richiede una decomposizione appropriata dello stato. |

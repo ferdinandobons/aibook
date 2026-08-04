@@ -1,8 +1,9 @@
-test_invalid_shapes_are_rejected (test_83_eval_design.ContractTests.test_invalid_shapes_are_rejected) ... ok
-test_output_dimension (test_83_eval_design.ContractTests.test_output_dimension) ... ok
-test_weights_sum_to_one (test_83_eval_design.ContractTests.test_weights_sum_to_one) ... ok
+test_contract_has_invariant (test_83_contract.ContractTests.test_contract_has_invariant) ... ok
+test_contract_has_observable_output (test_83_contract.ContractTests.test_contract_has_observable_output) ... ok
+test_contract_is_deterministic (test_83_contract.ContractTests.test_contract_is_deterministic) ... ok
+test_contract_rejects_incoherent_shape (test_83_contract.ContractTests.test_contract_rejects_incoherent_shape) ... ok
 
 ----------------------------------------------------------------------
-Ran 3 tests in 0.000s
+Ran 4 tests in 0.000s
 
 OK

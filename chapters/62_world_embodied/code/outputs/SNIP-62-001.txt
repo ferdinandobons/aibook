@@ -1,0 +1,1 @@
+{"action": "move", "invariant": "the world transition exposes state and action consequences", "next_state": {"battery": 1, "position": 1}}

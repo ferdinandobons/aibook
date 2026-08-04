@@ -15,7 +15,7 @@ deferred: modelli generativi completi, contrastive learning avanzato, distillazi
 
 # Capitolo 13. Apprendimento non supervisionato e auto-supervisionato
 
-Nel capitolo precedente ogni esempio arrivava con un target esterno. La richiesta «Il pacco non è arrivato» poteva essere accompagnata da una label come `urgente` oppure `non urgente`, e quella label guidava direttamente la loss. Molti dati disponibili in un sistema reale, però, non hanno questa forma. Possiamo possedere milioni di messaggi, immagini, eventi o documenti senza una annotazione affidabile per ciascuno.
+Nel capitolo precedente ogni esempio arrivava con un target esterno. La richiesta «Il pacco non è arrivato» poteva essere accompagnata da una label come `urgente` oppure `non urgente`, e quella label guidava direttamente la loss. Molti dati disponibili in un sistema reale, però, non hanno questa forma. Possiamo possedere milioni di messaggi, immagini, eventi o documenti senza un'annotazione affidabile per ciascuno.
 
 Rimuovere le label non rimuove il problema di apprendimento. Rimuove soltanto un tipo di segnale. Dobbiamo ancora scegliere quali relazioni rendere costose, quali trasformazioni considerare equivalenti e quale parte del dato chiedere al modello di prevedere.
 
@@ -204,7 +204,7 @@ Non esiste quindi un solo rimedio universale. Ogni metodo deve spiegare quale pa
 
 ## Clustering e pseudo-label nel training neurale
 
-Clustering e reti neurali possono essere combinati. DeepCluster alterna il clustering delle feature prodotte da una rete e l'uso delle assegnazioni ottenute come target per aggiornare i pesi [Caron et al., 2018]. Le assegnazioni vengono spesso chiamate **pseudo-label** perché non provengono da una annotazione umana, ma entrano in un passo supervisionato interno.
+Clustering e reti neurali possono essere combinati. DeepCluster alterna il clustering delle feature prodotte da una rete e l'uso delle assegnazioni ottenute come target per aggiornare i pesi [Caron et al., 2018]. Le assegnazioni vengono spesso chiamate **pseudo-label** perché non provengono da un'annotazione umana, ma entrano in un passo supervisionato interno.
 
 Il ciclo crea una dipendenza reciproca:
 

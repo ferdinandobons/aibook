@@ -1,0 +1,1 @@
+{"invariant": "cache reuse preserves token position and request ownership", "request_lengths": {"r1": 3, "r2": 3}, "shared_prefix": 2}

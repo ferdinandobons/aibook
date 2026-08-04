@@ -1,3 +1,3 @@
-# Alt text `LLM-01`
+# Alt text LLM-01
 
-Diagramma tecnico su sfondo bianco dedicato a dal prefisso al token successivo. Il token scelto diventa parte del nuovo prefisso
+Diagramma LLM-01 del Capitolo 31, famiglia matrix. Domanda: Il diagramma segue il passaggio: In-context learning, decoding e calibrazione. L'input è prefisso tokenizzato, esempi e temperatura dichiarati, l'output è logits, risposta e confidenza misurabile; il vincolo da controllare è che probabilità, comportamento osservato e correttezza non sono sinonimi La composizione usa i passaggi Distribuzione del token successivo, Prompt e dimostrazioni, Decoding, Calibrazione, Modello e sistema.
