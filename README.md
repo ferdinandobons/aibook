@@ -60,7 +60,7 @@ Le immagini vengono progettate secondo [`docs/03_VISUALI.md`](docs/03_VISUALI.md
 scripts/generate_book_visuals.py
 scripts/generate_history_visuals.py
 scripts/integrate_generated_visuals.py
-.github/workflows/generate-book-visuals.yml
+.github/workflows/ci.yml
 ```
 
 Ogni figura usa sfondo bianco puro, testo contenuto, collegamenti non ambigui, alt text e audit dedicato.

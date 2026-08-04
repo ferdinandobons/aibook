@@ -97,7 +97,7 @@ Le immagini:
 - vengono revisionate e rigenerate;
 - diventano `final.png` soltanto dopo approvazione tecnica e autoriale.
 
-I generatori raster correnti sono in `../scripts/`; il workflow `generate-book-visuals.yml` produce e verifica i PNG candidati nel branch canonico.
+I generatori raster correnti sono in `../scripts/`. La CI minimale in `../.github/workflows/ci.yml` controlla struttura, riferimenti alle immagini e sintassi Python; la generazione delle figure resta un'operazione locale esplicita.
 
 ## Codice
 

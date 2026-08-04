@@ -1,0 +1,69 @@
+name: Minimal book checks
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Check book structure and image references
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          root = Path('.')
+          chapters = sorted(root.joinpath('chapters').glob('[0-9][0-9]_*/CHAPTER.md'))
+          appendices = sorted(root.joinpath('appendices').glob('*/APPENDIX.md'))
+          assert len(chapters) == 98, f'expected 98 chapters, found {len(chapters)}'
+          assert len(appendices) == 12, f'expected 12 appendices, found {len(appendices)}'
+
+          documents = chapters + appendices
+          references = []
+          for document in documents:
+              text = document.read_text(encoding='utf-8')
+              assert text.strip(), document
+              assert '—' not in text, document
+              for relative in re.findall(r'!\[[^]]*\]\(([^)]+\.png)\)', text):
+                  target = (document.parent / relative).resolve()
+                  assert target.is_file(), f'{document}: missing {relative}'
+                  references.append(target)
+
+          assert len(references) == 208, f'expected 208 image references, found {len(references)}'
+          assert len(set(references)) == len(references), 'duplicate active image reference'
+          print(f'OK: {len(chapters)} chapters, {len(appendices)} appendices, {len(references)} images')
+          PY
+
+      - name: Check Python syntax
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import ast
+          from pathlib import Path
+
+          files = sorted(Path('.').rglob('*.py'))
+          for path in files:
+              ast.parse(path.read_text(encoding='utf-8'), filename=str(path))
+          print(f'OK: parsed {len(files)} Python files')
+          PY
