@@ -1,81 +1,30 @@
-# Piano interno. Capitolo 47
+# Piano editoriale. Capitolo 47
 
-- Domanda centrale: quale contratto costruisce Fine-tuning efficiente?
-- Oggetto continuo: l'aggiornamento adattivo rispetto ai pesi congelati; input guida: peso W, matrice A e B, rank e quantizzazione.
-- Prerequisito stabile: Capitolo 46, Supervised fine-tuning e instruction tuning.
-- Gap: adapter, LoRA, prefix o QLoRA.
-- Output consegnato: delta W e checkpoint adattatore; consumer successivo: Capitolo 48, Preferenze, reward model e RLHF.
-- Invariante principale: il delta non è il modello completo e va valutato sullo stesso base model.
-- Visuali: PEFT-01 e PEFT-02, con famiglie compositive variabili.
-- Snippet: code/snip_47_contract.py; output: code/outputs/SNIP-47-001.txt.
-- Gate aperti: revisione autoriale, lettura ad alta voce e approvazione finale delle visuali.
+## Obiettivo didattico
 
-## Transizione 1. Parametri congelati e adattamento
+Seguire **Fine-tuning efficiente** da peso W, matrice A e B, rank e quantizzazione a delta W e checkpoint adattatore, osservando adapter, LoRA, prefix o QLoRA senza oltrepassare questo limite: il delta non è il modello completo e va valutato sullo stesso base model.
 
-- Ultima affermazione stabile: l'aggiornamento adattivo rispetto ai pesi congelati.
-- Concetto nuovo: PEFT modifica un sottoinsieme di parametri o introduce moduli piccoli, lasciando invariata la maggior parte del checkpoint.
-- Input e shape: peso W, matrice A e B, rank e quantizzazione.
-- Operazione: adapter, LoRA, prefix o QLoRA.
-- Output e shape: delta W e checkpoint adattatore.
-- Che cosa cambia: il passaggio specifico di «Parametri congelati e adattamento».
-- Invariante: il delta non è il modello completo e va valutato sullo stesso base model.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: delta W = B A con rank uno su una matrice piccola; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Adapter.
-- Prova: SRC-47-001 e sezione pubblica corrispondente.
+## Prerequisiti reali
 
-## Transizione 2. Adapter
+- Capitolo 5: Algebra lineare, vettori e tensori
+- Capitolo 46: Supervised fine-tuning e instruction tuning
 
-- Ultima affermazione stabile: l'aggiornamento adattivo rispetto ai pesi congelati.
-- Concetto nuovo: Blocchi bottleneck vengono inseriti nel percorso residuale. Posizione, dimensione e inizializzazione determinano l'interfaccia con il modello base.
-- Input e shape: peso W, matrice A e B, rank e quantizzazione.
-- Operazione: adapter, LoRA, prefix o QLoRA.
-- Output e shape: delta W e checkpoint adattatore.
-- Che cosa cambia: il passaggio specifico di «Adapter».
-- Invariante: il delta non è il modello completo e va valutato sullo stesso base model.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: delta W = B A con rank uno su una matrice piccola; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: LoRA.
-- Prova: SRC-47-002 e sezione pubblica corrispondente.
+## Percorso della lezione
 
-## Transizione 3. LoRA
+1. **Parametri congelati e adattamento.** PEFT modifica un sottoinsieme di parametri o introduce moduli piccoli, lasciando invariata la maggior parte del checkpoint. Prova: SRC-47-001.
+2. **Adapter.** Blocchi bottleneck vengono inseriti nel percorso residuale. Posizione, dimensione e inizializzazione determinano l'interfaccia con il modello base. Prova: SRC-47-002.
+3. **LoRA.** Un aggiornamento di rango ridotto fattorizza la variazione di una matrice come BA e può essere fuso nei pesi per l'inference. Prova: SRC-47-003.
+4. **Prompt, prefix e IA3.** Soft prompt, prefix key-value e vettori di scaling modificano punti diversi del calcolo e non sono equivalenti. Prova: SRC-47-004.
+5. **QLoRA e compatibilità.** Il modello base quantizzato riduce memoria, mentre gli adapter restano addestrabili. Formato, tokenizer e architettura devono corrispondere. Prova: SRC-47-001.
 
-- Ultima affermazione stabile: l'aggiornamento adattivo rispetto ai pesi congelati.
-- Concetto nuovo: Un aggiornamento di rango ridotto fattorizza la variazione di una matrice come BA e può essere fuso nei pesi per l'inference.
-- Input e shape: peso W, matrice A e B, rank e quantizzazione.
-- Operazione: adapter, LoRA, prefix o QLoRA.
-- Output e shape: delta W e checkpoint adattatore.
-- Che cosa cambia: il passaggio specifico di «LoRA».
-- Invariante: il delta non è il modello completo e va valutato sullo stesso base model.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: delta W = B A con rank uno su una matrice piccola; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Prompt, prefix e IA3.
-- Prova: SRC-47-003 e sezione pubblica corrispondente.
+## Prove e artefatti
 
-## Transizione 4. Prompt, prefix e IA3
+- riferimento minimo: `code/snip_47_contract.py`; test: `code/test_47_contract.py`; output: `code/outputs/SNIP-47-001.txt`.
+- visuali candidate: PEFT-01, PEFT-02; le domande pedagogiche sono distinte e l'approvazione autoriale resta aperta.
+- fonti: `FONTI_PRIMARIE.md`; corrispondenza claim-fonte: `CLAIMS.md`.
 
-- Ultima affermazione stabile: l'aggiornamento adattivo rispetto ai pesi congelati.
-- Concetto nuovo: Soft prompt, prefix key-value e vettori di scaling modificano punti diversi del calcolo e non sono equivalenti.
-- Input e shape: peso W, matrice A e B, rank e quantizzazione.
-- Operazione: adapter, LoRA, prefix o QLoRA.
-- Output e shape: delta W e checkpoint adattatore.
-- Che cosa cambia: il passaggio specifico di «Prompt, prefix e IA3».
-- Invariante: il delta non è il modello completo e va valutato sullo stesso base model.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: delta W = B A con rank uno su una matrice piccola; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: QLoRA e compatibilità.
-- Prova: SRC-47-004 e sezione pubblica corrispondente.
+## Gate aperti
 
-## Transizione 5. QLoRA e compatibilità
-
-- Ultima affermazione stabile: l'aggiornamento adattivo rispetto ai pesi congelati.
-- Concetto nuovo: Il modello base quantizzato riduce memoria, mentre gli adapter restano addestrabili. Formato, tokenizer e architettura devono corrispondere.
-- Input e shape: peso W, matrice A e B, rank e quantizzazione.
-- Operazione: adapter, LoRA, prefix o QLoRA.
-- Output e shape: delta W e checkpoint adattatore.
-- Che cosa cambia: il passaggio specifico di «QLoRA e compatibilità».
-- Invariante: il delta non è il modello completo e va valutato sullo stesso base model.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: delta W = B A con rank uno su una matrice piccola; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Preferenze, reward model e RLHF.
-- Prova: SRC-47-001 e sezione pubblica corrispondente.
+- lettura editoriale finale da parte dell'autore;
+- approvazione delle visuali nel contesto impaginato;
+- benchmark esterni solo quando il capitolo formula un claim di scala o di produzione.

@@ -14,8 +14,8 @@ La documentazione è organizzata per tema in pochi file canonici. I materiali me
 - Opera: unica e continua
 - Capitoli pianificati: 98
 - Appendici: 12
-- Ultima passata di audit globale: **3 agosto 2026**
-- Ultimo audit di continuità: **3 agosto 2026**
+- Ultima passata di audit globale: **4 agosto 2026**
+- Ultimo audit di continuità: **4 agosto 2026**
 
 ## Ordine di lettura
 
@@ -112,7 +112,8 @@ Ogni capitolo tecnico include almeno uno snippet eseguibile, salvo eccezione mot
 - Audit editoriale: `98/98` capitoli senza problemi automatici, `0` immagini problematiche, `0` formule non etichettate e `0` paragrafi duplicati;
 - Profondità misurata: `2.159-3.402` parole nell'audit editoriale e `2.186-3.670` nell'audit generale;
 - Visuali: `15` famiglie compositive principali, differenziate per concetto e non applicate come immagine standard a ogni capitolo;
-- Codice: `166/166` test superati e `311/311` file Python compilati in memoria;
+- Codice: `464` test superati in `115` file e `267/267` file Python analizzati sintatticamente;
+- Policy Python: `94/98` capitoli con riferimento eseguibile; eccezioni motivate nei capitoli 20, 30, 93 e 98;
 - Fonti: `419` fonti uniche e `502` collegamenti fonte-claim; `332` con contesto aperto, `127` con contesto parziale e `43` confermati tramite accesso web ufficiale;
 - stato editoriale: candidature tecniche complete, non ancora approvate per la pubblicazione.
 

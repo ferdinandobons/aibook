@@ -1,3 +1,3 @@
-# Alt text DESIGN-02
+# Testo alternativo
 
-Diagramma DESIGN-02 del Capitolo 83, famiglia funnel. Domanda: Il diagramma segue il passaggio: Scelta della metrica, giudice, slice e report. L'input è task, dataset, predizioni, riferimento e metriche, l'output è stima, intervallo, errori e decisione; il vincolo da controllare è che una metrica risponde solo alla domanda per cui è stata progettata La composizione usa i passaggi Decisione e claim, Task e dataset, Metriche, Giudici modello, Report.
+DESIGN-02, Progettare una valutazione. Quale controllo collega «Giudici modello» a «Report» senza superare il limite dichiarato? La composizione selection funnel collega «Giudici modello», «Report». L'input è task, dataset, predizioni, riferimento e metriche; l'output è stima, intervallo, errori e decisione. Il limite esplicito è: una metrica risponde solo alla domanda per cui è stata progettata.

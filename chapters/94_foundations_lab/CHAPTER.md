@@ -4,133 +4,158 @@ part_id: P14
 order_key: 940
 title: Percorso pratico dai fondamenti
 maturity: CORE
-status: candidatura completa in revisione autoriale
-version: 0.4.0-draft2
-last_source_check: 3 agosto 2026
+status: revisione editoriale v2, approvazione autoriale aperta
+version: 0.5.0-draft3
+last_source_check: 4 agosto 2026
 environment: Python 3.13.12, CPU
-deferred: benchmark applicativi, varianti non necessarie al contratto centrale e approvazione autoriale
+code_policy: reference
+deferred: benchmark applicativi non eseguiti e approvazione autoriale delle visuali
 -->
 
 # Capitolo 94. Percorso pratico dai fondamenti
 
-Una frase plausibile non basta a spiegare percorso pratico dai fondamenti. L'oggetto è un esperimento didattico con ambiente e artefatti dichiarati; riprendiamo la richiesta «Il pacco non è arrivato» come contesto comune, partiamo da un input piccolo, rendiamo visibile l'operazione e fissiamo che cosa non possiamo concludere.
+La domanda guida di questa lezione è come collegare «Ambiente riproducibile» e «Report» senza perdere il contratto tecnico di percorso pratico dai fondamenti. L'oggetto osservato è un esperimento didattico con ambiente e artefatti dichiarati. Il contratto locale è: input, seed, dataset piccolo, config, codice e versione; operazione, run, test, valutazione e report; output, loss, metriche, manifest e limite. Il caso guida è questo: La stessa configurazione seed=7, split=fixed e dtype=float32 produce un digest ripetibile. Il confine da mantenere esplicito è: un run locale non equivale a una prova generale.
+
+![Percorso pratico dai fondamenti: checklist](../../assets/chapters/94_foundations_lab/LAB-01/candidate-v48.png)
+
+La prima figura segue il percorso da «Ambiente riproducibile» a «Modello e loss».
+
 
 ## Ambiente riproducibile
 
 Python, dipendenze, seed e struttura del progetto vengono fissati prima degli esperimenti. [SRC-94-001]
 
-Il caso minimo di «Ambiente riproducibile» si presenta così: la stessa configurazione seed=7, split=fixed e dtype=float32 produce un digest ripetibile. Non lo usiamo come decorazione: serve a rendere osservabile la frase «Python, dipendenze, seed e struttura del progetto vengono fissati prima degli esperimenti».
+Un laboratorio è utile quando il risultato può essere ricostruito.
 
-Per ricostruire «Ambiente riproducibile» annotiamo l'input «seed, dataset piccolo, config, codice e versione», poi l'operazione «run, test, valutazione e report», infine l'output «loss, metriche, manifest e limite». Questa sequenza impedisce di scambiare una forma compatibile per il comportamento descritto dalla fonte. Il controllo parte da «Python, dipendenze, seed e struttura del progetto vengono fissati prima degli esperimenti».
+**Caso da seguire.** La stessa configurazione seed=7, split=fixed e dtype=float32 produce un digest ripetibile.
 
-Il risultato è interpretabile soltanto se codice, dati, configurazione, ambiente e output restano collegati. La scala del laboratorio rende il percorso leggibile, ma il trasferimento richiede una nuova misura. Per «Ambiente riproducibile» il controllo cambia una sola premessa della frase «Python, dipendenze, seed e struttura del progetto vengono fissati prima degli esperimenti» e conserva input, output e criterio di successo, così la differenza resta attribuibile. La verifica resta ancorata a «Python, dipendenze, seed e struttura del progetto vengono fissati prima degli esperimenti». [SRC-94-001]
+**Controllo.** Esegui il caso con ambiente, seed e comando registrati; il risultato deve sopravvivere fuori dalla sessione interattiva.
 
-Il punto didattico di «Ambiente riproducibile» è separare ciò che la fonte afferma da ciò che il piccolo caso illustra. L'output «loss, metriche, manifest e limite» mostra il contratto locale, ma non sostituisce una misura sul sistema completo.
-
-Il controllo minimo di «Ambiente riproducibile» confronta il caso dichiarato con una variazione che rompe la sua ipotesi. Se la failure non è distinguibile dall'esito valido, manca un'osservazione nel contratto di protocollo, slice e decisione. Da «Ambiente riproducibile» portiamo l'output «loss, metriche, manifest e limite»; non portiamo invece una conclusione oltre il caso locale.
 
 ## Dataset piccolo
 
 Un dataset controllabile permette di vedere preprocessing, split, batch e leakage. [SRC-94-002]
 
-Prima del nome tecnico fissiamo la situazione: consideriamo un dataset di quattro record con split e checksum conservati nel manifest. Da qui possiamo leggere la conseguenza dichiarata da «Un dataset controllabile permette di vedere preprocessing, split, batch e leakage».
+**Caso da seguire.** Un dataset di quattro record con split e checksum conservati nel manifest.
 
-Nel contratto locale, l'input «seed, dataset piccolo, config, codice e versione» entra, l'operazione «run, test, valutazione e report» modifica il percorso e l'output «loss, metriche, manifest e limite» è ciò che osserviamo. Qui cambia soprattutto il passaggio «Dataset piccolo»; resta da controllare che un run locale non equivale a una prova generale. La domanda locale è «Un dataset controllabile permette di vedere preprocessing, split, batch e leakage».
+**Controllo.** Per «Dataset piccolo» conserva almeno un artefatto verificabile e un caso fallito, insieme alla configurazione che li ha prodotti.
 
-Il risultato è interpretabile soltanto se codice, dati, configurazione, ambiente e output restano collegati. La scala del laboratorio rende il percorso leggibile, ma il trasferimento richiede una nuova misura. Per «Dataset piccolo» il controllo cambia una sola premessa della frase «Un dataset controllabile permette di vedere preprocessing, split, batch e leakage» e conserva input, output e criterio di successo, così la differenza resta attribuibile. La verifica resta ancorata a «Un dataset controllabile permette di vedere preprocessing, split, batch e leakage». [SRC-94-002]
-
-La lettura va fatta in ordine: prima il caso, poi la trasformazione, quindi la conseguenza. Il piccolo risultato resta un'illustrazione di «Un dataset controllabile permette di vedere preprocessing, split, batch e leakage», non una promessa generale.
-
-La prova di «Dataset piccolo» conserva input, operazione e output; poi esplicita quale parte di «Un dataset controllabile permette di vedere preprocessing, split, batch e leakage» non è stata misurata. Così il test separa l'evidenza dall'inferenza. Il passaggio successivo, «Modello e loss», potrà cambiare una sola condizione, dichiarando il nuovo setup prima di interpretare il risultato.
 
 ## Modello e loss
 
 Una baseline lineare precede la rete. Shape, logits e loss vengono verificati con test. [SRC-94-003]
 
-Per capire «Modello e loss» partiamo da questo caso: un forward che produce loss su target dichiarati e un controllo negativo di shape. Il caso rende osservabile il punto centrale: «Una baseline lineare precede la rete».
+**Caso da seguire.** Un forward che produce loss su target dichiarati e un controllo negativo di shape.
 
-La sezione usa l'input «seed, dataset piccolo, config, codice e versione» come punto di partenza e l'output «loss, metriche, manifest e limite» come traccia d'uscita. La trasformazione concreta è «run, test, valutazione e report»; il caso non è completo se non dichiariamo anche che un run locale non equivale a una prova generale. La condizione da isolare è «Una baseline lineare precede la rete».
+**Controllo.** Scrivi prima l'esito atteso, poi confrontalo con output e log. Ogni differenza deve restare visibile nel report.
 
-Il risultato è interpretabile soltanto se codice, dati, configurazione, ambiente e output restano collegati. La scala del laboratorio rende il percorso leggibile, ma il trasferimento richiede una nuova misura. Per «Modello e loss» il controllo cambia una sola premessa della frase «Una baseline lineare precede la rete» e conserva input, output e criterio di successo, così la differenza resta attribuibile. La verifica resta ancorata a «Una baseline lineare precede la rete». [SRC-94-003]
 
-Se cambiamo una premessa, dobbiamo riaprire l'interpretazione. Per «Modello e loss» conserviamo l'osservazione collegata a «Una baseline lineare precede la rete» e lasciamo esplicitamente fuori ciò che non è stato misurato.
+## Esempio Python eseguito
 
-Per verificare «Modello e loss» cambiamo una sola condizione vicina alla frase «Una baseline lineare precede la rete», teniamo fermo il resto e registriamo l'output «loss, metriche, manifest e limite». Il caso negativo deve rendere riconoscibile la failure, non soltanto produrre un numero diverso. La sezione successiva, «Training e valutazione», riceve l'output «loss, metriche, manifest e limite» come base, ma dovrà formulare e verificare la propria distinzione.
+Il frammento seguente è lo stesso conservato nel repository. Usa valori piccoli perché l'obiettivo è osservare il meccanismo, non simulare una scala che non abbiamo eseguito.
 
-![Percorso pratico dai fondamenti: checklist](../../assets/chapters/94_foundations_lab/LAB-01/candidate-v48.png)
+```python
+def contract():
+    configuration = {"seed": 7, "split": "fixed", "dtype": "float32"}
+    digest = hashlib.sha256(json.dumps(configuration, sort_keys=True).encode()).hexdigest()
+    return {"configuration_digest": digest[:12], "configuration": configuration, "invariant": "a local run is reproducible only with its declared setup"}
+```
 
-La figura LAB-01 usa la famiglia checklist. Il diagramma segue il passaggio: Run, test, valutazione e report. L'input è seed, dataset piccolo, config, codice e versione, l'output è loss, metriche, manifest e limite; il vincolo da controllare è che un run locale non equivale a una prova generale.
+Esecuzione con `python snip_94_contract.py`:
+
+```text
+{"configuration": {"dtype": "float32", "seed": 7, "split": "fixed"}, "configuration_digest": "47f01c1610dd", "invariant": "a local run is reproducible only with its declared setup"}
+```
+
+Il test associato è [`code/test_94_contract.py`](code/test_94_contract.py); l'output versionato è [`code/outputs/SNIP-94-001.txt`](code/outputs/SNIP-94-001.txt).
+
+## Laboratorio completo: Training, baseline e manifest
+
+Il contratto precedente isola un solo punto. Il laboratorio seguente attraversa invece più fasi e conserva sia l'esito valido sia una failure controllata. L'estratto è identico al file eseguito.
+
+```python
+def train_classifier(data: np.ndarray, steps: int = 120, learning_rate: float = 0.2) -> dict[str, object]:
+    if steps <= 0 or learning_rate <= 0:
+        raise ValueError("steps e learning_rate devono essere positivi")
+    dataset_digest(data)  # valida shape e rende esplicito l'artefatto usato
+    features, labels = data[:, :2], data[:, 2]
+    weights = np.zeros(2, dtype=np.float64)
+    bias = 0.0
+
+    initial_loss = binary_cross_entropy(sigmoid(features @ weights + bias), labels)
+    for _ in range(steps):
+        probabilities = sigmoid(features @ weights + bias)
+        residual = probabilities - labels
+        weights -= learning_rate * (features.T @ residual) / len(features)
+        bias -= learning_rate * float(np.mean(residual))
+
+    probabilities = sigmoid(features @ weights + bias)
+    predictions = (probabilities >= 0.5).astype(np.float64)
+    return {
+        "initial_loss": round(initial_loss, 6),
+        "final_loss": round(binary_cross_entropy(probabilities, labels), 6),
+        "accuracy": round(float(np.mean(predictions == labels)), 6),
+        "weights": weights.round(6).tolist(),
+        "bias": round(bias, 6),
+        "dataset_sha256": dataset_digest(data),
+        "rows": int(len(data)),
+    }
+```
+
+Output di `python foundations_lab.py`:
+
+```text
+{"acceptance": true, "accuracy": 1.0, "baseline_accuracy": 0.5, "bias": -0.12329, "dataset_sha256": "fc28b299e579d62c", "final_loss": 0.018584, "initial_loss": 0.693147, "rows": 6, "weights": [2.156813, 1.228259]}
+```
+
+Codice completo: [`code/foundations_lab.py`](code/foundations_lab.py); test: [`code/test_foundations_lab.py`](code/test_foundations_lab.py); output versionato: [`code/outputs/FOUNDATIONS-LAB.txt`](code/outputs/FOUNDATIONS-LAB.txt).
+
 
 ## Training e valutazione
 
 Curve, checkpoint, validation e test seguono il protocollo costruito nel libro. [SRC-94-004]
 
-Il caso minimo di «Training e valutazione» si presenta così: due run con la stessa configurazione confrontati con metriche e casi falliti. Non lo usiamo come decorazione: serve a rendere osservabile la frase «Curve, checkpoint, validation e test seguono il protocollo costruito nel libro».
+**Caso da seguire.** Due run con la stessa configurazione confrontati con metriche e casi falliti.
 
-Per ricostruire «Training e valutazione» annotiamo l'input «seed, dataset piccolo, config, codice e versione», poi l'operazione «run, test, valutazione e report», infine l'output «loss, metriche, manifest e limite». Questa sequenza impedisce di scambiare una forma compatibile per il comportamento descritto dalla fonte. Il controllo parte da «Curve, checkpoint, validation e test seguono il protocollo costruito nel libro».
+**Controllo.** Riparti da un processo pulito e ricostruisci input e ambiente prima di interpretare la metrica.
 
-Il risultato è interpretabile soltanto se codice, dati, configurazione, ambiente e output restano collegati. La scala del laboratorio rende il percorso leggibile, ma il trasferimento richiede una nuova misura. Il controllo separa raccolta di traiettorie e confronto delle policy, riportando ritorno, dispersione e vincoli come misure diverse. La verifica resta ancorata a «Curve, checkpoint, validation e test seguono il protocollo costruito nel libro». [SRC-94-004]
-
-Il punto didattico di «Training e valutazione» è separare ciò che la fonte afferma da ciò che il piccolo caso illustra. L'output «loss, metriche, manifest e limite» mostra il contratto locale, ma non sostituisce una misura sul sistema completo.
-
-Il controllo minimo di «Training e valutazione» confronta il caso dichiarato con una variazione che rompe la sua ipotesi. Se la failure non è distinguibile dall'esito valido, manca un'osservazione nel contratto di protocollo, slice e decisione. Da «Training e valutazione» portiamo l'output «loss, metriche, manifest e limite»; non portiamo invece una conclusione oltre il caso locale.
 
 ## Report
 
 Il laboratorio produce README, output, figure e limiti, non soltanto un notebook che termina senza audit. [SRC-94-001]
 
-Prima del nome tecnico fissiamo la situazione: consideriamo un report che collega comando, artefatti, output e limite del risultato. Da qui possiamo leggere la conseguenza dichiarata da «Il laboratorio produce README, output, figure e limiti, non soltanto un notebook che termina senza audit».
+**Caso da seguire.** Un report che collega comando, artefatti, output e limite del risultato.
 
-Nel contratto locale, l'input «seed, dataset piccolo, config, codice e versione» entra, l'operazione «run, test, valutazione e report» modifica il percorso e l'output «loss, metriche, manifest e limite» è ciò che osserviamo. Qui cambia soprattutto il passaggio «Report»; resta da controllare che un run locale non equivale a una prova generale. La domanda locale è «Il laboratorio produce README, output, figure e limiti, non soltanto un notebook che termina senza audit».
+**Controllo.** Distingui il risultato riprodotto dal suo trasferimento ad altra scala. Il confine è: Il laboratorio produce README, output, figure e limiti, non soltanto un notebook che termina senza audit.
 
-Il risultato è interpretabile soltanto se codice, dati, configurazione, ambiente e output restano collegati. La scala del laboratorio rende il percorso leggibile, ma il trasferimento richiede una nuova misura. La misura va letta insieme a popolazione, slice e failure: cambiare il report senza cambiare il protocollo non crea nuova evidenza. La verifica resta ancorata a «Il laboratorio produce README, output, figure e limiti, non soltanto un notebook che termina senza audit». [SRC-94-001]
-
-La lettura va fatta in ordine: prima il caso, poi la trasformazione, quindi la conseguenza. Il piccolo risultato resta un'illustrazione di «Il laboratorio produce README, output, figure e limiti, non soltanto un notebook che termina senza audit», non una promessa generale.
-
-La prova di «Report» conserva input, operazione e output; poi esplicita quale parte di «Il laboratorio produce README, output, figure e limiti, non soltanto un notebook che termina senza audit» non è stata misurata. Così il test separa l'evidenza dall'inferenza. Il caso finale consegna l'output «loss, metriche, manifest e limite» come evidenza locale e conserva il confine tra evidenza e interpretazione come domanda aperta.
-
-## Un esempio con controllo negativo: Ambiente riproducibile
-
-Il caso intero parte dall'input «seed, dataset piccolo, config, codice e versione», applica l'operazione «run, test, valutazione e report» e osserva l'output «loss, metriche, manifest e limite». Un esempio controllato: seed, split e dtype salvati prima dell'esecuzione. Lo schema compatto è:
-
-$$
-result = run(code, data, environment)
-$$
-
-È una notazione di interfaccia, non un'identità numerica completa. Un laboratorio è utile quando il risultato può essere ricostruito. [SRC-94-001]
 
 ![Percorso pratico dai fondamenti: compare](../../assets/chapters/94_foundations_lab/LAB-02/candidate-v48.png)
 
-La figura LAB-02 cambia composizione rispetto alla prima. Il diagramma segue il passaggio: Run, test, valutazione e report. L'input è seed, dataset piccolo, config, codice e versione, l'output è loss, metriche, manifest e limite; il vincolo da controllare è che un run locale non equivale a una prova generale.
+La seconda figura mette a confronto «Training e valutazione» e il limite discusso in «Report».
 
-## Dalla formula al run: Dataset piccolo
 
-Il file `code/snip_94_contract.py` collega il contratto del capitolo alla frase «Il laboratorio produce README, output, figure e limiti, non soltanto un notebook che termina senza audit». Il test controlla l'invariante, la risposta valida e il caso negativo; `code/outputs/SNIP-94-001.txt` conserva il risultato ripetibile del caso locale.
+## Come si collegano i passaggi
 
-## Limiti, varianti e nuove misure: Report
+- **Da «Ambiente riproducibile» a «Dataset piccolo».** Python, dipendenze, seed e struttura del progetto vengono fissati prima degli esperimenti. Un dataset controllabile permette di vedere preprocessing, split, batch e leakage. La prima tappa fissa domanda, ambiente e input; la seconda costruisce l'artefatto eseguibile che materializza il protocollo. [SRC-94-001; SRC-94-002]
 
-Il meccanismo di «Percorso pratico dai fondamenti» resta legato al contratto locale. Un run locale non equivale a una prova generale. Prima di generalizzare la frase «Il laboratorio produce README, output, figure e limiti, non soltanto un notebook che termina senza audit», servono un nuovo setup, un protocollo dichiarato e una misura ripetibile.
+- **Da «Dataset piccolo» a «Modello e loss».** Un dataset controllabile permette di vedere preprocessing, split, batch e leakage. Una baseline lineare precede la rete. Il run produce numeri e file soltanto dopo che configurazione, seed e dipendenze sono stati registrati. [SRC-94-002; SRC-94-003]
 
-## L'invariante da conservare: Percorso pratico dai fondamenti
+- **Da «Modello e loss» a «Training e valutazione».** Una baseline lineare precede la rete. Curve, checkpoint, validation e test seguono il protocollo costruito nel libro. La tappa successiva confronta il risultato atteso con quello osservato e conserva le divergenze invece di correggerle retroattivamente. [SRC-94-003; SRC-94-004]
 
-Abbiamo seguito un esperimento didattico con ambiente e artefatti dichiarati, partendo dall'input «seed, dataset piccolo, config, codice e versione» e arrivando all'output «loss, metriche, manifest e limite». Le sezioni «Ambiente riproducibile», «Dataset piccolo», «Report» hanno isolato le proprie frasi chiave senza confondere il meccanismo con il risultato applicativo. L'invariante da portare avanti è: un run locale non equivale a una prova generale. Il Capitolo 95, Costruire un piccolo language model, può partire da questo output e dichiarare la propria domanda.
+- **Da «Training e valutazione» a «Report».** Curve, checkpoint, validation e test seguono il protocollo costruito nel libro. Il laboratorio produce README, output, figure e limiti, non soltanto un notebook che termina senza audit. La conclusione separa ciò che il laboratorio ha ricostruito da ciò che richiederebbe altri dati, hardware o una valutazione di produzione. [SRC-94-004; SRC-94-001]
 
-### Prova di comprensione: Ambiente riproducibile
+La catena completa produce loss, metriche, manifest e limite a partire da seed, dataset piccolo, config, codice e versione. Ogni collegamento conserva un oggetto osservabile diverso; per questo il risultato non può essere esteso oltre il limite dichiarato: un run locale non equivale a una prova generale.
 
-1. Ricostruisci l'oggetto continuo a partire da «Ambiente riproducibile» e indica quale parte della frase «Python, dipendenze, seed e struttura del progetto vengono fissati prima degli esperimenti» entra nel caso.
-2. Spiega quale trasformazione collega «Ambiente riproducibile» a «Report» e quale output osserviamo nel passaggio.
-3. Usa lo snippet per controllare l'invariante del contratto: un run locale non equivale a una prova generale.
-4. Separa una definizione sostenuta da una fonte, un esempio illustrativo e un risultato locale del caso guida.
-5. Indica quale parte della frase «Il laboratorio produce README, output, figure e limiti, non soltanto un notebook che termina senza audit» richiederebbe una misura nuova prima di essere estesa oltre il caso osservato.
 
-### Esercizi con casi limite: Report
+## Esperimenti da riprodurre
 
-1. Ricostruisci input e output di «Ambiente riproducibile» usando un esempio di tre righe.
-2. Modifica una sola variabile in «Dataset piccolo» e anticipa l'invariante che dovrebbe restare.
-3. Metti «Modello e loss» a confronto con il caso base e descrivi il failure mode più vicino.
-4. Scrivi un test minimo per rendere osservabile il confine di «Training e valutazione».
-5. Formula per «Report» una domanda che separi meccanismo e qualità del sistema.
+1. Ricostruisci «Ambiente riproducibile» con un esempio diverso da quello mostrato e indica l'output atteso prima del calcolo.
+2. Nel passaggio «Dataset piccolo», cambia una sola ipotesi e spiega quale risultato non è più confrontabile.
+3. Collega «Modello e loss» a una riga dello snippet oppure motiva perché la prova deve essere documentale.
+4. Progetta un caso limite per «Training e valutazione» che produca una failure riconoscibile.
+5. Per «Report», separa una conclusione sostenuta dal caso locale da una che richiederebbe nuovi dati o un benchmark.
 
-## Fonti primarie e artefatti del capitolo: Percorso pratico dai fondamenti
 
-Il dossier di «Percorso pratico dai fondamenti» in `FONTI_PRIMARIE.md` separa definizioni, risultati e la differenza tra media e failure; la data di consultazione è registrata accanto ai riferimenti. `CLAIMS.md` separa definizioni e risultati locali; codice, ambiente, test e output sono nella cartella `code/`, con attenzione a protocollo, slice e decisione.
+## Criterio di completamento
+
+La lezione parte da «seed, dataset piccolo, config, codice e versione» e arriva fino a «loss, metriche, manifest e limite». Il limite da conservare è questo: un run locale non equivale a una prova generale. Definizioni e risultati citati sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md); la mappa dei claim è in [`CLAIMS.md`](CLAIMS.md).

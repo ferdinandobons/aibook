@@ -4,133 +4,119 @@ part_id: P12
 order_key: 770
 title: Speculative e parallel decoding
 maturity: ESTABLISHED
-status: candidatura completa in revisione autoriale
-version: 0.4.0-draft2
-last_source_check: 3 agosto 2026
+status: revisione editoriale v2, approvazione autoriale aperta
+version: 0.5.0-draft3
+last_source_check: 4 agosto 2026
 environment: Python 3.13.12, CPU
-deferred: benchmark applicativi, varianti non necessarie al contratto centrale e approvazione autoriale
+code_policy: reference
+deferred: benchmark applicativi non eseguiti e approvazione autoriale delle visuali
 -->
 
 # Capitolo 77. Speculative e parallel decoding
 
-Il risultato precedente non è ancora una soluzione completa. Partiamo da draft e target durante il decoding speculativo e dalla richiesta «Il pacco non è arrivato» come esempio comune; per arrivare all'output «token accettati, velocità e distribuzione preservata» isoliamo il passaggio «proposta, verifica, accettazione e fallback» e ne misuriamo il limite prima di passare a KV cache e riuso del contesto.
+La domanda guida di questa lezione è come collegare «Draft e target» e «Parallel decoding» senza perdere il contratto tecnico di speculative e parallel decoding. L'oggetto osservato è draft e target durante il decoding speculativo. Il contratto locale è: input, token proposti, logits draft e logits target; operazione, proposta, verifica, accettazione e fallback; output, token accettati, velocità e distribuzione preservata. Il caso guida è questo: Tre token draft vengono verificati: due sono accettati e uno ricade nel target. Il confine da mantenere esplicito è: lo speedup richiede verifica senza cambiare il contratto di output.
 
 ## Draft e target
 
 Un modello economico propone più token; il modello target li verifica in parallelo. [SRC-77-001]
 
-Prima del nome tecnico fissiamo la situazione: consideriamo tre token draft vengono verificati: due sono accettati e uno ricade nel target. Da qui possiamo leggere la conseguenza dichiarata da «Un modello economico propone più token; il modello target li verifica in parallelo».
+Speculazione e decoding parallelo richiedono una verifica del draft.
 
-La sezione usa l'input «token proposti, logits draft e logits target» come punto di partenza e l'output «token accettati, velocità e distribuzione preservata» come traccia d'uscita. La trasformazione concreta è «proposta, verifica, accettazione e fallback»; il caso non è completo se non dichiariamo anche che lo speedup richiede verifica senza cambiare il contratto di output. La condizione da isolare è «Un modello economico propone più token; il modello target li verifica in parallelo».
+**Caso da seguire.** Tre token draft vengono verificati: due sono accettati e uno ricade nel target.
 
-L'ottimizzazione modifica rappresentazione, memoria, calcolo o scheduling sotto un carico dichiarato. Per attribuire il beneficio bisogna separare il guadagno locale da latenza, qualità e costo end-to-end. Per «Draft e target» il controllo cambia una sola premessa della frase «Un modello economico propone più token; il modello target li verifica in parallelo» e conserva input, output e criterio di successo, così la differenza resta attribuibile. La verifica resta ancorata a «Un modello economico propone più token; il modello target li verifica in parallelo». [SRC-77-001]
+**Controllo.** Scrivi il risultato atteso prima del calcolo, modifica una sola quantità e localizza il primo passaggio che cambia. Il vincolo da conservare è: Un modello economico propone più token; il modello target li verifica in parallelo.
 
-Se cambiamo una premessa, dobbiamo riaprire l'interpretazione. Per «Draft e target» conserviamo l'osservazione collegata a «Un modello economico propone più token; il modello target li verifica in parallelo» e lasciamo esplicitamente fuori ciò che non è stato misurato.
-
-La prova di «Draft e target» conserva input, operazione e output; poi esplicita quale parte di «Un modello economico propone più token; il modello target li verifica in parallelo» non è stata misurata. Così il test separa l'evidenza dall'inferenza. Il passaggio successivo, «Acceptance», potrà cambiare una sola condizione, dichiarando il nuovo setup prima di interpretare il risultato.
 
 ## Acceptance
 
 La regola di accettazione conserva esattamente la distribuzione target nel metodo speculativo standard. [SRC-77-002]
 
-Per capire «Acceptance» partiamo da questo caso: tre token proposti, due accettati e uno ricalcolato. Il caso rende osservabile il punto centrale: «La regola di accettazione conserva esattamente la distribuzione target nel metodo speculativo standard».
+**Caso da seguire.** Tre token proposti, due accettati e uno ricalcolato.
 
-Per ricostruire «Acceptance» annotiamo l'input «token proposti, logits draft e logits target», poi l'operazione «proposta, verifica, accettazione e fallback», infine l'output «token accettati, velocità e distribuzione preservata». Questa sequenza impedisce di scambiare una forma compatibile per il comportamento descritto dalla fonte. Il controllo parte da «La regola di accettazione conserva esattamente la distribuzione target nel metodo speculativo standard».
+**Controllo.** Ricalcola il caso a mano e con lo snippet. Se i risultati divergono, confronta prima i valori intermedi e soltanto dopo l'output finale.
 
-L'ottimizzazione modifica rappresentazione, memoria, calcolo o scheduling sotto un carico dichiarato. Per attribuire il beneficio bisogna separare il guadagno locale da latenza, qualità e costo end-to-end. Per «Acceptance» il controllo cambia una sola premessa della frase «La regola di accettazione conserva esattamente la distribuzione target nel metodo speculativo standard» e conserva input, output e criterio di successo, così la differenza resta attribuibile. La verifica resta ancorata a «La regola di accettazione conserva esattamente la distribuzione target nel metodo speculativo standard». [SRC-77-002]
 
-Il punto didattico di «Acceptance» è separare ciò che la fonte afferma da ciò che il piccolo caso illustra. L'output «token accettati, velocità e distribuzione preservata» mostra il contratto locale, ma non sostituisce una misura sul sistema completo.
+![Speculative e parallel decoding: compare](../../assets/chapters/77_speculative_decoding/DECODING-01/candidate-v48.png)
 
-Per verificare «Acceptance» cambiamo una sola condizione vicina alla frase «La regola di accettazione conserva esattamente la distribuzione target nel metodo speculativo standard», teniamo fermo il resto e registriamo l'output «token accettati, velocità e distribuzione preservata». Il caso negativo deve rendere riconoscibile la failure, non soltanto produrre un numero diverso. La sezione successiva, «Speedup», riceve l'output «token accettati, velocità e distribuzione preservata» come base, ma dovrà formulare e verificare la propria distinzione.
+La prima figura segue il percorso da «Draft e target» a «Speedup».
+
 
 ## Speedup
 
 Il guadagno dipende da acceptance rate, costo del draft, lunghezza proposta e hardware. [SRC-77-003]
 
-Il caso minimo di «Speedup» si presenta così: un caso in cui lo speedup richiede verifica senza cambiare il contratto di output. Non lo usiamo come decorazione: serve a rendere osservabile la frase «Il guadagno dipende da acceptance rate, costo del draft, lunghezza proposta e hardware».
+**Caso da seguire.** Un caso in cui lo speedup richiede verifica senza cambiare il contratto di output.
 
-Nel contratto locale, l'input «token proposti, logits draft e logits target» entra, l'operazione «proposta, verifica, accettazione e fallback» modifica il percorso e l'output «token accettati, velocità e distribuzione preservata» è ciò che osserviamo. Qui cambia soprattutto il passaggio «Speedup»; resta da controllare che lo speedup richiede verifica senza cambiare il contratto di output. La domanda locale è «Il guadagno dipende da acceptance rate, costo del draft, lunghezza proposta e hardware».
+**Controllo.** Aggiungi un valore limite e verifica separatamente forma, valore e ipotesi. Una shape valida non dimostra da sola «Speedup».
 
-L'ottimizzazione modifica rappresentazione, memoria, calcolo o scheduling sotto un carico dichiarato. Per attribuire il beneficio bisogna separare il guadagno locale da latenza, qualità e costo end-to-end. Per «Speedup» il controllo cambia una sola premessa della frase «Il guadagno dipende da acceptance rate, costo del draft, lunghezza proposta e hardware» e conserva input, output e criterio di successo, così la differenza resta attribuibile. La verifica resta ancorata a «Il guadagno dipende da acceptance rate, costo del draft, lunghezza proposta e hardware». [SRC-77-003]
-
-La lettura va fatta in ordine: prima il caso, poi la trasformazione, quindi la conseguenza. Il piccolo risultato resta un'illustrazione di «Il guadagno dipende da acceptance rate, costo del draft, lunghezza proposta e hardware», non una promessa generale.
-
-Il controllo minimo di «Speedup» confronta il caso dichiarato con una variazione che rompe la sua ipotesi. Se la failure non è distinguibile dall'esito valido, manca un'osservazione nel contratto di latency, memoria e throughput. Da «Speedup» portiamo l'output «token accettati, velocità e distribuzione preservata»; non portiamo invece una conclusione oltre il caso locale.
 
 ## Medusa, EAGLE e ReDrafter
 
 Head multiple, feature prediction e recurrent drafter producono candidate con strutture differenti. [SRC-77-004]
 
-Prima del nome tecnico fissiamo la situazione: consideriamo ridurre i byte per elemento cambia memoria e potenzialmente errore. Il controllo richiede confronto numerico oltre alla misura di tempo. Da qui possiamo leggere la conseguenza dichiarata da «Head multiple, feature prediction e recurrent drafter producono candidate con strutture differenti».
+**Caso da seguire.** Ridurre i byte per elemento cambia memoria e potenzialmente errore. Il controllo richiede confronto numerico oltre alla misura di tempo.
 
-La sezione usa l'input «token proposti, logits draft e logits target» come punto di partenza e l'output «token accettati, velocità e distribuzione preservata» come traccia d'uscita. La trasformazione concreta è «proposta, verifica, accettazione e fallback»; il caso non è completo se non dichiariamo anche che lo speedup richiede verifica senza cambiare il contratto di output. La condizione da isolare è «Head multiple, feature prediction e recurrent drafter producono candidate con strutture differenti».
+**Controllo.** Mantieni fisso l'input e sostituisci soltanto il meccanismo discusso nella sezione. Il confronto deve attribuire la differenza a quel passaggio, non al setup.
 
-L'ottimizzazione modifica rappresentazione, memoria, calcolo o scheduling sotto un carico dichiarato. Per attribuire il beneficio bisogna separare il guadagno locale da latenza, qualità e costo end-to-end. Per «Medusa, EAGLE e ReDrafter» il controllo cambia una sola premessa della frase «Head multiple, feature prediction e recurrent drafter producono candidate con strutture differenti» e conserva input, output e criterio di successo, così la differenza resta attribuibile. La verifica resta ancorata a «Head multiple, feature prediction e recurrent drafter producono candidate con strutture differenti». [SRC-77-004]
 
-Se cambiamo una premessa, dobbiamo riaprire l'interpretazione. Per «Medusa, EAGLE e ReDrafter» conserviamo l'osservazione collegata a «Head multiple, feature prediction e recurrent drafter producono candidate con strutture differenti» e lasciamo esplicitamente fuori ciò che non è stato misurato.
+## Esempio Python eseguito
 
-La prova di «Medusa, EAGLE e ReDrafter» conserva input, operazione e output; poi esplicita quale parte di «Head multiple, feature prediction e recurrent drafter producono candidate con strutture differenti» non è stata misurata. Così il test separa l'evidenza dall'inferenza. Il passaggio successivo, «Parallel decoding», potrà cambiare una sola condizione, dichiarando il nuovo setup prima di interpretare il risultato.
+Il frammento seguente è lo stesso conservato nel repository. Usa valori piccoli perché l'obiettivo è osservare il meccanismo, non simulare una scala che non abbiamo eseguito.
 
-![Speculative e parallel decoding: compare](../../assets/chapters/77_speculative_decoding/DECODING-01/candidate-v48.png)
+```python
+def contract():
+    draft = ["a", "b", "c"]
+    target_accepts = [True, True, False]
+    accepted = [token for token, ok in zip(draft, target_accepts) if ok]
+    fallback = "target_next" if not target_accepts[-1] else None
+    return {"accepted": accepted, "fallback": fallback, "invariant": "speculative decoding verifies draft tokens before committing them"}
+```
 
-La figura DECODING-01 usa la famiglia compare. Il diagramma segue il passaggio: Proposta, verifica, accettazione e fallback. L'input è token proposti, logits draft e logits target, l'output è token accettati, velocità e distribuzione preservata; il vincolo da controllare è che lo speedup richiede verifica senza cambiare il contratto di output.
+Esecuzione con `python snip_77_contract.py`:
+
+```text
+{"accepted": ["a", "b"], "fallback": "target_next", "invariant": "speculative decoding verifies draft tokens before committing them"}
+```
+
+Il test associato è [`code/test_77_contract.py`](code/test_77_contract.py); l'output versionato è [`code/outputs/SNIP-77-001.txt`](code/outputs/SNIP-77-001.txt).
+
 
 ## Parallel decoding
 
 Metodi lookahead o Jacobi aggiornano più posizioni ma devono dichiarare se preservano esattamente la distribuzione originale. [SRC-77-001]
 
-Per capire «Parallel decoding» partiamo da questo caso: un prefisso corretto confrontato con lo stesso prefisso dopo che il modello ha prodotto il token precedente. Il caso rende osservabile il punto centrale: «Metodi lookahead o Jacobi aggiornano più posizioni ma devono dichiarare se preservano esattamente la distribuzione originale».
+**Caso da seguire.** Un prefisso corretto confrontato con lo stesso prefisso dopo che il modello ha prodotto il token precedente.
 
-Per ricostruire «Parallel decoding» annotiamo l'input «token proposti, logits draft e logits target», poi l'operazione «proposta, verifica, accettazione e fallback», infine l'output «token accettati, velocità e distribuzione preservata». Questa sequenza impedisce di scambiare una forma compatibile per il comportamento descritto dalla fonte. Il controllo parte da «Metodi lookahead o Jacobi aggiornano più posizioni ma devono dichiarare se preservano esattamente la distribuzione originale».
+**Controllo.** Costruisci un controesempio che rispetti il tipo di dato ma violi l'ipotesi centrale. Il test deve rendere riconoscibile perché «Parallel decoding» non si applica.
 
-L'ottimizzazione modifica rappresentazione, memoria, calcolo o scheduling sotto un carico dichiarato. Per attribuire il beneficio bisogna separare il guadagno locale da latenza, qualità e costo end-to-end. Il confronto utile mette accanto il prefisso corretto e quello prodotto dal modello, così il segnale disponibile al training non viene confuso con l'inference. La verifica resta ancorata a «Metodi lookahead o Jacobi aggiornano più posizioni ma devono dichiarare se preservano esattamente la distribuzione originale». [SRC-77-001]
-
-Il punto didattico di «Parallel decoding» è separare ciò che la fonte afferma da ciò che il piccolo caso illustra. L'output «token accettati, velocità e distribuzione preservata» mostra il contratto locale, ma non sostituisce una misura sul sistema completo.
-
-Per verificare «Parallel decoding» cambiamo una sola condizione vicina alla frase «Metodi lookahead o Jacobi aggiornano più posizioni ma devono dichiarare se preservano esattamente la distribuzione originale», teniamo fermo il resto e registriamo l'output «token accettati, velocità e distribuzione preservata». Il caso negativo deve rendere riconoscibile la failure, non soltanto produrre un numero diverso. Il percorso si chiude lasciando espliciti la misura locale e ciò che richiederebbe una prova ulteriore.
-
-## Dal concetto alla situazione concreta: Draft e target
-
-Il caso intero parte dall'input «token proposti, logits draft e logits target», applica l'operazione «proposta, verifica, accettazione e fallback» e osserva l'output «token accettati, velocità e distribuzione preservata». Un esempio controllato: tre token proposti, due accettati e uno ricalcolato. Lo schema compatto è:
-
-$$
-accepted = verify(draft, target)
-$$
-
-È una notazione di interfaccia, non un'identità numerica completa. Speculazione e decoding parallelo richiedono una verifica del draft. [SRC-77-001]
 
 ![Speculative e parallel decoding: pipeline](../../assets/chapters/77_speculative_decoding/DECODING-02/candidate-v48.png)
 
-La figura DECODING-02 cambia composizione rispetto alla prima. Il diagramma segue il passaggio: Proposta, verifica, accettazione e fallback. L'input è token proposti, logits draft e logits target, l'output è token accettati, velocità e distribuzione preservata; il vincolo da controllare è che lo speedup richiede verifica senza cambiare il contratto di output.
+La seconda figura mette a confronto «Medusa, EAGLE e ReDrafter» e il limite discusso in «Parallel decoding».
 
-## Una prova ripetibile: Acceptance
 
-Lo snippet locale mette in esecuzione questo caso: tre token proposti, due accettati e uno ricalcolato. Il test associato controlla determinismo, output e invariante e rifiuta una shape o condizione incoerente; il risultato è conservato in `code/outputs/SNIP-77-001.txt`, come evidenza locale e non come benchmark di produzione.
+## Come si collegano i passaggi
 
-## Il trasferimento richiede altro: Parallel decoding
+- **Da «Draft e target» a «Acceptance».** Un modello economico propone più token; il modello target li verifica in parallelo. La regola di accettazione conserva esattamente la distribuzione target nel metodo speculativo standard. Il primo passaggio definisce che cosa entra nel calcolo; il secondo stabilisce la regola che produce il valore osservabile. [SRC-77-001; SRC-77-002]
 
-Il caso di «Speculative e parallel decoding» non certifica un servizio completo. Lo speedup richiede verifica senza cambiare il contratto di output. La domanda successiva è se «Metodi lookahead o Jacobi aggiornano più posizioni ma devono dichiarare se preservano esattamente la distribuzione originale» regga quando cambiano dati, scala, hardware o criteri di decisione.
+- **Da «Acceptance» a «Speedup».** La regola di accettazione conserva esattamente la distribuzione target nel metodo speculativo standard. Il guadagno dipende da acceptance rate, costo del draft, lunghezza proposta e hardware. La regola generale viene poi letta dentro il componente: questa separazione permette di localizzare un errore prima di attribuirlo all'intero modello. [SRC-77-002; SRC-77-003]
 
-## Il filo che passa oltre: Speculative e parallel decoding
+- **Da «Speedup» a «Medusa, EAGLE e ReDrafter».** Il guadagno dipende da acceptance rate, costo del draft, lunghezza proposta e hardware. Head multiple, feature prediction e recurrent drafter producono candidate con strutture differenti. Dopo avere reso visibile il componente, il percorso introduce la variante o l'ottimizzazione senza cambiare di nascosto il caso di partenza. [SRC-77-003; SRC-77-004]
 
-Il filo della lezione va dall'input «token proposti, logits draft e logits target» all'output «token accettati, velocità e distribuzione preservata». Nei passaggi «Draft e target», «Acceptance», «Parallel decoding» abbiamo usato esempi e controlli negativi per rendere il contratto controllabile e delimitare la conclusione. L'invariante da portare avanti è: lo speedup richiede verifica senza cambiare il contratto di output. Il Capitolo 78, KV cache e riuso del contesto, può partire da questo output e dichiarare la propria domanda.
+- **Da «Medusa, EAGLE e ReDrafter» a «Parallel decoding».** Head multiple, feature prediction e recurrent drafter producono candidate con strutture differenti. Metodi lookahead o Jacobi aggiornano più posizioni ma devono dichiarare se preservano esattamente la distribuzione originale. L'ultimo passaggio sposta l'attenzione dal funzionamento locale alla misura: correttezza del calcolo e qualità applicativa restano domande distinte. [SRC-77-004; SRC-77-001]
 
-### Rilettura guidata: Draft e target
+La catena completa produce token accettati, velocità e distribuzione preservata a partire da token proposti, logits draft e logits target. Ogni collegamento conserva un oggetto osservabile diverso; per questo il risultato non può essere esteso oltre il limite dichiarato: lo speedup richiede verifica senza cambiare il contratto di output.
 
-1. Ricostruisci l'oggetto continuo a partire da «Draft e target» e indica quale parte della frase «Un modello economico propone più token; il modello target li verifica in parallelo» entra nel caso.
-2. Spiega quale trasformazione collega «Draft e target» a «Parallel decoding» e quale output osserviamo nel passaggio.
-3. Usa lo snippet per controllare l'invariante del contratto: lo speedup richiede verifica senza cambiare il contratto di output.
-4. Separa una definizione sostenuta da una fonte, un esempio illustrativo e un risultato locale del caso guida.
-5. Indica quale parte della frase «Metodi lookahead o Jacobi aggiornano più posizioni ma devono dichiarare se preservano esattamente la distribuzione originale» richiederebbe una misura nuova prima di essere estesa oltre il caso osservato.
 
-### Allenamento e trasferimento: Parallel decoding
+## Esercizi sul meccanismo
 
-1. Ricostruisci «Draft e target» senza usare il nome della tecnica, soltanto con input, operazione e output.
-2. Sostituisci una condizione di «Acceptance» e prevedi che cosa non dovrebbe cambiare.
-3. Cerca un controesempio per «Speedup» e annota quale ipotesi viene rotta.
-4. Trasforma il limite di «Medusa, EAGLE e ReDrafter» in un test ripetibile.
-5. Spiega come trasferire «Parallel decoding» senza portare con sé una promessa non misurata.
+1. Ricostruisci «Draft e target» con un esempio diverso da quello mostrato e indica l'output atteso prima del calcolo.
+2. Nel passaggio «Acceptance», cambia una sola ipotesi e spiega quale risultato non è più confrontabile.
+3. Collega «Speedup» a una riga dello snippet oppure motiva perché la prova deve essere documentale.
+4. Progetta un caso limite per «Medusa, EAGLE e ReDrafter» che produca una failure riconoscibile.
+5. Per «Parallel decoding», separa una conclusione sostenuta dal caso locale da una che richiederebbe nuovi dati o un benchmark.
 
-## Dove verificare definizioni e risultati: Speculative e parallel decoding
 
-Per ricontrollare «Speculative e parallel decoding», partire da `FONTI_PRIMARIE.md` e poi dal codice: la domanda aperta è come trasferire la misura end-to-end sotto carico dichiarato oltre il caso locale, con la data di consultazione dichiarata. `CLAIMS.md` separa definizioni e risultati locali; codice, ambiente, test e output sono nella cartella `code/`, con attenzione a latency, memoria e throughput.
+## Che cosa deve restare chiaro
+
+La lezione parte da «token proposti, logits draft e logits target» e arriva fino a «token accettati, velocità e distribuzione preservata». Il limite da conservare è questo: lo speedup richiede verifica senza cambiare il contratto di output. Definizioni e risultati citati sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md); la mappa dei claim è in [`CLAIMS.md`](CLAIMS.md).

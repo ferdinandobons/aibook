@@ -1,14 +1,16 @@
 # Specifica visuale FOUNDATI-01
 
-- famiglia: pipeline
-- domanda principale: Il percorso dall'input di fondamenti della modellazione generativa all'output osservabile è leggibile da sinistra a destra
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: model_taxonomy
+- domanda principale: Come si passa da «Imparare una distribuzione» a «Variabili latenti» mantenendo osservabile una distribuzione sui dati o su una variabile latente?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v49.png
-- ordine di lettura: titolo, domanda, pipeline, invariante o limite in chiusura
-- nodi e contenuti: 1: Imparare una distribuzione; 2: Modelli espliciti e impliciti; 3: Variabili latenti; 4: Energy-based model; 5: Qualità, copertura e valutazione
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: un campione plausibile non dimostra copertura dell'intera distribuzione
-- fonti collegate: SRC-20-001 ... SRC-20-004
-- alt text: Diagramma FOUNDATI-01 del Capitolo 20, famiglia pipeline. Domanda: Il percorso dall'input di fondamenti della modellazione generativa all'output osservabile è leggibile da sinistra a destra La composizione usa i passaggi Imparare una distribuzione, Modelli espliciti e impliciti, Variabili latenti, Energy-based model, Qualità, copertura e valutazione.
+- file candidato: candidate-v49.png
+- oggetto osservato: una distribuzione sui dati o su una variabile latente
+- input: un dato x, un rumore epsilon o una variabile z
+- output: una probabilità, un punteggio o un campione
+- nodi locali: Imparare una distribuzione: Un modello generativo descrive o campiona dati secondo una distribuzione. Densità,…; Modelli espliciti e impliciti: Un modello esplicito assegna una densità o probabilità valutabile. Un modello implicito…; Variabili latenti: Una variabile latente introduce struttura non osservata. L'inferenza deve collegare dati…
+- limite visualizzato: un campione plausibile non dimostra copertura dell'intera distribuzione
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

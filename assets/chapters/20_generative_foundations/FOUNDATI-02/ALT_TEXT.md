@@ -1,3 +1,3 @@
-# Alt text FOUNDATI-02
+# Testo alternativo
 
-Diagramma FOUNDATI-02 del Capitolo 20, famiglia timeline. Domanda: La stessa informazione viene seguita lungo i passi del processo La composizione usa i passaggi Imparare una distribuzione, Modelli espliciti e impliciti, Variabili latenti, Energy-based model, Qualità, copertura e valutazione.
+FOUNDATI-02, Fondamenti della modellazione generativa. Quale controllo collega «Energy-based model» a «Qualità, copertura e valutazione» senza superare il limite dichiarato? La composizione evaluation lenses collega «Energy-based model», «Qualità, copertura e valutazione». L'input è un dato x, un rumore epsilon o una variabile z; l'output è una probabilità, un punteggio o un campione. Il limite esplicito è: un campione plausibile non dimostra copertura dell'intera distribuzione.

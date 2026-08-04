@@ -1,3 +1,0 @@
-chapter: 78
-title: KV cache e riuso del contesto
-output: [0.755272, 0.334759]

@@ -1,3 +1,0 @@
-chapter: 49
-title: Ottimizzazione diretta delle preferenze
-output: [0.755272, 0.334759]

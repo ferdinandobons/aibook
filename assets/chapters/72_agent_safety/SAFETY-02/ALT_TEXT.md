@@ -1,3 +1,3 @@
-# Alt text SAFETY-02
+# Testo alternativo
 
-Diagramma SAFETY-02 del Capitolo 72, famiglia loop. Domanda: Il diagramma segue il passaggio: Least privilege, sandbox, human approval e rollback. L'input è input non fidato, tool, scope e approvazione, l'output è allow/deny, side effect o rollback auditabile; il vincolo da controllare è che l'enforcement deve stare fuori dal testo generato La composizione usa i passaggi Least privilege, Sandbox, Human approval, Rollback e audit, Prompt injection.
+SAFETY-02, Sicurezza operativa degli agenti. Quale controllo collega «Rollback e audit» a «Prompt injection» senza superare il limite dichiarato? La composizione least privilege collega «Rollback e audit», «Prompt injection». L'input è input non fidato, tool, scope e approvazione; l'output è allow/deny, side effect o rollback auditabile. Il limite esplicito è: l'enforcement deve stare fuori dal testo generato.

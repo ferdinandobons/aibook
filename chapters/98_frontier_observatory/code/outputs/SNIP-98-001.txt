@@ -1,1 +1,0 @@
-{"invariant": "novelty, evidence and readiness remain separate fields", "maturity": "FRONTIER", "record_complete": true}

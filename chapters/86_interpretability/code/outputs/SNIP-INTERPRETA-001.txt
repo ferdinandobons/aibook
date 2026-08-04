@@ -1,3 +1,0 @@
-chapter: 86
-title: Interpretabilità delle rappresentazioni e dei circuiti
-output: [0.755272, 0.334759]

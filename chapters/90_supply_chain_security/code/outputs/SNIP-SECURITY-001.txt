@@ -1,3 +1,0 @@
-chapter: 90
-title: Poisoning, backdoor, extraction e supply chain
-output: [0.755272, 0.334759]

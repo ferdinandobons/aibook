@@ -1,3 +1,3 @@
-# Alt text SERVING-02
+# Testo alternativo
 
-Diagramma SERVING-02 del Capitolo 79, famiglia queue. Domanda: Il diagramma segue il passaggio: Batching continuo, admission e scheduling. L'input è prompt, deadline, lunghezza, memoria e priorità, l'output è throughput, latency p50/p99 e richieste ammesse; il vincolo da controllare è che throughput e latenza devono essere misurati insieme La composizione usa i passaggi Richieste eterogenee, Continuous batching, Throughput e latency, Admission control, Metriche di servizio.
+SERVING-02, Serving, batching e scheduling. Quale controllo collega «Admission control» a «Metriche di servizio» senza superare il limite dichiarato? La composizione continuous batch collega «Admission control», «Metriche di servizio». L'input è prompt, deadline, lunghezza, memoria e priorità; l'output è throughput, latency p50/p99 e richieste ammesse. Il limite esplicito è: throughput e latenza devono essere misurati insieme.

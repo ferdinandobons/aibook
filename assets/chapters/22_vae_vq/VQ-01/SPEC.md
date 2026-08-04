@@ -1,14 +1,16 @@
 # Specifica visuale VQ-01
 
-- famiglia: pipeline
-- domanda principale: Il diagramma segue il passaggio: ELBO e reparameterization trick. L'input è x, media, log-varianza e rumore epsilon, l'output è ricostruzione, KL e codice latente; il vincolo da controllare è che la ricostruzione non elimina il costo KL né dimostra disentanglement
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: latent_bottleneck
+- domanda principale: Come si passa da «Inferenza approssimata» a «Reparameterization trick» mantenendo osservabile una variabile osservata e il suo codice latente?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, pipeline, invariante o limite in chiusura
-- nodi e contenuti: 1: Inferenza approssimata; 2: ELBO; 3: Reparameterization trick; 4: Posterior collapse; 5: VQ-VAE
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: la ricostruzione non elimina il costo KL né dimostra disentanglement
-- fonti collegate: SRC-22-001 ... SRC-22-004
-- alt text: Diagramma VQ-01 del Capitolo 22, famiglia pipeline. Domanda: Il diagramma segue il passaggio: ELBO e reparameterization trick. L'input è x, media, log-varianza e rumore epsilon, l'output è ricostruzione, KL e codice latente; il vincolo da controllare è che la ricostruzione non elimina il costo KL né dimostra disentanglement La composizione usa i passaggi Inferenza approssimata, ELBO, Reparameterization trick, Posterior collapse, VQ-VAE.
+- file candidato: candidate-v48.png
+- oggetto osservato: una variabile osservata e il suo codice latente
+- input: x, media, log-varianza e rumore epsilon
+- output: ricostruzione, KL e codice latente
+- nodi locali: Inferenza approssimata: Il VAE introduce un encoder q(z|x) per approssimare il posterior. Il decoder modella…; ELBO: L'evidence lower bound combina ricostruzione e KL verso il prior. Massimizzare l'ELBO…; Reparameterization trick: Un campione gaussiano viene scritto come trasformazione di rumore indipendente. Questo…
+- limite visualizzato: la ricostruzione non elimina il costo KL né dimostra disentanglement
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

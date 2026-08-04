@@ -1,12 +1,10 @@
 # Review del Capitolo 37
 
-- revisione: 0.4.0-draft2
-- data: 3 agosto 2026
-- prosa e continuità: corretta, nuova review richiesta
-- fonti e claim: dossier completato, controllo autoriale richiesto
-- formule e derivazioni: ricontrollate a livello di coerenza locale
-- codice e test: eseguiti in Python CPU
-- visuali: due famiglie compositive diverse, raster audit superato
-- alt text e specifiche: presenti
-- anti-template: migliorato con famiglie e inserimenti variabili; passaggio read-aloud ancora aperto
-- approvazione autoriale: aperta
+- revisione: 0.5.0-draft3
+- data: 4 agosto 2026
+- testo: ricostruito sui cinque nuclei specifici della lezione
+- continuità: prerequisiti tematici espliciti in `PLAN.md`, non semplice dipendenza dal capitolo precedente
+- fonti: mappate in `CLAIMS.md`; controllo umano finale ancora richiesto per l'edizione
+- codice: policy `reference`; prove descritte in `code/CODE_AUDIT.md`
+- visuali: candidate differenziate; alt text, specifica e audit presenti; approvazione autoriale aperta
+- esito: non dichiarato pronto per la pubblicazione finché i gate aperti non vengono chiusi dall'autore

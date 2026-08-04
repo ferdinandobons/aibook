@@ -1,14 +1,16 @@
 # Specifica visuale JAILBREAK-01
 
-- famiglia: threat
-- domanda principale: Il diagramma segue il passaggio: Jailbreak, perturbazione, difesa e adaptive evaluation. L'input è threat model, prompt, budget e risposta, l'output è success rate, failure mode e costo della difesa; il vincolo da controllare è che un test superato non copre minacce non incluse nel protocollo
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: perturbation_grid
+- domanda principale: Come si passa da «Threat model» a «Ottimizzazione adversarial» mantenendo osservabile una superficie di attacco e il comportamento sotto perturbazione?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, threat, invariante o limite in chiusura
-- nodi e contenuti: 1: Threat model; 2: Perturbazioni; 3: Ottimizzazione adversarial; 4: Difese; 5: Valutazione adattiva
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: un test superato non copre minacce non incluse nel protocollo
-- fonti collegate: SRC-88-001 ... SRC-88-004
-- alt text: Diagramma JAILBREAK-01 del Capitolo 88, famiglia threat. Domanda: Il diagramma segue il passaggio: Jailbreak, perturbazione, difesa e adaptive evaluation. L'input è threat model, prompt, budget e risposta, l'output è success rate, failure mode e costo della difesa; il vincolo da controllare è che un test superato non copre minacce non incluse nel protocollo La composizione usa i passaggi Threat model, Perturbazioni, Ottimizzazione adversarial, Difese, Valutazione adattiva.
+- file candidato: candidate-v48.png
+- oggetto osservato: una superficie di attacco e il comportamento sotto perturbazione
+- input: threat model, prompt, budget e risposta
+- output: success rate, failure mode e costo della difesa
+- nodi locali: Threat model: Attaccante, accesso, obiettivo, budget e superficie definiscono il test. Un jailbreak…; Perturbazioni: Typo, parafrasi, encoding e contenuti multimodali possono aggirare filtri superficiali.; Ottimizzazione adversarial: Suffix e prompt vengono cercati per aumentare una loss di attacco. Trasferibilità e…
+- limite visualizzato: un test superato non copre minacce non incluse nel protocollo
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

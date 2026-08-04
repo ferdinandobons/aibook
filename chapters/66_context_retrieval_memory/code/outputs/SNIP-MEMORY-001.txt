@@ -1,3 +1,0 @@
-chapter: 66
-title: Contesto lungo, retrieval e memoria
-output: [0.755272, 0.334759]

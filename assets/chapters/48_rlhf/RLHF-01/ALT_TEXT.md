@@ -1,3 +1,3 @@
-# Alt text RLHF-01
+# Testo alternativo
 
-Diagramma RLHF-01 del Capitolo 48, famiglia pipeline. Domanda: Il diagramma segue il passaggio: Fit del reward, KL e aggiornamento della policy. L'input è prompt, risposta scelta, rifiutata e score, l'output è reward, log-probability e comportamento aggiornato; il vincolo da controllare è che il reward è un proxy e può essere ottimizzato in modo scorretto La composizione usa i passaggi Dalle dimostrazioni alle preferenze, Reward model, Policy optimization, KL e reward hacking, Valutazione e sicurezza.
+RLHF-01, Preferenze, reward model e RLHF. Come si passa da «Dalle dimostrazioni alle preferenze» a «Policy optimization» mantenendo osservabile dimostrazioni, preferenze, reward model e policy? La composizione preference pipeline collega «Dalle dimostrazioni alle preferenze», «Reward model», «Policy optimization». L'input è prompt, risposta scelta, rifiutata e score; l'output è reward, log-probability e comportamento aggiornato. Il limite esplicito è: il reward è un proxy e può essere ottimizzato in modo scorretto.

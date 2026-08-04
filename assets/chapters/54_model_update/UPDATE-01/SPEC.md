@@ -1,14 +1,16 @@
 # Specifica visuale UPDATE-01
 
-- famiglia: compare
-- domanda principale: Il diagramma segue il passaggio: Continued adaptation, merge, editing e regressione. L'input è base model, delta, task e rollback point, l'output è versione nuova, diff e test di regressione; il vincolo da controllare è che un merge senza valutazione può introdurre regressioni invisibili
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: model_edit
+- domanda principale: Come si passa da «Continued adaptation» a «TIES e DARE» mantenendo osservabile versioni di pesi e modifiche localizzate del modello?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, compare, invariante o limite in chiusura
-- nodi e contenuti: 1: Continued adaptation; 2: Task arithmetic; 3: TIES e DARE; 4: Model editing; 5: Versioning e rollback
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: un merge senza valutazione può introdurre regressioni invisibili
-- fonti collegate: SRC-54-001 ... SRC-54-004
-- alt text: Diagramma UPDATE-01 del Capitolo 54, famiglia compare. Domanda: Il diagramma segue il passaggio: Continued adaptation, merge, editing e regressione. L'input è base model, delta, task e rollback point, l'output è versione nuova, diff e test di regressione; il vincolo da controllare è che un merge senza valutazione può introdurre regressioni invisibili La composizione usa i passaggi Continued adaptation, Task arithmetic, TIES e DARE, Model editing, Versioning e rollback.
+- file candidato: candidate-v48.png
+- oggetto osservato: versioni di pesi e modifiche localizzate del modello
+- input: base model, delta, task e rollback point
+- output: versione nuova, diff e test di regressione
+- nodi locali: Continued adaptation: Nuovi dati e obiettivi aggiornano il checkpoint. Replay, regolarizzazione e valutazioni…; Task arithmetic: Differenze tra checkpoint possono essere combinate come vettori. La compatibilità…; TIES e DARE: Metodi di merging riducono interferenze mediante selezione, segni o sparsificazione. I…
+- limite visualizzato: un merge senza valutazione può introdurre regressioni invisibili
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

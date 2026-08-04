@@ -1,14 +1,16 @@
 # Specifica visuale FOUNDATI-02
 
-- famiglia: timeline
-- domanda principale: La stessa informazione viene seguita lungo i passi del processo
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: evaluation_lenses
+- domanda principale: Quale controllo collega «Energy-based model» a «Qualità, copertura e valutazione» senza superare il limite dichiarato?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v49.png
-- ordine di lettura: titolo, domanda, timeline, invariante o limite in chiusura
-- nodi e contenuti: 1: Imparare una distribuzione; 2: Modelli espliciti e impliciti; 3: Variabili latenti; 4: Energy-based model; 5: Qualità, copertura e valutazione
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: un campione plausibile non dimostra copertura dell'intera distribuzione
-- fonti collegate: SRC-20-001 ... SRC-20-004
-- alt text: Diagramma FOUNDATI-02 del Capitolo 20, famiglia timeline. Domanda: La stessa informazione viene seguita lungo i passi del processo La composizione usa i passaggi Imparare una distribuzione, Modelli espliciti e impliciti, Variabili latenti, Energy-based model, Qualità, copertura e valutazione.
+- file candidato: candidate-v49.png
+- oggetto osservato: una distribuzione sui dati o su una variabile latente
+- input: un dato x, un rumore epsilon o una variabile z
+- output: una probabilità, un punteggio o un campione
+- nodi locali: Energy-based model: Una energia non normalizzata assegna punteggi alle configurazioni. La costante di…; Qualità, copertura e valutazione: Campioni plausibili non garantiscono copertura. Likelihood e precision-recall generativa…
+- limite visualizzato: un campione plausibile non dimostra copertura dell'intera distribuzione
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

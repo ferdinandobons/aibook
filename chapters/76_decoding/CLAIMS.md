@@ -1,71 +1,70 @@
 # Registro dei claim. Capitolo 76
 
-- Data di revisione: 3 agosto 2026
-- Routing verificato: tema `decoding` con dossier fonte specifico del capitolo.
-- Stati usati: aperta, verificata, corretta, respinta, rimossa.
+- Data di revisione: 4 agosto 2026
+- Regola: ogni claim pubblico è collegato al locator registrato nel dossier e mantiene il proprio limite.
+- Stati usati: verificata; corretta; aperta.
 
 ## CL-76-01
 
 - Affermazione esatta: Greedy sceglie il massimo locale; beam mantiene più prefissi secondo score accumulati e criteri di lunghezza.
 - Tipo: definizione o meccanismo attribuito alla fonte.
-- Fonte o prova: SRC-76-001, dossier FONTI_PRIMARIE.md.
-- Sezione o pagina: Abstract / pagina iniziale; 3 Language Model Decoding; 4.3 Natural Language Does Not Maximize Probability (claim collegato alla sezione «Greedy e beam search» del capitolo).
-- Versione o data: revisione locale 3 agosto 2026; versione della fonte registrata nel dossier.
-- Controllo indipendente: pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito; claim ristretto a definizione o meccanismo e nessun risultato quantitativo trasferito senza setup.
+- Fonte o prova: SRC-76-001, dossier `FONTI_PRIMARIE.md`.
+- Sezione pubblica: «Greedy e beam search».
+- Versione o data: revisione locale 4 agosto 2026; versione e data della fonte nel dossier.
+- Controllo indipendente: la citazione è adiacente al claim; titolo, URL, locator, perimetro e limiti sono registrati nel dossier; nessun risultato quantitativo viene trasferito senza il relativo setup.
 - Esito: verificata
-- Note: il limite della fonte resta nel paragrafo e nel dossier.
+- Note: esempi, derivazioni e output locali restano distinti dall'evidenza della fonte.
 
 ## CL-76-02
 
 - Affermazione esatta: Temperature, top-k e top-p modificano la distribuzione prima dell'estrazione. Seed e backend influenzano la riproducibilità.
 - Tipo: definizione o meccanismo attribuito alla fonte.
-- Fonte o prova: SRC-76-002, dossier FONTI_PRIMARIE.md.
-- Sezione o pagina: Abstract / pagina iniziale; Diverse beam Search: Decoding Diverse Solutions from Neural Sequence Models (claim collegato alla sezione «Sampling» del capitolo).
-- Versione o data: revisione locale 3 agosto 2026; versione della fonte registrata nel dossier.
-- Controllo indipendente: pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito; claim ristretto a definizione o meccanismo e nessun risultato quantitativo trasferito senza setup.
+- Fonte o prova: SRC-76-002, dossier `FONTI_PRIMARIE.md`.
+- Sezione pubblica: «Sampling».
+- Versione o data: revisione locale 4 agosto 2026; versione e data della fonte nel dossier.
+- Controllo indipendente: la citazione è adiacente al claim; titolo, URL, locator, perimetro e limiti sono registrati nel dossier; nessun risultato quantitativo viene trasferito senza il relativo setup.
 - Esito: verificata
-- Note: il limite della fonte resta nel paragrafo e nel dossier.
+- Note: esempi, derivazioni e output locali restano distinti dall'evidenza della fonte.
 
 ## CL-76-03
 
 - Affermazione esatta: Repetition penalty, stop sequence e minimum length intervengono in punti differenti e possono interagire.
 - Tipo: definizione o meccanismo attribuito alla fonte.
-- Fonte o prova: SRC-76-003, dossier FONTI_PRIMARIE.md.
-- Sezione o pagina: Abstract / pagina iniziale; Locally Typical Sampling; 5 Sampling from a Language Process; 5.2 Locally Typical Sampling (claim collegato alla sezione «Penalità e stop» del capitolo).
-- Versione o data: revisione locale 3 agosto 2026; versione della fonte registrata nel dossier.
-- Controllo indipendente: pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito; claim ristretto a definizione o meccanismo e nessun risultato quantitativo trasferito senza setup.
+- Fonte o prova: SRC-76-003, dossier `FONTI_PRIMARIE.md`.
+- Sezione pubblica: «Penalità e stop».
+- Versione o data: revisione locale 4 agosto 2026; versione e data della fonte nel dossier.
+- Controllo indipendente: la citazione è adiacente al claim; titolo, URL, locator, perimetro e limiti sono registrati nel dossier; nessun risultato quantitativo viene trasferito senza il relativo setup.
 - Esito: verificata
-- Note: il limite della fonte resta nel paragrafo e nel dossier.
+- Note: esempi, derivazioni e output locali restano distinti dall'evidenza della fonte.
 
 ## CL-76-04
 
 - Affermazione esatta: Grammar, automi e schema limitano i token ammessi. Validità strutturale non garantisce argomenti corretti.
 - Tipo: definizione o meccanismo attribuito alla fonte.
-- Fonte o prova: SRC-76-004, dossier FONTI_PRIMARIE.md.
-- Sezione o pagina: Abstract / pagina iniziale; Grammar-Constrained Decoding for Structured NLP Tasks without Finetuning; 2.2 Grammar-constrained decoding (GCD); Appendix F Decoding Settings (claim collegato alla sezione «Constrained decoding» del capitolo).
-- Versione o data: revisione locale 3 agosto 2026; versione della fonte registrata nel dossier.
-- Controllo indipendente: pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito; claim ristretto a definizione o meccanismo e nessun risultato quantitativo trasferito senza setup.
+- Fonte o prova: SRC-76-004, dossier `FONTI_PRIMARIE.md`.
+- Sezione pubblica: «Constrained decoding».
+- Versione o data: revisione locale 4 agosto 2026; versione e data della fonte nel dossier.
+- Controllo indipendente: la citazione è adiacente al claim; titolo, URL, locator, perimetro e limiti sono registrati nel dossier; nessun risultato quantitativo viene trasferito senza il relativo setup.
 - Esito: verificata
-- Note: il limite della fonte resta nel paragrafo e nel dossier.
+- Note: esempi, derivazioni e output locali restano distinti dall'evidenza della fonte.
 
 ## CL-76-05
 
 - Affermazione esatta: Qualità, diversità, latency, token per secondo e probabilità della sequenza devono essere letti insieme.
 - Tipo: definizione o meccanismo attribuito alla fonte.
-- Fonte o prova: SRC-76-001, dossier FONTI_PRIMARIE.md.
-- Sezione o pagina: Abstract / pagina iniziale; 3 Language Model Decoding; 4.3 Natural Language Does Not Maximize Probability (claim collegato alla sezione «Metriche» del capitolo).
-- Versione o data: revisione locale 3 agosto 2026; versione della fonte registrata nel dossier.
-- Controllo indipendente: pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito; claim ristretto a definizione o meccanismo e nessun risultato quantitativo trasferito senza setup.
+- Fonte o prova: SRC-76-001, dossier `FONTI_PRIMARIE.md`.
+- Sezione pubblica: «Metriche».
+- Versione o data: revisione locale 4 agosto 2026; versione e data della fonte nel dossier.
+- Controllo indipendente: la citazione è adiacente al claim; titolo, URL, locator, perimetro e limiti sono registrati nel dossier; nessun risultato quantitativo viene trasferito senza il relativo setup.
 - Esito: verificata
-- Note: il limite della fonte resta nel paragrafo e nel dossier.
+- Note: esempi, derivazioni e output locali restano distinti dall'evidenza della fonte.
 
 ## CL-76-CODE
 
-- Affermazione esatta: lo snippet snip_76_contract.py produce l'output osservabile e il test rifiuta un input incoerente.
+- Affermazione esatta: `snip_76_contract.py` produce l'output JSON versionato; il test controlla output atteso, determinismo, serializzazione, valori finiti e limite interpretativo.
 - Tipo: risultato eseguito localmente.
-- Fonte o prova: code/snip_76_contract.py, test associato e output SNIP.
-- Sezione o pagina: Dall'algoritmo al codice.
-- Versione o data: Python 3.13.12, CPU, 3 agosto 2026.
-- Controllo indipendente: esecuzione dello snippet e unittest nello stesso ambiente.
+- Fonte o prova: code/snip_76_contract.py, code/test_76_contract.py e code/outputs/SNIP-76-001.txt.
+- Versione o data: Python 3.13.12, CPU, 4 agosto 2026.
+- Controllo indipendente: esecuzione dello snippet e unittest da processo separato.
 - Esito: verificata
-- Note: esempio delimitato, non benchmark di produzione.
+- Note: esempio delimitato e didattico; non è un benchmark di produzione.

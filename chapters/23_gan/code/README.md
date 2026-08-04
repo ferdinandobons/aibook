@@ -1,5 +1,8 @@
-# Codice del Capitolo 23
+# Esempio verificato. Capitolo 23
 
-Lo snippet snip_23_contract.py rende osservabile il contratto centrale di Generative Adversarial Network con valori piccoli e leggibili.
-Il test test_23_contract.py controlla determinismo, output, invariante e una shape incoerente.
-Il risultato è un esempio locale, non un benchmark di produzione.
+`snip_23_contract.py` esegue il caso minimo usato nel testo di **Generative Adversarial Network**. `test_23_contract.py` conserva l'output atteso, controlla determinismo, serializzazione, valori finiti e presenza del limite interpretativo.
+
+```bash
+python snip_23_contract.py
+python -m unittest -v test_23_contract.py
+```

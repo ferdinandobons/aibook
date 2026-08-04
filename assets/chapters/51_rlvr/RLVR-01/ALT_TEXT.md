@@ -1,3 +1,3 @@
-# Alt text RLVR-01
+# Testo alternativo
 
-Diagramma RLVR-01 del Capitolo 51, famiglia funnel. Domanda: Il diagramma segue il passaggio: Reward verificabile, policy update e gestione di reward sparso. L'input è prompt, rollout, gruppo di risposte e verifier, l'output è reward, vantaggio e nuova policy; il vincolo da controllare è che la verificabilità vale solo per il dominio coperto dal verifier La composizione usa i passaggi Reward verificabile, Rollout e gruppi, GRPO e policy update, Sparse reward, Verificabilità limitata.
+RLVR-01, Reinforcement learning con reward verificabili. Come si passa da «Reward verificabile» a «GRPO e policy update» mantenendo osservabile una risposta valutata da una regola verificabile? La composizione rlvr loop collega «Reward verificabile», «Rollout e gruppi», «GRPO e policy update». L'input è prompt, rollout, gruppo di risposte e verifier; l'output è reward, vantaggio e nuova policy. Il limite esplicito è: la verificabilità vale solo per il dominio coperto dal verifier.

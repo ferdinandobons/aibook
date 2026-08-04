@@ -1,3 +1,3 @@
-# Alt text FLOW-02
+# Testo alternativo
 
-Diagramma FLOW-02 del Capitolo 25, famiglia pipeline. Domanda: Il diagramma segue il passaggio: Forward noising, score o velocity e sampler. L'input è x_0, rumore epsilon e timestep t, l'output è stima del rumore e campione ricostruito; il vincolo da controllare è che parametrizzazione e scheduler fanno parte del contratto La composizione usa i passaggi Corrompere e ricostruire, Score matching, Parametrizzazioni epsilon, x0 e v, Sampler, Flow matching e rectified flow.
+FLOW-02, Diffusione, score matching e flow matching. Quale controllo collega «Sampler» a «Flow matching e rectified flow» senza superare il limite dichiarato? La composizione sampler path collega «Sampler», «Flow matching e rectified flow». L'input è x_0, rumore epsilon e timestep t; l'output è stima del rumore e campione ricostruito. Il limite esplicito è: parametrizzazione e scheduler fanno parte del contratto.

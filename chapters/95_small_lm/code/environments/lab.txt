@@ -1,0 +1,6 @@
+Python 3.13.12
+PyTorch 2.12.1
+CPU
+Date: 4 agosto 2026
+Command: python tiny_transformer_lm.py
+Test: python test_tiny_transformer_lm.py

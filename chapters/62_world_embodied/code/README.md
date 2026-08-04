@@ -1,5 +1,8 @@
-# Codice del Capitolo 62
+# Esempio verificato. Capitolo 62
 
-Lo snippet snip_62_contract.py rende osservabile il contratto centrale di World model, embodied AI e vision-language-action con valori piccoli e leggibili.
-Il test test_62_contract.py controlla determinismo, output, invariante e una shape incoerente.
-Il risultato è un esempio locale, non un benchmark di produzione.
+`snip_62_contract.py` esegue il caso minimo usato nel testo di **World model, embodied AI e vision-language-action**. `test_62_contract.py` conserva l'output atteso, controlla determinismo, serializzazione, valori finiti e presenza del limite interpretativo.
+
+```bash
+python snip_62_contract.py
+python -m unittest -v test_62_contract.py
+```

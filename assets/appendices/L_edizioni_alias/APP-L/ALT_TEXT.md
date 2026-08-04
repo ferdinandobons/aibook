@@ -1,3 +1,3 @@
 # Alt text APP-L
 
-Mappa dei contenuti dell'appendice L.
+Identità editoriale tra alias e versioni. concetto: nome canonico; alias: forma storica; versione: data e stato; rinvio: posizione attuale. Limite: alias, edizione e implementazione restano campi distinti.

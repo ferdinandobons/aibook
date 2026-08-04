@@ -1,3 +1,0 @@
-chapter: 48
-title: Preferenze, reward model e RLHF
-output: [0.755272, 0.334759]

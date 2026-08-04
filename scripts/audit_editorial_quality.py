@@ -105,6 +105,8 @@ def audit_chapter(chapter: Path) -> dict[str, object]:
     public = public_text(text)
     heading = CHAPTER_RE.search(text)
     number = int(chapter.name.split("_", 1)[0])
+    policy_match = re.search(r"^code_policy:\s*(\w+)\s*$", text, re.MULTILINE)
+    code_policy = policy_match.group(1) if policy_match else "undeclared"
     title = heading.group(2) if heading else chapter.name
     section_titles = [m.group(1) for m in HEADING_RE.finditer(public) if not m.group(1).startswith(("Capitolo", "Fonti", "Dossier", "Materiali"))]
     image_paths = [((chapter / link).resolve()) for link in IMAGE_RE.findall(text)]
@@ -137,8 +139,8 @@ def audit_chapter(chapter: Path) -> dict[str, object]:
     tests = sorted(code_dir.glob("test_*.py")) if code_dir.exists() else []
     outputs = sorted((code_dir / "outputs").glob("SNIP-*.txt")) if (code_dir / "outputs").exists() else []
     problems: list[str] = []
-    if COMMON_EXAMPLE not in public:
-        problems.append("esempio comune assente")
+    if public.count(COMMON_EXAMPLE) > 2:
+        problems.append("esempio del pacco ripetuto oltre il valore locale")
     if len(section_titles) < 3:
         problems.append("meno di tre sezioni pubbliche")
     if len(para) < 15:
@@ -150,8 +152,18 @@ def audit_chapter(chapter: Path) -> dict[str, object]:
     problems.extend(formula_problems)
     if duplicate_paragraphs:
         problems.append(f"paragrafi ripetuti dopo normalizzazione: {len(duplicate_paragraphs)}")
-    if not code_modules or not tests or not outputs:
-        problems.append("evidenza codice incompleta")
+    if code_policy == "reference":
+        if not code_modules or not tests or not outputs:
+            problems.append("evidenza codice incompleta")
+    elif code_policy == "exception":
+        code_audit = code_dir / "CODE_AUDIT.md"
+        audit_text = code_audit.read_text(encoding="utf-8") if code_audit.exists() else ""
+        if "policy: exception" not in audit_text or "motivazione:" not in audit_text:
+            problems.append("eccezione codice non documentata")
+        if code_modules or tests or outputs:
+            problems.append("eccezione codice con vecchi artefatti eseguibili")
+    elif number >= 14:
+        problems.append("code_policy non dichiarata")
     return {
         "number": number,
         "title": title,
@@ -167,7 +179,7 @@ def audit_chapter(chapter: Path) -> dict[str, object]:
         "duplicate_paragraphs": len(duplicate_paragraphs),
         "generic_source_lines": len(generic_source_lines),
         "generic_claim_lines": len(generic_claim_lines),
-        "code": {"modules": len(code_modules), "tests": len(tests), "outputs": len(outputs)},
+        "code": {"policy": code_policy, "modules": len(code_modules), "tests": len(tests), "outputs": len(outputs)},
         "problems": problems,
     }
 

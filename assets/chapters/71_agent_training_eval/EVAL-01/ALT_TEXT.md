@@ -1,3 +1,3 @@
-# Alt text EVAL-01
+# Testo alternativo
 
-Diagramma EVAL-01 del Capitolo 71, famiglia chart. Domanda: Il diagramma segue il passaggio: SFT, RL, benchmark e harness. L'input è task, trace, policy, outcome e costo, l'output è score di task, violazioni e failure per step; il vincolo da controllare è che task riuscito e traiettoria sicura sono criteri distinti La composizione usa i passaggi Traiettorie come dati, Imitation e SFT, RL in ambienti, Benchmark agentici, Evaluation harness.
+EVAL-01, Training e valutazione degli agenti. Come si passa da «Traiettorie come dati» a «RL in ambienti» mantenendo osservabile traiettorie agentiche usate come dati e valutazione? La composizione trajectory eval collega «Traiettorie come dati», «Imitation e SFT», «RL in ambienti». L'input è task, trace, policy, outcome e costo; l'output è score di task, violazioni e failure per step. Il limite esplicito è: task riuscito e traiettoria sicura sono criteri distinti.

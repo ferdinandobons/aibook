@@ -1,3 +1,3 @@
-# Alt text EVAL-02
+# Testo alternativo
 
-Diagramma EVAL-02 del Capitolo 71, famiglia funnel. Domanda: Il diagramma segue il passaggio: SFT, RL, benchmark e harness. L'input è task, trace, policy, outcome e costo, l'output è score di task, violazioni e failure per step; il vincolo da controllare è che task riuscito e traiettoria sicura sono criteri distinti La composizione usa i passaggi Traiettorie come dati, Imitation e SFT, RL in ambienti, Benchmark agentici, Evaluation harness.
+EVAL-02, Training e valutazione degli agenti. Quale controllo collega «Benchmark agentici» a «Evaluation harness» senza superare il limite dichiarato? La composizione agent scorecard collega «Benchmark agentici», «Evaluation harness». L'input è task, trace, policy, outcome e costo; l'output è score di task, violazioni e failure per step. Il limite esplicito è: task riuscito e traiettoria sicura sono criteri distinti.

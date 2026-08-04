@@ -1,3 +1,3 @@
-# Alt text DECODING-02
+# Testo alternativo
 
-Diagramma DECODING-02 del Capitolo 76, famiglia chart. Domanda: Il diagramma segue il passaggio: Greedy, beam, sampling, penalty e stop. L'input è logits, prefisso, temperatura e vincolo, l'output è token scelto, sequenza e metrica di costo; il vincolo da controllare è che il decoding modifica la traiettoria, non corregge il modello a monte La composizione usa i passaggi Greedy e beam search, Sampling, Penalità e stop, Constrained decoding, Metriche.
+DECODING-02, Decoding e generazione vincolata. Quale controllo collega «Constrained decoding» a «Metriche» senza superare il limite dichiarato? La composizione sampling controls collega «Constrained decoding», «Metriche». L'input è logits, prefisso, temperatura e vincolo; l'output è token scelto, sequenza e metrica di costo. Il limite esplicito è: il decoding modifica la traiettoria, non corregge il modello a monte.

@@ -1,81 +1,32 @@
-# Piano interno. Capitolo 93
+# Piano editoriale. Capitolo 93
 
-- Domanda centrale: quale contratto costruisce Diritto, governance e sostenibilità?
-- Oggetto continuo: una decisione di governance su un sistema e il suo rischio; input guida: ruoli, uso previsto, evidenza, impatto e consumo.
-- Prerequisito stabile: Capitolo 92, Watermarking e provenienza dei contenuti.
-- Gap: govern, map, measure, manage, document e change control.
-- Output consegnato: decisione, responsabilità, evidenza e registro d'incidente; consumer successivo: Capitolo 94, Percorso pratico dai fondamenti.
-- Invariante principale: un framework orienta il rischio ma non certifica automaticamente la conformità.
-- Visuali: GOVERNANCE-01 e GOVERNANCE-02, con famiglie compositive variabili.
-- Snippet: code/snip_93_contract.py; output: code/outputs/SNIP-93-001.txt.
-- Gate aperti: revisione autoriale, lettura ad alta voce e approvazione finale delle visuali.
+## Obiettivo didattico
 
-## Transizione 1. Ruoli e responsabilità
+Seguire **Diritto, governance e sostenibilità** da ruoli, uso previsto, evidenza, impatto e consumo a decisione, responsabilità, evidenza e registro d'incidente, osservando govern, map, measure, manage, document e change control senza oltrepassare questo limite: un framework orienta il rischio ma non certifica automaticamente la conformità.
 
-- Ultima affermazione stabile: una decisione di governance su un sistema e il suo rischio.
-- Concetto nuovo: Owner, sviluppatore, deployer, utente e fornitore hanno controlli e informazioni differenti. La matrice RACI rende esplicite decisioni ed escalation.
-- Input e shape: ruoli, uso previsto, evidenza, impatto e consumo.
-- Operazione: govern, map, measure, manage, document e change control.
-- Output e shape: decisione, responsabilità, evidenza e registro d'incidente.
-- Che cosa cambia: il passaggio specifico di «Ruoli e responsabilità».
-- Invariante: un framework orienta il rischio ma non certifica automaticamente la conformità.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: un caso d'uso assegnato a owner, misura, controllo e decisione di escalation; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Risk management.
-- Prova: SRC-93-001 e sezione pubblica corrispondente.
+## Prerequisiti reali
 
-## Transizione 2. Risk management
+- Capitolo 3: Il ciclo di vita di un sistema di AI
+- Capitolo 4: Come valutare criticamente un risultato di AI
+- Capitolo 82: LLMOps, edge, costo ed energia
+- Capitolo 91: Privacy, fairness e unlearning
 
-- Ultima affermazione stabile: una decisione di governance su un sistema e il suo rischio.
-- Concetto nuovo: NIST AI RMF organizza govern, map, measure e manage. Il framework guida un processo e non certifica automaticamente un sistema.
-- Input e shape: ruoli, uso previsto, evidenza, impatto e consumo.
-- Operazione: govern, map, measure, manage, document e change control.
-- Output e shape: decisione, responsabilità, evidenza e registro d'incidente.
-- Che cosa cambia: il passaggio specifico di «Risk management».
-- Invariante: un framework orienta il rischio ma non certifica automaticamente la conformità.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: un caso d'uso assegnato a owner, misura, controllo e decisione di escalation; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Norme e documentazione.
-- Prova: SRC-93-002 e sezione pubblica corrispondente.
+## Percorso della lezione
 
-## Transizione 3. Norme e documentazione
+1. **Ruoli e responsabilità.** Owner, sviluppatore, deployer, utente e fornitore hanno controlli e informazioni differenti. Governance, accountability e comunicazione devono essere documentate. Prova: SRC-93-001.
+2. **Risk management.** NIST AI RMF organizza govern, map, measure e manage. Il framework guida un processo e non certifica automaticamente un sistema. Prova: SRC-93-002.
+3. **Norme e documentazione.** Obblighi dipendono da giurisdizione, ruolo e uso. Versione, data e parere legale devono essere separati dal testo tecnico stabile. Prova: SRC-93-003.
+4. **Incidenti e change management.** Segnalazione, classificazione, risposta e comunicazione collegano monitoraggio e governance. Prova: SRC-93-001.
+5. **Sostenibilità.** Energia, acqua, emissioni e ciclo di vita dell'hardware richiedono indicatori, baseline e confini di misura documentati. Prova: SRC-93-004.
 
-- Ultima affermazione stabile: una decisione di governance su un sistema e il suo rischio.
-- Concetto nuovo: Obblighi dipendono da giurisdizione, ruolo e uso. Versione, data e parere legale devono essere separati dal testo tecnico stabile.
-- Input e shape: ruoli, uso previsto, evidenza, impatto e consumo.
-- Operazione: govern, map, measure, manage, document e change control.
-- Output e shape: decisione, responsabilità, evidenza e registro d'incidente.
-- Che cosa cambia: il passaggio specifico di «Norme e documentazione».
-- Invariante: un framework orienta il rischio ma non certifica automaticamente la conformità.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: un caso d'uso assegnato a owner, misura, controllo e decisione di escalation; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Incidenti e change management.
-- Prova: SRC-93-003 e sezione pubblica corrispondente.
+## Prove e artefatti
 
-## Transizione 4. Incidenti e change management
+- eccezione motivata: Norme e responsabilità dipendono da ruolo, giurisdizione e data: uno script locale produrrebbe una falsa impressione di conformità automatica.
+- visuali candidate: GOVERNANCE-01, GOVERNANCE-02; le domande pedagogiche sono distinte e l'approvazione autoriale resta aperta.
+- fonti: `FONTI_PRIMARIE.md`; corrispondenza claim-fonte: `CLAIMS.md`.
 
-- Ultima affermazione stabile: una decisione di governance su un sistema e il suo rischio.
-- Concetto nuovo: Segnalazione, classificazione, rollback e comunicazione collegano monitoraggio e governance.
-- Input e shape: ruoli, uso previsto, evidenza, impatto e consumo.
-- Operazione: govern, map, measure, manage, document e change control.
-- Output e shape: decisione, responsabilità, evidenza e registro d'incidente.
-- Che cosa cambia: il passaggio specifico di «Incidenti e change management».
-- Invariante: un framework orienta il rischio ma non certifica automaticamente la conformità.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: un caso d'uso assegnato a owner, misura, controllo e decisione di escalation; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Sostenibilità.
-- Prova: SRC-93-001 e sezione pubblica corrispondente.
+## Gate aperti
 
-## Transizione 5. Sostenibilità
-
-- Ultima affermazione stabile: una decisione di governance su un sistema e il suo rischio.
-- Concetto nuovo: Compute, energia, acqua, hardware e ciclo di vita richiedono confini di misura e confronti normalizzati per risultato utile.
-- Input e shape: ruoli, uso previsto, evidenza, impatto e consumo.
-- Operazione: govern, map, measure, manage, document e change control.
-- Output e shape: decisione, responsabilità, evidenza e registro d'incidente.
-- Che cosa cambia: il passaggio specifico di «Sostenibilità».
-- Invariante: un framework orienta il rischio ma non certifica automaticamente la conformità.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: un caso d'uso assegnato a owner, misura, controllo e decisione di escalation; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Percorso pratico dai fondamenti.
-- Prova: SRC-93-004 e sezione pubblica corrispondente.
+- lettura editoriale finale da parte dell'autore;
+- approvazione delle visuali nel contesto impaginato;
+- benchmark esterni solo quando il capitolo formula un claim di scala o di produzione.

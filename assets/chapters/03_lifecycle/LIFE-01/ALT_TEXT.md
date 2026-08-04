@@ -1,3 +1,3 @@
-# Alt text `LIFE-01`
+# Testo alternativo
 
-Diagramma ciclico orizzontale su sfondo bianco. La riga superiore mostra quattro fasi da sinistra a destra: definire il problema, costruire i dati, addestrare e valutare. Una freccia scende alla riga inferiore, che procede da destra a sinistra attraverso integrazione, deployment, monitoraggio e aggiornamento o ritiro. Ogni fase contiene l'artefatto verificabile associato, per esempio specifica, dataset versionato, configurazione e checkpoint, metriche e model card, release, telemetria e rollback. Una freccia rossa riporta dall'ultima fase alla definizione del problema. Il footer precisa che il feedback osservato in produzione deve essere verificato e versionato prima di diventare dato di training.
+Ciclo di vita e artefatti di un sistema di AI. Quale trasformazione centrale rende osservabile «Prima del modello viene il problema» nel capitolo 3?

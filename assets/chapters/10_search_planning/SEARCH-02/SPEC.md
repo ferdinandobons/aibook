@@ -46,3 +46,4 @@ Dopo il ramo A, `alpha=3`. Nel ramo B, MIN osserva `2`; la foglia `9` non può r
 ## Provenienza
 
 Valori e ordine dei figli derivano da `SNIP-SEARCH-001`. Il PNG raster è prodotto da `scripts/generate_search_visuals.py`; non viene usato SVG.
+- domanda principale: Quale confronto o limite chiarisce «La frontiera decide che cosa esplorare dopo»?

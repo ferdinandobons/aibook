@@ -1,14 +1,16 @@
 # Specifica visuale UPDATE-02
 
-- famiglia: timeline
-- domanda principale: Il diagramma segue il passaggio: Continued adaptation, merge, editing e regressione. L'input è base model, delta, task e rollback point, l'output è versione nuova, diff e test di regressione; il vincolo da controllare è che un merge senza valutazione può introdurre regressioni invisibili
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: side_effect_trace
+- domanda principale: Quale controllo collega «Model editing» a «Versioning e rollback» senza superare il limite dichiarato?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, timeline, invariante o limite in chiusura
-- nodi e contenuti: 1: Continued adaptation; 2: Task arithmetic; 3: TIES e DARE; 4: Model editing; 5: Versioning e rollback
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: un merge senza valutazione può introdurre regressioni invisibili
-- fonti collegate: SRC-54-001 ... SRC-54-004
-- alt text: Diagramma UPDATE-02 del Capitolo 54, famiglia timeline. Domanda: Il diagramma segue il passaggio: Continued adaptation, merge, editing e regressione. L'input è base model, delta, task e rollback point, l'output è versione nuova, diff e test di regressione; il vincolo da controllare è che un merge senza valutazione può introdurre regressioni invisibili La composizione usa i passaggi Continued adaptation, Task arithmetic, TIES e DARE, Model editing, Versioning e rollback.
+- file candidato: candidate-v48.png
+- oggetto osservato: versioni di pesi e modifiche localizzate del modello
+- input: base model, delta, task e rollback point
+- output: versione nuova, diff e test di regressione
+- nodi locali: Model editing: ROME, MEMIT e famiglie affini cercano modifiche localizzate. Località, generalizzazione…; Versioning e rollback: Un update produce un nuovo artefatto con fonti, test e dipendenze. Merging ed editing…
+- limite visualizzato: un merge senza valutazione può introdurre regressioni invisibili
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

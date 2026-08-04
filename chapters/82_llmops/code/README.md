@@ -1,5 +1,8 @@
-# Codice del Capitolo 82
+# Esempio verificato. Capitolo 82
 
-Lo snippet snip_82_contract.py rende osservabile il contratto centrale di LLMOps, edge, costo ed energia con valori piccoli e leggibili.
-Il test test_82_contract.py controlla determinismo, output, invariante e una shape incoerente.
-Il risultato è un esempio locale, non un benchmark di produzione.
+`snip_82_contract.py` esegue il caso minimo usato nel testo di **LLMOps, edge, costo ed energia**. `test_82_contract.py` conserva l'output atteso, controlla determinismo, serializzazione, valori finiti e presenza del limite interpretativo.
+
+```bash
+python snip_82_contract.py
+python -m unittest -v test_82_contract.py
+```

@@ -1,3 +1,0 @@
-chapter: 51
-title: Reinforcement learning con reward verificabili
-output: [0.755272, 0.334759]

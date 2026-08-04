@@ -1,3 +1,3 @@
-# Alt text `EVAL-01`
+# Testo alternativo
 
-Diagramma orizzontale su sfondo bianco. Otto box numerati formano un percorso a serpentina. La riga superiore procede da Domanda a Protocollo, Baseline e Metrica. Una freccia scende alla riga inferiore, che continua con Slice e costi, Variabilità, Controlli e Claim. Ogni box contiene una domanda breve, per esempio quali dati e split sono stati usati, rispetto a quale riferimento viene misurato il miglioramento e quali errori importanti sono nascosti dalla media. Il footer precisa che un punteggio può essere corretto mentre il claim costruito su di esso resta troppo ampio.
+Dal risultato al claim sostenibile. Quale trasformazione centrale rende osservabile «Un numero non è ancora una conclusione» nel capitolo 4?

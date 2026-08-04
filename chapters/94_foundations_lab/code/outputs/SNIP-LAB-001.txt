@@ -1,3 +1,0 @@
-chapter: 94
-title: Percorso pratico dai fondamenti
-output: [0.755272, 0.334759]

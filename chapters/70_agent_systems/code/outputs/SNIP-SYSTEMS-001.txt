@@ -1,3 +1,0 @@
-chapter: 70
-title: Multi-agent, browser, computer e code agents
-output: [0.755272, 0.334759]

@@ -1,81 +1,31 @@
-# Piano interno. Capitolo 40
+# Piano editoriale. Capitolo 40
 
-- Domanda centrale: quale contratto costruisce Attention hardware-aware?
-- Oggetto continuo: il calcolo dell'attention e il suo movimento di dati; input guida: tile di Q, K, V, dtype e device.
-- Prerequisito stabile: Capitolo 39, Varianti dell'attention e gestione KV.
-- Gap: tiling, softmax online e ricomputazione.
-- Output consegnato: stesso contratto matematico con memoria e latenza misurate; consumer successivo: Capitolo 41, Linear attention, fast weights e delta rule.
-- Invariante principale: una misura hardware dipende da shape, backend e precisione.
-- Visuali: FLASH-01 e FLASH-02, con famiglie compositive variabili.
-- Snippet: code/snip_40_contract.py; output: code/outputs/SNIP-40-001.txt.
-- Gate aperti: revisione autoriale, lettura ad alta voce e approvazione finale delle visuali.
+## Obiettivo didattico
 
-## Transizione 1. FLOP e movimento dei dati
+Seguire **Attention hardware-aware** da tile di Q, K, V, dtype e device a stesso contratto matematico con memoria e latenza misurate, osservando tiling, softmax online e ricomputazione senza oltrepassare questo limite: una misura hardware dipende da shape, backend e precisione.
 
-- Ultima affermazione stabile: il calcolo dell'attention e il suo movimento di dati.
-- Concetto nuovo: Lo stesso operatore può avere traffico di memoria molto diverso.
-- Input e shape: tile di Q, K, V, dtype e device.
-- Operazione: tiling, softmax online e ricomputazione.
-- Output e shape: stesso contratto matematico con memoria e latenza misurate.
-- Che cosa cambia: il passaggio specifico di «FLOP e movimento dei dati».
-- Invariante: una misura hardware dipende da shape, backend e precisione.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: softmax stabile su due tile con massimo per riga; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Tiling.
-- Prova: SRC-40-001 e sezione pubblica corrispondente.
+## Prerequisiti reali
 
-## Transizione 2. Tiling
+- Capitolo 9: Calcolo numerico, precisione e hardware
+- Capitolo 28: Il meccanismo di attention
+- Capitolo 39: Varianti dell'attention e gestione KV
 
-- Ultima affermazione stabile: il calcolo dell'attention e il suo movimento di dati.
-- Concetto nuovo: Blocchi di Q, K e V vengono elaborati nella memoria on-chip senza materializzare tutti gli score.
-- Input e shape: tile di Q, K, V, dtype e device.
-- Operazione: tiling, softmax online e ricomputazione.
-- Output e shape: stesso contratto matematico con memoria e latenza misurate.
-- Che cosa cambia: il passaggio specifico di «Tiling».
-- Invariante: una misura hardware dipende da shape, backend e precisione.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: softmax stabile su due tile con massimo per riga; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Softmax online.
-- Prova: SRC-40-002 e sezione pubblica corrispondente.
+## Percorso della lezione
 
-## Transizione 3. Softmax online
+1. **FLOP e movimento dei dati.** Lo stesso operatore può avere traffico di memoria molto diverso. Prova: SRC-40-001.
+2. **Tiling.** Blocchi di Q, K e V vengono elaborati nella memoria on-chip senza materializzare tutti gli score. Prova: SRC-40-002.
+3. **Softmax online.** Massimo, denominatore e numeratore vengono aggiornati blocco per blocco. Prova: SRC-40-003.
+4. **Backward e ricomputazione.** Salvare meno intermedi scambia memoria con compute aggiuntivo. Prova: SRC-40-004.
+5. **Backend.** FlashAttention, backend memory-efficient e math rispettano la stessa API entro tolleranze numeriche e condizioni diverse. Prova: SRC-40-001.
 
-- Ultima affermazione stabile: il calcolo dell'attention e il suo movimento di dati.
-- Concetto nuovo: Massimo, denominatore e numeratore vengono aggiornati blocco per blocco.
-- Input e shape: tile di Q, K, V, dtype e device.
-- Operazione: tiling, softmax online e ricomputazione.
-- Output e shape: stesso contratto matematico con memoria e latenza misurate.
-- Che cosa cambia: il passaggio specifico di «Softmax online».
-- Invariante: una misura hardware dipende da shape, backend e precisione.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: softmax stabile su due tile con massimo per riga; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Backward e ricomputazione.
-- Prova: SRC-40-003 e sezione pubblica corrispondente.
+## Prove e artefatti
 
-## Transizione 4. Backward e ricomputazione
+- riferimento minimo: `code/snip_40_contract.py`; test: `code/test_40_contract.py`; output: `code/outputs/SNIP-40-001.txt`.
+- visuali candidate: FLASH-01, FLASH-02; le domande pedagogiche sono distinte e l'approvazione autoriale resta aperta.
+- fonti: `FONTI_PRIMARIE.md`; corrispondenza claim-fonte: `CLAIMS.md`.
 
-- Ultima affermazione stabile: il calcolo dell'attention e il suo movimento di dati.
-- Concetto nuovo: Salvare meno intermedi scambia memoria con compute aggiuntivo.
-- Input e shape: tile di Q, K, V, dtype e device.
-- Operazione: tiling, softmax online e ricomputazione.
-- Output e shape: stesso contratto matematico con memoria e latenza misurate.
-- Che cosa cambia: il passaggio specifico di «Backward e ricomputazione».
-- Invariante: una misura hardware dipende da shape, backend e precisione.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: softmax stabile su due tile con massimo per riga; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Backend.
-- Prova: SRC-40-004 e sezione pubblica corrispondente.
+## Gate aperti
 
-## Transizione 5. Backend
-
-- Ultima affermazione stabile: il calcolo dell'attention e il suo movimento di dati.
-- Concetto nuovo: FlashAttention, backend memory-efficient e math rispettano la stessa API entro tolleranze numeriche e condizioni diverse.
-- Input e shape: tile di Q, K, V, dtype e device.
-- Operazione: tiling, softmax online e ricomputazione.
-- Output e shape: stesso contratto matematico con memoria e latenza misurate.
-- Che cosa cambia: il passaggio specifico di «Backend».
-- Invariante: una misura hardware dipende da shape, backend e precisione.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: softmax stabile su due tile con massimo per riga; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Linear attention, fast weights e delta rule.
-- Prova: SRC-40-001 e sezione pubblica corrispondente.
+- lettura editoriale finale da parte dell'autore;
+- approvazione delle visuali nel contesto impaginato;
+- benchmark esterni solo quando il capitolo formula un claim di scala o di produzione.

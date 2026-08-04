@@ -1,16 +1,12 @@
 # Audit del testo. Capitolo 80
 
-- Review ID: TEXT-80-2026-08-03-R2
-- Versione: 0.4.0-draft2
-- Data: 3 agosto 2026
-- Ambito: testo pubblico, continuità, fonti, formule, esempi, codice e visuali collegate.
-- Profili lettore: principiante motivato; sviluppatore Python; revisore tecnico.
-- Stato complessivo: corretta, nuova review richiesta
-- Correzioni applicate: profondità dei paragrafi, oggetto continuo, causalità input-operazione-output, esempi illustrativi, confini, esercizi, citazioni vicine, link a candidate versioned.
-- Blocker: lettura ad alta voce e approvazione autoriale finale non automatizzabili.
-- Non blocker: benchmark applicativi rinviati perché fuori dal contratto didattico locale.
-- Artefatti riaperti: CHAPTER.md, PLAN.md, CLAIMS.md, FONTI_PRIMARIE.md, code/, visuali candidate e review.
-- Lettura ad alta voce: nuova review richiesta.
-- Anti-template: composizione visuale e posizione delle figure variabili; verifica editoriale manuale ancora richiesta.
-- Esito: il capitolo è una candidatura tecnica completa, non una lezione approvata per la pubblicazione.
-- Reviewer: Codex, revisione automatizzata e controllo raster locale.
+- versione: 0.5.0-draft3
+- data: 4 agosto 2026
+- parole fuori dai blocchi di codice: 946
+- nuclei semantici: 5 (Tensor e pipeline parallelism; Expert parallelism; Prefill-decode disaggregation; Routing; Fault tolerance)
+- paragrafi del vecchio scaffold: assenti secondo `audit_book_quality.py`
+- ripetizioni lunghe tra tre o più capitoli: assenti secondo l'audit trasversale
+- esempi e controlli: specifici per ciascun nucleo; nessun esempio è presentato come benchmark
+- codice nel testo: reference
+- fonti: citazioni vicine ai claim e dossier separato
+- stato: candidatura tecnica revisionata; lettura autoriale e approvazione delle visuali ancora aperte

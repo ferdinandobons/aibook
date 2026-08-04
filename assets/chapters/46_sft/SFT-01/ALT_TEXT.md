@@ -1,3 +1,3 @@
-# Alt text SFT-01
+# Testo alternativo
 
-Diagramma SFT-01 del Capitolo 46, famiglia pipeline. Domanda: Il diagramma segue il passaggio: Teacher forcing e aggiornamento supervisionato. L'input è messaggi, target, mask delle label e mixture, l'output è loss per token e comportamento adattato; il vincolo da controllare è che il formato dei dati e le label decidono che cosa viene ottimizzato La composizione usa i passaggi Dal pretraining alle istruzioni, Formati conversazionali, Instruction mixture, Teacher forcing e generalizzazione, Catastrophic forgetting e controllo.
+SFT-01, Supervised fine-tuning e instruction tuning. Come si passa da «Dal pretraining alle istruzioni» a «Instruction mixture» mantenendo osservabile una coppia prompt-risposta nel formato di instruction tuning? La composizione loss mask collega «Dal pretraining alle istruzioni», «Formati conversazionali», «Instruction mixture». L'input è messaggi, target, mask delle label e mixture; l'output è loss per token e comportamento adattato. Il limite esplicito è: il formato dei dati e le label decidono che cosa viene ottimizzato.

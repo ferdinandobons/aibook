@@ -1,81 +1,32 @@
-# Piano interno. Capitolo 97
+# Piano editoriale. Capitolo 97
 
-- Domanda centrale: quale contratto costruisce Riprodurre e leggere un paper?
-- Oggetto continuo: un claim di paper e il protocollo necessario per riprodurlo; input guida: paper, codice, dati, seed, hardware e metriche.
-- Prerequisito stabile: Capitolo 96, Progetto di produzione completo.
-- Gap: setup indipendente, run, confronto e analisi delle divergenze.
-- Output consegnato: risultato replicato o differenza spiegata; consumer successivo: Capitolo 98, Osservatorio della frontiera.
-- Invariante principale: una replica richiede stesso claim e confini dichiarati, non solo stesso codice.
-- Visuali: REPLICATIO-01 e REPLICATIO-02, con famiglie compositive variabili.
-- Snippet: code/snip_97_contract.py; output: code/outputs/SNIP-97-001.txt.
-- Gate aperti: revisione autoriale, lettura ad alta voce e approvazione finale delle visuali.
+## Obiettivo didattico
 
-## Transizione 1. Domanda e claim
+Seguire **Riprodurre e leggere un paper** da paper, codice, dati, seed, hardware e metriche a risultato replicato o differenza spiegata, osservando setup indipendente, run, confronto e analisi delle divergenze senza oltrepassare questo limite: una replica richiede stesso claim e confini dichiarati, non solo stesso codice.
 
-- Ultima affermazione stabile: un claim di paper e il protocollo necessario per riprodurlo.
-- Concetto nuovo: Il paper viene scomposto in domanda, baseline, metodo, setup, risultati e limiti.
-- Input e shape: paper, codice, dati, seed, hardware e metriche.
-- Operazione: setup indipendente, run, confronto e analisi delle divergenze.
-- Output e shape: risultato replicato o differenza spiegata.
-- Che cosa cambia: il passaggio specifico di «Domanda e claim».
-- Invariante: una replica richiede stesso claim e confini dichiarati, non solo stesso codice.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: due run con seed diversi e divergenza registrata; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Artefatti.
-- Prova: SRC-97-001 e sezione pubblica corrispondente.
+## Prerequisiti reali
 
-## Transizione 2. Artefatti
+- Capitolo 4: Come valutare criticamente un risultato di AI
+- Capitolo 83: Progettare una valutazione
+- Capitolo 94: Percorso pratico dai fondamenti
 
-- Ultima affermazione stabile: un claim di paper e il protocollo necessario per riprodurlo.
-- Concetto nuovo: Codice, checkpoint, dati e configurazioni vengono versionati e confrontati con la descrizione.
-- Input e shape: paper, codice, dati, seed, hardware e metriche.
-- Operazione: setup indipendente, run, confronto e analisi delle divergenze.
-- Output e shape: risultato replicato o differenza spiegata.
-- Che cosa cambia: il passaggio specifico di «Artefatti».
-- Invariante: una replica richiede stesso claim e confini dichiarati, non solo stesso codice.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: due run con seed diversi e divergenza registrata; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Replica.
-- Prova: SRC-97-002 e sezione pubblica corrispondente.
+## Percorso della lezione
 
-## Transizione 3. Replica
+1. **Domanda e claim.** Il paper viene scomposto in domanda, baseline, metodo, setup, risultati e limiti. Prova: SRC-97-001.
+2. **Artefatti.** Codice, checkpoint, dati e configurazioni vengono versionati e confrontati con la descrizione. Prova: SRC-97-002.
+3. **Replica.** Una riproduzione conferma lo stesso codice; una replica indipendente ricostruisce il metodo con scelte proprie. Prova: SRC-97-003.
+4. **Divergenze.** Differenze di hardware, seed, preprocessing e versioni vengono registrate invece di essere nascoste. Prova: SRC-97-004.
+5. **Conclusione sostenibile.** Il risultato viene limitato al setup eseguito e confrontato con l'incertezza del paper originale. Prova: SRC-97-001.
 
-- Ultima affermazione stabile: un claim di paper e il protocollo necessario per riprodurlo.
-- Concetto nuovo: Una riproduzione conferma lo stesso codice; una replica indipendente ricostruisce il metodo con scelte proprie.
-- Input e shape: paper, codice, dati, seed, hardware e metriche.
-- Operazione: setup indipendente, run, confronto e analisi delle divergenze.
-- Output e shape: risultato replicato o differenza spiegata.
-- Che cosa cambia: il passaggio specifico di «Replica».
-- Invariante: una replica richiede stesso claim e confini dichiarati, non solo stesso codice.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: due run con seed diversi e divergenza registrata; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Divergenze.
-- Prova: SRC-97-003 e sezione pubblica corrispondente.
+## Prove e artefatti
 
-## Transizione 4. Divergenze
+- riferimento minimo: `code/snip_97_contract.py`; test: `code/test_97_contract.py`; output: `code/outputs/SNIP-97-001.txt`.
+- laboratorio esteso: `code/replication_protocol.py`; test: `code/test_replication_protocol.py`; output: `code/outputs/REPLICATION-PROTOCOL.txt`.
+- visuali candidate: REPLICATIO-01, REPLICATIO-02; le domande pedagogiche sono distinte e l'approvazione autoriale resta aperta.
+- fonti: `FONTI_PRIMARIE.md`; corrispondenza claim-fonte: `CLAIMS.md`.
 
-- Ultima affermazione stabile: un claim di paper e il protocollo necessario per riprodurlo.
-- Concetto nuovo: Differenze di hardware, seed, preprocessing e versioni vengono registrate invece di essere nascoste.
-- Input e shape: paper, codice, dati, seed, hardware e metriche.
-- Operazione: setup indipendente, run, confronto e analisi delle divergenze.
-- Output e shape: risultato replicato o differenza spiegata.
-- Che cosa cambia: il passaggio specifico di «Divergenze».
-- Invariante: una replica richiede stesso claim e confini dichiarati, non solo stesso codice.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: due run con seed diversi e divergenza registrata; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Conclusione sostenibile.
-- Prova: SRC-97-004 e sezione pubblica corrispondente.
+## Gate aperti
 
-## Transizione 5. Conclusione sostenibile
-
-- Ultima affermazione stabile: un claim di paper e il protocollo necessario per riprodurlo.
-- Concetto nuovo: Il risultato viene limitato al setup eseguito e confrontato con l'incertezza del paper originale.
-- Input e shape: paper, codice, dati, seed, hardware e metriche.
-- Operazione: setup indipendente, run, confronto e analisi delle divergenze.
-- Output e shape: risultato replicato o differenza spiegata.
-- Che cosa cambia: il passaggio specifico di «Conclusione sostenibile».
-- Invariante: una replica richiede stesso claim e confini dichiarati, non solo stesso codice.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: due run con seed diversi e divergenza registrata; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Osservatorio della frontiera.
-- Prova: SRC-97-001 e sezione pubblica corrispondente.
+- lettura editoriale finale da parte dell'autore;
+- approvazione delle visuali nel contesto impaginato;
+- benchmark esterni solo quando il capitolo formula un claim di scala o di produzione.

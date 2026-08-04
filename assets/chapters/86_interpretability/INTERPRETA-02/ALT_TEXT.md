@@ -1,3 +1,3 @@
-# Alt text INTERPRETA-02
+# Testo alternativo
 
-Diagramma INTERPRETA-02 del Capitolo 86, famiglia graph. Domanda: Il diagramma segue il passaggio: Probing, attribution, causal intervention e circuit tracing. L'input è attivazioni, probe, attribution e baseline, l'output è effetto osservato con controllo e confondenti; il vincolo da controllare è che correlazione di una feature non prova causalità La composizione usa i passaggi Oggetto dell'interpretazione, Probing, Attribution, Causal intervention, Circuiti.
+INTERPRETA-02, Interpretabilità delle rappresentazioni e dei circuiti. Quale controllo collega «Causal intervention» a «Circuiti» senza superare il limite dichiarato? La composizione causal boundary collega «Causal intervention», «Circuiti». L'input è attivazioni, probe, attribution e baseline; l'output è effetto osservato con controllo e confondenti. Il limite esplicito è: correlazione di una feature non prova causalità.

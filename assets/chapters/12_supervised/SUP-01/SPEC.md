@@ -19,3 +19,4 @@ Come si separano apprendimento dei parametri, scelta della configurazione e stim
 - validation che seleziona soglia e configurazione;
 - test finale con modello e soglia fissati;
 - risultati illustrativi e confine sul riuso del test.
+- domanda principale: Quale trasformazione centrale rende osservabile «Dalle osservazioni alle coppie input-target» nel capitolo 12?

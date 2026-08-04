@@ -1,5 +1,12 @@
-# Codice del Capitolo 95
+# Esempio verificato. Capitolo 95
 
-Lo snippet snip_95_contract.py rende osservabile il contratto centrale di Costruire un piccolo language model con valori piccoli e leggibili.
-Il test test_95_contract.py controlla determinismo, output, invariante e una shape incoerente.
-Il risultato è un esempio locale, non un benchmark di produzione.
+`snip_95_contract.py` esegue il caso minimo usato nel testo di **Costruire un piccolo language model**. `test_95_contract.py` conserva l'output atteso, controlla determinismo, serializzazione, valori finiti e presenza del limite interpretativo.
+
+```bash
+python snip_95_contract.py
+python -m unittest -v test_95_contract.py
+```
+
+## Decoder causale addestrato e campionato
+
+Codice: `tiny_transformer_lm.py`; test: `test_tiny_transformer_lm.py`; output: `outputs/TINY-TRANSFORMER-LM.txt`; ambiente: `environments/lab.txt`.

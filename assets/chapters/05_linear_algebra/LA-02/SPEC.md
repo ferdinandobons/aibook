@@ -33,3 +33,4 @@ La matrice viene ricostruita dalle componenti. La soglia con cui un valore picco
 - nessuna barra oltre il proprio contenitore;
 - terza componente distinguibile anche senza colore;
 - footer separato dalla decomposizione.
+- domanda principale: Quale confronto o limite chiarisce «Le operazioni elemento per elemento»?

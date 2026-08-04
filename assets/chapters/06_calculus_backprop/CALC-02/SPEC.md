@@ -81,3 +81,4 @@ Il footer deve separare:
 ## Produzione
 
 La prima versione raster è stata respinta perché il footer copriva parzialmente i box inferiori. `candidate-v2.png` aumenta lo spazio verticale e mantiene tutti i contenuti separati. Il file è un PNG raster, non un SVG.
+- domanda principale: Quale confronto o limite chiarisce «Più input richiedono derivate parziali e gradienti»?

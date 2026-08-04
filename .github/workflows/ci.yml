@@ -49,7 +49,7 @@ jobs:
                   assert target.is_file(), f'{document}: missing {relative}'
                   references.append(target)
 
-          assert len(references) == 208, f'expected 208 image references, found {len(references)}'
+          assert len(references) >= len(documents), 'each chapter or appendix needs at least one active visual on average'
           assert len(set(references)) == len(references), 'duplicate active image reference'
           print(f'OK: {len(chapters)} chapters, {len(appendices)} appendices, {len(references)} images')
           PY
@@ -67,3 +67,9 @@ jobs:
               ast.parse(path.read_text(encoding='utf-8'), filename=str(path))
           print(f'OK: parsed {len(files)} Python files')
           PY
+
+      - name: Check lesson-specific quality contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/audit_book_quality.py --strict

@@ -1,14 +1,16 @@
 # Specifica visuale TRACING-02
 
-- famiglia: architecture
-- domanda principale: Il diagramma segue il passaggio: Training SAE, splitting, dead features e tracing. L'input è attivazione, dizionario, sparsità e ricostruzione, l'output è feature, errore di ricostruzione e circuito candidato; il vincolo da controllare è che interpretabilità di una feature richiede valutazione e controlli indipendenti
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: circuit_graph
+- domanda principale: Quale controllo collega «Circuit tracing» a «Valutazione» senza superare il limite dichiarato?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, architecture, invariante o limite in chiusura
-- nodi e contenuti: 1: Superposition; 2: Sparse autoencoder; 3: Dead e splitting features; 4: Circuit tracing; 5: Valutazione
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: interpretabilità di una feature richiede valutazione e controlli indipendenti
-- fonti collegate: SRC-87-001 ... SRC-87-004
-- alt text: Diagramma TRACING-02 del Capitolo 87, famiglia architecture. Domanda: Il diagramma segue il passaggio: Training SAE, splitting, dead features e tracing. L'input è attivazione, dizionario, sparsità e ricostruzione, l'output è feature, errore di ricostruzione e circuito candidato; il vincolo da controllare è che interpretabilità di una feature richiede valutazione e controlli indipendenti La composizione usa i passaggi Superposition, Sparse autoencoder, Dead e splitting features, Circuit tracing, Valutazione.
+- file candidato: candidate-v48.png
+- oggetto osservato: un'attivazione scomposta in feature sparse
+- input: attivazione, dizionario, sparsità e ricostruzione
+- output: feature, errore di ricostruzione e circuito candidato
+- nodi locali: Circuit tracing: Feature e attribution graph possono collegare input, computazione e output. Il grafo…; Valutazione: Interpretabilità automatica, causal intervention e coverage devono essere misurate. Una…
+- limite visualizzato: interpretabilità di una feature richiede valutazione e controlli indipendenti
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

@@ -1,3 +1,3 @@
-# Alt text RAG-02
+# Testo alternativo
 
-Diagramma RAG-02 del Capitolo 65, famiglia graph. Domanda: Il diagramma segue il passaggio: Query transformation, routing e corrective retrieval. L'input è domanda multi-hop, nodi, archi e documenti, l'output è sottoquery, percorso e contesto selezionato; il vincolo da controllare è che un router può sbagliare anche quando il generatore è corretto La composizione usa i passaggi Query transformation, Retrieval adattivo, Corrective RAG, Graph RAG, RAG agentico.
+RAG-02, RAG adattivo, correttivo e basato su grafi. Quale controllo collega «Graph RAG» a «RAG agentico» senza superare il limite dichiarato? La composizione reranking funnel collega «Graph RAG», «RAG agentico». L'input è domanda multi-hop, nodi, archi e documenti; l'output è sottoquery, percorso e contesto selezionato. Il limite esplicito è: un router può sbagliare anche quando il generatore è corretto.

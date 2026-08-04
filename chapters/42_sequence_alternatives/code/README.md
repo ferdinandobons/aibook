@@ -1,5 +1,8 @@
-# Codice del Capitolo 42
+# Esempio verificato. Capitolo 42
 
-Lo snippet snip_42_contract.py rende osservabile il contratto centrale di State-space model, recurrence e long convolution con valori piccoli e leggibili.
-Il test test_42_contract.py controlla determinismo, output, invariante e una shape incoerente.
-Il risultato è un esempio locale, non un benchmark di produzione.
+`snip_42_contract.py` esegue il caso minimo usato nel testo di **State-space model, recurrence e long convolution**. `test_42_contract.py` conserva l'output atteso, controlla determinismo, serializzazione, valori finiti e presenza del limite interpretativo.
+
+```bash
+python snip_42_contract.py
+python -m unittest -v test_42_contract.py
+```

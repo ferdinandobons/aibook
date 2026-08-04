@@ -1,81 +1,31 @@
-# Piano interno. Capitolo 91
+# Piano editoriale. Capitolo 91
 
-- Domanda centrale: quale contratto costruisce Privacy, fairness e unlearning?
-- Oggetto continuo: un dato personale e il comportamento del sistema su gruppi diversi; input guida: record, membership, gruppo, label e budget privacy.
-- Prerequisito stabile: Capitolo 90, Poisoning, backdoor, extraction e supply chain.
-- Gap: DP, fairness evaluation e unlearning.
-- Output consegnato: utility, leakage, disparità e verifica di rimozione; consumer successivo: Capitolo 92, Watermarking e provenienza dei contenuti.
-- Invariante principale: privacy, fairness e utility richiedono metriche e trade-off espliciti.
-- Visuali: FAIRNESS-01 e FAIRNESS-02, con famiglie compositive variabili.
-- Snippet: code/snip_91_contract.py; output: code/outputs/SNIP-91-001.txt.
-- Gate aperti: revisione autoriale, lettura ad alta voce e approvazione finale delle visuali.
+## Obiettivo didattico
 
-## Transizione 1. Memorizzazione e leakage
+Seguire **Privacy, fairness e unlearning** da record, membership, gruppo, label e budget privacy a utility, leakage, disparità e verifica di rimozione, osservando DP, fairness evaluation e unlearning senza oltrepassare questo limite: privacy, fairness e utility richiedono metriche e trade-off espliciti.
 
-- Ultima affermazione stabile: un dato personale e il comportamento del sistema su gruppi diversi.
-- Concetto nuovo: Un modello può riprodurre sequenze rare. Membership inference e extraction misurano rischi differenti.
-- Input e shape: record, membership, gruppo, label e budget privacy.
-- Operazione: DP, fairness evaluation e unlearning.
-- Output e shape: utility, leakage, disparità e verifica di rimozione.
-- Che cosa cambia: il passaggio specifico di «Memorizzazione e leakage».
-- Invariante: privacy, fairness e utility richiedono metriche e trade-off espliciti.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: stessa accuracy media con leakage e disparità per slice; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Differential privacy.
-- Prova: SRC-91-001 e sezione pubblica corrispondente.
+## Prerequisiti reali
 
-## Transizione 2. Differential privacy
+- Capitolo 4: Come valutare criticamente un risultato di AI
+- Capitolo 7: Probabilità, statistica e inferenza
+- Capitolo 32: Il ciclo di vita dei dati
 
-- Ultima affermazione stabile: un dato personale e il comportamento del sistema su gruppi diversi.
-- Concetto nuovo: DP limita l'influenza di un record mediante clipping e rumore, con parametri epsilon e delta e un costo di utilità.
-- Input e shape: record, membership, gruppo, label e budget privacy.
-- Operazione: DP, fairness evaluation e unlearning.
-- Output e shape: utility, leakage, disparità e verifica di rimozione.
-- Che cosa cambia: il passaggio specifico di «Differential privacy».
-- Invariante: privacy, fairness e utility richiedono metriche e trade-off espliciti.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: stessa accuracy media con leakage e disparità per slice; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Fairness.
-- Prova: SRC-91-002 e sezione pubblica corrispondente.
+## Percorso della lezione
 
-## Transizione 3. Fairness
+1. **Memorizzazione e leakage.** Un modello può riprodurre sequenze rare. Membership inference e extraction misurano rischi differenti. Prova: SRC-91-001.
+2. **Differential privacy.** DP limita l'influenza di un record mediante clipping e rumore, con parametri epsilon e delta e un costo di utilità. Prova: SRC-91-002.
+3. **Fairness.** Metriche di parità, equalized odds e calibration possono essere incompatibili sotto distribuzioni differenti. Il contesto decisionale guida la scelta. Prova: SRC-91-003.
+4. **Bias nei dati e nel sistema.** Rappresentazione, label, soglie e policy possono produrre disparità anche con lo stesso modello. Prova: SRC-91-004.
+5. **Machine unlearning.** Rimuovere l'influenza di dati richiede un criterio e una verifica. Cancellare un record dal corpus non modifica automaticamente il checkpoint. Prova: SRC-91-001.
 
-- Ultima affermazione stabile: un dato personale e il comportamento del sistema su gruppi diversi.
-- Concetto nuovo: Metriche di parità, equalized odds e calibration possono essere incompatibili sotto distribuzioni differenti. Il contesto decisionale guida la scelta.
-- Input e shape: record, membership, gruppo, label e budget privacy.
-- Operazione: DP, fairness evaluation e unlearning.
-- Output e shape: utility, leakage, disparità e verifica di rimozione.
-- Che cosa cambia: il passaggio specifico di «Fairness».
-- Invariante: privacy, fairness e utility richiedono metriche e trade-off espliciti.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: stessa accuracy media con leakage e disparità per slice; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Bias nei dati e nel sistema.
-- Prova: SRC-91-003 e sezione pubblica corrispondente.
+## Prove e artefatti
 
-## Transizione 4. Bias nei dati e nel sistema
+- riferimento minimo: `code/snip_91_contract.py`; test: `code/test_91_contract.py`; output: `code/outputs/SNIP-91-001.txt`.
+- visuali candidate: FAIRNESS-01, FAIRNESS-02; le domande pedagogiche sono distinte e l'approvazione autoriale resta aperta.
+- fonti: `FONTI_PRIMARIE.md`; corrispondenza claim-fonte: `CLAIMS.md`.
 
-- Ultima affermazione stabile: un dato personale e il comportamento del sistema su gruppi diversi.
-- Concetto nuovo: Rappresentazione, label, soglie e policy possono produrre disparità anche con lo stesso modello.
-- Input e shape: record, membership, gruppo, label e budget privacy.
-- Operazione: DP, fairness evaluation e unlearning.
-- Output e shape: utility, leakage, disparità e verifica di rimozione.
-- Che cosa cambia: il passaggio specifico di «Bias nei dati e nel sistema».
-- Invariante: privacy, fairness e utility richiedono metriche e trade-off espliciti.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: stessa accuracy media con leakage e disparità per slice; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Machine unlearning.
-- Prova: SRC-91-004 e sezione pubblica corrispondente.
+## Gate aperti
 
-## Transizione 5. Machine unlearning
-
-- Ultima affermazione stabile: un dato personale e il comportamento del sistema su gruppi diversi.
-- Concetto nuovo: Rimuovere l'influenza di dati richiede un criterio e una verifica. Cancellare un record dal corpus non modifica automaticamente il checkpoint.
-- Input e shape: record, membership, gruppo, label e budget privacy.
-- Operazione: DP, fairness evaluation e unlearning.
-- Output e shape: utility, leakage, disparità e verifica di rimozione.
-- Che cosa cambia: il passaggio specifico di «Machine unlearning».
-- Invariante: privacy, fairness e utility richiedono metriche e trade-off espliciti.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: stessa accuracy media con leakage e disparità per slice; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Watermarking e provenienza dei contenuti.
-- Prova: SRC-91-001 e sezione pubblica corrispondente.
+- lettura editoriale finale da parte dell'autore;
+- approvazione delle visuali nel contesto impaginato;
+- benchmark esterni solo quando il capitolo formula un claim di scala o di produzione.

@@ -22,7 +22,6 @@ from PIL import Image
 ROOT = Path(__file__).resolve().parents[1]
 CHAPTERS = ROOT / "chapters"
 ASSETS = ROOT / "assets" / "chapters"
-COMMON_EXAMPLE = "Il pacco non è arrivato"
 IMAGE_RE = re.compile(r"!\[[^\]]*\]\(([^)]+)\)")
 SOURCE_RE = re.compile(r"\bSRC-(?:\d{2}|[A-Z0-9]+)-\d{3}\b")
 CHAPTER_RE = re.compile(r"^# Capitolo (\d+)\. (.+)$", re.MULTILINE)
@@ -85,20 +84,43 @@ def claim_statuses(claims: str) -> list[str]:
     return statuses
 
 
-def code_evidence(chapter: Path) -> dict[str, object]:
+def code_evidence(chapter: Path, chapter_text: str) -> dict[str, object]:
     code = chapter / "code"
+    match = re.search(r"^code_policy:\s*(\w+)\s*$", chapter_text, re.MULTILINE)
+    policy = match.group(1) if match else "undeclared"
     if not code.exists():
-        return {"exists": False, "modules": 0, "tests": 0, "outputs": 0, "problems": ["cartella code assente"]}
+        return {"exists": False, "policy": policy, "modules": 0, "tests": 0, "outputs": 0, "problems": ["cartella code assente"]}
     modules = sorted(path for path in code.glob("*.py") if not path.name.startswith("test_"))
     tests = sorted(code.glob("test_*.py"))
     outputs = sorted((code / "outputs").glob("SNIP-*.txt")) if (code / "outputs").exists() else []
     problems = []
-    if modules and not tests:
-        problems.append("moduli Python senza test locali")
-    if modules and not outputs:
-        problems.append("moduli Python senza output SNIP")
+    if policy == "reference":
+        if not modules:
+            problems.append("policy reference senza modulo Python")
+        if not tests:
+            problems.append("policy reference senza test locali")
+        if not outputs:
+            problems.append("policy reference senza output SNIP")
+    elif policy == "exception":
+        audit_text = (code / "CODE_AUDIT.md").read_text(encoding="utf-8") if (code / "CODE_AUDIT.md").exists() else ""
+        if "policy: exception" not in audit_text or "motivazione:" not in audit_text:
+            problems.append("eccezione non documentata")
+        if modules or tests or outputs:
+            problems.append("eccezione con artefatti Python storici")
+    elif policy == "undeclared":
+        # The hand-reviewed baseline chapters predate the explicit metadata
+        # field.  Their executable evidence is still checked using the legacy
+        # relationship, while all generated chapters are covered by the
+        # stricter quality audit.
+        if modules and not tests:
+            problems.append("moduli Python senza test locali")
+        if modules and not outputs:
+            problems.append("moduli Python senza output SNIP")
+    else:
+        problems.append("code_policy non riconosciuta")
     return {
         "exists": True,
+        "policy": policy,
         "modules": len(modules),
         "tests": len(tests),
         "outputs": len(outputs),
@@ -115,7 +137,6 @@ def audit() -> dict[str, object]:
     all_source_problems = []
     all_claim_problems = []
     all_code_problems = []
-    common_missing = []
 
     for chapter in chapters:
         chapter_file = chapter / "CHAPTER.md"
@@ -141,11 +162,9 @@ def audit() -> dict[str, object]:
         has_status_field = "- Esito:" in claim_text or bool(re.search(r"\|\s*Esito\s*\|", claim_text, re.IGNORECASE))
         if invalid_statuses or aliases or (claim_file.exists() and has_status_field and not statuses):
             all_claim_problems.append({"chapter": number, "invalid": invalid_statuses, "noncanonical": aliases, "count": len(statuses)})
-        code = code_evidence(chapter)
+        code = code_evidence(chapter, text)
         if code["problems"]:
             all_code_problems.append({"chapter": number, "problems": code["problems"]})
-        if COMMON_EXAMPLE not in text:
-            common_missing.append(number)
         paragraphs = [
             part.strip()
             for part in re.split(r"\n\s*\n", text)
@@ -165,7 +184,6 @@ def audit() -> dict[str, object]:
                 "h2": h2,
                 "h3": h3,
                 "images": len(images),
-                "common_example": COMMON_EXAMPLE in text,
                 "source_ids": len(ids),
                 "code": code,
                 "missing_images": missing,
@@ -211,7 +229,6 @@ def audit() -> dict[str, object]:
             "images_unique": len(unique_images),
             "missing_images": len(missing_images),
             "image_issues": len(image_issues),
-            "common_example_missing": common_missing,
             "source_problems": len(all_source_problems),
             "claim_problems": len(all_claim_problems),
             "code_problems": len(all_code_problems),
@@ -255,9 +272,6 @@ def markdown_report(result: dict[str, object]) -> str:
     ]
     for family, count in summary["image_families"].items():
         lines.append(f"- `{family}`: {count}")
-    lines.extend(["", "## Capitoli con esempio comune assente", ""])
-    missing_common = summary["common_example_missing"]
-    lines.append("- Nessuno" if not missing_common else "- " + ", ".join(str(number) for number in missing_common))
     lines.extend(["", "## Problemi rilevati", "", "```json", json.dumps(result["problems"], ensure_ascii=False, indent=2), "```", ""])
     return "\n".join(lines)
 

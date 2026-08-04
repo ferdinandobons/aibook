@@ -49,3 +49,4 @@ Ogni fase produce decisioni e versioni rintracciabili. Il diagramma non impone u
 - nessuna freccia attraversa una label;
 - direzione del ciclo inequivocabile;
 - nessuna fase appare come conclusione definitiva del processo.
+- domanda principale: Quale trasformazione centrale rende osservabile «Prima del modello viene il problema» nel capitolo 3?

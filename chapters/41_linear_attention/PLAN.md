@@ -1,81 +1,30 @@
-# Piano interno. Capitolo 41
+# Piano editoriale. Capitolo 41
 
-- Domanda centrale: quale contratto costruisce Linear attention, fast weights e delta rule?
-- Oggetto continuo: uno stato causale che sostituisce il prodotto quadratico; input guida: sequenza x_t, kernel fattorizzabile e stato.
-- Prerequisito stabile: Capitolo 40, Attention hardware-aware.
-- Gap: recurrence, normalizzazione e fast weights.
-- Output consegnato: h_t e predizione con costo dichiarato; consumer successivo: Capitolo 42, State-space model, recurrence e long convolution.
-- Invariante principale: la fattorizzazione cambia memoria e capacità di interazione.
-- Visuali: LINATT-01 e LINATT-02, con famiglie compositive variabili.
-- Snippet: code/snip_41_contract.py; output: code/outputs/SNIP-41-001.txt.
-- Gate aperti: revisione autoriale, lettura ad alta voce e approvazione finale delle visuali.
+## Obiettivo didattico
 
-## Transizione 1. Kernel fattorizzabile
+Seguire **Linear attention, fast weights e delta rule** da sequenza x_t, kernel fattorizzabile e stato a h_t e predizione con costo dichiarato, osservando recurrence, normalizzazione e fast weights senza oltrepassare questo limite: la fattorizzazione cambia memoria e capacità di interazione.
 
-- Ultima affermazione stabile: uno stato causale che sostituisce il prodotto quadratico.
-- Concetto nuovo: Una feature map permette di riassociare i prodotti senza una matrice completa di score.
-- Input e shape: sequenza x_t, kernel fattorizzabile e stato.
-- Operazione: recurrence, normalizzazione e fast weights.
-- Output e shape: h_t e predizione con costo dichiarato.
-- Che cosa cambia: il passaggio specifico di «Kernel fattorizzabile».
-- Invariante: la fattorizzazione cambia memoria e capacità di interazione.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: tre aggiornamenti causali con stato scalare; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Recurrence causale.
-- Prova: SRC-41-001 e sezione pubblica corrispondente.
+## Prerequisiti reali
 
-## Transizione 2. Recurrence causale
+- Capitolo 28: Il meccanismo di attention
+- Capitolo 37: Anatomia del blocco moderno
 
-- Ultima affermazione stabile: uno stato causale che sostituisce il prodotto quadratico.
-- Concetto nuovo: Statistiche S e z vengono aggiornate per token e hanno dimensione indipendente dalla lunghezza.
-- Input e shape: sequenza x_t, kernel fattorizzabile e stato.
-- Operazione: recurrence, normalizzazione e fast weights.
-- Output e shape: h_t e predizione con costo dichiarato.
-- Che cosa cambia: il passaggio specifico di «Recurrence causale».
-- Invariante: la fattorizzazione cambia memoria e capacità di interazione.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: tre aggiornamenti causali con stato scalare; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Normalizzazione.
-- Prova: SRC-41-002 e sezione pubblica corrispondente.
+## Percorso della lezione
 
-## Transizione 3. Normalizzazione
+1. **Kernel fattorizzabile.** Una feature map permette di riassociare i prodotti senza una matrice completa di score. Prova: SRC-41-001.
+2. **Recurrence causale.** Statistiche S e z vengono aggiornate per token e hanno dimensione indipendente dalla lunghezza. Prova: SRC-41-002.
+3. **Normalizzazione.** Il denominatore controlla la scala e richiede feature e stabilizzazione coerenti. Prova: SRC-41-003.
+4. **Fast weights.** Lo stato può essere letto come memoria associativa che accumula coppie key-value. Prova: SRC-41-004.
+5. **Delta rule.** L'update corregge l'errore tra value desiderato e value recuperato, riducendo la sovrascrittura cieca. Prova: SRC-41-001.
 
-- Ultima affermazione stabile: uno stato causale che sostituisce il prodotto quadratico.
-- Concetto nuovo: Il denominatore controlla la scala e richiede feature e stabilizzazione coerenti.
-- Input e shape: sequenza x_t, kernel fattorizzabile e stato.
-- Operazione: recurrence, normalizzazione e fast weights.
-- Output e shape: h_t e predizione con costo dichiarato.
-- Che cosa cambia: il passaggio specifico di «Normalizzazione».
-- Invariante: la fattorizzazione cambia memoria e capacità di interazione.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: tre aggiornamenti causali con stato scalare; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Fast weights.
-- Prova: SRC-41-003 e sezione pubblica corrispondente.
+## Prove e artefatti
 
-## Transizione 4. Fast weights
+- riferimento minimo: `code/snip_41_contract.py`; test: `code/test_41_contract.py`; output: `code/outputs/SNIP-41-001.txt`.
+- visuali candidate: LINATT-01, LINATT-02; le domande pedagogiche sono distinte e l'approvazione autoriale resta aperta.
+- fonti: `FONTI_PRIMARIE.md`; corrispondenza claim-fonte: `CLAIMS.md`.
 
-- Ultima affermazione stabile: uno stato causale che sostituisce il prodotto quadratico.
-- Concetto nuovo: Lo stato può essere letto come memoria associativa che accumula coppie key-value.
-- Input e shape: sequenza x_t, kernel fattorizzabile e stato.
-- Operazione: recurrence, normalizzazione e fast weights.
-- Output e shape: h_t e predizione con costo dichiarato.
-- Che cosa cambia: il passaggio specifico di «Fast weights».
-- Invariante: la fattorizzazione cambia memoria e capacità di interazione.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: tre aggiornamenti causali con stato scalare; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Delta rule.
-- Prova: SRC-41-004 e sezione pubblica corrispondente.
+## Gate aperti
 
-## Transizione 5. Delta rule
-
-- Ultima affermazione stabile: uno stato causale che sostituisce il prodotto quadratico.
-- Concetto nuovo: L'update corregge l'errore tra value desiderato e value recuperato, riducendo la sovrascrittura cieca.
-- Input e shape: sequenza x_t, kernel fattorizzabile e stato.
-- Operazione: recurrence, normalizzazione e fast weights.
-- Output e shape: h_t e predizione con costo dichiarato.
-- Che cosa cambia: il passaggio specifico di «Delta rule».
-- Invariante: la fattorizzazione cambia memoria e capacità di interazione.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: tre aggiornamenti causali con stato scalare; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: State-space model, recurrence e long convolution.
-- Prova: SRC-41-001 e sezione pubblica corrispondente.
+- lettura editoriale finale da parte dell'autore;
+- approvazione delle visuali nel contesto impaginato;
+- benchmark esterni solo quando il capitolo formula un claim di scala o di produzione.

@@ -1,81 +1,30 @@
-# Piano interno. Capitolo 55
+# Piano editoriale. Capitolo 55
 
-- Domanda centrale: quale contratto costruisce Fondamenti della multimodalità?
-- Oggetto continuo: rappresentazioni di modalità differenti; input guida: testo, immagine, audio e maschere di modalità.
-- Prerequisito stabile: Capitolo 54, Aggiornamento, merging ed editing del modello.
-- Gap: encoder, proiezione, alignment e fusion.
-- Output consegnato: spazio condiviso o output condizionato; consumer successivo: Capitolo 56, Vision encoder e Vision-Language Model.
-- Invariante principale: allineamento misurato non equivale a comprensione generale.
-- Visuali: FOUNDATION-01 e FOUNDATION-02, con famiglie compositive variabili.
-- Snippet: code/snip_55_contract.py; output: code/outputs/SNIP-55-001.txt.
-- Gate aperti: revisione autoriale, lettura ad alta voce e approvazione finale delle visuali.
+## Obiettivo didattico
 
-## Transizione 1. Modalità e misure
+Seguire **Fondamenti della multimodalità** da testo, immagine, audio e maschere di modalità a spazio condiviso o output condizionato, osservando encoder, proiezione, alignment e fusion senza oltrepassare questo limite: allineamento misurato non equivale a comprensione generale.
 
-- Ultima affermazione stabile: rappresentazioni di modalità differenti.
-- Concetto nuovo: Testo, immagine, audio e azione hanno strutture e scale differenti. Ogni encoder produce una rappresentazione con assi dichiarati.
-- Input e shape: testo, immagine, audio e maschere di modalità.
-- Operazione: encoder, proiezione, alignment e fusion.
-- Output e shape: spazio condiviso o output condizionato.
-- Che cosa cambia: il passaggio specifico di «Modalità e misure».
-- Invariante: allineamento misurato non equivale a comprensione generale.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: due vettori di modalità proiettati nella stessa dimensione; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Allineamento.
-- Prova: SRC-55-001 e sezione pubblica corrispondente.
+## Prerequisiti reali
 
-## Transizione 2. Allineamento
+- Capitolo 19: Representation learning
+- Capitolo 27: Embedding e spazio semantico
 
-- Ultima affermazione stabile: rappresentazioni di modalità differenti.
-- Concetto nuovo: Coppie sincronizzate o semanticamente collegate forniscono un segnale comune. Corrispondenza temporale e semantica non coincidono sempre.
-- Input e shape: testo, immagine, audio e maschere di modalità.
-- Operazione: encoder, proiezione, alignment e fusion.
-- Output e shape: spazio condiviso o output condizionato.
-- Che cosa cambia: il passaggio specifico di «Allineamento».
-- Invariante: allineamento misurato non equivale a comprensione generale.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: due vettori di modalità proiettati nella stessa dimensione; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Fusion.
-- Prova: SRC-55-002 e sezione pubblica corrispondente.
+## Percorso della lezione
 
-## Transizione 3. Fusion
+1. **Modalità e misure.** Testo, immagine, audio e azione hanno strutture e scale differenti. Ogni encoder produce una rappresentazione con assi dichiarati. Prova: SRC-55-001.
+2. **Allineamento.** Coppie sincronizzate o semanticamente collegate forniscono un segnale comune. Corrispondenza temporale e semantica non coincidono sempre. Prova: SRC-55-002.
+3. **Fusion.** Early, intermediate e late fusion combinano modalità in punti diversi e cambiano costo, dipendenze e disponibilità dei dati. Prova: SRC-55-003.
+4. **Missing modality.** Un sistema deve definire cosa accade quando una modalità è assente, corrotta o non autorizzata. Prova: SRC-55-004.
+5. **Valutazione.** Comprensione, retrieval, grounding e generazione richiedono benchmark distinti. Una media multimodale può nascondere una modalità debole. Prova: SRC-55-001.
 
-- Ultima affermazione stabile: rappresentazioni di modalità differenti.
-- Concetto nuovo: Early, intermediate e late fusion combinano modalità in punti diversi e cambiano costo, dipendenze e disponibilità dei dati.
-- Input e shape: testo, immagine, audio e maschere di modalità.
-- Operazione: encoder, proiezione, alignment e fusion.
-- Output e shape: spazio condiviso o output condizionato.
-- Che cosa cambia: il passaggio specifico di «Fusion».
-- Invariante: allineamento misurato non equivale a comprensione generale.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: due vettori di modalità proiettati nella stessa dimensione; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Missing modality.
-- Prova: SRC-55-003 e sezione pubblica corrispondente.
+## Prove e artefatti
 
-## Transizione 4. Missing modality
+- riferimento minimo: `code/snip_55_contract.py`; test: `code/test_55_contract.py`; output: `code/outputs/SNIP-55-001.txt`.
+- visuali candidate: FOUNDATION-01, FOUNDATION-02; le domande pedagogiche sono distinte e l'approvazione autoriale resta aperta.
+- fonti: `FONTI_PRIMARIE.md`; corrispondenza claim-fonte: `CLAIMS.md`.
 
-- Ultima affermazione stabile: rappresentazioni di modalità differenti.
-- Concetto nuovo: Un sistema deve definire cosa accade quando una modalità è assente, corrotta o non autorizzata.
-- Input e shape: testo, immagine, audio e maschere di modalità.
-- Operazione: encoder, proiezione, alignment e fusion.
-- Output e shape: spazio condiviso o output condizionato.
-- Che cosa cambia: il passaggio specifico di «Missing modality».
-- Invariante: allineamento misurato non equivale a comprensione generale.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: due vettori di modalità proiettati nella stessa dimensione; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Valutazione.
-- Prova: SRC-55-004 e sezione pubblica corrispondente.
+## Gate aperti
 
-## Transizione 5. Valutazione
-
-- Ultima affermazione stabile: rappresentazioni di modalità differenti.
-- Concetto nuovo: Comprensione, retrieval, grounding e generazione richiedono benchmark distinti. Una media multimodale può nascondere una modalità debole.
-- Input e shape: testo, immagine, audio e maschere di modalità.
-- Operazione: encoder, proiezione, alignment e fusion.
-- Output e shape: spazio condiviso o output condizionato.
-- Che cosa cambia: il passaggio specifico di «Valutazione».
-- Invariante: allineamento misurato non equivale a comprensione generale.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: due vettori di modalità proiettati nella stessa dimensione; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Vision encoder e Vision-Language Model.
-- Prova: SRC-55-001 e sezione pubblica corrispondente.
+- lettura editoriale finale da parte dell'autore;
+- approvazione delle visuali nel contesto impaginato;
+- benchmark esterni solo quando il capitolo formula un claim di scala o di produzione.

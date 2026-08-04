@@ -10,6 +10,7 @@ opened: 2026-07-30
 last_web_research: 2026-07-30
 last_source_check: 2026-07-30
 environment: Python 3.13.5, PyTorch 2.10.0+cpu
+code_policy: reference
 deferred: informazione posizionale, multi-head attention, varianti KV, KV cache, implementazioni hardware-aware
 -->
 

@@ -1,3 +1,3 @@
-# Alt text FLASH-02
+# Testo alternativo
 
-Diagramma FLASH-02 del Capitolo 40, famiglia chart. Domanda: Il diagramma segue il passaggio: Tiling, softmax online e ricomputazione. L'input è tile di Q, K, V, dtype e device, l'output è stesso contratto matematico con memoria e latenza misurate; il vincolo da controllare è che una misura hardware dipende da shape, backend e precisione La composizione usa i passaggi FLOP e movimento dei dati, Tiling, Softmax online, Backward e ricomputazione, Backend.
+FLASH-02, Attention hardware-aware. Quale controllo collega «Backward e ricomputazione» a «Backend» senza superare il limite dichiarato? La composizione compute memory tradeoff collega «Backward e ricomputazione», «Backend». L'input è tile di Q, K, V, dtype e device; l'output è stesso contratto matematico con memoria e latenza misurate. Il limite esplicito è: una misura hardware dipende da shape, backend e precisione.

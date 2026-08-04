@@ -1,14 +1,16 @@
 # Specifica visuale SCALE-01
 
-- famiglia: chart
-- domanda principale: Il diagramma segue il passaggio: Fit, confronto isoFLOP ed estrapolazione. L'input è punti con parametri, token, FLOP e loss, l'output è stima con intervallo osservato e costo; il vincolo da controllare è che un fit fuori dominio non è una legge garantita
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: scaling_balance
+- domanda principale: Come si passa da «Fit empirico» a «Esperimenti isoFLOP» mantenendo osservabile una curva empirica tra scala, compute e loss?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, chart, invariante o limite in chiusura
-- nodi e contenuti: 1: Fit empirico; 2: Allocazione compute-optimal; 3: Esperimenti isoFLOP; 4: Extrapolation; 5: Training e inference cost
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: un fit fuori dominio non è una legge garantita
-- fonti collegate: SRC-34-001 ... SRC-34-004
-- alt text: Diagramma SCALE-01 del Capitolo 34, famiglia chart. Domanda: Il diagramma segue il passaggio: Fit, confronto isoFLOP ed estrapolazione. L'input è punti con parametri, token, FLOP e loss, l'output è stima con intervallo osservato e costo; il vincolo da controllare è che un fit fuori dominio non è una legge garantita La composizione usa i passaggi Fit empirico, Allocazione compute-optimal, Esperimenti isoFLOP, Extrapolation, Training e inference cost.
+- file candidato: candidate-v48.png
+- oggetto osservato: una curva empirica tra scala, compute e loss
+- input: punti con parametri, token, FLOP e loss
+- output: stima con intervallo osservato e costo
+- nodi locali: Fit empirico: Una power law approssima loss rispetto a parametri, dati o compute in un intervallo…; Allocazione compute-optimal: A budget fissato, modello e token competono. Il risultato dipende da ricetta e qualità…; Esperimenti isoFLOP: Configurazioni con compute simile rendono osservabile la loss minima per budget.
+- limite visualizzato: un fit fuori dominio non è una legge garantita
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

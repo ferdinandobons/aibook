@@ -1,14 +1,16 @@
 # Specifica visuale KV-02
 
-- famiglia: compare
-- domanda principale: Il diagramma segue il passaggio: MHA, MQA, GQA, località o sparsità. L'input è Q con h_q teste e KV con h_kv teste, l'output è score, cache e pattern di comunicazione; il vincolo da controllare è che raggruppamento delle teste e costo della KV cache restano espliciti
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: kv_layout
+- domanda principale: Quale controllo collega «Local e sparse attention» a «MLA e cache» senza superare il limite dichiarato?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v47.png
-- ordine di lettura: titolo, domanda, compare, invariante o limite in chiusura
-- nodi e contenuti: 1: MHA; 2: MQA; 3: GQA; 4: Local e sparse attention; 5: MLA e cache
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: raggruppamento delle teste e costo della KV cache restano espliciti
-- fonti collegate: SRC-39-001 ... SRC-39-004
-- alt text: Diagramma KV-02 del Capitolo 39, famiglia compare. Domanda: Il diagramma segue il passaggio: MHA, MQA, GQA, località o sparsità. L'input è Q con h_q teste e KV con h_kv teste, l'output è score, cache e pattern di comunicazione; il vincolo da controllare è che raggruppamento delle teste e costo della KV cache restano espliciti La composizione usa i passaggi MHA, MQA, GQA, Local e sparse attention, MLA e cache.
+- file candidato: candidate-v47.png
+- oggetto osservato: le teste di query e key-value che alimentano l'attention
+- input: Q con h_q teste e KV con h_kv teste
+- output: score, cache e pattern di comunicazione
+- nodi locali: Local e sparse attention: Finestre e pattern selezionati riducono le coppie ma cambiano la connettività.; MLA e cache: Compressione latente e numero di KV head sono strategie differenti. La memoria dipende…
+- limite visualizzato: raggruppamento delle teste e costo della KV cache restano espliciti
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

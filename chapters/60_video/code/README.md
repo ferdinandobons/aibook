@@ -1,5 +1,8 @@
-# Codice del Capitolo 60
+# Esempio verificato. Capitolo 60
 
-Lo snippet snip_60_contract.py rende osservabile il contratto centrale di Generazione video con valori piccoli e leggibili.
-Il test test_60_contract.py controlla determinismo, output, invariante e una shape incoerente.
-Il risultato è un esempio locale, non un benchmark di produzione.
+`snip_60_contract.py` esegue il caso minimo usato nel testo di **Generazione video**. `test_60_contract.py` conserva l'output atteso, controlla determinismo, serializzazione, valori finiti e presenza del limite interpretativo.
+
+```bash
+python snip_60_contract.py
+python -m unittest -v test_60_contract.py
+```

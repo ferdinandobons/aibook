@@ -1,5 +1,8 @@
-# Codice del Capitolo 71
+# Esempio verificato. Capitolo 71
 
-Lo snippet snip_71_contract.py rende osservabile il contratto centrale di Training e valutazione degli agenti con valori piccoli e leggibili.
-Il test test_71_contract.py controlla determinismo, output, invariante e una shape incoerente.
-Il risultato è un esempio locale, non un benchmark di produzione.
+`snip_71_contract.py` esegue il caso minimo usato nel testo di **Training e valutazione degli agenti**. `test_71_contract.py` conserva l'output atteso, controlla determinismo, serializzazione, valori finiti e presenza del limite interpretativo.
+
+```bash
+python snip_71_contract.py
+python -m unittest -v test_71_contract.py
+```

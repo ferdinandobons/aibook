@@ -1,3 +1,3 @@
-# Alt text FACTUALITY-01
+# Testo alternativo
 
-Diagramma FACTUALITY-01 del Capitolo 84, famiglia funnel. Domanda: Il diagramma segue il passaggio: Verifica, calibrazione, astensione e retrieval. L'input è claim, predizione, fonti e score di confidenza, l'output è risposta supportata o astensione motivata; il vincolo da controllare è che confidenza alta non certifica la verità fattuale La composizione usa i passaggi Correttezza e supporto, Hallucination, Calibrazione, Astensione, Verifica e retrieval.
+FACTUALITY-01, Fattualità, incertezza e affidabilità. Come si passa da «Correttezza e supporto» a «Calibrazione» mantenendo osservabile una risposta con evidenza, confidenza e possibilità di errore? La composizione claim evidence collega «Correttezza e supporto», «Hallucination», «Calibrazione». L'input è claim, predizione, fonti e score di confidenza; l'output è risposta supportata o astensione motivata. Il limite esplicito è: confidenza alta non certifica la verità fattuale.

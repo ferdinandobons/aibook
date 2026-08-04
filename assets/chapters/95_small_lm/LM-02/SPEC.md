@@ -1,14 +1,16 @@
 # Specifica visuale LM-02
 
-- famiglia: pipeline
-- domanda principale: Il diagramma segue il passaggio: Embedding, decoder causale, cross-entropy e sampling. L'input è corpus, tokenizer, batch di sequenze e target, l'output è logits, loss, token generati e checkpoint; il vincolo da controllare è che tokenizer, mask, target shift e sampling devono essere coerenti
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: training_evidence
+- domanda principale: Quale controllo collega «Sampling» a «Limiti» senza superare il limite dichiarato?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, pipeline, invariante o limite in chiusura
-- nodi e contenuti: 1: Corpus e tokenizer; 2: Decoder Transformer; 3: Training; 4: Sampling; 5: Limiti
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: tokenizer, mask, target shift e sampling devono essere coerenti
-- fonti collegate: SRC-95-001 ... SRC-95-004
-- alt text: Diagramma LM-02 del Capitolo 95, famiglia pipeline. Domanda: Il diagramma segue il passaggio: Embedding, decoder causale, cross-entropy e sampling. L'input è corpus, tokenizer, batch di sequenze e target, l'output è logits, loss, token generati e checkpoint; il vincolo da controllare è che tokenizer, mask, target shift e sampling devono essere coerenti La composizione usa i passaggi Corpus e tokenizer, Decoder Transformer, Training, Sampling, Limiti.
+- file candidato: candidate-v48.png
+- oggetto osservato: un piccolo language model dalla stringa ai logits
+- input: corpus, tokenizer, batch di sequenze e target
+- output: logits, loss, token generati e checkpoint
+- nodi locali: Sampling: Greedy, temperature e top-k mostrano la differenza tra distribuzione e traiettoria.; Limiti: Un piccolo LM non rappresenta capacità o sicurezza di modelli su larga scala, ma rende…
+- limite visualizzato: tokenizer, mask, target shift e sampling devono essere coerenti
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

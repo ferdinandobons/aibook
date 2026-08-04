@@ -1,3 +1,3 @@
-# Alt text HYBRID-02
+# Testo alternativo
 
-Diagramma HYBRID-02 del Capitolo 43, famiglia loop. Domanda: Il diagramma segue il passaggio: Write, read, routing e fusione. L'input è segmento corrente, stato e memoria persistente, l'output è stato aggiornato e contenuto recuperato; il vincolo da controllare è che durata e provenienza della memoria devono essere separate La composizione usa i passaggi Ibridi tra layer, Attention locale e stato, Memoria segmentale, Memoria associativa, Memoria interna ed esterna.
+HYBRID-02, Architetture ibride e memoria interna. Quale controllo collega «Memoria associativa» a «Memoria interna ed esterna» senza superare il limite dichiarato? La composizione memory layers collega «Memoria associativa», «Memoria interna ed esterna». L'input è segmento corrente, stato e memoria persistente; l'output è stato aggiornato e contenuto recuperato. Il limite esplicito è: durata e provenienza della memoria devono essere separate.

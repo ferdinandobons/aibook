@@ -1,14 +1,16 @@
 # Specifica visuale MULTIMODAL-02
 
-- famiglia: pipeline
-- domanda principale: Il diagramma segue il passaggio: Backbone condiviso, routing e sincronizzazione. L'input è sequenza testo-immagine-audio con mask, l'output è token o artefatto nella modalità richiesta; il vincolo da controllare è che ordine, durata e maschera della modalità devono essere espliciti
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: modality_routing
+- domanda principale: Quale controllo collega «Any-to-any» a «Sincronizzazione» senza superare il limite dichiarato?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, pipeline, invariante o limite in chiusura
-- nodi e contenuti: 1: Token interleaved; 2: Backbone condiviso; 3: Output multimodale; 4: Any-to-any; 5: Sincronizzazione
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: ordine, durata e maschera della modalità devono essere espliciti
-- fonti collegate: SRC-58-001 ... SRC-58-004
-- alt text: Diagramma MULTIMODAL-02 del Capitolo 58, famiglia pipeline. Domanda: Il diagramma segue il passaggio: Backbone condiviso, routing e sincronizzazione. L'input è sequenza testo-immagine-audio con mask, l'output è token o artefatto nella modalità richiesta; il vincolo da controllare è che ordine, durata e maschera della modalità devono essere espliciti La composizione usa i passaggi Token interleaved, Backbone condiviso, Output multimodale, Any-to-any, Sincronizzazione.
+- file candidato: candidate-v48.png
+- oggetto osservato: token interleaved e output di più modalità
+- input: sequenza testo-immagine-audio con mask
+- output: token o artefatto nella modalità richiesta
+- nodi locali: Any-to-any: Un'interfaccia generale deve dichiarare quali combinazioni di input e output sono state…; Sincronizzazione: Audio, video e testo possiedono frequenze differenti. Allineamento temporale e…
+- limite visualizzato: ordine, durata e maschera della modalità devono essere espliciti
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

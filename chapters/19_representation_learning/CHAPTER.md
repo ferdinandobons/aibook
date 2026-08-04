@@ -4,133 +4,119 @@ part_id: P04
 order_key: 190
 title: Representation learning
 maturity: CORE
-status: candidatura completa in revisione autoriale
-version: 0.4.0-draft2
-last_source_check: 3 agosto 2026
+status: revisione editoriale v2, approvazione autoriale aperta
+version: 0.5.0-draft3
+last_source_check: 4 agosto 2026
 environment: Python 3.13.12, CPU
-deferred: benchmark applicativi, varianti non necessarie al contratto centrale e approvazione autoriale
+code_policy: reference
+deferred: benchmark applicativi non eseguiti e approvazione autoriale delle visuali
 -->
 
 # Capitolo 19. Representation learning
 
-Una frase plausibile non basta a spiegare representation learning. L'oggetto è un vettore prodotto per un compito successivo; riprendiamo la richiesta «Il pacco non è arrivato» come contesto comune, partiamo da un input piccolo, rendiamo visibile l'operazione e fissiamo che cosa non possiamo concludere.
+La domanda guida di questa lezione è come collegare «Che cosa rappresenta un vettore» e «Valutare una rappresentazione» senza perdere il contratto tecnico di representation learning. L'oggetto osservato è un vettore prodotto per un compito successivo. Il contratto locale è: input, u = [1, 2, 0] e v = [2, 1, 0]; operazione, una proiezione, una ricostruzione o una metrica tra rappresentazioni; output, un vettore, una similarità o una predizione downstream. Il caso guida è questo: Un caso minimo con input u = [1, 2, 0] e v = [2, 1, 0] e output «un vettore, una similarità o una predizione downstream». Il confine da mantenere esplicito è: la geometria dipende da dati, obiettivo e normalizzazione.
 
 ## Che cosa rappresenta un vettore
 
 Una rappresentazione è un insieme di quantità prodotte dal modello e usate da un calcolo successivo. Il significato dipende da obiettivo e dati. [SRC-19-001]
 
-Il caso minimo di «Che cosa rappresenta un vettore» si presenta così: un caso minimo con input u = [1, 2, 0] e v = [2, 1, 0] e output «un vettore, una similarità o una predizione downstream». Non lo usiamo come decorazione: serve a rendere osservabile la frase «Una rappresentazione è un insieme di quantità prodotte dal modello e usate da un calcolo successivo».
+La similarità coseno confronta direzioni dopo una scelta di normalizzazione.
 
-Per ricostruire «Che cosa rappresenta un vettore» annotiamo l'input «u = [1, 2, 0] e v = [2, 1, 0]», poi l'operazione «una proiezione, una ricostruzione o una metrica tra rappresentazioni», infine l'output «un vettore, una similarità o una predizione downstream». Questa sequenza impedisce di scambiare una forma compatibile per il comportamento descritto dalla fonte. Il controllo parte da «Una rappresentazione è un insieme di quantità prodotte dal modello e usate da un calcolo successivo».
+**Caso da seguire.** Un caso minimo con input u = [1, 2, 0] e v = [2, 1, 0] e output «un vettore, una similarità o una predizione downstream».
 
-Una rappresentazione non ha significato isolato: è una quantità prodotta per un uso successivo. Obiettivo, dati, augmentazioni e metrica determinano quali relazioni vengono rese facili da leggere. Per «Che cosa rappresenta un vettore» il controllo cambia una sola premessa della frase «Una rappresentazione è un insieme di quantità prodotte dal modello e usate da un calcolo successivo» e conserva input, output e criterio di successo, così la differenza resta attribuibile. La verifica resta ancorata a «Una rappresentazione è un insieme di quantità prodotte dal modello e usate da un calcolo successivo». [SRC-19-001]
+**Controllo.** Classifica lo stesso caso lungo un solo asse alla volta e annota quale proprietà non è stata misurata.
 
-Il punto didattico di «Che cosa rappresenta un vettore» è separare ciò che la fonte afferma da ciò che il piccolo caso illustra. L'output «un vettore, una similarità o una predizione downstream» mostra il contratto locale, ma non sostituisce una misura sul sistema completo.
-
-Il controllo minimo di «Che cosa rappresenta un vettore» confronta il caso dichiarato con una variazione che rompe la sua ipotesi. Se la failure non è distinguibile dall'esito valido, manca un'osservazione nel contratto del collegamento tra blocchi. Da «Che cosa rappresenta un vettore» portiamo l'output «un vettore, una similarità o una predizione downstream»; non portiamo invece una conclusione oltre il caso locale.
 
 ## Bottleneck e autoencoder
 
 Un autoencoder comprime e ricostruisce. Un bottleneck limita la capacità, ma non garantisce che le coordinate corrispondano a fattori interpretabili. [SRC-19-002]
 
-Prima del nome tecnico fissiamo la situazione: consideriamo similarità coseno calcolata dopo la normalizzazione delle norme. Da qui possiamo leggere la conseguenza dichiarata da «Un autoencoder comprime e ricostruisce».
+**Caso da seguire.** Similarità coseno calcolata dopo la normalizzazione delle norme.
 
-Nel contratto locale, l'input «u = [1, 2, 0] e v = [2, 1, 0]» entra, l'operazione «una proiezione, una ricostruzione o una metrica tra rappresentazioni» modifica il percorso e l'output «un vettore, una similarità o una predizione downstream» è ciò che osserviamo. Qui cambia soprattutto il passaggio «Bottleneck e autoencoder»; resta da controllare che la geometria dipende da dati, obiettivo e normalizzazione. La domanda locale è «Un autoencoder comprime e ricostruisce».
+**Controllo.** Cambia la proprietà che distingue «Bottleneck e autoencoder» dalle categorie vicine. Se la classificazione non cambia, la distinzione va formulata meglio.
 
-Una rappresentazione non ha significato isolato: è una quantità prodotta per un uso successivo. Obiettivo, dati, augmentazioni e metrica determinano quali relazioni vengono rese facili da leggere. Per «Bottleneck e autoencoder» il controllo cambia una sola premessa della frase «Un autoencoder comprime e ricostruisce» e conserva input, output e criterio di successo, così la differenza resta attribuibile. La verifica resta ancorata a «Un autoencoder comprime e ricostruisce». [SRC-19-002]
-
-La lettura va fatta in ordine: prima il caso, poi la trasformazione, quindi la conseguenza. Un bottleneck limita la capacità, ma non garantisce che le coordinate corrispondano a fattori interpretabili. Il piccolo risultato resta un'illustrazione di «Un autoencoder comprime e ricostruisce», non una promessa generale.
-
-La prova di «Bottleneck e autoencoder» conserva input, operazione e output; poi esplicita quale parte di «Un autoencoder comprime e ricostruisce» non è stata misurata. Così il test separa l'evidenza dall'inferenza. Il passaggio successivo, «Metric e contrastive learning», potrà cambiare una sola condizione, dichiarando il nuovo setup prima di interpretare il risultato.
 
 ## Metric e contrastive learning
 
 Obiettivi contrastivi avvicinano coppie positive e separano alternative. La definizione delle coppie e delle augmentazioni stabilisce le invarianti apprese. [SRC-19-003]
 
-Per capire «Metric e contrastive learning» partiamo da questo caso: quattro casi con protocollo, una failure e una slice conservati insieme al valore aggregato. Il caso rende osservabile il punto centrale: «Obiettivi contrastivi avvicinano coppie positive e separano alternative».
+**Caso da seguire.** Quattro casi con protocollo, una failure e una slice conservati insieme al valore aggregato.
 
-La sezione usa l'input «u = [1, 2, 0] e v = [2, 1, 0]» come punto di partenza e l'output «un vettore, una similarità o una predizione downstream» come traccia d'uscita. La trasformazione concreta è «una proiezione, una ricostruzione o una metrica tra rappresentazioni»; il caso non è completo se non dichiariamo anche che la geometria dipende da dati, obiettivo e normalizzazione. La condizione da isolare è «Obiettivi contrastivi avvicinano coppie positive e separano alternative».
+**Controllo.** Confronta un caso positivo e uno di confine usando la medesima definizione; non trasformare l'esempio in una graduatoria generale.
 
-Una rappresentazione non ha significato isolato: è una quantità prodotta per un uso successivo. Obiettivo, dati, augmentazioni e metrica determinano quali relazioni vengono rese facili da leggere. La misura va letta insieme a popolazione, slice e failure: cambiare il report senza cambiare il protocollo non crea nuova evidenza. La verifica resta ancorata a «Obiettivi contrastivi avvicinano coppie positive e separano alternative». [SRC-19-003]
-
-Se cambiamo una premessa, dobbiamo riaprire l'interpretazione. Per «Metric e contrastive learning» conserviamo l'osservazione collegata a «Obiettivi contrastivi avvicinano coppie positive e separano alternative» e lasciamo esplicitamente fuori ciò che non è stato misurato.
-
-Per verificare «Metric e contrastive learning» cambiamo una sola condizione vicina alla frase «Obiettivi contrastivi avvicinano coppie positive e separano alternative», teniamo fermo il resto e registriamo l'output «un vettore, una similarità o una predizione downstream». Il caso negativo deve rendere riconoscibile la failure, non soltanto produrre un numero diverso. La sezione successiva, «Disentanglement e identifiability», riceve l'output «un vettore, una similarità o una predizione downstream» come base, ma dovrà formulare e verificare la propria distinzione.
 
 ![Representation learning: compare](../../assets/chapters/19_representation_learning/REPRESEN-01/candidate-v49.png)
 
-La figura REPRESEN-01 usa la famiglia compare. Il caso base resta distinto dalle proprietà introdotte dalle estensioni.
+La prima figura segue il percorso da «Che cosa rappresenta un vettore» a «Metric e contrastive learning».
+
 
 ## Disentanglement e identifiability
 
 Separare fattori latenti richiede ipotesi. Senza supervision o bias aggiuntivi, molte rappresentazioni equivalenti possono spiegare gli stessi dati. [SRC-19-004]
 
-Il caso minimo di «Disentanglement e identifiability» si presenta così: due vettori con prodotto scalare positivo possono avere similarità diversa dopo normalizzazione. La metrica va scelta insieme al compito. Non lo usiamo come decorazione: serve a rendere osservabile la frase «Separare fattori latenti richiede ipotesi».
+**Caso da seguire.** Due vettori con prodotto scalare positivo possono avere similarità diversa dopo normalizzazione. La metrica va scelta insieme al compito.
 
-Per ricostruire «Disentanglement e identifiability» annotiamo l'input «u = [1, 2, 0] e v = [2, 1, 0]», poi l'operazione «una proiezione, una ricostruzione o una metrica tra rappresentazioni», infine l'output «un vettore, una similarità o una predizione downstream». Questa sequenza impedisce di scambiare una forma compatibile per il comportamento descritto dalla fonte. Il controllo parte da «Separare fattori latenti richiede ipotesi».
+**Controllo.** Indica quale osservazione smentirebbe l'assegnazione del caso a «Disentanglement e identifiability» e quale invece sarebbe irrilevante.
 
-Una rappresentazione non ha significato isolato: è una quantità prodotta per un uso successivo. Obiettivo, dati, augmentazioni e metrica determinano quali relazioni vengono rese facili da leggere. Per «Disentanglement e identifiability» il controllo cambia una sola premessa della frase «Separare fattori latenti richiede ipotesi» e conserva input, output e criterio di successo, così la differenza resta attribuibile. La verifica resta ancorata a «Separare fattori latenti richiede ipotesi». [SRC-19-004]
-
-Il punto didattico di «Disentanglement e identifiability» è separare ciò che la fonte afferma da ciò che il piccolo caso illustra. L'output «un vettore, una similarità o una predizione downstream» mostra il contratto locale, ma non sostituisce una misura sul sistema completo.
-
-Il controllo minimo di «Disentanglement e identifiability» confronta il caso dichiarato con una variazione che rompe la sua ipotesi. Se la failure non è distinguibile dall'esito valido, manca un'osservazione nel contratto del collegamento tra blocchi. Da «Disentanglement e identifiability» portiamo l'output «un vettore, una similarità o una predizione downstream»; non portiamo invece una conclusione oltre il caso locale.
 
 ## Valutare una rappresentazione
 
 Linear probe, retrieval e fine-tuning misurano proprietà diverse. Una buona metrica downstream non dimostra interpretabilità globale. [SRC-19-001]
 
-Prima del nome tecnico fissiamo la situazione: consideriamo due vettori con prodotto scalare positivo possono avere similarità diversa dopo normalizzazione. La metrica va scelta insieme al compito. Da qui possiamo leggere la conseguenza dichiarata da «Linear probe, retrieval e fine-tuning misurano proprietà diverse».
+**Caso da seguire.** Per «Valutare una rappresentazione» si mantiene l'input del capitolo e si isola questa condizione: Linear probe, retrieval e fine-tuning misurano proprietà diverse.
 
-Nel contratto locale, l'input «u = [1, 2, 0] e v = [2, 1, 0]» entra, l'operazione «una proiezione, una ricostruzione o una metrica tra rappresentazioni» modifica il percorso e l'output «un vettore, una similarità o una predizione downstream» è ciò che osserviamo. Qui cambia soprattutto il passaggio «Valutare una rappresentazione»; resta da controllare che la geometria dipende da dati, obiettivo e normalizzazione. La domanda locale è «Linear probe, retrieval e fine-tuning misurano proprietà diverse».
+**Controllo.** Limita la conclusione alla proprietà dichiarata: Una buona metrica downstream non dimostra interpretabilità globale. Le dimensioni non osservate restano aperte.
 
-Una rappresentazione non ha significato isolato: è una quantità prodotta per un uso successivo. Obiettivo, dati, augmentazioni e metrica determinano quali relazioni vengono rese facili da leggere. Per «Valutare una rappresentazione» il controllo cambia una sola premessa della frase «Linear probe, retrieval e fine-tuning misurano proprietà diverse» e conserva input, output e criterio di successo, così la differenza resta attribuibile. La verifica resta ancorata a «Linear probe, retrieval e fine-tuning misurano proprietà diverse». [SRC-19-001]
 
-La lettura va fatta in ordine: prima il caso, poi la trasformazione, quindi la conseguenza. Una buona metrica downstream non dimostra interpretabilità globale. Il piccolo risultato resta un'illustrazione di «Linear probe, retrieval e fine-tuning misurano proprietà diverse», non una promessa generale.
+## Esempio Python eseguito
 
-La prova di «Valutare una rappresentazione» conserva input, operazione e output; poi esplicita quale parte di «Linear probe, retrieval e fine-tuning misurano proprietà diverse» non è stata misurata. Così il test separa l'evidenza dall'inferenza. Il caso finale consegna l'output «un vettore, una similarità o una predizione downstream» come evidenza locale e conserva la trasformazione che la rete applica al segnale come domanda aperta.
+Il frammento seguente è lo stesso conservato nel repository. Usa valori piccoli perché l'obiettivo è osservare il meccanismo, non simulare una scala che non abbiamo eseguito.
 
-## La definizione messa alla prova: Che cosa rappresenta un vettore
+```python
+def contract():
+    left = [1.0, 2.0, 0.0]
+    right = [2.0, 1.0, 0.0]
+    dot = sum(a * b for a, b in zip(left, right))
+    score = dot / (math.sqrt(sum(a * a for a in left)) * math.sqrt(sum(b * b for b in right)))
+    return {"cosine": round(score, 6), "invariant": "the denominator normalizes both vectors"}
+```
 
-Il caso intero parte dall'input «u = [1, 2, 0] e v = [2, 1, 0]», applica l'operazione «una proiezione, una ricostruzione o una metrica tra rappresentazioni» e osserva l'output «un vettore, una similarità o una predizione downstream». Un esempio controllato: similarità coseno calcolata dopo la normalizzazione delle norme. La formula locale è:
+Esecuzione con `python snip_19_contract.py`:
 
-$$
-s(u,v)=u\cdot v/(||u||_2||v||_2)
-$$
+```text
+{"cosine": 0.8, "invariant": "the denominator normalizes both vectors"}
+```
 
-La similarità coseno confronta direzioni dopo una scelta di normalizzazione. [SRC-19-001]
+Il test associato è [`code/test_19_contract.py`](code/test_19_contract.py); l'output versionato è [`code/outputs/SNIP-19-001.txt`](code/outputs/SNIP-19-001.txt).
+
 
 ![Representation learning: scatter](../../assets/chapters/19_representation_learning/REPRESEN-02/candidate-v49.png)
 
-La figura REPRESEN-02 cambia composizione rispetto alla prima. La geometria viene confrontata rispetto alla metrica dichiarata.
+La seconda figura mette a confronto «Disentanglement e identifiability» e il limite discusso in «Valutare una rappresentazione».
 
-## Un esperimento piccolo ma leggibile: Bottleneck e autoencoder
 
-Lo snippet locale mette in esecuzione questo caso: similarità coseno calcolata dopo la normalizzazione delle norme. Il test associato controlla determinismo, output e invariante e rifiuta una shape o condizione incoerente; il risultato è conservato in `code/outputs/SNIP-19-001.txt`, come evidenza locale e non come benchmark di produzione.
+## Come si collegano i passaggi
 
-## Il confine del caso guida: Valutare una rappresentazione
+- **Da «Che cosa rappresenta un vettore» a «Bottleneck e autoencoder».** Una rappresentazione è un insieme di quantità prodotte dal modello e usate da un calcolo successivo. Un autoencoder comprime e ricostruisce. La definizione iniziale stabilisce l'asse del confronto; la categoria successiva aggiunge una proprietà senza creare una classifica implicita. [SRC-19-001; SRC-19-002]
 
-Il caso di «Representation learning» non certifica un servizio completo. La geometria dipende da dati, obiettivo e normalizzazione. La domanda successiva è se «Linear probe, retrieval e fine-tuning misurano proprietà diverse» regga quando cambiano dati, scala, hardware o criteri di decisione.
+- **Da «Bottleneck e autoencoder» a «Metric e contrastive learning».** Un autoencoder comprime e ricostruisce. Obiettivi contrastivi avvicinano coppie positive e separano alternative. Il terzo passaggio verifica se le categorie restano distinguibili sullo stesso caso e impedisce che termini vicini diventino sinonimi. [SRC-19-002; SRC-19-003]
 
-## Il contratto che rimane: Representation learning
+- **Da «Metric e contrastive learning» a «Disentanglement e identifiability».** Obiettivi contrastivi avvicinano coppie positive e separano alternative. Separare fattori latenti richiede ipotesi. La quarta sezione introduce il punto in cui l'asse scelto smette di bastare e richiede una nuova osservazione. [SRC-19-003; SRC-19-004]
 
-Il filo della lezione va dall'input «u = [1, 2, 0] e v = [2, 1, 0]» all'output «un vettore, una similarità o una predizione downstream». Nei passaggi «Che cosa rappresenta un vettore», «Bottleneck e autoencoder», «Valutare una rappresentazione» abbiamo usato esempi e controlli negativi per rendere il contratto controllabile e delimitare la conclusione. L'invariante da portare avanti è: la geometria dipende da dati, obiettivo e normalizzazione. Il Capitolo 20, Fondamenti della modellazione generativa, può partire da questo output e dichiarare la propria domanda.
+- **Da «Disentanglement e identifiability» a «Valutare una rappresentazione».** Separare fattori latenti richiede ipotesi. Linear probe, retrieval e fine-tuning misurano proprietà diverse. La sezione finale riunisce le dimensioni della valutazione, ma conserva i limiti di ciascuna invece di fonderle in un unico punteggio. [SRC-19-004; SRC-19-001]
 
-### Controllo finale della lezione: Che cosa rappresenta un vettore
+La catena completa produce un vettore, una similarità o una predizione downstream a partire da u = [1, 2, 0] e v = [2, 1, 0]. Ogni collegamento conserva un oggetto osservabile diverso; per questo il risultato non può essere esteso oltre il limite dichiarato: la geometria dipende da dati, obiettivo e normalizzazione.
 
-1. Ricostruisci l'oggetto continuo a partire da «Che cosa rappresenta un vettore» e indica quale parte della frase «Una rappresentazione è un insieme di quantità prodotte dal modello e usate da un calcolo successivo» entra nel caso.
-2. Spiega quale trasformazione collega «Che cosa rappresenta un vettore» a «Valutare una rappresentazione» e quale output osserviamo nel passaggio.
-3. Usa lo snippet per controllare l'invariante del contratto: la geometria dipende da dati, obiettivo e normalizzazione.
-4. Separa una definizione sostenuta da una fonte, un esempio illustrativo e un risultato locale del caso guida.
-5. Indica quale parte della frase «Linear probe, retrieval e fine-tuning misurano proprietà diverse» richiederebbe una misura nuova prima di essere estesa oltre il caso osservato.
 
-### Prove da rifare e modificare: Valutare una rappresentazione
+## Domande per distinguere le categorie
 
-1. Racconta «Che cosa rappresenta un vettore» come una trasformazione: che cosa entra e che cosa esce?
-2. Confronta due esecuzioni di «Bottleneck e autoencoder» mantenendo il resto del setup invariato.
-3. Per «Metric e contrastive learning», separa l'esempio locale dal limite che impedisce di generalizzarlo.
-4. Progetta una prova per «Disentanglement e identifiability» che renda visibile il suo confine.
-5. Scrivi una metrica o una domanda per valutare «Valutare una rappresentazione» senza confondere livelli diversi.
+1. Ricostruisci «Che cosa rappresenta un vettore» con un esempio diverso da quello mostrato e indica l'output atteso prima del calcolo.
+2. Nel passaggio «Bottleneck e autoencoder», cambia una sola ipotesi e spiega quale risultato non è più confrontabile.
+3. Collega «Metric e contrastive learning» a una riga dello snippet oppure motiva perché la prova deve essere documentale.
+4. Progetta un caso limite per «Disentanglement e identifiability» che produca una failure riconoscibile.
+5. Per «Valutare una rappresentazione», separa una conclusione sostenuta dal caso locale da una che richiederebbe nuovi dati o un benchmark.
 
-## Riferimenti e prove riproducibili: Representation learning
 
-Per ricontrollare «Representation learning», partire da `FONTI_PRIMARIE.md` e poi dal codice: la domanda aperta è come trasferire la trasformazione che la rete applica al segnale oltre il caso locale, con la data di consultazione dichiarata. `CLAIMS.md` separa definizioni e risultati locali; codice, ambiente, test e output sono nella cartella `code/`, con attenzione al collegamento tra blocchi.
+## Una mappa, non una graduatoria
+
+La lezione parte da «u = [1, 2, 0] e v = [2, 1, 0]» e arriva fino a «un vettore, una similarità o una predizione downstream». Il limite da conservare è questo: la geometria dipende da dati, obiettivo e normalizzazione. Definizioni e risultati citati sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md); la mappa dei claim è in [`CLAIMS.md`](CLAIMS.md).

@@ -1,3 +1,3 @@
-# Alt text LAB-01
+# Testo alternativo
 
-Diagramma LAB-01 del Capitolo 94, famiglia checklist. Domanda: Il diagramma segue il passaggio: Run, test, valutazione e report. L'input è seed, dataset piccolo, config, codice e versione, l'output è loss, metriche, manifest e limite; il vincolo da controllare è che un run locale non equivale a una prova generale La composizione usa i passaggi Ambiente riproducibile, Dataset piccolo, Modello e loss, Training e valutazione, Report.
+LAB-01, Percorso pratico dai fondamenti. Come si passa da «Ambiente riproducibile» a «Modello e loss» mantenendo osservabile un esperimento didattico con ambiente e artefatti dichiarati? La composizione lab pipeline collega «Ambiente riproducibile», «Dataset piccolo», «Modello e loss». L'input è seed, dataset piccolo, config, codice e versione; l'output è loss, metriche, manifest e limite. Il limite esplicito è: un run locale non equivale a una prova generale.

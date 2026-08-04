@@ -1,81 +1,31 @@
-# Piano interno. Capitolo 98
+# Piano editoriale. Capitolo 98
 
-- Domanda centrale: quale contratto costruisce Osservatorio della frontiera?
-- Oggetto continuo: un claim di frontiera accompagnato da data e incertezza; input guida: paper, release, benchmark, fonte e data di osservazione.
-- Prerequisito stabile: Capitolo 97, Riprodurre e leggere un paper.
-- Gap: scouting, routing, maturità, confronto e promozione.
-- Output consegnato: scheda con evidenza, stato e prossima verifica; consumer successivo: chiusura del percorso.
-- Invariante principale: novità, adozione e prova end-to-end sono dimensioni diverse.
-- Visuali: OBSERVATOR-01 e OBSERVATOR-02, con famiglie compositive variabili.
-- Snippet: code/snip_98_contract.py; output: code/outputs/SNIP-98-001.txt.
-- Gate aperti: revisione autoriale, lettura ad alta voce e approvazione finale delle visuali.
+## Obiettivo didattico
 
-## Transizione 1. Scouting
+Seguire **Osservatorio della frontiera** da paper, release, benchmark, fonte e data di osservazione a scheda con evidenza, stato e prossima verifica, osservando scouting, routing, maturità, confronto e promozione senza oltrepassare questo limite: novità, adozione e prova end-to-end sono dimensioni diverse.
 
-- Ultima affermazione stabile: un claim di frontiera accompagnato da data e incertezza.
-- Concetto nuovo: Nuovi paper, report e standard entrano in un registro con data, fonte e problema risolto.
-- Input e shape: paper, release, benchmark, fonte e data di osservazione.
-- Operazione: scouting, routing, maturità, confronto e promozione.
-- Output e shape: scheda con evidenza, stato e prossima verifica.
-- Che cosa cambia: il passaggio specifico di «Scouting».
-- Invariante: novità, adozione e prova end-to-end sono dimensioni diverse.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: una tecnica nuova separata da benchmark, disponibilità e readiness; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Routing.
-- Prova: SRC-98-001 e sezione pubblica corrispondente.
+## Prerequisiti reali
 
-## Transizione 2. Routing
+- Capitolo 4: Come valutare criticamente un risultato di AI
+- Capitolo 83: Progettare una valutazione
+- Capitolo 97: Riprodurre e leggere un paper
 
-- Ultima affermazione stabile: un claim di frontiera accompagnato da data e incertezza.
-- Concetto nuovo: Ogni tecnica viene collocata nella parte proprietaria dell'oggetto modificato, senza creare una sezione generica della frontiera.
-- Input e shape: paper, release, benchmark, fonte e data di osservazione.
-- Operazione: scouting, routing, maturità, confronto e promozione.
-- Output e shape: scheda con evidenza, stato e prossima verifica.
-- Che cosa cambia: il passaggio specifico di «Routing».
-- Invariante: novità, adozione e prova end-to-end sono dimensioni diverse.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: una tecnica nuova separata da benchmark, disponibilità e readiness; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Maturità.
-- Prova: SRC-98-002 e sezione pubblica corrispondente.
+## Percorso della lezione
 
-## Transizione 3. Maturità
+1. **Scouting.** Nuovi paper, report e standard entrano in un registro con data, fonte e problema risolto. Prova: SRC-98-001.
+2. **Routing.** Ogni tecnica viene collocata nella parte proprietaria dell'oggetto modificato, senza creare una sezione generica della frontiera. Prova: SRC-98-002.
+3. **Maturità.** CORE, ESTABLISHED e FRONTIER descrivono evidenza e stabilità editoriale, non prestigio o popolarità. Prova: SRC-98-003.
+4. **Promozione.** Una tecnica cambia maturità dopo nuove repliche, adozione, standardizzazione o chiarimento dei limiti. Prova: SRC-98-004.
+5. **Edizioni.** Nuovi contenuti aggiornano catalogo, claim, capitoli e alias senza rinumerare identità stabili. Prova: SRC-98-001.
 
-- Ultima affermazione stabile: un claim di frontiera accompagnato da data e incertezza.
-- Concetto nuovo: CORE, ESTABLISHED e FRONTIER descrivono evidenza e stabilità editoriale, non prestigio o popolarità.
-- Input e shape: paper, release, benchmark, fonte e data di osservazione.
-- Operazione: scouting, routing, maturità, confronto e promozione.
-- Output e shape: scheda con evidenza, stato e prossima verifica.
-- Che cosa cambia: il passaggio specifico di «Maturità».
-- Invariante: novità, adozione e prova end-to-end sono dimensioni diverse.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: una tecnica nuova separata da benchmark, disponibilità e readiness; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Promozione.
-- Prova: SRC-98-003 e sezione pubblica corrispondente.
+## Prove e artefatti
 
-## Transizione 4. Promozione
+- eccezione motivata: Un osservatorio di frontiera valuta evidenza aggiornata e maturità editoriale; il controllo centrale è documentale e datato, non computazionale. Ogni scheda conserva data, versione, disponibilità degli artefatti, replica indipendente, incertezza e condizione esplicita di riapertura.
+- visuali candidate: OBSERVATOR-01, OBSERVATOR-02; le domande pedagogiche sono distinte e l'approvazione autoriale resta aperta.
+- fonti: `FONTI_PRIMARIE.md`; corrispondenza claim-fonte: `CLAIMS.md`.
 
-- Ultima affermazione stabile: un claim di frontiera accompagnato da data e incertezza.
-- Concetto nuovo: Una tecnica cambia maturità dopo nuove repliche, adozione, standardizzazione o chiarimento dei limiti.
-- Input e shape: paper, release, benchmark, fonte e data di osservazione.
-- Operazione: scouting, routing, maturità, confronto e promozione.
-- Output e shape: scheda con evidenza, stato e prossima verifica.
-- Che cosa cambia: il passaggio specifico di «Promozione».
-- Invariante: novità, adozione e prova end-to-end sono dimensioni diverse.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: una tecnica nuova separata da benchmark, disponibilità e readiness; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Edizioni.
-- Prova: SRC-98-004 e sezione pubblica corrispondente.
+## Gate aperti
 
-## Transizione 5. Edizioni
-
-- Ultima affermazione stabile: un claim di frontiera accompagnato da data e incertezza.
-- Concetto nuovo: Nuovi contenuti aggiornano catalogo, claim, capitoli e alias senza rinumerare identità stabili.
-- Input e shape: paper, release, benchmark, fonte e data di osservazione.
-- Operazione: scouting, routing, maturità, confronto e promozione.
-- Output e shape: scheda con evidenza, stato e prossima verifica.
-- Che cosa cambia: il passaggio specifico di «Edizioni».
-- Invariante: novità, adozione e prova end-to-end sono dimensioni diverse.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: una tecnica nuova separata da benchmark, disponibilità e readiness; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: chiusura del percorso.
-- Prova: SRC-98-001 e sezione pubblica corrispondente.
+- lettura editoriale finale da parte dell'autore;
+- approvazione delle visuali nel contesto impaginato;
+- benchmark esterni solo quando il capitolo formula un claim di scala o di produzione.

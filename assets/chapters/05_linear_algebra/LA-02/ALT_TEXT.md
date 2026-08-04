@@ -1,3 +1,3 @@
-# Alt text LA-02
+# Testo alternativo
 
-Diagramma orizzontale su sfondo bianco. A sinistra compare la matrice A con righe 1,2,3; 2,4,6; 1,1,1. Un box annota che la seconda riga è il doppio della prima e che il rango è al massimo due. Al centro la matrice viene scomposta in U, diagonale di S e V trasposta. Sotto sono mostrati tre valori singolari: 8,5198, 0,6429 e un terzo valore vicino a zero, rappresentati con barre di lunghezza diversa. A destra la matrice è letta come somma di tre componenti di rango uno; la terza è barrata e indicata come numericamente nulla. Il footer spiega che il rango numerico è due nell'esempio e che la decisione di troncare componenti dipende da scala, precisione, tolleranza e problema.
+Rango e SVD come componenti ordinate. Quale confronto o limite chiarisce «Le operazioni elemento per elemento»?

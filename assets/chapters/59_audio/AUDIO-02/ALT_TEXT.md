@@ -1,3 +1,3 @@
-# Alt text AUDIO-02
+# Testo alternativo
 
-Diagramma AUDIO-02 del Capitolo 59, famiglia pipeline. Domanda: Il diagramma segue il passaggio: ASR, TTS, codec e generazione. L'input è waveform, sample rate, spettrogramma o codec, l'output è testo, waveform o token audio; il vincolo da controllare è che sample rate e durata fanno parte del contratto La composizione usa i passaggi Waveform e spettrogramma, ASR, TTS, Neural codec, Musica e dialogo.
+AUDIO-02, Audio, parlato e musica. Quale controllo collega «Neural codec» a «Musica e dialogo» senza superare il limite dichiarato? La composizione time frequency map collega «Neural codec», «Musica e dialogo». L'input è waveform, sample rate, spettrogramma o codec; l'output è testo, waveform o token audio. Il limite esplicito è: sample rate e durata fanno parte del contratto.

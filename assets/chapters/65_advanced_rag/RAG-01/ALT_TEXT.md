@@ -1,3 +1,3 @@
-# Alt text RAG-01
+# Testo alternativo
 
-Diagramma RAG-01 del Capitolo 65, famiglia branch. Domanda: Il diagramma segue il passaggio: Query transformation, routing e corrective retrieval. L'input è domanda multi-hop, nodi, archi e documenti, l'output è sottoquery, percorso e contesto selezionato; il vincolo da controllare è che un router può sbagliare anche quando il generatore è corretto La composizione usa i passaggi Query transformation, Retrieval adattivo, Corrective RAG, Graph RAG, RAG agentico.
+RAG-01, RAG adattivo, correttivo e basato su grafi. Come si passa da «Query transformation» a «Corrective RAG» mantenendo osservabile una query instradata tra retriever e grafo? La composizione multi query graph collega «Query transformation», «Retrieval adattivo», «Corrective RAG». L'input è domanda multi-hop, nodi, archi e documenti; l'output è sottoquery, percorso e contesto selezionato. Il limite esplicito è: un router può sbagliare anche quando il generatore è corretto.

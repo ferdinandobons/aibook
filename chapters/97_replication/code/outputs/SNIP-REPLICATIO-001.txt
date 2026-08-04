@@ -1,3 +1,0 @@
-chapter: 97
-title: Riprodurre e leggere un paper
-output: [0.755272, 0.334759]

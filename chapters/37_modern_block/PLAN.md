@@ -1,81 +1,30 @@
-# Piano interno. Capitolo 37
+# Piano editoriale. Capitolo 37
 
-- Domanda centrale: quale contratto costruisce Anatomia del blocco moderno?
-- Oggetto continuo: un residual stream dentro un blocco moderno; input guida: h di shape [batch, length, d] e norma misurata.
-- Prerequisito stabile: Capitolo 36, Training distribuito e continued pretraining.
-- Gap: norm, attention, MLP e gating nell'ordine scelto.
-- Output consegnato: h' con shape preservata e statistiche confrontabili; consumer successivo: Capitolo 38, Posizione e contesto lungo.
-- Invariante principale: ordine dei sottolayer e shape sono parte del blocco.
-- Visuali: BLOCK-01 e BLOCK-02, con famiglie compositive variabili.
-- Snippet: code/snip_37_contract.py; output: code/outputs/SNIP-37-001.txt.
-- Gate aperti: revisione autoriale, lettura ad alta voce e approvazione finale delle visuali.
+## Obiettivo didattico
 
-## Transizione 1. Residual stream
+Seguire **Anatomia del blocco moderno** da h di shape [batch, length, d] e norma misurata a h' con shape preservata e statistiche confrontabili, osservando norm, attention, MLP e gating nell'ordine scelto senza oltrepassare questo limite: ordine dei sottolayer e shape sono parte del blocco.
 
-- Ultima affermazione stabile: un residual stream dentro un blocco moderno.
-- Concetto nuovo: Ogni sottolayer produce un aggiornamento sommato a un percorso identità.
-- Input e shape: h di shape [batch, length, d] e norma misurata.
-- Operazione: norm, attention, MLP e gating nell'ordine scelto.
-- Output e shape: h' con shape preservata e statistiche confrontabili.
-- Che cosa cambia: il passaggio specifico di «Residual stream».
-- Invariante: ordine dei sottolayer e shape sono parte del blocco.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: pre-norm e residuale su un vettore di due coordinate; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Pre-norm e post-norm.
-- Prova: SRC-37-001 e sezione pubblica corrispondente.
+## Prerequisiti reali
 
-## Transizione 2. Pre-norm e post-norm
+- Capitolo 16: Addestrare reti profonde
+- Capitolo 29: Il Transformer da zero
 
-- Ultima affermazione stabile: un residual stream dentro un blocco moderno.
-- Concetto nuovo: La posizione della normalizzazione cambia il percorso dei gradienti e il contratto del blocco.
-- Input e shape: h di shape [batch, length, d] e norma misurata.
-- Operazione: norm, attention, MLP e gating nell'ordine scelto.
-- Output e shape: h' con shape preservata e statistiche confrontabili.
-- Che cosa cambia: il passaggio specifico di «Pre-norm e post-norm».
-- Invariante: ordine dei sottolayer e shape sono parte del blocco.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: pre-norm e residuale su un vettore di due coordinate; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: RMSNorm.
-- Prova: SRC-37-002 e sezione pubblica corrispondente.
+## Percorso della lezione
 
-## Transizione 3. RMSNorm
+1. **Residual stream.** Ogni sottolayer produce un aggiornamento sommato a un percorso identità. Prova: SRC-37-001.
+2. **Pre-norm e post-norm.** La posizione della normalizzazione cambia il percorso dei gradienti e il contratto del blocco. Prova: SRC-37-002.
+3. **RMSNorm.** RMSNorm scala usando la media quadratica e non sottrae la media. Prova: SRC-37-003.
+4. **SwiGLU.** Due proiezioni di ingresso costruiscono un gate moltiplicativo prima della proiezione down. Prova: SRC-37-004.
+5. **Ordine e parallelismo.** Attention e MLP possono essere sequenziali o paralleli; il nome del modello non basta a ricostruire l'ordine. Prova: SRC-37-001.
 
-- Ultima affermazione stabile: un residual stream dentro un blocco moderno.
-- Concetto nuovo: RMSNorm scala usando la media quadratica e non sottrae la media.
-- Input e shape: h di shape [batch, length, d] e norma misurata.
-- Operazione: norm, attention, MLP e gating nell'ordine scelto.
-- Output e shape: h' con shape preservata e statistiche confrontabili.
-- Che cosa cambia: il passaggio specifico di «RMSNorm».
-- Invariante: ordine dei sottolayer e shape sono parte del blocco.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: pre-norm e residuale su un vettore di due coordinate; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: SwiGLU.
-- Prova: SRC-37-003 e sezione pubblica corrispondente.
+## Prove e artefatti
 
-## Transizione 4. SwiGLU
+- riferimento minimo: `code/snip_37_contract.py`; test: `code/test_37_contract.py`; output: `code/outputs/SNIP-37-001.txt`.
+- visuali candidate: BLOCK-01, BLOCK-02; le domande pedagogiche sono distinte e l'approvazione autoriale resta aperta.
+- fonti: `FONTI_PRIMARIE.md`; corrispondenza claim-fonte: `CLAIMS.md`.
 
-- Ultima affermazione stabile: un residual stream dentro un blocco moderno.
-- Concetto nuovo: Due proiezioni di ingresso costruiscono un gate moltiplicativo prima della proiezione down.
-- Input e shape: h di shape [batch, length, d] e norma misurata.
-- Operazione: norm, attention, MLP e gating nell'ordine scelto.
-- Output e shape: h' con shape preservata e statistiche confrontabili.
-- Che cosa cambia: il passaggio specifico di «SwiGLU».
-- Invariante: ordine dei sottolayer e shape sono parte del blocco.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: pre-norm e residuale su un vettore di due coordinate; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Ordine e parallelismo.
-- Prova: SRC-37-004 e sezione pubblica corrispondente.
+## Gate aperti
 
-## Transizione 5. Ordine e parallelismo
-
-- Ultima affermazione stabile: un residual stream dentro un blocco moderno.
-- Concetto nuovo: Attention e MLP possono essere sequenziali o paralleli; il nome del modello non basta a ricostruire l'ordine.
-- Input e shape: h di shape [batch, length, d] e norma misurata.
-- Operazione: norm, attention, MLP e gating nell'ordine scelto.
-- Output e shape: h' con shape preservata e statistiche confrontabili.
-- Che cosa cambia: il passaggio specifico di «Ordine e parallelismo».
-- Invariante: ordine dei sottolayer e shape sono parte del blocco.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: pre-norm e residuale su un vettore di due coordinate; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Posizione e contesto lungo.
-- Prova: SRC-37-001 e sezione pubblica corrispondente.
+- lettura editoriale finale da parte dell'autore;
+- approvazione delle visuali nel contesto impaginato;
+- benchmark esterni solo quando il capitolo formula un claim di scala o di produzione.

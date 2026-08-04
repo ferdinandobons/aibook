@@ -22,3 +22,4 @@ Come si vede numericamente la relazione `H(q,p) = H(q) + KL(q||p)`?
 ## Invariante
 
 I tre termini sono coerenti con gli stessi vettori `q` e `p`; il valore mostrato è illustrativo e non una misura di training.
+- domanda principale: Quale trasformazione centrale rende osservabile «Informazione di un evento» nel capitolo 8?

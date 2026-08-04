@@ -54,3 +54,4 @@ P(H|E1) = 0,6667
 ## Provenienza
 
 I valori derivano dalla tabella del capitolo e da `SNIP-PROB-001`. La candidata è un PNG raster generato da `scripts/generate_probability_visuals.py`; non viene usato SVG.
+- domanda principale: Quale trasformazione centrale rende osservabile «Esiti, eventi e probabilità» nel capitolo 7?

@@ -1,3 +1,3 @@
-# Alt text ALT-02
+# Testo alternativo
 
-Diagramma ALT-02 del Capitolo 45, famiglia compare. Domanda: Il diagramma segue il passaggio: Raggruppamento, multi-token prediction o diffusione discreta. L'input è byte, gerarchia, target e numero di passi, l'output è unità predette, loss e durata di decoding; il vincolo da controllare è che granularità della rappresentazione e parallelismo sono assi distinti La composizione usa i passaggi Byte e caratteri, Gerarchie di byte, Predizione multi-token, Diffusione linguistica, Assi separati.
+ALT-02, Byte, predizione multi-token e language diffusion. Quale controllo collega «Diffusione linguistica» a «Assi separati» senza superare il limite dichiarato? La composizione prediction pipeline collega «Diffusione linguistica», «Assi separati». L'input è byte, gerarchia, target e numero di passi; l'output è unità predette, loss e durata di decoding. Il limite esplicito è: granularità della rappresentazione e parallelismo sono assi distinti.

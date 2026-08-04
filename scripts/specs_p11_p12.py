@@ -41,7 +41,7 @@ SPECS_P11_P12 = [
         ("Model Context Protocol", "MCP organizza risorse, prompt e tool esposti da server. La versione della specifica e il trasporto devono essere dichiarati."),
         ("Agent-to-agent", "Protocolli A2A e famiglie affini descrivono discovery, task, messaggi e artefatti tra agenti."),
         ("Identità e autorizzazione", "Interoperabilità non implica fiducia. Token, scope, provenance e policy devono attraversare ogni hop."),
-        ("Compatibilità ed evoluzione", "Versioning, feature negotiation e fallback impediscono che un nuovo campo cambi silenziosamente il significato del workflow."),
+        ("Compatibilità ed evoluzione", "Version e capability negotiation rendono esplicita l'incompatibilità. Una versione non supportata non deve proseguire silenziosamente."),
     ]),
     (69, "CH-P11-AGENT-LOOP", "P11", "69_agent_loop", "Ciclo agentico, pianificazione e verifica", "CORE", [
         ("Osservare e aggiornare lo stato", "Un agente riceve input, risultato dei tool e memoria. Lo stato operativo deve essere separato dal testo libero del modello."),
@@ -79,11 +79,11 @@ SPECS_P11_P12 = [
         ("Recovery", "Fine-tuning o calibration recuperano qualità dopo compressione. Il confronto deve includere memoria, latency e regressioni per slice."),
     ]),
     (74, "CH-P12-QUANTIZATION", "P12", "74_quantization", "Quantizzazione", "CORE", [
-        ("Scala e zero point", "Una mappa affine converte valori floating point in interi. Granularità per tensor, channel o group cambia errore e metadata."),
+        ("Scala e zero point", "Una mappa affine converte valori floating point in interi. La granularità per tensor o per channel cambia scale, errore e metadati."),
         ("PTQ", "Post-training quantization usa calibration senza riaddestrare completamente. La rappresentatività dei dati di calibration è essenziale."),
         ("QAT", "Quantization-aware training simula arrotondamento e clipping durante il training per adattare i pesi."),
         ("Weight-only e activation quantization", "Quantizzare soltanto i pesi riduce memoria; quantizzare attivazioni modifica anche i kernel di calcolo."),
-        ("Metodi per LLM", "GPTQ, AWQ, SmoothQuant e famiglie affini gestiscono salienza e outlier con contratti differenti."),
+        ("Metodi per LLM", "GPTQ, AWQ e SmoothQuant ottimizzano oggetti differenti: ricostruzione, canali salienti e outlier delle attivazioni. I loro contratti non sono intercambiabili."),
     ]),
     (75, "CH-P12-LOW-BIT-NATIVE", "P12", "75_low_bit_native", "Modelli low-bit nativi e co-design numerico", "FRONTIER", [
         ("Training nativo", "Un modello low-bit nativo incorpora il formato ridotto nella ricetta, invece di comprimere un checkpoint floating point al termine."),

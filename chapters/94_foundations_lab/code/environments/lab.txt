@@ -1,0 +1,6 @@
+Python 3.13.12
+NumPy 2.5.1
+CPU
+Date: 4 agosto 2026
+Command: python foundations_lab.py
+Test: python test_foundations_lab.py

@@ -1,3 +1,3 @@
-# Alt text TRACING-01
+# Testo alternativo
 
-Diagramma TRACING-01 del Capitolo 87, famiglia scatter. Domanda: Il diagramma segue il passaggio: Training SAE, splitting, dead features e tracing. L'input è attivazione, dizionario, sparsità e ricostruzione, l'output è feature, errore di ricostruzione e circuito candidato; il vincolo da controllare è che interpretabilità di una feature richiede valutazione e controlli indipendenti La composizione usa i passaggi Superposition, Sparse autoencoder, Dead e splitting features, Circuit tracing, Valutazione.
+TRACING-01, Sparse autoencoder e interpretabilità scalabile. Come si passa da «Superposition» a «Dead e splitting features» mantenendo osservabile un'attivazione scomposta in feature sparse? La composizione sparse features collega «Superposition», «Sparse autoencoder», «Dead e splitting features». L'input è attivazione, dizionario, sparsità e ricostruzione; l'output è feature, errore di ricostruzione e circuito candidato. Il limite esplicito è: interpretabilità di una feature richiede valutazione e controlli indipendenti.

@@ -12,3 +12,4 @@
 - Correzione v4: raster ricostruito dal generatore code-native; q₂ usa `0,05`, `0,15`, `0,80`, coerentemente con l'audit e con la prosa.
 - Produzione: composizione visuale iterata e rasterizzazione deterministica tramite `scripts/render_attention_visuals.py`.
 - Stato: `validata tecnicamente`, in attesa di revisione autoriale.
+- domanda principale: Quale trasformazione centrale rende osservabile «Perché una combinazione fissa non basta» nel capitolo 28?

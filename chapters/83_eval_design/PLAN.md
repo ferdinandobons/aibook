@@ -1,81 +1,31 @@
-# Piano interno. Capitolo 83
+# Piano editoriale. Capitolo 83
 
-- Domanda centrale: quale contratto costruisce Progettare una valutazione?
-- Oggetto continuo: un claim valutativo e il protocollo che lo rende misurabile; input guida: task, dataset, predizioni, riferimento e metriche.
-- Prerequisito stabile: Capitolo 82, LLMOps, edge, costo ed energia.
-- Gap: scelta della metrica, giudice, slice e report.
-- Output consegnato: stima, intervallo, errori e decisione; consumer successivo: Capitolo 84, Fattualità, incertezza e affidabilità.
-- Invariante principale: una metrica risponde solo alla domanda per cui è stata progettata.
-- Visuali: DESIGN-01 e DESIGN-02, con famiglie compositive variabili.
-- Snippet: code/snip_83_contract.py; output: code/outputs/SNIP-83-001.txt.
-- Gate aperti: revisione autoriale, lettura ad alta voce e approvazione finale delle visuali.
+## Obiettivo didattico
 
-## Transizione 1. Decisione e claim
+Seguire **Progettare una valutazione** da task, dataset, predizioni, riferimento e metriche a stima, intervallo, errori e decisione, osservando scelta della metrica, giudice, slice e report senza oltrepassare questo limite: una metrica risponde solo alla domanda per cui è stata progettata.
 
-- Ultima affermazione stabile: un claim valutativo e il protocollo che lo rende misurabile.
-- Concetto nuovo: Una valutazione parte dalla decisione che deve sostenere. Il claim deve nominare popolazione, condizioni, metrica e incertezza.
-- Input e shape: task, dataset, predizioni, riferimento e metriche.
-- Operazione: scelta della metrica, giudice, slice e report.
-- Output e shape: stima, intervallo, errori e decisione.
-- Che cosa cambia: il passaggio specifico di «Decisione e claim».
-- Invariante: una metrica risponde solo alla domanda per cui è stata progettata.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: accuracy media accompagnata da una slice fallita; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Task e dataset.
-- Prova: SRC-83-001 e sezione pubblica corrispondente.
+## Prerequisiti reali
 
-## Transizione 2. Task e dataset
+- Capitolo 4: Come valutare criticamente un risultato di AI
+- Capitolo 7: Probabilità, statistica e inferenza
+- Capitolo 31: Dalla rappresentazione linguistica agli LLM
 
-- Ultima affermazione stabile: un claim valutativo e il protocollo che lo rende misurabile.
-- Concetto nuovo: Prompt, input, reference e rubric devono rappresentare l'uso previsto. Split e cutoff impediscono contaminazione intenzionale.
-- Input e shape: task, dataset, predizioni, riferimento e metriche.
-- Operazione: scelta della metrica, giudice, slice e report.
-- Output e shape: stima, intervallo, errori e decisione.
-- Che cosa cambia: il passaggio specifico di «Task e dataset».
-- Invariante: una metrica risponde solo alla domanda per cui è stata progettata.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: accuracy media accompagnata da una slice fallita; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Metriche.
-- Prova: SRC-83-002 e sezione pubblica corrispondente.
+## Percorso della lezione
 
-## Transizione 3. Metriche
+1. **Decisione e claim.** Una valutazione parte dalla decisione che deve sostenere. Il claim deve nominare popolazione, condizioni, metrica e incertezza. Prova: SRC-83-001.
+2. **Task e dataset.** Prompt, input, reference e rubric devono rappresentare l'uso previsto. Split e cutoff impediscono contaminazione intenzionale. Prova: SRC-83-002.
+3. **Metriche.** Metriche automatiche, giudizi umani e verificatori misurano proprietà differenti. Aggregazione e slice devono essere predefinite. Prova: SRC-83-003.
+4. **Giudici modello.** LLM-as-a-judge può scalare confronti, ma è sensibile a posizione, stile, modello e rubric. Serve calibrazione con giudizi indipendenti. Prova: SRC-83-004.
+5. **Report.** Intervalli, fallimenti, costi e limiti accompagnano il punteggio. Una leaderboard non sostituisce il protocollo. Prova: SRC-83-001.
 
-- Ultima affermazione stabile: un claim valutativo e il protocollo che lo rende misurabile.
-- Concetto nuovo: Metriche automatiche, giudizi umani e verificatori misurano proprietà differenti. Aggregazione e slice devono essere predefinite.
-- Input e shape: task, dataset, predizioni, riferimento e metriche.
-- Operazione: scelta della metrica, giudice, slice e report.
-- Output e shape: stima, intervallo, errori e decisione.
-- Che cosa cambia: il passaggio specifico di «Metriche».
-- Invariante: una metrica risponde solo alla domanda per cui è stata progettata.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: accuracy media accompagnata da una slice fallita; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Giudici modello.
-- Prova: SRC-83-003 e sezione pubblica corrispondente.
+## Prove e artefatti
 
-## Transizione 4. Giudici modello
+- riferimento minimo: `code/snip_83_contract.py`; test: `code/test_83_contract.py`; output: `code/outputs/SNIP-83-001.txt`.
+- visuali candidate: DESIGN-01, DESIGN-02; le domande pedagogiche sono distinte e l'approvazione autoriale resta aperta.
+- fonti: `FONTI_PRIMARIE.md`; corrispondenza claim-fonte: `CLAIMS.md`.
 
-- Ultima affermazione stabile: un claim valutativo e il protocollo che lo rende misurabile.
-- Concetto nuovo: LLM-as-a-judge può scalare confronti, ma è sensibile a posizione, stile, modello e rubric. Serve calibrazione con giudizi indipendenti.
-- Input e shape: task, dataset, predizioni, riferimento e metriche.
-- Operazione: scelta della metrica, giudice, slice e report.
-- Output e shape: stima, intervallo, errori e decisione.
-- Che cosa cambia: il passaggio specifico di «Giudici modello».
-- Invariante: una metrica risponde solo alla domanda per cui è stata progettata.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: accuracy media accompagnata da una slice fallita; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Report.
-- Prova: SRC-83-004 e sezione pubblica corrispondente.
+## Gate aperti
 
-## Transizione 5. Report
-
-- Ultima affermazione stabile: un claim valutativo e il protocollo che lo rende misurabile.
-- Concetto nuovo: Intervalli, fallimenti, costi e limiti accompagnano il punteggio. Una leaderboard non sostituisce il protocollo.
-- Input e shape: task, dataset, predizioni, riferimento e metriche.
-- Operazione: scelta della metrica, giudice, slice e report.
-- Output e shape: stima, intervallo, errori e decisione.
-- Che cosa cambia: il passaggio specifico di «Report».
-- Invariante: una metrica risponde solo alla domanda per cui è stata progettata.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: accuracy media accompagnata da una slice fallita; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Fattualità, incertezza e affidabilità.
-- Prova: SRC-83-001 e sezione pubblica corrispondente.
+- lettura editoriale finale da parte dell'autore;
+- approvazione delle visuali nel contesto impaginato;
+- benchmark esterni solo quando il capitolo formula un claim di scala o di produzione.

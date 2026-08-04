@@ -4,133 +4,119 @@ part_id: P13
 order_key: 890
 title: Prompt injection e sicurezza dei tool
 maturity: CORE
-status: candidatura completa in revisione autoriale
-version: 0.4.0-draft2
-last_source_check: 3 agosto 2026
+status: revisione editoriale v2, approvazione autoriale aperta
+version: 0.5.0-draft3
+last_source_check: 4 agosto 2026
 environment: Python 3.13.12, CPU
-deferred: benchmark applicativi, varianti non necessarie al contratto centrale e approvazione autoriale
+code_policy: reference
+deferred: benchmark applicativi non eseguiti e approvazione autoriale delle visuali
 -->
 
 # Capitolo 89. Prompt injection e sicurezza dei tool
 
-Una frase plausibile non basta a spiegare prompt injection e sicurezza dei tool. L'oggetto è istruzioni e dati che entrano in un sistema con tool; riprendiamo la richiesta «Il pacco non è arrivato» come contesto comune, partiamo da un input piccolo, rendiamo visibile l'operazione e fissiamo che cosa non possiamo concludere.
+La domanda guida di questa lezione è come collegare «Istruzioni e dati» e «Test e incident response» senza perdere il contratto tecnico di prompt injection e sicurezza dei tool. L'oggetto osservato è istruzioni e dati che entrano in un sistema con tool. Il contratto locale è: input, prompt, documento non fidato, tool e scope; operazione, separazione, mediazione, allowlist e incident response; output, azione autorizzata o rifiuto con traccia. Il caso guida è questo: Un documento chiede export dei dati, ma il tool scope non lo autorizza. Il confine da mantenere esplicito è: contenuto recuperato non diventa istruzione privilegiata.
 
 ## Istruzioni e dati
 
 Contenuti recuperati, pagine e documenti sono dati non fidati. Non devono acquisire automaticamente la priorità delle istruzioni di sistema. [SRC-89-001]
 
-Prima del nome tecnico fissiamo la situazione: consideriamo un documento chiede export dei dati, ma il tool scope non lo autorizza. Da qui possiamo leggere la conseguenza dichiarata da «Contenuti recuperati, pagine e documenti sono dati non fidati».
+Prompt injection e tool security richiedono separazione tra dati e istruzioni.
 
-La sezione usa l'input «prompt, documento non fidato, tool e scope» come punto di partenza e l'output «azione autorizzata o rifiuto con traccia» come traccia d'uscita. La trasformazione concreta è «separazione, mediazione, allowlist e incident response»; il caso non è completo se non dichiariamo anche che contenuto recuperato non diventa istruzione privilegiata. La condizione da isolare è «Contenuti recuperati, pagine e documenti sono dati non fidati».
+**Caso da seguire.** Un documento chiede export dei dati, ma il tool scope non lo autorizza.
 
-Il componente può proporre un messaggio o un'azione, ma schema, identità, autorizzazione e side effect devono essere controllati al confine. La traiettoria osservabile è più informativa del testo prodotto. Per «Istruzioni e dati» il controllo cambia una sola premessa della frase «Contenuti recuperati, pagine e documenti sono dati non fidati» e conserva input, output e criterio di successo, così la differenza resta attribuibile. La verifica resta ancorata a «Contenuti recuperati, pagine e documenti sono dati non fidati». [SRC-89-001]
+**Controllo.** Registra richiesta, decisione, stato e output finale. Un esito plausibile non deve nascondere il componente che lo ha prodotto.
 
-Se cambiamo una premessa, dobbiamo riaprire l'interpretazione. Per «Istruzioni e dati» conserviamo l'osservazione collegata a «Contenuti recuperati, pagine e documenti sono dati non fidati» e lasciamo esplicitamente fuori ciò che non è stato misurato.
-
-La prova di «Istruzioni e dati» conserva input, operazione e output; poi esplicita quale parte di «Contenuti recuperati, pagine e documenti sono dati non fidati» non è stata misurata. Così il test separa l'evidenza dall'inferenza. Il passaggio successivo, «Indirect prompt injection», potrà cambiare una sola condizione, dichiarando il nuovo setup prima di interpretare il risultato.
 
 ## Indirect prompt injection
 
 Una istruzione malevola può essere inserita in una fonte consultata dall'agente e attivarsi durante il retrieval o il browsing. [SRC-89-002]
 
-Per capire «Indirect prompt injection» partiamo da questo caso: un input non fidato che raggiunge una policy esterna, con decisione allow/deny e traccia dell'evento conservate separatamente. Il caso rende osservabile il punto centrale: «Una istruzione malevola può essere inserita in una fonte consultata dall'agente e attivarsi durante il retrieval o il browsing».
+**Caso da seguire.** Un input non fidato che raggiunge una policy esterna, con decisione allow/deny e traccia dell'evento conservate separatamente.
 
-Per ricostruire «Indirect prompt injection» annotiamo l'input «prompt, documento non fidato, tool e scope», poi l'operazione «separazione, mediazione, allowlist e incident response», infine l'output «azione autorizzata o rifiuto con traccia». Questa sequenza impedisce di scambiare una forma compatibile per il comportamento descritto dalla fonte. Il controllo parte da «Una istruzione malevola può essere inserita in una fonte consultata dall'agente e attivarsi durante il retrieval o il browsing».
+**Controllo.** Ripeti «Indirect prompt injection» con una capability o un'autorizzazione rimossa e verifica che la failure preceda qualsiasi side effect.
 
-Il componente può proporre un messaggio o un'azione, ma schema, identità, autorizzazione e side effect devono essere controllati al confine. La traiettoria osservabile è più informativa del testo prodotto. Per «Indirect prompt injection» il controllo cambia una sola premessa della frase «Una istruzione malevola può essere inserita in una fonte consultata dall'agente e attivarsi durante il retrieval o il browsing» e conserva input, output e criterio di successo, così la differenza resta attribuibile. La verifica resta ancorata a «Una istruzione malevola può essere inserita in una fonte consultata dall'agente e attivarsi durante il retrieval o il browsing». [SRC-89-002]
 
-Il punto didattico di «Indirect prompt injection» è separare ciò che la fonte afferma da ciò che il piccolo caso illustra. L'output «azione autorizzata o rifiuto con traccia» mostra il contratto locale, ma non sostituisce una misura sul sistema completo.
+![Prompt injection e sicurezza dei tool: pipeline](../../assets/chapters/89_prompt_injection/INJECTION-01/candidate-v50.png)
 
-Per verificare «Indirect prompt injection» cambiamo una sola condizione vicina alla frase «Una istruzione malevola può essere inserita in una fonte consultata dall'agente e attivarsi durante il retrieval o il browsing», teniamo fermo il resto e registriamo l'output «azione autorizzata o rifiuto con traccia». Il caso negativo deve rendere riconoscibile la failure, non soltanto produrre un numero diverso. La sezione successiva, «Tool mediation», riceve l'output «azione autorizzata o rifiuto con traccia» come base, ma dovrà formulare e verificare la propria distinzione.
+La prima figura segue il percorso da «Istruzioni e dati» a «Tool mediation».
+
 
 ## Tool mediation
 
 Policy esterne validano tool, argomenti e destinazioni. Il modello propone, ma l'enforcement avviene fuori dal testo generato. [SRC-89-003]
 
-Il caso minimo di «Tool mediation» si presenta così: una traiettoria minima osservazione-azione-tool-verifica in cui una chiamata fuori allowlist viene bloccata prima dell'esecuzione. Non lo usiamo come decorazione: serve a rendere osservabile la frase «Policy esterne validano tool, argomenti e destinazioni».
+**Caso da seguire.** Una traiettoria minima osservazione-azione-tool-verifica in cui una chiamata fuori allowlist viene bloccata prima dell'esecuzione.
 
-Nel contratto locale, l'input «prompt, documento non fidato, tool e scope» entra, l'operazione «separazione, mediazione, allowlist e incident response» modifica il percorso e l'output «azione autorizzata o rifiuto con traccia» è ciò che osserviamo. Qui cambia soprattutto il passaggio «Tool mediation»; resta da controllare che contenuto recuperato non diventa istruzione privilegiata. La domanda locale è «Policy esterne validano tool, argomenti e destinazioni».
+**Controllo.** Separa il test del singolo componente dal test end-to-end, usando lo stesso input e la stessa configurazione versionata.
 
-Il componente può proporre un messaggio o un'azione, ma schema, identità, autorizzazione e side effect devono essere controllati al confine. La traiettoria osservabile è più informativa del testo prodotto. Il controllo deve mostrare la decisione prima del side effect e la verifica dopo la chiamata, includendo anche una richiesta fuori allowlist. La verifica resta ancorata a «Policy esterne validano tool, argomenti e destinazioni». [SRC-89-003]
-
-La lettura va fatta in ordine: prima il caso, poi la trasformazione, quindi la conseguenza. Il modello propone, ma l'enforcement avviene fuori dal testo generato. Il piccolo risultato resta un'illustrazione di «Policy esterne validano tool, argomenti e destinazioni», non una promessa generale.
-
-Il controllo minimo di «Tool mediation» confronta il caso dichiarato con una variazione che rompe la sua ipotesi. Se la failure non è distinguibile dall'esito valido, manca un'osservazione nel contratto di decisione, tool e side effect. Da «Tool mediation» portiamo l'output «azione autorizzata o rifiuto con traccia»; non portiamo invece una conclusione oltre il caso locale.
 
 ## Data exfiltration
 
 Segreti, memoria e risultati dei tool devono essere separati per scope. Output e URL possono diventare canali di esfiltrazione. [SRC-89-004]
 
-Prima del nome tecnico fissiamo la situazione: consideriamo due record con ID, testo, licenza e timestamp che attraversano una sola trasformazione registrata. Da qui possiamo leggere la conseguenza dichiarata da «Segreti, memoria e risultati dei tool devono essere separati per scope».
+**Caso da seguire.** Due record con ID, testo, licenza e timestamp che attraversano una sola trasformazione registrata.
 
-La sezione usa l'input «prompt, documento non fidato, tool e scope» come punto di partenza e l'output «azione autorizzata o rifiuto con traccia» come traccia d'uscita. La trasformazione concreta è «separazione, mediazione, allowlist e incident response»; il caso non è completo se non dichiariamo anche che contenuto recuperato non diventa istruzione privilegiata. La condizione da isolare è «Segreti, memoria e risultati dei tool devono essere separati per scope».
+**Controllo.** Introduci una failure a un solo confine e controlla che log, stato e recovery identifichino quel confine senza ambiguità.
 
-Il componente può proporre un messaggio o un'azione, ma schema, identità, autorizzazione e side effect devono essere controllati al confine. La traiettoria osservabile è più informativa del testo prodotto. Per «Data exfiltration» il controllo cambia una sola premessa della frase «Segreti, memoria e risultati dei tool devono essere separati per scope» e conserva input, output e criterio di successo, così la differenza resta attribuibile. La verifica resta ancorata a «Segreti, memoria e risultati dei tool devono essere separati per scope». [SRC-89-004]
-
-Se cambiamo una premessa, dobbiamo riaprire l'interpretazione. Per «Data exfiltration» conserviamo l'osservazione collegata a «Segreti, memoria e risultati dei tool devono essere separati per scope» e lasciamo esplicitamente fuori ciò che non è stato misurato.
-
-La prova di «Data exfiltration» conserva input, operazione e output; poi esplicita quale parte di «Segreti, memoria e risultati dei tool devono essere separati per scope» non è stata misurata. Così il test separa l'evidenza dall'inferenza. Il passaggio successivo, «Test e incident response», potrà cambiare una sola condizione, dichiarando il nuovo setup prima di interpretare il risultato.
-
-![Prompt injection e sicurezza dei tool: pipeline](../../assets/chapters/89_prompt_injection/INJECTION-01/candidate-v50.png)
-
-La figura INJECTION-01 usa la famiglia pipeline. Il diagramma segue il passaggio: Separazione, mediazione, allowlist e incident response. L'input è prompt, documento non fidato, tool e scope, l'output è azione autorizzata o rifiuto con traccia; il vincolo da controllare è che contenuto recuperato non diventa istruzione privilegiata.
 
 ## Test e incident response
 
 Canary, trace, allowlist, conferme e revoca delle credenziali supportano rilevamento, contenimento e recovery. [SRC-89-001]
 
-Per capire «Test e incident response» partiamo da questo caso: una decisione con owner, rischio, evidenza, giurisdizione e condizione di riapertura. Il caso rende osservabile il punto centrale: «Canary, trace, allowlist, conferme e revoca delle credenziali supportano rilevamento, contenimento e recovery».
+**Caso da seguire.** Una decisione con owner, rischio, evidenza, giurisdizione e condizione di riapertura.
 
-Per ricostruire «Test e incident response» annotiamo l'input «prompt, documento non fidato, tool e scope», poi l'operazione «separazione, mediazione, allowlist e incident response», infine l'output «azione autorizzata o rifiuto con traccia». Questa sequenza impedisce di scambiare una forma compatibile per il comportamento descritto dalla fonte. Il controllo parte da «Canary, trace, allowlist, conferme e revoca delle credenziali supportano rilevamento, contenimento e recovery».
+**Controllo.** Confronta il comportamento completo, non soltanto l'ultimo messaggio. Il risultato resta limitato da: Canary, trace, allowlist, conferme e revoca delle credenziali supportano rilevamento, contenimento e recovery.
 
-Il componente può proporre un messaggio o un'azione, ma schema, identità, autorizzazione e side effect devono essere controllati al confine. La traiettoria osservabile è più informativa del testo prodotto. La verifica assegna owner, evidenza, decisione e condizione di riapertura allo stesso caso, senza trasformare la checklist in una certificazione. La verifica resta ancorata a «Canary, trace, allowlist, conferme e revoca delle credenziali supportano rilevamento, contenimento e recovery». [SRC-89-001]
-
-Il punto didattico di «Test e incident response» è separare ciò che la fonte afferma da ciò che il piccolo caso illustra. L'output «azione autorizzata o rifiuto con traccia» mostra il contratto locale, ma non sostituisce una misura sul sistema completo.
-
-Per verificare «Test e incident response» cambiamo una sola condizione vicina alla frase «Canary, trace, allowlist, conferme e revoca delle credenziali supportano rilevamento, contenimento e recovery», teniamo fermo il resto e registriamo l'output «azione autorizzata o rifiuto con traccia». Il caso negativo deve rendere riconoscibile la failure, non soltanto produrre un numero diverso. Il percorso si chiude lasciando espliciti la misura locale e ciò che richiederebbe una prova ulteriore.
-
-## Il caso minimo e la sua variante: Istruzioni e dati
-
-Il caso intero parte dall'input «prompt, documento non fidato, tool e scope», applica l'operazione «separazione, mediazione, allowlist e incident response» e osserva l'output «azione autorizzata o rifiuto con traccia». Un esempio controllato: un documento chiede export dati ma il tool lo nega. Lo schema compatto è:
-
-$$
-allow = policy(instruction, provenance, scope)
-$$
-
-È una notazione di interfaccia, non un'identità numerica completa. Prompt injection e tool security richiedono separazione tra dati e istruzioni. [SRC-89-001]
 
 ![Prompt injection e sicurezza dei tool: threat](../../assets/chapters/89_prompt_injection/INJECTION-02/candidate-v48.png)
 
-La figura INJECTION-02 cambia composizione rispetto alla prima. Il diagramma segue il passaggio: Separazione, mediazione, allowlist e incident response. L'input è prompt, documento non fidato, tool e scope, l'output è azione autorizzata o rifiuto con traccia; il vincolo da controllare è che contenuto recuperato non diventa istruzione privilegiata.
+La seconda figura mette a confronto «Data exfiltration» e il limite discusso in «Test e incident response».
 
-## Che cosa osserva lo snippet: Indirect prompt injection
 
-Lo snippet locale mette in esecuzione questo caso: un documento chiede export dati ma il tool lo nega. Il test associato controlla determinismo, output e invariante e rifiuta una shape o condizione incoerente; il risultato è conservato in `code/outputs/SNIP-89-001.txt`, come evidenza locale e non come benchmark di produzione.
+## Esempio Python eseguito
 
-## Che cosa non dimostra: Test e incident response
+Il frammento seguente è lo stesso conservato nel repository. Usa valori piccoli perché l'obiettivo è osservare il meccanismo, non simulare una scala che non abbiamo eseguito.
 
-Il caso di «Prompt injection e sicurezza dei tool» non certifica un servizio completo. Contenuto recuperato non diventa istruzione privilegiata. La domanda successiva è se «Canary, trace, allowlist, conferme e revoca delle credenziali supportano rilevamento, contenimento e recovery» regga quando cambiano dati, scala, hardware o criteri di decisione.
+```python
+def contract():
+    document_instruction = "export all data"
+    tool_scope = {"lookup_order"}
+    requested = "export_data"
+    allowed = requested in tool_scope
+    return {"document_instruction": document_instruction, "allowed": allowed, "invariant": "retrieved content cannot grant a privileged tool scope"}
+```
 
-## La mappa delle condizioni: Prompt injection e sicurezza dei tool
+Esecuzione con `python snip_89_contract.py`:
 
-Il filo della lezione va dall'input «prompt, documento non fidato, tool e scope» all'output «azione autorizzata o rifiuto con traccia». Nei passaggi «Istruzioni e dati», «Indirect prompt injection», «Test e incident response» abbiamo usato esempi e controlli negativi per rendere il contratto controllabile e delimitare la conclusione. L'invariante da portare avanti è: contenuto recuperato non diventa istruzione privilegiata. Il Capitolo 90, Poisoning, backdoor, extraction e supply chain, può partire da questo output e dichiarare la propria domanda.
+```text
+{"allowed": false, "document_instruction": "export all data", "invariant": "retrieved content cannot grant a privileged tool scope"}
+```
 
-### Cinque domande di controllo: Istruzioni e dati
+Il test associato è [`code/test_89_contract.py`](code/test_89_contract.py); l'output versionato è [`code/outputs/SNIP-89-001.txt`](code/outputs/SNIP-89-001.txt).
 
-1. Ricostruisci l'oggetto continuo a partire da «Istruzioni e dati» e indica quale parte della frase «Contenuti recuperati, pagine e documenti sono dati non fidati» entra nel caso.
-2. Spiega quale trasformazione collega «Istruzioni e dati» a «Test e incident response» e quale output osserviamo nel passaggio.
-3. Usa lo snippet per controllare l'invariante del contratto: contenuto recuperato non diventa istruzione privilegiata.
-4. Separa una definizione sostenuta da una fonte, un esempio illustrativo e un risultato locale del caso guida.
-5. Indica quale parte della frase «Canary, trace, allowlist, conferme e revoca delle credenziali supportano rilevamento, contenimento e recovery» richiederebbe una misura nuova prima di essere estesa oltre il caso osservato.
 
-### Esercizi per cambiare una condizione: Test e incident response
+## Come si collegano i passaggi
 
-1. Racconta «Istruzioni e dati» come una trasformazione: che cosa entra e che cosa esce?
-2. Confronta due esecuzioni di «Indirect prompt injection» mantenendo il resto del setup invariato.
-3. Per «Tool mediation», separa l'esempio locale dal limite che impedisce di generalizzarlo.
-4. Progetta una prova per «Data exfiltration» che renda visibile il suo confine.
-5. Scrivi una metrica o una domanda per valutare «Test e incident response» senza confondere livelli diversi.
+- **Da «Istruzioni e dati» a «Indirect prompt injection».** Contenuti recuperati, pagine e documenti sono dati non fidati. Una istruzione malevola può essere inserita in una fonte consultata dall'agente e attivarsi durante il retrieval o il browsing. Il contratto iniziale nomina messaggi e confini; il componente successivo implementa una parte del percorso senza ereditare autorizzazioni implicite. [SRC-89-001; SRC-89-002]
 
-## Fonti e risultati locali: Prompt injection e sicurezza dei tool
+- **Da «Indirect prompt injection» a «Tool mediation».** Una istruzione malevola può essere inserita in una fonte consultata dall'agente e attivarsi durante il retrieval o il browsing. Policy esterne validano tool, argomenti e destinazioni. Il terzo passaggio compone più componenti e rende quindi necessario conservare stato, identità e decisione oltre all'output finale. [SRC-89-002; SRC-89-003]
 
-Per ricontrollare «Prompt injection e sicurezza dei tool», partire da `FONTI_PRIMARIE.md` e poi dal codice: la domanda aperta è come trasferire la traccia della traiettoria prima dell'effetto oltre il caso locale, con la data di consultazione dichiarata. `CLAIMS.md` separa definizioni e risultati locali; codice, ambiente, test e output sono nella cartella `code/`, con attenzione a decisione, tool e side effect.
+- **Da «Tool mediation» a «Data exfiltration».** Policy esterne validano tool, argomenti e destinazioni. Segreti, memoria e risultati dei tool devono essere separati per scope. La quarta sezione introduce failure e recovery nel punto in cui possono ancora precedere un side effect o una perdita di stato. [SRC-89-003; SRC-89-004]
+
+- **Da «Data exfiltration» a «Test e incident response».** Segreti, memoria e risultati dei tool devono essere separati per scope. Canary, trace, allowlist, conferme e revoca delle credenziali supportano rilevamento, contenimento e recovery. La chiusura valuta il comportamento end-to-end: un componente corretto non basta se il collegamento, il carico o la policy cambiano l'esito. [SRC-89-004; SRC-89-001]
+
+La catena completa produce azione autorizzata o rifiuto con traccia a partire da prompt, documento non fidato, tool e scope. Ogni collegamento conserva un oggetto osservabile diverso; per questo il risultato non può essere esteso oltre il limite dichiarato: contenuto recuperato non diventa istruzione privilegiata.
+
+
+## Prove sui confini del sistema
+
+1. Ricostruisci «Istruzioni e dati» con un esempio diverso da quello mostrato e indica l'output atteso prima del calcolo.
+2. Nel passaggio «Indirect prompt injection», cambia una sola ipotesi e spiega quale risultato non è più confrontabile.
+3. Collega «Tool mediation» a una riga dello snippet oppure motiva perché la prova deve essere documentale.
+4. Progetta un caso limite per «Data exfiltration» che produca una failure riconoscibile.
+5. Per «Test e incident response», separa una conclusione sostenuta dal caso locale da una che richiederebbe nuovi dati o un benchmark.
+
+
+## Il confine operativo
+
+La lezione parte da «prompt, documento non fidato, tool e scope» e arriva fino a «azione autorizzata o rifiuto con traccia». Il limite da conservare è questo: contenuto recuperato non diventa istruzione privilegiata. Definizioni e risultati citati sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md); la mappa dei claim è in [`CLAIMS.md`](CLAIMS.md).

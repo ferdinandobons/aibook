@@ -1,3 +1,3 @@
 # Alt text APP-D
 
-Mappa dei contenuti dell'appendice D.
+Compute, memoria e latenza non coincidono. compute: operazioni; memoria: resident set e cache; latenza: tempo end-to-end. Limite: il confronto richiede stesso setup e stessa shape.

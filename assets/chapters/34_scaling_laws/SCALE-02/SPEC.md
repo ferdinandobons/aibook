@@ -1,14 +1,16 @@
 # Specifica visuale SCALE-02
 
-- famiglia: architecture
-- domanda principale: Il diagramma segue il passaggio: Fit, confronto isoFLOP ed estrapolazione. L'input è punti con parametri, token, FLOP e loss, l'output è stima con intervallo osservato e costo; il vincolo da controllare è che un fit fuori dominio non è una legge garantita
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: budget_allocation
+- domanda principale: Quale controllo collega «Extrapolation» a «Training e inference cost» senza superare il limite dichiarato?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, architecture, invariante o limite in chiusura
-- nodi e contenuti: 1: Fit empirico; 2: Allocazione compute-optimal; 3: Esperimenti isoFLOP; 4: Extrapolation; 5: Training e inference cost
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: un fit fuori dominio non è una legge garantita
-- fonti collegate: SRC-34-001 ... SRC-34-004
-- alt text: Diagramma SCALE-02 del Capitolo 34, famiglia architecture. Domanda: Il diagramma segue il passaggio: Fit, confronto isoFLOP ed estrapolazione. L'input è punti con parametri, token, FLOP e loss, l'output è stima con intervallo osservato e costo; il vincolo da controllare è che un fit fuori dominio non è una legge garantita La composizione usa i passaggi Fit empirico, Allocazione compute-optimal, Esperimenti isoFLOP, Extrapolation, Training e inference cost.
+- file candidato: candidate-v48.png
+- oggetto osservato: una curva empirica tra scala, compute e loss
+- input: punti con parametri, token, FLOP e loss
+- output: stima con intervallo osservato e costo
+- nodi locali: Extrapolation: Residui, intervalli e ipotesi su loss irriducibile limitano la previsione fuori scala.; Training e inference cost: Una scelta compute-optimal per il training può non minimizzare costo e latenza del…
+- limite visualizzato: un fit fuori dominio non è una legge garantita
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

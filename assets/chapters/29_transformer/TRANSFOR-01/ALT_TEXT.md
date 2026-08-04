@@ -1,3 +1,3 @@
-# Alt text TRANSFOR-01
+# Testo alternativo
 
-Diagramma TRANSFOR-01 del Capitolo 29, famiglia branch. Domanda: Il diagramma segue il passaggio: Embedding, attention, MLP e residuo. L'input è tokenizzati di shape [batch, length] e vettori [batch, length, d], l'output è stato contestuale e logits; il vincolo da controllare è che mask, shape e percorso residuale devono essere compatibili La composizione usa i passaggi La mappa completa, Encoder, Decoder, Multi-head attention, Residual stream e output.
+TRANSFOR-01, Il Transformer da zero. Come si passa da «La mappa completa» a «Decoder» mantenendo osservabile lo stato nascosto che attraversa il blocco Transformer? La composizione transformer stack collega «La mappa completa», «Encoder», «Decoder». L'input è tokenizzati di shape [batch, length] e vettori [batch, length, d]; l'output è stato contestuale e logits. Il limite esplicito è: mask, shape e percorso residuale devono essere compatibili.

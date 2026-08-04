@@ -1,14 +1,16 @@
 # Specifica visuale KV-01
 
-- famiglia: matrix
-- domanda principale: Il diagramma segue il passaggio: MHA, MQA, GQA, località o sparsità. L'input è Q con h_q teste e KV con h_kv teste, l'output è score, cache e pattern di comunicazione; il vincolo da controllare è che raggruppamento delle teste e costo della KV cache restano espliciti
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: attention_compare
+- domanda principale: Come si passa da «MHA» a «GQA» mantenendo osservabile le teste di query e key-value che alimentano l'attention?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v47.png
-- ordine di lettura: titolo, domanda, matrix, invariante o limite in chiusura
-- nodi e contenuti: 1: MHA; 2: MQA; 3: GQA; 4: Local e sparse attention; 5: MLA e cache
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: raggruppamento delle teste e costo della KV cache restano espliciti
-- fonti collegate: SRC-39-001 ... SRC-39-004
-- alt text: Diagramma KV-01 del Capitolo 39, famiglia matrix. Domanda: Il diagramma segue il passaggio: MHA, MQA, GQA, località o sparsità. L'input è Q con h_q teste e KV con h_kv teste, l'output è score, cache e pattern di comunicazione; il vincolo da controllare è che raggruppamento delle teste e costo della KV cache restano espliciti La composizione usa i passaggi MHA, MQA, GQA, Local e sparse attention, MLA e cache.
+- file candidato: candidate-v47.png
+- oggetto osservato: le teste di query e key-value che alimentano l'attention
+- input: Q con h_q teste e KV con h_kv teste
+- output: score, cache e pattern di comunicazione
+- nodi locali: MHA: Ogni query head possiede key e value dedicate.; MQA: Tutte le query head condividono una singola coppia key-value, riducendo la cache.; GQA: Gruppi di query head condividono un numero intermedio di KV head.
+- limite visualizzato: raggruppamento delle teste e costo della KV cache restano espliciti
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

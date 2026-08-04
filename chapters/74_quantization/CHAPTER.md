@@ -4,133 +4,129 @@ part_id: P12
 order_key: 740
 title: Quantizzazione
 maturity: CORE
-status: candidatura completa in revisione autoriale
-version: 0.4.0-draft2
-last_source_check: 3 agosto 2026
+status: revisione editoriale v2, approvazione autoriale aperta
+version: 0.5.0-draft3
+last_source_check: 4 agosto 2026
 environment: Python 3.13.12, CPU
-deferred: benchmark applicativi, varianti non necessarie al contratto centrale e approvazione autoriale
+code_policy: reference
+deferred: benchmark applicativi non eseguiti e approvazione autoriale delle visuali
 -->
 
 # Capitolo 74. Quantizzazione
 
-Una frase plausibile non basta a spiegare quantizzazione. L'oggetto è un tensore reale e la sua rappresentazione quantizzata; riprendiamo la richiesta «Il pacco non è arrivato» come contesto comune, partiamo da un input piccolo, rendiamo visibile l'operazione e fissiamo che cosa non possiamo concludere.
+La domanda guida di questa lezione è come collegare «Scala e zero point» e «Metodi per LLM» senza perdere il contratto tecnico di quantizzazione. L'oggetto osservato è un tensore reale e la sua rappresentazione quantizzata. Il contratto locale è: input, valori, scale, zero-point, dtype e calibrazione; operazione, PTQ, QAT, weight-only o activation quantization; output, codici, tensore ricostruito, errore e memoria. Il caso guida è questo: Tre valori con scala 0,25 vengono quantizzati e ricostruiti con errore massimo misurato. Il confine da mantenere esplicito è: scala e dominio di calibrazione fanno parte del risultato.
 
 ## Scala e zero point
 
-Una mappa affine converte valori floating point in interi. Granularità per tensor, channel o group cambia errore e metadata. [SRC-74-001]
+Una mappa affine converte valori floating point in interi. La granularità per tensor o per channel cambia scale, errore e metadati. [SRC-74-001]
 
-Prima del nome tecnico fissiamo la situazione: consideriamo tre valori con scala 0,25 vengono quantizzati e ricostruiti con errore massimo misurato. Da qui possiamo leggere la conseguenza dichiarata da «Una mappa affine converte valori floating point in interi».
+Scale, zero-point e intervallo intero definiscono insieme quantizzazione e ricostruzione.
 
-La sezione usa l'input «valori, scale, zero-point, dtype e calibrazione» come punto di partenza e l'output «codici, tensore ricostruito, errore e memoria» come traccia d'uscita. La trasformazione concreta è «PTQ, QAT, weight-only o activation quantization»; il caso non è completo se non dichiariamo anche che scala e dominio di calibrazione fanno parte del risultato. La condizione da isolare è «Una mappa affine converte valori floating point in interi».
+**Caso da seguire.** Tre valori con scala 0,25 vengono quantizzati e ricostruiti con errore massimo misurato.
 
-L'ottimizzazione modifica rappresentazione, memoria, calcolo o scheduling sotto un carico dichiarato. Per attribuire il beneficio bisogna separare il guadagno locale da latenza, qualità e costo end-to-end. Per «Scala e zero point» il controllo cambia una sola premessa della frase «Una mappa affine converte valori floating point in interi» e conserva input, output e criterio di successo, così la differenza resta attribuibile. La verifica resta ancorata a «Una mappa affine converte valori floating point in interi». [SRC-74-001]
+**Controllo.** Scrivi il risultato atteso prima del calcolo, modifica una sola quantità e localizza il primo passaggio che cambia. Il vincolo da conservare è: La granularità per tensor o per channel cambia scale, errore e metadati.
 
-Se cambiamo una premessa, dobbiamo riaprire l'interpretazione. Per «Scala e zero point» conserviamo l'osservazione collegata a «Una mappa affine converte valori floating point in interi» e lasciamo esplicitamente fuori ciò che non è stato misurato.
-
-La prova di «Scala e zero point» conserva input, operazione e output; poi esplicita quale parte di «Una mappa affine converte valori floating point in interi» non è stata misurata. Così il test separa l'evidenza dall'inferenza. Il passaggio successivo, «PTQ», potrà cambiare una sola condizione, dichiarando il nuovo setup prima di interpretare il risultato.
 
 ## PTQ
 
 Post-training quantization usa calibration senza riaddestrare completamente. La rappresentatività dei dati di calibration è essenziale. [SRC-74-002]
 
-Per capire «PTQ» partiamo da questo caso: tre valori quantizzati con scala 0,25 e errore massimo. Il caso rende osservabile il punto centrale: «Post-training quantization usa calibration senza riaddestrare completamente».
+**Caso da seguire.** Tre valori quantizzati con scala 0,25 e errore massimo.
 
-Per ricostruire «PTQ» annotiamo l'input «valori, scale, zero-point, dtype e calibrazione», poi l'operazione «PTQ, QAT, weight-only o activation quantization», infine l'output «codici, tensore ricostruito, errore e memoria». Questa sequenza impedisce di scambiare una forma compatibile per il comportamento descritto dalla fonte. Il controllo parte da «Post-training quantization usa calibration senza riaddestrare completamente».
+**Controllo.** Ricalcola il caso a mano e con lo snippet. Se i risultati divergono, confronta prima i valori intermedi e soltanto dopo l'output finale.
 
-L'ottimizzazione modifica rappresentazione, memoria, calcolo o scheduling sotto un carico dichiarato. Per attribuire il beneficio bisogna separare il guadagno locale da latenza, qualità e costo end-to-end. Per «PTQ» il controllo cambia una sola premessa della frase «Post-training quantization usa calibration senza riaddestrare completamente» e conserva input, output e criterio di successo, così la differenza resta attribuibile. La verifica resta ancorata a «Post-training quantization usa calibration senza riaddestrare completamente». [SRC-74-002]
 
-Il punto didattico di «PTQ» è separare ciò che la fonte afferma da ciò che il piccolo caso illustra. L'output «codici, tensore ricostruito, errore e memoria» mostra il contratto locale, ma non sostituisce una misura sul sistema completo.
+La relazione centrale può essere scritta come:
 
-Per verificare «PTQ» cambiamo una sola condizione vicina alla frase «Post-training quantization usa calibration senza riaddestrare completamente», teniamo fermo il resto e registriamo l'output «codici, tensore ricostruito, errore e memoria». Il caso negativo deve rendere riconoscibile la failure, non soltanto produrre un numero diverso. La sezione successiva, «QAT», riceve l'output «codici, tensore ricostruito, errore e memoria» come base, ma dovrà formulare e verificare la propria distinzione.
+$$
+q = clamp(round(x / s) + z); \hat{x} = s(q - z)
+$$
 
-## QAT
+Scale, zero-point e intervallo intero definiscono insieme quantizzazione e ricostruzione. [SRC-74-001]
 
-Quantization-aware training simula arrotondamento e clipping durante il training per adattare i pesi. [SRC-74-003]
-
-Il caso minimo di «QAT» si presenta così: un caso in cui scala e dominio di calibrazione fanno parte del risultato. Non lo usiamo come decorazione: serve a rendere osservabile la frase «Quantization-aware training simula arrotondamento e clipping durante il training per adattare i pesi».
-
-Nel contratto locale, l'input «valori, scale, zero-point, dtype e calibrazione» entra, l'operazione «PTQ, QAT, weight-only o activation quantization» modifica il percorso e l'output «codici, tensore ricostruito, errore e memoria» è ciò che osserviamo. Qui cambia soprattutto il passaggio «QAT»; resta da controllare che scala e dominio di calibrazione fanno parte del risultato. La domanda locale è «Quantization-aware training simula arrotondamento e clipping durante il training per adattare i pesi».
-
-L'ottimizzazione modifica rappresentazione, memoria, calcolo o scheduling sotto un carico dichiarato. Per attribuire il beneficio bisogna separare il guadagno locale da latenza, qualità e costo end-to-end. Per «QAT» il controllo cambia una sola premessa della frase «Quantization-aware training simula arrotondamento e clipping durante il training per adattare i pesi» e conserva input, output e criterio di successo, così la differenza resta attribuibile. La verifica resta ancorata a «Quantization-aware training simula arrotondamento e clipping durante il training per adattare i pesi». [SRC-74-003]
-
-La lettura va fatta in ordine: prima il caso, poi la trasformazione, quindi la conseguenza. Il piccolo risultato resta un'illustrazione di «Quantization-aware training simula arrotondamento e clipping durante il training per adattare i pesi», non una promessa generale.
-
-Il controllo minimo di «QAT» confronta il caso dichiarato con una variazione che rompe la sua ipotesi. Se la failure non è distinguibile dall'esito valido, manca un'osservazione nel contratto di latency, memoria e throughput. Da «QAT» portiamo l'output «codici, tensore ricostruito, errore e memoria»; non portiamo invece una conclusione oltre il caso locale.
-
-## Weight-only e activation quantization
-
-Quantizzare soltanto i pesi riduce memoria; quantizzare attivazioni modifica anche i kernel di calcolo. [SRC-74-004]
-
-Prima del nome tecnico fissiamo la situazione: consideriamo tre valori floating point quantizzati con una scala dichiarata e confrontati con la ricostruzione. Da qui possiamo leggere la conseguenza dichiarata da «Quantizzare soltanto i pesi riduce memoria; quantizzare attivazioni modifica anche i kernel di calcolo».
-
-La sezione usa l'input «valori, scale, zero-point, dtype e calibrazione» come punto di partenza e l'output «codici, tensore ricostruito, errore e memoria» come traccia d'uscita. La trasformazione concreta è «PTQ, QAT, weight-only o activation quantization»; il caso non è completo se non dichiariamo anche che scala e dominio di calibrazione fanno parte del risultato. La condizione da isolare è «Quantizzare soltanto i pesi riduce memoria; quantizzare attivazioni modifica anche i kernel di calcolo».
-
-L'ottimizzazione modifica rappresentazione, memoria, calcolo o scheduling sotto un carico dichiarato. Per attribuire il beneficio bisogna separare il guadagno locale da latenza, qualità e costo end-to-end. Il controllo confronta valore originale, rappresentazione compressa e ricostruzione, riportando separatamente errore numerico e comportamento sul compito. La verifica resta ancorata a «Quantizzare soltanto i pesi riduce memoria; quantizzare attivazioni modifica anche i kernel di calcolo». [SRC-74-004]
-
-Se cambiamo una premessa, dobbiamo riaprire l'interpretazione. Per «Weight-only e activation quantization» conserviamo l'osservazione collegata a «Quantizzare soltanto i pesi riduce memoria; quantizzare attivazioni modifica anche i kernel di calcolo» e lasciamo esplicitamente fuori ciò che non è stato misurato.
-
-La prova di «Weight-only e activation quantization» conserva input, operazione e output; poi esplicita quale parte di «Quantizzare soltanto i pesi riduce memoria; quantizzare attivazioni modifica anche i kernel di calcolo» non è stata misurata. Così il test separa l'evidenza dall'inferenza. Il passaggio successivo, «Metodi per LLM», potrà cambiare una sola condizione, dichiarando il nuovo setup prima di interpretare il risultato.
 
 ![Quantizzazione: chart](../../assets/chapters/74_quantization/QUANTIZATI-01/candidate-v48.png)
 
-La figura QUANTIZATI-01 usa la famiglia chart. Il diagramma segue il passaggio: PTQ, QAT, weight-only o activation quantization. L'input è valori, scale, zero-point, dtype e calibrazione, l'output è codici, tensore ricostruito, errore e memoria; il vincolo da controllare è che scala e dominio di calibrazione fanno parte del risultato.
+La prima figura segue il percorso da «Scala e zero point» a «QAT».
+
+
+## QAT
+
+Quantization-aware training simula arrotondamento e clipping durante il training per adattare i pesi. [SRC-74-001]
+
+**Caso da seguire.** Un caso in cui scala e dominio di calibrazione fanno parte del risultato.
+
+**Controllo.** Aggiungi un valore limite e verifica separatamente forma, valore e ipotesi. Una shape valida non dimostra da sola «QAT».
+
+
+## Weight-only e activation quantization
+
+Quantizzare soltanto i pesi riduce memoria; quantizzare attivazioni modifica anche i kernel di calcolo. [SRC-74-003; SRC-74-002]
+
+**Caso da seguire.** Tre valori floating point quantizzati con una scala dichiarata e confrontati con la ricostruzione.
+
+**Controllo.** Mantieni fisso l'input e sostituisci soltanto il meccanismo discusso nella sezione. Il confronto deve attribuire la differenza a quel passaggio, non al setup.
+
+
+## Esempio Python eseguito
+
+Il frammento seguente è lo stesso conservato nel repository. Usa valori piccoli perché l'obiettivo è osservare il meccanismo, non simulare una scala che non abbiamo eseguito.
+
+```python
+def contract():
+    values = [-0.5, 0.0, 0.5]
+    scale = 0.25
+    quantized = [round(value / scale) for value in values]
+    restored = [code * scale for code in quantized]
+    error = max(abs(value - recovered) for value, recovered in zip(values, restored))
+    return {"quantized": quantized, "restored": restored, "max_error": error, "invariant": "scale and calibration determine quantization error"}
+```
+
+Esecuzione con `python snip_74_contract.py`:
+
+```text
+{"invariant": "scale and calibration determine quantization error", "max_error": 0.0, "quantized": [-2, 0, 2], "restored": [-0.5, 0.0, 0.5]}
+```
+
+Il test associato è [`code/test_74_contract.py`](code/test_74_contract.py); l'output versionato è [`code/outputs/SNIP-74-001.txt`](code/outputs/SNIP-74-001.txt).
+
 
 ## Metodi per LLM
 
-GPTQ, AWQ, SmoothQuant e famiglie affini gestiscono salienza e outlier con contratti differenti. [SRC-74-001]
+GPTQ, AWQ e SmoothQuant ottimizzano oggetti differenti: ricostruzione, canali salienti e outlier delle attivazioni. I loro contratti non sono intercambiabili. [SRC-74-004; SRC-74-003; SRC-74-002]
 
-Per capire «Metodi per LLM» partiamo da questo caso: ridurre i byte per elemento cambia memoria e potenzialmente errore. Il controllo richiede confronto numerico oltre alla misura di tempo. Il caso rende osservabile il punto centrale: «GPTQ, AWQ, SmoothQuant e famiglie affini gestiscono salienza e outlier con contratti differenti».
+**Caso da seguire.** Ridurre i byte per elemento cambia memoria e potenzialmente errore. Il controllo richiede confronto numerico oltre alla misura di tempo.
 
-Per ricostruire «Metodi per LLM» annotiamo l'input «valori, scale, zero-point, dtype e calibrazione», poi l'operazione «PTQ, QAT, weight-only o activation quantization», infine l'output «codici, tensore ricostruito, errore e memoria». Questa sequenza impedisce di scambiare una forma compatibile per il comportamento descritto dalla fonte. Il controllo parte da «GPTQ, AWQ, SmoothQuant e famiglie affini gestiscono salienza e outlier con contratti differenti».
+**Controllo.** Costruisci un controesempio che rispetti il tipo di dato ma violi l'ipotesi centrale. Il test deve rendere riconoscibile perché «Metodi per LLM» non si applica.
 
-L'ottimizzazione modifica rappresentazione, memoria, calcolo o scheduling sotto un carico dichiarato. Per attribuire il beneficio bisogna separare il guadagno locale da latenza, qualità e costo end-to-end. Per «Metodi per LLM» il controllo cambia una sola premessa della frase «GPTQ, AWQ, SmoothQuant e famiglie affini gestiscono salienza e outlier con contratti differenti» e conserva input, output e criterio di successo, così la differenza resta attribuibile. La verifica resta ancorata a «GPTQ, AWQ, SmoothQuant e famiglie affini gestiscono salienza e outlier con contratti differenti». [SRC-74-001]
-
-Il punto didattico di «Metodi per LLM» è separare ciò che la fonte afferma da ciò che il piccolo caso illustra. L'output «codici, tensore ricostruito, errore e memoria» mostra il contratto locale, ma non sostituisce una misura sul sistema completo.
-
-Per verificare «Metodi per LLM» cambiamo una sola condizione vicina alla frase «GPTQ, AWQ, SmoothQuant e famiglie affini gestiscono salienza e outlier con contratti differenti», teniamo fermo il resto e registriamo l'output «codici, tensore ricostruito, errore e memoria». Il caso negativo deve rendere riconoscibile la failure, non soltanto produrre un numero diverso. Il percorso si chiude lasciando espliciti la misura locale e ciò che richiederebbe una prova ulteriore.
-
-## Il caso minimo e la sua variante: Scala e zero point
-
-Il caso intero parte dall'input «valori, scale, zero-point, dtype e calibrazione», applica l'operazione «PTQ, QAT, weight-only o activation quantization» e osserva l'output «codici, tensore ricostruito, errore e memoria». Un esempio controllato: tre valori quantizzati con scala 0,25 e errore massimo. La formula locale è:
-
-$$
-x_hat = scale * round(x / scale)
-$$
-
-Quantizzare espone il trade-off tra memoria, errore e velocità. [SRC-74-001]
 
 ![Quantizzazione: compare](../../assets/chapters/74_quantization/QUANTIZATI-02/candidate-v48.png)
 
-La figura QUANTIZATI-02 cambia composizione rispetto alla prima. Il diagramma segue il passaggio: PTQ, QAT, weight-only o activation quantization. L'input è valori, scale, zero-point, dtype e calibrazione, l'output è codici, tensore ricostruito, errore e memoria; il vincolo da controllare è che scala e dominio di calibrazione fanno parte del risultato.
+La seconda figura mette a confronto «Weight-only e activation quantization» e il limite discusso in «Metodi per LLM».
 
-## Che cosa osserva lo snippet: PTQ
 
-Nel run Python rendiamo osservabile la frase «Una mappa affine converte valori floating point in interi» con valori piccoli e leggibili. Il test associato verifica determinismo, output e rifiuto di una condizione incoerente; il file di output `code/outputs/SNIP-74-001.txt` documenta il caso senza pretendere una misura generale.
+## Come si collegano i passaggi
 
-## Che cosa non dimostra: Metodi per LLM
+- **Da «Scala e zero point» a «PTQ».** Una mappa affine converte valori floating point in interi. Post-training quantization usa calibration senza riaddestrare completamente. Il primo passaggio definisce che cosa entra nel calcolo; il secondo stabilisce la regola che produce il valore osservabile. [SRC-74-001; SRC-74-002]
 
-Il meccanismo di «Quantizzazione» non garantisce da solo che il sistema funzioni fuori dal caso guida. Scala e dominio di calibrazione fanno parte del risultato. Il limite osservato riguarda la frase «Una mappa affine converte valori floating point in interi»; per trasferire il concetto occorre riaprire la verifica quando cambiano dati, scala o ambiente.
+- **Da «PTQ» a «QAT».** Post-training quantization usa calibration senza riaddestrare completamente. Quantization-aware training simula arrotondamento e clipping durante il training per adattare i pesi. La regola generale viene poi letta dentro il componente: questa separazione permette di localizzare un errore prima di attribuirlo all'intero modello. [SRC-74-002; SRC-74-001]
 
-## La mappa delle condizioni: Quantizzazione
+- **Da «QAT» a «Weight-only e activation quantization».** Quantization-aware training simula arrotondamento e clipping durante il training per adattare i pesi. Quantizzare soltanto i pesi riduce memoria; quantizzare attivazioni modifica anche i kernel di calcolo. Dopo avere reso visibile il componente, il percorso introduce la variante o l'ottimizzazione senza cambiare di nascosto il caso di partenza. [SRC-74-001; SRC-74-003; SRC-74-002]
 
-Il percorso ha tenuto insieme un tensore reale e la sua rappresentazione quantizzata, l'operazione «PTQ, QAT, weight-only o activation quantization» e l'output «codici, tensore ricostruito, errore e memoria». Le sezioni «Scala e zero point», «PTQ», «Metodi per LLM» mostrano come il protocollo osservato delimiti ciò che il capitolo può sostenere. L'invariante da portare avanti è: scala e dominio di calibrazione fanno parte del risultato. Il Capitolo 75, Modelli low-bit nativi e co-design numerico, può partire da questo output e dichiarare la propria domanda.
+- **Da «Weight-only e activation quantization» a «Metodi per LLM».** Quantizzare soltanto i pesi riduce memoria; quantizzare attivazioni modifica anche i kernel di calcolo. GPTQ, AWQ e SmoothQuant ottimizzano oggetti differenti: ricostruzione, canali salienti e outlier delle attivazioni. L'ultimo passaggio sposta l'attenzione dal funzionamento locale alla misura: correttezza del calcolo e qualità applicativa restano domande distinte. [SRC-74-003; SRC-74-002; SRC-74-004; SRC-74-003; SRC-74-002]
 
-### Cinque domande di controllo: Scala e zero point
+La catena completa produce codici, tensore ricostruito, errore e memoria a partire da valori, scale, zero-point, dtype e calibrazione. Ogni collegamento conserva un oggetto osservabile diverso; per questo il risultato non può essere esteso oltre il limite dichiarato: scala e dominio di calibrazione fanno parte del risultato.
 
-1. Ricostruisci l'oggetto continuo a partire da «Scala e zero point» e indica quale parte della frase «Una mappa affine converte valori floating point in interi» entra nel caso.
-2. Spiega quale trasformazione collega «Scala e zero point» a «Metodi per LLM» e quale output osserviamo nel passaggio.
-3. Usa lo snippet per controllare l'invariante del contratto: scala e dominio di calibrazione fanno parte del risultato.
-4. Separa una definizione sostenuta da una fonte, un esempio illustrativo e un risultato locale del caso guida.
-5. Indica quale parte della frase «GPTQ, AWQ, SmoothQuant e famiglie affini gestiscono salienza e outlier con contratti differenti» richiederebbe una misura nuova prima di essere estesa oltre il caso osservato.
 
-### Esercizi per cambiare una condizione: Metodi per LLM
+## Esercizi sul meccanismo
 
-1. Ricostruisci input e output di «Scala e zero point» usando un esempio di tre righe.
-2. Modifica una sola variabile in «PTQ» e anticipa l'invariante che dovrebbe restare.
-3. Metti «QAT» a confronto con il caso base e descrivi il failure mode più vicino.
-4. Scrivi un test minimo per rendere osservabile il confine di «Weight-only e activation quantization».
-5. Formula per «Metodi per LLM» una domanda che separi meccanismo e qualità del sistema.
+1. Ricostruisci «Scala e zero point» con un esempio diverso da quello mostrato e indica l'output atteso prima del calcolo.
+2. Nel passaggio «PTQ», cambia una sola ipotesi e spiega quale risultato non è più confrontabile.
+3. Collega «QAT» a una riga dello snippet oppure motiva perché la prova deve essere documentale.
+4. Progetta un caso limite per «Weight-only e activation quantization» che produca una failure riconoscibile.
+5. Per «Metodi per LLM», separa una conclusione sostenuta dal caso locale da una che richiederebbe nuovi dati o un benchmark.
 
-## Fonti e risultati locali: Quantizzazione
 
-Per «Quantizzazione», le fonti portanti, i limiti dei claim e la data di consultazione sono raccolti in `FONTI_PRIMARIE.md`; la ricerca riguarda soprattutto latency, memoria e throughput. `CLAIMS.md` separa definizioni e risultati locali; codice, ambiente, test e output sono nella cartella `code/`, con attenzione a latency, memoria e throughput.
+## Che cosa deve restare chiaro
+
+La lezione parte da «valori, scale, zero-point, dtype e calibrazione» e arriva fino a «codici, tensore ricostruito, errore e memoria». Il limite da conservare è questo: scala e dominio di calibrazione fanno parte del risultato. Definizioni e risultati citati sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md); la mappa dei claim è in [`CLAIMS.md`](CLAIMS.md).

@@ -1,14 +1,16 @@
 # Specifica visuale LLMOPS-01
 
-- famiglia: checklist
-- domanda principale: Il diagramma segue il passaggio: Deploy, osservabilità, edge routing e cost accounting. L'input è modello, richieste, device, energia e monitor, l'output è versione attiva, costo per richiesta e alert; il vincolo da controllare è che un costo locale non descrive l'intero ciclo di vita
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: llmops_loop
+- domanda principale: Come si passa da «Dalla versione al deployment» a «Edge» mantenendo osservabile un servizio LLM dalla versione al consumo?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, checklist, invariante o limite in chiusura
-- nodi e contenuti: 1: Dalla versione al deployment; 2: Osservabilità; 3: Edge; 4: Costo; 5: Energia e sostenibilità
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: un costo locale non descrive l'intero ciclo di vita
-- fonti collegate: SRC-82-001 ... SRC-82-004
-- alt text: Diagramma LLMOPS-01 del Capitolo 82, famiglia checklist. Domanda: Il diagramma segue il passaggio: Deploy, osservabilità, edge routing e cost accounting. L'input è modello, richieste, device, energia e monitor, l'output è versione attiva, costo per richiesta e alert; il vincolo da controllare è che un costo locale non descrive l'intero ciclo di vita La composizione usa i passaggi Dalla versione al deployment, Osservabilità, Edge, Costo, Energia e sostenibilità.
+- file candidato: candidate-v48.png
+- oggetto osservato: un servizio LLM dalla versione al consumo
+- input: modello, richieste, device, energia e monitor
+- output: versione attiva, costo per richiesta e alert
+- nodi locali: Dalla versione al deployment: Checkpoint, tokenizer, adapter, prompt e tool schema devono essere versionati come…; Osservabilità: Log, trace, metriche e feedback collegano input, modello, retrieval, tool e output senza…; Edge: Dispositivi locali impongono memoria, batteria, termica e compatibilità dei kernel.…
+- limite visualizzato: un costo locale non descrive l'intero ciclo di vita
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

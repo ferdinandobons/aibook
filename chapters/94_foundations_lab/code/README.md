@@ -1,5 +1,12 @@
-# Codice del Capitolo 94
+# Esempio verificato. Capitolo 94
 
-Lo snippet snip_94_contract.py rende osservabile il contratto centrale di Percorso pratico dai fondamenti con valori piccoli e leggibili.
-Il test test_94_contract.py controlla determinismo, output, invariante e una shape incoerente.
-Il risultato è un esempio locale, non un benchmark di produzione.
+`snip_94_contract.py` esegue il caso minimo usato nel testo di **Percorso pratico dai fondamenti**. `test_94_contract.py` conserva l'output atteso, controlla determinismo, serializzazione, valori finiti e presenza del limite interpretativo.
+
+```bash
+python snip_94_contract.py
+python -m unittest -v test_94_contract.py
+```
+
+## Training, baseline e manifest
+
+Codice: `foundations_lab.py`; test: `test_foundations_lab.py`; output: `outputs/FOUNDATIONS-LAB.txt`; ambiente: `environments/lab.txt`.

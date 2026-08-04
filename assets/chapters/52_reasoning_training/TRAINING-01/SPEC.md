@@ -1,14 +1,16 @@
 # Specifica visuale TRAINING-01
 
-- famiglia: branch
-- domanda principale: Il diagramma segue il passaggio: Distillazione, self-consistency e rejection sampling. L'input è prompt, trace del teacher, answer e costo in token, l'output è traccia selezionata, risposta e misura di costo; il vincolo da controllare è che una traccia leggibile non prova faithfulness causale
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: reasoning_curriculum
+- domanda principale: Come si passa da «Tracce e risposte» a «Self-consistency e rejection sampling» mantenendo osservabile una traccia di reasoning e la risposta che la segue?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, branch, invariante o limite in chiusura
-- nodi e contenuti: 1: Tracce e risposte; 2: Distillazione; 3: Self-consistency e rejection sampling; 4: Faithfulness; 5: Costo e lunghezza
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: una traccia leggibile non prova faithfulness causale
-- fonti collegate: SRC-52-001 ... SRC-52-004
-- alt text: Diagramma TRAINING-01 del Capitolo 52, famiglia branch. Domanda: Il diagramma segue il passaggio: Distillazione, self-consistency e rejection sampling. L'input è prompt, trace del teacher, answer e costo in token, l'output è traccia selezionata, risposta e misura di costo; il vincolo da controllare è che una traccia leggibile non prova faithfulness causale La composizione usa i passaggi Tracce e risposte, Distillazione, Self-consistency e rejection sampling, Faithfulness, Costo e lunghezza.
+- file candidato: candidate-v48.png
+- oggetto osservato: una traccia di reasoning e la risposta che la segue
+- input: prompt, trace del teacher, answer e costo in token
+- output: traccia selezionata, risposta e misura di costo
+- nodi locali: Tracce e risposte: Una traccia di ragionamento è testo prodotto dal modello. Può aiutare il training senza…; Distillazione: Un teacher produce soluzioni o distribuzioni che diventano target per uno student.…; Self-consistency e rejection sampling: Più candidate vengono generate e selezionate con voto o verifier. Il dataset risultante…
+- limite visualizzato: una traccia leggibile non prova faithfulness causale
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

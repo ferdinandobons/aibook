@@ -1,3 +1,0 @@
-chapter: 74
-title: Quantizzazione
-output: [0.755272, 0.334759]

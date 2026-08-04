@@ -1,12 +1,7 @@
 # Audit del codice
 
-- ambiente: Python 3.13.12, CPU, processo pulito
-- API: funzioni Python standard del modulo snip_93_contract
-- comando snippet: python snip_93_contract.py
-- comando test: python -m unittest -v test_93_contract.py
-- snippet: eseguito
-- test: 4 superati
-- controllo negativo: shape incoerente rifiutata
-- risultato: esempio delimitato, non benchmark di produzione
-- dipendenze esterne: nessuna
-- stato: verificato localmente, review autoriale aperta
+- policy: exception
+- motivazione: Norme e responsabilità dipendono da ruolo, giurisdizione e data: uno script locale produrrebbe una falsa impressione di conformità automatica.
+- snippet pubblico: non previsto
+- verifica sostitutiva: fonti primarie, data, claim delimitati e confronto documentale
+- stato: eccezione motivata; review autoriale aperta

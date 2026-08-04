@@ -1,3 +1,3 @@
-# Alt text LAB-02
+# Testo alternativo
 
-Diagramma LAB-02 del Capitolo 94, famiglia compare. Domanda: Il diagramma segue il passaggio: Run, test, valutazione e report. L'input è seed, dataset piccolo, config, codice e versione, l'output è loss, metriche, manifest e limite; il vincolo da controllare è che un run locale non equivale a una prova generale La composizione usa i passaggi Ambiente riproducibile, Dataset piccolo, Modello e loss, Training e valutazione, Report.
+LAB-02, Percorso pratico dai fondamenti. Quale controllo collega «Training e valutazione» a «Report» senza superare il limite dichiarato? La composizione result bundle collega «Training e valutazione», «Report». L'input è seed, dataset piccolo, config, codice e versione; l'output è loss, metriche, manifest e limite. Il limite esplicito è: un run locale non equivale a una prova generale.

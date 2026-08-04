@@ -1,14 +1,16 @@
 # Specifica visuale QUANTIZATI-01
 
-- famiglia: chart
-- domanda principale: Il diagramma segue il passaggio: PTQ, QAT, weight-only o activation quantization. L'input è valori, scale, zero-point, dtype e calibrazione, l'output è codici, tensore ricostruito, errore e memoria; il vincolo da controllare è che scala e dominio di calibrazione fanno parte del risultato
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: quantization_map
+- domanda principale: Come si passa da «Scala e zero point» a «QAT» mantenendo osservabile un tensore reale e la sua rappresentazione quantizzata?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, chart, invariante o limite in chiusura
-- nodi e contenuti: 1: Scala e zero point; 2: PTQ; 3: QAT; 4: Weight-only e activation quantization; 5: Metodi per LLM
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: scala e dominio di calibrazione fanno parte del risultato
-- fonti collegate: SRC-74-001 ... SRC-74-004
-- alt text: Diagramma QUANTIZATI-01 del Capitolo 74, famiglia chart. Domanda: Il diagramma segue il passaggio: PTQ, QAT, weight-only o activation quantization. L'input è valori, scale, zero-point, dtype e calibrazione, l'output è codici, tensore ricostruito, errore e memoria; il vincolo da controllare è che scala e dominio di calibrazione fanno parte del risultato La composizione usa i passaggi Scala e zero point, PTQ, QAT, Weight-only e activation quantization, Metodi per LLM.
+- file candidato: candidate-v48.png
+- oggetto osservato: un tensore reale e la sua rappresentazione quantizzata
+- input: valori, scale, zero-point, dtype e calibrazione
+- output: codici, tensore ricostruito, errore e memoria
+- nodi locali: Scala e zero point: Una mappa affine converte valori floating point in interi. La granularità per tensor o…; PTQ: Post-training quantization usa calibration senza riaddestrare completamente. La…; QAT: Quantization-aware training simula arrotondamento e clipping durante il training per…
+- limite visualizzato: scala e dominio di calibrazione fanno parte del risultato
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

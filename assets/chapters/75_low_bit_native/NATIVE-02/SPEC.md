@@ -1,14 +1,16 @@
 # Specifica visuale NATIVE-02
 
-- famiglia: compare
-- domanda principale: Il diagramma segue il passaggio: Training nativo, STE e accumulazione. L'input è peso reale, codice ternario, scala e attivazione, l'output è peso ricostruito, gradiente e costo hardware; il vincolo da controllare è che bit nominali e precisione effettiva dell'accumulo sono distinti
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: accumulator_stack
+- domanda principale: Quale controllo collega «Accumulazione» a «Co-design hardware» senza superare il limite dichiarato?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, compare, invariante o limite in chiusura
-- nodi e contenuti: 1: Training nativo; 2: Pesi ternari e 1.58-bit; 3: Straight-through estimator; 4: Accumulazione; 5: Co-design hardware
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: bit nominali e precisione effettiva dell'accumulo sono distinti
-- fonti collegate: SRC-75-001 ... SRC-75-004
-- alt text: Diagramma NATIVE-02 del Capitolo 75, famiglia compare. Domanda: Il diagramma segue il passaggio: Training nativo, STE e accumulazione. L'input è peso reale, codice ternario, scala e attivazione, l'output è peso ricostruito, gradiente e costo hardware; il vincolo da controllare è che bit nominali e precisione effettiva dell'accumulo sono distinti La composizione usa i passaggi Training nativo, Pesi ternari e 1.58-bit, Straight-through estimator, Accumulazione, Co-design hardware.
+- file candidato: candidate-v48.png
+- oggetto osservato: un peso low-bit e il suo accumulo numerico
+- input: peso reale, codice ternario, scala e attivazione
+- output: peso ricostruito, gradiente e costo hardware
+- nodi locali: Accumulazione: Prodotti low-bit possono accumulare in precisione maggiore. Storage, compute e…; Co-design hardware: Il vantaggio richiede kernel, packing e unità aritmetiche che sfruttino il formato.…
+- limite visualizzato: bit nominali e precisione effettiva dell'accumulo sono distinti
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

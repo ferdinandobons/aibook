@@ -1,5 +1,8 @@
-# Codice del Capitolo 56
+# Esempio verificato. Capitolo 56
 
-Lo snippet snip_56_contract.py rende osservabile il contratto centrale di Vision encoder e Vision-Language Model con valori piccoli e leggibili.
-Il test test_56_contract.py controlla determinismo, output, invariante e una shape incoerente.
-Il risultato è un esempio locale, non un benchmark di produzione.
+`snip_56_contract.py` esegue il caso minimo usato nel testo di **Vision encoder e Vision-Language Model**. `test_56_contract.py` conserva l'output atteso, controlla determinismo, serializzazione, valori finiti e presenza del limite interpretativo.
+
+```bash
+python snip_56_contract.py
+python -m unittest -v test_56_contract.py
+```

@@ -1,14 +1,16 @@
 # Specifica visuale DATA-02
 
-- famiglia: branch
-- domanda principale: Il diagramma segue il passaggio: Normalizzazione, segmentazione e packing. L'input è una stringa Unicode con byte e token speciali, l'output è ID, confini, mask e costo in token; il vincolo da controllare è che stringa, encoding e tokenizer devono restare dichiarati
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: tokenization_grid
+- domanda principale: Quale controllo collega «Packing e confini» a «Lunghezza, lingua e costi» senza superare il limite dichiarato?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, branch, invariante o limite in chiusura
-- nodi e contenuti: 1: Unicode e byte; 2: Tokenizzazione; 3: Token speciali; 4: Packing e confini; 5: Lunghezza, lingua e costi
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: stringa, encoding e tokenizer devono restare dichiarati
-- fonti collegate: SRC-26-001 ... SRC-26-004
-- alt text: Diagramma DATA-02 del Capitolo 26, famiglia branch. Domanda: Il diagramma segue il passaggio: Normalizzazione, segmentazione e packing. L'input è una stringa Unicode con byte e token speciali, l'output è ID, confini, mask e costo in token; il vincolo da controllare è che stringa, encoding e tokenizer devono restare dichiarati La composizione usa i passaggi Unicode e byte, Tokenizzazione, Token speciali, Packing e confini, Lunghezza, lingua e costi.
+- file candidato: candidate-v48.png
+- oggetto osservato: il testo prima e dopo la tokenizzazione
+- input: una stringa Unicode con byte e token speciali
+- output: ID, confini, mask e costo in token
+- nodi locali: Packing e confini: Più documenti possono condividere una sequenza. Attention mask e loss mask devono…; Lunghezza, lingua e costi: Token per carattere variano tra lingue e formati. La lunghezza in token influenza…
+- limite visualizzato: stringa, encoding e tokenizer devono restare dichiarati
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

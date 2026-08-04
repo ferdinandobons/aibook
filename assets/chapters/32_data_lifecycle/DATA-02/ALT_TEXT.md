@@ -1,3 +1,3 @@
-# Alt text DATA-02
+# Testo alternativo
 
-Diagramma DATA-02 del Capitolo 32, famiglia funnel. Domanda: Il diagramma segue il passaggio: Parsing, filtro, deduplicazione e tokenizzazione. L'input è testo grezzo, metadati, split e digest, l'output è record ammesso, conteggi e manifest; il vincolo da controllare è che ogni trasformazione deve restare ricostruibile e ordinata La composizione usa i passaggi Sorgenti e provenienza, Parsing e normalizzazione, Filtri, Deduplicazione e contaminazione, Split, tokenizzazione e manifest.
+DATA-02, Il ciclo di vita dei dati. Quale controllo collega «Deduplicazione e contaminazione» a «Split, tokenizzazione e manifest» senza superare il limite dichiarato? La composizione dataset gate collega «Deduplicazione e contaminazione», «Split, tokenizzazione e manifest». L'input è testo grezzo, metadati, split e digest; l'output è record ammesso, conteggi e manifest. Il limite esplicito è: ogni trasformazione deve restare ricostruibile e ordinata.

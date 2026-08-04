@@ -1,3 +1,3 @@
-# Alt text DECODING-01
+# Testo alternativo
 
-Diagramma DECODING-01 del Capitolo 77, famiglia compare. Domanda: Il diagramma segue il passaggio: Proposta, verifica, accettazione e fallback. L'input è token proposti, logits draft e logits target, l'output è token accettati, velocità e distribuzione preservata; il vincolo da controllare è che lo speedup richiede verifica senza cambiare il contratto di output La composizione usa i passaggi Draft e target, Acceptance, Speedup, Medusa, EAGLE e ReDrafter, Parallel decoding.
+DECODING-01, Speculative e parallel decoding. Come si passa da «Draft e target» a «Speedup» mantenendo osservabile draft e target durante il decoding speculativo? La composizione draft verify collega «Draft e target», «Acceptance», «Speedup». L'input è token proposti, logits draft e logits target; l'output è token accettati, velocità e distribuzione preservata. Il limite esplicito è: lo speedup richiede verifica senza cambiare il contratto di output.

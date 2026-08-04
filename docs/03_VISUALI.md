@@ -106,6 +106,20 @@ Per famiglie, varianti e metodi. La gerarchia deriva dalla relazione tecnica, no
 
 Per dati misurati con assi, unità, setup e fonte. Numeri illustrativi non vengono presentati come misure.
 
+Un grafico quantitativo non viene usato come riempitivo. Se il repository non conserva valori eseguiti o una fonte con protocollo e unità, la relazione viene mostrata con una composizione qualitativa esplicita: processo, confronto, stack, tree, grid, boundary, grafo, ciclo, tile o struttura dell'evidenza.
+
+### 4.8 Varietà guidata dal concetto
+
+Una grammatica comune non autorizza due figure quasi identiche per ogni capitolo. La scelta avviene in questo ordine:
+
+1. relazione da spiegare;
+2. oggetto che cambia;
+3. input e output osservabili;
+4. failure o limite da separare;
+5. composizione più piccola che renda visibili questi elementi.
+
+Colori, box e tipografia possono essere canonici. Geometria e ordine di lettura cambiano quando cambiano la relazione tecnica. La seconda figura di un capitolo deve rispondere a una domanda diversa dalla prima, non soltanto cambiare etichette.
+
 ## 5. Struttura della figura
 
 Una figura può includere:
@@ -324,6 +338,8 @@ Il prompt richiede esplicitamente:
 - assenza di watermark e branding.
 
 La prima bozza si chiama `candidate-v1.png` o equivalente, mai `final.png`.
+
+Per schemi tecnici, formule, tensor, confini di fiducia e collegamenti si preferisce un renderer deterministico. La generazione raster libera è ammessa per illustrazioni non diagrammatiche, ma non può inventare testo, misure, topologie o branding. Il compiler corrente per i capitoli revisionati è `scripts/generate_visuals_v2.py`; `scripts/build_visual_contact_sheets.py` produce contact sheet temporanee per il controllo complessivo.
 
 ### 15.3 Audit tecnico indipendente
 

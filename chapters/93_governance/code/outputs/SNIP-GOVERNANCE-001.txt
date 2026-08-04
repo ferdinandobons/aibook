@@ -1,3 +1,0 @@
-chapter: 93
-title: Diritto, governance e sostenibilità
-output: [0.755272, 0.334759]

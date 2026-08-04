@@ -1,5 +1,8 @@
-# Codice del Capitolo 45
+# Esempio verificato. Capitolo 45
 
-Lo snippet snip_45_contract.py rende osservabile il contratto centrale di Byte, predizione multi-token e language diffusion con valori piccoli e leggibili.
-Il test test_45_contract.py controlla determinismo, output, invariante e una shape incoerente.
-Il risultato è un esempio locale, non un benchmark di produzione.
+`snip_45_contract.py` esegue il caso minimo usato nel testo di **Byte, predizione multi-token e language diffusion**. `test_45_contract.py` conserva l'output atteso, controlla determinismo, serializzazione, valori finiti e presenza del limite interpretativo.
+
+```bash
+python snip_45_contract.py
+python -m unittest -v test_45_contract.py
+```

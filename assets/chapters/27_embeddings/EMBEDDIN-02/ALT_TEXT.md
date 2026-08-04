@@ -1,3 +1,3 @@
-# Alt text EMBEDDIN-02
+# Testo alternativo
 
-Diagramma EMBEDDIN-02 del Capitolo 27, famiglia matrix. Domanda: Il diagramma segue il passaggio: Lookup, pooling, similarità e normalizzazione. L'input è due ID, due vettori e una query, l'output è embedding, ranking o predizione; il vincolo da controllare è che la similarità dipende da training, metrica e normalizzazione La composizione usa i passaggi Da ID a vettore, Word embedding, Embedding contestuale, Sentence embedding, Ricerca e anisotropia.
+EMBEDDIN-02, Embedding e spazio semantico. Quale controllo collega «Sentence embedding» a «Ricerca e anisotropia» senza superare il limite dichiarato? La composizione lookup context collega «Sentence embedding», «Ricerca e anisotropia». L'input è due ID, due vettori e una query; l'output è embedding, ranking o predizione. Il limite esplicito è: la similarità dipende da training, metrica e normalizzazione.

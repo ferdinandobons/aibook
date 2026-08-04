@@ -1,14 +1,16 @@
 # Specifica visuale TRANSFOR-01
 
-- famiglia: branch
-- domanda principale: Il diagramma segue il passaggio: Embedding, attention, MLP e residuo. L'input è tokenizzati di shape [batch, length] e vettori [batch, length, d], l'output è stato contestuale e logits; il vincolo da controllare è che mask, shape e percorso residuale devono essere compatibili
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: transformer_stack
+- domanda principale: Come si passa da «La mappa completa» a «Decoder» mantenendo osservabile lo stato nascosto che attraversa il blocco Transformer?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, branch, invariante o limite in chiusura
-- nodi e contenuti: 1: La mappa completa; 2: Encoder; 3: Decoder; 4: Multi-head attention; 5: Residual stream e output
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: mask, shape e percorso residuale devono essere compatibili
-- fonti collegate: SRC-29-001 ... SRC-29-004
-- alt text: Diagramma TRANSFOR-01 del Capitolo 29, famiglia branch. Domanda: Il diagramma segue il passaggio: Embedding, attention, MLP e residuo. L'input è tokenizzati di shape [batch, length] e vettori [batch, length, d], l'output è stato contestuale e logits; il vincolo da controllare è che mask, shape e percorso residuale devono essere compatibili La composizione usa i passaggi La mappa completa, Encoder, Decoder, Multi-head attention, Residual stream e output.
+- file candidato: candidate-v48.png
+- oggetto osservato: lo stato nascosto che attraversa il blocco Transformer
+- input: tokenizzati di shape [batch, length] e vettori [batch, length, d]
+- output: stato contestuale e logits
+- nodi locali: La mappa completa: Il Transformer combina embedding, posizione, attention, feed-forward, residual e…; Encoder: L'encoder usa self-attention bidirezionale e produce rappresentazioni per tutte le…; Decoder: Il decoder usa self-attention causale e, nelle architetture encoder-decoder,…
+- limite visualizzato: mask, shape e percorso residuale devono essere compatibili
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

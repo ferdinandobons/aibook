@@ -48,3 +48,4 @@ Le famiglie si sovrappongono e continuano a convivere. Nessun pannello rappresen
 - generazione esplorativa con lo strumento immagini;
 - composizione raster revisionabile: `scripts/generate_history_visuals.py`;
 - decodifica verificata nel workflow `generate-book-visuals.yml`.
+- domanda principale: Quale trasformazione centrale rende osservabile «Una storia di colli di bottiglia, non una marcia lineare» nel capitolo 2?

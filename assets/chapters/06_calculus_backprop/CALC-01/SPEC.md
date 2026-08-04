@@ -78,3 +78,4 @@ dL/db1 = 0,016579
 ## Produzione
 
 Tre tentativi con lo strumento immagini sono stati respinti perché rappresentavano dashboard sullo stato del libro anziché il grafo matematico. La candidata revisionabile è un PNG raster costruito dal renderer `scripts/generate_calculus_visuals.py` sulla base di questa specifica. Non viene usato SVG.
+- domanda principale: Quale trasformazione centrale rende osservabile «La derivata descrive una sensibilità locale» nel capitolo 6?

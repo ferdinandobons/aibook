@@ -1,5 +1,8 @@
-# Codice del Capitolo 54
+# Esempio verificato. Capitolo 54
 
-Lo snippet snip_54_contract.py rende osservabile il contratto centrale di Aggiornamento, merging ed editing del modello con valori piccoli e leggibili.
-Il test test_54_contract.py controlla determinismo, output, invariante e una shape incoerente.
-Il risultato è un esempio locale, non un benchmark di produzione.
+`snip_54_contract.py` esegue il caso minimo usato nel testo di **Aggiornamento, merging ed editing del modello**. `test_54_contract.py` conserva l'output atteso, controlla determinismo, serializzazione, valori finiti e presenza del limite interpretativo.
+
+```bash
+python snip_54_contract.py
+python -m unittest -v test_54_contract.py
+```

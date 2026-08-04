@@ -1,14 +1,16 @@
 # Specifica visuale RECURREN-01
 
-- famiglia: timeline
-- domanda principale: La stessa informazione viene seguita lungo i passi del processo
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: sequence_unroll
+- domanda principale: Come si passa da «Uno stato che attraversa la sequenza» a «LSTM e GRU» mantenendo osservabile uno stato nascosto che attraversa una sequenza?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v49.png
-- ordine di lettura: titolo, domanda, timeline, invariante o limite in chiusura
-- nodi e contenuti: 1: Uno stato che attraversa la sequenza; 2: Backpropagation through time; 3: LSTM e GRU; 4: Bidirezionalità e causalità; 5: RNN, attention e stato
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: lo stato precedente deve essere consumato prima di produrre quello successivo
-- fonti collegate: SRC-18-001 ... SRC-18-004
-- alt text: Diagramma RECURREN-01 del Capitolo 18, famiglia timeline. Domanda: La stessa informazione viene seguita lungo i passi del processo La composizione usa i passaggi Uno stato che attraversa la sequenza, Backpropagation through time, LSTM e GRU, Bidirezionalità e causalità, RNN, attention e stato.
+- file candidato: candidate-v49.png
+- oggetto osservato: uno stato nascosto che attraversa una sequenza
+- input: x_1, x_2, x_3 e h_0 = 0
+- output: h_t e, se richiesto, una predizione per il passo
+- nodi locali: Uno stato che attraversa la sequenza: Una RNN aggiorna uno stato nascosto con input e stato precedente. Lo stesso insieme di…; Backpropagation through time: Il grafo ricorrente viene srotolato nel tempo. Gradienti molto lunghi possono svanire o…; LSTM e GRU: Gate di input, forget e output controllano il flusso della memoria. GRU usa una…
+- limite visualizzato: lo stato precedente deve essere consumato prima di produrre quello successivo
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

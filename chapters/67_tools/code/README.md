@@ -1,5 +1,8 @@
-# Codice del Capitolo 67
+# Esempio verificato. Capitolo 67
 
-Lo snippet snip_67_contract.py rende osservabile il contratto centrale di Output strutturato e uso degli strumenti con valori piccoli e leggibili.
-Il test test_67_contract.py controlla determinismo, output, invariante e una shape incoerente.
-Il risultato è un esempio locale, non un benchmark di produzione.
+`snip_67_contract.py` esegue il caso minimo usato nel testo di **Output strutturato e uso degli strumenti**. `test_67_contract.py` conserva l'output atteso, controlla determinismo, serializzazione, valori finiti e presenza del limite interpretativo.
+
+```bash
+python snip_67_contract.py
+python -m unittest -v test_67_contract.py
+```

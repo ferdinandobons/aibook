@@ -1,14 +1,16 @@
 # Specifica visuale REPRESEN-02
 
-- famiglia: scatter
-- domanda principale: La geometria viene confrontata rispetto alla metrica dichiarata
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: representation_map
+- domanda principale: Quale controllo collega «Disentanglement e identifiability» a «Valutare una rappresentazione» senza superare il limite dichiarato?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v49.png
-- ordine di lettura: titolo, domanda, scatter, invariante o limite in chiusura
-- nodi e contenuti: 1: Che cosa rappresenta un vettore; 2: Bottleneck e autoencoder; 3: Metric e contrastive learning; 4: Disentanglement e identifiability; 5: Valutare una rappresentazione
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: la geometria dipende da dati, obiettivo e normalizzazione
-- fonti collegate: SRC-19-001 ... SRC-19-004
-- alt text: Diagramma REPRESEN-02 del Capitolo 19, famiglia scatter. Domanda: La geometria viene confrontata rispetto alla metrica dichiarata La composizione usa i passaggi Che cosa rappresenta un vettore, Bottleneck e autoencoder, Metric e contrastive learning, Disentanglement e identifiability, Valutare una rappresentazione.
+- file candidato: candidate-v49.png
+- oggetto osservato: un vettore prodotto per un compito successivo
+- input: u = [1, 2, 0] e v = [2, 1, 0]
+- output: un vettore, una similarità o una predizione downstream
+- nodi locali: Disentanglement e identifiability: Separare fattori latenti richiede ipotesi. Senza supervision o bias aggiuntivi, molte…; Valutare una rappresentazione: Linear probe, retrieval e fine-tuning misurano proprietà diverse. Una buona metrica…
+- limite visualizzato: la geometria dipende da dati, obiettivo e normalizzazione
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

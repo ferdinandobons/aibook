@@ -1,81 +1,32 @@
-# Piano interno. Capitolo 35
+# Piano editoriale. Capitolo 35
 
-- Domanda centrale: quale contratto costruisce La ricetta di pretraining?
-- Oggetto continuo: lo stato completo di una ricetta di pretraining; input guida: batch, learning rate, seed, optimizer e checkpoint.
-- Prerequisito stabile: Capitolo 34, Scaling law e progettazione del modello.
-- Gap: forward, backward, update, schedule e recovery.
-- Output consegnato: loss, parametri e checkpoint ripristinabile; consumer successivo: Capitolo 36, Training distribuito e continued pretraining.
-- Invariante principale: un checkpoint deve includere lo stato necessario a continuare il run.
-- Visuali: RECIPE-01 e RECIPE-02, con famiglie compositive variabili.
-- Snippet: code/snip_35_contract.py; output: code/outputs/SNIP-35-001.txt.
-- Gate aperti: revisione autoriale, lettura ad alta voce e approvazione finale delle visuali.
+## Obiettivo didattico
 
-## Transizione 1. Batch di token
+Seguire **La ricetta di pretraining** da batch, learning rate, seed, optimizer e checkpoint a loss, parametri e checkpoint ripristinabile, osservando forward, backward, update, schedule e recovery senza oltrepassare questo limite: un checkpoint deve includere lo stato necessario a continuare il run.
 
-- Ultima affermazione stabile: lo stato completo di una ricetta di pretraining.
-- Concetto nuovo: Packing, padding e mask determinano quanti token validi contribuiscono alla loss.
-- Input e shape: batch, learning rate, seed, optimizer e checkpoint.
-- Operazione: forward, backward, update, schedule e recovery.
-- Output e shape: loss, parametri e checkpoint ripristinabile.
-- Che cosa cambia: il passaggio specifico di «Batch di token».
-- Invariante: un checkpoint deve includere lo stato necessario a continuare il run.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: warmup di quattro step e ripresa dal contatore salvato; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Inizializzazione.
-- Prova: SRC-35-001 e sezione pubblica corrispondente.
+## Prerequisiti reali
 
-## Transizione 2. Inizializzazione
+- Capitolo 16: Addestrare reti profonde
+- Capitolo 32: Il ciclo di vita dei dati
+- Capitolo 33: Dataset mixture, curriculum e dati sintetici
+- Capitolo 34: Scaling law e progettazione del modello
 
-- Ultima affermazione stabile: lo stato completo di una ricetta di pretraining.
-- Concetto nuovo: Scala dei pesi e residual deve restare coerente con profondità, norm e dtype.
-- Input e shape: batch, learning rate, seed, optimizer e checkpoint.
-- Operazione: forward, backward, update, schedule e recovery.
-- Output e shape: loss, parametri e checkpoint ripristinabile.
-- Che cosa cambia: il passaggio specifico di «Inizializzazione».
-- Invariante: un checkpoint deve includere lo stato necessario a continuare il run.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: warmup di quattro step e ripresa dal contatore salvato; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: AdamW.
-- Prova: SRC-35-002 e sezione pubblica corrispondente.
+## Percorso della lezione
 
-## Transizione 3. AdamW
+1. **Batch di token.** Packing, padding e mask determinano quanti token validi contribuiscono alla loss. Prova: SRC-35-001.
+2. **Inizializzazione.** Scala dei pesi e residual deve restare coerente con profondità, norm e dtype. Prova: SRC-35-002.
+3. **AdamW.** Learning rate, beta, epsilon e weight decay descrivono insieme l'optimizer. Prova: SRC-35-003.
+4. **Warmup e schedule.** Il learning rate dipende da step o token e deve riprendere dal contatore corretto. Prova: SRC-35-004.
+5. **Checkpoint e recovery.** Modello, optimizer, scheduler, scaler, RNG e posizione nei dati servono per un resume fedele. Prova: SRC-35-001.
 
-- Ultima affermazione stabile: lo stato completo di una ricetta di pretraining.
-- Concetto nuovo: Learning rate, beta, epsilon e weight decay descrivono insieme l'optimizer.
-- Input e shape: batch, learning rate, seed, optimizer e checkpoint.
-- Operazione: forward, backward, update, schedule e recovery.
-- Output e shape: loss, parametri e checkpoint ripristinabile.
-- Che cosa cambia: il passaggio specifico di «AdamW».
-- Invariante: un checkpoint deve includere lo stato necessario a continuare il run.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: warmup di quattro step e ripresa dal contatore salvato; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Warmup e schedule.
-- Prova: SRC-35-003 e sezione pubblica corrispondente.
+## Prove e artefatti
 
-## Transizione 4. Warmup e schedule
+- riferimento minimo: `code/snip_35_contract.py`; test: `code/test_35_contract.py`; output: `code/outputs/SNIP-35-001.txt`.
+- visuali candidate: RECIPE-01, RECIPE-02; le domande pedagogiche sono distinte e l'approvazione autoriale resta aperta.
+- fonti: `FONTI_PRIMARIE.md`; corrispondenza claim-fonte: `CLAIMS.md`.
 
-- Ultima affermazione stabile: lo stato completo di una ricetta di pretraining.
-- Concetto nuovo: Il learning rate dipende da step o token e deve riprendere dal contatore corretto.
-- Input e shape: batch, learning rate, seed, optimizer e checkpoint.
-- Operazione: forward, backward, update, schedule e recovery.
-- Output e shape: loss, parametri e checkpoint ripristinabile.
-- Che cosa cambia: il passaggio specifico di «Warmup e schedule».
-- Invariante: un checkpoint deve includere lo stato necessario a continuare il run.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: warmup di quattro step e ripresa dal contatore salvato; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Checkpoint e recovery.
-- Prova: SRC-35-004 e sezione pubblica corrispondente.
+## Gate aperti
 
-## Transizione 5. Checkpoint e recovery
-
-- Ultima affermazione stabile: lo stato completo di una ricetta di pretraining.
-- Concetto nuovo: Modello, optimizer, scheduler, scaler, RNG e posizione nei dati servono per un resume fedele.
-- Input e shape: batch, learning rate, seed, optimizer e checkpoint.
-- Operazione: forward, backward, update, schedule e recovery.
-- Output e shape: loss, parametri e checkpoint ripristinabile.
-- Che cosa cambia: il passaggio specifico di «Checkpoint e recovery».
-- Invariante: un checkpoint deve includere lo stato necessario a continuare il run.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: warmup di quattro step e ripresa dal contatore salvato; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Training distribuito e continued pretraining.
-- Prova: SRC-35-001 e sezione pubblica corrispondente.
+- lettura editoriale finale da parte dell'autore;
+- approvazione delle visuali nel contesto impaginato;
+- benchmark esterni solo quando il capitolo formula un claim di scala o di produzione.

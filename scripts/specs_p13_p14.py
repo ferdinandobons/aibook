@@ -72,11 +72,11 @@ SPECS_P13_P14 = [
         ("Policy e interfaccia", "Provenienza, disclosure e conservazione dei metadati devono essere progettate lungo la pipeline di pubblicazione."),
     ]),
     (93, "CH-P13-GOVERNANCE", "P13", "93_governance", "Diritto, governance e sostenibilità", "CORE", [
-        ("Ruoli e responsabilità", "Owner, sviluppatore, deployer, utente e fornitore hanno controlli e informazioni differenti. La matrice RACI rende esplicite decisioni ed escalation."),
+        ("Ruoli e responsabilità", "Owner, sviluppatore, deployer, utente e fornitore hanno controlli e informazioni differenti. Governance, accountability e comunicazione devono essere documentate."),
         ("Risk management", "NIST AI RMF organizza govern, map, measure e manage. Il framework guida un processo e non certifica automaticamente un sistema."),
         ("Norme e documentazione", "Obblighi dipendono da giurisdizione, ruolo e uso. Versione, data e parere legale devono essere separati dal testo tecnico stabile."),
-        ("Incidenti e change management", "Segnalazione, classificazione, rollback e comunicazione collegano monitoraggio e governance."),
-        ("Sostenibilità", "Compute, energia, acqua, hardware e ciclo di vita richiedono confini di misura e confronti normalizzati per risultato utile."),
+        ("Incidenti e change management", "Segnalazione, classificazione, risposta e comunicazione collegano monitoraggio e governance."),
+        ("Sostenibilità", "Energia, acqua, emissioni e ciclo di vita dell'hardware richiedono indicatori, baseline e confini di misura documentati."),
     ]),
     (94, "CH-P14-FOUNDATIONS-LAB", "P14", "94_foundations_lab", "Percorso pratico dai fondamenti", "CORE", [
         ("Ambiente riproducibile", "Python, dipendenze, seed e struttura del progetto vengono fissati prima degli esperimenti."),

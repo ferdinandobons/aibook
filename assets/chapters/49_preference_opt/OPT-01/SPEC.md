@@ -1,14 +1,16 @@
 # Specifica visuale OPT-01
 
-- famiglia: chart
-- domanda principale: Il diagramma segue il passaggio: Margine DPO, beta e variante offline. L'input è prompt, log-probability della policy e riferimento, l'output è loss di preferenza e policy aggiornata; il vincolo da controllare è che la preferenza osservata non è una verità assoluta
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: pairwise_objective
+- domanda principale: Come si passa da «Evitare un reward model esplicito» a «Temperatura beta» mantenendo osservabile una coppia chosen-rejected per l'ottimizzazione diretta?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, chart, invariante o limite in chiusura
-- nodi e contenuti: 1: Evitare un reward model esplicito; 2: Coppie chosen e rejected; 3: Temperatura beta; 4: IPO, KTO, ORPO e varianti; 5: Offline preference data
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: la preferenza osservata non è una verità assoluta
-- fonti collegate: SRC-49-001 ... SRC-49-004
-- alt text: Diagramma OPT-01 del Capitolo 49, famiglia chart. Domanda: Il diagramma segue il passaggio: Margine DPO, beta e variante offline. L'input è prompt, log-probability della policy e riferimento, l'output è loss di preferenza e policy aggiornata; il vincolo da controllare è che la preferenza osservata non è una verità assoluta La composizione usa i passaggi Evitare un reward model esplicito, Coppie chosen e rejected, Temperatura beta, IPO, KTO, ORPO e varianti, Offline preference data.
+- file candidato: candidate-v48.png
+- oggetto osservato: una coppia chosen-rejected per l'ottimizzazione diretta
+- input: prompt, log-probability della policy e riferimento
+- output: loss di preferenza e policy aggiornata
+- nodi locali: Evitare un reward model esplicito: DPO riscrive un obiettivo di preferenza usando log-probability della policy e del…; Coppie chosen e rejected: Ogni esempio richiede la stessa condizione e due risposte confrontabili. Errori o stili…; Temperatura beta: Beta controlla la forza relativa del vincolo rispetto al modello di riferimento e…
+- limite visualizzato: la preferenza osservata non è una verità assoluta
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

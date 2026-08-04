@@ -1,14 +1,16 @@
 # Specifica visuale REPLICATIO-01
 
-- famiglia: checklist
-- domanda principale: Il diagramma segue il passaggio: Setup indipendente, run, confronto e analisi delle divergenze. L'input è paper, codice, dati, seed, hardware e metriche, l'output è risultato replicato o differenza spiegata; il vincolo da controllare è che una replica richiede stesso claim e confini dichiarati, non solo stesso codice
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: replication_protocol
+- domanda principale: Come si passa da «Domanda e claim» a «Replica» mantenendo osservabile un claim di paper e il protocollo necessario per riprodurlo?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, checklist, invariante o limite in chiusura
-- nodi e contenuti: 1: Domanda e claim; 2: Artefatti; 3: Replica; 4: Divergenze; 5: Conclusione sostenibile
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: una replica richiede stesso claim e confini dichiarati, non solo stesso codice
-- fonti collegate: SRC-97-001 ... SRC-97-004
-- alt text: Diagramma REPLICATIO-01 del Capitolo 97, famiglia checklist. Domanda: Il diagramma segue il passaggio: Setup indipendente, run, confronto e analisi delle divergenze. L'input è paper, codice, dati, seed, hardware e metriche, l'output è risultato replicato o differenza spiegata; il vincolo da controllare è che una replica richiede stesso claim e confini dichiarati, non solo stesso codice La composizione usa i passaggi Domanda e claim, Artefatti, Replica, Divergenze, Conclusione sostenibile.
+- file candidato: candidate-v48.png
+- oggetto osservato: un claim di paper e il protocollo necessario per riprodurlo
+- input: paper, codice, dati, seed, hardware e metriche
+- output: risultato replicato o differenza spiegata
+- nodi locali: Domanda e claim: Il paper viene scomposto in domanda, baseline, metodo, setup, risultati e limiti.; Artefatti: Codice, checkpoint, dati e configurazioni vengono versionati e confrontati con la…; Replica: Una riproduzione conferma lo stesso codice; una replica indipendente ricostruisce il…
+- limite visualizzato: una replica richiede stesso claim e confini dichiarati, non solo stesso codice
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

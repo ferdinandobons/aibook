@@ -1,5 +1,8 @@
-# Codice del Capitolo 91
+# Esempio verificato. Capitolo 91
 
-Lo snippet snip_91_contract.py rende osservabile il contratto centrale di Privacy, fairness e unlearning con valori piccoli e leggibili.
-Il test test_91_contract.py controlla determinismo, output, invariante e una shape incoerente.
-Il risultato è un esempio locale, non un benchmark di produzione.
+`snip_91_contract.py` esegue il caso minimo usato nel testo di **Privacy, fairness e unlearning**. `test_91_contract.py` conserva l'output atteso, controlla determinismo, serializzazione, valori finiti e presenza del limite interpretativo.
+
+```bash
+python snip_91_contract.py
+python -m unittest -v test_91_contract.py
+```

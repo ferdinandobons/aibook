@@ -1,14 +1,16 @@
 # Specifica visuale GAN-02
 
-- famiglia: pipeline
-- domanda principale: Il diagramma segue il passaggio: Aggiornamento alternato e segnale di feedback. L'input è un dato reale, un campione e due score, l'output è score, gradiente e campione; il vincolo da controllare è che un equilibrio locale non prova copertura né stabilità
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: failure_balance
+- domanda principale: Quale controllo collega «Wasserstein GAN» a «Stabilità e valutazione» senza superare il limite dichiarato?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, pipeline, invariante o limite in chiusura
-- nodi e contenuti: 1: Un gioco tra due modelli; 2: Divergenze e gradienti; 3: Mode collapse; 4: Wasserstein GAN; 5: Stabilità e valutazione
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: un equilibrio locale non prova copertura né stabilità
-- fonti collegate: SRC-23-001 ... SRC-23-004
-- alt text: Diagramma GAN-02 del Capitolo 23, famiglia pipeline. Domanda: Il diagramma segue il passaggio: Aggiornamento alternato e segnale di feedback. L'input è un dato reale, un campione e due score, l'output è score, gradiente e campione; il vincolo da controllare è che un equilibrio locale non prova copertura né stabilità La composizione usa i passaggi Un gioco tra due modelli, Divergenze e gradienti, Mode collapse, Wasserstein GAN, Stabilità e valutazione.
+- file candidato: candidate-v48.png
+- oggetto osservato: la partita tra generatore e discriminatore
+- input: un dato reale, un campione e due score
+- output: score, gradiente e campione
+- nodi locali: Wasserstein GAN: WGAN usa una distanza legata a funzioni Lipschitz. Weight clipping e gradient penalty…; Stabilità e valutazione: Bilanciare update, normalizzazioni e capacità è essenziale. FID è una metrica su feature…
+- limite visualizzato: un equilibrio locale non prova copertura né stabilità
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

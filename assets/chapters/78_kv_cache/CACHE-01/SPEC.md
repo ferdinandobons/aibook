@@ -1,14 +1,16 @@
 # Specifica visuale CACHE-01
 
-- famiglia: queue
-- domanda principale: Il diagramma segue il passaggio: Prefill, decode, paging, caching ed eviction. L'input è layer, token, KV dimension, dtype e prefix, l'output è cache occupata, hit e latenza; il vincolo da controllare è che la cache deve rispettare ownership, posizione e validità del prefisso
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: cache_layout
+- domanda principale: Come si passa da «Prefill e decode» a «PagedAttention» mantenendo osservabile blocchi di KV cache associati a una richiesta?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, queue, invariante o limite in chiusura
-- nodi e contenuti: 1: Prefill e decode; 2: Layout; 3: PagedAttention; 4: Prefix caching; 5: Compressione ed eviction
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: la cache deve rispettare ownership, posizione e validità del prefisso
-- fonti collegate: SRC-78-001 ... SRC-78-004
-- alt text: Diagramma CACHE-01 del Capitolo 78, famiglia queue. Domanda: Il diagramma segue il passaggio: Prefill, decode, paging, caching ed eviction. L'input è layer, token, KV dimension, dtype e prefix, l'output è cache occupata, hit e latenza; il vincolo da controllare è che la cache deve rispettare ownership, posizione e validità del prefisso La composizione usa i passaggi Prefill e decode, Layout, PagedAttention, Prefix caching, Compressione ed eviction.
+- file candidato: candidate-v48.png
+- oggetto osservato: blocchi di KV cache associati a una richiesta
+- input: layer, token, KV dimension, dtype e prefix
+- output: cache occupata, hit e latenza
+- nodi locali: Prefill e decode: Il prefill calcola K e V per il prompt; il decode aggiunge una posizione e riusa la…; Layout: Layer, batch, KV head, token e head dimension determinano shape e byte. Contiguità e…; PagedAttention: Blocchi logici vengono mappati a pagine fisiche per ridurre frammentazione e supportare…
+- limite visualizzato: la cache deve rispettare ownership, posizione e validità del prefisso
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

@@ -1,81 +1,34 @@
-# Piano interno. Capitolo 94
+# Piano editoriale. Capitolo 94
 
-- Domanda centrale: quale contratto costruisce Percorso pratico dai fondamenti?
-- Oggetto continuo: un esperimento didattico con ambiente e artefatti dichiarati; input guida: seed, dataset piccolo, config, codice e versione.
-- Prerequisito stabile: Capitolo 93, Diritto, governance e sostenibilità.
-- Gap: run, test, valutazione e report.
-- Output consegnato: loss, metriche, manifest e limite; consumer successivo: Capitolo 95, Costruire un piccolo language model.
-- Invariante principale: un run locale non equivale a una prova generale.
-- Visuali: LAB-01 e LAB-02, con famiglie compositive variabili.
-- Snippet: code/snip_94_contract.py; output: code/outputs/SNIP-94-001.txt.
-- Gate aperti: revisione autoriale, lettura ad alta voce e approvazione finale delle visuali.
+## Obiettivo didattico
 
-## Transizione 1. Ambiente riproducibile
+Seguire **Percorso pratico dai fondamenti** da seed, dataset piccolo, config, codice e versione a loss, metriche, manifest e limite, osservando run, test, valutazione e report senza oltrepassare questo limite: un run locale non equivale a una prova generale.
 
-- Ultima affermazione stabile: un esperimento didattico con ambiente e artefatti dichiarati.
-- Concetto nuovo: Python, dipendenze, seed e struttura del progetto vengono fissati prima degli esperimenti.
-- Input e shape: seed, dataset piccolo, config, codice e versione.
-- Operazione: run, test, valutazione e report.
-- Output e shape: loss, metriche, manifest e limite.
-- Che cosa cambia: il passaggio specifico di «Ambiente riproducibile».
-- Invariante: un run locale non equivale a una prova generale.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: seed, split e dtype salvati prima dell'esecuzione; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Dataset piccolo.
-- Prova: SRC-94-001 e sezione pubblica corrispondente.
+## Prerequisiti reali
 
-## Transizione 2. Dataset piccolo
+- Capitolo 5: Algebra lineare, vettori e tensori
+- Capitolo 6: Calcolo differenziale e backpropagation
+- Capitolo 7: Probabilità, statistica e inferenza
+- Capitolo 12: Apprendimento supervisionato
+- Capitolo 13: Apprendimento non supervisionato e auto-supervisionato
 
-- Ultima affermazione stabile: un esperimento didattico con ambiente e artefatti dichiarati.
-- Concetto nuovo: Un dataset controllabile permette di vedere preprocessing, split, batch e leakage.
-- Input e shape: seed, dataset piccolo, config, codice e versione.
-- Operazione: run, test, valutazione e report.
-- Output e shape: loss, metriche, manifest e limite.
-- Che cosa cambia: il passaggio specifico di «Dataset piccolo».
-- Invariante: un run locale non equivale a una prova generale.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: seed, split e dtype salvati prima dell'esecuzione; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Modello e loss.
-- Prova: SRC-94-002 e sezione pubblica corrispondente.
+## Percorso della lezione
 
-## Transizione 3. Modello e loss
+1. **Ambiente riproducibile.** Python, dipendenze, seed e struttura del progetto vengono fissati prima degli esperimenti. Prova: SRC-94-001.
+2. **Dataset piccolo.** Un dataset controllabile permette di vedere preprocessing, split, batch e leakage. Prova: SRC-94-002.
+3. **Modello e loss.** Una baseline lineare precede la rete. Shape, logits e loss vengono verificati con test. Prova: SRC-94-003.
+4. **Training e valutazione.** Curve, checkpoint, validation e test seguono il protocollo costruito nel libro. Prova: SRC-94-004.
+5. **Report.** Il laboratorio produce README, output, figure e limiti, non soltanto un notebook che termina senza audit. Prova: SRC-94-001.
 
-- Ultima affermazione stabile: un esperimento didattico con ambiente e artefatti dichiarati.
-- Concetto nuovo: Una baseline lineare precede la rete. Shape, logits e loss vengono verificati con test.
-- Input e shape: seed, dataset piccolo, config, codice e versione.
-- Operazione: run, test, valutazione e report.
-- Output e shape: loss, metriche, manifest e limite.
-- Che cosa cambia: il passaggio specifico di «Modello e loss».
-- Invariante: un run locale non equivale a una prova generale.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: seed, split e dtype salvati prima dell'esecuzione; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Training e valutazione.
-- Prova: SRC-94-003 e sezione pubblica corrispondente.
+## Prove e artefatti
 
-## Transizione 4. Training e valutazione
+- riferimento minimo: `code/snip_94_contract.py`; test: `code/test_94_contract.py`; output: `code/outputs/SNIP-94-001.txt`.
+- laboratorio esteso: `code/foundations_lab.py`; test: `code/test_foundations_lab.py`; output: `code/outputs/FOUNDATIONS-LAB.txt`.
+- visuali candidate: LAB-01, LAB-02; le domande pedagogiche sono distinte e l'approvazione autoriale resta aperta.
+- fonti: `FONTI_PRIMARIE.md`; corrispondenza claim-fonte: `CLAIMS.md`.
 
-- Ultima affermazione stabile: un esperimento didattico con ambiente e artefatti dichiarati.
-- Concetto nuovo: Curve, checkpoint, validation e test seguono il protocollo costruito nel libro.
-- Input e shape: seed, dataset piccolo, config, codice e versione.
-- Operazione: run, test, valutazione e report.
-- Output e shape: loss, metriche, manifest e limite.
-- Che cosa cambia: il passaggio specifico di «Training e valutazione».
-- Invariante: un run locale non equivale a una prova generale.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: seed, split e dtype salvati prima dell'esecuzione; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Report.
-- Prova: SRC-94-004 e sezione pubblica corrispondente.
+## Gate aperti
 
-## Transizione 5. Report
-
-- Ultima affermazione stabile: un esperimento didattico con ambiente e artefatti dichiarati.
-- Concetto nuovo: Il laboratorio produce README, output, figure e limiti, non soltanto un notebook che termina senza audit.
-- Input e shape: seed, dataset piccolo, config, codice e versione.
-- Operazione: run, test, valutazione e report.
-- Output e shape: loss, metriche, manifest e limite.
-- Che cosa cambia: il passaggio specifico di «Report».
-- Invariante: un run locale non equivale a una prova generale.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: seed, split e dtype salvati prima dell'esecuzione; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Costruire un piccolo language model.
-- Prova: SRC-94-001 e sezione pubblica corrispondente.
+- lettura editoriale finale da parte dell'autore;
+- approvazione delle visuali nel contesto impaginato;
+- benchmark esterni solo quando il capitolo formula un claim di scala o di produzione.

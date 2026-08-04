@@ -1,3 +1,0 @@
-chapter: 92
-title: Watermarking e provenienza dei contenuti
-output: [0.755272, 0.334759]

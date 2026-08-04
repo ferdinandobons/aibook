@@ -1,5 +1,8 @@
-# Codice del Capitolo 25
+# Esempio verificato. Capitolo 25
 
-Lo snippet snip_25_contract.py rende osservabile il contratto centrale di Diffusione, score matching e flow matching con valori piccoli e leggibili.
-Il test test_25_contract.py controlla determinismo, output, invariante e una shape incoerente.
-Il risultato è un esempio locale, non un benchmark di produzione.
+`snip_25_contract.py` esegue il caso minimo usato nel testo di **Diffusione, score matching e flow matching**. `test_25_contract.py` conserva l'output atteso, controlla determinismo, serializzazione, valori finiti e presenza del limite interpretativo.
+
+```bash
+python snip_25_contract.py
+python -m unittest -v test_25_contract.py
+```

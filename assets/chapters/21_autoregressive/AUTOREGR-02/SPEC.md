@@ -1,14 +1,16 @@
 # Specifica visuale AUTOREGR-02
 
-- famiglia: pipeline
-- domanda principale: Il diagramma segue il passaggio: Fattorizzazione, teacher forcing e decoding. L'input è un prefisso di tre token e una mask causale, l'output è logits, token scelto e traiettoria; il vincolo da controllare è che nessuna posizione futura entra nella predizione causale
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: sampling_tree
+- domanda principale: Quale controllo collega «Sampling e accumulo degli errori» a «Immagini, audio e token discreti» senza superare il limite dichiarato?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v49.png
-- ordine di lettura: titolo, domanda, pipeline, invariante o limite in chiusura
-- nodi e contenuti: 1: Fattorizzare una sequenza; 2: Teacher forcing; 3: Maschera causale; 4: Sampling e accumulo degli errori; 5: Immagini, audio e token discreti
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: nessuna posizione futura entra nella predizione causale
-- fonti collegate: SRC-21-001 ... SRC-21-004
-- alt text: Diagramma AUTOREGR-02 del Capitolo 21, famiglia pipeline. Domanda: Il diagramma segue il passaggio: Fattorizzazione, teacher forcing e decoding. L'input è un prefisso di tre token e una mask causale, l'output è logits, token scelto e traiettoria; il vincolo da controllare è che nessuna posizione futura entra nella predizione causale La composizione usa i passaggi Fattorizzare una sequenza, Teacher forcing, Maschera causale, Sampling e accumulo degli errori, Immagini, audio e token discreti.
+- file candidato: candidate-v49.png
+- oggetto osservato: la sequenza di token e la distribuzione del prossimo elemento
+- input: un prefisso di tre token e una mask causale
+- output: logits, token scelto e traiettoria
+- nodi locali: Sampling e accumulo degli errori: Ogni scelta modifica il contesto successivo. Errori iniziali possono spostare la…; Immagini, audio e token discreti: L'autoregressione non è limitata al testo. Una sequenza può rappresentare pixel, code…
+- limite visualizzato: nessuna posizione futura entra nella predizione causale
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

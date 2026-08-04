@@ -1,3 +1,3 @@
-# Alt text `LIFE-02`
+# Testo alternativo
 
-Diagramma architetturale su sfondo bianco. Un grande rettangolo indica il confine del sistema. Al centro si trova il modello, descritto come checkpoint con parametri theta usato per l'inference. A sinistra confluiscono input e validazione, prompt e configurazione, retrieval e dati esterni. A destra compaiono strumenti, regole e autorizzazioni, output e interfaccia. Sopra il modello una versione distribuita comprende codice, configurazione, checkpoint e dipendenze; sotto compaiono telemetria e monitoraggio. Il footer afferma che una modifica fuori dal modello può cambiare il comportamento osservato senza cambiare il checkpoint.
+Il modello è un componente del sistema. Quale confronto o limite chiarisce «I dati sono un artefatto versionato»?

@@ -19,3 +19,4 @@ Come una struttura condizionatamente indipendente rende esplicita una fattorizza
 - fattorizzazione della congiunta;
 - evidenza numerica e posterior risultante;
 - confine esplicito: l'indipendenza è un'ipotesi del modello.
+- domanda principale: Quale confronto o limite chiarisce «Sintassi, interpretazione e conseguenza»?

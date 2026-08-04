@@ -1,5 +1,5 @@
-# Codice del Capitolo 30
+# Eccezione Python. Capitolo 30
 
-Lo snippet snip_30_contract.py rende osservabile il contratto centrale di Famiglie architetturali e obiettivi di pretraining con valori piccoli e leggibili.
-Il test test_30_contract.py controlla determinismo, output, invariante e una shape incoerente.
-Il risultato è un esempio locale, non un benchmark di produzione.
+Il capitolo è una mappa tra architetture e obiettivi; il Transformer eseguibile è nel capitolo 29 e le ricette di training iniziano dal 32.
+
+La verifica sostitutiva usa fonti primarie, locator e claim delimitati. Non viene conservato uno script generico che confonderebbe una tassonomia con una singola implementazione.

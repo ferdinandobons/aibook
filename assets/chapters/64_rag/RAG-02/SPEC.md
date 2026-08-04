@@ -1,14 +1,16 @@
 # Specifica visuale RAG-02
 
-- famiglia: graph
-- domanda principale: Il diagramma segue il passaggio: Chunking, retrieval, attribution e generazione. L'input è query, chunk, fonti e prompt, l'output è risposta con evidenza e score end-to-end; il vincolo da controllare è che contesto recuperato e testo generato devono restare distinguibili
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: citation_trace
+- domanda principale: Quale controllo collega «Attribution» a «Valutazione end-to-end» senza superare il limite dichiarato?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, graph, invariante o limite in chiusura
-- nodi e contenuti: 1: Una pipeline in due fasi; 2: Chunking; 3: Prompt con fonti; 4: Attribution; 5: Valutazione end-to-end
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: contesto recuperato e testo generato devono restare distinguibili
-- fonti collegate: SRC-64-001 ... SRC-64-004
-- alt text: Diagramma RAG-02 del Capitolo 64, famiglia graph. Domanda: Il diagramma segue il passaggio: Chunking, retrieval, attribution e generazione. L'input è query, chunk, fonti e prompt, l'output è risposta con evidenza e score end-to-end; il vincolo da controllare è che contesto recuperato e testo generato devono restare distinguibili La composizione usa i passaggi Una pipeline in due fasi, Chunking, Prompt con fonti, Attribution, Valutazione end-to-end.
+- file candidato: candidate-v48.png
+- oggetto osservato: la pipeline che collega query, contesto e risposta
+- input: query, chunk, fonti e prompt
+- output: risposta con evidenza e score end-to-end
+- nodi locali: Attribution: Una risposta supportata deve essere collegabile a passaggi recuperati. Citazione…; Valutazione end-to-end: Recall del retriever, precisione del contesto, fedeltà e utilità della risposta devono…
+- limite visualizzato: contesto recuperato e testo generato devono restare distinguibili
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

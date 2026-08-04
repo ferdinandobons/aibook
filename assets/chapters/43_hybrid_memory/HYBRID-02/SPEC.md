@@ -1,14 +1,16 @@
 # Specifica visuale HYBRID-02
 
-- famiglia: loop
-- domanda principale: Il diagramma segue il passaggio: Write, read, routing e fusione. L'input è segmento corrente, stato e memoria persistente, l'output è stato aggiornato e contenuto recuperato; il vincolo da controllare è che durata e provenienza della memoria devono essere separate
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: memory_layers
+- domanda principale: Quale controllo collega «Memoria associativa» a «Memoria interna ed esterna» senza superare il limite dichiarato?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v47.png
-- ordine di lettura: titolo, domanda, loop, invariante o limite in chiusura
-- nodi e contenuti: 1: Ibridi tra layer; 2: Attention locale e stato; 3: Memoria segmentale; 4: Memoria associativa; 5: Memoria interna ed esterna
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: durata e provenienza della memoria devono essere separate
-- fonti collegate: SRC-43-001 ... SRC-43-004
-- alt text: Diagramma HYBRID-02 del Capitolo 43, famiglia loop. Domanda: Il diagramma segue il passaggio: Write, read, routing e fusione. L'input è segmento corrente, stato e memoria persistente, l'output è stato aggiornato e contenuto recuperato; il vincolo da controllare è che durata e provenienza della memoria devono essere separate La composizione usa i passaggi Ibridi tra layer, Attention locale e stato, Memoria segmentale, Memoria associativa, Memoria interna ed esterna.
+- file candidato: candidate-v47.png
+- oggetto osservato: informazione distribuita tra attenzione locale e memoria
+- input: segmento corrente, stato e memoria persistente
+- output: stato aggiornato e contenuto recuperato
+- nodi locali: Memoria associativa: Key-value interne o moduli di memoria aggiornati online offrono accesso diverso dal…; Memoria interna ed esterna: Lo stato neurale non coincide con retrieval documentale. Reset, isolamento e provenienza…
+- limite visualizzato: durata e provenienza della memoria devono essere separate
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

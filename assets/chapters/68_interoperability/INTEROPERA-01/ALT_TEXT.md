@@ -1,3 +1,3 @@
-# Alt text INTEROPERA-01
+# Testo alternativo
 
-Diagramma INTEROPERA-01 del Capitolo 68, famiglia compare. Domanda: Il diagramma segue il passaggio: Negoziazione, encoding, autorizzazione e compatibilità. L'input è capability, schema, token e policy, l'output è messaggio accettato o errore di protocollo; il vincolo da controllare è che compatibilità sintattica non garantisce semantica o autorizzazione La composizione usa i passaggi Contratti tra componenti, Model Context Protocol, Agent-to-agent, Identità e autorizzazione, Compatibilità ed evoluzione.
+INTEROPERA-01, Protocolli e interoperabilità. Come si passa da «Contratti tra componenti» a «Agent-to-agent» mantenendo osservabile un messaggio tra componenti con identità e versione? La composizione protocol handshake collega «Contratti tra componenti», «Model Context Protocol», «Agent-to-agent». L'input è capability, schema, token e policy; l'output è messaggio accettato o errore di protocollo. Il limite esplicito è: compatibilità sintattica non garantisce semantica o autorizzazione.

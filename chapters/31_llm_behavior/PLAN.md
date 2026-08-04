@@ -1,81 +1,31 @@
-# Piano interno. Capitolo 31
+# Piano editoriale. Capitolo 31
 
-- Domanda centrale: quale contratto costruisce Dalla rappresentazione linguistica agli LLM?
-- Oggetto continuo: un prompt e la distribuzione del token successivo; input guida: prefisso tokenizzato, esempi e temperatura dichiarati.
-- Prerequisito stabile: Capitolo 30, Famiglie architetturali e obiettivi di pretraining.
-- Gap: in-context learning, decoding e calibrazione.
-- Output consegnato: logits, risposta e confidenza misurabile; consumer successivo: Capitolo 32, Il ciclo di vita dei dati.
-- Invariante principale: probabilità, comportamento osservato e correttezza non sono sinonimi.
-- Visuali: LLM-01 e LLM-02, con famiglie compositive variabili.
-- Snippet: code/snip_31_contract.py; output: code/outputs/SNIP-31-001.txt.
-- Gate aperti: revisione autoriale, lettura ad alta voce e approvazione finale delle visuali.
+## Obiettivo didattico
 
-## Transizione 1. Distribuzione del token successivo
+Seguire **Dalla rappresentazione linguistica agli LLM** da prefisso tokenizzato, esempi e temperatura dichiarati a logits, risposta e confidenza misurabile, osservando in-context learning, decoding e calibrazione senza oltrepassare questo limite: probabilità, comportamento osservato e correttezza non sono sinonimi.
 
-- Ultima affermazione stabile: un prompt e la distribuzione del token successivo.
-- Concetto nuovo: Un LLM autoregressivo produce logits condizionati sul prefisso. La softmax costruisce una distribuzione, non una risposta già scelta.
-- Input e shape: prefisso tokenizzato, esempi e temperatura dichiarati.
-- Operazione: in-context learning, decoding e calibrazione.
-- Output e shape: logits, risposta e confidenza misurabile.
-- Che cosa cambia: il passaggio specifico di «Distribuzione del token successivo».
-- Invariante: probabilità, comportamento osservato e correttezza non sono sinonimi.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: lo stesso prompt con greedy e top-p confrontati; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Prompt e dimostrazioni.
-- Prova: SRC-31-001 e sezione pubblica corrispondente.
+## Prerequisiti reali
 
-## Transizione 2. Prompt e dimostrazioni
+- Capitolo 26: Il testo come dato
+- Capitolo 29: Il Transformer da zero
+- Capitolo 30: Famiglie architetturali e obiettivi di pretraining
 
-- Ultima affermazione stabile: un prompt e la distribuzione del token successivo.
-- Concetto nuovo: Istruzioni ed esempi entrano nel contesto senza un optimizer step. Il checkpoint resta invariato durante in-context learning.
-- Input e shape: prefisso tokenizzato, esempi e temperatura dichiarati.
-- Operazione: in-context learning, decoding e calibrazione.
-- Output e shape: logits, risposta e confidenza misurabile.
-- Che cosa cambia: il passaggio specifico di «Prompt e dimostrazioni».
-- Invariante: probabilità, comportamento osservato e correttezza non sono sinonimi.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: lo stesso prompt con greedy e top-p confrontati; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Decoding.
-- Prova: SRC-31-002 e sezione pubblica corrispondente.
+## Percorso della lezione
 
-## Transizione 3. Decoding
+1. **Distribuzione del token successivo.** Un LLM autoregressivo produce logits condizionati sul prefisso. La softmax costruisce una distribuzione, non una risposta già scelta. Prova: SRC-31-001.
+2. **Prompt e dimostrazioni.** Istruzioni ed esempi entrano nel contesto senza un optimizer step. Il checkpoint resta invariato durante in-context learning. Prova: SRC-31-002.
+3. **Decoding.** Greedy, sampling, temperature e truncation trasformano la distribuzione in una traiettoria. Prova: SRC-31-003.
+4. **Calibrazione.** Probabilità del token, confidenza espressa e correttezza fattuale sono quantità differenti. Prova: SRC-31-004.
+5. **Modello e sistema.** Post-training, messaggi di sistema, strumenti e filtri contribuiscono al comportamento osservato. Prova: SRC-31-001.
 
-- Ultima affermazione stabile: un prompt e la distribuzione del token successivo.
-- Concetto nuovo: Greedy, sampling, temperature e truncation trasformano la distribuzione in una traiettoria.
-- Input e shape: prefisso tokenizzato, esempi e temperatura dichiarati.
-- Operazione: in-context learning, decoding e calibrazione.
-- Output e shape: logits, risposta e confidenza misurabile.
-- Che cosa cambia: il passaggio specifico di «Decoding».
-- Invariante: probabilità, comportamento osservato e correttezza non sono sinonimi.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: lo stesso prompt con greedy e top-p confrontati; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Calibrazione.
-- Prova: SRC-31-003 e sezione pubblica corrispondente.
+## Prove e artefatti
 
-## Transizione 4. Calibrazione
+- riferimento minimo: `code/snip_31_contract.py`; test: `code/test_31_contract.py`; output: `code/outputs/SNIP-31-001.txt`.
+- visuali candidate: LLM-01, LLM-02; le domande pedagogiche sono distinte e l'approvazione autoriale resta aperta.
+- fonti: `FONTI_PRIMARIE.md`; corrispondenza claim-fonte: `CLAIMS.md`.
 
-- Ultima affermazione stabile: un prompt e la distribuzione del token successivo.
-- Concetto nuovo: Probabilità del token, confidenza espressa e correttezza fattuale sono quantità differenti.
-- Input e shape: prefisso tokenizzato, esempi e temperatura dichiarati.
-- Operazione: in-context learning, decoding e calibrazione.
-- Output e shape: logits, risposta e confidenza misurabile.
-- Che cosa cambia: il passaggio specifico di «Calibrazione».
-- Invariante: probabilità, comportamento osservato e correttezza non sono sinonimi.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: lo stesso prompt con greedy e top-p confrontati; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Modello e sistema.
-- Prova: SRC-31-004 e sezione pubblica corrispondente.
+## Gate aperti
 
-## Transizione 5. Modello e sistema
-
-- Ultima affermazione stabile: un prompt e la distribuzione del token successivo.
-- Concetto nuovo: Post-training, messaggi di sistema, strumenti e filtri contribuiscono al comportamento osservato.
-- Input e shape: prefisso tokenizzato, esempi e temperatura dichiarati.
-- Operazione: in-context learning, decoding e calibrazione.
-- Output e shape: logits, risposta e confidenza misurabile.
-- Che cosa cambia: il passaggio specifico di «Modello e sistema».
-- Invariante: probabilità, comportamento osservato e correttezza non sono sinonimi.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: lo stesso prompt con greedy e top-p confrontati; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Il ciclo di vita dei dati.
-- Prova: SRC-31-001 e sezione pubblica corrispondente.
+- lettura editoriale finale da parte dell'autore;
+- approvazione delle visuali nel contesto impaginato;
+- benchmark esterni solo quando il capitolo formula un claim di scala o di produzione.

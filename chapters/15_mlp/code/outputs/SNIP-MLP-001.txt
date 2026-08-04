@@ -1,3 +1,0 @@
-chapter: 15
-title: Dal percettrone alle reti multilayer
-output: [0.755272, 0.334759]

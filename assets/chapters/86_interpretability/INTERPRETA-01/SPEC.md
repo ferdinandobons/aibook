@@ -1,14 +1,16 @@
 # Specifica visuale INTERPRETA-01
 
-- famiglia: compare
-- domanda principale: Il diagramma segue il passaggio: Probing, attribution, causal intervention e circuit tracing. L'input è attivazioni, probe, attribution e baseline, l'output è effetto osservato con controllo e confondenti; il vincolo da controllare è che correlazione di una feature non prova causalità
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: observation_inference
+- domanda principale: Come si passa da «Oggetto dell'interpretazione» a «Attribution» mantenendo osservabile un comportamento del modello e l'intervento che lo modifica?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, compare, invariante o limite in chiusura
-- nodi e contenuti: 1: Oggetto dell'interpretazione; 2: Probing; 3: Attribution; 4: Causal intervention; 5: Circuiti
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: correlazione di una feature non prova causalità
-- fonti collegate: SRC-86-001 ... SRC-86-004
-- alt text: Diagramma INTERPRETA-01 del Capitolo 86, famiglia compare. Domanda: Il diagramma segue il passaggio: Probing, attribution, causal intervention e circuit tracing. L'input è attivazioni, probe, attribution e baseline, l'output è effetto osservato con controllo e confondenti; il vincolo da controllare è che correlazione di una feature non prova causalità La composizione usa i passaggi Oggetto dell'interpretazione, Probing, Attribution, Causal intervention, Circuiti.
+- file candidato: candidate-v48.png
+- oggetto osservato: un comportamento del modello e l'intervento che lo modifica
+- input: attivazioni, probe, attribution e baseline
+- output: effetto osservato con controllo e confondenti
+- nodi locali: Oggetto dell'interpretazione: Pesi, attivazioni, feature, head e comportamento sono livelli differenti. Il metodo deve…; Probing: Un probe misura informazione decodificabile da una rappresentazione. Non prova che il…; Attribution: Gradienti, integrated gradients e perturbazioni assegnano importanza secondo definizioni…
+- limite visualizzato: correlazione di una feature non prova causalità
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

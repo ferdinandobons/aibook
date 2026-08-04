@@ -1,14 +1,16 @@
 # Specifica visuale FLOW-02
 
-- famiglia: pipeline
-- domanda principale: Il diagramma segue il passaggio: Forward noising, score o velocity e sampler. L'input è x_0, rumore epsilon e timestep t, l'output è stima del rumore e campione ricostruito; il vincolo da controllare è che parametrizzazione e scheduler fanno parte del contratto
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: sampler_path
+- domanda principale: Quale controllo collega «Sampler» a «Flow matching e rectified flow» senza superare il limite dichiarato?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, pipeline, invariante o limite in chiusura
-- nodi e contenuti: 1: Corrompere e ricostruire; 2: Score matching; 3: Parametrizzazioni epsilon, x0 e v; 4: Sampler; 5: Flow matching e rectified flow
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: parametrizzazione e scheduler fanno parte del contratto
-- fonti collegate: SRC-25-001 ... SRC-25-004
-- alt text: Diagramma FLOW-02 del Capitolo 25, famiglia pipeline. Domanda: Il diagramma segue il passaggio: Forward noising, score o velocity e sampler. L'input è x_0, rumore epsilon e timestep t, l'output è stima del rumore e campione ricostruito; il vincolo da controllare è che parametrizzazione e scheduler fanno parte del contratto La composizione usa i passaggi Corrompere e ricostruire, Score matching, Parametrizzazioni epsilon, x0 e v, Sampler, Flow matching e rectified flow.
+- file candidato: candidate-v48.png
+- oggetto osservato: un dato corrotto e il percorso di denoising
+- input: x_0, rumore epsilon e timestep t
+- output: stima del rumore e campione ricostruito
+- nodi locali: Sampler: DDPM, DDIM e solver ODE/SDE usano discretizzazioni differenti. Meno step non…; Flow matching e rectified flow: Flow matching apprende un campo vettoriale lungo percorsi scelti tra distribuzioni.…
+- limite visualizzato: parametrizzazione e scheduler fanno parte del contratto
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

@@ -1,3 +1,0 @@
-chapter: 89
-title: Prompt injection e sicurezza dei tool
-output: [0.755272, 0.334759]

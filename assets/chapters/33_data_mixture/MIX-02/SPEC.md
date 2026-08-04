@@ -1,14 +1,16 @@
 # Specifica visuale MIX-02
 
-- famiglia: chart
-- domanda principale: Il diagramma segue il passaggio: Campionamento, ripesatura e generazione controllata. L'input è pesi, temperatura, curriculum e conteggio dei token, l'output è probabilità effettive e mix osservato; il vincolo da controllare è che peso nominale e esposizione effettiva non sono la stessa misura
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: contamination_gate
+- domanda principale: Quale controllo collega «Curriculum» a «Dati sintetici» senza superare il limite dichiarato?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v47.png
-- ordine di lettura: titolo, domanda, chart, invariante o limite in chiusura
-- nodi e contenuti: 1: Peso effettivo delle sorgenti; 2: Temperature sampling; 3: Mixture ottimizzata; 4: Curriculum; 5: Dati sintetici
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: peso nominale e esposizione effettiva non sono la stessa misura
-- fonti collegate: SRC-33-001 ... SRC-33-004
-- alt text: Diagramma MIX-02 del Capitolo 33, famiglia chart. Domanda: Il diagramma segue il passaggio: Campionamento, ripesatura e generazione controllata. L'input è pesi, temperatura, curriculum e conteggio dei token, l'output è probabilità effettive e mix osservato; il vincolo da controllare è che peso nominale e esposizione effettiva non sono la stessa misura La composizione usa i passaggi Peso effettivo delle sorgenti, Temperature sampling, Mixture ottimizzata, Curriculum, Dati sintetici.
+- file candidato: candidate-v47.png
+- oggetto osservato: la miscela effettiva di sorgenti durante il training
+- input: pesi, temperatura, curriculum e conteggio dei token
+- output: probabilità effettive e mix osservato
+- nodi locali: Curriculum: Cambiare ordine e difficoltà nel tempo modifica la traiettoria di ottimizzazione.; Dati sintetici: Modello generatore, prompt, filtri e provenienza devono essere registrati per evitare…
+- limite visualizzato: peso nominale e esposizione effettiva non sono la stessa misura
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

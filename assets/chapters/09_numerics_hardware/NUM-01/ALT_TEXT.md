@@ -1,3 +1,3 @@
-# Alt text `NUM-01`
+# Testo alternativo
 
-Diagramma orizzontale su sfondo bianco con quattro schede parallele. `float16` usa 1 bit di segno, 5 di esponente e 10 di significando, occupa 2 byte, ha epsilon circa `9,765625e-4` e massimo finito `65504`. `bfloat16` usa 1 bit di segno, 8 di esponente e 7 di significando, occupa 2 byte, ha epsilon `7,8125e-3` e massimo finito circa `3,3895e38`. `float32` usa 1, 8 e 23 bit, occupa 4 byte, ha epsilon circa `1,1921e-7` e massimo circa `3,4028e38`. `float64` usa 1, 11 e 52 bit, occupa 8 byte, ha epsilon circa `2,2204e-16` e massimo circa `1,7977e308`. Il footer chiarisce che float16 conserva più precisione di bfloat16 vicino a uno, mentre bfloat16 conserva un range simile a float32.
+Range e precisione dei dtype. Quale trasformazione centrale rende osservabile «I numeri del modello non sono numeri reali» nel capitolo 9?

@@ -1,14 +1,16 @@
 # Specifica visuale EVAL-02
 
-- famiglia: architecture
-- domanda principale: Il diagramma segue il passaggio: Eval end-to-end, stress, slice e monitoraggio. L'input è task, componenti, trace e policy, l'output è score di sistema, failure e regressione; il vincolo da controllare è che misurare il modello isolato non misura il comportamento del sistema
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: slice_scorecard
+- domanda principale: Quale controllo collega «Agenti» a «Evaluation in production» senza superare il limite dichiarato?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, architecture, invariante o limite in chiusura
-- nodi e contenuti: 1: Contesto lungo; 2: RAG; 3: Multimodalità; 4: Agenti; 5: Evaluation in production
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: misurare il modello isolato non misura il comportamento del sistema
-- fonti collegate: SRC-85-001 ... SRC-85-004
-- alt text: Diagramma EVAL-02 del Capitolo 85, famiglia architecture. Domanda: Il diagramma segue il passaggio: Eval end-to-end, stress, slice e monitoraggio. L'input è task, componenti, trace e policy, l'output è score di sistema, failure e regressione; il vincolo da controllare è che misurare il modello isolato non misura il comportamento del sistema La composizione usa i passaggi Contesto lungo, RAG, Multimodalità, Agenti, Evaluation in production.
+- file candidato: candidate-v48.png
+- oggetto osservato: un sistema composto da modello, contesto, tool e interfaccia
+- input: task, componenti, trace e policy
+- output: score di sistema, failure e regressione
+- nodi locali: Agenti: Successo, step, costo, side effect e recovery vengono misurati in ambienti versionati e…; Evaluation in production: Shadow traffic, canary e monitoraggio collegano benchmark offline a distribuzioni reali…
+- limite visualizzato: misurare il modello isolato non misura il comportamento del sistema
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

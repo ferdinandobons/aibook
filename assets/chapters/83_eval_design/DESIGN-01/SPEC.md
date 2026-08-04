@@ -1,14 +1,16 @@
 # Specifica visuale DESIGN-01
 
-- famiglia: checklist
-- domanda principale: Il diagramma segue il passaggio: Scelta della metrica, giudice, slice e report. L'input è task, dataset, predizioni, riferimento e metriche, l'output è stima, intervallo, errori e decisione; il vincolo da controllare è che una metrica risponde solo alla domanda per cui è stata progettata
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: evaluation_matrix
+- domanda principale: Come si passa da «Decisione e claim» a «Metriche» mantenendo osservabile un claim valutativo e il protocollo che lo rende misurabile?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, checklist, invariante o limite in chiusura
-- nodi e contenuti: 1: Decisione e claim; 2: Task e dataset; 3: Metriche; 4: Giudici modello; 5: Report
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: una metrica risponde solo alla domanda per cui è stata progettata
-- fonti collegate: SRC-83-001 ... SRC-83-004
-- alt text: Diagramma DESIGN-01 del Capitolo 83, famiglia checklist. Domanda: Il diagramma segue il passaggio: Scelta della metrica, giudice, slice e report. L'input è task, dataset, predizioni, riferimento e metriche, l'output è stima, intervallo, errori e decisione; il vincolo da controllare è che una metrica risponde solo alla domanda per cui è stata progettata La composizione usa i passaggi Decisione e claim, Task e dataset, Metriche, Giudici modello, Report.
+- file candidato: candidate-v48.png
+- oggetto osservato: un claim valutativo e il protocollo che lo rende misurabile
+- input: task, dataset, predizioni, riferimento e metriche
+- output: stima, intervallo, errori e decisione
+- nodi locali: Decisione e claim: Una valutazione parte dalla decisione che deve sostenere. Il claim deve nominare…; Task e dataset: Prompt, input, reference e rubric devono rappresentare l'uso previsto. Split e cutoff…; Metriche: Metriche automatiche, giudizi umani e verificatori misurano proprietà differenti.…
+- limite visualizzato: una metrica risponde solo alla domanda per cui è stata progettata
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

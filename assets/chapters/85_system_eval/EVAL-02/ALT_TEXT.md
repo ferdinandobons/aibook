@@ -1,3 +1,3 @@
-# Alt text EVAL-02
+# Testo alternativo
 
-Diagramma EVAL-02 del Capitolo 85, famiglia architecture. Domanda: Il diagramma segue il passaggio: Eval end-to-end, stress, slice e monitoraggio. L'input è task, componenti, trace e policy, l'output è score di sistema, failure e regressione; il vincolo da controllare è che misurare il modello isolato non misura il comportamento del sistema La composizione usa i passaggi Contesto lungo, RAG, Multimodalità, Agenti, Evaluation in production.
+EVAL-02, Valutare contesto lungo, RAG, multimodalità e agenti. Quale controllo collega «Agenti» a «Evaluation in production» senza superare il limite dichiarato? La composizione slice scorecard collega «Agenti», «Evaluation in production». L'input è task, componenti, trace e policy; l'output è score di sistema, failure e regressione. Il limite esplicito è: misurare il modello isolato non misura il comportamento del sistema.

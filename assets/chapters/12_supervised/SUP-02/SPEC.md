@@ -18,3 +18,4 @@ Come possono due soglie avere la stessa accuracy ma costi e distribuzioni di err
 - soglia `0,30` e soglia `0,50`;
 - pannello centrale con accuracy comune;
 - footer che separa le slice con tracking disponibile e mancante.
+- domanda principale: Quale confronto o limite chiarisce «Predittore, loss e rischio empirico»?

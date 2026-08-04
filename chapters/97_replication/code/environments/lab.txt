@@ -1,0 +1,6 @@
+Python 3.13.12
+Python standard library
+CPU
+Date: 4 agosto 2026
+Command: python replication_protocol.py
+Test: python test_replication_protocol.py

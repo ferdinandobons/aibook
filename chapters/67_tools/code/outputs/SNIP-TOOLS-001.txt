@@ -1,3 +1,0 @@
-chapter: 67
-title: Output strutturato e uso degli strumenti
-output: [0.755272, 0.334759]

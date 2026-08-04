@@ -1,3 +1,3 @@
-# Alt text PRUNING-01
+# Testo alternativo
 
-Diagramma PRUNING-01 del Capitolo 73, famiglia pipeline. Domanda: Il diagramma segue il passaggio: Distillazione, pruning e recovery. L'input è logits teacher, target, pruning mask e budget, l'output è student più piccolo con loss e regressioni misurate; il vincolo da controllare è che compressione e accuratezza vanno misurate sullo stesso perimetro La composizione usa i passaggi Teacher e student, Temperature e loss, Sequence distillation, Pruning, Recovery.
+PRUNING-01, Distillazione e pruning. Come si passa da «Teacher e student» a «Sequence distillation» mantenendo osservabile pesi del teacher, student e struttura da comprimere? La composizione distill prune collega «Teacher e student», «Temperature e loss», «Sequence distillation». L'input è logits teacher, target, pruning mask e budget; l'output è student più piccolo con loss e regressioni misurate. Il limite esplicito è: compressione e accuratezza vanno misurate sullo stesso perimetro.

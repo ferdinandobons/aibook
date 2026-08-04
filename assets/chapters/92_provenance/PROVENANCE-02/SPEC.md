@@ -1,14 +1,16 @@
 # Specifica visuale PROVENANCE-02
 
-- famiglia: timeline
-- domanda principale: Il diagramma segue il passaggio: Digest, firma, C2PA, watermark e detection. L'input è payload, metadata, manifest e chiave o watermark, l'output è record verificabile e stato di rilevazione; il vincolo da controllare è che provenienza dell'artefatto non certifica la verità del contenuto
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: credential_layers
+- domanda principale: Quale controllo collega «Detection» a «Policy e interfaccia» senza superare il limite dichiarato?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, timeline, invariante o limite in chiusura
-- nodi e contenuti: 1: Provenienza crittografica; 2: C2PA; 3: Watermarking; 4: Detection; 5: Policy e interfaccia
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: provenienza dell'artefatto non certifica la verità del contenuto
-- fonti collegate: SRC-92-001 ... SRC-92-004
-- alt text: Diagramma PROVENANCE-02 del Capitolo 92, famiglia timeline. Domanda: Il diagramma segue il passaggio: Digest, firma, C2PA, watermark e detection. L'input è payload, metadata, manifest e chiave o watermark, l'output è record verificabile e stato di rilevazione; il vincolo da controllare è che provenienza dell'artefatto non certifica la verità del contenuto La composizione usa i passaggi Provenienza crittografica, C2PA, Watermarking, Detection, Policy e interfaccia.
+- file candidato: candidate-v48.png
+- oggetto osservato: un contenuto e la sua attestazione di provenienza
+- input: payload, metadata, manifest e chiave o watermark
+- output: record verificabile e stato di rilevazione
+- nodi locali: Detection: Classificatori di contenuto sintetico degradano sotto editing, nuovi modelli e shift. Un…; Policy e interfaccia: Provenienza, disclosure e conservazione dei metadati devono essere progettate lungo la…
+- limite visualizzato: provenienza dell'artefatto non certifica la verità del contenuto
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

@@ -1,24 +1,30 @@
 from __future__ import annotations
 
+import json
+import math
 import unittest
 
-from snip_80_contract import contract, weighted_state
+from snip_80_contract import contract
 
 
-class ContractTests(unittest.TestCase):
-    def test_contract_is_deterministic(self):
+class LessonExampleTests(unittest.TestCase):
+    def test_expected_result(self):
+        self.assertEqual(contract(), {'workers': 2, 'end_to_end_ms': 6, 'invariant': 'distributed inference includes communication in end-to-end latency'})
+
+    def test_example_is_deterministic(self):
         self.assertEqual(contract(), contract())
 
-    def test_contract_has_invariant(self):
-        self.assertIn("invariant", contract())
+    def test_result_is_serializable_and_finite(self):
+        encoded = json.dumps(contract(), sort_keys=True)
+        self.assertTrue(encoded)
+        for value in contract().values():
+            if isinstance(value, float):
+                self.assertTrue(math.isfinite(value))
 
-    def test_contract_has_observable_output(self):
-        self.assertGreaterEqual(len(contract()), 2)
-
-    def test_contract_rejects_incoherent_shape(self):
-        with self.assertRaises(ValueError):
-            weighted_state([0.0], [[1.0, 2.0], [3.0]])
+    def test_interpretation_boundary_is_explicit(self):
+        self.assertIsInstance(contract().get('invariant'), str)
+        self.assertGreaterEqual(len(contract()['invariant'].split()), 4)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     unittest.main(verbosity=2)

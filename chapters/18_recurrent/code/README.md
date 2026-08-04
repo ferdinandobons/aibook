@@ -1,5 +1,8 @@
-# Codice del Capitolo 18
+# Esempio verificato. Capitolo 18
 
-Lo snippet snip_18_contract.py rende osservabile il contratto centrale di Reti ricorrenti e modelli sequenziali con valori piccoli e leggibili.
-Il test test_18_contract.py controlla determinismo, output, invariante e una shape incoerente.
-Il risultato è un esempio locale, non un benchmark di produzione.
+`snip_18_contract.py` esegue il caso minimo usato nel testo di **Reti ricorrenti e modelli sequenziali**. `test_18_contract.py` conserva l'output atteso, controlla determinismo, serializzazione, valori finiti e presenza del limite interpretativo.
+
+```bash
+python snip_18_contract.py
+python -m unittest -v test_18_contract.py
+```

@@ -1,14 +1,16 @@
 # Specifica visuale PEFT-01
 
-- famiglia: architecture
-- domanda principale: Il diagramma segue il passaggio: Adapter, LoRA, prefix o QLoRA. L'input è peso W, matrice A e B, rank e quantizzazione, l'output è delta W e checkpoint adattatore; il vincolo da controllare è che il delta non è il modello completo e va valutato sullo stesso base model
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: low_rank_update
+- domanda principale: Come si passa da «Parametri congelati e adattamento» a «LoRA» mantenendo osservabile l'aggiornamento adattivo rispetto ai pesi congelati?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, architecture, invariante o limite in chiusura
-- nodi e contenuti: 1: Parametri congelati e adattamento; 2: Adapter; 3: LoRA; 4: Prompt, prefix e IA3; 5: QLoRA e compatibilità
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: il delta non è il modello completo e va valutato sullo stesso base model
-- fonti collegate: SRC-47-001 ... SRC-47-004
-- alt text: Diagramma PEFT-01 del Capitolo 47, famiglia architecture. Domanda: Il diagramma segue il passaggio: Adapter, LoRA, prefix o QLoRA. L'input è peso W, matrice A e B, rank e quantizzazione, l'output è delta W e checkpoint adattatore; il vincolo da controllare è che il delta non è il modello completo e va valutato sullo stesso base model La composizione usa i passaggi Parametri congelati e adattamento, Adapter, LoRA, Prompt, prefix e IA3, QLoRA e compatibilità.
+- file candidato: candidate-v48.png
+- oggetto osservato: l'aggiornamento adattivo rispetto ai pesi congelati
+- input: peso W, matrice A e B, rank e quantizzazione
+- output: delta W e checkpoint adattatore
+- nodi locali: Parametri congelati e adattamento: PEFT modifica un sottoinsieme di parametri o introduce moduli piccoli, lasciando…; Adapter: Blocchi bottleneck vengono inseriti nel percorso residuale. Posizione, dimensione e…; LoRA: Un aggiornamento di rango ridotto fattorizza la variazione di una matrice come BA e può…
+- limite visualizzato: il delta non è il modello completo e va valutato sullo stesso base model
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

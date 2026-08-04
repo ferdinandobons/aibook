@@ -1,14 +1,16 @@
 # Specifica visuale RAG-02
 
-- famiglia: graph
-- domanda principale: Il diagramma segue il passaggio: Query transformation, routing e corrective retrieval. L'input è domanda multi-hop, nodi, archi e documenti, l'output è sottoquery, percorso e contesto selezionato; il vincolo da controllare è che un router può sbagliare anche quando il generatore è corretto
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: reranking_funnel
+- domanda principale: Quale controllo collega «Graph RAG» a «RAG agentico» senza superare il limite dichiarato?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, graph, invariante o limite in chiusura
-- nodi e contenuti: 1: Query transformation; 2: Retrieval adattivo; 3: Corrective RAG; 4: Graph RAG; 5: RAG agentico
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: un router può sbagliare anche quando il generatore è corretto
-- fonti collegate: SRC-65-001 ... SRC-65-004
-- alt text: Diagramma RAG-02 del Capitolo 65, famiglia graph. Domanda: Il diagramma segue il passaggio: Query transformation, routing e corrective retrieval. L'input è domanda multi-hop, nodi, archi e documenti, l'output è sottoquery, percorso e contesto selezionato; il vincolo da controllare è che un router può sbagliare anche quando il generatore è corretto La composizione usa i passaggi Query transformation, Retrieval adattivo, Corrective RAG, Graph RAG, RAG agentico.
+- file candidato: candidate-v48.png
+- oggetto osservato: una query instradata tra retriever e grafo
+- input: domanda multi-hop, nodi, archi e documenti
+- output: sottoquery, percorso e contesto selezionato
+- nodi locali: Graph RAG: Entità, relazioni e comunità permettono query e sintesi multi-hop. Il grafo dipende da…; RAG agentico: Un agente può pianificare retrieval successivi. Più step aumentano copertura e…
+- limite visualizzato: un router può sbagliare anche quando il generatore è corretto
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

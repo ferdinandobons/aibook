@@ -1,14 +1,16 @@
 # Specifica visuale RLVR-01
 
-- famiglia: funnel
-- domanda principale: Il diagramma segue il passaggio: Reward verificabile, policy update e gestione di reward sparso. L'input è prompt, rollout, gruppo di risposte e verifier, l'output è reward, vantaggio e nuova policy; il vincolo da controllare è che la verificabilità vale solo per il dominio coperto dal verifier
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: rlvr_loop
+- domanda principale: Come si passa da «Reward verificabile» a «GRPO e policy update» mantenendo osservabile una risposta valutata da una regola verificabile?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, funnel, invariante o limite in chiusura
-- nodi e contenuti: 1: Reward verificabile; 2: Rollout e gruppi; 3: GRPO e policy update; 4: Sparse reward; 5: Verificabilità limitata
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: la verificabilità vale solo per il dominio coperto dal verifier
-- fonti collegate: SRC-51-001 ... SRC-51-004
-- alt text: Diagramma RLVR-01 del Capitolo 51, famiglia funnel. Domanda: Il diagramma segue il passaggio: Reward verificabile, policy update e gestione di reward sparso. L'input è prompt, rollout, gruppo di risposte e verifier, l'output è reward, vantaggio e nuova policy; il vincolo da controllare è che la verificabilità vale solo per il dominio coperto dal verifier La composizione usa i passaggi Reward verificabile, Rollout e gruppi, GRPO e policy update, Sparse reward, Verificabilità limitata.
+- file candidato: candidate-v48.png
+- oggetto osservato: una risposta valutata da una regola verificabile
+- input: prompt, rollout, gruppo di risposte e verifier
+- output: reward, vantaggio e nuova policy
+- nodi locali: Reward verificabile: Problemi con risposta controllabile, come codice o matematica, consentono reward da…; Rollout e gruppi: La policy genera più soluzioni per la stessa richiesta. Il reward confronta traiettorie…; GRPO e policy update: Algoritmi group-relative normalizzano reward all'interno di gruppi e aggiornano…
+- limite visualizzato: la verificabilità vale solo per il dominio coperto dal verifier
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

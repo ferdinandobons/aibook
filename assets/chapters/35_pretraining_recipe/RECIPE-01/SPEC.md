@@ -1,14 +1,16 @@
 # Specifica visuale RECIPE-01
 
-- famiglia: timeline
-- domanda principale: Il diagramma segue il passaggio: Forward, backward, update, schedule e recovery. L'input è batch, learning rate, seed, optimizer e checkpoint, l'output è loss, parametri e checkpoint ripristinabile; il vincolo da controllare è che un checkpoint deve includere lo stato necessario a continuare il run
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: recipe_pipeline
+- domanda principale: Come si passa da «Batch di token» a «AdamW» mantenendo osservabile lo stato completo di una ricetta di pretraining?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, timeline, invariante o limite in chiusura
-- nodi e contenuti: 1: Batch di token; 2: Inizializzazione; 3: AdamW; 4: Warmup e schedule; 5: Checkpoint e recovery
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: un checkpoint deve includere lo stato necessario a continuare il run
-- fonti collegate: SRC-35-001 ... SRC-35-004
-- alt text: Diagramma RECIPE-01 del Capitolo 35, famiglia timeline. Domanda: Il diagramma segue il passaggio: Forward, backward, update, schedule e recovery. L'input è batch, learning rate, seed, optimizer e checkpoint, l'output è loss, parametri e checkpoint ripristinabile; il vincolo da controllare è che un checkpoint deve includere lo stato necessario a continuare il run La composizione usa i passaggi Batch di token, Inizializzazione, AdamW, Warmup e schedule, Checkpoint e recovery.
+- file candidato: candidate-v48.png
+- oggetto osservato: lo stato completo di una ricetta di pretraining
+- input: batch, learning rate, seed, optimizer e checkpoint
+- output: loss, parametri e checkpoint ripristinabile
+- nodi locali: Batch di token: Packing, padding e mask determinano quanti token validi contribuiscono alla loss.; Inizializzazione: Scala dei pesi e residual deve restare coerente con profondità, norm e dtype.; AdamW: Learning rate, beta, epsilon e weight decay descrivono insieme l'optimizer.
+- limite visualizzato: un checkpoint deve includere lo stato necessario a continuare il run
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

@@ -1,3 +1,3 @@
-# Alt text VERIFIERS-02
+# Testo alternativo
 
-Diagramma VERIFIERS-02 del Capitolo 50, famiglia loop. Domanda: Il diagramma segue il passaggio: Process supervision, outcome supervision e verifica. L'input è passaggi, risposta finale, criterio e indipendenza, l'output è score verificato e failure localizzata; il vincolo da controllare è che un verifier può ereditare bias o essere ottimizzato La composizione usa i passaggi Supervisionare il risultato, Supervisionare il processo, Verifier, Reward model di processo, Goodhart e indipendenza.
+VERIFIERS-02, Process supervision, outcome supervision e verifier. Quale controllo collega «Reward model di processo» a «Goodhart e indipendenza» senza superare il limite dichiarato? La composizione process supervision collega «Reward model di processo», «Goodhart e indipendenza». L'input è passaggi, risposta finale, criterio e indipendenza; l'output è score verificato e failure localizzata. Il limite esplicito è: un verifier può ereditare bias o essere ottimizzato.

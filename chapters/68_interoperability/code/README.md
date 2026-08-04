@@ -1,5 +1,8 @@
-# Codice del Capitolo 68
+# Esempio verificato. Capitolo 68
 
-Lo snippet snip_68_contract.py rende osservabile il contratto centrale di Protocolli e interoperabilità con valori piccoli e leggibili.
-Il test test_68_contract.py controlla determinismo, output, invariante e una shape incoerente.
-Il risultato è un esempio locale, non un benchmark di produzione.
+`snip_68_contract.py` esegue il caso minimo usato nel testo di **Protocolli e interoperabilità**. `test_68_contract.py` conserva l'output atteso, controlla determinismo, serializzazione, valori finiti e presenza del limite interpretativo.
+
+```bash
+python snip_68_contract.py
+python -m unittest -v test_68_contract.py
+```

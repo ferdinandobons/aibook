@@ -1,14 +1,16 @@
 # Specifica visuale MLP-02
 
-- famiglia: architecture
-- domanda principale: I componenti cambiano lo stato mentre il contratto conserva le invarianti dichiarate
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: decision_boundary
+- domanda principale: Quale controllo collega «Capacità ed espressività» a «Dal forward al training» senza superare il limite dichiarato?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v49.png
-- ordine di lettura: titolo, domanda, architecture, invariante o limite in chiusura
-- nodi e contenuti: 1: Una decisione lineare; 2: Strati nascosti; 3: Attivazioni; 4: Capacità ed espressività; 5: Dal forward al training
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: una pila di trasformazioni affini senza non linearità resta una sola trasformazione affine
-- fonti collegate: SRC-15-001 ... SRC-15-004
-- alt text: Diagramma MLP-02 del Capitolo 15, famiglia architecture. Domanda: I componenti cambiano lo stato mentre il contratto conserva le invarianti dichiarate La composizione usa i passaggi Una decisione lineare, Strati nascosti, Attivazioni, Capacità ed espressività, Dal forward al training.
+- file candidato: candidate-v49.png
+- oggetto osservato: il vettore di feature x della richiesta
+- input: x = [1, 2] con shape [2]
+- output: un nuovo vettore h con shape dichiarata
+- nodi locali: Capacità ed espressività: Una rete più ampia può rappresentare funzioni più complesse, ma parametri aggiuntivi non…; Dal forward al training: Il forward produce logits e loss. Backpropagation e optimizer trasformano il segnale in…
+- limite visualizzato: una pila di trasformazioni affini senza non linearità resta una sola trasformazione affine
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

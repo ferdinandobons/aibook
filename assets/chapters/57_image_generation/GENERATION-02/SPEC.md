@@ -1,14 +1,16 @@
 # Specifica visuale GENERATION-02
 
-- famiglia: pipeline
-- domanda principale: Il diagramma segue il passaggio: Denoising, guidance, editing o inpainting. L'input è latent, prompt, mask e rumore, l'output è immagine, score e metadati di provenienza; il vincolo da controllare è che controllo dell'immagine e verità del contenuto sono proprietà diverse
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: quality_lenses
+- domanda principale: Quale controllo collega «Editing e inpainting» a «Controllo e provenienza» senza superare il limite dichiarato?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, pipeline, invariante o limite in chiusura
-- nodi e contenuti: 1: Latent diffusion; 2: Conditioning; 3: Classifier-free guidance; 4: Editing e inpainting; 5: Controllo e provenienza
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: controllo dell'immagine e verità del contenuto sono proprietà diverse
-- fonti collegate: SRC-57-001 ... SRC-57-004
-- alt text: Diagramma GENERATION-02 del Capitolo 57, famiglia pipeline. Domanda: Il diagramma segue il passaggio: Denoising, guidance, editing o inpainting. L'input è latent, prompt, mask e rumore, l'output è immagine, score e metadati di provenienza; il vincolo da controllare è che controllo dell'immagine e verità del contenuto sono proprietà diverse La composizione usa i passaggi Latent diffusion, Conditioning, Classifier-free guidance, Editing e inpainting, Controllo e provenienza.
+- file candidato: candidate-v48.png
+- oggetto osservato: un contenuto immagine e la condizione che lo modifica
+- input: latent, prompt, mask e rumore
+- output: immagine, score e metadati di provenienza
+- nodi locali: Editing e inpainting: Una mask stabilisce regioni modificabili. La coerenza con le aree conservate dipende da…; Controllo e provenienza: ControlNet, adapter e reference image aggiungono vincoli. Dataset, diritti e metadati…
+- limite visualizzato: controllo dell'immagine e verità del contenuto sono proprietà diverse
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

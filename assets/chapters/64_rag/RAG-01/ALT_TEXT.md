@@ -1,3 +1,3 @@
-# Alt text RAG-01
+# Testo alternativo
 
-Diagramma RAG-01 del Capitolo 64, famiglia pipeline. Domanda: Il diagramma segue il passaggio: Chunking, retrieval, attribution e generazione. L'input è query, chunk, fonti e prompt, l'output è risposta con evidenza e score end-to-end; il vincolo da controllare è che contesto recuperato e testo generato devono restare distinguibili La composizione usa i passaggi Una pipeline in due fasi, Chunking, Prompt con fonti, Attribution, Valutazione end-to-end.
+RAG-01, Retrieval-Augmented Generation. Come si passa da «Una pipeline in due fasi» a «Prompt con fonti» mantenendo osservabile la pipeline che collega query, contesto e risposta? La composizione rag route collega «Una pipeline in due fasi», «Chunking», «Prompt con fonti». L'input è query, chunk, fonti e prompt; l'output è risposta con evidenza e score end-to-end. Il limite esplicito è: contesto recuperato e testo generato devono restare distinguibili.

@@ -1,3 +1,0 @@
-chapter: 23
-title: Generative Adversarial Network
-output: [0.755272, 0.334759]

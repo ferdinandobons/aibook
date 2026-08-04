@@ -11,3 +11,4 @@
 - Contenimento: ogni valore, formula e label deve restare integralmente nel proprio pannello o box.
 - Produzione: composizione iterata con image generation; testo, valori e collegamenti rasterizzati con `scripts/render_attention_visuals.py`.
 - Stato: `validata tecnicamente`, in attesa di revisione autoriale.
+- domanda principale: Quale confronto o limite chiarisce «I tre ruoli: query, key e value»?

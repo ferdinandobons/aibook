@@ -1,14 +1,16 @@
 # Specifica visuale DIST-02
 
-- famiglia: graph
-- domanda principale: Il diagramma segue il passaggio: All-reduce, sharding, pipeline e recovery. L'input è microbatch, worker, shard e topologia, l'output è gradiente ridotto, stato sincronizzato e fault osservato; il vincolo da controllare è che la riduzione e il conteggio del batch devono essere dichiarati
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: communication_graph
+- domanda principale: Quale controllo collega «Topologia e fault tolerance» a «Continued pretraining» senza superare il limite dichiarato?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, graph, invariante o limite in chiusura
-- nodi e contenuti: 1: Data parallelism; 2: ZeRO e FSDP; 3: Tensor e pipeline parallelism; 4: Topologia e fault tolerance; 5: Continued pretraining
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: la riduzione e il conteggio del batch devono essere dichiarati
-- fonti collegate: SRC-36-001 ... SRC-36-004
-- alt text: Diagramma DIST-02 del Capitolo 36, famiglia graph. Domanda: Il diagramma segue il passaggio: All-reduce, sharding, pipeline e recovery. L'input è microbatch, worker, shard e topologia, l'output è gradiente ridotto, stato sincronizzato e fault osservato; il vincolo da controllare è che la riduzione e il conteggio del batch devono essere dichiarati La composizione usa i passaggi Data parallelism, ZeRO e FSDP, Tensor e pipeline parallelism, Topologia e fault tolerance, Continued pretraining.
+- file candidato: candidate-v48.png
+- oggetto osservato: gradienti e stato distribuiti tra worker
+- input: microbatch, worker, shard e topologia
+- output: gradiente ridotto, stato sincronizzato e fault osservato
+- nodi locali: Topologia e fault tolerance: Banda, latenza, checkpoint e cursor dei dati diventano parte della ricetta.; Continued pretraining: Un checkpoint viene adattato a nuovi dati con learning rate, mixture e valutazioni di…
+- limite visualizzato: la riduzione e il conteggio del batch devono essere dichiarati
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

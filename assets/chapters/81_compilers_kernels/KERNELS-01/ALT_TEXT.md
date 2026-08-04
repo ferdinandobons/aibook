@@ -1,3 +1,3 @@
-# Alt text KERNELS-01
+# Testo alternativo
 
-Diagramma KERNELS-01 del Capitolo 81, famiglia compare. Domanda: Il diagramma segue il passaggio: Lowering, fusion, autotuning e gestione dei graph break. L'input è grafo, shape, dtype, target e kernel, l'output è kernel eseguito, latenza e fallback; il vincolo da controllare è che ottimizzazione del grafo e correttezza numerica devono essere confrontate La composizione usa i passaggi Grafo e operatori, Kernel fusion, Triton e kernel custom, torch.compile e graph break, Autotuning e portabilità.
+KERNELS-01, Compiler, kernel e runtime. Come si passa da «Grafo e operatori» a «Triton e kernel custom» mantenendo osservabile un grafo di operatori trasformato dal compiler? La composizione compiler graph collega «Grafo e operatori», «Kernel fusion», «Triton e kernel custom». L'input è grafo, shape, dtype, target e kernel; l'output è kernel eseguito, latenza e fallback. Il limite esplicito è: ottimizzazione del grafo e correttezza numerica devono essere confrontate.

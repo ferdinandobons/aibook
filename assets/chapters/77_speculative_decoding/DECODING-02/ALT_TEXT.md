@@ -1,3 +1,3 @@
-# Alt text DECODING-02
+# Testo alternativo
 
-Diagramma DECODING-02 del Capitolo 77, famiglia pipeline. Domanda: Il diagramma segue il passaggio: Proposta, verifica, accettazione e fallback. L'input è token proposti, logits draft e logits target, l'output è token accettati, velocità e distribuzione preservata; il vincolo da controllare è che lo speedup richiede verifica senza cambiare il contratto di output La composizione usa i passaggi Draft e target, Acceptance, Speedup, Medusa, EAGLE e ReDrafter, Parallel decoding.
+DECODING-02, Speculative e parallel decoding. Quale controllo collega «Medusa, EAGLE e ReDrafter» a «Parallel decoding» senza superare il limite dichiarato? La composizione acceptance path collega «Medusa, EAGLE e ReDrafter», «Parallel decoding». L'input è token proposti, logits draft e logits target; l'output è token accettati, velocità e distribuzione preservata. Il limite esplicito è: lo speedup richiede verifica senza cambiare il contratto di output.

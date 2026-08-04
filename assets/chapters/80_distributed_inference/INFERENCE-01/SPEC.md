@@ -1,14 +1,16 @@
 # Specifica visuale INFERENCE-01
 
-- famiglia: architecture
-- domanda principale: Il diagramma segue il passaggio: Parallelismo, disaggregazione, routing e recovery. L'input è shard, worker, rete, batch e fase prefill/decode, l'output è risposta, trasferimenti e fault osservati; il vincolo da controllare è che la comunicazione fa parte della latenza end-to-end
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: sharding_topology
+- domanda principale: Come si passa da «Tensor e pipeline parallelism» a «Prefill-decode disaggregation» mantenendo osservabile una richiesta distribuita tra compute e comunicazioni?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, architecture, invariante o limite in chiusura
-- nodi e contenuti: 1: Tensor e pipeline parallelism; 2: Expert parallelism; 3: Prefill-decode disaggregation; 4: Routing; 5: Fault tolerance
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: la comunicazione fa parte della latenza end-to-end
-- fonti collegate: SRC-80-001 ... SRC-80-004
-- alt text: Diagramma INFERENCE-01 del Capitolo 80, famiglia architecture. Domanda: Il diagramma segue il passaggio: Parallelismo, disaggregazione, routing e recovery. L'input è shard, worker, rete, batch e fase prefill/decode, l'output è risposta, trasferimenti e fault osservati; il vincolo da controllare è che la comunicazione fa parte della latenza end-to-end La composizione usa i passaggi Tensor e pipeline parallelism, Expert parallelism, Prefill-decode disaggregation, Routing, Fault tolerance.
+- file candidato: candidate-v48.png
+- oggetto osservato: una richiesta distribuita tra compute e comunicazioni
+- input: shard, worker, rete, batch e fase prefill/decode
+- output: risposta, trasferimenti e fault osservati
+- nodi locali: Tensor e pipeline parallelism: Pesi e layer vengono divisi quando il modello non entra in un singolo dispositivo.; Expert parallelism: MoE distribuisce esperti e usa all-to-all durante l'inference.; Prefill-decode disaggregation: Cluster distinti ottimizzano prompt lunghi e generazione token-by-token, scambiando KV…
+- limite visualizzato: la comunicazione fa parte della latenza end-to-end
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

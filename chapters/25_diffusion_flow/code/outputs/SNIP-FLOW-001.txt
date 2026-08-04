@@ -1,3 +1,0 @@
-chapter: 25
-title: Diffusione, score matching e flow matching
-output: [0.755272, 0.334759]

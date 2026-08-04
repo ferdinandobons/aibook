@@ -1,5 +1,5 @@
-# Codice del Capitolo 98
+# Eccezione Python. Capitolo 98
 
-Lo snippet snip_98_contract.py rende osservabile il contratto centrale di Osservatorio della frontiera con valori piccoli e leggibili.
-Il test test_98_contract.py controlla determinismo, output, invariante e una shape incoerente.
-Il risultato è un esempio locale, non un benchmark di produzione.
+Un osservatorio di frontiera valuta evidenza aggiornata e maturità editoriale; il controllo centrale è documentale e datato, non computazionale.
+
+Ogni scheda conserva data, versione, disponibilità degli artefatti, replica indipendente, incertezza e condizione di riapertura. Uno script che assegnasse automaticamente maturità alla ricerca darebbe un'evidenza fuorviante.

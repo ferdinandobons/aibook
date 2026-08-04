@@ -1,14 +1,16 @@
 # Specifica visuale TOOLS-02
 
-- famiglia: pipeline
-- domanda principale: Il diagramma segue il passaggio: Parsing, selezione, esecuzione e osservazione. L'input è nome, argomenti, scope e stato, l'output è risultato del tool o rifiuto tracciato; il vincolo da controllare è che schema valido non significa permesso di eseguire il side effect
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: schema_gate
+- domanda principale: Quale controllo collega «Esecuzione e osservazione» a «Idempotenza e side effect» senza superare il limite dichiarato?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v50.png
-- ordine di lettura: titolo, domanda, pipeline, invariante o limite in chiusura
-- nodi e contenuti: 1: Schema dell'output; 2: Selezione del tool; 3: Argomenti; 4: Esecuzione e osservazione; 5: Idempotenza e side effect
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: schema valido non significa permesso di eseguire il side effect
-- fonti collegate: SRC-67-001 ... SRC-67-004
-- alt text: Diagramma TOOLS-02 del Capitolo 67, famiglia pipeline. Domanda: Il diagramma segue il passaggio: Parsing, selezione, esecuzione e osservazione. L'input è nome, argomenti, scope e stato, l'output è risultato del tool o rifiuto tracciato; il vincolo da controllare è che schema valido non significa permesso di eseguire il side effect La composizione usa i passaggi Schema dell'output, Selezione del tool, Argomenti, Esecuzione e osservazione, Idempotenza e side effect.
+- file candidato: candidate-v50.png
+- oggetto osservato: una chiamata a tool con schema e autorizzazione
+- input: nome, argomenti, scope e stato
+- output: risultato del tool o rifiuto tracciato
+- nodi locali: Esecuzione e osservazione: Il sistema esegue il tool fuori dal modello e restituisce un risultato strutturato.…; Idempotenza e side effect: Operazioni di lettura e scrittura hanno rischi differenti. Conferma, deduplicazione e…
+- limite visualizzato: schema valido non significa permesso di eseguire il side effect
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

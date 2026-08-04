@@ -1,3 +1,0 @@
-chapter: 82
-title: LLMOps, edge, costo ed energia
-output: [0.755272, 0.334759]

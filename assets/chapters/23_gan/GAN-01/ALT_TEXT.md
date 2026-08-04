@@ -1,3 +1,3 @@
-# Alt text GAN-01
+# Testo alternativo
 
-Diagramma GAN-01 del Capitolo 23, famiglia timeline. Domanda: Il diagramma segue il passaggio: Aggiornamento alternato e segnale di feedback. L'input è un dato reale, un campione e due score, l'output è score, gradiente e campione; il vincolo da controllare è che un equilibrio locale non prova copertura né stabilità La composizione usa i passaggi Un gioco tra due modelli, Divergenze e gradienti, Mode collapse, Wasserstein GAN, Stabilità e valutazione.
+GAN-01, Generative Adversarial Network. Come si passa da «Un gioco tra due modelli» a «Mode collapse» mantenendo osservabile la partita tra generatore e discriminatore? La composizione adversarial loop collega «Un gioco tra due modelli», «Divergenze e gradienti», «Mode collapse». L'input è un dato reale, un campione e due score; l'output è score, gradiente e campione. Il limite esplicito è: un equilibrio locale non prova copertura né stabilità.

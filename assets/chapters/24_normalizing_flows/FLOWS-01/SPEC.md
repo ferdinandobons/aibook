@@ -1,14 +1,16 @@
 # Specifica visuale FLOWS-01
 
-- famiglia: pipeline
-- domanda principale: Il diagramma segue il passaggio: Coupling, cambio di variabile e inversione. L'input è x, log-determinante e variabile latente z, l'output è log-likelihood, z e campione ricostruito; il vincolo da controllare è che l'inversione richiede una trasformazione e un log-determinante coerenti
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: invertible_flow
+- domanda principale: Come si passa da «Cambio di variabile» a «Invertibilità e architettura» mantenendo osservabile un dato trasformato da una mappa invertibile?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, pipeline, invariante o limite in chiusura
-- nodi e contenuti: 1: Cambio di variabile; 2: Coupling layer; 3: Invertibilità e architettura; 4: Continuous normalizing flow; 5: Sampling e costo
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: l'inversione richiede una trasformazione e un log-determinante coerenti
-- fonti collegate: SRC-24-001 ... SRC-24-004
-- alt text: Diagramma FLOWS-01 del Capitolo 24, famiglia pipeline. Domanda: Il diagramma segue il passaggio: Coupling, cambio di variabile e inversione. L'input è x, log-determinante e variabile latente z, l'output è log-likelihood, z e campione ricostruito; il vincolo da controllare è che l'inversione richiede una trasformazione e un log-determinante coerenti La composizione usa i passaggi Cambio di variabile, Coupling layer, Invertibilità e architettura, Continuous normalizing flow, Sampling e costo.
+- file candidato: candidate-v48.png
+- oggetto osservato: un dato trasformato da una mappa invertibile
+- input: x, log-determinante e variabile latente z
+- output: log-likelihood, z e campione ricostruito
+- nodi locali: Cambio di variabile: Una trasformazione invertibile collega una distribuzione semplice ai dati. La densità…; Coupling layer: RealNVP e Glow costruiscono trasformazioni triangolari, con inversa e log-determinante…; Invertibilità e architettura: L'invertibilità limita operazioni e dimensioni. Squeeze, split e permutazioni…
+- limite visualizzato: l'inversione richiede una trasformazione e un log-determinante coerenti
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

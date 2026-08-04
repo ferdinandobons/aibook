@@ -1,0 +1,3 @@
+{"healthy": {"canary_passed": true, "decision": "promote", "manifest_sha256": "581618d2cb8297b7", "offline_checks": {"critical_slice": true, "overall": true}, "rollback_target": null, "version": "v2"}, "regressed_canary": {"canary_passed": false, "decision": "rollback", "manifest_sha256": "a4f4f54a4ff52a47", "offline_checks": {"critical_slice": true, "overall": true}, "rollback_target": "v2", "version": "v3"}}
+
+5 test eseguiti, tutti superati.

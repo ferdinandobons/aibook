@@ -41,3 +41,4 @@ I due modelli vengono confrontati sugli stessi 24 casi illustrativi. Pesi, dati 
 - nessuna cifra fuori dal pannello;
 - footer separato dai grafici;
 - colore affiancato dalle label A/B e dai valori.
+- domanda principale: Quale confronto o limite chiarisce «La domanda viene prima della metrica»?

@@ -1,14 +1,16 @@
 # Specifica visuale RL-01
 
-- famiglia: branch
-- domanda principale: Il ramo comune resta separato dalle varianti e dai loro esiti
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: interaction_loop
+- domanda principale: Come si passa da «Dalle predizioni alle azioni» a «Value function e Bellman» mantenendo osservabile lo stato s_t della spedizione e la scelta a_t?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v51.png
-- ordine di lettura: titolo, domanda, branch, invariante o limite in chiusura
-- nodi e contenuti: 1: Dalle predizioni alle azioni; 2: MDP e ritorno; 3: Value function e Bellman; 4: Policy gradient e actor-critic; 5: Esplorazione e valutazione
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: un reward osservato non diventa automaticamente una misura del servizio reale
-- fonti collegate: SRC-14-001 ... SRC-14-004
-- alt text: Diagramma RL-01 del Capitolo 14, famiglia branch. Domanda: Il ramo comune resta separato dalle varianti e dai loro esiti La composizione usa i passaggi Dalle predizioni alle azioni, MDP e ritorno, Value function e Bellman, Policy gradient e actor-critic, Esplorazione e valutazione.
+- file candidato: candidate-v51.png
+- oggetto osservato: lo stato s_t della spedizione e la scelta a_t
+- input: s_t = (in_transito, ritardo=1)
+- output: la coppia (a_t, r_{t+1}) e il nuovo stato s_{t+1}
+- nodi locali: Dalle predizioni alle azioni: Un agente osserva uno stato, sceglie un'azione e riceve un reward. Il dato centrale non…; MDP e ritorno: Un Markov Decision Process specifica stati, azioni, transizioni, reward e fattore di…; Value function e Bellman: La value function riassume il ritorno atteso. Le equazioni di Bellman collegano il…
+- limite visualizzato: un reward osservato non diventa automaticamente una misura del servizio reale
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

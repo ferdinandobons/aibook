@@ -1,81 +1,31 @@
-# Piano interno. Capitolo 89
+# Piano editoriale. Capitolo 89
 
-- Domanda centrale: quale contratto costruisce Prompt injection e sicurezza dei tool?
-- Oggetto continuo: istruzioni e dati che entrano in un sistema con tool; input guida: prompt, documento non fidato, tool e scope.
-- Prerequisito stabile: Capitolo 88, Robustezza, jailbreak e attacchi adversarial.
-- Gap: separazione, mediazione, allowlist e incident response.
-- Output consegnato: azione autorizzata o rifiuto con traccia; consumer successivo: Capitolo 90, Poisoning, backdoor, extraction e supply chain.
-- Invariante principale: contenuto recuperato non diventa istruzione privilegiata.
-- Visuali: INJECTION-01 e INJECTION-02, con famiglie compositive variabili.
-- Snippet: code/snip_89_contract.py; output: code/outputs/SNIP-89-001.txt.
-- Gate aperti: revisione autoriale, lettura ad alta voce e approvazione finale delle visuali.
+## Obiettivo didattico
 
-## Transizione 1. Istruzioni e dati
+Seguire **Prompt injection e sicurezza dei tool** da prompt, documento non fidato, tool e scope a azione autorizzata o rifiuto con traccia, osservando separazione, mediazione, allowlist e incident response senza oltrepassare questo limite: contenuto recuperato non diventa istruzione privilegiata.
 
-- Ultima affermazione stabile: istruzioni e dati che entrano in un sistema con tool.
-- Concetto nuovo: Contenuti recuperati, pagine e documenti sono dati non fidati. Non devono acquisire automaticamente la priorità delle istruzioni di sistema.
-- Input e shape: prompt, documento non fidato, tool e scope.
-- Operazione: separazione, mediazione, allowlist e incident response.
-- Output e shape: azione autorizzata o rifiuto con traccia.
-- Che cosa cambia: il passaggio specifico di «Istruzioni e dati».
-- Invariante: contenuto recuperato non diventa istruzione privilegiata.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: un documento chiede export dati ma il tool lo nega; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Indirect prompt injection.
-- Prova: SRC-89-001 e sezione pubblica corrispondente.
+## Prerequisiti reali
 
-## Transizione 2. Indirect prompt injection
+- Capitolo 67: Output strutturato e uso degli strumenti
+- Capitolo 72: Sicurezza operativa degli agenti
+- Capitolo 88: Robustezza, jailbreak e attacchi adversarial
 
-- Ultima affermazione stabile: istruzioni e dati che entrano in un sistema con tool.
-- Concetto nuovo: Una istruzione malevola può essere inserita in una fonte consultata dall'agente e attivarsi durante il retrieval o il browsing.
-- Input e shape: prompt, documento non fidato, tool e scope.
-- Operazione: separazione, mediazione, allowlist e incident response.
-- Output e shape: azione autorizzata o rifiuto con traccia.
-- Che cosa cambia: il passaggio specifico di «Indirect prompt injection».
-- Invariante: contenuto recuperato non diventa istruzione privilegiata.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: un documento chiede export dati ma il tool lo nega; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Tool mediation.
-- Prova: SRC-89-002 e sezione pubblica corrispondente.
+## Percorso della lezione
 
-## Transizione 3. Tool mediation
+1. **Istruzioni e dati.** Contenuti recuperati, pagine e documenti sono dati non fidati. Non devono acquisire automaticamente la priorità delle istruzioni di sistema. Prova: SRC-89-001.
+2. **Indirect prompt injection.** Una istruzione malevola può essere inserita in una fonte consultata dall'agente e attivarsi durante il retrieval o il browsing. Prova: SRC-89-002.
+3. **Tool mediation.** Policy esterne validano tool, argomenti e destinazioni. Il modello propone, ma l'enforcement avviene fuori dal testo generato. Prova: SRC-89-003.
+4. **Data exfiltration.** Segreti, memoria e risultati dei tool devono essere separati per scope. Output e URL possono diventare canali di esfiltrazione. Prova: SRC-89-004.
+5. **Test e incident response.** Canary, trace, allowlist, conferme e revoca delle credenziali supportano rilevamento, contenimento e recovery. Prova: SRC-89-001.
 
-- Ultima affermazione stabile: istruzioni e dati che entrano in un sistema con tool.
-- Concetto nuovo: Policy esterne validano tool, argomenti e destinazioni. Il modello propone, ma l'enforcement avviene fuori dal testo generato.
-- Input e shape: prompt, documento non fidato, tool e scope.
-- Operazione: separazione, mediazione, allowlist e incident response.
-- Output e shape: azione autorizzata o rifiuto con traccia.
-- Che cosa cambia: il passaggio specifico di «Tool mediation».
-- Invariante: contenuto recuperato non diventa istruzione privilegiata.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: un documento chiede export dati ma il tool lo nega; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Data exfiltration.
-- Prova: SRC-89-003 e sezione pubblica corrispondente.
+## Prove e artefatti
 
-## Transizione 4. Data exfiltration
+- riferimento minimo: `code/snip_89_contract.py`; test: `code/test_89_contract.py`; output: `code/outputs/SNIP-89-001.txt`.
+- visuali candidate: INJECTION-01, INJECTION-02; le domande pedagogiche sono distinte e l'approvazione autoriale resta aperta.
+- fonti: `FONTI_PRIMARIE.md`; corrispondenza claim-fonte: `CLAIMS.md`.
 
-- Ultima affermazione stabile: istruzioni e dati che entrano in un sistema con tool.
-- Concetto nuovo: Segreti, memoria e risultati dei tool devono essere separati per scope. Output e URL possono diventare canali di esfiltrazione.
-- Input e shape: prompt, documento non fidato, tool e scope.
-- Operazione: separazione, mediazione, allowlist e incident response.
-- Output e shape: azione autorizzata o rifiuto con traccia.
-- Che cosa cambia: il passaggio specifico di «Data exfiltration».
-- Invariante: contenuto recuperato non diventa istruzione privilegiata.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: un documento chiede export dati ma il tool lo nega; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Test e incident response.
-- Prova: SRC-89-004 e sezione pubblica corrispondente.
+## Gate aperti
 
-## Transizione 5. Test e incident response
-
-- Ultima affermazione stabile: istruzioni e dati che entrano in un sistema con tool.
-- Concetto nuovo: Canary, trace, allowlist, conferme e revoca delle credenziali supportano rilevamento, contenimento e recovery.
-- Input e shape: prompt, documento non fidato, tool e scope.
-- Operazione: separazione, mediazione, allowlist e incident response.
-- Output e shape: azione autorizzata o rifiuto con traccia.
-- Che cosa cambia: il passaggio specifico di «Test e incident response».
-- Invariante: contenuto recuperato non diventa istruzione privilegiata.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: un documento chiede export dati ma il tool lo nega; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Poisoning, backdoor, extraction e supply chain.
-- Prova: SRC-89-001 e sezione pubblica corrispondente.
+- lettura editoriale finale da parte dell'autore;
+- approvazione delle visuali nel contesto impaginato;
+- benchmark esterni solo quando il capitolo formula un claim di scala o di produzione.

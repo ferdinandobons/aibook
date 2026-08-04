@@ -1,14 +1,16 @@
 # Specifica visuale PRUNING-01
 
-- famiglia: pipeline
-- domanda principale: Il diagramma segue il passaggio: Distillazione, pruning e recovery. L'input è logits teacher, target, pruning mask e budget, l'output è student più piccolo con loss e regressioni misurate; il vincolo da controllare è che compressione e accuratezza vanno misurate sullo stesso perimetro
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: distill_prune
+- domanda principale: Come si passa da «Teacher e student» a «Sequence distillation» mantenendo osservabile pesi del teacher, student e struttura da comprimere?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, pipeline, invariante o limite in chiusura
-- nodi e contenuti: 1: Teacher e student; 2: Temperature e loss; 3: Sequence distillation; 4: Pruning; 5: Recovery
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: compressione e accuratezza vanno misurate sullo stesso perimetro
-- fonti collegate: SRC-73-001 ... SRC-73-004
-- alt text: Diagramma PRUNING-01 del Capitolo 73, famiglia pipeline. Domanda: Il diagramma segue il passaggio: Distillazione, pruning e recovery. L'input è logits teacher, target, pruning mask e budget, l'output è student più piccolo con loss e regressioni misurate; il vincolo da controllare è che compressione e accuratezza vanno misurate sullo stesso perimetro La composizione usa i passaggi Teacher e student, Temperature e loss, Sequence distillation, Pruning, Recovery.
+- file candidato: candidate-v48.png
+- oggetto osservato: pesi del teacher, student e struttura da comprimere
+- input: logits teacher, target, pruning mask e budget
+- output: student più piccolo con loss e regressioni misurate
+- nodi locali: Teacher e student: La distillazione usa logits, distribuzioni o sequenze del teacher come target aggiuntivi…; Temperature e loss: Una temperatura più alta rivela relazioni tra classi o token. Hard target e soft target…; Sequence distillation: Per modelli generativi, risposte del teacher diventano un nuovo dataset. Filtri e…
+- limite visualizzato: compressione e accuratezza vanno misurate sullo stesso perimetro
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

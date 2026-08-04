@@ -1,3 +1,3 @@
-# Alt text LA-01
+# Testo alternativo
 
-Diagramma orizzontale su sfondo bianco. A sinistra una matrice X con tre righe e quattro colonne è etichettata batch uguale a tre e feature uguale a quattro. Segue la matrice dei pesi trasposta con quattro righe e tre colonne, etichettata feature uguale a quattro e classe uguale a tre. Una freccia conduce all'intermedio X per W trasposta, con tre righe e tre colonne. Un box inferiore collega i due fattori e indica che la dimensione feature pari a quattro viene contratta. Nel pannello finale un vettore bias di tre valori viene applicato alle tre righe e produce Y con shape batch per classe. Il footer precisa che shape compatibili non sostituiscono il significato degli assi.
+Contratto delle shape in un layer lineare. Quale trasformazione centrale rende osservabile «Da un numero a un tensore» nel capitolo 5?

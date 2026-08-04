@@ -1,5 +1,8 @@
-# Codice del Capitolo 43
+# Esempio verificato. Capitolo 43
 
-Lo snippet snip_43_contract.py rende osservabile il contratto centrale di Architetture ibride e memoria interna con valori piccoli e leggibili.
-Il test test_43_contract.py controlla determinismo, output, invariante e una shape incoerente.
-Il risultato è un esempio locale, non un benchmark di produzione.
+`snip_43_contract.py` esegue il caso minimo usato nel testo di **Architetture ibride e memoria interna**. `test_43_contract.py` conserva l'output atteso, controlla determinismo, serializzazione, valori finiti e presenza del limite interpretativo.
+
+```bash
+python snip_43_contract.py
+python -m unittest -v test_43_contract.py
+```

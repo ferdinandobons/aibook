@@ -1,5 +1,8 @@
-# Codice del Capitolo 35
+# Esempio verificato. Capitolo 35
 
-Lo snippet snip_35_contract.py rende osservabile il contratto centrale di La ricetta di pretraining con valori piccoli e leggibili.
-Il test test_35_contract.py controlla determinismo, output, invariante e una shape incoerente.
-Il risultato è un esempio locale, non un benchmark di produzione.
+`snip_35_contract.py` esegue il caso minimo usato nel testo di **La ricetta di pretraining**. `test_35_contract.py` conserva l'output atteso, controlla determinismo, serializzazione, valori finiti e presenza del limite interpretativo.
+
+```bash
+python snip_35_contract.py
+python -m unittest -v test_35_contract.py
+```

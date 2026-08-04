@@ -1,14 +1,16 @@
 # Specifica visuale JAILBREAK-02
 
-- famiglia: chart
-- domanda principale: Il diagramma segue il passaggio: Jailbreak, perturbazione, difesa e adaptive evaluation. L'input è threat model, prompt, budget e risposta, l'output è success rate, failure mode e costo della difesa; il vincolo da controllare è che un test superato non copre minacce non incluse nel protocollo
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: jailbreak_boundary
+- domanda principale: Quale controllo collega «Difese» a «Valutazione adattiva» senza superare il limite dichiarato?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v50.png
-- ordine di lettura: titolo, domanda, chart, invariante o limite in chiusura
-- nodi e contenuti: 1: Threat model; 2: Perturbazioni; 3: Ottimizzazione adversarial; 4: Difese; 5: Valutazione adattiva
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: un test superato non copre minacce non incluse nel protocollo
-- fonti collegate: SRC-88-001 ... SRC-88-004
-- alt text: Diagramma JAILBREAK-02 del Capitolo 88, famiglia chart. Domanda: Il diagramma segue il passaggio: Jailbreak, perturbazione, difesa e adaptive evaluation. L'input è threat model, prompt, budget e risposta, l'output è success rate, failure mode e costo della difesa; il vincolo da controllare è che un test superato non copre minacce non incluse nel protocollo La composizione usa i passaggi Threat model, Perturbazioni, Ottimizzazione adversarial, Difese, Valutazione adattiva.
+- file candidato: candidate-v50.png
+- oggetto osservato: una superficie di attacco e il comportamento sotto perturbazione
+- input: threat model, prompt, budget e risposta
+- output: success rate, failure mode e costo della difesa
+- nodi locali: Difese: Training, filtri, classificatori e refusal possono ridurre alcuni attacchi e introdurre…; Valutazione adattiva: Una difesa deve essere testata da attaccanti che conoscono il metodo, entro un…
+- limite visualizzato: un test superato non copre minacce non incluse nel protocollo
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

@@ -1,3 +1,0 @@
-chapter: 20
-title: Fondamenti della modellazione generativa
-output: [0.755272, 0.334759]

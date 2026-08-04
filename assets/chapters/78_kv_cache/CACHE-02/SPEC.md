@@ -1,14 +1,16 @@
 # Specifica visuale CACHE-02
 
-- famiglia: timeline
-- domanda principale: Il diagramma segue il passaggio: Prefill, decode, paging, caching ed eviction. L'input è layer, token, KV dimension, dtype e prefix, l'output è cache occupata, hit e latenza; il vincolo da controllare è che la cache deve rispettare ownership, posizione e validità del prefisso
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: eviction_lifecycle
+- domanda principale: Quale controllo collega «Prefix caching» a «Compressione ed eviction» senza superare il limite dichiarato?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, timeline, invariante o limite in chiusura
-- nodi e contenuti: 1: Prefill e decode; 2: Layout; 3: PagedAttention; 4: Prefix caching; 5: Compressione ed eviction
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: la cache deve rispettare ownership, posizione e validità del prefisso
-- fonti collegate: SRC-78-001 ... SRC-78-004
-- alt text: Diagramma CACHE-02 del Capitolo 78, famiglia timeline. Domanda: Il diagramma segue il passaggio: Prefill, decode, paging, caching ed eviction. L'input è layer, token, KV dimension, dtype e prefix, l'output è cache occupata, hit e latenza; il vincolo da controllare è che la cache deve rispettare ownership, posizione e validità del prefisso La composizione usa i passaggi Prefill e decode, Layout, PagedAttention, Prefix caching, Compressione ed eviction.
+- file candidato: candidate-v48.png
+- oggetto osservato: blocchi di KV cache associati a una richiesta
+- input: layer, token, KV dimension, dtype e prefix
+- output: cache occupata, hit e latenza
+- nodi locali: Prefix caching: Prefissi identici possono condividere pagine se modello, tokenizer, adapter e messaggi…; Compressione ed eviction: Quantizzazione, sliding window e selezione dei token riducono memoria, ma modificano…
+- limite visualizzato: la cache deve rispettare ownership, posizione e validità del prefisso
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

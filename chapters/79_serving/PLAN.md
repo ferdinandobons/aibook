@@ -1,81 +1,31 @@
-# Piano interno. Capitolo 79
+# Piano editoriale. Capitolo 79
 
-- Domanda centrale: quale contratto costruisce Serving, batching e scheduling?
-- Oggetto continuo: richieste eterogenee in una coda di serving; input guida: prompt, deadline, lunghezza, memoria e priorità.
-- Prerequisito stabile: Capitolo 78, KV cache e riuso del contesto.
-- Gap: batching continuo, admission e scheduling.
-- Output consegnato: throughput, latency p50/p99 e richieste ammesse; consumer successivo: Capitolo 80, Serving disaggregato e inference distribuita.
-- Invariante principale: throughput e latenza devono essere misurati insieme.
-- Visuali: SERVING-01 e SERVING-02, con famiglie compositive variabili.
-- Snippet: code/snip_79_contract.py; output: code/outputs/SNIP-79-001.txt.
-- Gate aperti: revisione autoriale, lettura ad alta voce e approvazione finale delle visuali.
+## Obiettivo didattico
 
-## Transizione 1. Richieste eterogenee
+Seguire **Serving, batching e scheduling** da prompt, deadline, lunghezza, memoria e priorità a throughput, latency p50/p99 e richieste ammesse, osservando batching continuo, admission e scheduling senza oltrepassare questo limite: throughput e latenza devono essere misurati insieme.
 
-- Ultima affermazione stabile: richieste eterogenee in una coda di serving.
-- Concetto nuovo: Prompt e output hanno lunghezze differenti. Un batch statico spreca slot quando alcune sequenze terminano.
-- Input e shape: prompt, deadline, lunghezza, memoria e priorità.
-- Operazione: batching continuo, admission e scheduling.
-- Output e shape: throughput, latency p50/p99 e richieste ammesse.
-- Che cosa cambia: il passaggio specifico di «Richieste eterogenee».
-- Invariante: throughput e latenza devono essere misurati insieme.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: una richiesta lunga e due brevi in un batch continuo; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Continuous batching.
-- Prova: SRC-79-001 e sezione pubblica corrispondente.
+## Prerequisiti reali
 
-## Transizione 2. Continuous batching
+- Capitolo 9: Calcolo numerico, precisione e hardware
+- Capitolo 76: Decoding e generazione vincolata
+- Capitolo 78: KV cache e riuso del contesto
 
-- Ultima affermazione stabile: richieste eterogenee in una coda di serving.
-- Concetto nuovo: Il scheduler inserisce nuove richieste tra iterazioni di decode e rimuove quelle concluse.
-- Input e shape: prompt, deadline, lunghezza, memoria e priorità.
-- Operazione: batching continuo, admission e scheduling.
-- Output e shape: throughput, latency p50/p99 e richieste ammesse.
-- Che cosa cambia: il passaggio specifico di «Continuous batching».
-- Invariante: throughput e latenza devono essere misurati insieme.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: una richiesta lunga e due brevi in un batch continuo; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Throughput e latency.
-- Prova: SRC-79-002 e sezione pubblica corrispondente.
+## Percorso della lezione
 
-## Transizione 3. Throughput e latency
+1. **Richieste eterogenee.** Prompt e output hanno lunghezze differenti. Un batch statico spreca slot quando alcune sequenze terminano. Prova: SRC-79-001.
+2. **Continuous batching.** Il scheduler inserisce nuove richieste tra iterazioni di decode e rimuove quelle concluse. Prova: SRC-79-002.
+3. **Throughput e latency.** Aumentare batch migliora utilizzo ma può aumentare time-to-first-token e inter-token latency. Prova: SRC-79-003.
+4. **Admission control.** Memoria KV, priorità, deadline e fairness determinano quali richieste entrano nel sistema. Prova: SRC-79-004.
+5. **Metriche di servizio.** TTFT, TPOT, goodput, queue time, error rate e costo devono essere osservati per tenant e classe di richiesta. Prova: SRC-79-001.
 
-- Ultima affermazione stabile: richieste eterogenee in una coda di serving.
-- Concetto nuovo: Aumentare batch migliora utilizzo ma può aumentare time-to-first-token e inter-token latency.
-- Input e shape: prompt, deadline, lunghezza, memoria e priorità.
-- Operazione: batching continuo, admission e scheduling.
-- Output e shape: throughput, latency p50/p99 e richieste ammesse.
-- Che cosa cambia: il passaggio specifico di «Throughput e latency».
-- Invariante: throughput e latenza devono essere misurati insieme.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: una richiesta lunga e due brevi in un batch continuo; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Admission control.
-- Prova: SRC-79-003 e sezione pubblica corrispondente.
+## Prove e artefatti
 
-## Transizione 4. Admission control
+- riferimento minimo: `code/snip_79_contract.py`; test: `code/test_79_contract.py`; output: `code/outputs/SNIP-79-001.txt`.
+- visuali candidate: SERVING-01, SERVING-02; le domande pedagogiche sono distinte e l'approvazione autoriale resta aperta.
+- fonti: `FONTI_PRIMARIE.md`; corrispondenza claim-fonte: `CLAIMS.md`.
 
-- Ultima affermazione stabile: richieste eterogenee in una coda di serving.
-- Concetto nuovo: Memoria KV, priorità, deadline e fairness determinano quali richieste entrano nel sistema.
-- Input e shape: prompt, deadline, lunghezza, memoria e priorità.
-- Operazione: batching continuo, admission e scheduling.
-- Output e shape: throughput, latency p50/p99 e richieste ammesse.
-- Che cosa cambia: il passaggio specifico di «Admission control».
-- Invariante: throughput e latenza devono essere misurati insieme.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: una richiesta lunga e due brevi in un batch continuo; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Metriche di servizio.
-- Prova: SRC-79-004 e sezione pubblica corrispondente.
+## Gate aperti
 
-## Transizione 5. Metriche di servizio
-
-- Ultima affermazione stabile: richieste eterogenee in una coda di serving.
-- Concetto nuovo: TTFT, TPOT, goodput, queue time, error rate e costo devono essere osservati per tenant e classe di richiesta.
-- Input e shape: prompt, deadline, lunghezza, memoria e priorità.
-- Operazione: batching continuo, admission e scheduling.
-- Output e shape: throughput, latency p50/p99 e richieste ammesse.
-- Che cosa cambia: il passaggio specifico di «Metriche di servizio».
-- Invariante: throughput e latenza devono essere misurati insieme.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: una richiesta lunga e due brevi in un batch continuo; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Serving disaggregato e inference distribuita.
-- Prova: SRC-79-001 e sezione pubblica corrispondente.
+- lettura editoriale finale da parte dell'autore;
+- approvazione delle visuali nel contesto impaginato;
+- benchmark esterni solo quando il capitolo formula un claim di scala o di produzione.

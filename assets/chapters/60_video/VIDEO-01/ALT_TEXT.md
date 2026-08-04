@@ -1,3 +1,3 @@
-# Alt text VIDEO-01
+# Testo alternativo
 
-Diagramma VIDEO-01 del Capitolo 60, famiglia timeline. Domanda: Il diagramma segue il passaggio: Denoising, autoregressione e controllo temporale. L'input è frame, latent video, testo e timestamp, l'output è frame coerenti e misura di flicker; il vincolo da controllare è che qualità del singolo frame non dimostra coerenza tra frame La composizione usa i passaggi Spazio e tempo, Video diffusion, Autoregressione, Coerenza, Condizionamento e editing.
+VIDEO-01, Generazione video. Come si passa da «Spazio e tempo» a «Autoregressione» mantenendo osservabile una sequenza di frame condizionata nel tempo? La composizione video grid collega «Spazio e tempo», «Video diffusion», «Autoregressione». L'input è frame, latent video, testo e timestamp; l'output è frame coerenti e misura di flicker. Il limite esplicito è: qualità del singolo frame non dimostra coerenza tra frame.

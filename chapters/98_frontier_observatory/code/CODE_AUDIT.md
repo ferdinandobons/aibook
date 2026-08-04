@@ -1,12 +1,7 @@
 # Audit del codice
 
-- ambiente: Python 3.13.12, CPU, processo pulito
-- API: funzioni Python standard del modulo snip_98_contract
-- comando snippet: python snip_98_contract.py
-- comando test: python -m unittest -v test_98_contract.py
-- snippet: eseguito
-- test: 4 superati
-- controllo negativo: shape incoerente rifiutata
-- risultato: esempio delimitato, non benchmark di produzione
-- dipendenze esterne: nessuna
-- stato: verificato localmente, review autoriale aperta
+- policy: exception
+- motivazione: Un osservatorio di frontiera valuta evidenza aggiornata e maturità editoriale; il controllo centrale è documentale e datato, non computazionale. Ogni scheda conserva data, versione, disponibilità degli artefatti, replica indipendente, incertezza e condizione esplicita di riapertura.
+- snippet pubblico: non previsto
+- verifica sostitutiva: fonti primarie, data, claim delimitati e confronto documentale
+- stato: eccezione motivata; review autoriale aperta

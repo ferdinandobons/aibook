@@ -4,133 +4,127 @@ part_id: P12
 order_key: 760
 title: Decoding e generazione vincolata
 maturity: CORE
-status: candidatura completa in revisione autoriale
-version: 0.4.0-draft2
-last_source_check: 3 agosto 2026
+status: revisione editoriale v2, approvazione autoriale aperta
+version: 0.5.0-draft3
+last_source_check: 4 agosto 2026
 environment: Python 3.13.12, CPU
-deferred: benchmark applicativi, varianti non necessarie al contratto centrale e approvazione autoriale
+code_policy: reference
+deferred: benchmark applicativi non eseguiti e approvazione autoriale delle visuali
 -->
 
 # Capitolo 76. Decoding e generazione vincolata
 
-Finora abbiamo potuto descrivere logits e spazio delle sequenze ammissibili. La richiesta «Il pacco non è arrivato» resta lo scenario condiviso: nel Capitolo 76 prendiamo l'input «logits, prefisso, temperatura e vincolo» e lo seguiamo fino all'output «token scelto, sequenza e metrica di costo», dichiarando prima il contratto e poi il limite.
+La domanda guida di questa lezione è come collegare «Greedy e beam search» e «Metriche» senza perdere il contratto tecnico di decoding e generazione vincolata. L'oggetto osservato è logits e spazio delle sequenze ammissibili. Il contratto locale è: input, logits, prefisso, temperatura e vincolo; operazione, greedy, beam, sampling, penalty e stop; output, token scelto, sequenza e metrica di costo. Il caso guida è questo: Lo stesso vettore di logits produce un token greedy e un supporto di sampling espliciti. Il confine da mantenere esplicito è: il decoding modifica la traiettoria, non corregge il modello a monte.
 
 ## Greedy e beam search
 
 Greedy sceglie il massimo locale; beam mantiene più prefissi secondo score accumulati e criteri di lunghezza. [SRC-76-001]
 
-Il caso minimo di «Greedy e beam search» si presenta così: lo stesso vettore di logits produce un token greedy e un supporto di sampling espliciti. Non lo usiamo come decorazione: serve a rendere osservabile la frase «Greedy sceglie il massimo locale; beam mantiene più prefissi secondo score accumulati e criteri di lunghezza».
+Vincoli di decoding cambiano lo spazio delle sequenze ammissibili.
 
-Per ricostruire «Greedy e beam search» annotiamo l'input «logits, prefisso, temperatura e vincolo», poi l'operazione «greedy, beam, sampling, penalty e stop», infine l'output «token scelto, sequenza e metrica di costo». Questa sequenza impedisce di scambiare una forma compatibile per il comportamento descritto dalla fonte. Il controllo parte da «Greedy sceglie il massimo locale; beam mantiene più prefissi secondo score accumulati e criteri di lunghezza».
+**Caso da seguire.** Lo stesso vettore di logits produce un token greedy e un supporto di sampling espliciti.
 
-L'ottimizzazione modifica rappresentazione, memoria, calcolo o scheduling sotto un carico dichiarato. Per attribuire il beneficio bisogna separare il guadagno locale da latenza, qualità e costo end-to-end. Per «Greedy e beam search» il controllo cambia una sola premessa della frase «Greedy sceglie il massimo locale; beam mantiene più prefissi secondo score accumulati e criteri di lunghezza» e conserva input, output e criterio di successo, così la differenza resta attribuibile. La verifica resta ancorata a «Greedy sceglie il massimo locale; beam mantiene più prefissi secondo score accumulati e criteri di lunghezza». [SRC-76-001]
+**Controllo.** Scrivi il risultato atteso prima del calcolo, modifica una sola quantità e localizza il primo passaggio che cambia. Il vincolo da conservare è: Greedy sceglie il massimo locale; beam mantiene più prefissi secondo score accumulati e criteri di lunghezza.
 
-Il punto didattico di «Greedy e beam search» è separare ciò che la fonte afferma da ciò che il piccolo caso illustra. L'output «token scelto, sequenza e metrica di costo» mostra il contratto locale, ma non sostituisce una misura sul sistema completo.
-
-Il controllo minimo di «Greedy e beam search» confronta il caso dichiarato con una variazione che rompe la sua ipotesi. Se la failure non è distinguibile dall'esito valido, manca un'osservazione nel contratto di latency, memoria e throughput. Da «Greedy e beam search» portiamo l'output «token scelto, sequenza e metrica di costo»; non portiamo invece una conclusione oltre il caso locale.
 
 ## Sampling
 
 Temperature, top-k e top-p modificano la distribuzione prima dell'estrazione. Seed e backend influenzano la riproducibilità. [SRC-76-002]
 
-Prima del nome tecnico fissiamo la situazione: consideriamo un prefisso corretto confrontato con lo stesso prefisso dopo che il modello ha prodotto il token precedente. Da qui possiamo leggere la conseguenza dichiarata da «Temperature, top-k e top-p modificano la distribuzione prima dell'estrazione».
+**Caso da seguire.** Un prefisso corretto confrontato con lo stesso prefisso dopo che il modello ha prodotto il token precedente.
 
-Nel contratto locale, l'input «logits, prefisso, temperatura e vincolo» entra, l'operazione «greedy, beam, sampling, penalty e stop» modifica il percorso e l'output «token scelto, sequenza e metrica di costo» è ciò che osserviamo. Qui cambia soprattutto il passaggio «Sampling»; resta da controllare che il decoding modifica la traiettoria, non corregge il modello a monte. La domanda locale è «Temperature, top-k e top-p modificano la distribuzione prima dell'estrazione».
+**Controllo.** Ricalcola il caso a mano e con lo snippet. Se i risultati divergono, confronta prima i valori intermedi e soltanto dopo l'output finale.
 
-L'ottimizzazione modifica rappresentazione, memoria, calcolo o scheduling sotto un carico dichiarato. Per attribuire il beneficio bisogna separare il guadagno locale da latenza, qualità e costo end-to-end. Il confronto utile mette accanto il prefisso corretto e quello prodotto dal modello, così il segnale disponibile al training non viene confuso con l'inference. La verifica resta ancorata a «Temperature, top-k e top-p modificano la distribuzione prima dell'estrazione». [SRC-76-002]
 
-La lettura va fatta in ordine: prima il caso, poi la trasformazione, quindi la conseguenza. Seed e backend influenzano la riproducibilità. Il piccolo risultato resta un'illustrazione di «Temperature, top-k e top-p modificano la distribuzione prima dell'estrazione», non una promessa generale.
+![Decoding e generazione vincolata: branch](../../assets/chapters/76_decoding/DECODING-01/candidate-v48.png)
 
-La prova di «Sampling» conserva input, operazione e output; poi esplicita quale parte di «Temperature, top-k e top-p modificano la distribuzione prima dell'estrazione» non è stata misurata. Così il test separa l'evidenza dall'inferenza. Il passaggio successivo, «Penalità e stop», potrà cambiare una sola condizione, dichiarando il nuovo setup prima di interpretare il risultato.
+La prima figura segue il percorso da «Greedy e beam search» a «Penalità e stop».
+
 
 ## Penalità e stop
 
 Repetition penalty, stop sequence e minimum length intervengono in punti differenti e possono interagire. [SRC-76-003]
 
-Per capire «Penalità e stop» partiamo da questo caso: un caso in cui il decoding modifica la traiettoria, non corregge il modello a monte. Il caso rende osservabile il punto centrale: «Repetition penalty, stop sequence e minimum length intervengono in punti differenti e possono interagire».
+**Caso da seguire.** Un caso in cui il decoding modifica la traiettoria, non corregge il modello a monte.
 
-La sezione usa l'input «logits, prefisso, temperatura e vincolo» come punto di partenza e l'output «token scelto, sequenza e metrica di costo» come traccia d'uscita. La trasformazione concreta è «greedy, beam, sampling, penalty e stop»; il caso non è completo se non dichiariamo anche che il decoding modifica la traiettoria, non corregge il modello a monte. La condizione da isolare è «Repetition penalty, stop sequence e minimum length intervengono in punti differenti e possono interagire».
+**Controllo.** Aggiungi un valore limite e verifica separatamente forma, valore e ipotesi. Una shape valida non dimostra da sola «Penalità e stop».
 
-L'ottimizzazione modifica rappresentazione, memoria, calcolo o scheduling sotto un carico dichiarato. Per attribuire il beneficio bisogna separare il guadagno locale da latenza, qualità e costo end-to-end. Per «Penalità e stop» il controllo cambia una sola premessa della frase «Repetition penalty, stop sequence e minimum length intervengono in punti differenti e possono interagire» e conserva input, output e criterio di successo, così la differenza resta attribuibile. La verifica resta ancorata a «Repetition penalty, stop sequence e minimum length intervengono in punti differenti e possono interagire». [SRC-76-003]
-
-Se cambiamo una premessa, dobbiamo riaprire l'interpretazione. Per «Penalità e stop» conserviamo l'osservazione collegata a «Repetition penalty, stop sequence e minimum length intervengono in punti differenti e possono interagire» e lasciamo esplicitamente fuori ciò che non è stato misurato.
-
-Per verificare «Penalità e stop» cambiamo una sola condizione vicina alla frase «Repetition penalty, stop sequence e minimum length intervengono in punti differenti e possono interagire», teniamo fermo il resto e registriamo l'output «token scelto, sequenza e metrica di costo». Il caso negativo deve rendere riconoscibile la failure, non soltanto produrre un numero diverso. La sezione successiva, «Constrained decoding», riceve l'output «token scelto, sequenza e metrica di costo» come base, ma dovrà formulare e verificare la propria distinzione.
-
-![Decoding e generazione vincolata: branch](../../assets/chapters/76_decoding/DECODING-01/candidate-v48.png)
-
-La figura DECODING-01 usa la famiglia branch. Il diagramma segue il passaggio: Greedy, beam, sampling, penalty e stop. L'input è logits, prefisso, temperatura e vincolo, l'output è token scelto, sequenza e metrica di costo; il vincolo da controllare è che il decoding modifica la traiettoria, non corregge il modello a monte.
 
 ## Constrained decoding
 
 Grammar, automi e schema limitano i token ammessi. Validità strutturale non garantisce argomenti corretti. [SRC-76-004]
 
-Il caso minimo di «Constrained decoding» si presenta così: un prefisso corretto confrontato con lo stesso prefisso dopo che il modello ha prodotto il token precedente. Non lo usiamo come decorazione: serve a rendere osservabile la frase «Grammar, automi e schema limitano i token ammessi».
+**Caso da seguire.** Per «Constrained decoding» si mantiene l'input del capitolo e si isola questa condizione: Grammar, automi e schema limitano i token ammessi.
 
-Per ricostruire «Constrained decoding» annotiamo l'input «logits, prefisso, temperatura e vincolo», poi l'operazione «greedy, beam, sampling, penalty e stop», infine l'output «token scelto, sequenza e metrica di costo». Questa sequenza impedisce di scambiare una forma compatibile per il comportamento descritto dalla fonte. Il controllo parte da «Grammar, automi e schema limitano i token ammessi».
+**Controllo.** Mantieni fisso l'input e sostituisci soltanto il meccanismo discusso nella sezione. Il confronto deve attribuire la differenza a quel passaggio, non al setup.
 
-L'ottimizzazione modifica rappresentazione, memoria, calcolo o scheduling sotto un carico dichiarato. Per attribuire il beneficio bisogna separare il guadagno locale da latenza, qualità e costo end-to-end. Il confronto utile mette accanto il prefisso corretto e quello prodotto dal modello, così il segnale disponibile al training non viene confuso con l'inference. La verifica resta ancorata a «Grammar, automi e schema limitano i token ammessi». [SRC-76-004]
 
-Il punto didattico di «Constrained decoding» è separare ciò che la fonte afferma da ciò che il piccolo caso illustra. L'output «token scelto, sequenza e metrica di costo» mostra il contratto locale, ma non sostituisce una misura sul sistema completo.
+## Esempio Python eseguito
 
-Il controllo minimo di «Constrained decoding» confronta il caso dichiarato con una variazione che rompe la sua ipotesi. Se la failure non è distinguibile dall'esito valido, manca un'osservazione nel contratto di latency, memoria e throughput. Da «Constrained decoding» portiamo l'output «token scelto, sequenza e metrica di costo»; non portiamo invece una conclusione oltre il caso locale.
+Il frammento seguente è lo stesso conservato nel repository. Usa valori piccoli perché l'obiettivo è osservare il meccanismo, non simulare una scala che non abbiamo eseguito.
+
+```python
+def normalize(values):
+    if not values:
+        raise ValueError('values must not be empty')
+    maximum = max(values)
+    exponentials = [math.exp(value - maximum) for value in values]
+    total = sum(exponentials)
+    return [value / total for value in exponentials]
+
+
+def contract():
+    logits = [2.0, 1.0, 0.5]
+    greedy = max(range(len(logits)), key=logits.__getitem__)
+    sampled_support = [index for index, probability in enumerate(normalize(logits)) if probability >= 0.2]
+    return {"greedy": greedy, "support": sampled_support, "invariant": "decoding chooses a trajectory from logits without changing model parameters"}
+```
+
+Esecuzione con `python snip_76_contract.py`:
+
+```text
+{"greedy": 0, "invariant": "decoding chooses a trajectory from logits without changing model parameters", "support": [0, 1]}
+```
+
+Il test associato è [`code/test_76_contract.py`](code/test_76_contract.py); l'output versionato è [`code/outputs/SNIP-76-001.txt`](code/outputs/SNIP-76-001.txt).
+
 
 ## Metriche
 
 Qualità, diversità, latency, token per secondo e probabilità della sequenza devono essere letti insieme. [SRC-76-001]
 
-Prima del nome tecnico fissiamo la situazione: consideriamo quattro casi con protocollo, una failure e una slice conservati insieme al valore aggregato. Da qui possiamo leggere la conseguenza dichiarata da «Qualità, diversità, latency, token per secondo e probabilità della sequenza devono essere letti insieme».
+**Caso da seguire.** Quattro casi con protocollo, una failure e una slice conservati insieme al valore aggregato.
 
-Nel contratto locale, l'input «logits, prefisso, temperatura e vincolo» entra, l'operazione «greedy, beam, sampling, penalty e stop» modifica il percorso e l'output «token scelto, sequenza e metrica di costo» è ciò che osserviamo. Qui cambia soprattutto il passaggio «Metriche»; resta da controllare che il decoding modifica la traiettoria, non corregge il modello a monte. La domanda locale è «Qualità, diversità, latency, token per secondo e probabilità della sequenza devono essere letti insieme».
+**Controllo.** Costruisci un controesempio che rispetti il tipo di dato ma violi l'ipotesi centrale. Il test deve rendere riconoscibile perché «Metriche» non si applica.
 
-L'ottimizzazione modifica rappresentazione, memoria, calcolo o scheduling sotto un carico dichiarato. Per attribuire il beneficio bisogna separare il guadagno locale da latenza, qualità e costo end-to-end. La misura va letta insieme a popolazione, slice e failure: cambiare il report senza cambiare il protocollo non crea nuova evidenza. La verifica resta ancorata a «Qualità, diversità, latency, token per secondo e probabilità della sequenza devono essere letti insieme». [SRC-76-001]
-
-La lettura va fatta in ordine: prima il caso, poi la trasformazione, quindi la conseguenza. Il piccolo risultato resta un'illustrazione di «Qualità, diversità, latency, token per secondo e probabilità della sequenza devono essere letti insieme», non una promessa generale.
-
-La prova di «Metriche» conserva input, operazione e output; poi esplicita quale parte di «Qualità, diversità, latency, token per secondo e probabilità della sequenza devono essere letti insieme» non è stata misurata. Così il test separa l'evidenza dall'inferenza. Il caso finale consegna l'output «token scelto, sequenza e metrica di costo» come evidenza locale e conserva la misura end-to-end sotto carico dichiarato come domanda aperta.
-
-## Un esempio con controllo negativo: Greedy e beam search
-
-Il caso intero parte dall'input «logits, prefisso, temperatura e vincolo», applica l'operazione «greedy, beam, sampling, penalty e stop» e osserva l'output «token scelto, sequenza e metrica di costo». Un esempio controllato: greedy e top-p sullo stesso vettore di logits. Lo schema compatto è:
-
-$$
-y = decode(logits, constraint)
-$$
-
-È una notazione di interfaccia, non un'identità numerica completa. Vincoli di decoding cambiano lo spazio delle sequenze ammissibili. [SRC-76-001]
 
 ![Decoding e generazione vincolata: chart](../../assets/chapters/76_decoding/DECODING-02/candidate-v48.png)
 
-La figura DECODING-02 cambia composizione rispetto alla prima. Il diagramma segue il passaggio: Greedy, beam, sampling, penalty e stop. L'input è logits, prefisso, temperatura e vincolo, l'output è token scelto, sequenza e metrica di costo; il vincolo da controllare è che il decoding modifica la traiettoria, non corregge il modello a monte.
+La seconda figura mette a confronto «Constrained decoding» e il limite discusso in «Metriche».
 
-## Dalla formula al run: Sampling
 
-Lo snippet locale mette in esecuzione questo caso: greedy e top-p sullo stesso vettore di logits. Il test associato controlla determinismo, output e invariante e rifiuta una shape o condizione incoerente; il risultato è conservato in `code/outputs/SNIP-76-001.txt`, come evidenza locale e non come benchmark di produzione.
+## Come si collegano i passaggi
 
-## Limiti, varianti e nuove misure: Metriche
+- **Da «Greedy e beam search» a «Sampling».** Greedy sceglie il massimo locale; beam mantiene più prefissi secondo score accumulati e criteri di lunghezza. Temperature, top-k e top-p modificano la distribuzione prima dell'estrazione. Il primo passaggio definisce che cosa entra nel calcolo; il secondo stabilisce la regola che produce il valore osservabile. [SRC-76-001; SRC-76-002]
 
-Il caso di «Decoding e generazione vincolata» non certifica un servizio completo. Il decoding modifica la traiettoria, non corregge il modello a monte. La domanda successiva è se «Qualità, diversità, latency, token per secondo e probabilità della sequenza devono essere letti insieme» regga quando cambiano dati, scala, hardware o criteri di decisione.
+- **Da «Sampling» a «Penalità e stop».** Temperature, top-k e top-p modificano la distribuzione prima dell'estrazione. Repetition penalty, stop sequence e minimum length intervengono in punti differenti e possono interagire. La regola generale viene poi letta dentro il componente: questa separazione permette di localizzare un errore prima di attribuirlo all'intero modello. [SRC-76-002; SRC-76-003]
 
-## L'invariante da conservare: Decoding e generazione vincolata
+- **Da «Penalità e stop» a «Constrained decoding».** Repetition penalty, stop sequence e minimum length intervengono in punti differenti e possono interagire. Grammar, automi e schema limitano i token ammessi. Dopo avere reso visibile il componente, il percorso introduce la variante o l'ottimizzazione senza cambiare di nascosto il caso di partenza. [SRC-76-003; SRC-76-004]
 
-Il filo della lezione va dall'input «logits, prefisso, temperatura e vincolo» all'output «token scelto, sequenza e metrica di costo». Nei passaggi «Greedy e beam search», «Sampling», «Metriche» abbiamo usato esempi e controlli negativi per rendere il contratto controllabile e delimitare la conclusione. L'invariante da portare avanti è: il decoding modifica la traiettoria, non corregge il modello a monte. Il Capitolo 77, Speculative e parallel decoding, può partire da questo output e dichiarare la propria domanda.
+- **Da «Constrained decoding» a «Metriche».** Grammar, automi e schema limitano i token ammessi. Qualità, diversità, latency, token per secondo e probabilità della sequenza devono essere letti insieme. L'ultimo passaggio sposta l'attenzione dal funzionamento locale alla misura: correttezza del calcolo e qualità applicativa restano domande distinte. [SRC-76-004; SRC-76-001]
 
-### Prova di comprensione: Greedy e beam search
+La catena completa produce token scelto, sequenza e metrica di costo a partire da logits, prefisso, temperatura e vincolo. Ogni collegamento conserva un oggetto osservabile diverso; per questo il risultato non può essere esteso oltre il limite dichiarato: il decoding modifica la traiettoria, non corregge il modello a monte.
 
-1. Ricostruisci l'oggetto continuo a partire da «Greedy e beam search» e indica quale parte della frase «Greedy sceglie il massimo locale; beam mantiene più prefissi secondo score accumulati e criteri di lunghezza» entra nel caso.
-2. Spiega quale trasformazione collega «Greedy e beam search» a «Metriche» e quale output osserviamo nel passaggio.
-3. Usa lo snippet per controllare l'invariante del contratto: il decoding modifica la traiettoria, non corregge il modello a monte.
-4. Separa una definizione sostenuta da una fonte, un esempio illustrativo e un risultato locale del caso guida.
-5. Indica quale parte della frase «Qualità, diversità, latency, token per secondo e probabilità della sequenza devono essere letti insieme» richiederebbe una misura nuova prima di essere estesa oltre il caso osservato.
 
-### Esercizi con casi limite: Metriche
+## Esercizi sul meccanismo
 
-1. Ricostruisci input e output di «Greedy e beam search» usando un esempio di tre righe.
-2. Modifica una sola variabile in «Sampling» e anticipa l'invariante che dovrebbe restare.
-3. Metti «Penalità e stop» a confronto con il caso base e descrivi il failure mode più vicino.
-4. Scrivi un test minimo per rendere osservabile il confine di «Constrained decoding».
-5. Formula per «Metriche» una domanda che separi meccanismo e qualità del sistema.
+1. Ricostruisci «Greedy e beam search» con un esempio diverso da quello mostrato e indica l'output atteso prima del calcolo.
+2. Nel passaggio «Sampling», cambia una sola ipotesi e spiega quale risultato non è più confrontabile.
+3. Collega «Penalità e stop» a una riga dello snippet oppure motiva perché la prova deve essere documentale.
+4. Progetta un caso limite per «Constrained decoding» che produca una failure riconoscibile.
+5. Per «Metriche», separa una conclusione sostenuta dal caso locale da una che richiederebbe nuovi dati o un benchmark.
 
-## Fonti primarie e artefatti del capitolo: Decoding e generazione vincolata
 
-Per ricontrollare «Decoding e generazione vincolata», partire da `FONTI_PRIMARIE.md` e poi dal codice: la domanda aperta è come trasferire la misura end-to-end sotto carico dichiarato oltre il caso locale, con la data di consultazione dichiarata. `CLAIMS.md` separa definizioni e risultati locali; codice, ambiente, test e output sono nella cartella `code/`, con attenzione a latency, memoria e throughput.
+## Che cosa deve restare chiaro
+
+La lezione parte da «logits, prefisso, temperatura e vincolo» e arriva fino a «token scelto, sequenza e metrica di costo». Il limite da conservare è questo: il decoding modifica la traiettoria, non corregge il modello a monte. Definizioni e risultati citati sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md); la mappa dei claim è in [`CLAIMS.md`](CLAIMS.md).

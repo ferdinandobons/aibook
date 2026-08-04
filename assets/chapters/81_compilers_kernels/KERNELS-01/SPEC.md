@@ -1,14 +1,16 @@
 # Specifica visuale KERNELS-01
 
-- famiglia: compare
-- domanda principale: Il diagramma segue il passaggio: Lowering, fusion, autotuning e gestione dei graph break. L'input è grafo, shape, dtype, target e kernel, l'output è kernel eseguito, latenza e fallback; il vincolo da controllare è che ottimizzazione del grafo e correttezza numerica devono essere confrontate
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: compiler_graph
+- domanda principale: Come si passa da «Grafo e operatori» a «Triton e kernel custom» mantenendo osservabile un grafo di operatori trasformato dal compiler?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, compare, invariante o limite in chiusura
-- nodi e contenuti: 1: Grafo e operatori; 2: Kernel fusion; 3: Triton e kernel custom; 4: torch.compile e graph break; 5: Autotuning e portabilità
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: ottimizzazione del grafo e correttezza numerica devono essere confrontate
-- fonti collegate: SRC-81-001 ... SRC-81-004
-- alt text: Diagramma KERNELS-01 del Capitolo 81, famiglia compare. Domanda: Il diagramma segue il passaggio: Lowering, fusion, autotuning e gestione dei graph break. L'input è grafo, shape, dtype, target e kernel, l'output è kernel eseguito, latenza e fallback; il vincolo da controllare è che ottimizzazione del grafo e correttezza numerica devono essere confrontate La composizione usa i passaggi Grafo e operatori, Kernel fusion, Triton e kernel custom, torch.compile e graph break, Autotuning e portabilità.
+- file candidato: candidate-v48.png
+- oggetto osservato: un grafo di operatori trasformato dal compiler
+- input: grafo, shape, dtype, target e kernel
+- output: kernel eseguito, latenza e fallback
+- nodi locali: Grafo e operatori: Un compiler cattura operazioni e dipendenze, poi applica fusion, scheduling e layout…; Kernel fusion: Combinare operazioni riduce lanci e traffico di memoria, ma può aumentare register…; Triton e kernel custom: Un linguaggio di kernel espone tiling e parallelismo mantenendo una astrazione più alta…
+- limite visualizzato: ottimizzazione del grafo e correttezza numerica devono essere confrontate
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

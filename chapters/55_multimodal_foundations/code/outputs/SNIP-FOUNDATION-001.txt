@@ -1,3 +1,0 @@
-chapter: 55
-title: Fondamenti della multimodalità
-output: [0.755272, 0.334759]

@@ -1,3 +1,0 @@
-chapter: 24
-title: Normalizing flow e trasformazioni invertibili
-output: [0.755272, 0.334759]

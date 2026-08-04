@@ -4,94 +4,39 @@ part_id: P07
 order_key: 340
 title: Scaling law e progettazione del modello
 maturity: CORE
-status: candidatura completa in revisione autoriale
-version: 0.4.0-draft2
-last_source_check: 3 agosto 2026
+status: revisione editoriale v2, approvazione autoriale aperta
+version: 0.5.0-draft3
+last_source_check: 4 agosto 2026
 environment: Python 3.13.12, CPU
-deferred: benchmark applicativi, varianti non necessarie al contratto centrale e approvazione autoriale
+code_policy: reference
+deferred: benchmark applicativi non eseguiti e approvazione autoriale delle visuali
 -->
 
 # Capitolo 34. Scaling law e progettazione del modello
 
-Una frase plausibile non basta a spiegare scaling law e progettazione del modello. L'oggetto è una curva empirica tra scala, compute e loss; riprendiamo la richiesta «Il pacco non è arrivato» come contesto comune, partiamo da un input piccolo, rendiamo visibile l'operazione e fissiamo che cosa non possiamo concludere.
+La domanda guida di questa lezione è come collegare «Fit empirico» e «Training e inference cost» senza perdere il contratto tecnico di scaling law e progettazione del modello. L'oggetto osservato è una curva empirica tra scala, compute e loss. Il contratto locale è: input, punti con parametri, token, FLOP e loss; operazione, fit, confronto isoFLOP ed estrapolazione; output, stima con intervallo osservato e costo. Il caso guida è questo: Un caso minimo con input punti con parametri, token, FLOP e loss e output «stima con intervallo osservato e costo». Il confine da mantenere esplicito è: un fit fuori dominio non è una legge garantita.
 
 ## Fit empirico
 
 Una power law approssima loss rispetto a parametri, dati o compute in un intervallo misurato. [SRC-34-001]
 
-Il caso minimo di «Fit empirico» si presenta così: un caso minimo con input punti con parametri, token, FLOP e loss e output «stima con intervallo osservato e costo». Non lo usiamo come decorazione: serve a rendere osservabile la frase «Una power law approssima loss rispetto a parametri, dati o compute in un intervallo misurato».
+Un fit empirico vale nell'intervallo e nel setup che lo hanno prodotto.
 
-Per ricostruire «Fit empirico» annotiamo l'input «punti con parametri, token, FLOP e loss», poi l'operazione «fit, confronto isoFLOP ed estrapolazione», infine l'output «stima con intervallo osservato e costo». Questa sequenza impedisce di scambiare una forma compatibile per il comportamento descritto dalla fonte. Il controllo parte da «Una power law approssima loss rispetto a parametri, dati o compute in un intervallo misurato».
+**Caso da seguire.** Un caso minimo con input punti con parametri, token, FLOP e loss e output «stima con intervallo osservato e costo».
 
-Il passaggio da seguire in «Fit empirico» è quello descritto dalla frase «Una power law approssima loss rispetto a parametri, dati o compute in un intervallo misurato»: l'esempio rende osservabile la trasformazione, mentre il contratto del capitolo ne delimita l'interpretazione. Per «Fit empirico» il controllo cambia una sola premessa della frase «Una power law approssima loss rispetto a parametri, dati o compute in un intervallo misurato» e conserva input, output e criterio di successo, così la differenza resta attribuibile. La verifica resta ancorata a «Una power law approssima loss rispetto a parametri, dati o compute in un intervallo misurato». [SRC-34-001]
+**Controllo.** Scrivi il risultato atteso prima del calcolo, modifica una sola quantità e localizza il primo passaggio che cambia. Il vincolo da conservare è: Una power law approssima loss rispetto a parametri, dati o compute in un intervallo misurato.
 
-Il punto didattico di «Fit empirico» è separare ciò che la fonte afferma da ciò che il piccolo caso illustra. L'output «stima con intervallo osservato e costo» mostra il contratto locale, ma non sostituisce una misura sul sistema completo.
-
-Il controllo minimo di «Fit empirico» confronta il caso dichiarato con una variazione che rompe la sua ipotesi. Se la failure non è distinguibile dall'esito valido, manca un'osservazione nel contratto di popolazione, manifest e stato del run. Da «Fit empirico» portiamo l'output «stima con intervallo osservato e costo»; non portiamo invece una conclusione oltre il caso locale.
 
 ## Allocazione compute-optimal
 
 A budget fissato, modello e token competono. Il risultato dipende da ricetta e qualità dei dati. [SRC-34-002]
 
-Prima del nome tecnico fissiamo la situazione: consideriamo quattro punti, fit lineare locale e intervallo dichiarato. Da qui possiamo leggere la conseguenza dichiarata da «A budget fissato, modello e token competono».
+**Caso da seguire.** Quattro punti, fit lineare locale e intervallo dichiarato.
 
-Nel contratto locale, l'input «punti con parametri, token, FLOP e loss» entra, l'operazione «fit, confronto isoFLOP ed estrapolazione» modifica il percorso e l'output «stima con intervallo osservato e costo» è ciò che osserviamo. Qui cambia soprattutto il passaggio «Allocazione compute-optimal»; resta da controllare che un fit fuori dominio non è una legge garantita. La domanda locale è «A budget fissato, modello e token competono».
+**Controllo.** Ricalcola il caso a mano e con lo snippet. Se i risultati divergono, confronta prima i valori intermedi e soltanto dopo l'output finale.
 
-Una relazione di scaling è una misura nell'intervallo del setup osservato. Cambiare qualità dei dati, ricetta, obiettivo o costo di inference può spostare la conclusione, quindi l'extrapolation richiede ipotesi esplicite. Per «Allocazione compute-optimal» il controllo cambia una sola premessa della frase «A budget fissato, modello e token competono» e conserva input, output e criterio di successo, così la differenza resta attribuibile. La verifica resta ancorata a «A budget fissato, modello e token competono». [SRC-34-002]
 
-La lettura va fatta in ordine: prima il caso, poi la trasformazione, quindi la conseguenza. Il risultato dipende da ricetta e qualità dei dati. Il piccolo risultato resta un'illustrazione di «A budget fissato, modello e token competono», non una promessa generale.
-
-La prova di «Allocazione compute-optimal» conserva input, operazione e output; poi esplicita quale parte di «A budget fissato, modello e token competono» non è stata misurata. Così il test separa l'evidenza dall'inferenza. Il passaggio successivo, «Esperimenti isoFLOP», potrà cambiare una sola condizione, dichiarando il nuovo setup prima di interpretare il risultato.
-
-## Esperimenti isoFLOP
-
-Configurazioni con compute simile rendono osservabile la loss minima per budget. [SRC-34-003]
-
-Per capire «Esperimenti isoFLOP» partiamo da questo caso: un caso in cui un fit fuori dominio non è una legge garantita. Il caso rende osservabile il punto centrale: «Configurazioni con compute simile rendono osservabile la loss minima per budget».
-
-La sezione usa l'input «punti con parametri, token, FLOP e loss» come punto di partenza e l'output «stima con intervallo osservato e costo» come traccia d'uscita. La trasformazione concreta è «fit, confronto isoFLOP ed estrapolazione»; il caso non è completo se non dichiariamo anche che un fit fuori dominio non è una legge garantita. La condizione da isolare è «Configurazioni con compute simile rendono osservabile la loss minima per budget».
-
-Una relazione di scaling è una misura nell'intervallo del setup osservato. Cambiare qualità dei dati, ricetta, obiettivo o costo di inference può spostare la conclusione, quindi l'extrapolation richiede ipotesi esplicite. Per «Esperimenti isoFLOP» il controllo cambia una sola premessa della frase «Configurazioni con compute simile rendono osservabile la loss minima per budget» e conserva input, output e criterio di successo, così la differenza resta attribuibile. La verifica resta ancorata a «Configurazioni con compute simile rendono osservabile la loss minima per budget». [SRC-34-003]
-
-Se cambiamo una premessa, dobbiamo riaprire l'interpretazione. Per «Esperimenti isoFLOP» conserviamo l'osservazione collegata a «Configurazioni con compute simile rendono osservabile la loss minima per budget» e lasciamo esplicitamente fuori ciò che non è stato misurato.
-
-Per verificare «Esperimenti isoFLOP» cambiamo una sola condizione vicina alla frase «Configurazioni con compute simile rendono osservabile la loss minima per budget», teniamo fermo il resto e registriamo l'output «stima con intervallo osservato e costo». Il caso negativo deve rendere riconoscibile la failure, non soltanto produrre un numero diverso. La sezione successiva, «Extrapolation», riceve l'output «stima con intervallo osservato e costo» come base, ma dovrà formulare e verificare la propria distinzione.
-
-![Scaling law e progettazione del modello: chart](../../assets/chapters/34_scaling_laws/SCALE-01/candidate-v48.png)
-
-La figura SCALE-01 usa la famiglia chart. Il diagramma segue il passaggio: Fit, confronto isoFLOP ed estrapolazione. L'input è punti con parametri, token, FLOP e loss, l'output è stima con intervallo osservato e costo; il vincolo da controllare è che un fit fuori dominio non è una legge garantita.
-
-## Extrapolation
-
-Residui, intervalli e ipotesi su loss irriducibile limitano la previsione fuori scala. [SRC-34-004]
-
-Il caso minimo di «Extrapolation» si presenta così: due ricette con budget di token dichiarato, compute comparabile e loss osservata nello stesso intervallo. Non lo usiamo come decorazione: serve a rendere osservabile la frase «Residui, intervalli e ipotesi su loss irriducibile limitano la previsione fuori scala».
-
-Per ricostruire «Extrapolation» annotiamo l'input «punti con parametri, token, FLOP e loss», poi l'operazione «fit, confronto isoFLOP ed estrapolazione», infine l'output «stima con intervallo osservato e costo». Questa sequenza impedisce di scambiare una forma compatibile per il comportamento descritto dalla fonte. Il controllo parte da «Residui, intervalli e ipotesi su loss irriducibile limitano la previsione fuori scala».
-
-Una relazione di scaling è una misura nell'intervallo del setup osservato. Cambiare qualità dei dati, ricetta, obiettivo o costo di inference può spostare la conclusione, quindi l'extrapolation richiede ipotesi esplicite. Per «Extrapolation» il controllo cambia una sola premessa della frase «Residui, intervalli e ipotesi su loss irriducibile limitano la previsione fuori scala» e conserva input, output e criterio di successo, così la differenza resta attribuibile. La verifica resta ancorata a «Residui, intervalli e ipotesi su loss irriducibile limitano la previsione fuori scala». [SRC-34-004]
-
-Il punto didattico di «Extrapolation» è separare ciò che la fonte afferma da ciò che il piccolo caso illustra. L'output «stima con intervallo osservato e costo» mostra il contratto locale, ma non sostituisce una misura sul sistema completo.
-
-Il controllo minimo di «Extrapolation» confronta il caso dichiarato con una variazione che rompe la sua ipotesi. Se la failure non è distinguibile dall'esito valido, manca un'osservazione nel contratto di popolazione, manifest e stato del run. Da «Extrapolation» portiamo l'output «stima con intervallo osservato e costo»; non portiamo invece una conclusione oltre il caso locale.
-
-## Training e inference cost
-
-Una scelta compute-optimal per il training può non minimizzare costo e latenza del servizio. [SRC-34-001]
-
-Prima del nome tecnico fissiamo la situazione: consideriamo due vettori con shape compatibile confrontati prima e dopo il blocco, osservando separatamente scala e percorso residuale in «Training e inference cost». Da qui possiamo leggere la conseguenza dichiarata da «Una scelta compute-optimal per il training può non minimizzare costo e latenza del servizio».
-
-Nel contratto locale, l'input «punti con parametri, token, FLOP e loss» entra, l'operazione «fit, confronto isoFLOP ed estrapolazione» modifica il percorso e l'output «stima con intervallo osservato e costo» è ciò che osserviamo. Qui cambia soprattutto il passaggio «Training e inference cost»; resta da controllare che un fit fuori dominio non è una legge garantita. La domanda locale è «Una scelta compute-optimal per il training può non minimizzare costo e latenza del servizio».
-
-Una relazione di scaling è una misura nell'intervallo del setup osservato. Cambiare qualità dei dati, ricetta, obiettivo o costo di inference può spostare la conclusione, quindi l'extrapolation richiede ipotesi esplicite. Per «Training e inference cost» il controllo cambia una sola premessa della frase «Una scelta compute-optimal per il training può non minimizzare costo e latenza del servizio» e conserva input, output e criterio di successo, così la differenza resta attribuibile. La verifica resta ancorata a «Una scelta compute-optimal per il training può non minimizzare costo e latenza del servizio». [SRC-34-001]
-
-La lettura va fatta in ordine: prima il caso, poi la trasformazione, quindi la conseguenza. Il piccolo risultato resta un'illustrazione di «Una scelta compute-optimal per il training può non minimizzare costo e latenza del servizio», non una promessa generale.
-
-La prova di «Training e inference cost» conserva input, operazione e output; poi esplicita quale parte di «Una scelta compute-optimal per il training può non minimizzare costo e latenza del servizio» non è stata misurata. Così il test separa l'evidenza dall'inferenza. Il caso finale consegna l'output «stima con intervallo osservato e costo» come evidenza locale e conserva il legame tra dati esposti e risultato come domanda aperta.
-
-## Dal concetto alla situazione concreta: Fit empirico
-
-Il caso intero parte dall'input «punti con parametri, token, FLOP e loss», applica l'operazione «fit, confronto isoFLOP ed estrapolazione» e osserva l'output «stima con intervallo osservato e costo». Un esempio controllato: quattro punti, fit lineare locale e intervallo dichiarato. La formula locale è:
+La relazione centrale può essere scritta come:
 
 $$
 L(N) = L_inf + A N^(-alpha)
@@ -99,38 +44,87 @@ $$
 
 Un fit empirico vale nell'intervallo e nel setup che lo hanno prodotto. [SRC-34-001]
 
+
+![Scaling law e progettazione del modello: chart](../../assets/chapters/34_scaling_laws/SCALE-01/candidate-v48.png)
+
+La prima figura segue il percorso da «Fit empirico» a «Esperimenti isoFLOP».
+
+
+## Esperimenti isoFLOP
+
+Configurazioni con compute simile rendono osservabile la loss minima per budget. [SRC-34-003]
+
+**Caso da seguire.** Un caso in cui un fit fuori dominio non è una legge garantita.
+
+**Controllo.** Aggiungi un valore limite e verifica separatamente forma, valore e ipotesi. Una shape valida non dimostra da sola «Esperimenti isoFLOP».
+
+
+## Extrapolation
+
+Residui, intervalli e ipotesi su loss irriducibile limitano la previsione fuori scala. [SRC-34-004]
+
+**Caso da seguire.** Due ricette con budget di token dichiarato, compute comparabile e loss osservata nello stesso intervallo.
+
+**Controllo.** Mantieni fisso l'input e sostituisci soltanto il meccanismo discusso nella sezione. Il confronto deve attribuire la differenza a quel passaggio, non al setup.
+
+
+## Esempio Python eseguito
+
+Il frammento seguente è lo stesso conservato nel repository. Usa valori piccoli perché l'obiettivo è osservare il meccanismo, non simulare una scala che non abbiamo eseguito.
+
+```python
+def contract():
+    tokens = [1000.0, 2000.0, 4000.0, 8000.0]
+    losses = [3.10, 2.74, 2.47, 2.29]
+    slope = (losses[-1] - losses[0]) / (tokens[-1] - tokens[0])
+    return {"points": len(tokens), "slope": round(slope, 8), "interval": [tokens[0], tokens[-1]], "invariant": "the fit is interpreted only on the observed interval"}
+```
+
+Esecuzione con `python snip_34_contract.py`:
+
+```text
+{"interval": [1000.0, 8000.0], "invariant": "the fit is interpreted only on the observed interval", "points": 4, "slope": -0.00011571}
+```
+
+Il test associato è [`code/test_34_contract.py`](code/test_34_contract.py); l'output versionato è [`code/outputs/SNIP-34-001.txt`](code/outputs/SNIP-34-001.txt).
+
+
+## Training e inference cost
+
+Una scelta compute-optimal per il training può non minimizzare costo e latenza del servizio. [SRC-34-001]
+
+**Caso da seguire.** Due vettori con shape compatibile confrontati prima e dopo il blocco, osservando separatamente scala e percorso residuale in «Training e inference cost».
+
+**Controllo.** Costruisci un controesempio che rispetti il tipo di dato ma violi l'ipotesi centrale. Il test deve rendere riconoscibile perché «Training e inference cost» non si applica.
+
+
 ![Scaling law e progettazione del modello: architecture](../../assets/chapters/34_scaling_laws/SCALE-02/candidate-v48.png)
 
-La figura SCALE-02 cambia composizione rispetto alla prima. Il diagramma segue il passaggio: Fit, confronto isoFLOP ed estrapolazione. L'input è punti con parametri, token, FLOP e loss, l'output è stima con intervallo osservato e costo; il vincolo da controllare è che un fit fuori dominio non è una legge garantita.
+La seconda figura mette a confronto «Extrapolation» e il limite discusso in «Training e inference cost».
 
-## Una prova ripetibile: Allocazione compute-optimal
 
-Nel run Python rendiamo osservabile la frase «Una power law approssima loss rispetto a parametri, dati o compute in un intervallo misurato» con valori piccoli e leggibili. Il test associato verifica determinismo, output e rifiuto di una condizione incoerente; il file di output `code/outputs/SNIP-34-001.txt` documenta il caso senza pretendere una misura generale.
+## Come si collegano i passaggi
 
-## Il trasferimento richiede altro: Training e inference cost
+- **Da «Fit empirico» a «Allocazione compute-optimal».** Una power law approssima loss rispetto a parametri, dati o compute in un intervallo misurato. A budget fissato, modello e token competono. Il primo passaggio definisce che cosa entra nel calcolo; il secondo stabilisce la regola che produce il valore osservabile. [SRC-34-001; SRC-34-002]
 
-Il meccanismo di «Scaling law e progettazione del modello» non garantisce da solo che il sistema funzioni fuori dal caso guida. Un fit fuori dominio non è una legge garantita. Il limite osservato riguarda la frase «Una power law approssima loss rispetto a parametri, dati o compute in un intervallo misurato»; per trasferire il concetto occorre riaprire la verifica quando cambiano dati, scala o ambiente.
+- **Da «Allocazione compute-optimal» a «Esperimenti isoFLOP».** A budget fissato, modello e token competono. Configurazioni con compute simile rendono osservabile la loss minima per budget. La regola generale viene poi letta dentro il componente: questa separazione permette di localizzare un errore prima di attribuirlo all'intero modello. [SRC-34-002; SRC-34-003]
 
-## Il filo che passa oltre: Scaling law e progettazione del modello
+- **Da «Esperimenti isoFLOP» a «Extrapolation».** Configurazioni con compute simile rendono osservabile la loss minima per budget. Residui, intervalli e ipotesi su loss irriducibile limitano la previsione fuori scala. Dopo avere reso visibile il componente, il percorso introduce la variante o l'ottimizzazione senza cambiare di nascosto il caso di partenza. [SRC-34-003; SRC-34-004]
 
-Il percorso ha tenuto insieme una curva empirica tra scala, compute e loss, l'operazione «fit, confronto isoFLOP ed estrapolazione» e l'output «stima con intervallo osservato e costo». Le sezioni «Fit empirico», «Allocazione compute-optimal», «Training e inference cost» mostrano come il protocollo osservato delimiti ciò che il capitolo può sostenere. L'invariante da portare avanti è: un fit fuori dominio non è una legge garantita. Il Capitolo 35, La ricetta di pretraining, può partire da questo output e dichiarare la propria domanda.
+- **Da «Extrapolation» a «Training e inference cost».** Residui, intervalli e ipotesi su loss irriducibile limitano la previsione fuori scala. Una scelta compute-optimal per il training può non minimizzare costo e latenza del servizio. L'ultimo passaggio sposta l'attenzione dal funzionamento locale alla misura: correttezza del calcolo e qualità applicativa restano domande distinte. [SRC-34-004; SRC-34-001]
 
-### Rilettura guidata: Fit empirico
+La catena completa produce stima con intervallo osservato e costo a partire da punti con parametri, token, FLOP e loss. Ogni collegamento conserva un oggetto osservabile diverso; per questo il risultato non può essere esteso oltre il limite dichiarato: un fit fuori dominio non è una legge garantita.
 
-1. Ricostruisci l'oggetto continuo a partire da «Fit empirico» e indica quale parte della frase «Una power law approssima loss rispetto a parametri, dati o compute in un intervallo misurato» entra nel caso.
-2. Spiega quale trasformazione collega «Fit empirico» a «Training e inference cost» e quale output osserviamo nel passaggio.
-3. Usa lo snippet per controllare l'invariante del contratto: un fit fuori dominio non è una legge garantita.
-4. Separa una definizione sostenuta da una fonte, un esempio illustrativo e un risultato locale del caso guida.
-5. Indica quale parte della frase «Una scelta compute-optimal per il training può non minimizzare costo e latenza del servizio» richiederebbe una misura nuova prima di essere estesa oltre il caso osservato.
 
-### Allenamento e trasferimento: Training e inference cost
+## Esercizi sul meccanismo
 
-1. Racconta «Fit empirico» come una trasformazione: che cosa entra e che cosa esce?
-2. Confronta due esecuzioni di «Allocazione compute-optimal» mantenendo il resto del setup invariato.
-3. Per «Esperimenti isoFLOP», separa l'esempio locale dal limite che impedisce di generalizzarlo.
-4. Progetta una prova per «Extrapolation» che renda visibile il suo confine.
-5. Scrivi una metrica o una domanda per valutare «Training e inference cost» senza confondere livelli diversi.
+1. Ricostruisci «Fit empirico» con un esempio diverso da quello mostrato e indica l'output atteso prima del calcolo.
+2. Nel passaggio «Allocazione compute-optimal», cambia una sola ipotesi e spiega quale risultato non è più confrontabile.
+3. Collega «Esperimenti isoFLOP» a una riga dello snippet oppure motiva perché la prova deve essere documentale.
+4. Progetta un caso limite per «Extrapolation» che produca una failure riconoscibile.
+5. Per «Training e inference cost», separa una conclusione sostenuta dal caso locale da una che richiederebbe nuovi dati o un benchmark.
 
-## Dove verificare definizioni e risultati: Scaling law e progettazione del modello
 
-Per «Scaling law e progettazione del modello», le fonti portanti, i limiti dei claim e la data di consultazione sono raccolti in `FONTI_PRIMARIE.md`; la ricerca riguarda soprattutto popolazione, manifest e stato del run. `CLAIMS.md` separa definizioni e risultati locali; codice, ambiente, test e output sono nella cartella `code/`, con attenzione a popolazione, manifest e stato del run.
+## Che cosa deve restare chiaro
+
+La lezione parte da «punti con parametri, token, FLOP e loss» e arriva fino a «stima con intervallo osservato e costo». Il limite da conservare è questo: un fit fuori dominio non è una legge garantita. Definizioni e risultati citati sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md); la mappa dei claim è in [`CLAIMS.md`](CLAIMS.md).

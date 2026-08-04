@@ -1,3 +1,3 @@
-# Alt text INFERENCE-02
+# Testo alternativo
 
-Diagramma INFERENCE-02 del Capitolo 80, famiglia queue. Domanda: Il diagramma segue il passaggio: Parallelismo, disaggregazione, routing e recovery. L'input è shard, worker, rete, batch e fase prefill/decode, l'output è risposta, trasferimenti e fault osservati; il vincolo da controllare è che la comunicazione fa parte della latenza end-to-end La composizione usa i passaggi Tensor e pipeline parallelism, Expert parallelism, Prefill-decode disaggregation, Routing, Fault tolerance.
+INFERENCE-02, Serving disaggregato e inference distribuita. Quale controllo collega «Routing» a «Fault tolerance» senza superare il limite dichiarato? La composizione network boundary collega «Routing», «Fault tolerance». L'input è shard, worker, rete, batch e fase prefill/decode; l'output è risposta, trasferimenti e fault osservati. Il limite esplicito è: la comunicazione fa parte della latenza end-to-end.

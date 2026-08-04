@@ -1,3 +1,3 @@
-# Alt text REPRESEN-02
+# Testo alternativo
 
-Diagramma REPRESEN-02 del Capitolo 19, famiglia scatter. Domanda: La geometria viene confrontata rispetto alla metrica dichiarata La composizione usa i passaggi Che cosa rappresenta un vettore, Bottleneck e autoencoder, Metric e contrastive learning, Disentanglement e identifiability, Valutare una rappresentazione.
+REPRESEN-02, Representation learning. Quale controllo collega «Disentanglement e identifiability» a «Valutare una rappresentazione» senza superare il limite dichiarato? La composizione representation map collega «Disentanglement e identifiability», «Valutare una rappresentazione». L'input è u = [1, 2, 0] e v = [2, 1, 0]; l'output è un vettore, una similarità o una predizione downstream. Il limite esplicito è: la geometria dipende da dati, obiettivo e normalizzazione.

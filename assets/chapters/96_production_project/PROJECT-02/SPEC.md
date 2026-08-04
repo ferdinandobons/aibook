@@ -1,14 +1,16 @@
 # Specifica visuale PROJECT-02
 
-- famiglia: checklist
-- domanda principale: Il diagramma segue il passaggio: Design, test, release, osservabilità e change management. L'input è problema, dati, modello, eval, deployment e rollback, l'output è servizio versionato con metriche e piano di ritorno; il vincolo da controllare è che un modello che passa un test offline non è automaticamente pronto in produzione
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: rollback_path
+- domanda principale: Quale controllo collega «Deployment» a «Documentazione» senza superare il limite dichiarato?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, checklist, invariante o limite in chiusura
-- nodi e contenuti: 1: Definizione del problema; 2: Architettura; 3: Valutazione; 4: Deployment; 5: Documentazione
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: un modello che passa un test offline non è automaticamente pronto in produzione
-- fonti collegate: SRC-96-001 ... SRC-96-004
-- alt text: Diagramma PROJECT-02 del Capitolo 96, famiglia checklist. Domanda: Il diagramma segue il passaggio: Design, test, release, osservabilità e change management. L'input è problema, dati, modello, eval, deployment e rollback, l'output è servizio versionato con metriche e piano di ritorno; il vincolo da controllare è che un modello che passa un test offline non è automaticamente pronto in produzione La composizione usa i passaggi Definizione del problema, Architettura, Valutazione, Deployment, Documentazione.
+- file candidato: candidate-v48.png
+- oggetto osservato: un sistema ML che attraversa sviluppo, rilascio e monitoraggio
+- input: problema, dati, modello, eval, deployment e rollback
+- output: servizio versionato con metriche e piano di ritorno
+- nodi locali: Deployment: Versioni, secret, rollback, observability e incident response vengono esercitati prima…; Documentazione: Model card, data card, runbook e decision log rendono il progetto revisionabile e…
+- limite visualizzato: un modello che passa un test offline non è automaticamente pronto in produzione
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

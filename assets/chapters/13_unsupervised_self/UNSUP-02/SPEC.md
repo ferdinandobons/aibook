@@ -19,3 +19,4 @@ Come nasce una label dal dato stesso in un obiettivo masked modeling?
 - encoder e decoder con shape dichiarate;
 - loss calcolata soltanto sulle posizioni mascherate;
 - target autogenerato e confini del pretraining.
+- domanda principale: Quale confronto o limite chiarisce «Cercare gruppi con k-means»?

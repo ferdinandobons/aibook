@@ -1,81 +1,32 @@
-# Piano interno. Capitolo 20
+# Piano editoriale. Capitolo 20
 
-- Domanda centrale: quale contratto costruisce Fondamenti della modellazione generativa?
-- Oggetto continuo: una distribuzione sui dati o su una variabile latente; input guida: un dato x, un rumore epsilon o una variabile z.
-- Prerequisito stabile: Capitolo 19, Representation learning.
-- Gap: valutazione di likelihood, trasformazione o campionamento.
-- Output consegnato: una probabilità, un punteggio o un campione; consumer successivo: Capitolo 21, Modelli autoregressivi.
-- Invariante principale: un campione plausibile non dimostra copertura dell'intera distribuzione.
-- Visuali: FOUNDATI-01 e FOUNDATI-02, con famiglie compositive variabili.
-- Snippet: code/snip_20_contract.py; output: code/outputs/SNIP-20-001.txt.
-- Gate aperti: revisione autoriale, lettura ad alta voce e approvazione finale delle visuali.
+## Obiettivo didattico
 
-## Transizione 1. Imparare una distribuzione
+Seguire **Fondamenti della modellazione generativa** da un dato x, un rumore epsilon o una variabile z a una probabilità, un punteggio o un campione, osservando valutazione di likelihood, trasformazione o campionamento senza oltrepassare questo limite: un campione plausibile non dimostra copertura dell'intera distribuzione.
 
-- Ultima affermazione stabile: una distribuzione sui dati o su una variabile latente.
-- Concetto nuovo: Un modello generativo descrive o campiona dati secondo una distribuzione. Densità, likelihood e sampling sono contratti distinti.
-- Input e shape: un dato x, un rumore epsilon o una variabile z.
-- Operazione: valutazione di likelihood, trasformazione o campionamento.
-- Output e shape: una probabilità, un punteggio o un campione.
-- Che cosa cambia: il passaggio specifico di «Imparare una distribuzione».
-- Invariante: un campione plausibile non dimostra copertura dell'intera distribuzione.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: tre probabilità che sommano a 1 prima della selezione; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Modelli espliciti e impliciti.
-- Prova: SRC-20-001 e sezione pubblica corrispondente.
+## Prerequisiti reali
 
-## Transizione 2. Modelli espliciti e impliciti
+- Capitolo 7: Probabilità, statistica e inferenza
+- Capitolo 8: Teoria dell'informazione e funzioni obiettivo
+- Capitolo 13: Apprendimento non supervisionato e auto-supervisionato
+- Capitolo 19: Representation learning
 
-- Ultima affermazione stabile: una distribuzione sui dati o su una variabile latente.
-- Concetto nuovo: Un modello esplicito assegna una densità o probabilità valutabile. Un modello implicito definisce il campionamento senza una likelihood semplice.
-- Input e shape: un dato x, un rumore epsilon o una variabile z.
-- Operazione: valutazione di likelihood, trasformazione o campionamento.
-- Output e shape: una probabilità, un punteggio o un campione.
-- Che cosa cambia: il passaggio specifico di «Modelli espliciti e impliciti».
-- Invariante: un campione plausibile non dimostra copertura dell'intera distribuzione.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: tre probabilità che sommano a 1 prima della selezione; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Variabili latenti.
-- Prova: SRC-20-002 e sezione pubblica corrispondente.
+## Percorso della lezione
 
-## Transizione 3. Variabili latenti
+1. **Imparare una distribuzione.** Un modello generativo descrive o campiona dati secondo una distribuzione. Densità, likelihood e sampling sono contratti distinti. Prova: SRC-20-001.
+2. **Modelli espliciti e impliciti.** Un modello esplicito assegna una densità o probabilità valutabile. Un modello implicito definisce il campionamento senza una likelihood semplice. Prova: SRC-20-002.
+3. **Variabili latenti.** Una variabile latente introduce struttura non osservata. L'inferenza deve collegare dati e latenti, esattamente o mediante approssimazione. Prova: SRC-20-003.
+4. **Energy-based model.** Una energia non normalizzata assegna punteggi alle configurazioni. La costante di partizione rende difficile la likelihood in molti casi. Prova: SRC-20-004.
+5. **Qualità, copertura e valutazione.** Campioni plausibili non garantiscono copertura. Likelihood e precision-recall generativa rispondono a domande diverse e richiedono protocolli dichiarati. Prova: SRC-20-001; SRC-20-005.
 
-- Ultima affermazione stabile: una distribuzione sui dati o su una variabile latente.
-- Concetto nuovo: Una variabile latente introduce struttura non osservata. L'inferenza deve collegare dati e latenti, esattamente o mediante approssimazione.
-- Input e shape: un dato x, un rumore epsilon o una variabile z.
-- Operazione: valutazione di likelihood, trasformazione o campionamento.
-- Output e shape: una probabilità, un punteggio o un campione.
-- Che cosa cambia: il passaggio specifico di «Variabili latenti».
-- Invariante: un campione plausibile non dimostra copertura dell'intera distribuzione.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: tre probabilità che sommano a 1 prima della selezione; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Energy-based model.
-- Prova: SRC-20-003 e sezione pubblica corrispondente.
+## Prove e artefatti
 
-## Transizione 4. Energy-based model
+- eccezione motivata: Il capitolo confronta famiglie generative a livello concettuale; le implementazioni verificabili sono distribuite nei capitoli 21-25.
+- visuali candidate: FOUNDATI-01, FOUNDATI-02; le domande pedagogiche sono distinte e l'approvazione autoriale resta aperta.
+- fonti: `FONTI_PRIMARIE.md`; corrispondenza claim-fonte: `CLAIMS.md`.
 
-- Ultima affermazione stabile: una distribuzione sui dati o su una variabile latente.
-- Concetto nuovo: Una energia non normalizzata assegna punteggi alle configurazioni. La costante di partizione rende difficile la likelihood in molti casi.
-- Input e shape: un dato x, un rumore epsilon o una variabile z.
-- Operazione: valutazione di likelihood, trasformazione o campionamento.
-- Output e shape: una probabilità, un punteggio o un campione.
-- Che cosa cambia: il passaggio specifico di «Energy-based model».
-- Invariante: un campione plausibile non dimostra copertura dell'intera distribuzione.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: tre probabilità che sommano a 1 prima della selezione; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Qualità, copertura e valutazione.
-- Prova: SRC-20-004 e sezione pubblica corrispondente.
+## Gate aperti
 
-## Transizione 5. Qualità, copertura e valutazione
-
-- Ultima affermazione stabile: una distribuzione sui dati o su una variabile latente.
-- Concetto nuovo: Campioni plausibili non garantiscono copertura. Likelihood, precision-recall generativa e valutazione umana rispondono a domande diverse.
-- Input e shape: un dato x, un rumore epsilon o una variabile z.
-- Operazione: valutazione di likelihood, trasformazione o campionamento.
-- Output e shape: una probabilità, un punteggio o un campione.
-- Che cosa cambia: il passaggio specifico di «Qualità, copertura e valutazione».
-- Invariante: un campione plausibile non dimostra copertura dell'intera distribuzione.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: tre probabilità che sommano a 1 prima della selezione; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Modelli autoregressivi.
-- Prova: SRC-20-001 e sezione pubblica corrispondente.
+- lettura editoriale finale da parte dell'autore;
+- approvazione delle visuali nel contesto impaginato;
+- benchmark esterni solo quando il capitolo formula un claim di scala o di produzione.

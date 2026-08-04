@@ -1,81 +1,31 @@
-# Piano interno. Capitolo 43
+# Piano editoriale. Capitolo 43
 
-- Domanda centrale: quale contratto costruisce Architetture ibride e memoria interna?
-- Oggetto continuo: informazione distribuita tra attenzione locale e memoria; input guida: segmento corrente, stato e memoria persistente.
-- Prerequisito stabile: Capitolo 42, State-space model, recurrence e long convolution.
-- Gap: write, read, routing e fusione.
-- Output consegnato: stato aggiornato e contenuto recuperato; consumer successivo: Capitolo 44, Mixture of Experts e calcolo condizionale.
-- Invariante principale: durata e provenienza della memoria devono essere separate.
-- Visuali: HYBRID-01 e HYBRID-02, con famiglie compositive variabili.
-- Snippet: code/snip_43_contract.py; output: code/outputs/SNIP-43-001.txt.
-- Gate aperti: revisione autoriale, lettura ad alta voce e approvazione finale delle visuali.
+## Obiettivo didattico
 
-## Transizione 1. Ibridi tra layer
+Seguire **Architetture ibride e memoria interna** da segmento corrente, stato e memoria persistente a stato aggiornato e contenuto recuperato, osservando write, read, routing e fusione senza oltrepassare questo limite: durata e provenienza della memoria devono essere separate.
 
-- Ultima affermazione stabile: informazione distribuita tra attenzione locale e memoria.
-- Concetto nuovo: Transformer, SSM e recurrence possono alternarsi con rapporti e interfacce dichiarati.
-- Input e shape: segmento corrente, stato e memoria persistente.
-- Operazione: write, read, routing e fusione.
-- Output e shape: stato aggiornato e contenuto recuperato.
-- Che cosa cambia: il passaggio specifico di «Ibridi tra layer».
-- Invariante: durata e provenienza della memoria devono essere separate.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: un fatto stabile e due elementi recenti con letture diverse; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Attention locale e stato.
-- Prova: SRC-43-001 e sezione pubblica corrispondente.
+## Prerequisiti reali
 
-## Transizione 2. Attention locale e stato
+- Capitolo 29: Il Transformer da zero
+- Capitolo 39: Varianti dell'attention e gestione KV
+- Capitolo 42: State-space model, recurrence e long convolution
 
-- Ultima affermazione stabile: informazione distribuita tra attenzione locale e memoria.
-- Concetto nuovo: Una finestra precisa gestisce il vicino; uno stato compatto trasporta informazione oltre la finestra.
-- Input e shape: segmento corrente, stato e memoria persistente.
-- Operazione: write, read, routing e fusione.
-- Output e shape: stato aggiornato e contenuto recuperato.
-- Che cosa cambia: il passaggio specifico di «Attention locale e stato».
-- Invariante: durata e provenienza della memoria devono essere separate.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: un fatto stabile e due elementi recenti con letture diverse; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Memoria segmentale.
-- Prova: SRC-43-002 e sezione pubblica corrispondente.
+## Percorso della lezione
 
-## Transizione 3. Memoria segmentale
+1. **Ibridi tra layer.** Transformer, SSM e recurrence possono alternarsi con rapporti e interfacce dichiarati. Prova: SRC-43-001.
+2. **Attention locale e stato.** Una finestra precisa gestisce il vicino; uno stato compatto trasporta informazione oltre la finestra. Prova: SRC-43-002.
+3. **Memoria segmentale.** Stati di segmenti precedenti possono essere riusati o compressi con stop-gradient e capacità limitata. Prova: SRC-43-003.
+4. **Memoria associativa.** Key-value interne o moduli di memoria aggiornati online offrono accesso diverso dal residual stream. Prova: SRC-43-004.
+5. **Memoria interna ed esterna.** Lo stato neurale non coincide con retrieval documentale. Reset, isolamento e provenienza hanno contratti differenti. Prova: SRC-43-001.
 
-- Ultima affermazione stabile: informazione distribuita tra attenzione locale e memoria.
-- Concetto nuovo: Stati di segmenti precedenti possono essere riusati o compressi con stop-gradient e capacità limitata.
-- Input e shape: segmento corrente, stato e memoria persistente.
-- Operazione: write, read, routing e fusione.
-- Output e shape: stato aggiornato e contenuto recuperato.
-- Che cosa cambia: il passaggio specifico di «Memoria segmentale».
-- Invariante: durata e provenienza della memoria devono essere separate.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: un fatto stabile e due elementi recenti con letture diverse; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Memoria associativa.
-- Prova: SRC-43-003 e sezione pubblica corrispondente.
+## Prove e artefatti
 
-## Transizione 4. Memoria associativa
+- riferimento minimo: `code/snip_43_contract.py`; test: `code/test_43_contract.py`; output: `code/outputs/SNIP-43-001.txt`.
+- visuali candidate: HYBRID-01, HYBRID-02; le domande pedagogiche sono distinte e l'approvazione autoriale resta aperta.
+- fonti: `FONTI_PRIMARIE.md`; corrispondenza claim-fonte: `CLAIMS.md`.
 
-- Ultima affermazione stabile: informazione distribuita tra attenzione locale e memoria.
-- Concetto nuovo: Key-value interne o moduli di memoria aggiornati online offrono accesso diverso dal residual stream.
-- Input e shape: segmento corrente, stato e memoria persistente.
-- Operazione: write, read, routing e fusione.
-- Output e shape: stato aggiornato e contenuto recuperato.
-- Che cosa cambia: il passaggio specifico di «Memoria associativa».
-- Invariante: durata e provenienza della memoria devono essere separate.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: un fatto stabile e due elementi recenti con letture diverse; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Memoria interna ed esterna.
-- Prova: SRC-43-004 e sezione pubblica corrispondente.
+## Gate aperti
 
-## Transizione 5. Memoria interna ed esterna
-
-- Ultima affermazione stabile: informazione distribuita tra attenzione locale e memoria.
-- Concetto nuovo: Lo stato neurale non coincide con retrieval documentale. Reset, isolamento e provenienza hanno contratti differenti.
-- Input e shape: segmento corrente, stato e memoria persistente.
-- Operazione: write, read, routing e fusione.
-- Output e shape: stato aggiornato e contenuto recuperato.
-- Che cosa cambia: il passaggio specifico di «Memoria interna ed esterna».
-- Invariante: durata e provenienza della memoria devono essere separate.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: un fatto stabile e due elementi recenti con letture diverse; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Mixture of Experts e calcolo condizionale.
-- Prova: SRC-43-001 e sezione pubblica corrispondente.
+- lettura editoriale finale da parte dell'autore;
+- approvazione delle visuali nel contesto impaginato;
+- benchmark esterni solo quando il capitolo formula un claim di scala o di produzione.

@@ -1,81 +1,31 @@
-# Piano interno. Capitolo 45
+# Piano editoriale. Capitolo 45
 
-- Domanda centrale: quale contratto costruisce Byte, predizione multi-token e language diffusion?
-- Oggetto continuo: unità di predizione dal byte al token multiplo; input guida: byte, gerarchia, target e numero di passi.
-- Prerequisito stabile: Capitolo 44, Mixture of Experts e calcolo condizionale.
-- Gap: raggruppamento, multi-token prediction o diffusione discreta.
-- Output consegnato: unità predette, loss e durata di decoding; consumer successivo: Capitolo 46, Supervised fine-tuning e instruction tuning.
-- Invariante principale: granularità della rappresentazione e parallelismo sono assi distinti.
-- Visuali: ALT-01 e ALT-02, con famiglie compositive variabili.
-- Snippet: code/snip_45_contract.py; output: code/outputs/SNIP-45-001.txt.
-- Gate aperti: revisione autoriale, lettura ad alta voce e approvazione finale delle visuali.
+## Obiettivo didattico
 
-## Transizione 1. Byte e caratteri
+Seguire **Byte, predizione multi-token e language diffusion** da byte, gerarchia, target e numero di passi a unità predette, loss e durata di decoding, osservando raggruppamento, multi-token prediction o diffusione discreta senza oltrepassare questo limite: granularità della rappresentazione e parallelismo sono assi distinti.
 
-- Ultima affermazione stabile: unità di predizione dal byte al token multiplo.
-- Concetto nuovo: Modelli byte-level usano un vocabolario piccolo e sequenze più lunghe.
-- Input e shape: byte, gerarchia, target e numero di passi.
-- Operazione: raggruppamento, multi-token prediction o diffusione discreta.
-- Output e shape: unità predette, loss e durata di decoding.
-- Che cosa cambia: il passaggio specifico di «Byte e caratteri».
-- Invariante: granularità della rappresentazione e parallelismo sono assi distinti.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: due byte raggruppati e due target predetti nello stesso passo; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Gerarchie di byte.
-- Prova: SRC-45-001 e sezione pubblica corrispondente.
+## Prerequisiti reali
 
-## Transizione 2. Gerarchie di byte
+- Capitolo 21: Modelli autoregressivi
+- Capitolo 26: Il testo come dato
+- Capitolo 29: Il Transformer da zero
 
-- Ultima affermazione stabile: unità di predizione dal byte al token multiplo.
-- Concetto nuovo: Patch fisse o dinamiche riducono la lunghezza vista dal modello globale.
-- Input e shape: byte, gerarchia, target e numero di passi.
-- Operazione: raggruppamento, multi-token prediction o diffusione discreta.
-- Output e shape: unità predette, loss e durata di decoding.
-- Che cosa cambia: il passaggio specifico di «Gerarchie di byte».
-- Invariante: granularità della rappresentazione e parallelismo sono assi distinti.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: due byte raggruppati e due target predetti nello stesso passo; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Predizione multi-token.
-- Prova: SRC-45-002 e sezione pubblica corrispondente.
+## Percorso della lezione
 
-## Transizione 3. Predizione multi-token
+1. **Byte e caratteri.** Modelli byte-level usano un vocabolario piccolo e sequenze più lunghe. Prova: SRC-45-001.
+2. **Gerarchie di byte.** Patch fisse o dinamiche riducono la lunghezza vista dal modello globale. Prova: SRC-45-002.
+3. **Predizione multi-token.** Head aggiuntive predicono più offset futuri e forniscono segnali oltre il token immediato. Prova: SRC-45-003.
+4. **Diffusione linguistica.** Processi continui, discreti o masked denoisano più posizioni attraverso step iterativi. Prova: SRC-45-004.
+5. **Assi separati.** Unità del testo, architettura e obiettivo di predizione sono scelte distinte che interagiscono. Prova: SRC-45-001.
 
-- Ultima affermazione stabile: unità di predizione dal byte al token multiplo.
-- Concetto nuovo: Head aggiuntive predicono più offset futuri e forniscono segnali oltre il token immediato.
-- Input e shape: byte, gerarchia, target e numero di passi.
-- Operazione: raggruppamento, multi-token prediction o diffusione discreta.
-- Output e shape: unità predette, loss e durata di decoding.
-- Che cosa cambia: il passaggio specifico di «Predizione multi-token».
-- Invariante: granularità della rappresentazione e parallelismo sono assi distinti.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: due byte raggruppati e due target predetti nello stesso passo; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Diffusione linguistica.
-- Prova: SRC-45-003 e sezione pubblica corrispondente.
+## Prove e artefatti
 
-## Transizione 4. Diffusione linguistica
+- riferimento minimo: `code/snip_45_contract.py`; test: `code/test_45_contract.py`; output: `code/outputs/SNIP-45-001.txt`.
+- visuali candidate: ALT-01, ALT-02; le domande pedagogiche sono distinte e l'approvazione autoriale resta aperta.
+- fonti: `FONTI_PRIMARIE.md`; corrispondenza claim-fonte: `CLAIMS.md`.
 
-- Ultima affermazione stabile: unità di predizione dal byte al token multiplo.
-- Concetto nuovo: Processi continui, discreti o masked denoisano più posizioni attraverso step iterativi.
-- Input e shape: byte, gerarchia, target e numero di passi.
-- Operazione: raggruppamento, multi-token prediction o diffusione discreta.
-- Output e shape: unità predette, loss e durata di decoding.
-- Che cosa cambia: il passaggio specifico di «Diffusione linguistica».
-- Invariante: granularità della rappresentazione e parallelismo sono assi distinti.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: due byte raggruppati e due target predetti nello stesso passo; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Assi separati.
-- Prova: SRC-45-004 e sezione pubblica corrispondente.
+## Gate aperti
 
-## Transizione 5. Assi separati
-
-- Ultima affermazione stabile: unità di predizione dal byte al token multiplo.
-- Concetto nuovo: Unità del testo, architettura e obiettivo di predizione sono scelte distinte che interagiscono.
-- Input e shape: byte, gerarchia, target e numero di passi.
-- Operazione: raggruppamento, multi-token prediction o diffusione discreta.
-- Output e shape: unità predette, loss e durata di decoding.
-- Che cosa cambia: il passaggio specifico di «Assi separati».
-- Invariante: granularità della rappresentazione e parallelismo sono assi distinti.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: due byte raggruppati e due target predetti nello stesso passo; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Supervised fine-tuning e instruction tuning.
-- Prova: SRC-45-001 e sezione pubblica corrispondente.
+- lettura editoriale finale da parte dell'autore;
+- approvazione delle visuali nel contesto impaginato;
+- benchmark esterni solo quando il capitolo formula un claim di scala o di produzione.

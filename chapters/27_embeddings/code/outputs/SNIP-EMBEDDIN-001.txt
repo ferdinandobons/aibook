@@ -1,3 +1,0 @@
-chapter: 27
-title: Embedding e spazio semantico
-output: [0.755272, 0.334759]

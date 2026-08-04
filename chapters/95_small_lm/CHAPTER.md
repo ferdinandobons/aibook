@@ -4,133 +4,171 @@ part_id: P14
 order_key: 950
 title: Costruire un piccolo language model
 maturity: CORE
-status: candidatura completa in revisione autoriale
-version: 0.4.0-draft2
-last_source_check: 3 agosto 2026
+status: revisione editoriale v2, approvazione autoriale aperta
+version: 0.5.0-draft3
+last_source_check: 4 agosto 2026
 environment: Python 3.13.12, CPU
-deferred: benchmark applicativi, varianti non necessarie al contratto centrale e approvazione autoriale
+code_policy: reference
+deferred: benchmark applicativi non eseguiti e approvazione autoriale delle visuali
 -->
 
 # Capitolo 95. Costruire un piccolo language model
 
-Il Capitolo 94, Percorso pratico dai fondamenti, ha lasciato disponibile un piccolo language model dalla stringa ai logits. Manteniamo come filo comune la richiesta «Il pacco non è arrivato» e qui la traduciamo nell'oggetto della lezione. La domanda diventa operativa: rendiamo osservabile il passaggio «embedding, decoder causale, cross-entropy e sampling» e verifichiamo che tokenizer, mask, target shift e sampling devono essere coerenti.
+La domanda guida di questa lezione è come collegare «Corpus e tokenizer» e «Limiti» senza perdere il contratto tecnico di costruire un piccolo language model. L'oggetto osservato è un piccolo language model dalla stringa ai logits. Il contratto locale è: input, corpus, tokenizer, batch di sequenze e target; operazione, embedding, decoder causale, cross-entropy e sampling; output, logits, loss, token generati e checkpoint. Il caso guida è questo: Due sequenze di tre token diventano input e target spostati con shape coerenti. Il confine da mantenere esplicito è: tokenizer, mask, target shift e sampling devono essere coerenti.
+
+![Costruire un piccolo language model: matrix](../../assets/chapters/95_small_lm/LM-01/candidate-v48.png)
+
+La prima figura segue il percorso da «Corpus e tokenizer» a «Training».
+
 
 ## Corpus e tokenizer
 
 Un corpus ridotto e un tokenizer identificabile costruiscono sequenze e split verificabili. [SRC-95-001]
 
-Prima del nome tecnico fissiamo la situazione: consideriamo due sequenze di tre token diventano input e target spostati con shape coerenti. Da qui possiamo leggere la conseguenza dichiarata da «Un corpus ridotto e un tokenizer identificabile costruiscono sequenze e split verificabili».
+Un piccolo LM consente di osservare la relazione tra dati, logits e loss.
 
-La sezione usa l'input «corpus, tokenizer, batch di sequenze e target» come punto di partenza e l'output «logits, loss, token generati e checkpoint» come traccia d'uscita. La trasformazione concreta è «embedding, decoder causale, cross-entropy e sampling»; il caso non è completo se non dichiariamo anche che tokenizer, mask, target shift e sampling devono essere coerenti. La condizione da isolare è «Un corpus ridotto e un tokenizer identificabile costruiscono sequenze e split verificabili».
+**Caso da seguire.** Due sequenze di tre token diventano input e target spostati con shape coerenti.
 
-Il risultato è interpretabile soltanto se codice, dati, configurazione, ambiente e output restano collegati. La scala del laboratorio rende il percorso leggibile, ma il trasferimento richiede una nuova misura. Per «Corpus e tokenizer» il controllo cambia una sola premessa della frase «Un corpus ridotto e un tokenizer identificabile costruiscono sequenze e split verificabili» e conserva input, output e criterio di successo, così la differenza resta attribuibile. La verifica resta ancorata a «Un corpus ridotto e un tokenizer identificabile costruiscono sequenze e split verificabili». [SRC-95-001]
+**Controllo.** Esegui il caso con ambiente, seed e comando registrati; il risultato deve sopravvivere fuori dalla sessione interattiva.
 
-Se cambiamo una premessa, dobbiamo riaprire l'interpretazione. Per «Corpus e tokenizer» conserviamo l'osservazione collegata a «Un corpus ridotto e un tokenizer identificabile costruiscono sequenze e split verificabili» e lasciamo esplicitamente fuori ciò che non è stato misurato.
-
-La prova di «Corpus e tokenizer» conserva input, operazione e output; poi esplicita quale parte di «Un corpus ridotto e un tokenizer identificabile costruiscono sequenze e split verificabili» non è stata misurata. Così il test separa l'evidenza dall'inferenza. Il passaggio successivo, «Decoder Transformer», potrà cambiare una sola condizione, dichiarando il nuovo setup prima di interpretare il risultato.
 
 ## Decoder Transformer
 
 Embedding, posizione, causal attention, MLP, norm e head di output vengono assemblati con test di shape. [SRC-95-002]
 
-Per capire «Decoder Transformer» partiamo da questo caso: un batch [2, 4] attraversa embedding, mask causale, MLP e head dei logits. Il caso rende osservabile il punto centrale: «Embedding, posizione, causal attention, MLP, norm e head di output vengono assemblati con test di shape».
+**Caso da seguire.** Un batch [2, 4] attraversa embedding, mask causale, MLP e head dei logits.
 
-Per ricostruire «Decoder Transformer» annotiamo l'input «corpus, tokenizer, batch di sequenze e target», poi l'operazione «embedding, decoder causale, cross-entropy e sampling», infine l'output «logits, loss, token generati e checkpoint». Questa sequenza impedisce di scambiare una forma compatibile per il comportamento descritto dalla fonte. Il controllo parte da «Embedding, posizione, causal attention, MLP, norm e head di output vengono assemblati con test di shape».
+**Controllo.** Per «Decoder Transformer» conserva almeno un artefatto verificabile e un caso fallito, insieme alla configurazione che li ha prodotti.
 
-Il risultato è interpretabile soltanto se codice, dati, configurazione, ambiente e output restano collegati. La scala del laboratorio rende il percorso leggibile, ma il trasferimento richiede una nuova misura. Per «Decoder Transformer» il controllo cambia una sola premessa della frase «Embedding, posizione, causal attention, MLP, norm e head di output vengono assemblati con test di shape» e conserva input, output e criterio di successo, così la differenza resta attribuibile. La verifica resta ancorata a «Embedding, posizione, causal attention, MLP, norm e head di output vengono assemblati con test di shape». [SRC-95-002]
-
-Il punto didattico di «Decoder Transformer» è separare ciò che la fonte afferma da ciò che il piccolo caso illustra. L'output «logits, loss, token generati e checkpoint» mostra il contratto locale, ma non sostituisce una misura sul sistema completo.
-
-Per verificare «Decoder Transformer» cambiamo una sola condizione vicina alla frase «Embedding, posizione, causal attention, MLP, norm e head di output vengono assemblati con test di shape», teniamo fermo il resto e registriamo l'output «logits, loss, token generati e checkpoint». Il caso negativo deve rendere riconoscibile la failure, non soltanto produrre un numero diverso. La sezione successiva, «Training», riceve l'output «logits, loss, token generati e checkpoint» come base, ma dovrà formulare e verificare la propria distinzione.
 
 ## Training
 
 AdamW, schedule, gradient clipping e checkpoint producono un run riproducibile su CPU o singola GPU. [SRC-95-003]
 
-Il caso minimo di «Training» si presenta così: un optimizer step confrontato con loss, seed e stato del checkpoint salvato. Non lo usiamo come decorazione: serve a rendere osservabile la frase «AdamW, schedule, gradient clipping e checkpoint producono un run riproducibile su CPU o singola GPU».
+**Caso da seguire.** Un optimizer step confrontato con loss, seed e stato del checkpoint salvato.
 
-Nel contratto locale, l'input «corpus, tokenizer, batch di sequenze e target» entra, l'operazione «embedding, decoder causale, cross-entropy e sampling» modifica il percorso e l'output «logits, loss, token generati e checkpoint» è ciò che osserviamo. Qui cambia soprattutto il passaggio «Training»; resta da controllare che tokenizer, mask, target shift e sampling devono essere coerenti. La domanda locale è «AdamW, schedule, gradient clipping e checkpoint producono un run riproducibile su CPU o singola GPU».
+**Controllo.** Scrivi prima l'esito atteso, poi confrontalo con output e log. Ogni differenza deve restare visibile nel report.
 
-Il risultato è interpretabile soltanto se codice, dati, configurazione, ambiente e output restano collegati. La scala del laboratorio rende il percorso leggibile, ma il trasferimento richiede una nuova misura. Per «Training» il controllo cambia una sola premessa della frase «AdamW, schedule, gradient clipping e checkpoint producono un run riproducibile su CPU o singola GPU» e conserva input, output e criterio di successo, così la differenza resta attribuibile. La verifica resta ancorata a «AdamW, schedule, gradient clipping e checkpoint producono un run riproducibile su CPU o singola GPU». [SRC-95-003]
 
-La lettura va fatta in ordine: prima il caso, poi la trasformazione, quindi la conseguenza. Il piccolo risultato resta un'illustrazione di «AdamW, schedule, gradient clipping e checkpoint producono un run riproducibile su CPU o singola GPU», non una promessa generale.
+## Esempio Python eseguito
 
-Il controllo minimo di «Training» confronta il caso dichiarato con una variazione che rompe la sua ipotesi. Se la failure non è distinguibile dall'esito valido, manca un'osservazione nel contratto di protocollo, slice e decisione. Da «Training» portiamo l'output «logits, loss, token generati e checkpoint»; non portiamo invece una conclusione oltre il caso locale.
+Il frammento seguente è lo stesso conservato nel repository. Usa valori piccoli perché l'obiettivo è osservare il meccanismo, non simulare una scala che non abbiamo eseguito.
+
+```python
+def contract():
+    tokens = [[1, 2, 3], [2, 3, 4]]
+    inputs = [row[:-1] for row in tokens]
+    targets = [row[1:] for row in tokens]
+    return {"input_shape": [len(inputs), len(inputs[0])], "target_shape": [len(targets), len(targets[0])], "invariant": "causal training shifts target one token after the input"}
+```
+
+Esecuzione con `python snip_95_contract.py`:
+
+```text
+{"input_shape": [2, 2], "invariant": "causal training shifts target one token after the input", "target_shape": [2, 2]}
+```
+
+Il test associato è [`code/test_95_contract.py`](code/test_95_contract.py); l'output versionato è [`code/outputs/SNIP-95-001.txt`](code/outputs/SNIP-95-001.txt).
+
+## Laboratorio completo: Decoder causale addestrato e campionato
+
+Il contratto precedente isola un solo punto. Il laboratorio seguente attraversa invece più fasi e conserva sia l'esito valido sia una failure controllata. L'estratto è identico al file eseguito.
+
+```python
+def train_and_generate(steps: int = 24) -> dict[str, object]:
+    if steps <= 0:
+        raise ValueError("steps deve essere positivo")
+    random.seed(7)
+    torch.manual_seed(7)
+    torch.use_deterministic_algorithms(True)
+
+    tokenizer = CharTokenizer(CORPUS)
+    model = TinyCausalLM(len(tokenizer.tokens))
+    inputs, targets = build_training_batch(tokenizer.encode(CORPUS), model.context)
+    optimizer = torch.optim.AdamW(model.parameters(), lr=0.01)
+
+    losses: list[float] = []
+    model.train()
+    for _ in range(steps):
+        optimizer.zero_grad(set_to_none=True)
+        logits = model(inputs)
+        loss = nn.functional.cross_entropy(logits.reshape(-1, logits.shape[-1]), targets.reshape(-1))
+        loss.backward()
+        optimizer.step()
+        losses.append(float(loss.detach()))
+
+    model.eval()
+    generated = tokenizer.encode("il modello")
+    with torch.inference_mode():
+        for _ in range(18):
+            context = torch.tensor([generated[-model.context :]], dtype=torch.long)
+            next_id = int(model(context)[0, -1].argmax())
+            generated.append(next_id)
+
+    return {
+        "vocab_size": len(tokenizer.tokens),
+        "context": model.context,
+        "initial_loss": round(losses[0], 6),
+        "final_loss": round(losses[-1], 6),
+        "generated": tokenizer.decode(generated),
+        "target_shift_verified": bool(torch.equal(inputs[:, 1:], targets[:, :-1])),
+    }
+```
+
+Output di `python tiny_transformer_lm.py`:
+
+```text
+{"context": 16, "final_loss": 0.952446, "generated": "il modello lelleggggge token", "initial_loss": 2.921019, "target_shift_verified": true, "vocab_size": 17}
+```
+
+Codice completo: [`code/tiny_transformer_lm.py`](code/tiny_transformer_lm.py); test: [`code/test_tiny_transformer_lm.py`](code/test_tiny_transformer_lm.py); output versionato: [`code/outputs/TINY-TRANSFORMER-LM.txt`](code/outputs/TINY-TRANSFORMER-LM.txt).
+
 
 ## Sampling
 
 Greedy, temperature e top-k mostrano la differenza tra distribuzione e traiettoria. [SRC-95-004]
 
-Prima del nome tecnico fissiamo la situazione: consideriamo lo stesso vettore di logits decodificato con greedy e top-k. Da qui possiamo leggere la conseguenza dichiarata da «Greedy, temperature e top-k mostrano la differenza tra distribuzione e traiettoria».
+**Caso da seguire.** Lo stesso vettore di logits decodificato con greedy e top-k.
 
-La sezione usa l'input «corpus, tokenizer, batch di sequenze e target» come punto di partenza e l'output «logits, loss, token generati e checkpoint» come traccia d'uscita. La trasformazione concreta è «embedding, decoder causale, cross-entropy e sampling»; il caso non è completo se non dichiariamo anche che tokenizer, mask, target shift e sampling devono essere coerenti. La condizione da isolare è «Greedy, temperature e top-k mostrano la differenza tra distribuzione e traiettoria».
+**Controllo.** Riparti da un processo pulito e ricostruisci input e ambiente prima di interpretare la metrica.
 
-Il risultato è interpretabile soltanto se codice, dati, configurazione, ambiente e output restano collegati. La scala del laboratorio rende il percorso leggibile, ma il trasferimento richiede una nuova misura. Il confronto utile mette accanto il prefisso corretto e quello prodotto dal modello, così il segnale disponibile al training non viene confuso con l'inference. La verifica resta ancorata a «Greedy, temperature e top-k mostrano la differenza tra distribuzione e traiettoria». [SRC-95-004]
-
-Se cambiamo una premessa, dobbiamo riaprire l'interpretazione. Per «Sampling» conserviamo l'osservazione collegata a «Greedy, temperature e top-k mostrano la differenza tra distribuzione e traiettoria» e lasciamo esplicitamente fuori ciò che non è stato misurato.
-
-La prova di «Sampling» conserva input, operazione e output; poi esplicita quale parte di «Greedy, temperature e top-k mostrano la differenza tra distribuzione e traiettoria» non è stata misurata. Così il test separa l'evidenza dall'inferenza. Il passaggio successivo, «Limiti», potrà cambiare una sola condizione, dichiarando il nuovo setup prima di interpretare il risultato.
-
-![Costruire un piccolo language model: matrix](../../assets/chapters/95_small_lm/LM-01/candidate-v48.png)
-
-La figura LM-01 usa la famiglia matrix. Il diagramma segue il passaggio: Embedding, decoder causale, cross-entropy e sampling. L'input è corpus, tokenizer, batch di sequenze e target, l'output è logits, loss, token generati e checkpoint; il vincolo da controllare è che tokenizer, mask, target shift e sampling devono essere coerenti.
 
 ## Limiti
 
 Un piccolo LM non rappresenta capacità o sicurezza di modelli su larga scala, ma rende osservabile l'intero contratto. [SRC-95-001]
 
-Per capire «Limiti» partiamo da questo caso: un confronto tra loss del piccolo modello e un claim che non può essere trasferito a modelli grandi. Il caso rende osservabile il punto centrale: «Un piccolo LM non rappresenta capacità o sicurezza di modelli su larga scala, ma rende osservabile l'intero contratto».
+**Caso da seguire.** Un confronto tra loss del piccolo modello e un claim che non può essere trasferito a modelli grandi.
 
-Per ricostruire «Limiti» annotiamo l'input «corpus, tokenizer, batch di sequenze e target», poi l'operazione «embedding, decoder causale, cross-entropy e sampling», infine l'output «logits, loss, token generati e checkpoint». Questa sequenza impedisce di scambiare una forma compatibile per il comportamento descritto dalla fonte. Il controllo parte da «Un piccolo LM non rappresenta capacità o sicurezza di modelli su larga scala, ma rende osservabile l'intero contratto».
+**Controllo.** Distingui il risultato riprodotto dal suo trasferimento ad altra scala. Il confine è: Un piccolo LM non rappresenta capacità o sicurezza di modelli su larga scala, ma rende osservabile l'intero contratto.
 
-Il risultato è interpretabile soltanto se codice, dati, configurazione, ambiente e output restano collegati. La scala del laboratorio rende il percorso leggibile, ma il trasferimento richiede una nuova misura. Per «Limiti» il controllo cambia una sola premessa della frase «Un piccolo LM non rappresenta capacità o sicurezza di modelli su larga scala, ma rende osservabile l'intero contratto» e conserva input, output e criterio di successo, così la differenza resta attribuibile. La verifica resta ancorata a «Un piccolo LM non rappresenta capacità o sicurezza di modelli su larga scala, ma rende osservabile l'intero contratto». [SRC-95-001]
-
-Il punto didattico di «Limiti» è separare ciò che la fonte afferma da ciò che il piccolo caso illustra. L'output «logits, loss, token generati e checkpoint» mostra il contratto locale, ma non sostituisce una misura sul sistema completo.
-
-Per verificare «Limiti» cambiamo una sola condizione vicina alla frase «Un piccolo LM non rappresenta capacità o sicurezza di modelli su larga scala, ma rende osservabile l'intero contratto», teniamo fermo il resto e registriamo l'output «logits, loss, token generati e checkpoint». Il caso negativo deve rendere riconoscibile la failure, non soltanto produrre un numero diverso. Il percorso si chiude lasciando espliciti la misura locale e ciò che richiederebbe una prova ulteriore.
-
-## Il contratto in un caso piccolo: Corpus e tokenizer
-
-Il caso intero parte dall'input «corpus, tokenizer, batch di sequenze e target», applica l'operazione «embedding, decoder causale, cross-entropy e sampling» e osserva l'output «logits, loss, token generati e checkpoint». Un esempio controllato: due sequenze, target spostato di un token e loss calcolata. La formula locale è:
-
-$$
-loss = cross_entropy(logits, targets)
-$$
-
-Un piccolo LM consente di osservare la relazione tra dati, logits e loss. [SRC-95-001]
 
 ![Costruire un piccolo language model: pipeline](../../assets/chapters/95_small_lm/LM-02/candidate-v48.png)
 
-La figura LM-02 cambia composizione rispetto alla prima. Il diagramma segue il passaggio: Embedding, decoder causale, cross-entropy e sampling. L'input è corpus, tokenizer, batch di sequenze e target, l'output è logits, loss, token generati e checkpoint; il vincolo da controllare è che tokenizer, mask, target shift e sampling devono essere coerenti.
+La seconda figura mette a confronto «Sampling» e il limite discusso in «Limiti».
 
-## Dalla trasformazione al test: Decoder Transformer
 
-Nel run Python rendiamo osservabile la frase «Un corpus ridotto e un tokenizer identificabile costruiscono sequenze e split verificabili» con valori piccoli e leggibili. Il test associato verifica determinismo, output e rifiuto di una condizione incoerente; il file di output `code/outputs/SNIP-95-001.txt` documenta il caso senza pretendere una misura generale.
+## Come si collegano i passaggi
 
-## Il perimetro della conclusione: Limiti
+- **Da «Corpus e tokenizer» a «Decoder Transformer».** Un corpus ridotto e un tokenizer identificabile costruiscono sequenze e split verificabili. Embedding, posizione, causal attention, MLP, norm e head di output vengono assemblati con test di shape. La prima tappa fissa domanda, ambiente e input; la seconda costruisce l'artefatto eseguibile che materializza il protocollo. [SRC-95-001; SRC-95-002]
 
-Il meccanismo di «Costruire un piccolo language model» non garantisce da solo che il sistema funzioni fuori dal caso guida. Tokenizer, mask, target shift e sampling devono essere coerenti. Il limite osservato riguarda la frase «Un corpus ridotto e un tokenizer identificabile costruiscono sequenze e split verificabili»; per trasferire il concetto occorre riaprire la verifica quando cambiano dati, scala o ambiente.
+- **Da «Decoder Transformer» a «Training».** Embedding, posizione, causal attention, MLP, norm e head di output vengono assemblati con test di shape. AdamW, schedule, gradient clipping e checkpoint producono un run riproducibile su CPU o singola GPU. Il run produce numeri e file soltanto dopo che configurazione, seed e dipendenze sono stati registrati. [SRC-95-002; SRC-95-003]
 
-## Una sintesi operativa: Costruire un piccolo language model
+- **Da «Training» a «Sampling».** AdamW, schedule, gradient clipping e checkpoint producono un run riproducibile su CPU o singola GPU. Greedy, temperature e top-k mostrano la differenza tra distribuzione e traiettoria. La tappa successiva confronta il risultato atteso con quello osservato e conserva le divergenze invece di correggerle retroattivamente. [SRC-95-003; SRC-95-004]
 
-Il percorso ha tenuto insieme un piccolo language model dalla stringa ai logits, l'operazione «embedding, decoder causale, cross-entropy e sampling» e l'output «logits, loss, token generati e checkpoint». Le sezioni «Corpus e tokenizer», «Decoder Transformer», «Limiti» mostrano come il protocollo osservato delimiti ciò che il capitolo può sostenere. L'invariante da portare avanti è: tokenizer, mask, target shift e sampling devono essere coerenti. Il Capitolo 96, Progetto di produzione completo, può partire da questo output e dichiarare la propria domanda.
+- **Da «Sampling» a «Limiti».** Greedy, temperature e top-k mostrano la differenza tra distribuzione e traiettoria. Un piccolo LM non rappresenta capacità o sicurezza di modelli su larga scala, ma rende osservabile l'intero contratto. La conclusione separa ciò che il laboratorio ha ricostruito da ciò che richiederebbe altri dati, hardware o una valutazione di produzione. [SRC-95-004; SRC-95-001]
 
-### Domande per il lettore: Corpus e tokenizer
+La catena completa produce logits, loss, token generati e checkpoint a partire da corpus, tokenizer, batch di sequenze e target. Ogni collegamento conserva un oggetto osservabile diverso; per questo il risultato non può essere esteso oltre il limite dichiarato: tokenizer, mask, target shift e sampling devono essere coerenti.
 
-1. Ricostruisci l'oggetto continuo a partire da «Corpus e tokenizer» e indica quale parte della frase «Un corpus ridotto e un tokenizer identificabile costruiscono sequenze e split verificabili» entra nel caso.
-2. Spiega quale trasformazione collega «Corpus e tokenizer» a «Limiti» e quale output osserviamo nel passaggio.
-3. Usa lo snippet per controllare l'invariante del contratto: tokenizer, mask, target shift e sampling devono essere coerenti.
-4. Separa una definizione sostenuta da una fonte, un esempio illustrativo e un risultato locale del caso guida.
-5. Indica quale parte della frase «Un piccolo LM non rappresenta capacità o sicurezza di modelli su larga scala, ma rende osservabile l'intero contratto» richiederebbe una misura nuova prima di essere estesa oltre il caso osservato.
 
-### Esercizi di ricostruzione: Limiti
+## Esperimenti da riprodurre
 
-1. Disegna il percorso di «Corpus e tokenizer» indicando dati in ingresso e risultato.
-2. Ripeti «Decoder Transformer» cambiando soltanto un valore dichiarato.
-3. Trova in «Training» una condizione che, se rimossa, produrrebbe una failure leggibile.
-4. Aggiungi a «Sampling» un controllo negativo e spiega che cosa protegge.
-5. Indica quale claim su «Limiti» richiederebbe un benchmark ulteriore.
+1. Ricostruisci «Corpus e tokenizer» con un esempio diverso da quello mostrato e indica l'output atteso prima del calcolo.
+2. Nel passaggio «Decoder Transformer», cambia una sola ipotesi e spiega quale risultato non è più confrontabile.
+3. Collega «Training» a una riga dello snippet oppure motiva perché la prova deve essere documentale.
+4. Progetta un caso limite per «Sampling» che produca una failure riconoscibile.
+5. Per «Limiti», separa una conclusione sostenuta dal caso locale da una che richiederebbe nuovi dati o un benchmark.
 
-## Materiali, fonti e codice verificato: Costruire un piccolo language model
 
-Per «Costruire un piccolo language model», le fonti portanti, i limiti dei claim e la data di consultazione sono raccolti in `FONTI_PRIMARIE.md`; la ricerca riguarda soprattutto protocollo, slice e decisione. `CLAIMS.md` separa definizioni e risultati locali; codice, ambiente, test e output sono nella cartella `code/`, con attenzione a protocollo, slice e decisione.
+## Criterio di completamento
+
+La lezione parte da «corpus, tokenizer, batch di sequenze e target» e arriva fino a «logits, loss, token generati e checkpoint». Il limite da conservare è questo: tokenizer, mask, target shift e sampling devono essere coerenti. Definizioni e risultati citati sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md); la mappa dei claim è in [`CLAIMS.md`](CLAIMS.md).

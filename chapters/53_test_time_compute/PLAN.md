@@ -1,81 +1,31 @@
-# Piano interno. Capitolo 53
+# Piano editoriale. Capitolo 53
 
-- Domanda centrale: quale contratto costruisce Test-time compute, ricerca e controllo del budget?
-- Oggetto continuo: un budget di compute aggiunto durante l'inferenza; input guida: prompt, numero di campioni, token e deadline.
-- Prerequisito stabile: Capitolo 52, Addestrare e distillare il reasoning.
-- Gap: best-of-n, tree search e adaptive compute.
-- Output consegnato: risposta, costo, latenza e qualità; consumer successivo: Capitolo 54, Aggiornamento, merging ed editing del modello.
-- Invariante principale: qualità e costo devono essere riportati insieme.
-- Visuali: COMPUTE-01 e COMPUTE-02, con famiglie compositive variabili.
-- Snippet: code/snip_53_contract.py; output: code/outputs/SNIP-53-001.txt.
-- Gate aperti: revisione autoriale, lettura ad alta voce e approvazione finale delle visuali.
+## Obiettivo didattico
 
-## Transizione 1. Più compute dopo il training
+Seguire **Test-time compute, ricerca e controllo del budget** da prompt, numero di campioni, token e deadline a risposta, costo, latenza e qualità, osservando best-of-n, tree search e adaptive compute senza oltrepassare questo limite: qualità e costo devono essere riportati insieme.
 
-- Ultima affermazione stabile: un budget di compute aggiunto durante l'inferenza.
-- Concetto nuovo: Il sistema può generare più candidate, approfondire una traiettoria o usare ricerca prima di restituire la risposta.
-- Input e shape: prompt, numero di campioni, token e deadline.
-- Operazione: best-of-n, tree search e adaptive compute.
-- Output e shape: risposta, costo, latenza e qualità.
-- Che cosa cambia: il passaggio specifico di «Più compute dopo il training».
-- Invariante: qualità e costo devono essere riportati insieme.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: quattro campioni con un budget massimo di token; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Best-of-n.
-- Prova: SRC-53-001 e sezione pubblica corrispondente.
+## Prerequisiti reali
 
-## Transizione 2. Best-of-n
+- Capitolo 10: Ricerca, pianificazione e giochi
+- Capitolo 31: Dalla rappresentazione linguistica agli LLM
+- Capitolo 50: Process supervision, outcome supervision e verifier
 
-- Ultima affermazione stabile: un budget di compute aggiunto durante l'inferenza.
-- Concetto nuovo: Un proposer genera n candidate e un verifier seleziona. Il beneficio dipende dalla diversità e dalla qualità del ranking.
-- Input e shape: prompt, numero di campioni, token e deadline.
-- Operazione: best-of-n, tree search e adaptive compute.
-- Output e shape: risposta, costo, latenza e qualità.
-- Che cosa cambia: il passaggio specifico di «Best-of-n».
-- Invariante: qualità e costo devono essere riportati insieme.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: quattro campioni con un budget massimo di token; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Tree search.
-- Prova: SRC-53-002 e sezione pubblica corrispondente.
+## Percorso della lezione
 
-## Transizione 3. Tree search
+1. **Più compute dopo il training.** Il sistema può generare più candidate, approfondire una traiettoria o usare ricerca prima di restituire la risposta. Prova: SRC-53-001.
+2. **Best-of-n.** Un proposer genera n candidate e un verifier seleziona. Il beneficio dipende dalla diversità e dalla qualità del ranking. Prova: SRC-53-002.
+3. **Tree search.** Stati parziali vengono espansi, valutati e potati. Branching factor, profondità e budget definiscono il costo. Prova: SRC-53-003.
+4. **Adaptive compute.** Problemi differenti ricevono budget differenti secondo confidenza, difficoltà o policy. La stima di difficoltà può essere errata. Prova: SRC-53-004.
+5. **Metriche costo-qualità.** Accuracy o reward devono essere riportati insieme a token, forward, latenza e fallimenti del verifier. Prova: SRC-53-001.
 
-- Ultima affermazione stabile: un budget di compute aggiunto durante l'inferenza.
-- Concetto nuovo: Stati parziali vengono espansi, valutati e potati. Branching factor, profondità e budget definiscono il costo.
-- Input e shape: prompt, numero di campioni, token e deadline.
-- Operazione: best-of-n, tree search e adaptive compute.
-- Output e shape: risposta, costo, latenza e qualità.
-- Che cosa cambia: il passaggio specifico di «Tree search».
-- Invariante: qualità e costo devono essere riportati insieme.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: quattro campioni con un budget massimo di token; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Adaptive compute.
-- Prova: SRC-53-003 e sezione pubblica corrispondente.
+## Prove e artefatti
 
-## Transizione 4. Adaptive compute
+- riferimento minimo: `code/snip_53_contract.py`; test: `code/test_53_contract.py`; output: `code/outputs/SNIP-53-001.txt`.
+- visuali candidate: COMPUTE-01, COMPUTE-02; le domande pedagogiche sono distinte e l'approvazione autoriale resta aperta.
+- fonti: `FONTI_PRIMARIE.md`; corrispondenza claim-fonte: `CLAIMS.md`.
 
-- Ultima affermazione stabile: un budget di compute aggiunto durante l'inferenza.
-- Concetto nuovo: Problemi differenti ricevono budget differenti secondo confidenza, difficoltà o policy. La stima di difficoltà può essere errata.
-- Input e shape: prompt, numero di campioni, token e deadline.
-- Operazione: best-of-n, tree search e adaptive compute.
-- Output e shape: risposta, costo, latenza e qualità.
-- Che cosa cambia: il passaggio specifico di «Adaptive compute».
-- Invariante: qualità e costo devono essere riportati insieme.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: quattro campioni con un budget massimo di token; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Metriche costo-qualità.
-- Prova: SRC-53-004 e sezione pubblica corrispondente.
+## Gate aperti
 
-## Transizione 5. Metriche costo-qualità
-
-- Ultima affermazione stabile: un budget di compute aggiunto durante l'inferenza.
-- Concetto nuovo: Accuracy o reward devono essere riportati insieme a token, forward, latenza e fallimenti del verifier.
-- Input e shape: prompt, numero di campioni, token e deadline.
-- Operazione: best-of-n, tree search e adaptive compute.
-- Output e shape: risposta, costo, latenza e qualità.
-- Che cosa cambia: il passaggio specifico di «Metriche costo-qualità».
-- Invariante: qualità e costo devono essere riportati insieme.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: quattro campioni con un budget massimo di token; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Aggiornamento, merging ed editing del modello.
-- Prova: SRC-53-001 e sezione pubblica corrispondente.
+- lettura editoriale finale da parte dell'autore;
+- approvazione delle visuali nel contesto impaginato;
+- benchmark esterni solo quando il capitolo formula un claim di scala o di produzione.

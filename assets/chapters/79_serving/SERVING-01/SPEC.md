@@ -1,14 +1,16 @@
 # Specifica visuale SERVING-01
 
-- famiglia: chart
-- domanda principale: Il diagramma segue il passaggio: Batching continuo, admission e scheduling. L'input è prompt, deadline, lunghezza, memoria e priorità, l'output è throughput, latency p50/p99 e richieste ammesse; il vincolo da controllare è che throughput e latenza devono essere misurati insieme
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: serving_queue
+- domanda principale: Come si passa da «Richieste eterogenee» a «Throughput e latency» mantenendo osservabile richieste eterogenee in una coda di serving?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, chart, invariante o limite in chiusura
-- nodi e contenuti: 1: Richieste eterogenee; 2: Continuous batching; 3: Throughput e latency; 4: Admission control; 5: Metriche di servizio
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: throughput e latenza devono essere misurati insieme
-- fonti collegate: SRC-79-001 ... SRC-79-004
-- alt text: Diagramma SERVING-01 del Capitolo 79, famiglia chart. Domanda: Il diagramma segue il passaggio: Batching continuo, admission e scheduling. L'input è prompt, deadline, lunghezza, memoria e priorità, l'output è throughput, latency p50/p99 e richieste ammesse; il vincolo da controllare è che throughput e latenza devono essere misurati insieme La composizione usa i passaggi Richieste eterogenee, Continuous batching, Throughput e latency, Admission control, Metriche di servizio.
+- file candidato: candidate-v48.png
+- oggetto osservato: richieste eterogenee in una coda di serving
+- input: prompt, deadline, lunghezza, memoria e priorità
+- output: throughput, latency p50/p99 e richieste ammesse
+- nodi locali: Richieste eterogenee: Prompt e output hanno lunghezze differenti. Un batch statico spreca slot quando alcune…; Continuous batching: Il scheduler inserisce nuove richieste tra iterazioni di decode e rimuove quelle concluse.; Throughput e latency: Aumentare batch migliora utilizzo ma può aumentare time-to-first-token e inter-token…
+- limite visualizzato: throughput e latenza devono essere misurati insieme
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

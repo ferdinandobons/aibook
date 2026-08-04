@@ -1,14 +1,16 @@
 # Specifica visuale LAB-01
 
-- famiglia: checklist
-- domanda principale: Il diagramma segue il passaggio: Run, test, valutazione e report. L'input è seed, dataset piccolo, config, codice e versione, l'output è loss, metriche, manifest e limite; il vincolo da controllare è che un run locale non equivale a una prova generale
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: lab_pipeline
+- domanda principale: Come si passa da «Ambiente riproducibile» a «Modello e loss» mantenendo osservabile un esperimento didattico con ambiente e artefatti dichiarati?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, checklist, invariante o limite in chiusura
-- nodi e contenuti: 1: Ambiente riproducibile; 2: Dataset piccolo; 3: Modello e loss; 4: Training e valutazione; 5: Report
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: un run locale non equivale a una prova generale
-- fonti collegate: SRC-94-001 ... SRC-94-004
-- alt text: Diagramma LAB-01 del Capitolo 94, famiglia checklist. Domanda: Il diagramma segue il passaggio: Run, test, valutazione e report. L'input è seed, dataset piccolo, config, codice e versione, l'output è loss, metriche, manifest e limite; il vincolo da controllare è che un run locale non equivale a una prova generale La composizione usa i passaggi Ambiente riproducibile, Dataset piccolo, Modello e loss, Training e valutazione, Report.
+- file candidato: candidate-v48.png
+- oggetto osservato: un esperimento didattico con ambiente e artefatti dichiarati
+- input: seed, dataset piccolo, config, codice e versione
+- output: loss, metriche, manifest e limite
+- nodi locali: Ambiente riproducibile: Python, dipendenze, seed e struttura del progetto vengono fissati prima degli esperimenti.; Dataset piccolo: Un dataset controllabile permette di vedere preprocessing, split, batch e leakage.; Modello e loss: Una baseline lineare precede la rete. Shape, logits e loss vengono verificati con test.
+- limite visualizzato: un run locale non equivale a una prova generale
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

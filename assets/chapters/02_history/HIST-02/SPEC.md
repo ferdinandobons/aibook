@@ -44,3 +44,4 @@ L'input esterno resta lo stesso. I paradigmi possono convivere nella stessa appl
 - generazione esplorativa con lo strumento immagini;
 - composizione raster revisionabile: `scripts/generate_history_visuals.py`;
 - decodifica verificata nel workflow `generate-book-visuals.yml`.
+- domanda principale: Quale confronto o limite chiarisce «Descrivere il problema con simboli e ricerca»?

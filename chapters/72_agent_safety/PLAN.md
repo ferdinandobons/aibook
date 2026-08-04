@@ -1,81 +1,31 @@
-# Piano interno. Capitolo 72
+# Piano editoriale. Capitolo 72
 
-- Domanda centrale: quale contratto costruisce Sicurezza operativa degli agenti?
-- Oggetto continuo: una decisione agentica su una risorsa reale; input guida: input non fidato, tool, scope e approvazione.
-- Prerequisito stabile: Capitolo 71, Training e valutazione degli agenti.
-- Gap: least privilege, sandbox, human approval e rollback.
-- Output consegnato: allow/deny, side effect o rollback auditabile; consumer successivo: Capitolo 73, Distillazione e pruning.
-- Invariante principale: l'enforcement deve stare fuori dal testo generato.
-- Visuali: SAFETY-01 e SAFETY-02, con famiglie compositive variabili.
-- Snippet: code/snip_72_contract.py; output: code/outputs/SNIP-72-001.txt.
-- Gate aperti: revisione autoriale, lettura ad alta voce e approvazione finale delle visuali.
+## Obiettivo didattico
 
-## Transizione 1. Least privilege
+Seguire **Sicurezza operativa degli agenti** da input non fidato, tool, scope e approvazione a allow/deny, side effect o rollback auditabile, osservando least privilege, sandbox, human approval e rollback senza oltrepassare questo limite: l'enforcement deve stare fuori dal testo generato.
 
-- Ultima affermazione stabile: una decisione agentica su una risorsa reale.
-- Concetto nuovo: Ogni tool riceve soltanto gli scope necessari. Credenziali e filesystem devono essere separati per task e tenant.
-- Input e shape: input non fidato, tool, scope e approvazione.
-- Operazione: least privilege, sandbox, human approval e rollback.
-- Output e shape: allow/deny, side effect o rollback auditabile.
-- Che cosa cambia: il passaggio specifico di «Least privilege».
-- Invariante: l'enforcement deve stare fuori dal testo generato.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: refund bloccato e lookup consentito con log firmato; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Sandbox.
-- Prova: SRC-72-001 e sezione pubblica corrispondente.
+## Prerequisiti reali
 
-## Transizione 2. Sandbox
+- Capitolo 67: Output strutturato e uso degli strumenti
+- Capitolo 69: Ciclo agentico, pianificazione e verifica
+- Capitolo 71: Training e valutazione degli agenti
 
-- Ultima affermazione stabile: una decisione agentica su una risorsa reale.
-- Concetto nuovo: Codice e browser vengono eseguiti in ambienti isolati con rete, processi e risorse limitate.
-- Input e shape: input non fidato, tool, scope e approvazione.
-- Operazione: least privilege, sandbox, human approval e rollback.
-- Output e shape: allow/deny, side effect o rollback auditabile.
-- Che cosa cambia: il passaggio specifico di «Sandbox».
-- Invariante: l'enforcement deve stare fuori dal testo generato.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: refund bloccato e lookup consentito con log firmato; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Human approval.
-- Prova: SRC-72-002 e sezione pubblica corrispondente.
+## Percorso della lezione
 
-## Transizione 3. Human approval
+1. **Least privilege.** Ogni tool riceve soltanto gli scope necessari. Credenziali e filesystem devono essere separati per task e tenant. Prova: SRC-72-001.
+2. **Sandbox.** Codice e browser vengono eseguiti in ambienti isolati con rete, processi e risorse limitate. Prova: SRC-72-002.
+3. **Human approval.** Azioni ad alto impatto richiedono conferma con anteprima, differenza e destinatario espliciti. Prova: SRC-72-003.
+4. **Rollback e audit.** Transaction log, snapshot e operazioni compensative permettono di ricostruire e correggere una traiettoria. Prova: SRC-72-004.
+5. **Prompt injection.** Contenuti esterni possono tentare di cambiare il piano. Dati non fidati e istruzioni di sistema devono restare separati. Prova: SRC-72-001.
 
-- Ultima affermazione stabile: una decisione agentica su una risorsa reale.
-- Concetto nuovo: Azioni ad alto impatto richiedono conferma con anteprima, differenza e destinatario espliciti.
-- Input e shape: input non fidato, tool, scope e approvazione.
-- Operazione: least privilege, sandbox, human approval e rollback.
-- Output e shape: allow/deny, side effect o rollback auditabile.
-- Che cosa cambia: il passaggio specifico di «Human approval».
-- Invariante: l'enforcement deve stare fuori dal testo generato.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: refund bloccato e lookup consentito con log firmato; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Rollback e audit.
-- Prova: SRC-72-003 e sezione pubblica corrispondente.
+## Prove e artefatti
 
-## Transizione 4. Rollback e audit
+- riferimento minimo: `code/snip_72_contract.py`; test: `code/test_72_contract.py`; output: `code/outputs/SNIP-72-001.txt`.
+- visuali candidate: SAFETY-01, SAFETY-02; le domande pedagogiche sono distinte e l'approvazione autoriale resta aperta.
+- fonti: `FONTI_PRIMARIE.md`; corrispondenza claim-fonte: `CLAIMS.md`.
 
-- Ultima affermazione stabile: una decisione agentica su una risorsa reale.
-- Concetto nuovo: Transaction log, snapshot e operazioni compensative permettono di ricostruire e correggere una traiettoria.
-- Input e shape: input non fidato, tool, scope e approvazione.
-- Operazione: least privilege, sandbox, human approval e rollback.
-- Output e shape: allow/deny, side effect o rollback auditabile.
-- Che cosa cambia: il passaggio specifico di «Rollback e audit».
-- Invariante: l'enforcement deve stare fuori dal testo generato.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: refund bloccato e lookup consentito con log firmato; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Prompt injection.
-- Prova: SRC-72-004 e sezione pubblica corrispondente.
+## Gate aperti
 
-## Transizione 5. Prompt injection
-
-- Ultima affermazione stabile: una decisione agentica su una risorsa reale.
-- Concetto nuovo: Contenuti esterni possono tentare di cambiare il piano. Dati non fidati e istruzioni di sistema devono restare separati.
-- Input e shape: input non fidato, tool, scope e approvazione.
-- Operazione: least privilege, sandbox, human approval e rollback.
-- Output e shape: allow/deny, side effect o rollback auditabile.
-- Che cosa cambia: il passaggio specifico di «Prompt injection».
-- Invariante: l'enforcement deve stare fuori dal testo generato.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: refund bloccato e lookup consentito con log firmato; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Distillazione e pruning.
-- Prova: SRC-72-001 e sezione pubblica corrispondente.
+- lettura editoriale finale da parte dell'autore;
+- approvazione delle visuali nel contesto impaginato;
+- benchmark esterni solo quando il capitolo formula un claim di scala o di produzione.

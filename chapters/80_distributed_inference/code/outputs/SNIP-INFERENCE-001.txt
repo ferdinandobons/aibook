@@ -1,3 +1,0 @@
-chapter: 80
-title: Serving disaggregato e inference distribuita
-output: [0.755272, 0.334759]

@@ -1,14 +1,16 @@
 # Specifica visuale GENERATION-01
 
-- famiglia: timeline
-- domanda principale: Il diagramma segue il passaggio: Denoising, guidance, editing o inpainting. L'input è latent, prompt, mask e rumore, l'output è immagine, score e metadati di provenienza; il vincolo da controllare è che controllo dell'immagine e verità del contenuto sono proprietà diverse
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: image_generation
+- domanda principale: Come si passa da «Latent diffusion» a «Classifier-free guidance» mantenendo osservabile un contenuto immagine e la condizione che lo modifica?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, timeline, invariante o limite in chiusura
-- nodi e contenuti: 1: Latent diffusion; 2: Conditioning; 3: Classifier-free guidance; 4: Editing e inpainting; 5: Controllo e provenienza
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: controllo dell'immagine e verità del contenuto sono proprietà diverse
-- fonti collegate: SRC-57-001 ... SRC-57-004
-- alt text: Diagramma GENERATION-01 del Capitolo 57, famiglia timeline. Domanda: Il diagramma segue il passaggio: Denoising, guidance, editing o inpainting. L'input è latent, prompt, mask e rumore, l'output è immagine, score e metadati di provenienza; il vincolo da controllare è che controllo dell'immagine e verità del contenuto sono proprietà diverse La composizione usa i passaggi Latent diffusion, Conditioning, Classifier-free guidance, Editing e inpainting, Controllo e provenienza.
+- file candidato: candidate-v48.png
+- oggetto osservato: un contenuto immagine e la condizione che lo modifica
+- input: latent, prompt, mask e rumore
+- output: immagine, score e metadati di provenienza
+- nodi locali: Latent diffusion: Un autoencoder comprime l'immagine e il denoiser opera nello spazio latente. Il decoder…; Conditioning: Testo, classi, immagini o mappe strutturali entrano attraverso cross-attention,…; Classifier-free guidance: Combinare predizioni condizionate e non condizionate aumenta aderenza, con un trade-off…
+- limite visualizzato: controllo dell'immagine e verità del contenuto sono proprietà diverse
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

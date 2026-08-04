@@ -4,133 +4,117 @@ part_id: P07
 order_key: 320
 title: Il ciclo di vita dei dati
 maturity: CORE
-status: candidatura completa in revisione autoriale
-version: 0.4.0-draft2
-last_source_check: 3 agosto 2026
+status: revisione editoriale v2, approvazione autoriale aperta
+version: 0.5.0-draft3
+last_source_check: 4 agosto 2026
 environment: Python 3.13.12, CPU
-deferred: benchmark applicativi, varianti non necessarie al contratto centrale e approvazione autoriale
+code_policy: reference
+deferred: benchmark applicativi non eseguiti e approvazione autoriale delle visuali
 -->
 
 # Capitolo 32. Il ciclo di vita dei dati
 
-Il risultato precedente non è ancora una soluzione completa. Partiamo da un record di dataset dalla sorgente al manifest e dalla richiesta «Il pacco non è arrivato» come esempio comune; per arrivare all'output «record ammesso, conteggi e manifest» isoliamo il passaggio «parsing, filtro, deduplicazione e tokenizzazione» e ne misuriamo il limite prima di passare a Dataset mixture, curriculum e dati sintetici.
+La domanda guida di questa lezione è come collegare «Sorgenti e provenienza» e «Split, tokenizzazione e manifest» senza perdere il contratto tecnico di il ciclo di vita dei dati. L'oggetto osservato è un record di dataset dalla sorgente al manifest. Il contratto locale è: input, testo grezzo, metadati, split e digest; operazione, parsing, filtro, deduplicazione e tokenizzazione; output, record ammesso, conteggi e manifest. Il caso guida è questo: Due sorgenti con conteggi diversi confrontate dopo una regola di campionamento dichiarata. Il confine da mantenere esplicito è: ogni trasformazione deve restare ricostruibile e ordinata.
 
 ## Sorgenti e provenienza
 
 Record, documenti, timestamp e licenze devono restare tracciabili dalla raccolta allo shard. [SRC-32-001]
 
-Prima del nome tecnico fissiamo la situazione: consideriamo due sorgenti con conteggi diversi confrontate dopo una regola di campionamento dichiarata. Da qui possiamo leggere la conseguenza dichiarata da «Record, documenti, timestamp e licenze devono restare tracciabili dalla raccolta allo shard».
+Il digest diventa utile soltanto se le trasformazioni incluse sono dichiarate.
 
-La sezione usa l'input «testo grezzo, metadati, split e digest» come punto di partenza e l'output «record ammesso, conteggi e manifest» come traccia d'uscita. La trasformazione concreta è «parsing, filtro, deduplicazione e tokenizzazione»; il caso non è completo se non dichiariamo anche che ogni trasformazione deve restare ricostruibile e ordinata. La condizione da isolare è «Record, documenti, timestamp e licenze devono restare tracciabili dalla raccolta allo shard».
+**Caso da seguire.** Due sorgenti con conteggi diversi confrontate dopo una regola di campionamento dichiarata.
 
-Ogni trasformazione dei dati cambia la popolazione che il training vede. Provenienza, regole di filtro, deduplicazione, split e manifest servono a distinguere un cambiamento nei dati da un cambiamento nel modello. La variabile da registrare è la probabilità effettiva di campionamento per sorgente, distinta dal conteggio grezzo dei record. La verifica resta ancorata a «Record, documenti, timestamp e licenze devono restare tracciabili dalla raccolta allo shard». [SRC-32-001]
+**Controllo.** Conserva record iniziale, regola applicata e record finale; un conteggio aggregato non basta a spiegare la trasformazione.
 
-Se cambiamo una premessa, dobbiamo riaprire l'interpretazione. Per «Sorgenti e provenienza» conserviamo l'osservazione collegata a «Record, documenti, timestamp e licenze devono restare tracciabili dalla raccolta allo shard» e lasciamo esplicitamente fuori ciò che non è stato misurato.
 
-La prova di «Sorgenti e provenienza» conserva input, operazione e output; poi esplicita quale parte di «Record, documenti, timestamp e licenze devono restare tracciabili dalla raccolta allo shard» non è stata misurata. Così il test separa l'evidenza dall'inferenza. Il passaggio successivo, «Parsing e normalizzazione», potrà cambiare una sola condizione, dichiarando il nuovo setup prima di interpretare il risultato.
+![Il ciclo di vita dei dati: manifest](../../assets/chapters/32_data_lifecycle/DATA-01/candidate-v47.png)
+
+La prima figura segue il percorso da «Sorgenti e provenienza» a «Filtri».
+
 
 ## Parsing e normalizzazione
 
 Trasformazioni di HTML, PDF, codice e conversazioni possono perdere informazione e devono essere versionate. [SRC-32-002]
 
-Per capire «Parsing e normalizzazione» partiamo da questo caso: due record con ID, testo, licenza e timestamp che attraversano una sola trasformazione registrata. Il caso rende osservabile il punto centrale: «Trasformazioni di HTML, PDF, codice e conversazioni possono perdere informazione e devono essere versionate».
+**Caso da seguire.** Due record con ID, testo, licenza e timestamp che attraversano una sola trasformazione registrata.
 
-Per ricostruire «Parsing e normalizzazione» annotiamo l'input «testo grezzo, metadati, split e digest», poi l'operazione «parsing, filtro, deduplicazione e tokenizzazione», infine l'output «record ammesso, conteggi e manifest». Questa sequenza impedisce di scambiare una forma compatibile per il comportamento descritto dalla fonte. Il controllo parte da «Trasformazioni di HTML, PDF, codice e conversazioni possono perdere informazione e devono essere versionate».
+**Controllo.** Esegui «Parsing e normalizzazione» due volte sullo stesso manifest e confronta identificatori, ordine, split e checksum.
 
-Il punto operativo è la scala del segnale: inizializzazione, normalizzazione, residual e regolarizzazione intervengono in momenti diversi e non sono sostituti intercambiabili. Shape compatibili e curve osservate servono a controllare il percorso reale. Per «Parsing e normalizzazione» il controllo cambia una sola premessa della frase «Trasformazioni di HTML, PDF, codice e conversazioni possono perdere informazione e devono essere versionate» e conserva input, output e criterio di successo, così la differenza resta attribuibile. La verifica resta ancorata a «Trasformazioni di HTML, PDF, codice e conversazioni possono perdere informazione e devono essere versionate». [SRC-32-002]
-
-Il punto didattico di «Parsing e normalizzazione» è separare ciò che la fonte afferma da ciò che il piccolo caso illustra. L'output «record ammesso, conteggi e manifest» mostra il contratto locale, ma non sostituisce una misura sul sistema completo.
-
-Per verificare «Parsing e normalizzazione» cambiamo una sola condizione vicina alla frase «Trasformazioni di HTML, PDF, codice e conversazioni possono perdere informazione e devono essere versionate», teniamo fermo il resto e registriamo l'output «record ammesso, conteggi e manifest». Il caso negativo deve rendere riconoscibile la failure, non soltanto produrre un numero diverso. La sezione successiva, «Filtri», riceve l'output «record ammesso, conteggi e manifest» come base, ma dovrà formulare e verificare la propria distinzione.
 
 ## Filtri
 
 Filtri di qualità, lingua, sicurezza e PII modificano la distribuzione e richiedono statistiche prima e dopo. [SRC-32-003]
 
-Il caso minimo di «Filtri» si presenta così: due record con ID, testo, licenza e timestamp che attraversano una sola trasformazione registrata. Non lo usiamo come decorazione: serve a rendere osservabile la frase «Filtri di qualità, lingua, sicurezza e PII modificano la distribuzione e richiedono statistiche prima e dopo».
+**Caso da seguire.** Per «Filtri» si mantiene l'input del capitolo e si isola questa condizione: Filtri di qualità, lingua, sicurezza e PII modificano la distribuzione e richiedono statistiche prima e dopo.
 
-Nel contratto locale, l'input «testo grezzo, metadati, split e digest» entra, l'operazione «parsing, filtro, deduplicazione e tokenizzazione» modifica il percorso e l'output «record ammesso, conteggi e manifest» è ciò che osserviamo. Qui cambia soprattutto il passaggio «Filtri»; resta da controllare che ogni trasformazione deve restare ricostruibile e ordinata. La domanda locale è «Filtri di qualità, lingua, sicurezza e PII modificano la distribuzione e richiedono statistiche prima e dopo».
+**Controllo.** Aggiungi un record che deve essere escluso e verifica che l'output conservi anche il motivo dell'esclusione.
 
-Ogni trasformazione dei dati cambia la popolazione che il training vede. Provenienza, regole di filtro, deduplicazione, split e manifest servono a distinguere un cambiamento nei dati da un cambiamento nel modello. Per «Filtri» il controllo cambia una sola premessa della frase «Filtri di qualità, lingua, sicurezza e PII modificano la distribuzione e richiedono statistiche prima e dopo» e conserva input, output e criterio di successo, così la differenza resta attribuibile. La verifica resta ancorata a «Filtri di qualità, lingua, sicurezza e PII modificano la distribuzione e richiedono statistiche prima e dopo». [SRC-32-003]
 
-La lettura va fatta in ordine: prima il caso, poi la trasformazione, quindi la conseguenza. Il piccolo risultato resta un'illustrazione di «Filtri di qualità, lingua, sicurezza e PII modificano la distribuzione e richiedono statistiche prima e dopo», non una promessa generale.
+## Esempio Python eseguito
 
-Il controllo minimo di «Filtri» confronta il caso dichiarato con una variazione che rompe la sua ipotesi. Se la failure non è distinguibile dall'esito valido, manca un'osservazione nel contratto di popolazione, manifest e stato del run. Da «Filtri» portiamo l'output «record ammesso, conteggi e manifest»; non portiamo invece una conclusione oltre il caso locale.
+Il frammento seguente è lo stesso conservato nel repository. Usa valori piccoli perché l'obiettivo è osservare il meccanismo, non simulare una scala che non abbiamo eseguito.
+
+```python
+def contract():
+    records = [{"id": "a", "source": "mail", "text": "pacco"}, {"id": "b", "source": "crm", "text": "ritardo"}]
+    manifest = {"ids": [record["id"] for record in records], "sources": sorted({record["source"] for record in records})}
+    return {"manifest": manifest, "invariant": "data transformations retain provenance and a stable record identity"}
+```
+
+Esecuzione con `python snip_32_contract.py`:
+
+```text
+{"invariant": "data transformations retain provenance and a stable record identity", "manifest": {"ids": ["a", "b"], "sources": ["crm", "mail"]}}
+```
+
+Il test associato è [`code/test_32_contract.py`](code/test_32_contract.py); l'output versionato è [`code/outputs/SNIP-32-001.txt`](code/outputs/SNIP-32-001.txt).
+
 
 ## Deduplicazione e contaminazione
 
 Hash esatti e similarità approssimata rilevano forme differenti di duplicazione. I benchmark richiedono controlli separati. [SRC-32-004]
 
-Prima del nome tecnico fissiamo la situazione: consideriamo due record simili che vengono confrontati con hash esatto e con una regola distinta per la similarità approssimata. Da qui possiamo leggere la conseguenza dichiarata da «Hash esatti e similarità approssimata rilevano forme differenti di duplicazione».
+**Caso da seguire.** Due record simili che vengono confrontati con hash esatto e con una regola distinta per la similarità approssimata.
 
-La sezione usa l'input «testo grezzo, metadati, split e digest» come punto di partenza e l'output «record ammesso, conteggi e manifest» come traccia d'uscita. La trasformazione concreta è «parsing, filtro, deduplicazione e tokenizzazione»; il caso non è completo se non dichiariamo anche che ogni trasformazione deve restare ricostruibile e ordinata. La condizione da isolare è «Hash esatti e similarità approssimata rilevano forme differenti di duplicazione».
+**Controllo.** Modifica una sola regola della pipeline e misura quali record cambiano, evitando di confrontare raccolte di origine diversa.
 
-Ogni trasformazione dei dati cambia la popolazione che il training vede. Provenienza, regole di filtro, deduplicazione, split e manifest servono a distinguere un cambiamento nei dati da un cambiamento nel modello. Per «Deduplicazione e contaminazione» il controllo cambia una sola premessa della frase «Hash esatti e similarità approssimata rilevano forme differenti di duplicazione» e conserva input, output e criterio di successo, così la differenza resta attribuibile. La verifica resta ancorata a «Hash esatti e similarità approssimata rilevano forme differenti di duplicazione». [SRC-32-004]
-
-Se cambiamo una premessa, dobbiamo riaprire l'interpretazione. Per «Deduplicazione e contaminazione» conserviamo l'osservazione collegata a «Hash esatti e similarità approssimata rilevano forme differenti di duplicazione» e lasciamo esplicitamente fuori ciò che non è stato misurato.
-
-La prova di «Deduplicazione e contaminazione» conserva input, operazione e output; poi esplicita quale parte di «Hash esatti e similarità approssimata rilevano forme differenti di duplicazione» non è stata misurata. Così il test separa l'evidenza dall'inferenza. Il passaggio successivo, «Split, tokenizzazione e manifest», potrà cambiare una sola condizione, dichiarando il nuovo setup prima di interpretare il risultato.
-
-![Il ciclo di vita dei dati: manifest](../../assets/chapters/32_data_lifecycle/DATA-01/candidate-v47.png)
-
-La figura DATA-01 usa la famiglia manifest. Il diagramma segue il passaggio: Parsing, filtro, deduplicazione e tokenizzazione. L'input è testo grezzo, metadati, split e digest, l'output è record ammesso, conteggi e manifest; il vincolo da controllare è che ogni trasformazione deve restare ricostruibile e ordinata.
 
 ## Split, tokenizzazione e manifest
 
 Confini temporali, tokenizer, packing, checksum e conteggi definiscono l'artefatto usato dal training. [SRC-32-001]
 
-Per capire «Split, tokenizzazione e manifest» partiamo da questo caso: un prefisso corto con ID, lunghezza, posizione e output del token successivo dichiarati. Il caso rende osservabile il punto centrale: «Confini temporali, tokenizer, packing, checksum e conteggi definiscono l'artefatto usato dal training».
+**Caso da seguire.** Un prefisso corto con ID, lunghezza, posizione e output del token successivo dichiarati.
 
-Per ricostruire «Split, tokenizzazione e manifest» annotiamo l'input «testo grezzo, metadati, split e digest», poi l'operazione «parsing, filtro, deduplicazione e tokenizzazione», infine l'output «record ammesso, conteggi e manifest». Questa sequenza impedisce di scambiare una forma compatibile per il comportamento descritto dalla fonte. Il controllo parte da «Confini temporali, tokenizer, packing, checksum e conteggi definiscono l'artefatto usato dal training».
+**Controllo.** Descrivi ciò che la pipeline perde oltre a ciò che produce. Il limite locale è: Confini temporali, tokenizer, packing, checksum e conteggi definiscono l'artefatto usato dal training.
 
-Prima del modello, il testo diventa una sequenza di unità con una convenzione precisa. Encoding, tokenizer, token speciali, mask e packing modificano l'input effettivo e quindi fanno parte del contratto del checkpoint. Per «Split, tokenizzazione e manifest» il controllo cambia una sola premessa della frase «Confini temporali, tokenizer, packing, checksum e conteggi definiscono l'artefatto usato dal training» e conserva input, output e criterio di successo, così la differenza resta attribuibile. La verifica resta ancorata a «Confini temporali, tokenizer, packing, checksum e conteggi definiscono l'artefatto usato dal training». [SRC-32-001]
-
-Il punto didattico di «Split, tokenizzazione e manifest» è separare ciò che la fonte afferma da ciò che il piccolo caso illustra. L'output «record ammesso, conteggi e manifest» mostra il contratto locale, ma non sostituisce una misura sul sistema completo.
-
-Per verificare «Split, tokenizzazione e manifest» cambiamo una sola condizione vicina alla frase «Confini temporali, tokenizer, packing, checksum e conteggi definiscono l'artefatto usato dal training», teniamo fermo il resto e registriamo l'output «record ammesso, conteggi e manifest». Il caso negativo deve rendere riconoscibile la failure, non soltanto produrre un numero diverso. Il percorso si chiude lasciando espliciti la misura locale e ciò che richiederebbe una prova ulteriore.
-
-## Un esempio con controllo negativo: Sorgenti e provenienza
-
-Il caso intero parte dall'input «testo grezzo, metadati, split e digest», applica l'operazione «parsing, filtro, deduplicazione e tokenizzazione» e osserva l'output «record ammesso, conteggi e manifest». Un esempio controllato: due record, uno duplicato, con digest prima e dopo il filtro. La formula locale è:
-
-$$
-manifest = hash(raw, transform, tokenizer, split)
-$$
-
-Il digest diventa utile soltanto se le trasformazioni incluse sono dichiarate. [SRC-32-001]
 
 ![Il ciclo di vita dei dati: funnel](../../assets/chapters/32_data_lifecycle/DATA-02/candidate-v47.png)
 
-La figura DATA-02 cambia composizione rispetto alla prima. Il diagramma segue il passaggio: Parsing, filtro, deduplicazione e tokenizzazione. L'input è testo grezzo, metadati, split e digest, l'output è record ammesso, conteggi e manifest; il vincolo da controllare è che ogni trasformazione deve restare ricostruibile e ordinata.
+La seconda figura mette a confronto «Deduplicazione e contaminazione» e il limite discusso in «Split, tokenizzazione e manifest».
 
-## Dalla formula al run: Parsing e normalizzazione
 
-Lo snippet locale mette in esecuzione questo caso: due record, uno duplicato, con digest prima e dopo il filtro. Il test associato controlla determinismo, output e invariante e rifiuta una shape o condizione incoerente; il risultato è conservato in `code/outputs/SNIP-32-001.txt`, come evidenza locale e non come benchmark di produzione.
+## Come si collegano i passaggi
 
-## Limiti, varianti e nuove misure: Split, tokenizzazione e manifest
+- **Da «Sorgenti e provenienza» a «Parsing e normalizzazione».** Record, documenti, timestamp e licenze devono restare tracciabili dalla raccolta allo shard. Trasformazioni di HTML, PDF, codice e conversazioni possono perdere informazione e devono essere versionate. Il primo passaggio identifica il record e la sua provenienza; il secondo dichiara la trasformazione che cambia la popolazione osservata. [SRC-32-001; SRC-32-002]
 
-Il caso di «Il ciclo di vita dei dati» non certifica un servizio completo. Ogni trasformazione deve restare ricostruibile e ordinata. La domanda successiva è se «Confini temporali, tokenizer, packing, checksum e conteggi definiscono l'artefatto usato dal training» regga quando cambiano dati, scala, hardware o criteri di decisione.
+- **Da «Parsing e normalizzazione» a «Filtri».** Trasformazioni di HTML, PDF, codice e conversazioni possono perdere informazione e devono essere versionate. Filtri di qualità, lingua, sicurezza e PII modificano la distribuzione e richiedono statistiche prima e dopo. La trasformazione diventa confrontabile soltanto quando il passaggio successivo conserva configurazione, conteggi e artefatti intermedi. [SRC-32-002; SRC-32-003]
 
-## L'invariante da conservare: Il ciclo di vita dei dati
+- **Da «Filtri» a «Deduplicazione e contaminazione».** Filtri di qualità, lingua, sicurezza e PII modificano la distribuzione e richiedono statistiche prima e dopo. Hash esatti e similarità approssimata rilevano forme differenti di duplicazione. Una volta resa tracciabile la pipeline, il quarto passaggio può affrontare selezione o uso senza confondere un cambiamento nei dati con uno nel modello. [SRC-32-003; SRC-32-004]
 
-Il filo della lezione va dall'input «testo grezzo, metadati, split e digest» all'output «record ammesso, conteggi e manifest». Nei passaggi «Sorgenti e provenienza», «Parsing e normalizzazione», «Split, tokenizzazione e manifest» abbiamo usato esempi e controlli negativi per rendere il contratto controllabile e delimitare la conclusione. L'invariante da portare avanti è: ogni trasformazione deve restare ricostruibile e ordinata. Il Capitolo 33, Dataset mixture, curriculum e dati sintetici, può partire da questo output e dichiarare la propria domanda.
+- **Da «Deduplicazione e contaminazione» a «Split, tokenizzazione e manifest».** Hash esatti e similarità approssimata rilevano forme differenti di duplicazione. Confini temporali, tokenizer, packing, checksum e conteggi definiscono l'artefatto usato dal training. L'ultima sezione porta il risultato alla valutazione e chiede quali record, slice o failure restano fuori dalla media. [SRC-32-004; SRC-32-001]
 
-### Prova di comprensione: Sorgenti e provenienza
+La catena completa produce record ammesso, conteggi e manifest a partire da testo grezzo, metadati, split e digest. Ogni collegamento conserva un oggetto osservabile diverso; per questo il risultato non può essere esteso oltre il limite dichiarato: ogni trasformazione deve restare ricostruibile e ordinata.
 
-1. Ricostruisci l'oggetto continuo a partire da «Sorgenti e provenienza» e indica quale parte della frase «Record, documenti, timestamp e licenze devono restare tracciabili dalla raccolta allo shard» entra nel caso.
-2. Spiega quale trasformazione collega «Sorgenti e provenienza» a «Split, tokenizzazione e manifest» e quale output osserviamo nel passaggio.
-3. Usa lo snippet per controllare l'invariante del contratto: ogni trasformazione deve restare ricostruibile e ordinata.
-4. Separa una definizione sostenuta da una fonte, un esempio illustrativo e un risultato locale del caso guida.
-5. Indica quale parte della frase «Confini temporali, tokenizer, packing, checksum e conteggi definiscono l'artefatto usato dal training» richiederebbe una misura nuova prima di essere estesa oltre il caso osservato.
 
-### Esercizi con casi limite: Split, tokenizzazione e manifest
+## Esercizi sulla tracciabilità
 
-1. Racconta «Sorgenti e provenienza» come una trasformazione: che cosa entra e che cosa esce?
-2. Confronta due esecuzioni di «Parsing e normalizzazione» mantenendo il resto del setup invariato.
-3. Per «Filtri», separa l'esempio locale dal limite che impedisce di generalizzarlo.
-4. Progetta una prova per «Deduplicazione e contaminazione» che renda visibile il suo confine.
-5. Scrivi una metrica o una domanda per valutare «Split, tokenizzazione e manifest» senza confondere livelli diversi.
+1. Ricostruisci «Sorgenti e provenienza» con un esempio diverso da quello mostrato e indica l'output atteso prima del calcolo.
+2. Nel passaggio «Parsing e normalizzazione», cambia una sola ipotesi e spiega quale risultato non è più confrontabile.
+3. Collega «Filtri» a una riga dello snippet oppure motiva perché la prova deve essere documentale.
+4. Progetta un caso limite per «Deduplicazione e contaminazione» che produca una failure riconoscibile.
+5. Per «Split, tokenizzazione e manifest», separa una conclusione sostenuta dal caso locale da una che richiederebbe nuovi dati o un benchmark.
 
-## Fonti primarie e artefatti del capitolo: Il ciclo di vita dei dati
 
-Per ricontrollare «Il ciclo di vita dei dati», partire da `FONTI_PRIMARIE.md` e poi dal codice: la domanda aperta è come trasferire il legame tra dati esposti e risultato oltre il caso locale, con la data di consultazione dichiarata. `CLAIMS.md` separa definizioni e risultati locali; codice, ambiente, test e output sono nella cartella `code/`, con attenzione a popolazione, manifest e stato del run.
+## L'artefatto che deve sopravvivere
+
+La lezione parte da «testo grezzo, metadati, split e digest» e arriva fino a «record ammesso, conteggi e manifest». Il limite da conservare è questo: ogni trasformazione deve restare ricostruibile e ordinata. Definizioni e risultati citati sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md); la mappa dei claim è in [`CLAIMS.md`](CLAIMS.md).

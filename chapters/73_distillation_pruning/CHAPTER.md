@@ -4,94 +4,39 @@ part_id: P12
 order_key: 730
 title: Distillazione e pruning
 maturity: CORE
-status: candidatura completa in revisione autoriale
-version: 0.4.0-draft2
-last_source_check: 3 agosto 2026
+status: revisione editoriale v2, approvazione autoriale aperta
+version: 0.5.0-draft3
+last_source_check: 4 agosto 2026
 environment: Python 3.13.12, CPU
-deferred: benchmark applicativi, varianti non necessarie al contratto centrale e approvazione autoriale
+code_policy: reference
+deferred: benchmark applicativi non eseguiti e approvazione autoriale delle visuali
 -->
 
 # Capitolo 73. Distillazione e pruning
 
-La richiesta «Il pacco non è arrivato» resta il caso guida. In questo capitolo la usiamo per distinguere pesi del teacher, student e struttura da comprimere, trasformazione e risultato, senza nascondere i dettagli tecnici.
+La domanda guida di questa lezione è come collegare «Teacher e student» e «Recovery» senza perdere il contratto tecnico di distillazione e pruning. L'oggetto osservato è pesi del teacher, student e struttura da comprimere. Il contratto locale è: input, logits teacher, target, pruning mask e budget; operazione, distillazione, pruning e recovery; output, student più piccolo con loss e regressioni misurate. Il caso guida è questo: Teacher e student hanno due vettori di logits differenti e una mask conserva una connessione. Il confine da mantenere esplicito è: compressione e accuratezza vanno misurate sullo stesso perimetro.
 
 ## Teacher e student
 
 La distillazione usa logits, distribuzioni o sequenze del teacher come target aggiuntivi per uno student. [SRC-73-001]
 
-Il caso minimo di «Teacher e student» si presenta così: teacher e student hanno due vettori di logits differenti e una mask conserva una connessione. Non lo usiamo come decorazione: serve a rendere osservabile la frase «La distillazione usa logits, distribuzioni o sequenze del teacher come target aggiuntivi per uno student».
+Compressione e accuratezza vanno misurate nello stesso perimetro.
 
-Per ricostruire «Teacher e student» annotiamo l'input «logits teacher, target, pruning mask e budget», poi l'operazione «distillazione, pruning e recovery», infine l'output «student più piccolo con loss e regressioni misurate». Questa sequenza impedisce di scambiare una forma compatibile per il comportamento descritto dalla fonte. Il controllo parte da «La distillazione usa logits, distribuzioni o sequenze del teacher come target aggiuntivi per uno student».
+**Caso da seguire.** Teacher e student hanno due vettori di logits differenti e una mask conserva una connessione.
 
-L'ottimizzazione modifica rappresentazione, memoria, calcolo o scheduling sotto un carico dichiarato. Per attribuire il beneficio bisogna separare il guadagno locale da latenza, qualità e costo end-to-end. Per «Teacher e student» il controllo cambia una sola premessa della frase «La distillazione usa logits, distribuzioni o sequenze del teacher come target aggiuntivi per uno student» e conserva input, output e criterio di successo, così la differenza resta attribuibile. La verifica resta ancorata a «La distillazione usa logits, distribuzioni o sequenze del teacher come target aggiuntivi per uno student». [SRC-73-001]
+**Controllo.** Scrivi il risultato atteso prima del calcolo, modifica una sola quantità e localizza il primo passaggio che cambia. Il vincolo da conservare è: La distillazione usa logits, distribuzioni o sequenze del teacher come target aggiuntivi per uno student.
 
-Il punto didattico di «Teacher e student» è separare ciò che la fonte afferma da ciò che il piccolo caso illustra. L'output «student più piccolo con loss e regressioni misurate» mostra il contratto locale, ma non sostituisce una misura sul sistema completo.
-
-Il controllo minimo di «Teacher e student» confronta il caso dichiarato con una variazione che rompe la sua ipotesi. Se la failure non è distinguibile dall'esito valido, manca un'osservazione nel contratto di latency, memoria e throughput. Da «Teacher e student» portiamo l'output «student più piccolo con loss e regressioni misurate»; non portiamo invece una conclusione oltre il caso locale.
 
 ## Temperature e loss
 
 Una temperatura più alta rivela relazioni tra classi o token. Hard target e soft target vengono pesati separatamente. [SRC-73-002]
 
-Prima del nome tecnico fissiamo la situazione: consideriamo due logits trasferiti e una connessione potata con recovery. Da qui possiamo leggere la conseguenza dichiarata da «Una temperatura più alta rivela relazioni tra classi o token».
+**Caso da seguire.** Due logits trasferiti e una connessione potata con recovery.
 
-Nel contratto locale, l'input «logits teacher, target, pruning mask e budget» entra, l'operazione «distillazione, pruning e recovery» modifica il percorso e l'output «student più piccolo con loss e regressioni misurate» è ciò che osserviamo. Qui cambia soprattutto il passaggio «Temperature e loss»; resta da controllare che compressione e accuratezza vanno misurate sullo stesso perimetro. La domanda locale è «Una temperatura più alta rivela relazioni tra classi o token».
+**Controllo.** Ricalcola il caso a mano e con lo snippet. Se i risultati divergono, confronta prima i valori intermedi e soltanto dopo l'output finale.
 
-L'ottimizzazione modifica rappresentazione, memoria, calcolo o scheduling sotto un carico dichiarato. Per attribuire il beneficio bisogna separare il guadagno locale da latenza, qualità e costo end-to-end. Per «Temperature e loss» il controllo cambia una sola premessa della frase «Una temperatura più alta rivela relazioni tra classi o token» e conserva input, output e criterio di successo, così la differenza resta attribuibile. La verifica resta ancorata a «Una temperatura più alta rivela relazioni tra classi o token». [SRC-73-002]
 
-La lettura va fatta in ordine: prima il caso, poi la trasformazione, quindi la conseguenza. Hard target e soft target vengono pesati separatamente. Il piccolo risultato resta un'illustrazione di «Una temperatura più alta rivela relazioni tra classi o token», non una promessa generale.
-
-La prova di «Temperature e loss» conserva input, operazione e output; poi esplicita quale parte di «Una temperatura più alta rivela relazioni tra classi o token» non è stata misurata. Così il test separa l'evidenza dall'inferenza. Il passaggio successivo, «Sequence distillation», potrà cambiare una sola condizione, dichiarando il nuovo setup prima di interpretare il risultato.
-
-## Sequence distillation
-
-Per modelli generativi, risposte del teacher diventano un nuovo dataset. Filtri e diversità determinano ciò che lo student vede. [SRC-73-003]
-
-Per capire «Sequence distillation» partiamo da questo caso: un modello teacher e uno student confrontati sullo stesso input, con memoria e regressioni riportate insieme alla loss. Il caso rende osservabile il punto centrale: «Per modelli generativi, risposte del teacher diventano un nuovo dataset».
-
-La sezione usa l'input «logits teacher, target, pruning mask e budget» come punto di partenza e l'output «student più piccolo con loss e regressioni misurate» come traccia d'uscita. La trasformazione concreta è «distillazione, pruning e recovery»; il caso non è completo se non dichiariamo anche che compressione e accuratezza vanno misurate sullo stesso perimetro. La condizione da isolare è «Per modelli generativi, risposte del teacher diventano un nuovo dataset».
-
-L'ottimizzazione modifica rappresentazione, memoria, calcolo o scheduling sotto un carico dichiarato. Per attribuire il beneficio bisogna separare il guadagno locale da latenza, qualità e costo end-to-end. Per «Sequence distillation» il controllo cambia una sola premessa della frase «Per modelli generativi, risposte del teacher diventano un nuovo dataset» e conserva input, output e criterio di successo, così la differenza resta attribuibile. La verifica resta ancorata a «Per modelli generativi, risposte del teacher diventano un nuovo dataset». [SRC-73-003]
-
-Se cambiamo una premessa, dobbiamo riaprire l'interpretazione. Per «Sequence distillation» conserviamo l'osservazione collegata a «Per modelli generativi, risposte del teacher diventano un nuovo dataset» e lasciamo esplicitamente fuori ciò che non è stato misurato.
-
-Per verificare «Sequence distillation» cambiamo una sola condizione vicina alla frase «Per modelli generativi, risposte del teacher diventano un nuovo dataset», teniamo fermo il resto e registriamo l'output «student più piccolo con loss e regressioni misurate». Il caso negativo deve rendere riconoscibile la failure, non soltanto produrre un numero diverso. La sezione successiva, «Pruning», riceve l'output «student più piccolo con loss e regressioni misurate» come base, ma dovrà formulare e verificare la propria distinzione.
-
-![Distillazione e pruning: pipeline](../../assets/chapters/73_distillation_pruning/PRUNING-01/candidate-v48.png)
-
-La figura PRUNING-01 usa la famiglia pipeline. Il diagramma segue il passaggio: Distillazione, pruning e recovery. L'input è logits teacher, target, pruning mask e budget, l'output è student più piccolo con loss e regressioni misurate; il vincolo da controllare è che compressione e accuratezza vanno misurate sullo stesso perimetro.
-
-## Pruning
-
-Pesi, canali, head o layer possono essere rimossi. Sparsità nominale e accelerazione reale dipendono da kernel e hardware. [SRC-73-004]
-
-Il caso minimo di «Pruning» si presenta così: un modello teacher e uno student confrontati sullo stesso input, con memoria e regressioni riportate insieme alla loss. Non lo usiamo come decorazione: serve a rendere osservabile la frase «Pesi, canali, head o layer possono essere rimossi».
-
-Per ricostruire «Pruning» annotiamo l'input «logits teacher, target, pruning mask e budget», poi l'operazione «distillazione, pruning e recovery», infine l'output «student più piccolo con loss e regressioni misurate». Questa sequenza impedisce di scambiare una forma compatibile per il comportamento descritto dalla fonte. Il controllo parte da «Pesi, canali, head o layer possono essere rimossi».
-
-L'ottimizzazione modifica rappresentazione, memoria, calcolo o scheduling sotto un carico dichiarato. Per attribuire il beneficio bisogna separare il guadagno locale da latenza, qualità e costo end-to-end. Per «Pruning» il controllo cambia una sola premessa della frase «Pesi, canali, head o layer possono essere rimossi» e conserva input, output e criterio di successo, così la differenza resta attribuibile. La verifica resta ancorata a «Pesi, canali, head o layer possono essere rimossi». [SRC-73-004]
-
-Il punto didattico di «Pruning» è separare ciò che la fonte afferma da ciò che il piccolo caso illustra. L'output «student più piccolo con loss e regressioni misurate» mostra il contratto locale, ma non sostituisce una misura sul sistema completo.
-
-Il controllo minimo di «Pruning» confronta il caso dichiarato con una variazione che rompe la sua ipotesi. Se la failure non è distinguibile dall'esito valido, manca un'osservazione nel contratto di latency, memoria e throughput. Da «Pruning» portiamo l'output «student più piccolo con loss e regressioni misurate»; non portiamo invece una conclusione oltre il caso locale.
-
-## Recovery
-
-Fine-tuning o calibration recuperano qualità dopo compressione. Il confronto deve includere memoria, latency e regressioni per slice. [SRC-73-001]
-
-Prima del nome tecnico fissiamo la situazione: consideriamo una metrica del compito nuovo confrontata con la stessa metrica sul comportamento precedente. Da qui possiamo leggere la conseguenza dichiarata da «Fine-tuning o calibration recuperano qualità dopo compressione».
-
-Nel contratto locale, l'input «logits teacher, target, pruning mask e budget» entra, l'operazione «distillazione, pruning e recovery» modifica il percorso e l'output «student più piccolo con loss e regressioni misurate» è ciò che osserviamo. Qui cambia soprattutto il passaggio «Recovery»; resta da controllare che compressione e accuratezza vanno misurate sullo stesso perimetro. La domanda locale è «Fine-tuning o calibration recuperano qualità dopo compressione».
-
-L'ottimizzazione modifica rappresentazione, memoria, calcolo o scheduling sotto un carico dichiarato. Per attribuire il beneficio bisogna separare il guadagno locale da latenza, qualità e costo end-to-end. Il test deve conservare una misura del comportamento precedente prima e dopo l'aggiornamento, non soltanto il punteggio sul compito nuovo. La verifica resta ancorata a «Fine-tuning o calibration recuperano qualità dopo compressione». [SRC-73-001]
-
-La lettura va fatta in ordine: prima il caso, poi la trasformazione, quindi la conseguenza. Il confronto deve includere memoria, latency e regressioni per slice. Il piccolo risultato resta un'illustrazione di «Fine-tuning o calibration recuperano qualità dopo compressione», non una promessa generale.
-
-La prova di «Recovery» conserva input, operazione e output; poi esplicita quale parte di «Fine-tuning o calibration recuperano qualità dopo compressione» non è stata misurata. Così il test separa l'evidenza dall'inferenza. Il caso finale consegna l'output «student più piccolo con loss e regressioni misurate» come evidenza locale e conserva la misura end-to-end sotto carico dichiarato come domanda aperta.
-
-## Un caso dall'input all'output: Teacher e student
-
-Il caso intero parte dall'input «logits teacher, target, pruning mask e budget», applica l'operazione «distillazione, pruning e recovery» e osserva l'output «student più piccolo con loss e regressioni misurate». Un esempio controllato: due logits trasferiti e una connessione potata con recovery. La formula locale è:
+La relazione centrale può essere scritta come:
 
 $$
 L_student = distill(L_teacher) + lambda R
@@ -99,38 +44,88 @@ $$
 
 Compressione e accuratezza vanno misurate nello stesso perimetro. [SRC-73-001]
 
+
+![Distillazione e pruning: pipeline](../../assets/chapters/73_distillation_pruning/PRUNING-01/candidate-v48.png)
+
+La prima figura segue il percorso da «Teacher e student» a «Sequence distillation».
+
+
+## Sequence distillation
+
+Per modelli generativi, risposte del teacher diventano un nuovo dataset. Filtri e diversità determinano ciò che lo student vede. [SRC-73-003]
+
+**Caso da seguire.** Un modello teacher e uno student confrontati sullo stesso input, con memoria e regressioni riportate insieme alla loss.
+
+**Controllo.** Aggiungi un valore limite e verifica separatamente forma, valore e ipotesi. Una shape valida non dimostra da sola «Sequence distillation».
+
+
+## Pruning
+
+Pesi, canali, head o layer possono essere rimossi. Sparsità nominale e accelerazione reale dipendono da kernel e hardware. [SRC-73-004]
+
+**Caso da seguire.** Per «Pruning» si mantiene l'input del capitolo e si isola questa condizione: Pesi, canali, head o layer possono essere rimossi.
+
+**Controllo.** Mantieni fisso l'input e sostituisci soltanto il meccanismo discusso nella sezione. Il confronto deve attribuire la differenza a quel passaggio, non al setup.
+
+
+## Esempio Python eseguito
+
+Il frammento seguente è lo stesso conservato nel repository. Usa valori piccoli perché l'obiettivo è osservare il meccanismo, non simulare una scala che non abbiamo eseguito.
+
+```python
+def contract():
+    teacher = [0.8, 0.2]
+    student = [0.6, 0.4]
+    distillation_error = sum((a - b) ** 2 for a, b in zip(teacher, student))
+    mask = [True, False]
+    return {"distillation_error": round(distillation_error, 6), "kept_weights": sum(mask), "invariant": "compression quality and structural pruning are measured separately"}
+```
+
+Esecuzione con `python snip_73_contract.py`:
+
+```text
+{"distillation_error": 0.08, "invariant": "compression quality and structural pruning are measured separately", "kept_weights": 1}
+```
+
+Il test associato è [`code/test_73_contract.py`](code/test_73_contract.py); l'output versionato è [`code/outputs/SNIP-73-001.txt`](code/outputs/SNIP-73-001.txt).
+
+
+## Recovery
+
+Fine-tuning o calibration recuperano qualità dopo compressione. Il confronto deve includere memoria, latency e regressioni per slice. [SRC-73-001]
+
+**Caso da seguire.** Una metrica del compito nuovo confrontata con la stessa metrica sul comportamento precedente.
+
+**Controllo.** Costruisci un controesempio che rispetti il tipo di dato ma violi l'ipotesi centrale. Il test deve rendere riconoscibile perché «Recovery» non si applica.
+
+
 ![Distillazione e pruning: compare](../../assets/chapters/73_distillation_pruning/PRUNING-02/candidate-v48.png)
 
-La figura PRUNING-02 cambia composizione rispetto alla prima. Il diagramma segue il passaggio: Distillazione, pruning e recovery. L'input è logits teacher, target, pruning mask e budget, l'output è student più piccolo con loss e regressioni misurate; il vincolo da controllare è che compressione e accuratezza vanno misurate sullo stesso perimetro.
+La seconda figura mette a confronto «Pruning» e il limite discusso in «Recovery».
 
-## Dal meccanismo alla prova locale: Temperature e loss
 
-Lo snippet locale mette in esecuzione questo caso: due logits trasferiti e una connessione potata con recovery. Il test associato controlla determinismo, output e invariante e rifiuta una shape o condizione incoerente; il risultato è conservato in `code/outputs/SNIP-73-001.txt`, come evidenza locale e non come benchmark di produzione.
+## Come si collegano i passaggi
 
-## Dove il risultato si ferma: Recovery
+- **Da «Teacher e student» a «Temperature e loss».** La distillazione usa logits, distribuzioni o sequenze del teacher come target aggiuntivi per uno student. Una temperatura più alta rivela relazioni tra classi o token. Il primo passaggio definisce che cosa entra nel calcolo; il secondo stabilisce la regola che produce il valore osservabile. [SRC-73-001; SRC-73-002]
 
-Il caso di «Distillazione e pruning» non certifica un servizio completo. Compressione e accuratezza vanno misurate sullo stesso perimetro. La domanda successiva è se «Fine-tuning o calibration recuperano qualità dopo compressione» regga quando cambiano dati, scala, hardware o criteri di decisione.
+- **Da «Temperature e loss» a «Sequence distillation».** Una temperatura più alta rivela relazioni tra classi o token. Per modelli generativi, risposte del teacher diventano un nuovo dataset. La regola generale viene poi letta dentro il componente: questa separazione permette di localizzare un errore prima di attribuirlo all'intero modello. [SRC-73-002; SRC-73-003]
 
-## Che cosa portiamo avanti: Distillazione e pruning
+- **Da «Sequence distillation» a «Pruning».** Per modelli generativi, risposte del teacher diventano un nuovo dataset. Pesi, canali, head o layer possono essere rimossi. Dopo avere reso visibile il componente, il percorso introduce la variante o l'ottimizzazione senza cambiare di nascosto il caso di partenza. [SRC-73-003; SRC-73-004]
 
-Il filo della lezione va dall'input «logits teacher, target, pruning mask e budget» all'output «student più piccolo con loss e regressioni misurate». Nei passaggi «Teacher e student», «Temperature e loss», «Recovery» abbiamo usato esempi e controlli negativi per rendere il contratto controllabile e delimitare la conclusione. L'invariante da portare avanti è: compressione e accuratezza vanno misurate sullo stesso perimetro. Il Capitolo 74, Quantizzazione, può partire da questo output e dichiarare la propria domanda.
+- **Da «Pruning» a «Recovery».** Pesi, canali, head o layer possono essere rimossi. Fine-tuning o calibration recuperano qualità dopo compressione. L'ultimo passaggio sposta l'attenzione dal funzionamento locale alla misura: correttezza del calcolo e qualità applicativa restano domande distinte. [SRC-73-004; SRC-73-001]
 
-### Verifica di comprensione: Teacher e student
+La catena completa produce student più piccolo con loss e regressioni misurate a partire da logits teacher, target, pruning mask e budget. Ogni collegamento conserva un oggetto osservabile diverso; per questo il risultato non può essere esteso oltre il limite dichiarato: compressione e accuratezza vanno misurate sullo stesso perimetro.
 
-1. Ricostruisci l'oggetto continuo a partire da «Teacher e student» e indica quale parte della frase «La distillazione usa logits, distribuzioni o sequenze del teacher come target aggiuntivi per uno student» entra nel caso.
-2. Spiega quale trasformazione collega «Teacher e student» a «Recovery» e quale output osserviamo nel passaggio.
-3. Usa lo snippet per controllare l'invariante del contratto: compressione e accuratezza vanno misurate sullo stesso perimetro.
-4. Separa una definizione sostenuta da una fonte, un esempio illustrativo e un risultato locale del caso guida.
-5. Indica quale parte della frase «Fine-tuning o calibration recuperano qualità dopo compressione» richiederebbe una misura nuova prima di essere estesa oltre il caso osservato.
 
-### Esercizi di trasferimento: Recovery
+## Esercizi sul meccanismo
 
-1. Racconta «Teacher e student» come una trasformazione: che cosa entra e che cosa esce?
-2. Confronta due esecuzioni di «Temperature e loss» mantenendo il resto del setup invariato.
-3. Per «Sequence distillation», separa l'esempio locale dal limite che impedisce di generalizzarlo.
-4. Progetta una prova per «Pruning» che renda visibile il suo confine.
-5. Scrivi una metrica o una domanda per valutare «Recovery» senza confondere livelli diversi.
+1. Ricostruisci «Teacher e student» con un esempio diverso da quello mostrato e indica l'output atteso prima del calcolo.
+2. Nel passaggio «Temperature e loss», cambia una sola ipotesi e spiega quale risultato non è più confrontabile.
+3. Collega «Sequence distillation» a una riga dello snippet oppure motiva perché la prova deve essere documentale.
+4. Progetta un caso limite per «Pruning» che produca una failure riconoscibile.
+5. Per «Recovery», separa una conclusione sostenuta dal caso locale da una che richiederebbe nuovi dati o un benchmark.
 
-## Fonti, codice e materiali: Distillazione e pruning
 
-Per ricontrollare «Distillazione e pruning», partire da `FONTI_PRIMARIE.md` e poi dal codice: la domanda aperta è come trasferire la misura end-to-end sotto carico dichiarato oltre il caso locale, con la data di consultazione dichiarata. `CLAIMS.md` separa definizioni e risultati locali; codice, ambiente, test e output sono nella cartella `code/`, con attenzione a latency, memoria e throughput.
+## Che cosa deve restare chiaro
+
+La lezione parte da «logits teacher, target, pruning mask e budget» e arriva fino a «student più piccolo con loss e regressioni misurate». Il limite da conservare è questo: compressione e accuratezza vanno misurate sullo stesso perimetro. Definizioni e risultati citati sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md); la mappa dei claim è in [`CLAIMS.md`](CLAIMS.md).

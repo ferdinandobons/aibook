@@ -1,14 +1,16 @@
 # Specifica visuale OBSERVATOR-02
 
-- famiglia: timeline
-- domanda principale: Il diagramma segue il passaggio: Scouting, routing, maturità, confronto e promozione. L'input è paper, release, benchmark, fonte e data di osservazione, l'output è scheda con evidenza, stato e prossima verifica; il vincolo da controllare è che novità, adozione e prova end-to-end sono dimensioni diverse
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: watchlist_cycle
+- domanda principale: Quale controllo collega «Promozione» a «Edizioni» senza superare il limite dichiarato?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, timeline, invariante o limite in chiusura
-- nodi e contenuti: 1: Scouting; 2: Routing; 3: Maturità; 4: Promozione; 5: Edizioni
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: novità, adozione e prova end-to-end sono dimensioni diverse
-- fonti collegate: SRC-98-001 ... SRC-98-004
-- alt text: Diagramma OBSERVATOR-02 del Capitolo 98, famiglia timeline. Domanda: Il diagramma segue il passaggio: Scouting, routing, maturità, confronto e promozione. L'input è paper, release, benchmark, fonte e data di osservazione, l'output è scheda con evidenza, stato e prossima verifica; il vincolo da controllare è che novità, adozione e prova end-to-end sono dimensioni diverse La composizione usa i passaggi Scouting, Routing, Maturità, Promozione, Edizioni.
+- file candidato: candidate-v48.png
+- oggetto osservato: un claim di frontiera accompagnato da data e incertezza
+- input: paper, release, benchmark, fonte e data di osservazione
+- output: scheda con evidenza, stato e prossima verifica
+- nodi locali: Promozione: Una tecnica cambia maturità dopo nuove repliche, adozione, standardizzazione o…; Edizioni: Nuovi contenuti aggiornano catalogo, claim, capitoli e alias senza rinumerare identità…
+- limite visualizzato: novità, adozione e prova end-to-end sono dimensioni diverse
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

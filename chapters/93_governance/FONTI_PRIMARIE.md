@@ -1,6 +1,6 @@
 # Fonti primarie e autorevoli. Capitolo 93
 
-- Data di consultazione: 3 agosto 2026
+- Data di consultazione: 4 agosto 2026
 - Routing semantico: capitolo 93 -> tema `governance`.
 - Perimetro: definizioni, meccanismi e limiti portanti del capitolo.
 - Regola: risultati numerici locali restano distinti dalle evidenze sperimentali delle fonti.
@@ -41,31 +41,31 @@
 
 - Titolo o riferimento: European Union, Regulation (EU) 2024/1689.
 - Autori o organizzazione: European Union.
-- Tipo: paper o report tecnico.
-- Data: 2024.
-- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
+- Tipo: atto normativo ufficiale dell'Unione europea.
+- Data: 13 giugno 2024; pubblicato nella Gazzetta ufficiale il 12 luglio 2024.
+- Versione, revisione o commit: testo consolidato dell'atto CELEX 32024R1689 consultato il 4 agosto 2026.
 - URL o identificatore: https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=celex:32024R1689
-- Data di consultazione: 3 agosto 2026.
-- Verifica d'accesso: opened-context; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
-- Sezioni rilevanti: Abstract / pagina iniziale; Need help?; Follow us; Legal.
+- Data di consultazione: 4 agosto 2026.
+- Verifica d'accesso: testo ufficiale EUR-Lex controllato direttamente; la pagina non è trattata come consulenza legale.
+- Sezioni rilevanti: articolo 3, definizioni di provider e deployer; articolo 16, obblighi dei provider di sistemi ad alto rischio; articolo 26, obblighi dei deployer di sistemi ad alto rischio; articolo 113, entrata in vigore e applicazione.
 - Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
-- Affermazioni sostenibili: Obblighi dipendono da giurisdizione, ruolo e uso.
-- Limiti: non autorizza generalizzazioni a ogni modello, dataset, implementazione o prodotto.
-- Divergenze note: eventuali differenze di obiettivo, dataset o implementazione vanno mantenute separate nel testo.
+- Affermazioni sostenibili: il regolamento distingue ruoli quali provider e deployer e assegna obblighi differenti in funzione del ruolo e, per gli articoli citati, della classificazione del sistema; le date di applicazione non sono tutte uguali.
+- Limiti: il capitolo non determina la classificazione giuridica di un caso concreto e non sostituisce una verifica della normativa applicabile o un parere legale.
+- Divergenze note: giurisdizione, ruolo nella catena del valore, destinazione d'uso, classificazione del rischio e data possono cambiare gli obblighi pertinenti.
 
 ## SRC-93-004
 
-- Titolo o riferimento: Schwartz et al., Green AI.
-- Autori o organizzazione: Schwartz et al..
-- Tipo: paper o report tecnico.
-- Data: data della revisione consultata.
-- Versione, revisione o commit: revisione o versione disponibile all'URL consultato il 3 agosto 2026.
-- URL o identificatore: https://arxiv.org/abs/1907.10597
-- Data di consultazione: 3 agosto 2026.
-- Verifica d'accesso: opened-partial; pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito.
-- Sezioni rilevanti: Abstract / pagina iniziale; Green AI; 1 Introduction and Motivation; 2 Red AI.
+- Titolo o riferimento: NIST AI RMF Playbook, Measure 2.12, Environmental impact and sustainability.
+- Autori o organizzazione: National Institute of Standards and Technology.
+- Tipo: guida ufficiale collegata al NIST AI RMF.
+- Data: versione web consultata il 4 agosto 2026.
+- Versione, revisione o commit: pagina Measure del NIST AI Resource Center, consultata il 4 agosto 2026.
+- URL o identificatore: https://airc.nist.gov/airmf-resources/playbook/measure/
+- Data di consultazione: 4 agosto 2026.
+- Verifica d'accesso: pagina ufficiale controllata; nessun valore quantitativo trasferito.
+- Sezioni rilevanti: MEASURE 2.12; direct environmental impacts; energy, water and GHG indicators; hardware production, transport and end-of-life; transparency and documentation.
 - Perimetro del supporto: la fonte è usata per la definizione o il meccanismo indicato; esempi, derivazioni e risultati locali restano separati.
-- Affermazioni sostenibili: Compute, energia, acqua, hardware e ciclo di vita richiedono confini di misura e confronti normalizzati per risultato utile.
+- Affermazioni sostenibili: energia, acqua, emissioni e impatti legati alla produzione, al trasporto e al fine vita dell'hardware richiedono indicatori e confini di misura documentati lungo il ciclo di vita.
 - Limiti: non autorizza generalizzazioni a ogni modello, dataset, implementazione o prodotto.
 - Divergenze note: eventuali differenze di obiettivo, dataset o implementazione vanno mantenute separate nel testo.
 

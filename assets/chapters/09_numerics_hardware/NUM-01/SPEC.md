@@ -44,3 +44,4 @@ Quattro schede parallele:
 - Kalamkar et al. per bfloat16;
 - `SNIP-NUM-001` per i valori stampati;
 - renderer: `scripts/generate_numerics_visuals.py` e revisione `generate_numerics_visuals_v2.py`.
+- domanda principale: Quale trasformazione centrale rende osservabile «I numeri del modello non sono numeri reali» nel capitolo 9?

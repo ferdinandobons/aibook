@@ -1,14 +1,16 @@
 # Specifica visuale PEFT-02
 
-- famiglia: compare
-- domanda principale: Il diagramma segue il passaggio: Adapter, LoRA, prefix o QLoRA. L'input è peso W, matrice A e B, rank e quantizzazione, l'output è delta W e checkpoint adattatore; il vincolo da controllare è che il delta non è il modello completo e va valutato sullo stesso base model
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: adapter_stack
+- domanda principale: Quale controllo collega «Prompt, prefix e IA3» a «QLoRA e compatibilità» senza superare il limite dichiarato?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, compare, invariante o limite in chiusura
-- nodi e contenuti: 1: Parametri congelati e adattamento; 2: Adapter; 3: LoRA; 4: Prompt, prefix e IA3; 5: QLoRA e compatibilità
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: il delta non è il modello completo e va valutato sullo stesso base model
-- fonti collegate: SRC-47-001 ... SRC-47-004
-- alt text: Diagramma PEFT-02 del Capitolo 47, famiglia compare. Domanda: Il diagramma segue il passaggio: Adapter, LoRA, prefix o QLoRA. L'input è peso W, matrice A e B, rank e quantizzazione, l'output è delta W e checkpoint adattatore; il vincolo da controllare è che il delta non è il modello completo e va valutato sullo stesso base model La composizione usa i passaggi Parametri congelati e adattamento, Adapter, LoRA, Prompt, prefix e IA3, QLoRA e compatibilità.
+- file candidato: candidate-v48.png
+- oggetto osservato: l'aggiornamento adattivo rispetto ai pesi congelati
+- input: peso W, matrice A e B, rank e quantizzazione
+- output: delta W e checkpoint adattatore
+- nodi locali: Prompt, prefix e IA3: Soft prompt, prefix key-value e vettori di scaling modificano punti diversi del calcolo…; QLoRA e compatibilità: Il modello base quantizzato riduce memoria, mentre gli adapter restano addestrabili.…
+- limite visualizzato: il delta non è il modello completo e va valutato sullo stesso base model
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

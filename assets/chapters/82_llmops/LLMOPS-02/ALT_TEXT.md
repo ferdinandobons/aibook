@@ -1,3 +1,3 @@
-# Alt text LLMOPS-02
+# Testo alternativo
 
-Diagramma LLMOPS-02 del Capitolo 82, famiglia chart. Domanda: Il diagramma segue il passaggio: Deploy, osservabilità, edge routing e cost accounting. L'input è modello, richieste, device, energia e monitor, l'output è versione attiva, costo per richiesta e alert; il vincolo da controllare è che un costo locale non descrive l'intero ciclo di vita La composizione usa i passaggi Dalla versione al deployment, Osservabilità, Edge, Costo, Energia e sostenibilità.
+LLMOPS-02, LLMOps, edge, costo ed energia. Quale controllo collega «Costo» a «Energia e sostenibilità» senza superare il limite dichiarato? La composizione rollback path collega «Costo», «Energia e sostenibilità». L'input è modello, richieste, device, energia e monitor; l'output è versione attiva, costo per richiesta e alert. Il limite esplicito è: un costo locale non descrive l'intero ciclo di vita.

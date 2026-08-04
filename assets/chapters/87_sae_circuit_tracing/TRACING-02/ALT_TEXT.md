@@ -1,3 +1,3 @@
-# Alt text TRACING-02
+# Testo alternativo
 
-Diagramma TRACING-02 del Capitolo 87, famiglia architecture. Domanda: Il diagramma segue il passaggio: Training SAE, splitting, dead features e tracing. L'input è attivazione, dizionario, sparsità e ricostruzione, l'output è feature, errore di ricostruzione e circuito candidato; il vincolo da controllare è che interpretabilità di una feature richiede valutazione e controlli indipendenti La composizione usa i passaggi Superposition, Sparse autoencoder, Dead e splitting features, Circuit tracing, Valutazione.
+TRACING-02, Sparse autoencoder e interpretabilità scalabile. Quale controllo collega «Circuit tracing» a «Valutazione» senza superare il limite dichiarato? La composizione circuit graph collega «Circuit tracing», «Valutazione». L'input è attivazione, dizionario, sparsità e ricostruzione; l'output è feature, errore di ricostruzione e circuito candidato. Il limite esplicito è: interpretabilità di una feature richiede valutazione e controlli indipendenti.

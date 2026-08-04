@@ -1,14 +1,16 @@
 # Specifica visuale FAIRNESS-01
 
-- famiglia: chart
-- domanda principale: Il diagramma segue il passaggio: DP, fairness evaluation e unlearning. L'input è record, membership, gruppo, label e budget privacy, l'output è utility, leakage, disparità e verifica di rimozione; il vincolo da controllare è che privacy, fairness e utility richiedono metriche e trade-off espliciti
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: privacy_fairness_matrix
+- domanda principale: Come si passa da «Memorizzazione e leakage» a «Fairness» mantenendo osservabile un dato personale e il comportamento del sistema su gruppi diversi?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v50.png
-- ordine di lettura: titolo, domanda, chart, invariante o limite in chiusura
-- nodi e contenuti: 1: Memorizzazione e leakage; 2: Differential privacy; 3: Fairness; 4: Bias nei dati e nel sistema; 5: Machine unlearning
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: privacy, fairness e utility richiedono metriche e trade-off espliciti
-- fonti collegate: SRC-91-001 ... SRC-91-004
-- alt text: Diagramma FAIRNESS-01 del Capitolo 91, famiglia chart. Domanda: Il diagramma segue il passaggio: DP, fairness evaluation e unlearning. L'input è record, membership, gruppo, label e budget privacy, l'output è utility, leakage, disparità e verifica di rimozione; il vincolo da controllare è che privacy, fairness e utility richiedono metriche e trade-off espliciti La composizione usa i passaggi Memorizzazione e leakage, Differential privacy, Fairness, Bias nei dati e nel sistema, Machine unlearning.
+- file candidato: candidate-v50.png
+- oggetto osservato: un dato personale e il comportamento del sistema su gruppi diversi
+- input: record, membership, gruppo, label e budget privacy
+- output: utility, leakage, disparità e verifica di rimozione
+- nodi locali: Memorizzazione e leakage: Un modello può riprodurre sequenze rare. Membership inference e extraction misurano…; Differential privacy: DP limita l'influenza di un record mediante clipping e rumore, con parametri epsilon e…; Fairness: Metriche di parità, equalized odds e calibration possono essere incompatibili sotto…
+- limite visualizzato: privacy, fairness e utility richiedono metriche e trade-off espliciti
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

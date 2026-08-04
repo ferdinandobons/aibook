@@ -222,6 +222,15 @@ Un capitolo non computazionale può non includere codice soltanto quando:
 
 Non si aggiunge codice decorativo per soddisfare un conteggio.
 
+Ogni capitolo dichiara nei metadati una delle due policy:
+
+```text
+code_policy: reference
+code_policy: exception
+```
+
+`reference` richiede blocco Python nel testo, output letterale, file completo, test e output versionato. `exception` richiede una motivazione concreta, una prova sostitutiva documentale e l'assenza di vecchi script generici che contraddicano la policy. L'eccezione è appropriata quando il codice locale ridurrebbe una tassonomia, una norma o un tema di frontiera a una simulazione non fedele.
+
 ## 12. Dimensione e ruolo degli snippet
 
 La forma predefinita è breve e autosufficiente, normalmente da 8 a 40 righe significative. Il limite non è rigido.
@@ -236,6 +245,8 @@ Script più lunghi restano nel repository quando servono a:
 - verificare hardware specifico.
 
 Nel capitolo viene mostrata soltanto la porzione necessaria. Il file completo viene referenziato.
+
+Il blocco mostrato nel testo deve essere estratto dal file eseguito oppure controllato automaticamente contro di esso. L'output riportato è una copia letterale dell'artefatto versionato, non una riscrittura editoriale.
 
 ## 13. Contratto dello snippet
 

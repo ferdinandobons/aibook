@@ -1,3 +1,3 @@
-# Alt text LLMOPS-01
+# Testo alternativo
 
-Diagramma LLMOPS-01 del Capitolo 82, famiglia checklist. Domanda: Il diagramma segue il passaggio: Deploy, osservabilità, edge routing e cost accounting. L'input è modello, richieste, device, energia e monitor, l'output è versione attiva, costo per richiesta e alert; il vincolo da controllare è che un costo locale non descrive l'intero ciclo di vita La composizione usa i passaggi Dalla versione al deployment, Osservabilità, Edge, Costo, Energia e sostenibilità.
+LLMOPS-01, LLMOps, edge, costo ed energia. Come si passa da «Dalla versione al deployment» a «Edge» mantenendo osservabile un servizio LLM dalla versione al consumo? La composizione llmops loop collega «Dalla versione al deployment», «Osservabilità», «Edge». L'input è modello, richieste, device, energia e monitor; l'output è versione attiva, costo per richiesta e alert. Il limite esplicito è: un costo locale non descrive l'intero ciclo di vita.

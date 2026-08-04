@@ -1,5 +1,8 @@
-# Codice del Capitolo 41
+# Esempio verificato. Capitolo 41
 
-Lo snippet snip_41_contract.py rende osservabile il contratto centrale di Linear attention, fast weights e delta rule con valori piccoli e leggibili.
-Il test test_41_contract.py controlla determinismo, output, invariante e una shape incoerente.
-Il risultato è un esempio locale, non un benchmark di produzione.
+`snip_41_contract.py` esegue il caso minimo usato nel testo di **Linear attention, fast weights e delta rule**. `test_41_contract.py` conserva l'output atteso, controlla determinismo, serializzazione, valori finiti e presenza del limite interpretativo.
+
+```bash
+python snip_41_contract.py
+python -m unittest -v test_41_contract.py
+```

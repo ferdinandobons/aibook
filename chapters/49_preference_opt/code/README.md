@@ -1,5 +1,8 @@
-# Codice del Capitolo 49
+# Esempio verificato. Capitolo 49
 
-Lo snippet snip_49_contract.py rende osservabile il contratto centrale di Ottimizzazione diretta delle preferenze con valori piccoli e leggibili.
-Il test test_49_contract.py controlla determinismo, output, invariante e una shape incoerente.
-Il risultato è un esempio locale, non un benchmark di produzione.
+`snip_49_contract.py` esegue il caso minimo usato nel testo di **Ottimizzazione diretta delle preferenze**. `test_49_contract.py` conserva l'output atteso, controlla determinismo, serializzazione, valori finiti e presenza del limite interpretativo.
+
+```bash
+python snip_49_contract.py
+python -m unittest -v test_49_contract.py
+```

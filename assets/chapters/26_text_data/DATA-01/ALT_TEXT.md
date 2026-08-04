@@ -1,3 +1,3 @@
-# Alt text DATA-01
+# Testo alternativo
 
-Diagramma DATA-01 del Capitolo 26, famiglia matrix. Domanda: Il diagramma segue il passaggio: Normalizzazione, segmentazione e packing. L'input è una stringa Unicode con byte e token speciali, l'output è ID, confini, mask e costo in token; il vincolo da controllare è che stringa, encoding e tokenizer devono restare dichiarati La composizione usa i passaggi Unicode e byte, Tokenizzazione, Token speciali, Packing e confini, Lunghezza, lingua e costi.
+DATA-01, Il testo come dato. Come si passa da «Unicode e byte» a «Token speciali» mantenendo osservabile il testo prima e dopo la tokenizzazione? La composizione data lineage collega «Unicode e byte», «Tokenizzazione», «Token speciali». L'input è una stringa Unicode con byte e token speciali; l'output è ID, confini, mask e costo in token. Il limite esplicito è: stringa, encoding e tokenizer devono restare dichiarati.

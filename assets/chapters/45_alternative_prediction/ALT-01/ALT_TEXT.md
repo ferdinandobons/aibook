@@ -1,3 +1,3 @@
-# Alt text ALT-01
+# Testo alternativo
 
-Diagramma ALT-01 del Capitolo 45, famiglia pipeline. Domanda: Il diagramma segue il passaggio: Raggruppamento, multi-token prediction o diffusione discreta. L'input è byte, gerarchia, target e numero di passi, l'output è unità predette, loss e durata di decoding; il vincolo da controllare è che granularità della rappresentazione e parallelismo sono assi distinti La composizione usa i passaggi Byte e caratteri, Gerarchie di byte, Predizione multi-token, Diffusione linguistica, Assi separati.
+ALT-01, Byte, predizione multi-token e language diffusion. Come si passa da «Byte e caratteri» a «Predizione multi-token» mantenendo osservabile unità di predizione dal byte al token multiplo? La composizione objective compare collega «Byte e caratteri», «Gerarchie di byte», «Predizione multi-token». L'input è byte, gerarchia, target e numero di passi; l'output è unità predette, loss e durata di decoding. Il limite esplicito è: granularità della rappresentazione e parallelismo sono assi distinti.

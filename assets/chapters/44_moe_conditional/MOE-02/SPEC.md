@@ -1,14 +1,16 @@
 # Specifica visuale MOE-02
 
-- famiglia: chart
-- domanda principale: Il diagramma segue il passaggio: Routing, dispatch, expert compute e combine. L'input è logits del router, top-k e capacità per esperto, l'output è carico, token restituiti e costo attivo; il vincolo da controllare è che parametri totali e parametri attivi non sono la stessa quantità
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: capacity_gate
+- domanda principale: Quale controllo collega «Expert parallelism» a «Parametri totali e attivi» senza superare il limite dichiarato?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v45.png
-- ordine di lettura: titolo, domanda, chart, invariante o limite in chiusura
-- nodi e contenuti: 1: Router top-k; 2: Capacità; 3: Load balancing; 4: Expert parallelism; 5: Parametri totali e attivi
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: parametri totali e parametri attivi non sono la stessa quantità
-- fonti collegate: SRC-44-001 ... SRC-44-004
-- alt text: Diagramma MOE-02 del Capitolo 44, famiglia chart. Domanda: Il diagramma segue il passaggio: Routing, dispatch, expert compute e combine. L'input è logits del router, top-k e capacità per esperto, l'output è carico, token restituiti e costo attivo; il vincolo da controllare è che parametri totali e parametri attivi non sono la stessa quantità La composizione usa i passaggi Router top-k, Capacità, Load balancing, Expert parallelism, Parametri totali e attivi.
+- file candidato: candidate-v45.png
+- oggetto osservato: token e assegnazioni del router agli esperti
+- input: logits del router, top-k e capacità per esperto
+- output: carico, token restituiti e costo attivo
+- nodi locali: Expert parallelism: Token ed output attraversano collective all-to-all tra dispositivi che ospitano esperti…; Parametri totali e attivi: Un MoE può avere molti parametri totali e pochi parametri attivi per token. FLOP,…
+- limite visualizzato: parametri totali e parametri attivi non sono la stessa quantità
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

@@ -1,14 +1,16 @@
 # Specifica visuale GAN-01
 
-- famiglia: timeline
-- domanda principale: Il diagramma segue il passaggio: Aggiornamento alternato e segnale di feedback. L'input è un dato reale, un campione e due score, l'output è score, gradiente e campione; il vincolo da controllare è che un equilibrio locale non prova copertura né stabilità
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: adversarial_loop
+- domanda principale: Come si passa da «Un gioco tra due modelli» a «Mode collapse» mantenendo osservabile la partita tra generatore e discriminatore?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, timeline, invariante o limite in chiusura
-- nodi e contenuti: 1: Un gioco tra due modelli; 2: Divergenze e gradienti; 3: Mode collapse; 4: Wasserstein GAN; 5: Stabilità e valutazione
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: un equilibrio locale non prova copertura né stabilità
-- fonti collegate: SRC-23-001 ... SRC-23-004
-- alt text: Diagramma GAN-01 del Capitolo 23, famiglia timeline. Domanda: Il diagramma segue il passaggio: Aggiornamento alternato e segnale di feedback. L'input è un dato reale, un campione e due score, l'output è score, gradiente e campione; il vincolo da controllare è che un equilibrio locale non prova copertura né stabilità La composizione usa i passaggi Un gioco tra due modelli, Divergenze e gradienti, Mode collapse, Wasserstein GAN, Stabilità e valutazione.
+- file candidato: candidate-v48.png
+- oggetto osservato: la partita tra generatore e discriminatore
+- input: un dato reale, un campione e due score
+- output: score, gradiente e campione
+- nodi locali: Un gioco tra due modelli: Il generatore produce campioni; il discriminatore distingue dati reali e generati.…; Divergenze e gradienti: La formulazione originale è collegata alla Jensen-Shannon divergence sotto un…; Mode collapse: Il generatore può produrre poche modalità convincenti. Diversità e fedeltà devono essere…
+- limite visualizzato: un equilibrio locale non prova copertura né stabilità
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

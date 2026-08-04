@@ -1,5 +1,12 @@
-# Codice del Capitolo 96
+# Esempio verificato. Capitolo 96
 
-Lo snippet snip_96_contract.py rende osservabile il contratto centrale di Progetto di produzione completo con valori piccoli e leggibili.
-Il test test_96_contract.py controlla determinismo, output, invariante e una shape incoerente.
-Il risultato è un esempio locale, non un benchmark di produzione.
+`snip_96_contract.py` esegue il caso minimo usato nel testo di **Progetto di produzione completo**. `test_96_contract.py` conserva l'output atteso, controlla determinismo, serializzazione, valori finiti e presenza del limite interpretativo.
+
+```bash
+python snip_96_contract.py
+python -m unittest -v test_96_contract.py
+```
+
+## Gate offline, canary e rollback
+
+Codice: `production_pipeline.py`; test: `test_production_pipeline.py`; output: `outputs/PRODUCTION-PIPELINE.txt`; ambiente: `environments/lab.txt`.

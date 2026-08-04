@@ -1,71 +1,70 @@
 # Registro dei claim. Capitolo 37
 
-- Data di revisione: 3 agosto 2026
-- Routing verificato: tema `modern_block` con dossier fonte specifico del capitolo.
-- Stati usati: aperta, verificata, corretta, respinta, rimossa.
+- Data di revisione: 4 agosto 2026
+- Regola: ogni claim pubblico è collegato al locator registrato nel dossier e mantiene il proprio limite.
+- Stati usati: verificata; corretta; aperta.
 
 ## CL-37-01
 
 - Affermazione esatta: Ogni sottolayer produce un aggiornamento sommato a un percorso identità.
 - Tipo: definizione o meccanismo attribuito alla fonte.
-- Fonte o prova: SRC-37-001, dossier FONTI_PRIMARIE.md.
-- Sezione o pagina: Abstract / pagina iniziale; Attention Is All You Need; 1 Introduction; 2 Background (claim collegato alla sezione «Residual stream» del capitolo).
-- Versione o data: revisione locale 3 agosto 2026; versione della fonte registrata nel dossier.
-- Controllo indipendente: pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito; claim ristretto a definizione o meccanismo e nessun risultato quantitativo trasferito senza setup.
+- Fonte o prova: SRC-37-001, dossier `FONTI_PRIMARIE.md`.
+- Sezione pubblica: «Residual stream».
+- Versione o data: revisione locale 4 agosto 2026; versione e data della fonte nel dossier.
+- Controllo indipendente: la citazione è adiacente al claim; titolo, URL, locator, perimetro e limiti sono registrati nel dossier; nessun risultato quantitativo viene trasferito senza il relativo setup.
 - Esito: verificata
-- Note: il limite della fonte resta nel paragrafo e nel dossier.
+- Note: esempi, derivazioni e output locali restano distinti dall'evidenza della fonte.
 
 ## CL-37-02
 
 - Affermazione esatta: La posizione della normalizzazione cambia il percorso dei gradienti e il contratto del blocco.
 - Tipo: definizione o meccanismo attribuito alla fonte.
-- Fonte o prova: SRC-37-002, dossier FONTI_PRIMARIE.md.
-- Sezione o pagina: Abstract / pagina iniziale; On Layer Normalization in the Transformer Architecture; 3 Optimization for the Transformer; 3.1 Transformer with Post-Layer Normalization (claim collegato alla sezione «Pre-norm e post-norm» del capitolo).
-- Versione o data: revisione locale 3 agosto 2026; versione della fonte registrata nel dossier.
-- Controllo indipendente: pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito; claim ristretto a definizione o meccanismo e nessun risultato quantitativo trasferito senza setup.
+- Fonte o prova: SRC-37-002, dossier `FONTI_PRIMARIE.md`.
+- Sezione pubblica: «Pre-norm e post-norm».
+- Versione o data: revisione locale 4 agosto 2026; versione e data della fonte nel dossier.
+- Controllo indipendente: la citazione è adiacente al claim; titolo, URL, locator, perimetro e limiti sono registrati nel dossier; nessun risultato quantitativo viene trasferito senza il relativo setup.
 - Esito: verificata
-- Note: il limite della fonte resta nel paragrafo e nel dossier.
+- Note: esempi, derivazioni e output locali restano distinti dall'evidenza della fonte.
 
 ## CL-37-03
 
 - Affermazione esatta: RMSNorm scala usando la media quadratica e non sottrae la media.
 - Tipo: definizione o meccanismo attribuito alla fonte.
-- Fonte o prova: SRC-37-003, dossier FONTI_PRIMARIE.md.
-- Sezione o pagina: Abstract / pagina iniziale; Root Mean Square Layer Normalization (claim collegato alla sezione «RMSNorm» del capitolo).
-- Versione o data: revisione locale 3 agosto 2026; versione della fonte registrata nel dossier.
-- Controllo indipendente: pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito; claim ristretto a definizione o meccanismo e nessun risultato quantitativo trasferito senza setup.
+- Fonte o prova: SRC-37-003, dossier `FONTI_PRIMARIE.md`.
+- Sezione pubblica: «RMSNorm».
+- Versione o data: revisione locale 4 agosto 2026; versione e data della fonte nel dossier.
+- Controllo indipendente: la citazione è adiacente al claim; titolo, URL, locator, perimetro e limiti sono registrati nel dossier; nessun risultato quantitativo viene trasferito senza il relativo setup.
 - Esito: verificata
-- Note: il limite della fonte resta nel paragrafo e nel dossier.
+- Note: esempi, derivazioni e output locali restano distinti dall'evidenza della fonte.
 
 ## CL-37-04
 
 - Affermazione esatta: Due proiezioni di ingresso costruiscono un gate moltiplicativo prima della proiezione down.
 - Tipo: definizione o meccanismo attribuito alla fonte.
-- Fonte o prova: SRC-37-004, dossier FONTI_PRIMARIE.md.
-- Sezione o pagina: Abstract / pagina iniziale; GLU Variants Improve Transformer; 3 Experiments on Text-to-Text Transfer Transformer (T5) (claim collegato alla sezione «SwiGLU» del capitolo).
-- Versione o data: revisione locale 3 agosto 2026; versione della fonte registrata nel dossier.
-- Controllo indipendente: pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito; claim ristretto a definizione o meccanismo e nessun risultato quantitativo trasferito senza setup.
+- Fonte o prova: SRC-37-004, dossier `FONTI_PRIMARIE.md`.
+- Sezione pubblica: «SwiGLU».
+- Versione o data: revisione locale 4 agosto 2026; versione e data della fonte nel dossier.
+- Controllo indipendente: la citazione è adiacente al claim; titolo, URL, locator, perimetro e limiti sono registrati nel dossier; nessun risultato quantitativo viene trasferito senza il relativo setup.
 - Esito: verificata
-- Note: il limite della fonte resta nel paragrafo e nel dossier.
+- Note: esempi, derivazioni e output locali restano distinti dall'evidenza della fonte.
 
 ## CL-37-05
 
 - Affermazione esatta: Attention e MLP possono essere sequenziali o paralleli; il nome del modello non basta a ricostruire l'ordine.
 - Tipo: definizione o meccanismo attribuito alla fonte.
-- Fonte o prova: SRC-37-001, dossier FONTI_PRIMARIE.md.
-- Sezione o pagina: Abstract / pagina iniziale; Attention Is All You Need; 1 Introduction; 2 Background (claim collegato alla sezione «Ordine e parallelismo» del capitolo).
-- Versione o data: revisione locale 3 agosto 2026; versione della fonte registrata nel dossier.
-- Controllo indipendente: pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito; claim ristretto a definizione o meccanismo e nessun risultato quantitativo trasferito senza setup.
+- Fonte o prova: SRC-37-001, dossier `FONTI_PRIMARIE.md`.
+- Sezione pubblica: «Ordine e parallelismo».
+- Versione o data: revisione locale 4 agosto 2026; versione e data della fonte nel dossier.
+- Controllo indipendente: la citazione è adiacente al claim; titolo, URL, locator, perimetro e limiti sono registrati nel dossier; nessun risultato quantitativo viene trasferito senza il relativo setup.
 - Esito: verificata
-- Note: il limite della fonte resta nel paragrafo e nel dossier.
+- Note: esempi, derivazioni e output locali restano distinti dall'evidenza della fonte.
 
 ## CL-37-CODE
 
-- Affermazione esatta: lo snippet snip_37_contract.py produce l'output osservabile e il test rifiuta un input incoerente.
+- Affermazione esatta: `snip_37_contract.py` produce l'output JSON versionato; il test controlla output atteso, determinismo, serializzazione, valori finiti e limite interpretativo.
 - Tipo: risultato eseguito localmente.
-- Fonte o prova: code/snip_37_contract.py, test associato e output SNIP.
-- Sezione o pagina: Dall'algoritmo al codice.
-- Versione o data: Python 3.13.12, CPU, 3 agosto 2026.
-- Controllo indipendente: esecuzione dello snippet e unittest nello stesso ambiente.
+- Fonte o prova: code/snip_37_contract.py, code/test_37_contract.py e code/outputs/SNIP-37-001.txt.
+- Versione o data: Python 3.13.12, CPU, 4 agosto 2026.
+- Controllo indipendente: esecuzione dello snippet e unittest da processo separato.
 - Esito: verificata
-- Note: esempio delimitato, non benchmark di produzione.
+- Note: esempio delimitato e didattico; non è un benchmark di produzione.

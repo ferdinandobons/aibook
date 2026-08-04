@@ -140,7 +140,7 @@ Una rete profonda non è utile soltanto perché contiene molti livelli. Deve ess
 
 È comune usare quell'episodio come simbolo della crescita del deep learning, ma una spiegazione accurata non lo riduce a una sola causa. Il risultato dipendeva dall'incontro tra architettura, dati su larga scala, accelerazione hardware, regolarizzazione e una procedura di training che funzionava abbastanza bene. Nessuno di questi elementi, preso da solo, descrive l'intera transizione.
 
-Per la richiesta «Il pacco non è arrivato», questo cambiamento permette di partire dal testo quasi grezzo e apprendere rappresentazioni interne utili. Rimangono però domande aperte: quali dati contengono esempi sufficienti? Che cosa misura la loss? Il modello generalizza a formulazioni nuove? Quali errori introduce il dataset? Il collo di bottiglia non scompare; si sposta verso la costruzione dei dati, il costo del training, la stabilità e la valutazione.
+Per la stessa richiesta, questo cambiamento permette di partire dal testo quasi grezzo e apprendere rappresentazioni interne utili. Rimangono però domande aperte: quali dati contengono esempi sufficienti? Che cosa misura la loss? Il modello generalizza a formulazioni nuove? Quali errori introduce il dataset? Il collo di bottiglia non scompare; si sposta verso la costruzione dei dati, il costo del training, la stabilità e la valutazione.
 
 ## Dal modello per un compito al pretraining riutilizzabile
 

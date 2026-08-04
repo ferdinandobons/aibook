@@ -551,3 +551,50 @@ Il controllo HTTP sui 73 URL unici presenti nei dossier ha rilevato 65 risposte 
 - Ricontrollo autoriale delle affermazioni sensibili e approvazione finale delle fonti alla data di pubblicazione.
 - Approvazione di ogni coppia testo-visuale, alt text e composizione, poi eventuale promozione da `candidate-vN.png` a `final.png`.
 - Congelamento degli artefatti editoriali; non sono stati eseguiti commit, push, tag o release.
+
+# DR-2026-08-04-01
+
+## Stato
+
+- ID: `DR-2026-08-04-01`
+- Tipo: revisione integrale lezione per lezione, ricostruzione visuale e pulizia dell'evidenza Python
+- Data: **4 agosto 2026**
+- Ambito: 98 capitoli, 12 appendici, testo, claim, fonti sensibili, codice, output, visuali e pipeline minima
+- Esito: candidatura tecnica revisionata; approvazione autoriale e congelamento restano aperti
+
+## Testo e struttura
+
+- `audit_book_quality.py --strict`: `98/98` capitoli e `12/12` appendici puliti; nessun paragrafo lungo riutilizzato in tre o più capitoli.
+- `audit_semantic_alignment.py`: `98/98` capitoli puliti.
+- `audit_editorial_quality.py --strict`: `0` capitoli problematici, `863-3.402` parole pubbliche, `261` formule, `0` formule schematiche non etichettate, `0` paragrafi duplicati e `0` immagini problematiche.
+- `audit_book_general.py`: `0` problemi di fonti, claim, codice, immagini o paragrafi ripetuti nel proprio perimetro.
+- I capitoli 14-98, escluso il pilota 28, sono stati ricostruiti da nuclei semantici specifici e non da un paragrafo pubblico comune. Prerequisiti, casi, controlli, connessioni ed esercizi restano locali alla lezione.
+
+## Codice
+
+- `94/98` capitoli conservano un riferimento eseguibile con blocco Python nel testo, output letterale, file completo, test e output versionato.
+- I capitoli 20, 30, 93 e 98 dichiarano un'eccezione motivata. I vecchi script generici sono stati rimossi, perché contraddicevano la prova documentale richiesta dal tema.
+- Sono stati eseguiti `461` test in `114` file con Python 3.13.12, NumPy 2.5.1 e PyTorch 2.12.1; altri `3` test JAX sono passati nell'ambiente JAX 0.11.0. Totale: `464` test in `115` file, `0` fallimenti.
+- `267/267` file Python sono stati analizzati sintatticamente.
+- Sono stati rimossi 51 test storici scollegati che importavano funzioni non più presenti e 159 output o record ambiente duplicati della prima materializzazione.
+
+## Fonti
+
+- La passata globale rimane registrata in `source_verification_2026-08-03.json`: `419` fonti uniche e `502` record fonte-claim.
+- Il 4 agosto sono stati ricontrollati i punti corretti ad alto rischio: tassonomia generativa e precision-recall del capitolo 20, lifecycle MCP e protocollo A2A del capitolo 68, QAT, GPTQ, AWQ e SmoothQuant del capitolo 74, testo ufficiale dell'AI Act e misura ambientale NIST del capitolo 93.
+- Questo controllo non trasforma automaticamente l'intero libro in un'opera fattualmente congelata: API, standard e normativa vanno ricontrollati alla data di pubblicazione.
+
+## Visuali
+
+- Sono state rigenerate e riaperte `168` visuali dei capitoli 14-98, escluso 28, e `12` visuali di appendice. Con le 28 figure iniziali preservate, i capitoli mantengono `196` riferimenti attivi e unici; il totale con le appendici è `208`.
+- Le 84 coppie revisionate usano 165 modelli semantici ricondotti a dieci primitive deterministiche: processi, cicli, stack, confronti, tree, grid, boundary, grafi, strutture dell'evidenza e tile.
+- I vecchi grafici quantitativi illustrativi sono stati eliminati dal percorso attivo. Una figura con numeri è ammessa soltanto quando conserva dati eseguiti o una fonte con setup e unità.
+- Sei contact sheet hanno coperto l'intero set revisionato; spot check a piena risoluzione hanno incluso attention hardware-aware, test-time compute, interoperabilità, quantizzazione, prompt injection e piccolo language model.
+- Tutte le figure restano candidate tecniche con approvazione autoriale aperta.
+
+## Gate ancora aperti
+
+- lettura autoriale integrale e prova ad alta voce;
+- approvazione delle coppie testo-visuale nel layout editoriale;
+- ricontrollo temporale delle fonti sensibili alla data di pubblicazione;
+- congelamento, promozione degli asset approvati a `final.png` ed eventuale release.

@@ -1,5 +1,8 @@
-# Codice del Capitolo 52
+# Esempio verificato. Capitolo 52
 
-Lo snippet snip_52_contract.py rende osservabile il contratto centrale di Addestrare e distillare il reasoning con valori piccoli e leggibili.
-Il test test_52_contract.py controlla determinismo, output, invariante e una shape incoerente.
-Il risultato è un esempio locale, non un benchmark di produzione.
+`snip_52_contract.py` esegue il caso minimo usato nel testo di **Addestrare e distillare il reasoning**. `test_52_contract.py` conserva l'output atteso, controlla determinismo, serializzazione, valori finiti e presenza del limite interpretativo.
+
+```bash
+python snip_52_contract.py
+python -m unittest -v test_52_contract.py
+```

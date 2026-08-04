@@ -1,5 +1,8 @@
-# Codice del Capitolo 90
+# Esempio verificato. Capitolo 90
 
-Lo snippet snip_90_contract.py rende osservabile il contratto centrale di Poisoning, backdoor, extraction e supply chain con valori piccoli e leggibili.
-Il test test_90_contract.py controlla determinismo, output, invariante e una shape incoerente.
-Il risultato è un esempio locale, non un benchmark di produzione.
+`snip_90_contract.py` esegue il caso minimo usato nel testo di **Poisoning, backdoor, extraction e supply chain**. `test_90_contract.py` conserva l'output atteso, controlla determinismo, serializzazione, valori finiti e presenza del limite interpretativo.
+
+```bash
+python snip_90_contract.py
+python -m unittest -v test_90_contract.py
+```

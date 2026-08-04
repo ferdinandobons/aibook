@@ -1,14 +1,16 @@
 # Specifica visuale EMBODIED-02
 
-- famiglia: pipeline
-- domanda principale: Il diagramma segue il passaggio: World model, planning, VLA e controllo. L'input è osservazione, stato, azione e dinamica, l'output è azione, stato previsto e risultato fisico; il vincolo da controllare è che sim-to-real richiede una misura sul sistema reale
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: action_boundary
+- domanda principale: Quale controllo collega «Vision-language-action» a «Sicurezza e sim-to-real» senza superare il limite dichiarato?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, pipeline, invariante o limite in chiusura
-- nodi e contenuti: 1: Modello della dinamica; 2: Planning nel modello; 3: Embodied perception; 4: Vision-language-action; 5: Sicurezza e sim-to-real
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: sim-to-real richiede una misura sul sistema reale
-- fonti collegate: SRC-62-001 ... SRC-62-004
-- alt text: Diagramma EMBODIED-02 del Capitolo 62, famiglia pipeline. Domanda: Il diagramma segue il passaggio: World model, planning, VLA e controllo. L'input è osservazione, stato, azione e dinamica, l'output è azione, stato previsto e risultato fisico; il vincolo da controllare è che sim-to-real richiede una misura sul sistema reale La composizione usa i passaggi Modello della dinamica, Planning nel modello, Embodied perception, Vision-language-action, Sicurezza e sim-to-real.
+- file candidato: candidate-v48.png
+- oggetto osservato: lo stato di un agente embodied nel mondo
+- input: osservazione, stato, azione e dinamica
+- output: azione, stato previsto e risultato fisico
+- nodi locali: Vision-language-action: VLA mappa osservazioni e istruzioni a token o controlli di azione. Frequenza e…; Sicurezza e sim-to-real: Simulazione, fallback, limiti di forza e supervisione umana riducono rischio, ma non…
+- limite visualizzato: sim-to-real richiede una misura sul sistema reale
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

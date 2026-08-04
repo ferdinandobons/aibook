@@ -1,5 +1,8 @@
-# Codice del Capitolo 32
+# Esempio verificato. Capitolo 32
 
-Lo snippet snip_32_contract.py rende osservabile il contratto centrale di Il ciclo di vita dei dati con valori piccoli e leggibili.
-Il test test_32_contract.py controlla determinismo, output, invariante e una shape incoerente.
-Il risultato è un esempio locale, non un benchmark di produzione.
+`snip_32_contract.py` esegue il caso minimo usato nel testo di **Il ciclo di vita dei dati**. `test_32_contract.py` conserva l'output atteso, controlla determinismo, serializzazione, valori finiti e presenza del limite interpretativo.
+
+```bash
+python snip_32_contract.py
+python -m unittest -v test_32_contract.py
+```

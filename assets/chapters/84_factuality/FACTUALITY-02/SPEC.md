@@ -1,14 +1,16 @@
 # Specifica visuale FACTUALITY-02
 
-- famiglia: scatter
-- domanda principale: Il diagramma segue il passaggio: Verifica, calibrazione, astensione e retrieval. L'input è claim, predizione, fonti e score di confidenza, l'output è risposta supportata o astensione motivata; il vincolo da controllare è che confidenza alta non certifica la verità fattuale
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: calibration_map
+- domanda principale: Quale controllo collega «Astensione» a «Verifica e retrieval» senza superare il limite dichiarato?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, scatter, invariante o limite in chiusura
-- nodi e contenuti: 1: Correttezza e supporto; 2: Hallucination; 3: Calibrazione; 4: Astensione; 5: Verifica e retrieval
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: confidenza alta non certifica la verità fattuale
-- fonti collegate: SRC-84-001 ... SRC-84-004
-- alt text: Diagramma FACTUALITY-02 del Capitolo 84, famiglia scatter. Domanda: Il diagramma segue il passaggio: Verifica, calibrazione, astensione e retrieval. L'input è claim, predizione, fonti e score di confidenza, l'output è risposta supportata o astensione motivata; il vincolo da controllare è che confidenza alta non certifica la verità fattuale La composizione usa i passaggi Correttezza e supporto, Hallucination, Calibrazione, Astensione, Verifica e retrieval.
+- file candidato: candidate-v48.png
+- oggetto osservato: una risposta con evidenza, confidenza e possibilità di errore
+- input: claim, predizione, fonti e score di confidenza
+- output: risposta supportata o astensione motivata
+- nodi locali: Astensione: Un sistema può rifiutare o chiedere chiarimenti quando il rischio è alto. Coverage e…; Verifica e retrieval: Fonti esterne possono aumentare supporto, ma retrieval e generazione hanno failure mode…
+- limite visualizzato: confidenza alta non certifica la verità fattuale
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

@@ -357,7 +357,7 @@ FORMULAS = {
     71: ("score = evaluate(trajectory, task, policy)", "L'eval deve distinguere compito riuscito, traiettoria e violazione di policy."),
     72: ("allow = policy(input, tool, scope)", "Sicurezza agentica richiede una decisione esterna alla sola generazione."),
     73: ("L_student = distill(L_teacher) + lambda R", "Compressione e accuratezza vanno misurate nello stesso perimetro."),
-    74: ("x_hat = scale * round(x / scale)", "Quantizzare espone il trade-off tra memoria, errore e velocità."),
+    74: ("q = clamp(round(x / s) + z); \\hat{x} = s(q - z)", "Scale, zero-point e intervallo intero definiscono insieme quantizzazione e ricostruzione."),
     75: ("w_hat = dequantize(codebook(index(w)))", "Un formato low-bit introduce rappresentazione e operazione di ricostruzione."),
     76: ("y = decode(logits, constraint)", "Vincoli di decoding cambiano lo spazio delle sequenze ammissibili."),
     77: ("accepted = verify(draft, target)", "Speculazione e decoding parallelo richiedono una verifica del draft."),

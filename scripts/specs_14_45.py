@@ -51,7 +51,7 @@ SPECS_14_45 = [
         ("Modelli espliciti e impliciti", "Un modello esplicito assegna una densità o probabilità valutabile. Un modello implicito definisce il campionamento senza una likelihood semplice."),
         ("Variabili latenti", "Una variabile latente introduce struttura non osservata. L'inferenza deve collegare dati e latenti, esattamente o mediante approssimazione."),
         ("Energy-based model", "Una energia non normalizzata assegna punteggi alle configurazioni. La costante di partizione rende difficile la likelihood in molti casi."),
-        ("Qualità, copertura e valutazione", "Campioni plausibili non garantiscono copertura. Likelihood, precision-recall generativa e valutazione umana rispondono a domande diverse."),
+        ("Qualità, copertura e valutazione", "Campioni plausibili non garantiscono copertura. Likelihood e precision-recall generativa rispondono a domande diverse e richiedono protocolli dichiarati."),
     ]),
     (21, "CH-P05-AUTOREGRESSIVE", "P05", "21_autoregressive", "Modelli autoregressivi", "CORE", [
         ("Fattorizzare una sequenza", "La chain rule scompone la probabilità con un ordine. Ogni fattore condiziona sugli elementi precedenti."),

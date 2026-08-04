@@ -1,1 +1,1 @@
-{"answer": "Il pacco \u00e8 in transito", "citation": "d1", "invariant": "RAG keeps retrieved evidence and generated answer as separate records"}
+{"answer": "Il pacco è in transito", "citation": "d1", "invariant": "RAG keeps retrieved evidence and generated answer as separate records"}

@@ -1,12 +1,7 @@
 # Audit del codice
 
-- ambiente: Python 3.13.12, CPU, processo pulito
-- API: funzioni Python standard del modulo snip_30_contract
-- comando snippet: python snip_30_contract.py
-- comando test: python -m unittest -v test_30_contract.py
-- snippet: eseguito
-- test: 4 superati
-- controllo negativo: shape incoerente rifiutata
-- risultato: esempio delimitato, non benchmark di produzione
-- dipendenze esterne: nessuna
-- stato: verificato localmente, review autoriale aperta
+- policy: exception
+- motivazione: Il capitolo è una mappa tra architetture e obiettivi; il Transformer eseguibile è nel capitolo 29 e le ricette di training iniziano dal 32.
+- snippet pubblico: non previsto
+- verifica sostitutiva: fonti primarie, data, claim delimitati e confronto documentale
+- stato: eccezione motivata; review autoriale aperta

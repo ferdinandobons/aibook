@@ -1,6 +1,7 @@
 # Fonti. Appendice B
 
-- Python documentation: https://docs.python.org/3/
-- NumPy documentation: https://numpy.org/doc/stable/
-- PyTorch documentation: https://pytorch.org/docs/stable/
-- JAX documentation: https://docs.jax.dev/
+- JAX documentation e quickstart: https://docs.jax.dev/
+- JAX thinking in JAX, pure functions e tracing: https://docs.jax.dev/en/latest/notebooks/thinking_in_jax.html
+- JAX automatic vectorization con `vmap`: https://docs.jax.dev/en/latest/automatic-vectorization.html
+- JAX distributed arrays e automatic parallelization: https://docs.jax.dev/en/latest/notebooks/Distributed_arrays_and_automatic_parallelization.html
+- PyTorch 2 documentation, per il confronto terminologico: https://pytorch.org/docs/stable/

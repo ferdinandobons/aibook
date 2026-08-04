@@ -1,81 +1,31 @@
-# Piano interno. Capitolo 81
+# Piano editoriale. Capitolo 81
 
-- Domanda centrale: quale contratto costruisce Compiler, kernel e runtime?
-- Oggetto continuo: un grafo di operatori trasformato dal compiler; input guida: grafo, shape, dtype, target e kernel.
-- Prerequisito stabile: Capitolo 80, Serving disaggregato e inference distribuita.
-- Gap: lowering, fusion, autotuning e gestione dei graph break.
-- Output consegnato: kernel eseguito, latenza e fallback; consumer successivo: Capitolo 82, LLMOps, edge, costo ed energia.
-- Invariante principale: ottimizzazione del grafo e correttezza numerica devono essere confrontate.
-- Visuali: KERNELS-01 e KERNELS-02, con famiglie compositive variabili.
-- Snippet: code/snip_81_contract.py; output: code/outputs/SNIP-81-001.txt.
-- Gate aperti: revisione autoriale, lettura ad alta voce e approvazione finale delle visuali.
+## Obiettivo didattico
 
-## Transizione 1. Grafo e operatori
+Seguire **Compiler, kernel e runtime** da grafo, shape, dtype, target e kernel a kernel eseguito, latenza e fallback, osservando lowering, fusion, autotuning e gestione dei graph break senza oltrepassare questo limite: ottimizzazione del grafo e correttezza numerica devono essere confrontate.
 
-- Ultima affermazione stabile: un grafo di operatori trasformato dal compiler.
-- Concetto nuovo: Un compiler cattura operazioni e dipendenze, poi applica fusion, scheduling e layout transformation.
-- Input e shape: grafo, shape, dtype, target e kernel.
-- Operazione: lowering, fusion, autotuning e gestione dei graph break.
-- Output e shape: kernel eseguito, latenza e fallback.
-- Che cosa cambia: il passaggio specifico di «Grafo e operatori».
-- Invariante: ottimizzazione del grafo e correttezza numerica devono essere confrontate.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: due operatori fusi con output numericamente equivalente; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Kernel fusion.
-- Prova: SRC-81-001 e sezione pubblica corrispondente.
+## Prerequisiti reali
 
-## Transizione 2. Kernel fusion
+- Capitolo 9: Calcolo numerico, precisione e hardware
+- Capitolo 29: Il Transformer da zero
+- Capitolo 40: Attention hardware-aware
 
-- Ultima affermazione stabile: un grafo di operatori trasformato dal compiler.
-- Concetto nuovo: Combinare operazioni riduce lanci e traffico di memoria, ma può aumentare register pressure e ridurre riuso.
-- Input e shape: grafo, shape, dtype, target e kernel.
-- Operazione: lowering, fusion, autotuning e gestione dei graph break.
-- Output e shape: kernel eseguito, latenza e fallback.
-- Che cosa cambia: il passaggio specifico di «Kernel fusion».
-- Invariante: ottimizzazione del grafo e correttezza numerica devono essere confrontate.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: due operatori fusi con output numericamente equivalente; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Triton e kernel custom.
-- Prova: SRC-81-002 e sezione pubblica corrispondente.
+## Percorso della lezione
 
-## Transizione 3. Triton e kernel custom
+1. **Grafo e operatori.** Un compiler cattura operazioni e dipendenze, poi applica fusion, scheduling e layout transformation. Prova: SRC-81-001.
+2. **Kernel fusion.** Combinare operazioni riduce lanci e traffico di memoria, ma può aumentare register pressure e ridurre riuso. Prova: SRC-81-002.
+3. **Triton e kernel custom.** Un linguaggio di kernel espone tiling e parallelismo mantenendo una astrazione più alta rispetto a CUDA. Prova: SRC-81-003.
+4. **torch.compile e graph break.** Tracing e guard permettono specializzazione dinamica. Python side effect o shape non supportate producono graph break. Prova: SRC-81-004.
+5. **Autotuning e portabilità.** Tile, num warps e schedule ottimali dipendono dall'hardware. Un kernel corretto richiede test numerici e benchmark separati. Prova: SRC-81-001.
 
-- Ultima affermazione stabile: un grafo di operatori trasformato dal compiler.
-- Concetto nuovo: Un linguaggio di kernel espone tiling e parallelismo mantenendo una astrazione più alta rispetto a CUDA.
-- Input e shape: grafo, shape, dtype, target e kernel.
-- Operazione: lowering, fusion, autotuning e gestione dei graph break.
-- Output e shape: kernel eseguito, latenza e fallback.
-- Che cosa cambia: il passaggio specifico di «Triton e kernel custom».
-- Invariante: ottimizzazione del grafo e correttezza numerica devono essere confrontate.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: due operatori fusi con output numericamente equivalente; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: torch.compile e graph break.
-- Prova: SRC-81-003 e sezione pubblica corrispondente.
+## Prove e artefatti
 
-## Transizione 4. torch.compile e graph break
+- riferimento minimo: `code/snip_81_contract.py`; test: `code/test_81_contract.py`; output: `code/outputs/SNIP-81-001.txt`.
+- visuali candidate: KERNELS-01, KERNELS-02; le domande pedagogiche sono distinte e l'approvazione autoriale resta aperta.
+- fonti: `FONTI_PRIMARIE.md`; corrispondenza claim-fonte: `CLAIMS.md`.
 
-- Ultima affermazione stabile: un grafo di operatori trasformato dal compiler.
-- Concetto nuovo: Tracing e guard permettono specializzazione dinamica. Python side effect o shape non supportate producono graph break.
-- Input e shape: grafo, shape, dtype, target e kernel.
-- Operazione: lowering, fusion, autotuning e gestione dei graph break.
-- Output e shape: kernel eseguito, latenza e fallback.
-- Che cosa cambia: il passaggio specifico di «torch.compile e graph break».
-- Invariante: ottimizzazione del grafo e correttezza numerica devono essere confrontate.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: due operatori fusi con output numericamente equivalente; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Autotuning e portabilità.
-- Prova: SRC-81-004 e sezione pubblica corrispondente.
+## Gate aperti
 
-## Transizione 5. Autotuning e portabilità
-
-- Ultima affermazione stabile: un grafo di operatori trasformato dal compiler.
-- Concetto nuovo: Tile, num warps e schedule ottimali dipendono dall'hardware. Un kernel corretto richiede test numerici e benchmark separati.
-- Input e shape: grafo, shape, dtype, target e kernel.
-- Operazione: lowering, fusion, autotuning e gestione dei graph break.
-- Output e shape: kernel eseguito, latenza e fallback.
-- Che cosa cambia: il passaggio specifico di «Autotuning e portabilità».
-- Invariante: ottimizzazione del grafo e correttezza numerica devono essere confrontate.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: due operatori fusi con output numericamente equivalente; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: LLMOps, edge, costo ed energia.
-- Prova: SRC-81-001 e sezione pubblica corrispondente.
+- lettura editoriale finale da parte dell'autore;
+- approvazione delle visuali nel contesto impaginato;
+- benchmark esterni solo quando il capitolo formula un claim di scala o di produzione.

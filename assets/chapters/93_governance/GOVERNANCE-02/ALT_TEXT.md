@@ -1,3 +1,3 @@
-# Alt text GOVERNANCE-02
+# Testo alternativo
 
-Diagramma GOVERNANCE-02 del Capitolo 93, famiglia checklist. Domanda: Il diagramma segue il passaggio: Govern, map, measure, manage, document e change control. L'input è ruoli, uso previsto, evidenza, impatto e consumo, l'output è decisione, responsabilità, evidenza e registro d'incidente; il vincolo da controllare è che un framework orienta il rischio ma non certifica automaticamente la conformità La composizione usa i passaggi Ruoli e responsabilità, Risk management, Norme e documentazione, Incidenti e change management, Sostenibilità.
+GOVERNANCE-02, Diritto, governance e sostenibilità. Quale controllo collega «Incidenti e change management» a «Sostenibilità» senza superare il limite dichiarato? La composizione governance lifecycle collega «Incidenti e change management», «Sostenibilità». L'input è ruoli, uso previsto, evidenza, impatto e consumo; l'output è decisione, responsabilità, evidenza e registro d'incidente. Il limite esplicito è: un framework orienta il rischio ma non certifica automaticamente la conformità.

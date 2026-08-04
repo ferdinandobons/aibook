@@ -1,5 +1,8 @@
-# Codice del Capitolo 92
+# Esempio verificato. Capitolo 92
 
-Lo snippet snip_92_contract.py rende osservabile il contratto centrale di Watermarking e provenienza dei contenuti con valori piccoli e leggibili.
-Il test test_92_contract.py controlla determinismo, output, invariante e una shape incoerente.
-Il risultato è un esempio locale, non un benchmark di produzione.
+`snip_92_contract.py` esegue il caso minimo usato nel testo di **Watermarking e provenienza dei contenuti**. `test_92_contract.py` conserva l'output atteso, controlla determinismo, serializzazione, valori finiti e presenza del limite interpretativo.
+
+```bash
+python snip_92_contract.py
+python -m unittest -v test_92_contract.py
+```

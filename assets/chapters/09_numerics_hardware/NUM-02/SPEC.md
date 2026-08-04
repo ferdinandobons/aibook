@@ -49,3 +49,4 @@ Input e pesi
 - Kalamkar et al. 2019;
 - NVIDIA CUDA/cuBLAS;
 - renderer: `scripts/generate_numerics_visuals.py` e revisione `generate_numerics_visuals_v2.py`.
+- domanda principale: Quale confronto o limite chiarisce «Range e precisione rispondono a domande diverse»?

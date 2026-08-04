@@ -1,3 +1,3 @@
-# Alt text DIST-02
+# Testo alternativo
 
-Diagramma DIST-02 del Capitolo 36, famiglia graph. Domanda: Il diagramma segue il passaggio: All-reduce, sharding, pipeline e recovery. L'input è microbatch, worker, shard e topologia, l'output è gradiente ridotto, stato sincronizzato e fault osservato; il vincolo da controllare è che la riduzione e il conteggio del batch devono essere dichiarati La composizione usa i passaggi Data parallelism, ZeRO e FSDP, Tensor e pipeline parallelism, Topologia e fault tolerance, Continued pretraining.
+DIST-02, Training distribuito e continued pretraining. Quale controllo collega «Topologia e fault tolerance» a «Continued pretraining» senza superare il limite dichiarato? La composizione communication graph collega «Topologia e fault tolerance», «Continued pretraining». L'input è microbatch, worker, shard e topologia; l'output è gradiente ridotto, stato sincronizzato e fault osservato. Il limite esplicito è: la riduzione e il conteggio del batch devono essere dichiarati.

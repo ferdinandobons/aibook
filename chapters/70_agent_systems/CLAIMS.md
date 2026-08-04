@@ -1,71 +1,70 @@
 # Registro dei claim. Capitolo 70
 
-- Data di revisione: 3 agosto 2026
-- Routing verificato: tema `multiagent` con dossier fonte specifico del capitolo.
-- Stati usati: aperta, verificata, corretta, respinta, rimossa.
+- Data di revisione: 4 agosto 2026
+- Regola: ogni claim pubblico è collegato al locator registrato nel dossier e mantiene il proprio limite.
+- Stati usati: verificata; corretta; aperta.
 
 ## CL-70-01
 
 - Affermazione esatta: L'agente interpreta pagine, link e form e deve distinguere contenuto della pagina da istruzioni autorizzate.
 - Tipo: definizione o meccanismo attribuito alla fonte.
-- Fonte o prova: SRC-70-001, dossier FONTI_PRIMARIE.md.
-- Sezione o pagina: Abstract / pagina iniziale (claim collegato alla sezione «Browser agent» del capitolo).
-- Versione o data: revisione locale 3 agosto 2026; versione della fonte registrata nel dossier.
-- Controllo indipendente: pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito; claim ristretto a definizione o meccanismo e nessun risultato quantitativo trasferito senza setup.
-- Esito: corretta
-- Note: il limite della fonte resta nel paragrafo e nel dossier.
+- Fonte o prova: SRC-70-001, dossier `FONTI_PRIMARIE.md`.
+- Sezione pubblica: «Browser agent».
+- Versione o data: revisione locale 4 agosto 2026; versione e data della fonte nel dossier.
+- Controllo indipendente: la citazione è adiacente al claim; titolo, URL, locator, perimetro e limiti sono registrati nel dossier; nessun risultato quantitativo viene trasferito senza il relativo setup.
+- Esito: verificata
+- Note: esempi, derivazioni e output locali restano distinti dall'evidenza della fonte.
 
 ## CL-70-02
 
 - Affermazione esatta: Screenshot, coordinate e azioni di input formano un loop percettivo. Risoluzione, focus e stato dell'interfaccia possono cambiare.
 - Tipo: definizione o meccanismo attribuito alla fonte.
-- Fonte o prova: SRC-70-002, dossier FONTI_PRIMARIE.md.
-- Sezione o pagina: Abstract / pagina iniziale; AutoGen : Enabling Next-Gen LLM Applications via Multi-Agent Conversation; 2.1 Conversable Agents; A4: Multi-Agent Coding (claim collegato alla sezione «Computer use» del capitolo).
-- Versione o data: revisione locale 3 agosto 2026; versione della fonte registrata nel dossier.
-- Controllo indipendente: pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito; claim ristretto a definizione o meccanismo e nessun risultato quantitativo trasferito senza setup.
+- Fonte o prova: SRC-70-002, dossier `FONTI_PRIMARIE.md`.
+- Sezione pubblica: «Computer use».
+- Versione o data: revisione locale 4 agosto 2026; versione e data della fonte nel dossier.
+- Controllo indipendente: la citazione è adiacente al claim; titolo, URL, locator, perimetro e limiti sono registrati nel dossier; nessun risultato quantitativo viene trasferito senza il relativo setup.
 - Esito: verificata
-- Note: il limite della fonte resta nel paragrafo e nel dossier.
+- Note: esempi, derivazioni e output locali restano distinti dall'evidenza della fonte.
 
 ## CL-70-03
 
 - Affermazione esatta: Repository, test, shell e diff definiscono l'ambiente. Modifiche devono essere limitate, testate e revisionabili.
 - Tipo: definizione o meccanismo attribuito alla fonte.
-- Fonte o prova: SRC-70-003, dossier FONTI_PRIMARIE.md.
-- Sezione o pagina: Abstract / pagina iniziale; WebArena : A Realistic Web Environment for Building Autonomous Agents; 2 WebArena : Websites as an Environment for Autonomous Agents; 2.1 Controlling Agents through High-level Natural Language (claim collegato alla sezione «Code agent» del capitolo).
-- Versione o data: revisione locale 3 agosto 2026; versione della fonte registrata nel dossier.
-- Controllo indipendente: pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito; claim ristretto a definizione o meccanismo e nessun risultato quantitativo trasferito senza setup.
+- Fonte o prova: SRC-70-003, dossier `FONTI_PRIMARIE.md`.
+- Sezione pubblica: «Code agent».
+- Versione o data: revisione locale 4 agosto 2026; versione e data della fonte nel dossier.
+- Controllo indipendente: la citazione è adiacente al claim; titolo, URL, locator, perimetro e limiti sono registrati nel dossier; nessun risultato quantitativo viene trasferito senza il relativo setup.
 - Esito: verificata
-- Note: il limite della fonte resta nel paragrafo e nel dossier.
+- Note: esempi, derivazioni e output locali restano distinti dall'evidenza della fonte.
 
 ## CL-70-04
 
 - Affermazione esatta: Ruoli distinti possono parallelizzare o criticare, ma introducono comunicazione, ridondanza e propagazione degli errori.
 - Tipo: definizione o meccanismo attribuito alla fonte.
-- Fonte o prova: SRC-70-004, dossier FONTI_PRIMARIE.md.
-- Sezione o pagina: Abstract / pagina iniziale (claim collegato alla sezione «Multi-agent» del capitolo).
-- Versione o data: revisione locale 3 agosto 2026; versione della fonte registrata nel dossier.
-- Controllo indipendente: pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito; claim ristretto a definizione o meccanismo e nessun risultato quantitativo trasferito senza setup.
-- Esito: corretta
-- Note: il limite della fonte resta nel paragrafo e nel dossier.
+- Fonte o prova: SRC-70-004, dossier `FONTI_PRIMARIE.md`.
+- Sezione pubblica: «Multi-agent».
+- Versione o data: revisione locale 4 agosto 2026; versione e data della fonte nel dossier.
+- Controllo indipendente: la citazione è adiacente al claim; titolo, URL, locator, perimetro e limiti sono registrati nel dossier; nessun risultato quantitativo viene trasferito senza il relativo setup.
+- Esito: verificata
+- Note: esempi, derivazioni e output locali restano distinti dall'evidenza della fonte.
 
 ## CL-70-05
 
 - Affermazione esatta: Il beneficio deve essere misurato rispetto a una baseline con stesso modello, tool e budget.
 - Tipo: definizione o meccanismo attribuito alla fonte.
-- Fonte o prova: SRC-70-001, dossier FONTI_PRIMARIE.md.
-- Sezione o pagina: Abstract / pagina iniziale (claim collegato alla sezione «Confronto con un singolo workflow» del capitolo).
-- Versione o data: revisione locale 3 agosto 2026; versione della fonte registrata nel dossier.
-- Controllo indipendente: pagina originale aperta; titolo, testo e intestazioni estratti; nessun risultato numerico trasferito; claim ristretto a definizione o meccanismo e nessun risultato quantitativo trasferito senza setup.
-- Esito: corretta
-- Note: il limite della fonte resta nel paragrafo e nel dossier.
+- Fonte o prova: SRC-70-001, dossier `FONTI_PRIMARIE.md`.
+- Sezione pubblica: «Confronto con un singolo workflow».
+- Versione o data: revisione locale 4 agosto 2026; versione e data della fonte nel dossier.
+- Controllo indipendente: la citazione è adiacente al claim; titolo, URL, locator, perimetro e limiti sono registrati nel dossier; nessun risultato quantitativo viene trasferito senza il relativo setup.
+- Esito: verificata
+- Note: esempi, derivazioni e output locali restano distinti dall'evidenza della fonte.
 
 ## CL-70-CODE
 
-- Affermazione esatta: lo snippet snip_70_contract.py produce l'output osservabile e il test rifiuta un input incoerente.
+- Affermazione esatta: `snip_70_contract.py` produce l'output JSON versionato; il test controlla output atteso, determinismo, serializzazione, valori finiti e limite interpretativo.
 - Tipo: risultato eseguito localmente.
-- Fonte o prova: code/snip_70_contract.py, test associato e output SNIP.
-- Sezione o pagina: Dall'algoritmo al codice.
-- Versione o data: Python 3.13.12, CPU, 3 agosto 2026.
-- Controllo indipendente: esecuzione dello snippet e unittest nello stesso ambiente.
+- Fonte o prova: code/snip_70_contract.py, code/test_70_contract.py e code/outputs/SNIP-70-001.txt.
+- Versione o data: Python 3.13.12, CPU, 4 agosto 2026.
+- Controllo indipendente: esecuzione dello snippet e unittest da processo separato.
 - Esito: verificata
-- Note: esempio delimitato, non benchmark di produzione.
+- Note: esempio delimitato e didattico; non è un benchmark di produzione.

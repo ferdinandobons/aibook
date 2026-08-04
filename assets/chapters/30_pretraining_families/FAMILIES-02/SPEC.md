@@ -1,14 +1,16 @@
 # Specifica visuale FAMILIES-02
 
-- famiglia: branch
-- domanda principale: Il diagramma segue il passaggio: Encoder, decoder, span corruption o causal prediction. L'input è sequenza, mask e target di pretraining, l'output è rappresentazione o distribuzione predittiva; il vincolo da controllare è che architettura e objective non possono essere scambiati senza cambiare il compito
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: objective_map
+- domanda principale: Quale controllo collega «Masked, causal e span corruption» a «Architettura e obiettivo» senza superare il limite dichiarato?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, branch, invariante o limite in chiusura
-- nodi e contenuti: 1: Encoder-only; 2: Decoder-only; 3: Encoder-decoder; 4: Masked, causal e span corruption; 5: Architettura e obiettivo
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: architettura e objective non possono essere scambiati senza cambiare il compito
-- fonti collegate: SRC-30-001 ... SRC-30-004
-- alt text: Diagramma FAMILIES-02 del Capitolo 30, famiglia branch. Domanda: Il diagramma segue il passaggio: Encoder, decoder, span corruption o causal prediction. L'input è sequenza, mask e target di pretraining, l'output è rappresentazione o distribuzione predittiva; il vincolo da controllare è che architettura e objective non possono essere scambiati senza cambiare il compito La composizione usa i passaggi Encoder-only, Decoder-only, Encoder-decoder, Masked, causal e span corruption, Architettura e obiettivo.
+- file candidato: candidate-v48.png
+- oggetto osservato: una famiglia architetturale legata al proprio obiettivo
+- input: sequenza, mask e target di pretraining
+- output: rappresentazione o distribuzione predittiva
+- nodi locali: Masked, causal e span corruption: Obiettivi differenti stabiliscono quali token sono visibili e quali producono loss.; Architettura e obiettivo: La forma del modello e l'obiettivo sono assi separati. Confrontarli richiede dati,…
+- limite visualizzato: architettura e objective non possono essere scambiati senza cambiare il compito
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

@@ -1,3 +1,3 @@
-# Alt text GENERATION-01
+# Testo alternativo
 
-Diagramma GENERATION-01 del Capitolo 57, famiglia timeline. Domanda: Il diagramma segue il passaggio: Denoising, guidance, editing o inpainting. L'input è latent, prompt, mask e rumore, l'output è immagine, score e metadati di provenienza; il vincolo da controllare è che controllo dell'immagine e verità del contenuto sono proprietà diverse La composizione usa i passaggi Latent diffusion, Conditioning, Classifier-free guidance, Editing e inpainting, Controllo e provenienza.
+GENERATION-01, Generazione e modifica delle immagini. Come si passa da «Latent diffusion» a «Classifier-free guidance» mantenendo osservabile un contenuto immagine e la condizione che lo modifica? La composizione image generation collega «Latent diffusion», «Conditioning», «Classifier-free guidance». L'input è latent, prompt, mask e rumore; l'output è immagine, score e metadati di provenienza. Il limite esplicito è: controllo dell'immagine e verità del contenuto sono proprietà diverse.

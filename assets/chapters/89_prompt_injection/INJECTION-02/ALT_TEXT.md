@@ -1,3 +1,3 @@
-# Alt text INJECTION-02
+# Testo alternativo
 
-Diagramma INJECTION-02 del Capitolo 89, famiglia threat. Domanda: Il diagramma segue il passaggio: Separazione, mediazione, allowlist e incident response. L'input è prompt, documento non fidato, tool e scope, l'output è azione autorizzata o rifiuto con traccia; il vincolo da controllare è che contenuto recuperato non diventa istruzione privilegiata La composizione usa i passaggi Istruzioni e dati, Indirect prompt injection, Tool mediation, Data exfiltration, Test e incident response.
+INJECTION-02, Prompt injection e sicurezza dei tool. Quale controllo collega «Data exfiltration» a «Test e incident response» senza superare il limite dichiarato? La composizione data control plane collega «Data exfiltration», «Test e incident response». L'input è prompt, documento non fidato, tool e scope; l'output è azione autorizzata o rifiuto con traccia. Il limite esplicito è: contenuto recuperato non diventa istruzione privilegiata.

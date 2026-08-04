@@ -1,14 +1,16 @@
 # Specifica visuale AUDIO-02
 
-- famiglia: pipeline
-- domanda principale: Il diagramma segue il passaggio: ASR, TTS, codec e generazione. L'input è waveform, sample rate, spettrogramma o codec, l'output è testo, waveform o token audio; il vincolo da controllare è che sample rate e durata fanno parte del contratto
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: time_frequency_map
+- domanda principale: Quale controllo collega «Neural codec» a «Musica e dialogo» senza superare il limite dichiarato?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, pipeline, invariante o limite in chiusura
-- nodi e contenuti: 1: Waveform e spettrogramma; 2: ASR; 3: TTS; 4: Neural codec; 5: Musica e dialogo
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: sample rate e durata fanno parte del contratto
-- fonti collegate: SRC-59-001 ... SRC-59-004
-- alt text: Diagramma AUDIO-02 del Capitolo 59, famiglia pipeline. Domanda: Il diagramma segue il passaggio: ASR, TTS, codec e generazione. L'input è waveform, sample rate, spettrogramma o codec, l'output è testo, waveform o token audio; il vincolo da controllare è che sample rate e durata fanno parte del contratto La composizione usa i passaggi Waveform e spettrogramma, ASR, TTS, Neural codec, Musica e dialogo.
+- file candidato: candidate-v48.png
+- oggetto osservato: un segnale audio e la sua rappresentazione discreta
+- input: waveform, sample rate, spettrogramma o codec
+- output: testo, waveform o token audio
+- nodi locali: Neural codec: Codec neurali quantizzano il suono in code discreti multi-rate, usabili da audio…; Musica e dialogo: Struttura musicale, speaker identity, turn-taking e latenza richiedono dati e metriche…
+- limite visualizzato: sample rate e durata fanno parte del contratto
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

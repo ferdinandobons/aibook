@@ -1,9 +1,0 @@
-test_contract_has_invariant (test_98_contract.ContractTests.test_contract_has_invariant) ... ok
-test_contract_has_observable_output (test_98_contract.ContractTests.test_contract_has_observable_output) ... ok
-test_contract_is_deterministic (test_98_contract.ContractTests.test_contract_is_deterministic) ... ok
-test_contract_rejects_incoherent_shape (test_98_contract.ContractTests.test_contract_rejects_incoherent_shape) ... ok
-
-----------------------------------------------------------------------
-Ran 4 tests in 0.000s
-
-OK

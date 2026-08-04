@@ -1,3 +1,3 @@
-# Alt text NATIVE-01
+# Testo alternativo
 
-Diagramma NATIVE-01 del Capitolo 75, famiglia architecture. Domanda: Il diagramma segue il passaggio: Training nativo, STE e accumulazione. L'input è peso reale, codice ternario, scala e attivazione, l'output è peso ricostruito, gradiente e costo hardware; il vincolo da controllare è che bit nominali e precisione effettiva dell'accumulo sono distinti La composizione usa i passaggi Training nativo, Pesi ternari e 1.58-bit, Straight-through estimator, Accumulazione, Co-design hardware.
+NATIVE-01, Modelli low-bit nativi e co-design numerico. Come si passa da «Training nativo» a «Straight-through estimator» mantenendo osservabile un peso low-bit e il suo accumulo numerico? La composizione low bit path collega «Training nativo», «Pesi ternari e 1.58-bit», «Straight-through estimator». L'input è peso reale, codice ternario, scala e attivazione; l'output è peso ricostruito, gradiente e costo hardware. Il limite esplicito è: bit nominali e precisione effettiva dell'accumulo sono distinti.

@@ -48,3 +48,4 @@ La figura mostra una sequenza di domande di audit, non una garanzia che ogni esp
 - ordine a serpentina leggibile;
 - nessuna sovrapposizione tra titolo, box e footer;
 - colore associato anche a numero e titolo, non unico segnale.
+- domanda principale: Quale trasformazione centrale rende osservabile «Un numero non è ancora una conclusione» nel capitolo 4?

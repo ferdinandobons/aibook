@@ -1,14 +1,16 @@
 # Specifica visuale DIST-01
 
-- famiglia: architecture
-- domanda principale: Il diagramma segue il passaggio: All-reduce, sharding, pipeline e recovery. L'input è microbatch, worker, shard e topologia, l'output è gradiente ridotto, stato sincronizzato e fault osservato; il vincolo da controllare è che la riduzione e il conteggio del batch devono essere dichiarati
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: parallel_topology
+- domanda principale: Come si passa da «Data parallelism» a «Tensor e pipeline parallelism» mantenendo osservabile gradienti e stato distribuiti tra worker?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, architecture, invariante o limite in chiusura
-- nodi e contenuti: 1: Data parallelism; 2: ZeRO e FSDP; 3: Tensor e pipeline parallelism; 4: Topologia e fault tolerance; 5: Continued pretraining
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: la riduzione e il conteggio del batch devono essere dichiarati
-- fonti collegate: SRC-36-001 ... SRC-36-004
-- alt text: Diagramma DIST-01 del Capitolo 36, famiglia architecture. Domanda: Il diagramma segue il passaggio: All-reduce, sharding, pipeline e recovery. L'input è microbatch, worker, shard e topologia, l'output è gradiente ridotto, stato sincronizzato e fault osservato; il vincolo da controllare è che la riduzione e il conteggio del batch devono essere dichiarati La composizione usa i passaggi Data parallelism, ZeRO e FSDP, Tensor e pipeline parallelism, Topologia e fault tolerance, Continued pretraining.
+- file candidato: candidate-v48.png
+- oggetto osservato: gradienti e stato distribuiti tra worker
+- input: microbatch, worker, shard e topologia
+- output: gradiente ridotto, stato sincronizzato e fault osservato
+- nodi locali: Data parallelism: Repliche elaborano sotto-batch e aggregano gradienti. Media e loss reduction devono…; ZeRO e FSDP: Parametri, gradienti e optimizer state vengono shardati tra worker.; Tensor e pipeline parallelism: Matrici o gruppi di layer vengono divisi, introducendo collective e microbatch.
+- limite visualizzato: la riduzione e il conteggio del batch devono essere dichiarati
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

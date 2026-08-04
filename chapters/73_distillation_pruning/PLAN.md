@@ -1,81 +1,30 @@
-# Piano interno. Capitolo 73
+# Piano editoriale. Capitolo 73
 
-- Domanda centrale: quale contratto costruisce Distillazione e pruning?
-- Oggetto continuo: pesi del teacher, student e struttura da comprimere; input guida: logits teacher, target, pruning mask e budget.
-- Prerequisito stabile: Capitolo 72, Sicurezza operativa degli agenti.
-- Gap: distillazione, pruning e recovery.
-- Output consegnato: student più piccolo con loss e regressioni misurate; consumer successivo: Capitolo 74, Quantizzazione.
-- Invariante principale: compressione e accuratezza vanno misurate sullo stesso perimetro.
-- Visuali: PRUNING-01 e PRUNING-02, con famiglie compositive variabili.
-- Snippet: code/snip_73_contract.py; output: code/outputs/SNIP-73-001.txt.
-- Gate aperti: revisione autoriale, lettura ad alta voce e approvazione finale delle visuali.
+## Obiettivo didattico
 
-## Transizione 1. Teacher e student
+Seguire **Distillazione e pruning** da logits teacher, target, pruning mask e budget a student più piccolo con loss e regressioni misurate, osservando distillazione, pruning e recovery senza oltrepassare questo limite: compressione e accuratezza vanno misurate sullo stesso perimetro.
 
-- Ultima affermazione stabile: pesi del teacher, student e struttura da comprimere.
-- Concetto nuovo: La distillazione usa logits, distribuzioni o sequenze del teacher come target aggiuntivi per uno student.
-- Input e shape: logits teacher, target, pruning mask e budget.
-- Operazione: distillazione, pruning e recovery.
-- Output e shape: student più piccolo con loss e regressioni misurate.
-- Che cosa cambia: il passaggio specifico di «Teacher e student».
-- Invariante: compressione e accuratezza vanno misurate sullo stesso perimetro.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: due logits trasferiti e una connessione potata con recovery; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Temperature e loss.
-- Prova: SRC-73-001 e sezione pubblica corrispondente.
+## Prerequisiti reali
 
-## Transizione 2. Temperature e loss
+- Capitolo 16: Addestrare reti profonde
+- Capitolo 31: Dalla rappresentazione linguistica agli LLM
 
-- Ultima affermazione stabile: pesi del teacher, student e struttura da comprimere.
-- Concetto nuovo: Una temperatura più alta rivela relazioni tra classi o token. Hard target e soft target vengono pesati separatamente.
-- Input e shape: logits teacher, target, pruning mask e budget.
-- Operazione: distillazione, pruning e recovery.
-- Output e shape: student più piccolo con loss e regressioni misurate.
-- Che cosa cambia: il passaggio specifico di «Temperature e loss».
-- Invariante: compressione e accuratezza vanno misurate sullo stesso perimetro.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: due logits trasferiti e una connessione potata con recovery; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Sequence distillation.
-- Prova: SRC-73-002 e sezione pubblica corrispondente.
+## Percorso della lezione
 
-## Transizione 3. Sequence distillation
+1. **Teacher e student.** La distillazione usa logits, distribuzioni o sequenze del teacher come target aggiuntivi per uno student. Prova: SRC-73-001.
+2. **Temperature e loss.** Una temperatura più alta rivela relazioni tra classi o token. Hard target e soft target vengono pesati separatamente. Prova: SRC-73-002.
+3. **Sequence distillation.** Per modelli generativi, risposte del teacher diventano un nuovo dataset. Filtri e diversità determinano ciò che lo student vede. Prova: SRC-73-003.
+4. **Pruning.** Pesi, canali, head o layer possono essere rimossi. Sparsità nominale e accelerazione reale dipendono da kernel e hardware. Prova: SRC-73-004.
+5. **Recovery.** Fine-tuning o calibration recuperano qualità dopo compressione. Il confronto deve includere memoria, latency e regressioni per slice. Prova: SRC-73-001.
 
-- Ultima affermazione stabile: pesi del teacher, student e struttura da comprimere.
-- Concetto nuovo: Per modelli generativi, risposte del teacher diventano un nuovo dataset. Filtri e diversità determinano ciò che lo student vede.
-- Input e shape: logits teacher, target, pruning mask e budget.
-- Operazione: distillazione, pruning e recovery.
-- Output e shape: student più piccolo con loss e regressioni misurate.
-- Che cosa cambia: il passaggio specifico di «Sequence distillation».
-- Invariante: compressione e accuratezza vanno misurate sullo stesso perimetro.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: due logits trasferiti e una connessione potata con recovery; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Pruning.
-- Prova: SRC-73-003 e sezione pubblica corrispondente.
+## Prove e artefatti
 
-## Transizione 4. Pruning
+- riferimento minimo: `code/snip_73_contract.py`; test: `code/test_73_contract.py`; output: `code/outputs/SNIP-73-001.txt`.
+- visuali candidate: PRUNING-01, PRUNING-02; le domande pedagogiche sono distinte e l'approvazione autoriale resta aperta.
+- fonti: `FONTI_PRIMARIE.md`; corrispondenza claim-fonte: `CLAIMS.md`.
 
-- Ultima affermazione stabile: pesi del teacher, student e struttura da comprimere.
-- Concetto nuovo: Pesi, canali, head o layer possono essere rimossi. Sparsità nominale e accelerazione reale dipendono da kernel e hardware.
-- Input e shape: logits teacher, target, pruning mask e budget.
-- Operazione: distillazione, pruning e recovery.
-- Output e shape: student più piccolo con loss e regressioni misurate.
-- Che cosa cambia: il passaggio specifico di «Pruning».
-- Invariante: compressione e accuratezza vanno misurate sullo stesso perimetro.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: due logits trasferiti e una connessione potata con recovery; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Recovery.
-- Prova: SRC-73-004 e sezione pubblica corrispondente.
+## Gate aperti
 
-## Transizione 5. Recovery
-
-- Ultima affermazione stabile: pesi del teacher, student e struttura da comprimere.
-- Concetto nuovo: Fine-tuning o calibration recuperano qualità dopo compressione. Il confronto deve includere memoria, latency e regressioni per slice.
-- Input e shape: logits teacher, target, pruning mask e budget.
-- Operazione: distillazione, pruning e recovery.
-- Output e shape: student più piccolo con loss e regressioni misurate.
-- Che cosa cambia: il passaggio specifico di «Recovery».
-- Invariante: compressione e accuratezza vanno misurate sullo stesso perimetro.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: due logits trasferiti e una connessione potata con recovery; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Quantizzazione.
-- Prova: SRC-73-001 e sezione pubblica corrispondente.
+- lettura editoriale finale da parte dell'autore;
+- approvazione delle visuali nel contesto impaginato;
+- benchmark esterni solo quando il capitolo formula un claim di scala o di produzione.

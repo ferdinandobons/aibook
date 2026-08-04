@@ -1,5 +1,8 @@
-# Codice del Capitolo 22
+# Esempio verificato. Capitolo 22
 
-Lo snippet snip_22_contract.py rende osservabile il contratto centrale di Variational Autoencoder e latent discreti con valori piccoli e leggibili.
-Il test test_22_contract.py controlla determinismo, output, invariante e una shape incoerente.
-Il risultato è un esempio locale, non un benchmark di produzione.
+`snip_22_contract.py` esegue il caso minimo usato nel testo di **Variational Autoencoder e latent discreti**. `test_22_contract.py` conserva l'output atteso, controlla determinismo, serializzazione, valori finiti e presenza del limite interpretativo.
+
+```bash
+python snip_22_contract.py
+python -m unittest -v test_22_contract.py
+```

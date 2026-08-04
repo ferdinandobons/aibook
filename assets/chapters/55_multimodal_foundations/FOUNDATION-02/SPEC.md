@@ -1,14 +1,16 @@
 # Specifica visuale FOUNDATION-02
 
-- famiglia: compare
-- domanda principale: Il diagramma segue il passaggio: Encoder, proiezione, alignment e fusion. L'input è testo, immagine, audio e maschere di modalità, l'output è spazio condiviso o output condizionato; il vincolo da controllare è che allineamento misurato non equivale a comprensione generale
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: alignment_space
+- domanda principale: Quale controllo collega «Missing modality» a «Valutazione» senza superare il limite dichiarato?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, compare, invariante o limite in chiusura
-- nodi e contenuti: 1: Modalità e misure; 2: Allineamento; 3: Fusion; 4: Missing modality; 5: Valutazione
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: allineamento misurato non equivale a comprensione generale
-- fonti collegate: SRC-55-001 ... SRC-55-004
-- alt text: Diagramma FOUNDATION-02 del Capitolo 55, famiglia compare. Domanda: Il diagramma segue il passaggio: Encoder, proiezione, alignment e fusion. L'input è testo, immagine, audio e maschere di modalità, l'output è spazio condiviso o output condizionato; il vincolo da controllare è che allineamento misurato non equivale a comprensione generale La composizione usa i passaggi Modalità e misure, Allineamento, Fusion, Missing modality, Valutazione.
+- file candidato: candidate-v48.png
+- oggetto osservato: rappresentazioni di modalità differenti
+- input: testo, immagine, audio e maschere di modalità
+- output: spazio condiviso o output condizionato
+- nodi locali: Missing modality: Un sistema deve definire cosa accade quando una modalità è assente, corrotta o non…; Valutazione: Comprensione, retrieval, grounding e generazione richiedono benchmark distinti. Una…
+- limite visualizzato: allineamento misurato non equivale a comprensione generale
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

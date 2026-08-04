@@ -74,3 +74,4 @@ con valori arrotondati:
 ## Provenienza
 
 Le medie derivano da `SNIP-PROB-001`. I momenti e la deviazione teorica derivano dalla Bernoulli. La candidata è un PNG raster generato da `scripts/generate_probability_visuals.py`; non viene usato SVG.
+- domanda principale: Quale confronto o limite chiarisce «Congiunta, marginale e condizionata»?

@@ -1,3 +1,3 @@
-# Alt text JAILBREAK-02
+# Testo alternativo
 
-Diagramma JAILBREAK-02 del Capitolo 88, famiglia chart. Domanda: Il diagramma segue il passaggio: Jailbreak, perturbazione, difesa e adaptive evaluation. L'input è threat model, prompt, budget e risposta, l'output è success rate, failure mode e costo della difesa; il vincolo da controllare è che un test superato non copre minacce non incluse nel protocollo La composizione usa i passaggi Threat model, Perturbazioni, Ottimizzazione adversarial, Difese, Valutazione adattiva.
+JAILBREAK-02, Robustezza, jailbreak e attacchi adversarial. Quale controllo collega «Difese» a «Valutazione adattiva» senza superare il limite dichiarato? La composizione jailbreak boundary collega «Difese», «Valutazione adattiva». L'input è threat model, prompt, budget e risposta; l'output è success rate, failure mode e costo della difesa. Il limite esplicito è: un test superato non copre minacce non incluse nel protocollo.

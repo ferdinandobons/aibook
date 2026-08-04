@@ -1,3 +1,3 @@
-# Alt text EMBEDDIN-01
+# Testo alternativo
 
-Diagramma EMBEDDIN-01 del Capitolo 27, famiglia branch. Domanda: Il diagramma segue il passaggio: Lookup, pooling, similarità e normalizzazione. L'input è due ID, due vettori e una query, l'output è embedding, ranking o predizione; il vincolo da controllare è che la similarità dipende da training, metrica e normalizzazione La composizione usa i passaggi Da ID a vettore, Word embedding, Embedding contestuale, Sentence embedding, Ricerca e anisotropia.
+EMBEDDIN-01, Embedding e spazio semantico. Come si passa da «Da ID a vettore» a «Embedding contestuale» mantenendo osservabile un ID e il vettore che lo rappresenta? La composizione embedding geometry collega «Da ID a vettore», «Word embedding», «Embedding contestuale». L'input è due ID, due vettori e una query; l'output è embedding, ranking o predizione. Il limite esplicito è: la similarità dipende da training, metrica e normalizzazione.

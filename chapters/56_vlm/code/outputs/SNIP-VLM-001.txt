@@ -1,3 +1,0 @@
-chapter: 56
-title: Vision encoder e Vision-Language Model
-output: [0.755272, 0.334759]

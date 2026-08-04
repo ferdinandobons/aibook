@@ -1,5 +1,8 @@
-# Codice del Capitolo 33
+# Esempio verificato. Capitolo 33
 
-Lo snippet snip_33_contract.py rende osservabile il contratto centrale di Dataset mixture, curriculum e dati sintetici con valori piccoli e leggibili.
-Il test test_33_contract.py controlla determinismo, output, invariante e una shape incoerente.
-Il risultato è un esempio locale, non un benchmark di produzione.
+`snip_33_contract.py` esegue il caso minimo usato nel testo di **Dataset mixture, curriculum e dati sintetici**. `test_33_contract.py` conserva l'output atteso, controlla determinismo, serializzazione, valori finiti e presenza del limite interpretativo.
+
+```bash
+python snip_33_contract.py
+python -m unittest -v test_33_contract.py
+```

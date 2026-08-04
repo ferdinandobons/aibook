@@ -1,14 +1,16 @@
 # Specifica visuale HYBRID-01
 
-- famiglia: graph
-- domanda principale: Il diagramma segue il passaggio: Write, read, routing e fusione. L'input è segmento corrente, stato e memoria persistente, l'output è stato aggiornato e contenuto recuperato; il vincolo da controllare è che durata e provenienza della memoria devono essere separate
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: hybrid_route
+- domanda principale: Come si passa da «Ibridi tra layer» a «Memoria segmentale» mantenendo osservabile informazione distribuita tra attenzione locale e memoria?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v47.png
-- ordine di lettura: titolo, domanda, graph, invariante o limite in chiusura
-- nodi e contenuti: 1: Ibridi tra layer; 2: Attention locale e stato; 3: Memoria segmentale; 4: Memoria associativa; 5: Memoria interna ed esterna
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: durata e provenienza della memoria devono essere separate
-- fonti collegate: SRC-43-001 ... SRC-43-004
-- alt text: Diagramma HYBRID-01 del Capitolo 43, famiglia graph. Domanda: Il diagramma segue il passaggio: Write, read, routing e fusione. L'input è segmento corrente, stato e memoria persistente, l'output è stato aggiornato e contenuto recuperato; il vincolo da controllare è che durata e provenienza della memoria devono essere separate La composizione usa i passaggi Ibridi tra layer, Attention locale e stato, Memoria segmentale, Memoria associativa, Memoria interna ed esterna.
+- file candidato: candidate-v47.png
+- oggetto osservato: informazione distribuita tra attenzione locale e memoria
+- input: segmento corrente, stato e memoria persistente
+- output: stato aggiornato e contenuto recuperato
+- nodi locali: Ibridi tra layer: Transformer, SSM e recurrence possono alternarsi con rapporti e interfacce dichiarati.; Attention locale e stato: Una finestra precisa gestisce il vicino; uno stato compatto trasporta informazione oltre…; Memoria segmentale: Stati di segmenti precedenti possono essere riusati o compressi con stop-gradient e…
+- limite visualizzato: durata e provenienza della memoria devono essere separate
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

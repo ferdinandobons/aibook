@@ -1,14 +1,16 @@
 # Specifica visuale POS-02
 
-- famiglia: chart
-- domanda principale: Il diagramma segue il passaggio: Posizione assoluta, relativa, RoPE o bias. L'input è query, key e indice di posizione, l'output è score dipendente dalla posizione; il vincolo da controllare è che estendere il contesto richiede una misura fuori dalla lunghezza addestrata
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: context_window
+- domanda principale: Quale controllo collega «ALiBi» a «Estensione e valutazione» senza superare il limite dichiarato?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v47.png
-- ordine di lettura: titolo, domanda, chart, invariante o limite in chiusura
-- nodi e contenuti: 1: Posizione assoluta; 2: Posizione relativa; 3: RoPE; 4: ALiBi; 5: Estensione e valutazione
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: estendere il contesto richiede una misura fuori dalla lunghezza addestrata
-- fonti collegate: SRC-38-001 ... SRC-38-004
-- alt text: Diagramma POS-02 del Capitolo 38, famiglia chart. Domanda: Il diagramma segue il passaggio: Posizione assoluta, relativa, RoPE o bias. L'input è query, key e indice di posizione, l'output è score dipendente dalla posizione; il vincolo da controllare è che estendere il contesto richiede una misura fuori dalla lunghezza addestrata La composizione usa i passaggi Posizione assoluta, Posizione relativa, RoPE, ALiBi, Estensione e valutazione.
+- file candidato: candidate-v47.png
+- oggetto osservato: la relazione tra posizione e rappresentazione del token
+- input: query, key e indice di posizione
+- output: score dipendente dalla posizione
+- nodi locali: ALiBi: Bias lineari penalizzano distanze maggiori con slope per head.; Estensione e valutazione: Positional interpolation e metodi affini estendono gli indici, ma l'uso effettivo del…
+- limite visualizzato: estendere il contesto richiede una misura fuori dalla lunghezza addestrata
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

@@ -98,3 +98,4 @@ I tre aspetti possono combinarsi: nessuno determina automaticamente gli altri.
 - definizioni: `FONTI_PRIMARIE.md` e `CLAIMS.md`;
 - valori: nessun dato misurato;
 - generazione raster riproducibile: `scripts/generate_book_visuals.py`.
+- domanda principale: Quale confronto o limite chiarisce «Quando il comportamento è scritto e quando viene appreso»?

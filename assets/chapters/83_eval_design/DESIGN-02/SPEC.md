@@ -1,14 +1,16 @@
 # Specifica visuale DESIGN-02
 
-- famiglia: funnel
-- domanda principale: Il diagramma segue il passaggio: Scelta della metrica, giudice, slice e report. L'input è task, dataset, predizioni, riferimento e metriche, l'output è stima, intervallo, errori e decisione; il vincolo da controllare è che una metrica risponde solo alla domanda per cui è stata progettata
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: selection_funnel
+- domanda principale: Quale controllo collega «Giudici modello» a «Report» senza superare il limite dichiarato?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, funnel, invariante o limite in chiusura
-- nodi e contenuti: 1: Decisione e claim; 2: Task e dataset; 3: Metriche; 4: Giudici modello; 5: Report
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: una metrica risponde solo alla domanda per cui è stata progettata
-- fonti collegate: SRC-83-001 ... SRC-83-004
-- alt text: Diagramma DESIGN-02 del Capitolo 83, famiglia funnel. Domanda: Il diagramma segue il passaggio: Scelta della metrica, giudice, slice e report. L'input è task, dataset, predizioni, riferimento e metriche, l'output è stima, intervallo, errori e decisione; il vincolo da controllare è che una metrica risponde solo alla domanda per cui è stata progettata La composizione usa i passaggi Decisione e claim, Task e dataset, Metriche, Giudici modello, Report.
+- file candidato: candidate-v48.png
+- oggetto osservato: un claim valutativo e il protocollo che lo rende misurabile
+- input: task, dataset, predizioni, riferimento e metriche
+- output: stima, intervallo, errori e decisione
+- nodi locali: Giudici modello: LLM-as-a-judge può scalare confronti, ma è sensibile a posizione, stile, modello e…; Report: Intervalli, fallimenti, costi e limiti accompagnano il punteggio. Una leaderboard non…
+- limite visualizzato: una metrica risponde solo alla domanda per cui è stata progettata
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

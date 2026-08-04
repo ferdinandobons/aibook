@@ -1,14 +1,16 @@
 # Specifica visuale SECURITY-02
 
-- famiglia: threat
-- domanda principale: Il diagramma segue il passaggio: Poisoning, backdoor, extraction e controllo di provenienza. L'input è dataset, checkpoint, repository, digest e owner, l'output è artefatto rilasciato, traccia e decisione di blocco; il vincolo da controllare è che integrità del file non certifica assenza di contenuto malevolo
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: artifact_lineage
+- domanda principale: Quale controllo collega «Artifact security» a «Repository e deployment» senza superare il limite dichiarato?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v50.png
-- ordine di lettura: titolo, domanda, threat, invariante o limite in chiusura
-- nodi e contenuti: 1: Data poisoning; 2: Backdoor; 3: Model extraction; 4: Artifact security; 5: Repository e deployment
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: integrità del file non certifica assenza di contenuto malevolo
-- fonti collegate: SRC-90-001 ... SRC-90-004
-- alt text: Diagramma SECURITY-02 del Capitolo 90, famiglia threat. Domanda: Il diagramma segue il passaggio: Poisoning, backdoor, extraction e controllo di provenienza. L'input è dataset, checkpoint, repository, digest e owner, l'output è artefatto rilasciato, traccia e decisione di blocco; il vincolo da controllare è che integrità del file non certifica assenza di contenuto malevolo La composizione usa i passaggi Data poisoning, Backdoor, Model extraction, Artifact security, Repository e deployment.
+- file candidato: candidate-v50.png
+- oggetto osservato: gli artefatti che attraversano la supply chain del modello
+- input: dataset, checkpoint, repository, digest e owner
+- output: artefatto rilasciato, traccia e decisione di blocco
+- nodi locali: Artifact security: Checkpoint, tokenizer, codice e dipendenze richiedono hash, firma, SBOM e policy di…; Repository e deployment: File eseguibili, custom code e deserializzazione possono introdurre rischio indipendente…
+- limite visualizzato: integrità del file non certifica assenza di contenuto malevolo
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

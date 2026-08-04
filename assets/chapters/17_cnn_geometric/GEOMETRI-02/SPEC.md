@@ -1,14 +1,16 @@
 # Specifica visuale GEOMETRI-02
 
-- famiglia: matrix
-- domanda principale: La matrice rende visibili posizioni, dimensioni e vincoli dell'operazione
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: vision_stack
+- domanda principale: Quale controllo collega «Vision Transformer e ibridi» a «Grafi e message passing» senza superare il limite dichiarato?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v49.png
-- ordine di lettura: titolo, domanda, matrix, invariante o limite in chiusura
-- nodi e contenuti: 1: Condivisione locale dei pesi; 2: Stride, padding e receptive field; 3: Equivarianza e invariance; 4: Vision Transformer e ibridi; 5: Grafi e message passing
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: la condivisione dei pesi non implica invariance a ogni trasformazione
-- fonti collegate: SRC-17-001 ... SRC-17-004
-- alt text: Diagramma GEOMETRI-02 del Capitolo 17, famiglia matrix. Domanda: La matrice rende visibili posizioni, dimensioni e vincoli dell'operazione La composizione usa i passaggi Condivisione locale dei pesi, Stride, padding e receptive field, Equivarianza e invariance, Vision Transformer e ibridi, Grafi e message passing.
+- file candidato: candidate-v49.png
+- oggetto osservato: una griglia locale di feature
+- input: una matrice 3 x 3 e un kernel 2 x 2
+- output: una griglia di attivazioni con dimensioni calcolabili
+- nodi locali: Vision Transformer e ibridi: Patch embedding e attention offrono una geometria diversa. CNN e Transformer possono…; Grafi e message passing: Su un grafo, i vicini non sono disposti in una griglia regolare. Le GNN aggregano…
+- limite visualizzato: la condivisione dei pesi non implica invariance a ogni trasformazione
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

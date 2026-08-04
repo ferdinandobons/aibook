@@ -1,3 +1,0 @@
-chapter: 18
-title: Reti ricorrenti e modelli sequenziali
-output: [0.755272, 0.334759]

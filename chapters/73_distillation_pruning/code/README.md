@@ -1,5 +1,8 @@
-# Codice del Capitolo 73
+# Esempio verificato. Capitolo 73
 
-Lo snippet snip_73_contract.py rende osservabile il contratto centrale di Distillazione e pruning con valori piccoli e leggibili.
-Il test test_73_contract.py controlla determinismo, output, invariante e una shape incoerente.
-Il risultato è un esempio locale, non un benchmark di produzione.
+`snip_73_contract.py` esegue il caso minimo usato nel testo di **Distillazione e pruning**. `test_73_contract.py` conserva l'output atteso, controlla determinismo, serializzazione, valori finiti e presenza del limite interpretativo.
+
+```bash
+python snip_73_contract.py
+python -m unittest -v test_73_contract.py
+```

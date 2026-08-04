@@ -1,3 +1,3 @@
-# Alt text MIX-02
+# Testo alternativo
 
-Diagramma MIX-02 del Capitolo 33, famiglia chart. Domanda: Il diagramma segue il passaggio: Campionamento, ripesatura e generazione controllata. L'input è pesi, temperatura, curriculum e conteggio dei token, l'output è probabilità effettive e mix osservato; il vincolo da controllare è che peso nominale e esposizione effettiva non sono la stessa misura La composizione usa i passaggi Peso effettivo delle sorgenti, Temperature sampling, Mixture ottimizzata, Curriculum, Dati sintetici.
+MIX-02, Dataset mixture, curriculum e dati sintetici. Quale controllo collega «Curriculum» a «Dati sintetici» senza superare il limite dichiarato? La composizione contamination gate collega «Curriculum», «Dati sintetici». L'input è pesi, temperatura, curriculum e conteggio dei token; l'output è probabilità effettive e mix osservato. Il limite esplicito è: peso nominale e esposizione effettiva non sono la stessa misura.

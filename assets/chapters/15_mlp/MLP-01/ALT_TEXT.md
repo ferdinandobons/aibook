@@ -1,3 +1,3 @@
-# Alt text MLP-01
+# Testo alternativo
 
-Diagramma MLP-01 del Capitolo 15, famiglia chart. Domanda: Il grafico confronta la quantità che cambia con quella che non viene misurata La composizione usa i passaggi Una decisione lineare, Strati nascosti, Attivazioni, Capacità ed espressività, Dal forward al training.
+MLP-01, Dal percettrone alle reti multilayer. Come si passa da «Una decisione lineare» a «Attivazioni» mantenendo osservabile il vettore di feature x della richiesta? La composizione layer stack collega «Una decisione lineare», «Strati nascosti», «Attivazioni». L'input è x = [1, 2] con shape [2]; l'output è un nuovo vettore h con shape dichiarata. Il limite esplicito è: una pila di trasformazioni affini senza non linearità resta una sola trasformazione affine.

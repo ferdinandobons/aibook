@@ -37,3 +37,4 @@ Come può A* espandere meno stati di uniform-cost mantenendo lo stesso piano ott
 ## Provenienza
 
 I dati derivano da `SNIP-SEARCH-001` e dai relativi test. Il PNG raster è prodotto da `scripts/generate_search_visuals.py`; non viene usato SVG.
+- domanda principale: Quale trasformazione centrale rende osservabile «Dal problema allo spazio degli stati» nel capitolo 10?

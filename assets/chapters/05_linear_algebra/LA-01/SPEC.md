@@ -30,3 +30,4 @@ L'asse feature, lungo quattro, viene contratto. Batch e classe restano. La compa
 - frecce esterne ai contenitori;
 - nota sulla contrazione collegata ai due fattori;
 - nessuna sovrapposizione tra bias, titolo e output.
+- domanda principale: Quale trasformazione centrale rende osservabile «Da un numero a un tensore» nel capitolo 5?

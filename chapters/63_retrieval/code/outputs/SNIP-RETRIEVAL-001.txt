@@ -1,3 +1,0 @@
-chapter: 63
-title: Information retrieval
-output: [0.755272, 0.334759]

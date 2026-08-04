@@ -1,7 +1,7 @@
-test_contract_has_invariant (test_39_contract.ContractTests.test_contract_has_invariant) ... ok
-test_contract_has_observable_output (test_39_contract.ContractTests.test_contract_has_observable_output) ... ok
-test_contract_is_deterministic (test_39_contract.ContractTests.test_contract_is_deterministic) ... ok
-test_contract_rejects_incoherent_shape (test_39_contract.ContractTests.test_contract_rejects_incoherent_shape) ... ok
+test_example_is_deterministic (test_39_contract.LessonExampleTests.test_example_is_deterministic) ... ok
+test_expected_result (test_39_contract.LessonExampleTests.test_expected_result) ... ok
+test_interpretation_boundary_is_explicit (test_39_contract.LessonExampleTests.test_interpretation_boundary_is_explicit) ... ok
+test_result_is_serializable_and_finite (test_39_contract.LessonExampleTests.test_result_is_serializable_and_finite) ... ok
 
 ----------------------------------------------------------------------
 Ran 4 tests in 0.000s

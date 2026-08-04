@@ -1,14 +1,16 @@
 # Specifica visuale SYSTEMS-02
 
-- famiglia: compare
-- domanda principale: Il diagramma segue il passaggio: Delega, comunicazione, esecuzione e aggregazione. L'input è task, ruoli, browser, codice e handoff, l'output è risultato con responsabilità e log per componente; il vincolo da controllare è che più agenti ampliano anche superficie e costo dell'errore
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: orchestration_boundary
+- domanda principale: Quale controllo collega «Multi-agent» a «Confronto con un singolo workflow» senza superare il limite dichiarato?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, compare, invariante o limite in chiusura
-- nodi e contenuti: 1: Browser agent; 2: Computer use; 3: Code agent; 4: Multi-agent; 5: Confronto con un singolo workflow
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: più agenti ampliano anche superficie e costo dell'errore
-- fonti collegate: SRC-70-001 ... SRC-70-004
-- alt text: Diagramma SYSTEMS-02 del Capitolo 70, famiglia compare. Domanda: Il diagramma segue il passaggio: Delega, comunicazione, esecuzione e aggregazione. L'input è task, ruoli, browser, codice e handoff, l'output è risultato con responsabilità e log per componente; il vincolo da controllare è che più agenti ampliano anche superficie e costo dell'errore La composizione usa i passaggi Browser agent, Computer use, Code agent, Multi-agent, Confronto con un singolo workflow.
+- file candidato: candidate-v48.png
+- oggetto osservato: una traiettoria composta da agenti e strumenti
+- input: task, ruoli, browser, codice e handoff
+- output: risultato con responsabilità e log per componente
+- nodi locali: Multi-agent: Ruoli distinti possono parallelizzare o criticare, ma introducono comunicazione,…; Confronto con un singolo workflow: Il beneficio deve essere misurato rispetto a una baseline con stesso modello, tool e…
+- limite visualizzato: più agenti ampliano anche superficie e costo dell'errore
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

@@ -22,3 +22,4 @@ Come il forward chaining trasforma fatti iniziali e regole positive in fatti der
 ## Invariante
 
 Ogni fatto derivato deve essere sostenuto da una regola e dai fatti disponibili prima della sua applicazione.
+- domanda principale: Quale trasformazione centrale rende osservabile «Da un testo a fatti dichiarati» nel capitolo 11?

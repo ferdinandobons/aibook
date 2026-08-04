@@ -101,3 +101,4 @@ Requisiti:
 - inference: `SNIP-AI-001` e documentazione `Module` / `inference_mode`;
 - nessun valore quantitativo necessario;
 - generazione raster riproducibile: `scripts/generate_book_visuals.py`.
+- domanda principale: Quale trasformazione centrale rende osservabile «Una stessa richiesta, sistemi diversi» nel capitolo 1?

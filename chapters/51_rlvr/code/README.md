@@ -1,5 +1,8 @@
-# Codice del Capitolo 51
+# Esempio verificato. Capitolo 51
 
-Lo snippet snip_51_contract.py rende osservabile il contratto centrale di Reinforcement learning con reward verificabili con valori piccoli e leggibili.
-Il test test_51_contract.py controlla determinismo, output, invariante e una shape incoerente.
-Il risultato è un esempio locale, non un benchmark di produzione.
+`snip_51_contract.py` esegue il caso minimo usato nel testo di **Reinforcement learning con reward verificabili**. `test_51_contract.py` conserva l'output atteso, controlla determinismo, serializzazione, valori finiti e presenza del limite interpretativo.
+
+```bash
+python snip_51_contract.py
+python -m unittest -v test_51_contract.py
+```

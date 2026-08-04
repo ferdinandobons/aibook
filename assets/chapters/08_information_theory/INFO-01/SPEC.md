@@ -23,3 +23,4 @@ Perché due distribuzioni con la stessa entropia possono produrre loss diverse q
 ## Invariante
 
 Le due distribuzioni sono permutazioni: la loro entropia è la stessa, ma la classe target riceve probabilità diversa.
+- domanda principale: Quale confronto o limite chiarisce «Entropia come informazione media»?

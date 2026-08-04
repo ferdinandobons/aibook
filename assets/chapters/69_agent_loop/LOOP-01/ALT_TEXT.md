@@ -1,3 +1,3 @@
-# Alt text LOOP-01
+# Testo alternativo
 
-Diagramma LOOP-01 del Capitolo 69, famiglia timeline. Domanda: Il diagramma segue il passaggio: Observe, plan, act, verify e terminate. L'input è osservazione, piano, azione e risultato del tool, l'output è stato successivo o arresto motivato; il vincolo da controllare è che ogni side effect deve avere precondizioni e verifica La composizione usa i passaggi Osservare e aggiornare lo stato, Pianificare, Agire, Verificare, Terminare.
+LOOP-01, Ciclo agentico, pianificazione e verifica. Come si passa da «Osservare e aggiornare lo stato» a «Agire» mantenendo osservabile lo stato di una traiettoria agentica? La composizione agent loop collega «Osservare e aggiornare lo stato», «Pianificare», «Agire». L'input è osservazione, piano, azione e risultato del tool; l'output è stato successivo o arresto motivato. Il limite esplicito è: ogni side effect deve avere precondizioni e verifica.

@@ -1,3 +1,0 @@
-chapter: 75
-title: Modelli low-bit nativi e co-design numerico
-output: [0.755272, 0.334759]

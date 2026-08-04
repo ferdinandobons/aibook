@@ -1,3 +1,0 @@
-chapter: 46
-title: Supervised fine-tuning e instruction tuning
-output: [0.755272, 0.334759]

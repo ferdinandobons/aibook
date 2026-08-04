@@ -1,14 +1,16 @@
 # Specifica visuale TRAINING-01
 
-- famiglia: chart
-- domanda principale: Il grafico confronta la quantità che cambia con quella che non viene misurata
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: training_loop
+- domanda principale: Come si passa da «Segnali che attraversano molti layer» a «Normalizzazione» mantenendo osservabile il segnale che attraversa una rete profonda?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v49.png
-- ordine di lettura: titolo, domanda, chart, invariante o limite in chiusura
-- nodi e contenuti: 1: Segnali che attraversano molti layer; 2: Inizializzazione; 3: Normalizzazione; 4: Residual e profondità; 5: Regolarizzazione e diagnostica
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: una somma residuale richiede shape compatibili e non prova da sola stabilità del training
-- fonti collegate: SRC-16-001 ... SRC-16-004
-- alt text: Diagramma TRAINING-01 del Capitolo 16, famiglia chart. Domanda: Il grafico confronta la quantità che cambia con quella che non viene misurata La composizione usa i passaggi Segnali che attraversano molti layer, Inizializzazione, Normalizzazione, Residual e profondità, Regolarizzazione e diagnostica.
+- file candidato: candidate-v49.png
+- oggetto osservato: il segnale che attraversa una rete profonda
+- input: x_l con shape [batch, d] e norma misurata
+- output: x_{l+1} con la stessa o con una nuova shape dichiarata
+- nodi locali: Segnali che attraversano molti layer: Attivazioni e gradienti possono crescere o ridursi lungo la profondità.…; Inizializzazione: Xavier e He initialization collegano la varianza dei pesi al fan-in o fan-out. Le…; Normalizzazione: BatchNorm, LayerNorm e RMSNorm normalizzano assi e statistiche differenti. Non sono…
+- limite visualizzato: una somma residuale richiede shape compatibili e non prova da sola stabilità del training
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

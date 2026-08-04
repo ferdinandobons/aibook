@@ -1,3 +1,3 @@
-# Alt text SAFETY-01
+# Testo alternativo
 
-Diagramma SAFETY-01 del Capitolo 72, famiglia threat. Domanda: Il diagramma segue il passaggio: Least privilege, sandbox, human approval e rollback. L'input è input non fidato, tool, scope e approvazione, l'output è allow/deny, side effect o rollback auditabile; il vincolo da controllare è che l'enforcement deve stare fuori dal testo generato La composizione usa i passaggi Least privilege, Sandbox, Human approval, Rollback e audit, Prompt injection.
+SAFETY-01, Sicurezza operativa degli agenti. Come si passa da «Least privilege» a «Human approval» mantenendo osservabile una decisione agentica su una risorsa reale? La composizione trust boundary collega «Least privilege», «Sandbox», «Human approval». L'input è input non fidato, tool, scope e approvazione; l'output è allow/deny, side effect o rollback auditabile. Il limite esplicito è: l'enforcement deve stare fuori dal testo generato.

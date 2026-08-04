@@ -4,133 +4,118 @@ part_id: P11
 order_key: 630
 title: Information retrieval
 maturity: CORE
-status: candidatura completa in revisione autoriale
-version: 0.4.0-draft2
-last_source_check: 3 agosto 2026
+status: revisione editoriale v2, approvazione autoriale aperta
+version: 0.5.0-draft3
+last_source_check: 4 agosto 2026
 environment: Python 3.13.12, CPU
-deferred: benchmark applicativi, varianti non necessarie al contratto centrale e approvazione autoriale
+code_policy: reference
+deferred: benchmark applicativi non eseguiti e approvazione autoriale delle visuali
 -->
 
 # Capitolo 63. Information retrieval
 
-La richiesta «Il pacco non è arrivato» resta il caso guida. In questo capitolo la usiamo per distinguere query e documenti ordinati per rilevanza, trasformazione e risultato, senza nascondere i dettagli tecnici.
+La domanda guida di questa lezione è come collegare «Documenti, query e rilevanza» e «Reranking» senza perdere il contratto tecnico di information retrieval. L'oggetto osservato è query e documenti ordinati per rilevanza. Il contratto locale è: input, query, corpus, termini e indice; operazione, BM25, dense retrieval, ANN e reranking; output, ranking con score e documento recuperato. Il caso guida è questo: Tre documenti vengono ordinati per sovrapposizione con la query. Il confine da mantenere esplicito è: rilevanza del ranking e correttezza della risposta sono misure separate.
 
 ## Documenti, query e rilevanza
 
 Un sistema di retrieval ordina documenti rispetto a una query. La rilevanza dipende dal bisogno informativo e dalle label disponibili. [SRC-63-001]
 
-Per capire «Documenti, query e rilevanza» partiamo da questo caso: tre documenti vengono ordinati per sovrapposizione con la query. Il caso rende osservabile il punto centrale: «Un sistema di retrieval ordina documenti rispetto a una query».
+Il ranking è una funzione osservabile prima di qualsiasi generazione.
 
-Nel contratto locale, l'input «query, corpus, termini e indice» entra, l'operazione «BM25, dense retrieval, ANN e reranking» modifica il percorso e l'output «ranking con score e documento recuperato» è ciò che osserviamo. Qui cambia soprattutto il passaggio «Documenti, query e rilevanza»; resta da controllare che rilevanza del ranking e correttezza della risposta sono misure separate. La domanda locale è «Un sistema di retrieval ordina documenti rispetto a una query».
+**Caso da seguire.** Tre documenti vengono ordinati per sovrapposizione con la query.
 
-La pipeline distingue query, recupero, contesto e risposta. Registrare il documento o il segmento entrato nel contesto permette di localizzare un errore di ranking separatamente da un errore di generazione. La prova conserva ranking, segmenti entrati nel contesto e risposta, così un errore di recupero non viene attribuito alla generazione. La verifica resta ancorata a «Un sistema di retrieval ordina documenti rispetto a una query». [SRC-63-001]
+**Controllo.** Conserva record iniziale, regola applicata e record finale; un conteggio aggregato non basta a spiegare la trasformazione.
 
-La lettura va fatta in ordine: prima il caso, poi la trasformazione, quindi la conseguenza. La rilevanza dipende dal bisogno informativo e dalle label disponibili. Il piccolo risultato resta un'illustrazione di «Un sistema di retrieval ordina documenti rispetto a una query», non una promessa generale.
 
-Per verificare «Documenti, query e rilevanza» cambiamo una sola condizione vicina alla frase «Un sistema di retrieval ordina documenti rispetto a una query», teniamo fermo il resto e registriamo l'output «ranking con score e documento recuperato». Il caso negativo deve rendere riconoscibile la failure, non soltanto produrre un numero diverso. La sezione successiva, «BM25», riceve l'output «ranking con score e documento recuperato» come base, ma dovrà formulare e verificare la propria distinzione.
+![Information retrieval: graph](../../assets/chapters/63_retrieval/RETRIEVAL-01/candidate-v48.png)
+
+La prima figura segue il percorso da «Documenti, query e rilevanza» a «Dense retrieval».
+
 
 ## BM25
 
 La ricerca lessicale combina frequenza del termine, rarità nel corpus e normalizzazione della lunghezza. Tokenizzazione e campi modificano il punteggio. [SRC-63-002]
 
-Il caso minimo di «BM25» si presenta così: tre documenti ordinati per sovrapposizione di termini. Non lo usiamo come decorazione: serve a rendere osservabile la frase «La ricerca lessicale combina frequenza del termine, rarità nel corpus e normalizzazione della lunghezza».
+**Caso da seguire.** Tre documenti ordinati per sovrapposizione di termini.
 
-La sezione usa l'input «query, corpus, termini e indice» come punto di partenza e l'output «ranking con score e documento recuperato» come traccia d'uscita. La trasformazione concreta è «BM25, dense retrieval, ANN e reranking»; il caso non è completo se non dichiariamo anche che rilevanza del ranking e correttezza della risposta sono misure separate. La condizione da isolare è «La ricerca lessicale combina frequenza del termine, rarità nel corpus e normalizzazione della lunghezza».
+**Controllo.** Esegui «BM25» due volte sullo stesso manifest e confronta identificatori, ordine, split e checksum.
 
-La pipeline distingue query, recupero, contesto e risposta. Registrare il documento o il segmento entrato nel contesto permette di localizzare un errore di ranking separatamente da un errore di generazione. Per «BM25» il controllo cambia una sola premessa della frase «La ricerca lessicale combina frequenza del termine, rarità nel corpus e normalizzazione della lunghezza» e conserva input, output e criterio di successo, così la differenza resta attribuibile. La verifica resta ancorata a «La ricerca lessicale combina frequenza del termine, rarità nel corpus e normalizzazione della lunghezza». [SRC-63-002]
-
-Se cambiamo una premessa, dobbiamo riaprire l'interpretazione. Per «BM25» conserviamo l'osservazione collegata a «La ricerca lessicale combina frequenza del termine, rarità nel corpus e normalizzazione della lunghezza» e lasciamo esplicitamente fuori ciò che non è stato misurato.
-
-Il controllo minimo di «BM25» confronta il caso dichiarato con una variazione che rompe la sua ipotesi. Se la failure non è distinguibile dall'esito valido, manca un'osservazione nel contratto di decisione, tool e side effect. Da «BM25» portiamo l'output «ranking con score e documento recuperato»; non portiamo invece una conclusione oltre il caso locale.
-
-![Information retrieval: graph](../../assets/chapters/63_retrieval/RETRIEVAL-01/candidate-v48.png)
-
-La figura RETRIEVAL-01 usa la famiglia graph. Il diagramma segue il passaggio: BM25, dense retrieval, ANN e reranking. L'input è query, corpus, termini e indice, l'output è ranking con score e documento recuperato; il vincolo da controllare è che rilevanza del ranking e correttezza della risposta sono misure separate.
 
 ## Dense retrieval
 
 Un bi-encoder mappa query e documenti in vettori e usa una similarità. L'addestramento dipende da positivi, negativi e in-batch sampling. [SRC-63-003]
 
-Prima del nome tecnico fissiamo la situazione: consideriamo una query confrontata con tre documenti, conservando ranking, chunk entrati nel contesto e risposta finale. Da qui possiamo leggere la conseguenza dichiarata da «Un bi-encoder mappa query e documenti in vettori e usa una similarità».
+**Caso da seguire.** Una query confrontata con tre documenti, conservando ranking, chunk entrati nel contesto e risposta finale.
 
-Per ricostruire «Dense retrieval» annotiamo l'input «query, corpus, termini e indice», poi l'operazione «BM25, dense retrieval, ANN e reranking», infine l'output «ranking con score e documento recuperato». Questa sequenza impedisce di scambiare una forma compatibile per il comportamento descritto dalla fonte. Il controllo parte da «Un bi-encoder mappa query e documenti in vettori e usa una similarità».
+**Controllo.** Aggiungi un record che deve essere escluso e verifica che l'output conservi anche il motivo dell'esclusione.
 
-La pipeline distingue query, recupero, contesto e risposta. Registrare il documento o il segmento entrato nel contesto permette di localizzare un errore di ranking separatamente da un errore di generazione. La prova conserva ranking, segmenti entrati nel contesto e risposta, così un errore di recupero non viene attribuito alla generazione. La verifica resta ancorata a «Un bi-encoder mappa query e documenti in vettori e usa una similarità». [SRC-63-003]
 
-Il punto didattico di «Dense retrieval» è separare ciò che la fonte afferma da ciò che il piccolo caso illustra. L'output «ranking con score e documento recuperato» mostra il contratto locale, ma non sostituisce una misura sul sistema completo.
+## Esempio Python eseguito
 
-La prova di «Dense retrieval» conserva input, operazione e output; poi esplicita quale parte di «Un bi-encoder mappa query e documenti in vettori e usa una similarità» non è stata misurata. Così il test separa l'evidenza dall'inferenza. Il passaggio successivo, «Indici ANN», potrà cambiare una sola condizione, dichiarando il nuovo setup prima di interpretare il risultato.
+Il frammento seguente è lo stesso conservato nel repository. Usa valori piccoli perché l'obiettivo è osservare il meccanismo, non simulare una scala che non abbiamo eseguito.
+
+```python
+def contract():
+    query = {"pacco", "ritardo"}
+    documents = [("d1", {"pacco", "ritardo"}), ("d2", {"pacco"}), ("d3", {"carta"})]
+    ranking = sorted(((len(query & terms), doc_id) for doc_id, terms in documents), reverse=True)
+    return {"ranking": ranking, "invariant": "retrieval exposes document scores before generation"}
+```
+
+Esecuzione con `python snip_63_contract.py`:
+
+```text
+{"invariant": "retrieval exposes document scores before generation", "ranking": [[2, "d1"], [1, "d2"], [0, "d3"]]}
+```
+
+Il test associato è [`code/test_63_contract.py`](code/test_63_contract.py); l'output versionato è [`code/outputs/SNIP-63-001.txt`](code/outputs/SNIP-63-001.txt).
+
 
 ## Indici ANN
 
 Approximate nearest neighbor riduce il costo rispetto al confronto esaustivo. Recall, memoria e latenza dipendono dalla struttura e dai parametri. [SRC-63-004]
 
-Per capire «Indici ANN» partiamo da questo caso: una query e tre documenti ricevono punteggi distinti. Prima di generare, controlliamo quale documento è entrato nel contesto e con quale ranking. Il caso rende osservabile il punto centrale: «Approximate nearest neighbor riduce il costo rispetto al confronto esaustivo».
+**Caso da seguire.** Una query e tre documenti ricevono punteggi distinti. Prima di generare, controlliamo quale documento è entrato nel contesto e con quale ranking.
 
-Nel contratto locale, l'input «query, corpus, termini e indice» entra, l'operazione «BM25, dense retrieval, ANN e reranking» modifica il percorso e l'output «ranking con score e documento recuperato» è ciò che osserviamo. Qui cambia soprattutto il passaggio «Indici ANN»; resta da controllare che rilevanza del ranking e correttezza della risposta sono misure separate. La domanda locale è «Approximate nearest neighbor riduce il costo rispetto al confronto esaustivo».
+**Controllo.** Modifica una sola regola della pipeline e misura quali record cambiano, evitando di confrontare raccolte di origine diversa.
 
-La pipeline distingue query, recupero, contesto e risposta. Registrare il documento o il segmento entrato nel contesto permette di localizzare un errore di ranking separatamente da un errore di generazione. Per «Indici ANN» il controllo cambia una sola premessa della frase «Approximate nearest neighbor riduce il costo rispetto al confronto esaustivo» e conserva input, output e criterio di successo, così la differenza resta attribuibile. La verifica resta ancorata a «Approximate nearest neighbor riduce il costo rispetto al confronto esaustivo». [SRC-63-004]
-
-La lettura va fatta in ordine: prima il caso, poi la trasformazione, quindi la conseguenza. Recall, memoria e latenza dipendono dalla struttura e dai parametri. Il piccolo risultato resta un'illustrazione di «Approximate nearest neighbor riduce il costo rispetto al confronto esaustivo», non una promessa generale.
-
-Per verificare «Indici ANN» cambiamo una sola condizione vicina alla frase «Approximate nearest neighbor riduce il costo rispetto al confronto esaustivo», teniamo fermo il resto e registriamo l'output «ranking con score e documento recuperato». Il caso negativo deve rendere riconoscibile la failure, non soltanto produrre un numero diverso. La sezione successiva, «Reranking», riceve l'output «ranking con score e documento recuperato» come base, ma dovrà formulare e verificare la propria distinzione.
 
 ## Reranking
 
 Un cross-encoder valuta coppie query-documento con maggiore interazione, ma viene applicato a un insieme candidato più piccolo. [SRC-63-001]
 
-Il caso minimo di «Reranking» si presenta così: una query e tre documenti ricevono punteggi distinti. Prima di generare, controlliamo quale documento è entrato nel contesto e con quale ranking. Non lo usiamo come decorazione: serve a rendere osservabile la frase «Un cross-encoder valuta coppie query-documento con maggiore interazione, ma viene applicato a un insieme candidato più piccolo».
+**Caso da seguire.** Per «Reranking» si mantiene l'input del capitolo e si isola questa condizione: Un cross-encoder valuta coppie query-documento con maggiore interazione, ma viene applicato a un insieme candidato più piccolo.
 
-La sezione usa l'input «query, corpus, termini e indice» come punto di partenza e l'output «ranking con score e documento recuperato» come traccia d'uscita. La trasformazione concreta è «BM25, dense retrieval, ANN e reranking»; il caso non è completo se non dichiariamo anche che rilevanza del ranking e correttezza della risposta sono misure separate. La condizione da isolare è «Un cross-encoder valuta coppie query-documento con maggiore interazione, ma viene applicato a un insieme candidato più piccolo».
+**Controllo.** Descrivi ciò che la pipeline perde oltre a ciò che produce. Il limite locale è: Un cross-encoder valuta coppie query-documento con maggiore interazione, ma viene applicato a un insieme candidato più piccolo.
 
-La pipeline distingue query, recupero, contesto e risposta. Registrare il documento o il segmento entrato nel contesto permette di localizzare un errore di ranking separatamente da un errore di generazione. Per «Reranking» il controllo cambia una sola premessa della frase «Un cross-encoder valuta coppie query-documento con maggiore interazione, ma viene applicato a un insieme candidato più piccolo» e conserva input, output e criterio di successo, così la differenza resta attribuibile. La verifica resta ancorata a «Un cross-encoder valuta coppie query-documento con maggiore interazione, ma viene applicato a un insieme candidato più piccolo». [SRC-63-001]
-
-Se cambiamo una premessa, dobbiamo riaprire l'interpretazione. Per «Reranking» conserviamo l'osservazione collegata a «Un cross-encoder valuta coppie query-documento con maggiore interazione, ma viene applicato a un insieme candidato più piccolo» e lasciamo esplicitamente fuori ciò che non è stato misurato.
-
-Il controllo minimo di «Reranking» confronta il caso dichiarato con una variazione che rompe la sua ipotesi. Se la failure non è distinguibile dall'esito valido, manca un'osservazione nel contratto di decisione, tool e side effect. La conclusione resta ancorata al protocollo osservato, non al nome della tecnica.
-
-## Una traiettoria controllata: Documenti, query e rilevanza
-
-Il caso intero parte dall'input «query, corpus, termini e indice», applica l'operazione «BM25, dense retrieval, ANN e reranking» e osserva l'output «ranking con score e documento recuperato». Un esempio controllato: tre documenti ordinati per sovrapposizione di termini. La formula locale è:
-
-$$
-score(q,d) = bm25(q,d)
-$$
-
-Il ranking è una funzione osservabile prima di qualsiasi generazione. [SRC-63-001]
 
 ![Information retrieval: pipeline](../../assets/chapters/63_retrieval/RETRIEVAL-02/candidate-v48.png)
 
-La figura RETRIEVAL-02 cambia composizione rispetto alla prima. Il diagramma segue il passaggio: BM25, dense retrieval, ANN e reranking. L'input è query, corpus, termini e indice, l'output è ranking con score e documento recuperato; il vincolo da controllare è che rilevanza del ranking e correttezza della risposta sono misure separate.
+La seconda figura mette a confronto «Indici ANN» e il limite discusso in «Reranking».
 
-## Il passaggio eseguito in Python: BM25
 
-Lo snippet locale mette in esecuzione questo caso: tre documenti ordinati per sovrapposizione di termini. Il test associato controlla determinismo, output e invariante e rifiuta una shape o condizione incoerente; il risultato è conservato in `code/outputs/SNIP-63-001.txt`, come evidenza locale e non come benchmark di produzione.
+## Come si collegano i passaggi
 
-## Prima di generalizzare: Reranking
+- **Da «Documenti, query e rilevanza» a «BM25».** Un sistema di retrieval ordina documenti rispetto a una query. La ricerca lessicale combina frequenza del termine, rarità nel corpus e normalizzazione della lunghezza. Il primo passaggio identifica il record e la sua provenienza; il secondo dichiara la trasformazione che cambia la popolazione osservata. [SRC-63-001; SRC-63-002]
 
-Il caso di «Information retrieval» non certifica un servizio completo. Rilevanza del ranking e correttezza della risposta sono misure separate. La domanda successiva è se «Un cross-encoder valuta coppie query-documento con maggiore interazione, ma viene applicato a un insieme candidato più piccolo» regga quando cambiano dati, scala, hardware o criteri di decisione.
+- **Da «BM25» a «Dense retrieval».** La ricerca lessicale combina frequenza del termine, rarità nel corpus e normalizzazione della lunghezza. Un bi-encoder mappa query e documenti in vettori e usa una similarità. La trasformazione diventa confrontabile soltanto quando il passaggio successivo conserva configurazione, conteggi e artefatti intermedi. [SRC-63-002; SRC-63-003]
 
-## Dalla lezione al capitolo seguente: Information retrieval
+- **Da «Dense retrieval» a «Indici ANN».** Un bi-encoder mappa query e documenti in vettori e usa una similarità. Approximate nearest neighbor riduce il costo rispetto al confronto esaustivo. Una volta resa tracciabile la pipeline, il quarto passaggio può affrontare selezione o uso senza confondere un cambiamento nei dati con uno nel modello. [SRC-63-003; SRC-63-004]
 
-Il filo della lezione va dall'input «query, corpus, termini e indice» all'output «ranking con score e documento recuperato». Nei passaggi «Documenti, query e rilevanza», «BM25», «Reranking» abbiamo usato esempi e controlli negativi per rendere il contratto controllabile e delimitare la conclusione. L'invariante da portare avanti è: rilevanza del ranking e correttezza della risposta sono misure separate. Il Capitolo 64, Retrieval-Augmented Generation, può partire da questo output e dichiarare la propria domanda.
+- **Da «Indici ANN» a «Reranking».** Approximate nearest neighbor riduce il costo rispetto al confronto esaustivo. Un cross-encoder valuta coppie query-documento con maggiore interazione, ma viene applicato a un insieme candidato più piccolo. L'ultima sezione porta il risultato alla valutazione e chiede quali record, slice o failure restano fuori dalla media. [SRC-63-004; SRC-63-001]
 
-### Domande per ricostruire il percorso: Documenti, query e rilevanza
+La catena completa produce ranking con score e documento recuperato a partire da query, corpus, termini e indice. Ogni collegamento conserva un oggetto osservabile diverso; per questo il risultato non può essere esteso oltre il limite dichiarato: rilevanza del ranking e correttezza della risposta sono misure separate.
 
-1. Ricostruisci l'oggetto continuo a partire da «Documenti, query e rilevanza» e indica quale parte della frase «Un sistema di retrieval ordina documenti rispetto a una query» entra nel caso.
-2. Spiega quale trasformazione collega «Documenti, query e rilevanza» a «Reranking» e quale output osserviamo nel passaggio.
-3. Usa lo snippet per controllare l'invariante del contratto: rilevanza del ranking e correttezza della risposta sono misure separate.
-4. Separa una definizione sostenuta da una fonte, un esempio illustrativo e un risultato locale del caso guida.
-5. Indica quale parte della frase «Un cross-encoder valuta coppie query-documento con maggiore interazione, ma viene applicato a un insieme candidato più piccolo» richiederebbe una misura nuova prima di essere estesa oltre il caso osservato.
 
-### Esercizi sul failure mode: Reranking
+## Esercizi sulla tracciabilità
 
-1. Ricostruisci «Documenti, query e rilevanza» senza usare il nome della tecnica, soltanto con input, operazione e output.
-2. Sostituisci una condizione di «BM25» e prevedi che cosa non dovrebbe cambiare.
-3. Cerca un controesempio per «Dense retrieval» e annota quale ipotesi viene rotta.
-4. Trasforma il limite di «Indici ANN» in un test ripetibile.
-5. Spiega come trasferire «Reranking» senza portare con sé una promessa non misurata.
+1. Ricostruisci «Documenti, query e rilevanza» con un esempio diverso da quello mostrato e indica l'output atteso prima del calcolo.
+2. Nel passaggio «BM25», cambia una sola ipotesi e spiega quale risultato non è più confrontabile.
+3. Collega «Dense retrieval» a una riga dello snippet oppure motiva perché la prova deve essere documentale.
+4. Progetta un caso limite per «Indici ANN» che produca una failure riconoscibile.
+5. Per «Reranking», separa una conclusione sostenuta dal caso locale da una che richiederebbe nuovi dati o un benchmark.
 
-## Dossier delle fonti e materiali: Information retrieval
 
-Per ricontrollare «Information retrieval», partire da `FONTI_PRIMARIE.md` e poi dal codice: la domanda aperta è come trasferire la traccia della traiettoria prima dell'effetto oltre il caso locale, con la data di consultazione dichiarata. `CLAIMS.md` separa definizioni e risultati locali; codice, ambiente, test e output sono nella cartella `code/`, con attenzione a decisione, tool e side effect.
+## L'artefatto che deve sopravvivere
+
+La lezione parte da «query, corpus, termini e indice» e arriva fino a «ranking con score e documento recuperato». Il limite da conservare è questo: rilevanza del ranking e correttezza della risposta sono misure separate. Definizioni e risultati citati sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md); la mappa dei claim è in [`CLAIMS.md`](CLAIMS.md).

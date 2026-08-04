@@ -4,133 +4,103 @@ part_id: P05
 order_key: 200
 title: Fondamenti della modellazione generativa
 maturity: CORE
-status: candidatura completa in revisione autoriale
-version: 0.4.0-draft2
-last_source_check: 3 agosto 2026
+status: revisione editoriale v2, approvazione autoriale aperta
+version: 0.5.0-draft3
+last_source_check: 4 agosto 2026
 environment: Python 3.13.12, CPU
-deferred: benchmark applicativi, varianti non necessarie al contratto centrale e approvazione autoriale
+code_policy: exception
+code_exception: Il capitolo confronta famiglie generative a livello concettuale; le implementazioni verificabili sono distribuite nei capitoli 21-25.
+deferred: benchmark applicativi non eseguiti e approvazione autoriale delle visuali
 -->
 
 # Capitolo 20. Fondamenti della modellazione generativa
 
-Il Capitolo 19, Representation learning, ha lasciato disponibile una distribuzione sui dati o su una variabile latente. Manteniamo come filo comune la richiesta «Il pacco non è arrivato» e qui la traduciamo nell'oggetto della lezione. La domanda diventa operativa: rendiamo osservabile il passaggio «valutazione di likelihood, trasformazione o campionamento» e verifichiamo che un campione plausibile non dimostra copertura dell'intera distribuzione.
+La domanda guida di questa lezione è come collegare «Imparare una distribuzione» e «Qualità, copertura e valutazione» senza perdere il contratto tecnico di fondamenti della modellazione generativa. L'oggetto osservato è una distribuzione sui dati o su una variabile latente. Il contratto locale è: input, un dato x, un rumore epsilon o una variabile z; operazione, valutazione di likelihood, trasformazione o campionamento; output, una probabilità, un punteggio o un campione. Il caso guida è questo: Un caso minimo con input un dato x, un rumore epsilon o una variabile z e output «una probabilità, un punteggio o un campione». Il confine da mantenere esplicito è: un campione plausibile non dimostra copertura dell'intera distribuzione.
 
 ## Imparare una distribuzione
 
 Un modello generativo descrive o campiona dati secondo una distribuzione. Densità, likelihood e sampling sono contratti distinti. [SRC-20-001]
 
-Prima del nome tecnico fissiamo la situazione: consideriamo un caso minimo con input un dato x, un rumore epsilon o una variabile z e output «una probabilità, un punteggio o un campione». Da qui possiamo leggere la conseguenza dichiarata da «Un modello generativo descrive o campiona dati secondo una distribuzione».
+La variabile latente collega un prior a una distribuzione osservabile.
 
-La sezione usa l'input «un dato x, un rumore epsilon o una variabile z» come punto di partenza e l'output «una probabilità, un punteggio o un campione» come traccia d'uscita. La trasformazione concreta è «valutazione di likelihood, trasformazione o campionamento»; il caso non è completo se non dichiariamo anche che un campione plausibile non dimostra copertura dell'intera distribuzione. La condizione da isolare è «Un modello generativo descrive o campiona dati secondo una distribuzione».
+**Caso da seguire.** Un caso minimo con input un dato x, un rumore epsilon o una variabile z e output «una probabilità, un punteggio o un campione».
 
-Un modello generativo può assegnare un punteggio ai dati, definire una densità oppure descrivere direttamente un percorso di campionamento. Likelihood e qualità del campione sono osservazioni diverse e vanno tenute separate. Per «Imparare una distribuzione» il controllo cambia una sola premessa della frase «Un modello generativo descrive o campiona dati secondo una distribuzione» e conserva input, output e criterio di successo, così la differenza resta attribuibile. La verifica resta ancorata a «Un modello generativo descrive o campiona dati secondo una distribuzione». [SRC-20-001]
+**Controllo.** Classifica lo stesso caso lungo un solo asse alla volta e annota quale proprietà non è stata misurata.
 
-Se cambiamo una premessa, dobbiamo riaprire l'interpretazione. Per «Imparare una distribuzione» conserviamo l'osservazione collegata a «Un modello generativo descrive o campiona dati secondo una distribuzione» e lasciamo esplicitamente fuori ciò che non è stato misurato.
-
-La prova di «Imparare una distribuzione» conserva input, operazione e output; poi esplicita quale parte di «Un modello generativo descrive o campiona dati secondo una distribuzione» non è stata misurata. Così il test separa l'evidenza dall'inferenza. Il passaggio successivo, «Modelli espliciti e impliciti», potrà cambiare una sola condizione, dichiarando il nuovo setup prima di interpretare il risultato.
 
 ## Modelli espliciti e impliciti
 
 Un modello esplicito assegna una densità o probabilità valutabile. Un modello implicito definisce il campionamento senza una likelihood semplice. [SRC-20-002]
 
-Per capire «Modelli espliciti e impliciti» partiamo da questo caso: tre probabilità che sommano a 1 prima della selezione. Il caso rende osservabile il punto centrale: «Un modello esplicito assegna una densità o probabilità valutabile».
+**Caso da seguire.** Tre probabilità che sommano a 1 prima della selezione.
 
-Per ricostruire «Modelli espliciti e impliciti» annotiamo l'input «un dato x, un rumore epsilon o una variabile z», poi l'operazione «valutazione di likelihood, trasformazione o campionamento», infine l'output «una probabilità, un punteggio o un campione». Questa sequenza impedisce di scambiare una forma compatibile per il comportamento descritto dalla fonte. Il controllo parte da «Un modello esplicito assegna una densità o probabilità valutabile».
+**Controllo.** Cambia la proprietà che distingue «Modelli espliciti e impliciti» dalle categorie vicine. Se la classificazione non cambia, la distinzione va formulata meglio.
 
-Un modello generativo può assegnare un punteggio ai dati, definire una densità oppure descrivere direttamente un percorso di campionamento. Likelihood e qualità del campione sono osservazioni diverse e vanno tenute separate. Per «Modelli espliciti e impliciti» il controllo cambia una sola premessa della frase «Un modello esplicito assegna una densità o probabilità valutabile» e conserva input, output e criterio di successo, così la differenza resta attribuibile. La verifica resta ancorata a «Un modello esplicito assegna una densità o probabilità valutabile». [SRC-20-002]
-
-Il punto didattico di «Modelli espliciti e impliciti» è separare ciò che la fonte afferma da ciò che il piccolo caso illustra. L'output «una probabilità, un punteggio o un campione» mostra il contratto locale, ma non sostituisce una misura sul sistema completo.
-
-Per verificare «Modelli espliciti e impliciti» cambiamo una sola condizione vicina alla frase «Un modello esplicito assegna una densità o probabilità valutabile», teniamo fermo il resto e registriamo l'output «una probabilità, un punteggio o un campione». Il caso negativo deve rendere riconoscibile la failure, non soltanto produrre un numero diverso. La sezione successiva, «Variabili latenti», riceve l'output «una probabilità, un punteggio o un campione» come base, ma dovrà formulare e verificare la propria distinzione.
 
 ## Variabili latenti
 
 Una variabile latente introduce struttura non osservata. L'inferenza deve collegare dati e latenti, esattamente o mediante approssimazione. [SRC-20-003]
 
-Il caso minimo di «Variabili latenti» si presenta così: tre probabilità che sommano a 1 prima del campionamento, distinguendo plausibilità del campione e copertura. Non lo usiamo come decorazione: serve a rendere osservabile la frase «Una variabile latente introduce struttura non osservata».
+**Caso da seguire.** Tre probabilità che sommano a 1 prima del campionamento, distinguendo plausibilità del campione e copertura.
 
-Nel contratto locale, l'input «un dato x, un rumore epsilon o una variabile z» entra, l'operazione «valutazione di likelihood, trasformazione o campionamento» modifica il percorso e l'output «una probabilità, un punteggio o un campione» è ciò che osserviamo. Qui cambia soprattutto il passaggio «Variabili latenti»; resta da controllare che un campione plausibile non dimostra copertura dell'intera distribuzione. La domanda locale è «Una variabile latente introduce struttura non osservata».
+**Controllo.** Confronta un caso positivo e uno di confine usando la medesima definizione; non trasformare l'esempio in una graduatoria generale.
 
-Il passaggio da seguire in «Variabili latenti» è quello descritto dalla frase «Una variabile latente introduce struttura non osservata»: l'esempio rende osservabile la trasformazione, mentre il contratto del capitolo ne delimita l'interpretazione. Per «Variabili latenti» il controllo cambia una sola premessa della frase «Una variabile latente introduce struttura non osservata» e conserva input, output e criterio di successo, così la differenza resta attribuibile. La verifica resta ancorata a «Una variabile latente introduce struttura non osservata». [SRC-20-003]
 
-La lettura va fatta in ordine: prima il caso, poi la trasformazione, quindi la conseguenza. L'inferenza deve collegare dati e latenti, esattamente o mediante approssimazione. Il piccolo risultato resta un'illustrazione di «Una variabile latente introduce struttura non osservata», non una promessa generale.
+![Fondamenti della modellazione generativa: pipeline](../../assets/chapters/20_generative_foundations/FOUNDATI-01/candidate-v49.png)
 
-Il controllo minimo di «Variabili latenti» confronta il caso dichiarato con una variazione che rompe la sua ipotesi. Se la failure non è distinguibile dall'esito valido, manca un'osservazione nel contratto del rapporto tra distribuzione e campione. Da «Variabili latenti» portiamo l'output «una probabilità, un punteggio o un campione»; non portiamo invece una conclusione oltre il caso locale.
+La prima figura segue il percorso da «Imparare una distribuzione» a «Variabili latenti».
+
 
 ## Energy-based model
 
 Una energia non normalizzata assegna punteggi alle configurazioni. La costante di partizione rende difficile la likelihood in molti casi. [SRC-20-004]
 
-Prima del nome tecnico fissiamo la situazione: consideriamo per una variabile Bernoulli, la likelihood valuta la probabilità del dato osservato; un campione plausibile non dimostra che la distribuzione sia coperta. Da qui possiamo leggere la conseguenza dichiarata da «Una energia non normalizzata assegna punteggi alle configurazioni».
+**Caso da seguire.** Per una variabile Bernoulli, la likelihood valuta la probabilità del dato osservato; un campione plausibile non dimostra che la distribuzione sia coperta.
 
-La sezione usa l'input «un dato x, un rumore epsilon o una variabile z» come punto di partenza e l'output «una probabilità, un punteggio o un campione» come traccia d'uscita. La trasformazione concreta è «valutazione di likelihood, trasformazione o campionamento»; il caso non è completo se non dichiariamo anche che un campione plausibile non dimostra copertura dell'intera distribuzione. La condizione da isolare è «Una energia non normalizzata assegna punteggi alle configurazioni».
+**Controllo.** Indica quale osservazione smentirebbe l'assegnazione del caso a «Energy-based model» e quale invece sarebbe irrilevante.
 
-Un modello generativo può assegnare un punteggio ai dati, definire una densità oppure descrivere direttamente un percorso di campionamento. Likelihood e qualità del campione sono osservazioni diverse e vanno tenute separate. Per «Energy-based model» il controllo cambia una sola premessa della frase «Una energia non normalizzata assegna punteggi alle configurazioni» e conserva input, output e criterio di successo, così la differenza resta attribuibile. La verifica resta ancorata a «Una energia non normalizzata assegna punteggi alle configurazioni». [SRC-20-004]
-
-Se cambiamo una premessa, dobbiamo riaprire l'interpretazione. Per «Energy-based model» conserviamo l'osservazione collegata a «Una energia non normalizzata assegna punteggi alle configurazioni» e lasciamo esplicitamente fuori ciò che non è stato misurato.
-
-La prova di «Energy-based model» conserva input, operazione e output; poi esplicita quale parte di «Una energia non normalizzata assegna punteggi alle configurazioni» non è stata misurata. Così il test separa l'evidenza dall'inferenza. Il passaggio successivo, «Qualità, copertura e valutazione», potrà cambiare una sola condizione, dichiarando il nuovo setup prima di interpretare il risultato.
-
-![Fondamenti della modellazione generativa: pipeline](../../assets/chapters/20_generative_foundations/FOUNDATI-01/candidate-v49.png)
-
-La figura FOUNDATI-01 usa la famiglia pipeline. Il percorso dall'input di fondamenti della modellazione generativa all'output osservabile è leggibile da sinistra a destra.
 
 ## Qualità, copertura e valutazione
 
-Campioni plausibili non garantiscono copertura. Likelihood, precision-recall generativa e valutazione umana rispondono a domande diverse. [SRC-20-001]
+Campioni plausibili non garantiscono copertura. Likelihood e precision-recall generativa rispondono a domande diverse e richiedono protocolli dichiarati. [SRC-20-001; SRC-20-005]
 
-Per capire «Qualità, copertura e valutazione» partiamo da questo caso: per una variabile Bernoulli, la likelihood valuta la probabilità del dato osservato; un campione plausibile non dimostra che la distribuzione sia coperta. Il caso rende osservabile il punto centrale: «Campioni plausibili non garantiscono copertura».
+**Caso da seguire.** Per «Qualità, copertura e valutazione» si mantiene l'input del capitolo e si isola questa condizione: Campioni plausibili non garantiscono copertura.
 
-Per ricostruire «Qualità, copertura e valutazione» annotiamo l'input «un dato x, un rumore epsilon o una variabile z», poi l'operazione «valutazione di likelihood, trasformazione o campionamento», infine l'output «una probabilità, un punteggio o un campione». Questa sequenza impedisce di scambiare una forma compatibile per il comportamento descritto dalla fonte. Il controllo parte da «Campioni plausibili non garantiscono copertura».
+**Controllo.** Limita la conclusione alla proprietà dichiarata: Likelihood e precision-recall generativa rispondono a domande diverse e richiedono protocolli dichiarati. Le dimensioni non osservate restano aperte.
 
-Una valutazione deve collegare claim, popolazione, protocollo e decisione. Media, slice, failure, giudice e incertezza misurano aspetti diversi e non diventano intercambiabili perché condividono una tabella. Il controllo separa raccolta di traiettorie e confronto delle policy, riportando ritorno, dispersione e vincoli come misure diverse. La verifica resta ancorata a «Campioni plausibili non garantiscono copertura». [SRC-20-001]
-
-Il punto didattico di «Qualità, copertura e valutazione» è separare ciò che la fonte afferma da ciò che il piccolo caso illustra. L'output «una probabilità, un punteggio o un campione» mostra il contratto locale, ma non sostituisce una misura sul sistema completo.
-
-Per verificare «Qualità, copertura e valutazione» cambiamo una sola condizione vicina alla frase «Campioni plausibili non garantiscono copertura», teniamo fermo il resto e registriamo l'output «una probabilità, un punteggio o un campione». Il caso negativo deve rendere riconoscibile la failure, non soltanto produrre un numero diverso. Il percorso si chiude lasciando espliciti la misura locale e ciò che richiederebbe una prova ulteriore.
-
-## Un caso dall'input all'output: Imparare una distribuzione
-
-Il caso intero parte dall'input «un dato x, un rumore epsilon o una variabile z», applica l'operazione «valutazione di likelihood, trasformazione o campionamento» e osserva l'output «una probabilità, un punteggio o un campione». Un esempio controllato: tre probabilità che sommano a 1 prima della selezione. La formula locale è:
-
-$$
-p(x)=\int p(x|z)p(z)\,dz
-$$
-
-La variabile latente collega un prior a una distribuzione osservabile. [SRC-20-001]
 
 ![Fondamenti della modellazione generativa: timeline](../../assets/chapters/20_generative_foundations/FOUNDATI-02/candidate-v49.png)
 
-La figura FOUNDATI-02 cambia composizione rispetto alla prima. La stessa informazione viene seguita lungo i passi del processo.
+La seconda figura mette a confronto «Energy-based model» e il limite discusso in «Qualità, copertura e valutazione».
 
-## Dal meccanismo alla prova locale: Modelli espliciti e impliciti
 
-Lo snippet locale mette in esecuzione questo caso: tre probabilità che sommano a 1 prima della selezione. Il test associato controlla determinismo, output e invariante e rifiuta una shape o condizione incoerente; il risultato è conservato in `code/outputs/SNIP-20-001.txt`, come evidenza locale e non come benchmark di produzione.
+## Perché non forziamo un esempio Python
 
-## Dove il risultato si ferma: Qualità, copertura e valutazione
+Il capitolo confronta famiglie generative a livello concettuale; le implementazioni verificabili sono distribuite nei capitoli 21-25. La verifica resta comunque obbligatoria attraverso fonti primarie, data di consultazione, claim delimitati e confronto tra casi.
 
-Il caso di «Fondamenti della modellazione generativa» non certifica un servizio completo. Un campione plausibile non dimostra copertura dell'intera distribuzione. La domanda successiva è se «Campioni plausibili non garantiscono copertura» regga quando cambiano dati, scala, hardware o criteri di decisione.
 
-## Che cosa portiamo avanti: Fondamenti della modellazione generativa
+## Come si collegano i passaggi
 
-Il filo della lezione va dall'input «un dato x, un rumore epsilon o una variabile z» all'output «una probabilità, un punteggio o un campione». Nei passaggi «Imparare una distribuzione», «Modelli espliciti e impliciti», «Qualità, copertura e valutazione» abbiamo usato esempi e controlli negativi per rendere il contratto controllabile e delimitare la conclusione. L'invariante da portare avanti è: un campione plausibile non dimostra copertura dell'intera distribuzione. Il Capitolo 21, Modelli autoregressivi, può partire da questo output e dichiarare la propria domanda.
+- **Da «Imparare una distribuzione» a «Modelli espliciti e impliciti».** Un modello generativo descrive o campiona dati secondo una distribuzione. Un modello esplicito assegna una densità o probabilità valutabile. La definizione iniziale stabilisce l'asse del confronto; la categoria successiva aggiunge una proprietà senza creare una classifica implicita. [SRC-20-001; SRC-20-002]
 
-### Verifica di comprensione: Imparare una distribuzione
+- **Da «Modelli espliciti e impliciti» a «Variabili latenti».** Un modello esplicito assegna una densità o probabilità valutabile. Una variabile latente introduce struttura non osservata. Il terzo passaggio verifica se le categorie restano distinguibili sullo stesso caso e impedisce che termini vicini diventino sinonimi. [SRC-20-002; SRC-20-003]
 
-1. Ricostruisci l'oggetto continuo a partire da «Imparare una distribuzione» e indica quale parte della frase «Un modello generativo descrive o campiona dati secondo una distribuzione» entra nel caso.
-2. Spiega quale trasformazione collega «Imparare una distribuzione» a «Qualità, copertura e valutazione» e quale output osserviamo nel passaggio.
-3. Usa lo snippet per controllare l'invariante del contratto: un campione plausibile non dimostra copertura dell'intera distribuzione.
-4. Separa una definizione sostenuta da una fonte, un esempio illustrativo e un risultato locale del caso guida.
-5. Indica quale parte della frase «Campioni plausibili non garantiscono copertura» richiederebbe una misura nuova prima di essere estesa oltre il caso osservato.
+- **Da «Variabili latenti» a «Energy-based model».** Una variabile latente introduce struttura non osservata. Una energia non normalizzata assegna punteggi alle configurazioni. La quarta sezione introduce il punto in cui l'asse scelto smette di bastare e richiede una nuova osservazione. [SRC-20-003; SRC-20-004]
 
-### Esercizi di trasferimento: Qualità, copertura e valutazione
+- **Da «Energy-based model» a «Qualità, copertura e valutazione».** Una energia non normalizzata assegna punteggi alle configurazioni. Campioni plausibili non garantiscono copertura. La sezione finale riunisce le dimensioni della valutazione, ma conserva i limiti di ciascuna invece di fonderle in un unico punteggio. [SRC-20-004; SRC-20-001; SRC-20-005]
 
-1. Racconta «Imparare una distribuzione» come una trasformazione: che cosa entra e che cosa esce?
-2. Confronta due esecuzioni di «Modelli espliciti e impliciti» mantenendo il resto del setup invariato.
-3. Per «Variabili latenti», separa l'esempio locale dal limite che impedisce di generalizzarlo.
-4. Progetta una prova per «Energy-based model» che renda visibile il suo confine.
-5. Scrivi una metrica o una domanda per valutare «Qualità, copertura e valutazione» senza confondere livelli diversi.
+La catena completa produce una probabilità, un punteggio o un campione a partire da un dato x, un rumore epsilon o una variabile z. Ogni collegamento conserva un oggetto osservabile diverso; per questo il risultato non può essere esteso oltre il limite dichiarato: un campione plausibile non dimostra copertura dell'intera distribuzione.
 
-## Fonti, codice e materiali: Fondamenti della modellazione generativa
 
-Per ricontrollare «Fondamenti della modellazione generativa», partire da `FONTI_PRIMARIE.md` e poi dal codice: la domanda aperta è come trasferire il passaggio dal latente all'osservabile oltre il caso locale, con la data di consultazione dichiarata. `CLAIMS.md` separa definizioni e risultati locali; codice, ambiente, test e output sono nella cartella `code/`, con attenzione al rapporto tra distribuzione e campione.
+## Domande per distinguere le categorie
+
+1. Ricostruisci «Imparare una distribuzione» con un esempio diverso da quello mostrato e indica l'output atteso prima del calcolo.
+2. Nel passaggio «Modelli espliciti e impliciti», cambia una sola ipotesi e spiega quale risultato non è più confrontabile.
+3. Collega «Variabili latenti» a una riga dello snippet oppure motiva perché la prova deve essere documentale.
+4. Progetta un caso limite per «Energy-based model» che produca una failure riconoscibile.
+5. Per «Qualità, copertura e valutazione», separa una conclusione sostenuta dal caso locale da una che richiederebbe nuovi dati o un benchmark.
+
+
+## Una mappa, non una graduatoria
+
+La lezione parte da «un dato x, un rumore epsilon o una variabile z» e arriva fino a «una probabilità, un punteggio o un campione». Il limite da conservare è questo: un campione plausibile non dimostra copertura dell'intera distribuzione. Definizioni e risultati citati sono rintracciabili in [`FONTI_PRIMARIE.md`](FONTI_PRIMARIE.md); la mappa dei claim è in [`CLAIMS.md`](CLAIMS.md).

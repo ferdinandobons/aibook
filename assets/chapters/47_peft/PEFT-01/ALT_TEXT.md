@@ -1,3 +1,3 @@
-# Alt text PEFT-01
+# Testo alternativo
 
-Diagramma PEFT-01 del Capitolo 47, famiglia architecture. Domanda: Il diagramma segue il passaggio: Adapter, LoRA, prefix o QLoRA. L'input è peso W, matrice A e B, rank e quantizzazione, l'output è delta W e checkpoint adattatore; il vincolo da controllare è che il delta non è il modello completo e va valutato sullo stesso base model La composizione usa i passaggi Parametri congelati e adattamento, Adapter, LoRA, Prompt, prefix e IA3, QLoRA e compatibilità.
+PEFT-01, Fine-tuning efficiente. Come si passa da «Parametri congelati e adattamento» a «LoRA» mantenendo osservabile l'aggiornamento adattivo rispetto ai pesi congelati? La composizione low rank update collega «Parametri congelati e adattamento», «Adapter», «LoRA». L'input è peso W, matrice A e B, rank e quantizzazione; l'output è delta W e checkpoint adattatore. Il limite esplicito è: il delta non è il modello completo e va valutato sullo stesso base model.

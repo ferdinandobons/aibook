@@ -1,14 +1,16 @@
 # Specifica visuale MEMORY-01
 
-- famiglia: queue
-- domanda principale: Il diagramma segue il passaggio: Routing, scrittura episodica e recupero. L'input è segmento, query, budget e durata, l'output è contesto scelto, memoria aggiornata e costo; il vincolo da controllare è che memoria persistente e contesto temporaneo hanno politiche diverse
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: memory_layers
+- domanda principale: Come si passa da «Tre risorse differenti» a «Quando recuperare» mantenendo osservabile la decisione tra contesto, retrieval e memoria?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, queue, invariante o limite in chiusura
-- nodi e contenuti: 1: Tre risorse differenti; 2: Quando usare il contesto; 3: Quando recuperare; 4: Memoria episodica; 5: Routing ibrido
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: memoria persistente e contesto temporaneo hanno politiche diverse
-- fonti collegate: SRC-66-001 ... SRC-66-004
-- alt text: Diagramma MEMORY-01 del Capitolo 66, famiglia queue. Domanda: Il diagramma segue il passaggio: Routing, scrittura episodica e recupero. L'input è segmento, query, budget e durata, l'output è contesto scelto, memoria aggiornata e costo; il vincolo da controllare è che memoria persistente e contesto temporaneo hanno politiche diverse La composizione usa i passaggi Tre risorse differenti, Quando usare il contesto, Quando recuperare, Memoria episodica, Routing ibrido.
+- file candidato: candidate-v48.png
+- oggetto osservato: la decisione tra contesto, retrieval e memoria
+- input: segmento, query, budget e durata
+- output: contesto scelto, memoria aggiornata e costo
+- nodi locali: Tre risorse differenti: Contesto lungo, retrieval esterno e memoria persistente offrono capacità, costo e…; Quando usare il contesto: Inserire tutti i documenti evita un indice separato ma aumenta prefill, distrattori e…; Quando recuperare: Retrieval seleziona un sottoinsieme aggiornabile e attribuibile. Può fallire per query,…
+- limite visualizzato: memoria persistente e contesto temporaneo hanno politiche diverse
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

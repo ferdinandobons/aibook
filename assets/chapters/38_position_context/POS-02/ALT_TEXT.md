@@ -1,3 +1,3 @@
-# Alt text POS-02
+# Testo alternativo
 
-Diagramma POS-02 del Capitolo 38, famiglia chart. Domanda: Il diagramma segue il passaggio: Posizione assoluta, relativa, RoPE o bias. L'input è query, key e indice di posizione, l'output è score dipendente dalla posizione; il vincolo da controllare è che estendere il contesto richiede una misura fuori dalla lunghezza addestrata La composizione usa i passaggi Posizione assoluta, Posizione relativa, RoPE, ALiBi, Estensione e valutazione.
+POS-02, Posizione e contesto lungo. Quale controllo collega «ALiBi» a «Estensione e valutazione» senza superare il limite dichiarato? La composizione context window collega «ALiBi», «Estensione e valutazione». L'input è query, key e indice di posizione; l'output è score dipendente dalla posizione. Il limite esplicito è: estendere il contesto richiede una misura fuori dalla lunghezza addestrata.

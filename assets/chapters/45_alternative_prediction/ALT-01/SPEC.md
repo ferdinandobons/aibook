@@ -1,14 +1,16 @@
 # Specifica visuale ALT-01
 
-- famiglia: pipeline
-- domanda principale: Il diagramma segue il passaggio: Raggruppamento, multi-token prediction o diffusione discreta. L'input è byte, gerarchia, target e numero di passi, l'output è unità predette, loss e durata di decoding; il vincolo da controllare è che granularità della rappresentazione e parallelismo sono assi distinti
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: objective_compare
+- domanda principale: Come si passa da «Byte e caratteri» a «Predizione multi-token» mantenendo osservabile unità di predizione dal byte al token multiplo?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v47.png
-- ordine di lettura: titolo, domanda, pipeline, invariante o limite in chiusura
-- nodi e contenuti: 1: Byte e caratteri; 2: Gerarchie di byte; 3: Predizione multi-token; 4: Diffusione linguistica; 5: Assi separati
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: granularità della rappresentazione e parallelismo sono assi distinti
-- fonti collegate: SRC-45-001 ... SRC-45-004
-- alt text: Diagramma ALT-01 del Capitolo 45, famiglia pipeline. Domanda: Il diagramma segue il passaggio: Raggruppamento, multi-token prediction o diffusione discreta. L'input è byte, gerarchia, target e numero di passi, l'output è unità predette, loss e durata di decoding; il vincolo da controllare è che granularità della rappresentazione e parallelismo sono assi distinti La composizione usa i passaggi Byte e caratteri, Gerarchie di byte, Predizione multi-token, Diffusione linguistica, Assi separati.
+- file candidato: candidate-v47.png
+- oggetto osservato: unità di predizione dal byte al token multiplo
+- input: byte, gerarchia, target e numero di passi
+- output: unità predette, loss e durata di decoding
+- nodi locali: Byte e caratteri: Modelli byte-level usano un vocabolario piccolo e sequenze più lunghe.; Gerarchie di byte: Patch fisse o dinamiche riducono la lunghezza vista dal modello globale.; Predizione multi-token: Head aggiuntive predicono più offset futuri e forniscono segnali oltre il token immediato.
+- limite visualizzato: granularità della rappresentazione e parallelismo sono assi distinti
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

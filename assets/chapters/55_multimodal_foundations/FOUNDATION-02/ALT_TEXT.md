@@ -1,3 +1,3 @@
-# Alt text FOUNDATION-02
+# Testo alternativo
 
-Diagramma FOUNDATION-02 del Capitolo 55, famiglia compare. Domanda: Il diagramma segue il passaggio: Encoder, proiezione, alignment e fusion. L'input è testo, immagine, audio e maschere di modalità, l'output è spazio condiviso o output condizionato; il vincolo da controllare è che allineamento misurato non equivale a comprensione generale La composizione usa i passaggi Modalità e misure, Allineamento, Fusion, Missing modality, Valutazione.
+FOUNDATION-02, Fondamenti della multimodalità. Quale controllo collega «Missing modality» a «Valutazione» senza superare il limite dichiarato? La composizione alignment space collega «Missing modality», «Valutazione». L'input è testo, immagine, audio e maschere di modalità; l'output è spazio condiviso o output condizionato. Il limite esplicito è: allineamento misurato non equivale a comprensione generale.

@@ -1,81 +1,31 @@
-# Piano interno. Capitolo 78
+# Piano editoriale. Capitolo 78
 
-- Domanda centrale: quale contratto costruisce KV cache e riuso del contesto?
-- Oggetto continuo: blocchi di KV cache associati a una richiesta; input guida: layer, token, KV dimension, dtype e prefix.
-- Prerequisito stabile: Capitolo 77, Speculative e parallel decoding.
-- Gap: prefill, decode, paging, caching ed eviction.
-- Output consegnato: cache occupata, hit e latenza; consumer successivo: Capitolo 79, Serving, batching e scheduling.
-- Invariante principale: la cache deve rispettare ownership, posizione e validità del prefisso.
-- Visuali: CACHE-01 e CACHE-02, con famiglie compositive variabili.
-- Snippet: code/snip_78_contract.py; output: code/outputs/SNIP-78-001.txt.
-- Gate aperti: revisione autoriale, lettura ad alta voce e approvazione finale delle visuali.
+## Obiettivo didattico
 
-## Transizione 1. Prefill e decode
+Seguire **KV cache e riuso del contesto** da layer, token, KV dimension, dtype e prefix a cache occupata, hit e latenza, osservando prefill, decode, paging, caching ed eviction senza oltrepassare questo limite: la cache deve rispettare ownership, posizione e validità del prefisso.
 
-- Ultima affermazione stabile: blocchi di KV cache associati a una richiesta.
-- Concetto nuovo: Il prefill calcola K e V per il prompt; il decode aggiunge una posizione e riusa la cache precedente.
-- Input e shape: layer, token, KV dimension, dtype e prefix.
-- Operazione: prefill, decode, paging, caching ed eviction.
-- Output e shape: cache occupata, hit e latenza.
-- Che cosa cambia: il passaggio specifico di «Prefill e decode».
-- Invariante: la cache deve rispettare ownership, posizione e validità del prefisso.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: due richieste condividono un prefisso e divergono al terzo token; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Layout.
-- Prova: SRC-78-001 e sezione pubblica corrispondente.
+## Prerequisiti reali
 
-## Transizione 2. Layout
+- Capitolo 29: Il Transformer da zero
+- Capitolo 39: Varianti dell'attention e gestione KV
+- Capitolo 76: Decoding e generazione vincolata
 
-- Ultima affermazione stabile: blocchi di KV cache associati a una richiesta.
-- Concetto nuovo: Layer, batch, KV head, token e head dimension determinano shape e byte. Contiguità e paginazione influenzano il kernel.
-- Input e shape: layer, token, KV dimension, dtype e prefix.
-- Operazione: prefill, decode, paging, caching ed eviction.
-- Output e shape: cache occupata, hit e latenza.
-- Che cosa cambia: il passaggio specifico di «Layout».
-- Invariante: la cache deve rispettare ownership, posizione e validità del prefisso.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: due richieste condividono un prefisso e divergono al terzo token; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: PagedAttention.
-- Prova: SRC-78-002 e sezione pubblica corrispondente.
+## Percorso della lezione
 
-## Transizione 3. PagedAttention
+1. **Prefill e decode.** Il prefill calcola K e V per il prompt; il decode aggiunge una posizione e riusa la cache precedente. Prova: SRC-78-001.
+2. **Layout.** Layer, batch, KV head, token e head dimension determinano shape e byte. Contiguità e paginazione influenzano il kernel. Prova: SRC-78-002.
+3. **PagedAttention.** Blocchi logici vengono mappati a pagine fisiche per ridurre frammentazione e supportare sequenze di lunghezza diversa. Prova: SRC-78-003.
+4. **Prefix caching.** Prefissi identici possono condividere pagine se modello, tokenizer, adapter e messaggi sono compatibili. Prova: SRC-78-004.
+5. **Compressione ed eviction.** Quantizzazione, sliding window e selezione dei token riducono memoria, ma modificano precisione o contesto disponibile. Prova: SRC-78-001.
 
-- Ultima affermazione stabile: blocchi di KV cache associati a una richiesta.
-- Concetto nuovo: Blocchi logici vengono mappati a pagine fisiche per ridurre frammentazione e supportare sequenze di lunghezza diversa.
-- Input e shape: layer, token, KV dimension, dtype e prefix.
-- Operazione: prefill, decode, paging, caching ed eviction.
-- Output e shape: cache occupata, hit e latenza.
-- Che cosa cambia: il passaggio specifico di «PagedAttention».
-- Invariante: la cache deve rispettare ownership, posizione e validità del prefisso.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: due richieste condividono un prefisso e divergono al terzo token; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Prefix caching.
-- Prova: SRC-78-003 e sezione pubblica corrispondente.
+## Prove e artefatti
 
-## Transizione 4. Prefix caching
+- riferimento minimo: `code/snip_78_contract.py`; test: `code/test_78_contract.py`; output: `code/outputs/SNIP-78-001.txt`.
+- visuali candidate: CACHE-01, CACHE-02; le domande pedagogiche sono distinte e l'approvazione autoriale resta aperta.
+- fonti: `FONTI_PRIMARIE.md`; corrispondenza claim-fonte: `CLAIMS.md`.
 
-- Ultima affermazione stabile: blocchi di KV cache associati a una richiesta.
-- Concetto nuovo: Prefissi identici possono condividere pagine se modello, tokenizer, adapter e messaggi sono compatibili.
-- Input e shape: layer, token, KV dimension, dtype e prefix.
-- Operazione: prefill, decode, paging, caching ed eviction.
-- Output e shape: cache occupata, hit e latenza.
-- Che cosa cambia: il passaggio specifico di «Prefix caching».
-- Invariante: la cache deve rispettare ownership, posizione e validità del prefisso.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: due richieste condividono un prefisso e divergono al terzo token; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Compressione ed eviction.
-- Prova: SRC-78-004 e sezione pubblica corrispondente.
+## Gate aperti
 
-## Transizione 5. Compressione ed eviction
-
-- Ultima affermazione stabile: blocchi di KV cache associati a una richiesta.
-- Concetto nuovo: Quantizzazione, sliding window e selezione dei token riducono memoria, ma modificano precisione o contesto disponibile.
-- Input e shape: layer, token, KV dimension, dtype e prefix.
-- Operazione: prefill, decode, paging, caching ed eviction.
-- Output e shape: cache occupata, hit e latenza.
-- Che cosa cambia: il passaggio specifico di «Compressione ed eviction».
-- Invariante: la cache deve rispettare ownership, posizione e validità del prefisso.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: due richieste condividono un prefisso e divergono al terzo token; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Serving, batching e scheduling.
-- Prova: SRC-78-001 e sezione pubblica corrispondente.
+- lettura editoriale finale da parte dell'autore;
+- approvazione delle visuali nel contesto impaginato;
+- benchmark esterni solo quando il capitolo formula un claim di scala o di produzione.

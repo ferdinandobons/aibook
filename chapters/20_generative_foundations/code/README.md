@@ -1,5 +1,5 @@
-# Codice del Capitolo 20
+# Eccezione Python. Capitolo 20
 
-Lo snippet snip_20_contract.py rende osservabile il contratto centrale di Fondamenti della modellazione generativa con valori piccoli e leggibili.
-Il test test_20_contract.py controlla determinismo, output, invariante e una shape incoerente.
-Il risultato è un esempio locale, non un benchmark di produzione.
+Il capitolo confronta famiglie generative a livello concettuale; le implementazioni verificabili sono distribuite nei capitoli 21-25.
+
+La verifica sostitutiva usa fonti primarie, locator e claim delimitati. Non viene conservato uno script giocattolo che potrebbe sembrare una prova computazionale dell'intera tassonomia.

@@ -1,3 +1,3 @@
-# Alt text `PROB-02`
+# Testo alternativo
 
-Diagramma orizzontale su sfondo bianco. A sinistra una distribuzione Bernoulli ha parametro fisso `p=0,30`, media teorica `0,30` e varianza `0,21`. A destra compaiono tre campioni ottenuti dalla stessa distribuzione. Il primo ha dimensione 10, sei successi e media `0,6000`; il secondo dimensione 100, trentadue successi e media `0,3200`; il terzo dimensione 10 000, 3 042 successi e media `0,3042`. Ogni card mostra una barra della frequenza osservata e la deviazione standard teorica della media, che diminuisce da circa `0,1449` a `0,0046`. Un footer chiarisce che la legge dei grandi numeri non obbliga ogni campione più grande a essere più vicino del precedente.
+Distribuzione, campione e stimatore. Quale confronto o limite chiarisce «Congiunta, marginale e condizionata»?

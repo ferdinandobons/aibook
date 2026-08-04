@@ -1,3 +1,3 @@
-# Alt text FAMILIES-01
+# Testo alternativo
 
-Diagramma FAMILIES-01 del Capitolo 30, famiglia matrix. Domanda: Il diagramma segue il passaggio: Encoder, decoder, span corruption o causal prediction. L'input è sequenza, mask e target di pretraining, l'output è rappresentazione o distribuzione predittiva; il vincolo da controllare è che architettura e objective non possono essere scambiati senza cambiare il compito La composizione usa i passaggi Encoder-only, Decoder-only, Encoder-decoder, Masked, causal e span corruption, Architettura e obiettivo.
+FAMILIES-01, Famiglie architetturali e obiettivi di pretraining. Come si passa da «Encoder-only» a «Encoder-decoder» mantenendo osservabile una famiglia architetturale legata al proprio obiettivo? La composizione architecture taxonomy collega «Encoder-only», «Decoder-only», «Encoder-decoder». L'input è sequenza, mask e target di pretraining; l'output è rappresentazione o distribuzione predittiva. Il limite esplicito è: architettura e objective non possono essere scambiati senza cambiare il compito.

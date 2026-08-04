@@ -1,81 +1,31 @@
-# Piano interno. Capitolo 23
+# Piano editoriale. Capitolo 23
 
-- Domanda centrale: quale contratto costruisce Generative Adversarial Network?
-- Oggetto continuo: la partita tra generatore e discriminatore; input guida: un dato reale, un campione e due score.
-- Prerequisito stabile: Capitolo 22, Variational Autoencoder e latent discreti.
-- Gap: aggiornamento alternato e segnale di feedback.
-- Output consegnato: score, gradiente e campione; consumer successivo: Capitolo 24, Normalizing flow e trasformazioni invertibili.
-- Invariante principale: un equilibrio locale non prova copertura né stabilità.
-- Visuali: GAN-01 e GAN-02, con famiglie compositive variabili.
-- Snippet: code/snip_23_contract.py; output: code/outputs/SNIP-23-001.txt.
-- Gate aperti: revisione autoriale, lettura ad alta voce e approvazione finale delle visuali.
+## Obiettivo didattico
 
-## Transizione 1. Un gioco tra due modelli
+Seguire **Generative Adversarial Network** da un dato reale, un campione e due score a score, gradiente e campione, osservando aggiornamento alternato e segnale di feedback senza oltrepassare questo limite: un equilibrio locale non prova copertura né stabilità.
 
-- Ultima affermazione stabile: la partita tra generatore e discriminatore.
-- Concetto nuovo: Il generatore produce campioni; il discriminatore distingue dati reali e generati. L'obiettivo è un gioco, non una loss singola ottimizzata congiuntamente.
-- Input e shape: un dato reale, un campione e due score.
-- Operazione: aggiornamento alternato e segnale di feedback.
-- Output e shape: score, gradiente e campione.
-- Che cosa cambia: il passaggio specifico di «Un gioco tra due modelli».
-- Invariante: un equilibrio locale non prova copertura né stabilità.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: due score reali e sintetici con un aggiornamento alternato; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Divergenze e gradienti.
-- Prova: SRC-23-001 e sezione pubblica corrispondente.
+## Prerequisiti reali
 
-## Transizione 2. Divergenze e gradienti
+- Capitolo 6: Calcolo differenziale e backpropagation
+- Capitolo 7: Probabilità, statistica e inferenza
+- Capitolo 20: Fondamenti della modellazione generativa
 
-- Ultima affermazione stabile: la partita tra generatore e discriminatore.
-- Concetto nuovo: La formulazione originale è collegata alla Jensen-Shannon divergence sotto un discriminatore ottimo. I gradienti pratici dipendono dalla loss scelta.
-- Input e shape: un dato reale, un campione e due score.
-- Operazione: aggiornamento alternato e segnale di feedback.
-- Output e shape: score, gradiente e campione.
-- Che cosa cambia: il passaggio specifico di «Divergenze e gradienti».
-- Invariante: un equilibrio locale non prova copertura né stabilità.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: due score reali e sintetici con un aggiornamento alternato; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Mode collapse.
-- Prova: SRC-23-002 e sezione pubblica corrispondente.
+## Percorso della lezione
 
-## Transizione 3. Mode collapse
+1. **Un gioco tra due modelli.** Il generatore produce campioni; il discriminatore distingue dati reali e generati. L'obiettivo è un gioco, non una loss singola ottimizzata congiuntamente. Prova: SRC-23-001.
+2. **Divergenze e gradienti.** La formulazione originale è collegata alla Jensen-Shannon divergence sotto un discriminatore ottimo. I gradienti pratici dipendono dalla loss scelta. Prova: SRC-23-002.
+3. **Mode collapse.** Il generatore può produrre poche modalità convincenti. Diversità e fedeltà devono essere misurate separatamente. Prova: SRC-23-003.
+4. **Wasserstein GAN.** WGAN usa una distanza legata a funzioni Lipschitz. Weight clipping e gradient penalty sono implementazioni differenti del vincolo. Prova: SRC-23-004.
+5. **Stabilità e valutazione.** Bilanciare update, normalizzazioni e capacità è essenziale. FID è una metrica su feature e non sostituisce l'analisi dei campioni. Prova: SRC-23-001.
 
-- Ultima affermazione stabile: la partita tra generatore e discriminatore.
-- Concetto nuovo: Il generatore può produrre poche modalità convincenti. Diversità e fedeltà devono essere misurate separatamente.
-- Input e shape: un dato reale, un campione e due score.
-- Operazione: aggiornamento alternato e segnale di feedback.
-- Output e shape: score, gradiente e campione.
-- Che cosa cambia: il passaggio specifico di «Mode collapse».
-- Invariante: un equilibrio locale non prova copertura né stabilità.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: due score reali e sintetici con un aggiornamento alternato; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Wasserstein GAN.
-- Prova: SRC-23-003 e sezione pubblica corrispondente.
+## Prove e artefatti
 
-## Transizione 4. Wasserstein GAN
+- riferimento minimo: `code/snip_23_contract.py`; test: `code/test_23_contract.py`; output: `code/outputs/SNIP-23-001.txt`.
+- visuali candidate: GAN-01, GAN-02; le domande pedagogiche sono distinte e l'approvazione autoriale resta aperta.
+- fonti: `FONTI_PRIMARIE.md`; corrispondenza claim-fonte: `CLAIMS.md`.
 
-- Ultima affermazione stabile: la partita tra generatore e discriminatore.
-- Concetto nuovo: WGAN usa una distanza legata a funzioni Lipschitz. Weight clipping e gradient penalty sono implementazioni differenti del vincolo.
-- Input e shape: un dato reale, un campione e due score.
-- Operazione: aggiornamento alternato e segnale di feedback.
-- Output e shape: score, gradiente e campione.
-- Che cosa cambia: il passaggio specifico di «Wasserstein GAN».
-- Invariante: un equilibrio locale non prova copertura né stabilità.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: due score reali e sintetici con un aggiornamento alternato; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Stabilità e valutazione.
-- Prova: SRC-23-004 e sezione pubblica corrispondente.
+## Gate aperti
 
-## Transizione 5. Stabilità e valutazione
-
-- Ultima affermazione stabile: la partita tra generatore e discriminatore.
-- Concetto nuovo: Bilanciare update, normalizzazioni e capacità è essenziale. FID è una metrica su feature e non sostituisce l'analisi dei campioni.
-- Input e shape: un dato reale, un campione e due score.
-- Operazione: aggiornamento alternato e segnale di feedback.
-- Output e shape: score, gradiente e campione.
-- Che cosa cambia: il passaggio specifico di «Stabilità e valutazione».
-- Invariante: un equilibrio locale non prova copertura né stabilità.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: due score reali e sintetici con un aggiornamento alternato; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Normalizing flow e trasformazioni invertibili.
-- Prova: SRC-23-001 e sezione pubblica corrispondente.
+- lettura editoriale finale da parte dell'autore;
+- approvazione delle visuali nel contesto impaginato;
+- benchmark esterni solo quando il capitolo formula un claim di scala o di produzione.

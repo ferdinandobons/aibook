@@ -1,14 +1,16 @@
 # Specifica visuale COMPUTE-02
 
-- famiglia: chart
-- domanda principale: Il diagramma segue il passaggio: Best-of-n, tree search e adaptive compute. L'input è prompt, numero di campioni, token e deadline, l'output è risposta, costo, latenza e qualità; il vincolo da controllare è che qualità e costo devono essere riportati insieme
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: search_tree
+- domanda principale: Quale controllo collega «Adaptive compute» a «Metriche costo-qualità» senza superare il limite dichiarato?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, chart, invariante o limite in chiusura
-- nodi e contenuti: 1: Più compute dopo il training; 2: Best-of-n; 3: Tree search; 4: Adaptive compute; 5: Metriche costo-qualità
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: qualità e costo devono essere riportati insieme
-- fonti collegate: SRC-53-001 ... SRC-53-004
-- alt text: Diagramma COMPUTE-02 del Capitolo 53, famiglia chart. Domanda: Il diagramma segue il passaggio: Best-of-n, tree search e adaptive compute. L'input è prompt, numero di campioni, token e deadline, l'output è risposta, costo, latenza e qualità; il vincolo da controllare è che qualità e costo devono essere riportati insieme La composizione usa i passaggi Più compute dopo il training, Best-of-n, Tree search, Adaptive compute, Metriche costo-qualità.
+- file candidato: candidate-v48.png
+- oggetto osservato: un budget di compute aggiunto durante l'inferenza
+- input: prompt, numero di campioni, token e deadline
+- output: risposta, costo, latenza e qualità
+- nodi locali: Adaptive compute: Problemi differenti ricevono budget differenti secondo confidenza, difficoltà o policy.…; Metriche costo-qualità: Accuracy o reward devono essere riportati insieme a token, forward, latenza e fallimenti…
+- limite visualizzato: qualità e costo devono essere riportati insieme
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

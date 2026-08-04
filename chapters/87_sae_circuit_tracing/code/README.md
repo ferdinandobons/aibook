@@ -1,5 +1,8 @@
-# Codice del Capitolo 87
+# Esempio verificato. Capitolo 87
 
-Lo snippet snip_87_contract.py rende osservabile il contratto centrale di Sparse autoencoder e interpretabilità scalabile con valori piccoli e leggibili.
-Il test test_87_contract.py controlla determinismo, output, invariante e una shape incoerente.
-Il risultato è un esempio locale, non un benchmark di produzione.
+`snip_87_contract.py` esegue il caso minimo usato nel testo di **Sparse autoencoder e interpretabilità scalabile**. `test_87_contract.py` conserva l'output atteso, controlla determinismo, serializzazione, valori finiti e presenza del limite interpretativo.
+
+```bash
+python snip_87_contract.py
+python -m unittest -v test_87_contract.py
+```

@@ -1,14 +1,16 @@
 # Specifica visuale EMBEDDIN-02
 
-- famiglia: matrix
-- domanda principale: Il diagramma segue il passaggio: Lookup, pooling, similarità e normalizzazione. L'input è due ID, due vettori e una query, l'output è embedding, ranking o predizione; il vincolo da controllare è che la similarità dipende da training, metrica e normalizzazione
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: lookup_context
+- domanda principale: Quale controllo collega «Sentence embedding» a «Ricerca e anisotropia» senza superare il limite dichiarato?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, matrix, invariante o limite in chiusura
-- nodi e contenuti: 1: Da ID a vettore; 2: Word embedding; 3: Embedding contestuale; 4: Sentence embedding; 5: Ricerca e anisotropia
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: la similarità dipende da training, metrica e normalizzazione
-- fonti collegate: SRC-27-001 ... SRC-27-004
-- alt text: Diagramma EMBEDDIN-02 del Capitolo 27, famiglia matrix. Domanda: Il diagramma segue il passaggio: Lookup, pooling, similarità e normalizzazione. L'input è due ID, due vettori e una query, l'output è embedding, ranking o predizione; il vincolo da controllare è che la similarità dipende da training, metrica e normalizzazione La composizione usa i passaggi Da ID a vettore, Word embedding, Embedding contestuale, Sentence embedding, Ricerca e anisotropia.
+- file candidato: candidate-v48.png
+- oggetto osservato: un ID e il vettore che lo rappresenta
+- input: due ID, due vettori e una query
+- output: embedding, ranking o predizione
+- nodi locali: Sentence embedding: Pooling o training contrastivo producono vettori per frasi e documenti. La metrica deve…; Ricerca e anisotropia: Cosine similarity è una convenzione, non una misura universale di significato.…
+- limite visualizzato: la similarità dipende da training, metrica e normalizzazione
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

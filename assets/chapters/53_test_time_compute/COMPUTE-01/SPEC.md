@@ -1,14 +1,16 @@
 # Specifica visuale COMPUTE-01
 
-- famiglia: branch
-- domanda principale: Il diagramma segue il passaggio: Best-of-n, tree search e adaptive compute. L'input è prompt, numero di campioni, token e deadline, l'output è risposta, costo, latenza e qualità; il vincolo da controllare è che qualità e costo devono essere riportati insieme
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: sample_and_vote
+- domanda principale: Come si passa da «Più compute dopo il training» a «Tree search» mantenendo osservabile un budget di compute aggiunto durante l'inferenza?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v48.png
-- ordine di lettura: titolo, domanda, branch, invariante o limite in chiusura
-- nodi e contenuti: 1: Più compute dopo il training; 2: Best-of-n; 3: Tree search; 4: Adaptive compute; 5: Metriche costo-qualità
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: qualità e costo devono essere riportati insieme
-- fonti collegate: SRC-53-001 ... SRC-53-004
-- alt text: Diagramma COMPUTE-01 del Capitolo 53, famiglia branch. Domanda: Il diagramma segue il passaggio: Best-of-n, tree search e adaptive compute. L'input è prompt, numero di campioni, token e deadline, l'output è risposta, costo, latenza e qualità; il vincolo da controllare è che qualità e costo devono essere riportati insieme La composizione usa i passaggi Più compute dopo il training, Best-of-n, Tree search, Adaptive compute, Metriche costo-qualità.
+- file candidato: candidate-v48.png
+- oggetto osservato: un budget di compute aggiunto durante l'inferenza
+- input: prompt, numero di campioni, token e deadline
+- output: risposta, costo, latenza e qualità
+- nodi locali: Più compute dopo il training: Il sistema può generare più candidate, approfondire una traiettoria o usare ricerca…; Best-of-n: Un proposer genera n candidate e un verifier seleziona. Il beneficio dipende dalla…; Tree search: Stati parziali vengono espansi, valutati e potati. Branching factor, profondità e budget…
+- limite visualizzato: qualità e costo devono essere riportati insieme
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

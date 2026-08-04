@@ -48,3 +48,4 @@ Il checkpoint può restare invariato mentre cambiano dati, strumenti, regole, au
 - componenti esterni separati dal modello;
 - colori usati insieme a titoli e posizione, non come unico significato;
 - footer leggibile e non sovrapposto al confine del sistema.
+- domanda principale: Quale confronto o limite chiarisce «I dati sono un artefatto versionato»?

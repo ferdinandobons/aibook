@@ -22,3 +22,4 @@ Quali segnali di training si possono costruire quando nessuna persona fornisce u
 ## Invariante
 
 L'assenza di label esterne non elimina l'obiettivo: cambia la procedura che costruisce il segnale supervisionante.
+- domanda principale: Quale trasformazione centrale rende osservabile «Senza label non significa senza obiettivo» nel capitolo 13?

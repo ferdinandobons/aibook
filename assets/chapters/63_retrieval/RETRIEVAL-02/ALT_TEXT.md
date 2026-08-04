@@ -1,3 +1,3 @@
-# Alt text RETRIEVAL-02
+# Testo alternativo
 
-Diagramma RETRIEVAL-02 del Capitolo 63, famiglia pipeline. Domanda: Il diagramma segue il passaggio: BM25, dense retrieval, ANN e reranking. L'input è query, corpus, termini e indice, l'output è ranking con score e documento recuperato; il vincolo da controllare è che rilevanza del ranking e correttezza della risposta sono misure separate La composizione usa i passaggi Documenti, query e rilevanza, BM25, Dense retrieval, Indici ANN, Reranking.
+RETRIEVAL-02, Information retrieval. Quale controllo collega «Indici ANN» a «Reranking» senza superare il limite dichiarato? La composizione index layers collega «Indici ANN», «Reranking». L'input è query, corpus, termini e indice; l'output è ranking con score e documento recuperato. Il limite esplicito è: rilevanza del ranking e correttezza della risposta sono misure separate.

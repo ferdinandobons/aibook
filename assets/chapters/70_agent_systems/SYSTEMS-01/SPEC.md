@@ -1,14 +1,16 @@
 # Specifica visuale SYSTEMS-01
 
-- famiglia: graph
-- domanda principale: Il diagramma segue il passaggio: Delega, comunicazione, esecuzione e aggregazione. L'input è task, ruoli, browser, codice e handoff, l'output è risultato con responsabilità e log per componente; il vincolo da controllare è che più agenti ampliano anche superficie e costo dell'errore
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: agent_graph
+- domanda principale: Come si passa da «Browser agent» a «Code agent» mantenendo osservabile una traiettoria composta da agenti e strumenti?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v50.png
-- ordine di lettura: titolo, domanda, graph, invariante o limite in chiusura
-- nodi e contenuti: 1: Browser agent; 2: Computer use; 3: Code agent; 4: Multi-agent; 5: Confronto con un singolo workflow
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: più agenti ampliano anche superficie e costo dell'errore
-- fonti collegate: SRC-70-001 ... SRC-70-004
-- alt text: Diagramma SYSTEMS-01 del Capitolo 70, famiglia graph. Domanda: Il diagramma segue il passaggio: Delega, comunicazione, esecuzione e aggregazione. L'input è task, ruoli, browser, codice e handoff, l'output è risultato con responsabilità e log per componente; il vincolo da controllare è che più agenti ampliano anche superficie e costo dell'errore La composizione usa i passaggi Browser agent, Computer use, Code agent, Multi-agent, Confronto con un singolo workflow.
+- file candidato: candidate-v50.png
+- oggetto osservato: una traiettoria composta da agenti e strumenti
+- input: task, ruoli, browser, codice e handoff
+- output: risultato con responsabilità e log per componente
+- nodi locali: Browser agent: L'agente interpreta pagine, link e form e deve distinguere contenuto della pagina da…; Computer use: Screenshot, coordinate e azioni di input formano un loop percettivo. Risoluzione, focus…; Code agent: Repository, test, shell e diff definiscono l'ambiente. Modifiche devono essere limitate,…
+- limite visualizzato: più agenti ampliano anche superficie e costo dell'errore
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta

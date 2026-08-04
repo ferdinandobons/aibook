@@ -225,9 +225,21 @@ Per ogni snippet definire domanda, input, shape, operazione, output, invariante,
 
 Verificare documentazione, eseguire in processo pulito, testare invarianti e rieseguire dopo le modifiche.
 
+La policy `reference` richiede evidenza eseguibile completa. La policy `exception` richiede una motivazione nel capitolo e in `code/CODE_AUDIT.md`; non può convivere con script storici che fingano di verificare il tema.
+
 ### Fase 8. Visuali
 
 Generare una bozza, eseguire audit tecnico, stilistico, compositivo e di contenimento. Rigenerare finché non restano difetti bloccanti.
+
+Per i capitoli 14-98, escluso il pilota 28, l'ordine riproducibile corrente è:
+
+```text
+python scripts/rebuild_lessons_v2.py
+python scripts/generate_visuals_v2.py
+python scripts/build_visual_contact_sheets.py
+```
+
+Il compiler visuale viene eseguito dopo quello testuale perché aggiorna domanda, specifica, alt text e audit delle figure. I generatori precedenti restano materiale storico o tooling dedicato ai capitoli iniziali e non costituiscono il percorso canonico di rigenerazione completa.
 
 ### Fase 9. Audit fattuale
 

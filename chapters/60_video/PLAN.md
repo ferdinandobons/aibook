@@ -1,81 +1,31 @@
-# Piano interno. Capitolo 60
+# Piano editoriale. Capitolo 60
 
-- Domanda centrale: quale contratto costruisce Generazione video?
-- Oggetto continuo: una sequenza di frame condizionata nel tempo; input guida: frame, latent video, testo e timestamp.
-- Prerequisito stabile: Capitolo 59, Audio, parlato e musica.
-- Gap: denoising, autoregressione e controllo temporale.
-- Output consegnato: frame coerenti e misura di flicker; consumer successivo: Capitolo 61, 3D, spazio e rappresentazione delle scene.
-- Invariante principale: qualità del singolo frame non dimostra coerenza tra frame.
-- Visuali: VIDEO-01 e VIDEO-02, con famiglie compositive variabili.
-- Snippet: code/snip_60_contract.py; output: code/outputs/SNIP-60-001.txt.
-- Gate aperti: revisione autoriale, lettura ad alta voce e approvazione finale delle visuali.
+## Obiettivo didattico
 
-## Transizione 1. Spazio e tempo
+Seguire **Generazione video** da frame, latent video, testo e timestamp a frame coerenti e misura di flicker, osservando denoising, autoregressione e controllo temporale senza oltrepassare questo limite: qualità del singolo frame non dimostra coerenza tra frame.
 
-- Ultima affermazione stabile: una sequenza di frame condizionata nel tempo.
-- Concetto nuovo: Un video aggiunge una dimensione temporale alle immagini. Token, patch o latent devono conservare movimento e identità.
-- Input e shape: frame, latent video, testo e timestamp.
-- Operazione: denoising, autoregressione e controllo temporale.
-- Output e shape: frame coerenti e misura di flicker.
-- Che cosa cambia: il passaggio specifico di «Spazio e tempo».
-- Invariante: qualità del singolo frame non dimostra coerenza tra frame.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: tre frame con un oggetto che deve mantenere posizione; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Video diffusion.
-- Prova: SRC-60-001 e sezione pubblica corrispondente.
+## Prerequisiti reali
 
-## Transizione 2. Video diffusion
+- Capitolo 25: Diffusione, score matching e flow matching
+- Capitolo 55: Fondamenti della multimodalità
+- Capitolo 59: Audio, parlato e musica
 
-- Ultima affermazione stabile: una sequenza di frame condizionata nel tempo.
-- Concetto nuovo: Il denoiser opera su tensori spazio-temporali o latent compressi. Attention fattorizzata e convoluzioni riducono il costo.
-- Input e shape: frame, latent video, testo e timestamp.
-- Operazione: denoising, autoregressione e controllo temporale.
-- Output e shape: frame coerenti e misura di flicker.
-- Che cosa cambia: il passaggio specifico di «Video diffusion».
-- Invariante: qualità del singolo frame non dimostra coerenza tra frame.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: tre frame con un oggetto che deve mantenere posizione; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Autoregressione.
-- Prova: SRC-60-002 e sezione pubblica corrispondente.
+## Percorso della lezione
 
-## Transizione 3. Autoregressione
+1. **Spazio e tempo.** Un video aggiunge una dimensione temporale alle immagini. Token, patch o latent devono conservare movimento e identità. Prova: SRC-60-001.
+2. **Video diffusion.** Il denoiser opera su tensori spazio-temporali o latent compressi. Attention fattorizzata e convoluzioni riducono il costo. Prova: SRC-60-002.
+3. **Autoregressione.** Frame, patch o token video possono essere generati in ordine. L'ordine scelto modifica dipendenze e cache. Prova: SRC-60-003.
+4. **Coerenza.** Flicker, drift dell'identità e dinamiche impossibili richiedono controlli oltre la qualità di singoli frame. Prova: SRC-60-004.
+5. **Condizionamento e editing.** Testo, immagine iniziale, traiettoria o maschere guidano il video. Il controllo deve essere valutato nel tempo. Prova: SRC-60-001.
 
-- Ultima affermazione stabile: una sequenza di frame condizionata nel tempo.
-- Concetto nuovo: Frame, patch o token video possono essere generati in ordine. L'ordine scelto modifica dipendenze e cache.
-- Input e shape: frame, latent video, testo e timestamp.
-- Operazione: denoising, autoregressione e controllo temporale.
-- Output e shape: frame coerenti e misura di flicker.
-- Che cosa cambia: il passaggio specifico di «Autoregressione».
-- Invariante: qualità del singolo frame non dimostra coerenza tra frame.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: tre frame con un oggetto che deve mantenere posizione; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Coerenza.
-- Prova: SRC-60-003 e sezione pubblica corrispondente.
+## Prove e artefatti
 
-## Transizione 4. Coerenza
+- riferimento minimo: `code/snip_60_contract.py`; test: `code/test_60_contract.py`; output: `code/outputs/SNIP-60-001.txt`.
+- visuali candidate: VIDEO-01, VIDEO-02; le domande pedagogiche sono distinte e l'approvazione autoriale resta aperta.
+- fonti: `FONTI_PRIMARIE.md`; corrispondenza claim-fonte: `CLAIMS.md`.
 
-- Ultima affermazione stabile: una sequenza di frame condizionata nel tempo.
-- Concetto nuovo: Flicker, drift dell'identità e dinamiche impossibili richiedono controlli oltre la qualità di singoli frame.
-- Input e shape: frame, latent video, testo e timestamp.
-- Operazione: denoising, autoregressione e controllo temporale.
-- Output e shape: frame coerenti e misura di flicker.
-- Che cosa cambia: il passaggio specifico di «Coerenza».
-- Invariante: qualità del singolo frame non dimostra coerenza tra frame.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: tre frame con un oggetto che deve mantenere posizione; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Condizionamento e editing.
-- Prova: SRC-60-004 e sezione pubblica corrispondente.
+## Gate aperti
 
-## Transizione 5. Condizionamento e editing
-
-- Ultima affermazione stabile: una sequenza di frame condizionata nel tempo.
-- Concetto nuovo: Testo, immagine iniziale, traiettoria o maschere guidano il video. Il controllo deve essere valutato nel tempo.
-- Input e shape: frame, latent video, testo e timestamp.
-- Operazione: denoising, autoregressione e controllo temporale.
-- Output e shape: frame coerenti e misura di flicker.
-- Che cosa cambia: il passaggio specifico di «Condizionamento e editing».
-- Invariante: qualità del singolo frame non dimostra coerenza tra frame.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: tre frame con un oggetto che deve mantenere posizione; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: 3D, spazio e rappresentazione delle scene.
-- Prova: SRC-60-001 e sezione pubblica corrispondente.
+- lettura editoriale finale da parte dell'autore;
+- approvazione delle visuali nel contesto impaginato;
+- benchmark esterni solo quando il capitolo formula un claim di scala o di produzione.

@@ -1,81 +1,31 @@
-# Piano interno. Capitolo 88
+# Piano editoriale. Capitolo 88
 
-- Domanda centrale: quale contratto costruisce Robustezza, jailbreak e attacchi adversarial?
-- Oggetto continuo: una superficie di attacco e il comportamento sotto perturbazione; input guida: threat model, prompt, budget e risposta.
-- Prerequisito stabile: Capitolo 87, Sparse autoencoder e interpretabilità scalabile.
-- Gap: jailbreak, perturbazione, difesa e adaptive evaluation.
-- Output consegnato: success rate, failure mode e costo della difesa; consumer successivo: Capitolo 89, Prompt injection e sicurezza dei tool.
-- Invariante principale: un test superato non copre minacce non incluse nel protocollo.
-- Visuali: JAILBREAK-01 e JAILBREAK-02, con famiglie compositive variabili.
-- Snippet: code/snip_88_contract.py; output: code/outputs/SNIP-88-001.txt.
-- Gate aperti: revisione autoriale, lettura ad alta voce e approvazione finale delle visuali.
+## Obiettivo didattico
 
-## Transizione 1. Threat model
+Seguire **Robustezza, jailbreak e attacchi adversarial** da threat model, prompt, budget e risposta a success rate, failure mode e costo della difesa, osservando jailbreak, perturbazione, difesa e adaptive evaluation senza oltrepassare questo limite: un test superato non copre minacce non incluse nel protocollo.
 
-- Ultima affermazione stabile: una superficie di attacco e il comportamento sotto perturbazione.
-- Concetto nuovo: Attaccante, accesso, obiettivo, budget e superficie definiscono il test. Un jailbreak testuale e un attacco ai pesi hanno contratti diversi.
-- Input e shape: threat model, prompt, budget e risposta.
-- Operazione: jailbreak, perturbazione, difesa e adaptive evaluation.
-- Output e shape: success rate, failure mode e costo della difesa.
-- Che cosa cambia: il passaggio specifico di «Threat model».
-- Invariante: un test superato non copre minacce non incluse nel protocollo.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: stesso prompt con perturbazione e controllo di policy; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Perturbazioni.
-- Prova: SRC-88-001 e sezione pubblica corrispondente.
+## Prerequisiti reali
 
-## Transizione 2. Perturbazioni
+- Capitolo 4: Come valutare criticamente un risultato di AI
+- Capitolo 31: Dalla rappresentazione linguistica agli LLM
+- Capitolo 72: Sicurezza operativa degli agenti
 
-- Ultima affermazione stabile: una superficie di attacco e il comportamento sotto perturbazione.
-- Concetto nuovo: Typo, parafrasi, encoding e contenuti multimodali possono aggirare filtri superficiali.
-- Input e shape: threat model, prompt, budget e risposta.
-- Operazione: jailbreak, perturbazione, difesa e adaptive evaluation.
-- Output e shape: success rate, failure mode e costo della difesa.
-- Che cosa cambia: il passaggio specifico di «Perturbazioni».
-- Invariante: un test superato non copre minacce non incluse nel protocollo.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: stesso prompt con perturbazione e controllo di policy; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Ottimizzazione adversarial.
-- Prova: SRC-88-002 e sezione pubblica corrispondente.
+## Percorso della lezione
 
-## Transizione 3. Ottimizzazione adversarial
+1. **Threat model.** Attaccante, accesso, obiettivo, budget e superficie definiscono il test. Un jailbreak testuale e un attacco ai pesi hanno contratti diversi. Prova: SRC-88-001.
+2. **Perturbazioni.** Typo, parafrasi, encoding e contenuti multimodali possono aggirare filtri superficiali. Prova: SRC-88-002.
+3. **Ottimizzazione adversarial.** Suffix e prompt vengono cercati per aumentare una loss di attacco. Trasferibilità e query budget devono essere riportati. Prova: SRC-88-003.
+4. **Difese.** Training, filtri, classificatori e refusal possono ridurre alcuni attacchi e introdurre falsi positivi o nuove bypass. Prova: SRC-88-004.
+5. **Valutazione adattiva.** Una difesa deve essere testata da attaccanti che conoscono il metodo, entro un protocollo sicuro e autorizzato. Prova: SRC-88-001.
 
-- Ultima affermazione stabile: una superficie di attacco e il comportamento sotto perturbazione.
-- Concetto nuovo: Suffix e prompt vengono cercati per aumentare una loss di attacco. Trasferibilità e query budget devono essere riportati.
-- Input e shape: threat model, prompt, budget e risposta.
-- Operazione: jailbreak, perturbazione, difesa e adaptive evaluation.
-- Output e shape: success rate, failure mode e costo della difesa.
-- Che cosa cambia: il passaggio specifico di «Ottimizzazione adversarial».
-- Invariante: un test superato non copre minacce non incluse nel protocollo.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: stesso prompt con perturbazione e controllo di policy; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Difese.
-- Prova: SRC-88-003 e sezione pubblica corrispondente.
+## Prove e artefatti
 
-## Transizione 4. Difese
+- riferimento minimo: `code/snip_88_contract.py`; test: `code/test_88_contract.py`; output: `code/outputs/SNIP-88-001.txt`.
+- visuali candidate: JAILBREAK-01, JAILBREAK-02; le domande pedagogiche sono distinte e l'approvazione autoriale resta aperta.
+- fonti: `FONTI_PRIMARIE.md`; corrispondenza claim-fonte: `CLAIMS.md`.
 
-- Ultima affermazione stabile: una superficie di attacco e il comportamento sotto perturbazione.
-- Concetto nuovo: Training, filtri, classificatori e refusal possono ridurre alcuni attacchi e introdurre falsi positivi o nuove bypass.
-- Input e shape: threat model, prompt, budget e risposta.
-- Operazione: jailbreak, perturbazione, difesa e adaptive evaluation.
-- Output e shape: success rate, failure mode e costo della difesa.
-- Che cosa cambia: il passaggio specifico di «Difese».
-- Invariante: un test superato non copre minacce non incluse nel protocollo.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: stesso prompt con perturbazione e controllo di policy; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Valutazione adattiva.
-- Prova: SRC-88-004 e sezione pubblica corrispondente.
+## Gate aperti
 
-## Transizione 5. Valutazione adattiva
-
-- Ultima affermazione stabile: una superficie di attacco e il comportamento sotto perturbazione.
-- Concetto nuovo: Una difesa deve essere testata da attaccanti che conoscono il metodo, entro un protocollo sicuro e autorizzato.
-- Input e shape: threat model, prompt, budget e risposta.
-- Operazione: jailbreak, perturbazione, difesa e adaptive evaluation.
-- Output e shape: success rate, failure mode e costo della difesa.
-- Che cosa cambia: il passaggio specifico di «Valutazione adattiva».
-- Invariante: un test superato non copre minacce non incluse nel protocollo.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: stesso prompt con perturbazione e controllo di policy; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Prompt injection e sicurezza dei tool.
-- Prova: SRC-88-001 e sezione pubblica corrispondente.
+- lettura editoriale finale da parte dell'autore;
+- approvazione delle visuali nel contesto impaginato;
+- benchmark esterni solo quando il capitolo formula un claim di scala o di produzione.

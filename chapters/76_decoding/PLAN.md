@@ -1,81 +1,31 @@
-# Piano interno. Capitolo 76
+# Piano editoriale. Capitolo 76
 
-- Domanda centrale: quale contratto costruisce Decoding e generazione vincolata?
-- Oggetto continuo: logits e spazio delle sequenze ammissibili; input guida: logits, prefisso, temperatura e vincolo.
-- Prerequisito stabile: Capitolo 75, Modelli low-bit nativi e co-design numerico.
-- Gap: greedy, beam, sampling, penalty e stop.
-- Output consegnato: token scelto, sequenza e metrica di costo; consumer successivo: Capitolo 77, Speculative e parallel decoding.
-- Invariante principale: il decoding modifica la traiettoria, non corregge il modello a monte.
-- Visuali: DECODING-01 e DECODING-02, con famiglie compositive variabili.
-- Snippet: code/snip_76_contract.py; output: code/outputs/SNIP-76-001.txt.
-- Gate aperti: revisione autoriale, lettura ad alta voce e approvazione finale delle visuali.
+## Obiettivo didattico
 
-## Transizione 1. Greedy e beam search
+Seguire **Decoding e generazione vincolata** da logits, prefisso, temperatura e vincolo a token scelto, sequenza e metrica di costo, osservando greedy, beam, sampling, penalty e stop senza oltrepassare questo limite: il decoding modifica la traiettoria, non corregge il modello a monte.
 
-- Ultima affermazione stabile: logits e spazio delle sequenze ammissibili.
-- Concetto nuovo: Greedy sceglie il massimo locale; beam mantiene più prefissi secondo score accumulati e criteri di lunghezza.
-- Input e shape: logits, prefisso, temperatura e vincolo.
-- Operazione: greedy, beam, sampling, penalty e stop.
-- Output e shape: token scelto, sequenza e metrica di costo.
-- Che cosa cambia: il passaggio specifico di «Greedy e beam search».
-- Invariante: il decoding modifica la traiettoria, non corregge il modello a monte.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: greedy e top-p sullo stesso vettore di logits; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Sampling.
-- Prova: SRC-76-001 e sezione pubblica corrispondente.
+## Prerequisiti reali
 
-## Transizione 2. Sampling
+- Capitolo 7: Probabilità, statistica e inferenza
+- Capitolo 21: Modelli autoregressivi
+- Capitolo 31: Dalla rappresentazione linguistica agli LLM
 
-- Ultima affermazione stabile: logits e spazio delle sequenze ammissibili.
-- Concetto nuovo: Temperature, top-k e top-p modificano la distribuzione prima dell'estrazione. Seed e backend influenzano la riproducibilità.
-- Input e shape: logits, prefisso, temperatura e vincolo.
-- Operazione: greedy, beam, sampling, penalty e stop.
-- Output e shape: token scelto, sequenza e metrica di costo.
-- Che cosa cambia: il passaggio specifico di «Sampling».
-- Invariante: il decoding modifica la traiettoria, non corregge il modello a monte.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: greedy e top-p sullo stesso vettore di logits; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Penalità e stop.
-- Prova: SRC-76-002 e sezione pubblica corrispondente.
+## Percorso della lezione
 
-## Transizione 3. Penalità e stop
+1. **Greedy e beam search.** Greedy sceglie il massimo locale; beam mantiene più prefissi secondo score accumulati e criteri di lunghezza. Prova: SRC-76-001.
+2. **Sampling.** Temperature, top-k e top-p modificano la distribuzione prima dell'estrazione. Seed e backend influenzano la riproducibilità. Prova: SRC-76-002.
+3. **Penalità e stop.** Repetition penalty, stop sequence e minimum length intervengono in punti differenti e possono interagire. Prova: SRC-76-003.
+4. **Constrained decoding.** Grammar, automi e schema limitano i token ammessi. Validità strutturale non garantisce argomenti corretti. Prova: SRC-76-004.
+5. **Metriche.** Qualità, diversità, latency, token per secondo e probabilità della sequenza devono essere letti insieme. Prova: SRC-76-001.
 
-- Ultima affermazione stabile: logits e spazio delle sequenze ammissibili.
-- Concetto nuovo: Repetition penalty, stop sequence e minimum length intervengono in punti differenti e possono interagire.
-- Input e shape: logits, prefisso, temperatura e vincolo.
-- Operazione: greedy, beam, sampling, penalty e stop.
-- Output e shape: token scelto, sequenza e metrica di costo.
-- Che cosa cambia: il passaggio specifico di «Penalità e stop».
-- Invariante: il decoding modifica la traiettoria, non corregge il modello a monte.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: greedy e top-p sullo stesso vettore di logits; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Constrained decoding.
-- Prova: SRC-76-003 e sezione pubblica corrispondente.
+## Prove e artefatti
 
-## Transizione 4. Constrained decoding
+- riferimento minimo: `code/snip_76_contract.py`; test: `code/test_76_contract.py`; output: `code/outputs/SNIP-76-001.txt`.
+- visuali candidate: DECODING-01, DECODING-02; le domande pedagogiche sono distinte e l'approvazione autoriale resta aperta.
+- fonti: `FONTI_PRIMARIE.md`; corrispondenza claim-fonte: `CLAIMS.md`.
 
-- Ultima affermazione stabile: logits e spazio delle sequenze ammissibili.
-- Concetto nuovo: Grammar, automi e schema limitano i token ammessi. Validità strutturale non garantisce argomenti corretti.
-- Input e shape: logits, prefisso, temperatura e vincolo.
-- Operazione: greedy, beam, sampling, penalty e stop.
-- Output e shape: token scelto, sequenza e metrica di costo.
-- Che cosa cambia: il passaggio specifico di «Constrained decoding».
-- Invariante: il decoding modifica la traiettoria, non corregge il modello a monte.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: greedy e top-p sullo stesso vettore di logits; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Metriche.
-- Prova: SRC-76-004 e sezione pubblica corrispondente.
+## Gate aperti
 
-## Transizione 5. Metriche
-
-- Ultima affermazione stabile: logits e spazio delle sequenze ammissibili.
-- Concetto nuovo: Qualità, diversità, latency, token per secondo e probabilità della sequenza devono essere letti insieme.
-- Input e shape: logits, prefisso, temperatura e vincolo.
-- Operazione: greedy, beam, sampling, penalty e stop.
-- Output e shape: token scelto, sequenza e metrica di costo.
-- Che cosa cambia: il passaggio specifico di «Metriche».
-- Invariante: il decoding modifica la traiettoria, non corregge il modello a monte.
-- Che cosa non fa: non dimostra da solo qualità generale, causalità o readiness di produzione.
-- Esempio o errore: greedy e top-p sullo stesso vettore di logits; provare anche una condizione incoerente e osservare il controllo.
-- Consumer: Speculative e parallel decoding.
-- Prova: SRC-76-001 e sezione pubblica corrispondente.
+- lettura editoriale finale da parte dell'autore;
+- approvazione delle visuali nel contesto impaginato;
+- benchmark esterni solo quando il capitolo formula un claim di scala o di produzione.

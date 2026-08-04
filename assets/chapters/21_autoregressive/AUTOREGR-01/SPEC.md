@@ -1,14 +1,16 @@
 # Specifica visuale AUTOREGR-01
 
-- famiglia: timeline
-- domanda principale: Il diagramma segue il passaggio: Fattorizzazione, teacher forcing e decoding. L'input è un prefisso di tre token e una mask causale, l'output è logits, token scelto e traiettoria; il vincolo da controllare è che nessuna posizione futura entra nella predizione causale
-- orientamento: orizzontale
-- formato: PNG raster 1800x1000
+- modello compositivo: causal_sequence
+- domanda principale: Come si passa da «Fattorizzare una sequenza» a «Maschera causale» mantenendo osservabile la sequenza di token e la distribuzione del prossimo elemento?
+- formato: PNG raster 1800x1000, RGB
 - sfondo: #FFFFFF
-- versione candidata: candidate-v49.png
-- ordine di lettura: titolo, domanda, timeline, invariante o limite in chiusura
-- nodi e contenuti: 1: Fattorizzare una sequenza; 2: Teacher forcing; 3: Maschera causale; 4: Sampling e accumulo degli errori; 5: Immagini, audio e token discreti
-- archi o relazioni: determinati dalla famiglia e leggibili senza affidarsi al colore
-- invariante: nessuna posizione futura entra nella predizione causale
-- fonti collegate: SRC-21-001 ... SRC-21-004
-- alt text: Diagramma AUTOREGR-01 del Capitolo 21, famiglia timeline. Domanda: Il diagramma segue il passaggio: Fattorizzazione, teacher forcing e decoding. L'input è un prefisso di tre token e una mask causale, l'output è logits, token scelto e traiettoria; il vincolo da controllare è che nessuna posizione futura entra nella predizione causale La composizione usa i passaggi Fattorizzare una sequenza, Teacher forcing, Maschera causale, Sampling e accumulo degli errori, Immagini, audio e token discreti.
+- file candidato: candidate-v49.png
+- oggetto osservato: la sequenza di token e la distribuzione del prossimo elemento
+- input: un prefisso di tre token e una mask causale
+- output: logits, token scelto e traiettoria
+- nodi locali: Fattorizzare una sequenza: La chain rule scompone la probabilità con un ordine. Ogni fattore condiziona sugli…; Teacher forcing: Durante il training il modello riceve il prefisso reale e predice il passo successivo.…; Maschera causale: La causal mask impedisce a una posizione di usare target futuri. Un errore nella…
+- limite visualizzato: nessuna posizione futura entra nella predizione causale
+- valori quantitativi: nessun benchmark inventato; la figura mostra relazioni qualitative o output versionati
+- accessibilita: ordine leggibile, label testuali, significato non affidato al solo colore
+- generatore: scripts/generate_visuals_v2.py
+- approvazione autoriale: aperta
